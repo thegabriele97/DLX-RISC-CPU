@@ -1,0 +1,29 @@
+ 
+****************************************
+Report : area
+Design : MUX21
+Version: F-2011.09-SP3
+Date   : Tue Mar  2 20:25:29 2021
+****************************************
+
+Information: Updating design information... (UID-85)
+Library(s) Used:
+
+    NangateOpenCellLibrary (File: /home/mariagrazia.graziano/do/libnangate/NangateOpenCellLibrary_typical_ecsm.db)
+
+Number of ports:                            4
+Number of nets:                             7
+Number of cells:                            4
+Number of combinational cells:              0
+Number of sequential cells:                 0
+Number of macros:                           0
+Number of buf/inv:                          0
+Number of references:                       4
+
+Combinational area:          2.926000
+Noncombinational area:       0.000000
+Net Interconnect area:      undefined  (Wire load has zero net area)
+
+Total cell area:             2.926000
+Total area:                 undefined
+1

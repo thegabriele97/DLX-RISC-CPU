@@ -1,0 +1,43 @@
+ 
+****************************************
+Report : timing
+        -path full
+        -delay max
+        -max_paths 1
+Design : MUX21
+Version: F-2011.09-SP3
+Date   : Tue Mar  2 20:25:45 2021
+****************************************
+
+Operating Conditions: typical   Library: NangateOpenCellLibrary
+Wire Load Model Mode: top
+
+  Startpoint: S (input port)
+  Endpoint: Y (output port)
+  Path Group: (none)
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  MUX21              5K_hvratio_1_1        NangateOpenCellLibrary
+
+  Point                                    Incr       Path
+  -----------------------------------------------------------
+  input external delay                     0.00       0.00 f
+  S (in)                                   0.00       0.00 f
+  UIV/A (IV)                               0.00       0.00 f
+  UIV/U1/ZN (INV_X1)                       0.02       0.02 r
+  UIV/Y (IV)                               0.00       0.02 r
+  UND2/B (ND2_2)                           0.00       0.02 r
+  UND2/U1/ZN (NAND2_X1)                    0.02       0.05 f
+  UND2/Y (ND2_2)                           0.00       0.05 f
+  UND3/B (ND2_1)                           0.00       0.05 f
+  UND3/U1/ZN (NAND2_X1)                    0.02       0.07 r
+  UND3/Y (ND2_1)                           0.00       0.07 r
+  Y (out)                                  0.00       0.07 r
+  data arrival time                                   0.07
+  -----------------------------------------------------------
+  (Path is unconstrained)
+
+
+1

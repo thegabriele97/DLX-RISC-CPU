@@ -1,0 +1,197 @@
+# //  Questa Sim-64
+# //  Version 10.7c linux_x86_64 Aug 17 2018
+# //
+# //  Copyright 1991-2018 Mentor Graphics Corporation
+# //  All Rights Reserved.
+# //
+# //  QuestaSim and its associated documentation contain trade
+# //  secrets and commercial or financial information that are the property of
+# //  Mentor Graphics Corporation and are privileged, confidential,
+# //  and exempt from disclosure under the Freedom of Information Act,
+# //  5 U.S.C. Section 552. Furthermore, this information
+# //  is prohibited from disclosure under the Trade Secrets Act,
+# //  18 U.S.C. Section 1905.
+# //
+vcom -reportprogress 300 -work work /home/ms21.16/ms-lab/lab0/setup/vhdlsim/constants.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 19:04:33 on Mar 02,2021
+# vcom -reportprogress 300 -work work /home/ms21.16/ms-lab/lab0/setup/vhdlsim/constants.vhd 
+# -- Loading package STANDARD
+# -- Compiling package CONSTANTS
+# End time: 19:04:33 on Mar 02,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+./compile
+# Start time: 19:05:47 on Mar 02,2021
+# vcom constants.vhd 
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# -- Loading package STANDARD
+# -- Compiling package CONSTANTS
+# End time: 19:05:47 on Mar 02,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Start time: 19:05:47 on Mar 02,2021
+# vcom iv.vhd 
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package CONSTANTS
+# -- Compiling entity IV
+# -- Compiling architecture BEHAVIORAL of IV
+# -- Compiling configuration CFG_IV_BEHAVIORAL
+# -- Loading entity IV
+# -- Loading architecture BEHAVIORAL of IV
+# End time: 19:05:47 on Mar 02,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Start time: 19:05:47 on Mar 02,2021
+# vcom nd2.vhd 
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package CONSTANTS
+# -- Compiling entity ND2
+# -- Compiling architecture ARCH1 of ND2
+# -- Compiling architecture ARCH2 of ND2
+# -- Loading entity ND2
+# -- Compiling configuration CFG_ND2_ARCH1
+# -- Loading entity ND2
+# -- Loading architecture ARCH1 of ND2
+# -- Compiling configuration CFG_ND2_ARCH2
+# -- Loading entity ND2
+# -- Loading architecture ARCH2 of ND2
+# End time: 19:05:47 on Mar 02,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Start time: 19:05:47 on Mar 02,2021
+# vcom mux21.vhd 
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package CONSTANTS
+# -- Compiling entity MUX21
+# -- Compiling architecture BEHAVIORAL_1 of MUX21
+# -- Compiling architecture BEHAVIORAL_2 of MUX21
+# -- Loading entity MUX21
+# -- Compiling architecture BEHAVIORAL_3 of MUX21
+# -- Loading entity MUX21
+# -- Compiling architecture STRUCTURAL of MUX21
+# -- Loading entity MUX21
+# -- Compiling configuration CFG_MUX21_BEHAVIORAL_1
+# -- Loading entity MUX21
+# -- Loading architecture BEHAVIORAL_1 of MUX21
+# -- Compiling configuration CFG_MUX21_BEHAVIORAL_2
+# -- Loading entity MUX21
+# -- Loading architecture BEHAVIORAL_2 of MUX21
+# -- Compiling configuration CFG_MUX21_BEHAVIORAL_3
+# -- Loading entity MUX21
+# -- Loading architecture BEHAVIORAL_3 of MUX21
+# -- Compiling configuration CFG_MUX21_STRUCTURAL
+# -- Loading entity MUX21
+# -- Loading architecture STRUCTURAL of MUX21
+# -- Loading entity IV
+# -- Loading entity ND2
+# -- Loading configuration cfg_iv_behavioral
+# -- Loading configuration cfg_nd2_arch2
+# End time: 19:05:47 on Mar 02,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Start time: 19:05:47 on Mar 02,2021
+# vcom tb_mux21.vhd 
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package CONSTANTS
+# -- Compiling entity TBMUX21
+# -- Compiling architecture TEST of TBMUX21
+# -- Compiling configuration MUX21TEST
+# -- Loading entity TBMUX21
+# -- Loading architecture TEST of TBMUX21
+# -- Loading entity MUX21
+# -- Loading configuration cfg_mux21_behavioral_1
+# -- Loading configuration cfg_mux21_behavioral_2
+# -- Loading configuration cfg_mux21_behavioral_3
+# -- Loading configuration cfg_mux21_structural
+# End time: 19:05:47 on Mar 02,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vsim work.mux21test -t 10ps
+# vsim work.mux21test -t 10ps 
+# Start time: 19:07:14 on Mar 02,2021
+# ** Note: (vsim-3812) Design is being optimized...
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading work.constants
+# Loading work.mux21test#1
+# Loading work.tbmux21(test)#1
+# Loading work.cfg_mux21_behavioral_1#1
+# Loading work.mux21(behavioral_1)#1
+# Loading work.cfg_mux21_behavioral_2#1
+# Loading work.mux21(behavioral_2)#1
+# Loading work.cfg_mux21_behavioral_3#1
+# Loading work.mux21(behavioral_3)#1
+# Loading work.cfg_mux21_structural#1
+# Loading work.mux21(structural)#1
+# Loading work.cfg_iv_behavioral#1
+# Loading work.iv(behavioral)#1
+# Loading work.cfg_nd2_arch2#1
+# Loading work.nd2(arch2)#1
+quit -sim
+# End time: 19:08:10 on Mar 02,2021, Elapsed time: 0:00:56
+# Errors: 0, Warnings: 0
+vsim -t 10ps work.mux21test -novopt
+# vsim -t 10ps work.mux21test -novopt 
+# Start time: 19:08:28 on Mar 02,2021
+# ** Error (suppressible): (vsim-12110) All optimizations are disabled because the -novopt option is in effect. This will cause your simulation to run very slowly. If you are using this switch to preserve visibility for Debug or PLI features, please see the User's Manual section on Preserving Object Visibility with vopt. -novopt option is now deprecated and will be removed in future releases.
+# Error loading design
+# End time: 19:08:28 on Mar 02,2021, Elapsed time: 0:00:00
+# Errors: 1, Warnings: 0
+vsim -t 10ps work.MUX21TEST
+# vsim -t 10ps work.MUX21TEST 
+# Start time: 19:09:24 on Mar 02,2021
+# ** Note: (vsim-8009) Loading existing optimized design _opt
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading work.constants
+# Loading work.MUX21TEST#1
+# Loading work.tbmux21(test)#1
+# Loading work.cfg_mux21_behavioral_1#1
+# Loading work.mux21(behavioral_1)#1
+# Loading work.cfg_mux21_behavioral_2#1
+# Loading work.mux21(behavioral_2)#1
+# Loading work.cfg_mux21_behavioral_3#1
+# Loading work.mux21(behavioral_3)#1
+# Loading work.cfg_mux21_structural#1
+# Loading work.mux21(structural)#1
+# Loading work.cfg_iv_behavioral#1
+# Loading work.iv(behavioral)#1
+# Loading work.cfg_nd2_arch2#1
+# Loading work.nd2(arch2)#1
+run
+add waves *
+# ** Error: bad option "waves": should be one of...
+#   add atv ?options? ?arg arg ...?
+#   add button text action ?disable? ?options? ?help?
+#   add dataflow ?options? ?arg arg ...?
+#   add lists ?options? ?arg arg ...?
+#   add log ?options? ?arg arg ...?
+#   add memory options ?arg arg ...?
+#   add message ?options? ?arg arg ...?
+#   add monitor ?options? ?arg arg ...?
+#   add schematic ?options? ?arg arg ...?
+#   add testbrowser ?options? ?arg arg ...?
+#   add virtual ?options? ?arg arg ...?
+#   add watch ?options? ?arg arg ...?
+#   add wave ?options? ?arg arg ...?
+add wave *
+run 3 ns
+# Debug data file, vsim.dbg, does not exist.
+# 
+# Invoke vsim with -debugDB to create this file.
+# Debug data file, vsim.dbg, does not exist.
+# 
+# Invoke vsim with -debugDB to create this file.
+run 8000 ps
+run 3 ns
+# End time: 19:39:17 on Mar 02,2021, Elapsed time: 0:29:53
+# Errors: 3, Warnings: 0
