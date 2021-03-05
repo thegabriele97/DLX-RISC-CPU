@@ -48,9 +48,9 @@ architecture behavioral of rca is
   
 begin
 
-  stmp <= (('0' & a) + ('0' & b) + ('0' & ci)) after DRCAS;
-  s <= stmp((nbit-1) downto 0);
-  co <= stmp(nbit);
+  stmp <= (('0' & a) + ('0' & b) + ('0' & ci));
+  s <= stmp((nbit-1) downto 0) after DRCAS;
+  co <= stmp(nbit) after DRCAC;
   
 end behavioral;
 
