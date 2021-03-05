@@ -12,4 +12,4 @@
 # TO DO LIST
 
 ## LAB 01
- - Provaere a mettere 0 ns nella sintesi di Synopsys con il multiplexer
+ - Provare a mettere 0 ns nella sintesi di Synopsys con il multiplexer
