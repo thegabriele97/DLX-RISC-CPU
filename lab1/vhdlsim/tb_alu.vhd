@@ -36,7 +36,7 @@ begin
 --	OP2 <= ('0',others => '1') after 0.5 ns, ('1',others => '0') after 3 ns,('0','0','0',others => '1') after 6 ns,('0',others => '1')
 --	after 9 ns,('1',others => '0') after 12 ns,('0','0','0',others => '1') after 15 ns;
 
-        OP1 <= "0000000000110101";
+        OP1 <= "0000000001110101";
         OP2 <= "0000000000010110";
 	FUNC_CODE <= 	ADD after 2 ns, 
 		     	SUB after 4 ns,
