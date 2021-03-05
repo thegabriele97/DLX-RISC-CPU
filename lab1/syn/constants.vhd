@@ -1,4 +1,5 @@
 package CONSTANTS is
+   constant DELAY_MUX : time := 0 ns;
    constant IVDELAY : time := 0.1 ns;
    constant NDDELAY : time := 0.2 ns;
    constant NDDELAYRISE : time := 0.6 ns;

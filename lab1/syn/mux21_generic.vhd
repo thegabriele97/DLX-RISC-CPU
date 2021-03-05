@@ -4,7 +4,7 @@ use IEEE.numeric_std.all;
 use WORK.constants.all;
 
 entity mux21_generic is
-    Generic (NBIT: integer:= numBit; DELAY_MUX: Time:= tp_mux);
+    Generic (NBIT: integer:= numBit);
 	Port (	
         A:	In	std_logic_vector(NBIT-1 downto 0) ;
         B:	In	std_logic_vector(NBIT-1 downto 0);
@@ -16,7 +16,6 @@ end entity mux21_generic;
 
 --- Structural architecture -----
 architecture structural of mux21_generic is
-
     component iv_generic is
         Generic (NBIT: integer:= numBit);
         Port (	
