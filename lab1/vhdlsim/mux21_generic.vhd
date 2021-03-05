@@ -8,7 +8,7 @@ entity mux21_generic is
 	Port (	
         A:	In	std_logic_vector(NBIT-1 downto 0) ;
         B:	In	std_logic_vector(NBIT-1 downto 0);
-        S: In	std_logic;
+        S: 	In	std_logic;
         Y:	Out	std_logic_vector(NBIT-1 downto 0)
     );
 end entity mux21_generic;
@@ -42,8 +42,7 @@ architecture structural of mux21_generic is
 begin
 
     -- Necessario per adattare l'input del multiplexer ad 1 bit all'input dell'inverter
-    S_in <= (OTHERS => '0');
-    S_in(0) <= S;
+    S_in <= (OTHERS => S);
 
     UIV : iv_generic generic map(NBIT) port map (S_in, SB);
 	UND1 : nd2_generic generic map(NBIT) port map (A, S_in, Y1);
@@ -62,9 +61,9 @@ begin
     pmux: process(A, B, S)
 	begin
 		if S = '1' then
-			Y <= A after DELAY_MUX;
+			Y <= A; --after DELAY_MUX;
 		else
-			Y <= B after DELAY_MUX;
+			Y <= B; --after DELAY_MUX;
 		end if;
 	end process;
 end architecture Behavioural;

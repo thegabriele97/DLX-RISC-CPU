@@ -1,0 +1,124 @@
+# //  Questa Sim-64
+# //  Version 10.7c linux_x86_64 Aug 17 2018
+# //
+# //  Copyright 1991-2018 Mentor Graphics Corporation
+# //  All Rights Reserved.
+# //
+# //  QuestaSim and its associated documentation contain trade
+# //  secrets and commercial or financial information that are the property of
+# //  Mentor Graphics Corporation and are privileged, confidential,
+# //  and exempt from disclosure under the Freedom of Information Act,
+# //  5 U.S.C. Section 552. Furthermore, this information
+# //  is prohibited from disclosure under the Trade Secrets Act,
+# //  18 U.S.C. Section 1905.
+# //
+vcom -reportprogress 300 -work work /home/ms21.16/copy-ms-lab/ms-lab/lab1/vhdlsim/constants.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:43:00 on Mar 05,2021
+# vcom -reportprogress 300 -work work /home/ms21.16/copy-ms-lab/ms-lab/lab1/vhdlsim/constants.vhd 
+# -- Loading package STANDARD
+# -- Compiling package CONSTANTS
+# End time: 11:43:00 on Mar 05,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom -reportprogress 300 -work work /home/ms21.16/copy-ms-lab/ms-lab/lab1/vhdlsim/iv_generic.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:43:02 on Mar 05,2021
+# vcom -reportprogress 300 -work work /home/ms21.16/copy-ms-lab/ms-lab/lab1/vhdlsim/iv_generic.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package CONSTANTS
+# -- Compiling entity iv_generic
+# -- Compiling architecture BEHAVIORAL of iv_generic
+# -- Compiling configuration CFG_IV_BEHAVIORAL
+# -- Loading entity iv_generic
+# -- Loading architecture BEHAVIORAL of iv_generic
+# End time: 11:43:02 on Mar 05,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom -reportprogress 300 -work work /home/ms21.16/copy-ms-lab/ms-lab/lab1/vhdlsim/nd2_generic.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:43:03 on Mar 05,2021
+# vcom -reportprogress 300 -work work /home/ms21.16/copy-ms-lab/ms-lab/lab1/vhdlsim/nd2_generic.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package CONSTANTS
+# -- Compiling entity nd2_generic
+# -- Compiling architecture ARCH1 of nd2_generic
+# -- Compiling configuration CFG_ND2_ARCH1
+# -- Loading entity nd2_generic
+# -- Loading architecture ARCH1 of nd2_generic
+# End time: 11:43:03 on Mar 05,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom -reportprogress 300 -work work /home/ms21.16/copy-ms-lab/ms-lab/lab1/vhdlsim/mux21_generic.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:43:06 on Mar 05,2021
+# vcom -reportprogress 300 -work work /home/ms21.16/copy-ms-lab/ms-lab/lab1/vhdlsim/mux21_generic.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package CONSTANTS
+# -- Compiling entity mux21_generic
+# -- Compiling architecture structural of mux21_generic
+# -- Compiling architecture Behavioural of mux21_generic
+# -- Loading entity mux21_generic
+# -- Compiling configuration CFG_MUX21_GEN_BEHAVIORAL
+# -- Loading entity mux21_generic
+# -- Loading architecture Behavioural of mux21_generic
+# -- Compiling configuration CFG_MUX21_GEN_STRUCTURAL
+# -- Loading entity mux21_generic
+# -- Loading architecture structural of mux21_generic
+# -- Loading entity iv_generic
+# -- Loading entity nd2_generic
+# -- Loading configuration cfg_iv_behavioral
+# -- Loading configuration cfg_nd2_arch1
+# End time: 11:43:06 on Mar 05,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom -reportprogress 300 -work work /home/ms21.16/copy-ms-lab/ms-lab/lab1/vhdlsim/tb_mux21_generic.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:43:06 on Mar 05,2021
+# vcom -reportprogress 300 -work work /home/ms21.16/copy-ms-lab/ms-lab/lab1/vhdlsim/tb_mux21_generic.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package CONSTANTS
+# -- Compiling entity TBMUX21_GENERIC
+# -- Compiling architecture TEST of TBMUX21_GENERIC
+# -- Compiling configuration MUX21GENTEST
+# -- Loading entity TBMUX21_GENERIC
+# -- Loading architecture TEST of TBMUX21_GENERIC
+# -- Loading package NUMERIC_STD
+# -- Loading entity mux21_generic
+# -- Loading configuration cfg_mux21_gen_behavioral
+# -- Loading configuration cfg_mux21_gen_structural
+# End time: 11:43:07 on Mar 05,2021, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+vsim work.mux21gentest -t 10ps
+# vsim work.mux21gentest -t 10ps 
+# Start time: 11:43:19 on Mar 05,2021
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading work.constants
+# Loading ieee.numeric_std(body)
+# Loading work.mux21gentest#1
+# Loading work.tbmux21_generic(test)#1
+# Loading work.cfg_mux21_gen_behavioral#1
+# Loading work.mux21_generic(behavioural)#1
+# Loading work.cfg_mux21_gen_structural#1
+# Loading work.mux21_generic(structural)#1
+# Loading work.cfg_iv_behavioral#1
+# Loading work.iv_generic(behavioral)#1
+# Loading work.cfg_nd2_arch1#1
+# Loading work.nd2_generic(arch1)#1
+add wave *
+run 10 ns
+add wave -position insertpoint  \
+sim:/tbmux21_generic/U2/UIV/Y
+restart -f
+# ** Note: (vsim-8009) Loading existing optimized design _opt
+run 10 ns
+# End time: 11:48:06 on Mar 05,2021, Elapsed time: 0:04:47
+# Errors: 0, Warnings: 0
