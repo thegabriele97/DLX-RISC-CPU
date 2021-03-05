@@ -1,5 +1,5 @@
 # exclude everything
-work/
+work/*
 
 # exception to the rule
 work/.gitkeep 
