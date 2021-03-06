@@ -10,7 +10,7 @@ entity TBALU is
 end TBALU;
 
 architecture TEST of TBALU is
-    constant NBIT: integer := 16;
+    	constant NBIT: integer := 16;
 	signal	FUNC_CODE:	TYPE_OP:=ADD;
 	signal	OP1:	STD_LOGIC_VECTOR(NBIT-1 downto 0);
 	signal	OP2:	STD_LOGIC_VECTOR(NBIT-1 downto 0);
