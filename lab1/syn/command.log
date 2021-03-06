@@ -1,6 +1,6 @@
 #@ # 
 #@ # Running dc_shell Version F-2011.09-SP3 for amd64 -- Jan 26, 2012
-#@ # Date:   Sat Mar  6 09:20:59 2021
+#@ # Date:   Sat Mar  6 17:42:05 2021
 #@ # Run by: ms21.16@localhost.localdomain
 #@ 
 
@@ -4772,46 +4772,54 @@ source /home/ms21.16/ms-lab/lab1/syn/.synopsys_dc.setup
 #@ # -- End source /home/ms21.16/ms-lab/lab1/syn/.synopsys_dc.setup
 
 gui_start
-analyze -library WORK -format vhdl {/home/ms21.16/ms-lab/lab1/syn/constants.vhd /home/ms21.16/ms-lab/lab1/syn/alu_type.vhd /home/ms21.16/ms-lab/lab1/syn/alu.vhd}
-elaborate ALU -architecture BEHAVIOR -library WORK -parameters "N = 16"
-change_selection [get_s ALU_N16]
-gui_zoom -window [gui_get_current_window -view] -full
-analyze -library WORK -format vhdl {/home/ms21.16/ms-lab/lab1/syn/constants.vhd /home/ms21.16/ms-lab/lab1/syn/alu_type.vhd /home/ms21.16/ms-lab/lab1/syn/alu.vhd}
-elaborate ALU -architecture BEHAVIOR -library WORK -parameters "N = 16"
-change_selection [get_s ALU_N16]
-change_selection 
-change_selection [get_s ALU_N16]
-change_selection 
-gui_zoom -window [gui_get_current_window -view] -full
-change_selection [get_s C2177]
-change_selection [get_s C2177]
-gui_zoom -window [gui_get_current_window -view] -full
+analyze -library WORK -format vhdl {/home/ms21.16/ms-lab/lab1/syn/constants.vhd /home/ms21.16/ms-lab/lab1/syn/fa.vhd /home/ms21.16/ms-lab/lab1/syn/rca_generic.vhd}
+elaborate RCA -architecture STRUCTURAL -library WORK -parameters "DRCAS = 0 ns, DRCAC = 0 ns, nbit = 6"
+elaborate RCA -architecture STRUCTURAL -library WORK -parameters "DRCAS = 0ns, DRCAC = 0ns, nbit = 6"
+elaborate RCA -architecture STRUCTURAL -library WORK -parameters "DRCAS = 0, DRCAC = 0, nbit = 6"
+analyze -library WORK -format vhdl {/home/ms21.16/ms-lab/lab1/syn/constants.vhd /home/ms21.16/ms-lab/lab1/syn/fa.vhd /home/ms21.16/ms-lab/lab1/syn/rca_generic.vhd}
+analyze -library WORK -format vhdl {/home/ms21.16/ms-lab/lab1/syn/constants.vhd /home/ms21.16/ms-lab/lab1/syn/fa.vhd /home/ms21.16/ms-lab/lab1/syn/rca_generic.vhd}
+analyze -library WORK -format vhdl {/home/ms21.16/ms-lab/lab1/syn/constants.vhd /home/ms21.16/ms-lab/lab1/syn/fa.vhd /home/ms21.16/ms-lab/lab1/syn/rca_generic.vhd}
+analyze -library WORK -format vhdl {/home/ms21.16/ms-lab/lab1/syn/constants.vhd /home/ms21.16/ms-lab/lab1/syn/fa.vhd /home/ms21.16/ms-lab/lab1/syn/rca_generic.vhd}
+analyze -library WORK -format vhdl {/home/ms21.16/ms-lab/lab1/syn/constants.vhd /home/ms21.16/ms-lab/lab1/syn/fa.vhd /home/ms21.16/ms-lab/lab1/syn/rca_generic.vhd}
+analyze -library WORK -format vhdl {/home/ms21.16/ms-lab/lab1/syn/constants.vhd /home/ms21.16/ms-lab/lab1/syn/fa.vhd /home/ms21.16/ms-lab/lab1/syn/rca_generic.vhd}
+elaborate RCA -architecture STRUCTURAL -library WORK -parameters "nbit = 6"
+analyze -library WORK -format vhdl {/home/ms21.16/ms-lab/lab1/syn/constants.vhd /home/ms21.16/ms-lab/lab1/syn/fa.vhd /home/ms21.16/ms-lab/lab1/syn/rca_generic.vhd}
+elaborate RCA -architecture STRUCTURAL -library WORK -parameters "nbit = 6"
+change_selection [get_s rca_nbit6]
 gui_zoom -window [gui_get_current_window -view] -full
 compile -exact_map
-change_selection [get_s ALU_N16]
 gui_zoom -window [gui_get_current_window -view] -full
-change_selection [get_s r138]
-change_selection [get_s r138]
-change_selection [get_s mult_38]
-change_selection [get_s mult_38/FS_1]
-change_selection [get_s mult_38/FS_1]
-change_selection [get_s mult_38/FS_1]
-change_selection [get_s ALU_N16]
+change_selection [get_s FAI_1]
 change_selection 
-change_selection [::snpsGuiSyn::get_current_design]
-change_selection [get_s ALU_N16]
-change_selection [get_s r138]
-change_selection [get_s ALU_N16]
-write -hierarchy -format vhdl -output /home/ms21.16/ms-lab/lab1/syn/alu_syn_beh.vhdl
-analyze -library WORK -format vhdl {/home/ms21.16/ms-lab/lab1/syn/constants.vhd /home/ms21.16/ms-lab/lab1/syn/alu_type.vhd /home/ms21.16/ms-lab/lab1/syn/alu.vhd}
-elaborate ALU -architecture BEHAVIOR -library WORK -parameters "N = 16"
+write -hierarchy -format vhdl -output /home/ms21.16/ms-lab/lab1/syn/rca_syn_str.vhdl
+report_area > rca_str_area.txt
+report_timing > rca_str_area.txt
+report_area > rca_str_area.txt
+report_timing > rca_str_timing.txt
+analyze -library WORK -format vhdl {/home/ms21.16/ms-lab/lab1/syn/constants.vhd /home/ms21.16/ms-lab/lab1/syn/fa.vhd /home/ms21.16/ms-lab/lab1/syn/rca_generic.vhd}
+elaborate RCA -architecture BEHAVIORAL -library WORK -parameters "nbit = 6"
+compile -exact_map
 gui_zoom -window [gui_get_current_window -view] -full
-analyze -library WORK -format vhdl {/home/ms21.16/ms-lab/lab1/syn/constants.vhd /home/ms21.16/ms-lab/lab1/syn/alu_type.vhd /home/ms21.16/ms-lab/lab1/syn/alu.vhd}
-elaborate ALU -architecture BEHAVIOR -library WORK -parameters "N = 16"
-change_selection [get_s ALU_N16]
+change_selection [get_s {{n1,A[5:0]} n1 {A[5]} {A[4]} {A[3]} {A[2]} {A[1]} {A[0]}}]
+change_selection [get_s {{n1,B[5:0]} n1 {B[5]} {B[4]} {B[3]} {B[2]} {B[1]} {B[0]}}]
+change_selection 
+change_selection [get_s add_1_root_add_47_2/CO]
+change_selection 
+analyze -library WORK -format vhdl {/home/ms21.16/ms-lab/lab1/syn/constants.vhd /home/ms21.16/ms-lab/lab1/syn/fa.vhd /home/ms21.16/ms-lab/lab1/syn/rca_generic.vhd}
+elaborate RCA -architecture BEHAVIORAL -library WORK -parameters "nbit = 6"
+change_selection [get_s add_47]
 gui_zoom -window [gui_get_current_window -view] -full
-elaborate ALU -architecture BEHAVIOR -library WORK -parameters "N = 15"
-change_selection [get_s ALU_N15]
-elaborate ALU -architecture BEHAVIOR -library WORK -parameters "N = 3"
-change_selection [get_s ALU_N3]
+change_selection 
+change_selection [get_s add_47]
+change_selection 
+compile -exact_map
 gui_zoom -window [gui_get_current_window -view] -full
+change_selection [get_s {{B[5:0]} {B[5]} {B[4]} {B[3]} {B[2]} {B[1]} {B[0]}}]
+change_selection 
+change_selection [get_s add_1_root_add_47_2]
+change_selection 
+gui_zoom -window [gui_get_current_window -view] -full
+gui_zoom -window [gui_get_current_window -view] -full
+write -hierarchy -format vhdl -output /home/ms21.16/ms-lab/lab1/syn/rca_syn_beh.vhdl
+report_area > rca_beh_area.txt
+report_timing > rca_beh_timing.txt

@@ -1,0 +1,28 @@
+ 
+****************************************
+Report : area
+Design : rca_nbit6
+Version: F-2011.09-SP3
+Date   : Sat Mar  6 21:43:46 2021
+****************************************
+
+Library(s) Used:
+
+    NangateOpenCellLibrary (File: /home/mariagrazia.graziano/do/libnangate/NangateOpenCellLibrary_typical_ecsm.db)
+
+Number of ports:                           20
+Number of nets:                            25
+Number of cells:                            6
+Number of combinational cells:              0
+Number of sequential cells:                 0
+Number of macros:                           0
+Number of buf/inv:                          0
+Number of references:                       6
+
+Combinational area:         30.324000
+Noncombinational area:       0.000000
+Net Interconnect area:      undefined  (Wire load has zero net area)
+
+Total cell area:            30.324000
+Total area:                 undefined
+1
