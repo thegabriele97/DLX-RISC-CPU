@@ -2,6 +2,7 @@
 
 
 ## Domande LAB 01
+ - Chiedere se il mux generico va fatto con N livelli di mux oppure con i generic in AND/OR/IV
  - Chiedere se nella nand si può togliere la seconda achitettura
  - Chiedere se nel registro bisogna mettere il delay
  - Chiedere se nel registro bisogna mettere il segnale enable
