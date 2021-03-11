@@ -23,7 +23,7 @@ architecture structural of fd_generic is
 	fds: for i in 0 to NBIT - 1 generate
 			fdi: FD port map(D => D(i), CK => (CK AND ENABLE), RESET => RESET, Q => Q(i));
 	end generate fds;
-end struct_sync;
+end structural;
 
 
 configuration CFG_FD_GENERIC_SYNC of fd_generic is
