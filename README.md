@@ -11,6 +11,7 @@
  - Chiedere se lo shift va gestito anche per valori > N
  - Chiedere se N è sempre una potenza di 2, N e sempre pari
  - Chiedere se si può usare la funzione rem
+ - Chiedere se va bene un for di lunghezza indefinita per la sintesi
 
 ## To Do List
  - Provare a mettere 0 ns nella sintesi di Synopsys con il multiplexer
