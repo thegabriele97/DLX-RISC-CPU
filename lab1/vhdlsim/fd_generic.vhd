@@ -2,17 +2,17 @@ library IEEE;
 use IEEE.std_logic_1164.all; 
 use WORK.constants.all;
 
-entity FD_GENERIC is
+entity fd_generic is
 	generic (NBIT : integer := NumBit);
 	Port (	D:	In	std_logic_vector(NBIT-1 downto 0);
 		CK:	In	std_logic;
 		RESET:	In	std_logic;
 		ENABLE:	In	std_logic;
 		Q:	Out	std_logic_vector(NBIT-1 downto 0));
-end FD_GENERIC;
+end fd_generic;
 
 
-architecture PIPPO_GENERIC of FD_GENERIC is -- flip flop D with syncronous reset
+architecture PIPPO_GENERIC of fd_generic is -- flip flop D with syncronous reset
 
 begin
 	PSYNCH: process(CK,RESET)
@@ -28,7 +28,7 @@ begin
 
 end PIPPO_GENERIC;
 
-architecture PLUTO_GENERIC of FD_GENERIC is -- flip flop D with asyncronous reset
+architecture PLUTO_GENERIC of fd_generic is -- flip flop D with asyncronous reset
 
 begin
 	
@@ -44,13 +44,13 @@ begin
 end PLUTO_GENERIC;
 
 
-configuration CFG_FD_GEN_PIPPO of FD_GENERIC is
+configuration CFG_FD_GEN_PIPPO of fd_generic is
 	for PIPPO_GENERIC
 	end for;
 end CFG_FD_GEN_PIPPO;
 
 
-configuration CFG_FD_GEN_PLUTO of FD_GENERIC is
+configuration CFG_FD_GEN_PLUTO of fd_generic is
 	for PLUTO_GENERIC
 	end for;
 end CFG_FD_GEN_PLUTO;

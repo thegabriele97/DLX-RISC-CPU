@@ -4,12 +4,12 @@ use IEEE.numeric_std.all;
 use WORK.constants.all;
 
 entity mux21_generic is
-    Generic (NBIT: integer:= numBit; DELAY_MUX: Time:= tp_mux);
+    generic (NBIT: integer:= numBit; DELAY_MUX: Time:= tp_mux);
 	Port (	
-        A:	In	std_logic_vector(NBIT-1 downto 0) ;
-        B:	In	std_logic_vector(NBIT-1 downto 0);
-        S: 	In	std_logic;
-        Y:	Out	std_logic_vector(NBIT-1 downto 0)
+        a:	in	std_logic_vector(NBIT - 1 downto 0) ;
+        b:	in	std_logic_vector(NBIT - 1 downto 0);
+        s: 	in	std_logic;
+        y:	out	std_logic_vector(NBIT - 1 downto 0)
     );
 end entity mux21_generic;
 
@@ -18,69 +18,69 @@ end entity mux21_generic;
 architecture structural of mux21_generic is
 
     component iv_generic is
-        Generic (NBIT: integer:= numBit);
-        Port (	
-            A:	In	std_logic_vector(NBIT - 1 downto 0);
-            Y:	Out	std_logic_vector(NBIT - 1 downto 0)
+        generic (NBIT: integer := NumBit);
+        port (
+            a:	In	std_logic_vector(NBIT - 1 DOWNTO 0);
+            y:	Out	std_logic_vector(NBIT - 1 DOWNTO 0)
         );
     end component;
 
     component nd2_generic is
-        Generic (NBIT: integer:= numBit);
-        Port (	
-            A:	In	std_logic_vector(NBIT - 1 downto 0);
-            B:	In	std_logic_vector(NBIT - 1 downto 0);
-            Y:	Out	std_logic_vector(NBIT - 1 downto 0)
+        generic (NBIT: integer := NumBit);
+        port (
+            a:	in	std_logic_vector(NBIT - 1 DOWNTO 0);
+            b:	in	std_logic_vector(NBIT - 1 DOWNTO 0);
+            y:	out	std_logic_vector(NBIT - 1 DOWNTO 0)
         );
     end component;
 
-    signal Y1: std_logic_vector(NBIT - 1 downto 0);
-	signal Y2: std_logic_vector(NBIT - 1 downto 0);
-	signal SB: std_logic_vector(NBIT - 1 downto 0);
-    signal S_in: std_logic_vector(NBIT - 1 downto 0);
+    signal y1: std_logic_vector(NBIT - 1 downto 0);
+	signal y2: std_logic_vector(NBIT - 1 downto 0);
+	signal sb: std_logic_vector(NBIT - 1 downto 0);
+    signal s_in: std_logic_vector(NBIT - 1 downto 0);
 
 begin
 
     -- Necessario per adattare l'input del multiplexer ad 1 bit all'input dell'inverter
-    S_in <= (OTHERS => S);
+    s_in <= (OTHERS => s);
 
-    UIV : iv_generic generic map(NBIT) port map (S_in, SB);
-	UND1 : nd2_generic generic map(NBIT) port map (A, S_in, Y1);
-	UND2 : nd2_generic generic map(NBIT) port map (B, SB, Y2);
-	UND3 : nd2_generic generic map(NBIT) port map (Y1, Y2, Y);
+    UIV : iv_generic generic map(NBIT) port map (s_in, sb);
+	UND1 : nd2_generic generic map(NBIT) port map (a, s_in, y1);
+	UND2 : nd2_generic generic map(NBIT) port map (b, sb, y2);
+	UND3 : nd2_generic generic map(NBIT) port map (y1, y2, y);
     
 end architecture structural;
 
 
 --- Behavioural architecture ----
 
-architecture Behavioural of mux21_generic is
+architecture behavioural of mux21_generic is
     
 begin
 
-    pmux: process(A, B, S)
+    pmux: process(a, b, s)
 	begin
-		if S = '1' then
-			Y <= A after DELAY_MUX;
+		if s = '1' then
+			y <= a after DELAY_MUX;
 		else
-			Y <= B after DELAY_MUX;
+			y <= b after DELAY_MUX;
 		end if;
 	end process;
 end architecture Behavioural;
 
 
 configuration CFG_MUX21_GEN_BEHAVIORAL of mux21_generic is
-	for Behavioural
+	for behavioural
 	end for;
 end CFG_MUX21_GEN_BEHAVIORAL;
 
 configuration CFG_MUX21_GEN_STRUCTURAL of mux21_generic is
-	for Structural
+	for structural
 		for all : iv_generic
-			use configuration WORK.CFG_IV_BEHAVIORAL;
+			use configuration WORK.CFG_IV_GENERIC_STRUCTURAL;
 		end for;
 		for all : nd2_generic
-			use configuration WORK.CFG_ND2_ARCH1;
+			use configuration WORK.CFG_ND2_GENERIC_STRUCTURAL;
 		end for;
 	end for;
 end CFG_MUX21_GEN_STRUCTURAL;

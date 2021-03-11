@@ -6,6 +6,6 @@ package CONSTANTS is
    constant NRDELAY : time := 0.2 ns;
    constant DRCAS : time := 1 ns;
    constant DRCAC : time := 2 ns;
-   constant NumBit : integer := 4;	
+   constant NumBit : integer := 64;	
    constant TP_MUX : time := 0.5 ns; 	
 end CONSTANTS;

@@ -15,7 +15,7 @@ architecture TEST of TBFD_GENERIC is
 	signal	QSYNCH:		std_logic_vector(NBIT-1 downto 0);
 	signal	QASYNCH:	std_logic_vector(NBIT-1 downto 0);
 
-	component FD_GENERIC is
+	component fd_generic is
 		generic (NBIT : integer := NumBit);
         	Port (  D:	In	std_logic_vector(NBIT-1 downto 0);
                 	CK:     In	std_logic;
@@ -25,11 +25,11 @@ architecture TEST of TBFD_GENERIC is
 	end component;	
 begin 
 		
-	UFD1 : FD_GENERIC
+	UFD1 : fd_generic
 	Generic Map (NBIT)
 	Port Map ( D, CK, RESET, ENABLE, QSYNCH); -- sinc
 
-	UFD2 : FD_GENERIC
+	UFD2 : fd_generic
 	Generic Map (NBIT)
 	Port Map ( D, CK, RESET, ENABLE, QASYNCH); -- asinc
 	
@@ -53,10 +53,10 @@ end TEST;
 
 configuration FDGENTEST of TBFD_GENERIC is
    for TEST
-      for UFD1 : FD_GENERIC
+      for UFD1 : fd_generic
          use configuration WORK.CFG_FD_GEN_PIPPO; -- sincrono
       end for;
-      for UFD2 : FD_GENERIC
+      for UFD2 : fd_generic
          use configuration WORK.CFG_FD_GEN_PLUTO; -- asincrono
       end for;
 
