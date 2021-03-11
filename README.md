@@ -9,7 +9,7 @@
  - Chiedere se bisogna togliere completamente i delay (anche dai generic map) nella fase di sintesi
  - Chiedere se va bene utilizzare la numeric_std al posto della std_logic_unsigned e della std_logic_arith
  - Chiedere se lo shift va gestito anche per valori > N
- - Chiedere se N è sempre una potenza di 2
+ - Chiedere se N è sempre una potenza di 2, N e sempre pari
  - Chiedere se si può usare la funzione rem
 
 ## To Do List
