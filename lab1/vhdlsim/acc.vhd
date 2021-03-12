@@ -71,7 +71,7 @@ architecture structural of ACC_GENERIC is
 		Y:	Out	std_logic_vector(NBIT-1 downto 0)
 	    );
 	end component;
-	component rca is 
+	component rca_generic is 
 		generic (DRCAS : 	Time := 0 ns;
 			 DRCAC : 	Time := 0 ns;
 		         nbit  :        integer := 6);
@@ -95,7 +95,7 @@ architecture structural of ACC_GENERIC is
 begin
 	mux1: mux21_generic GENERIC MAP(NBIT, DELAY_MUX)
 			    PORT MAP(feed_back, B, ACCUMULATE, m1);
-	add1: rca GENERIC MAP(DRCAS, DRCAC, NBIT)
+	add1: rca_generic GENERIC MAP(DRCAS, DRCAC, NBIT)
 		  PORT MAP(A, m1, '0', out_add, co1);
 	reg: reg_generic GENERIC MAP(NBIT)
 			PORT MAP(out_add, CLK, rst_not, acc_en_not, feed_back);
@@ -115,7 +115,7 @@ configuration CFG_ACC_STRUCTURAL of ACC_GENERIC is
 		for all: mux21_generic
 			use configuration WORK.CFG_MUX21_GEN_STRUCTURAL;
 		end for;
-		for all: rca
+		for all: rca_generic
 			use configuration WORK.CFG_RCA_GEN_STRUCTURAL;
 		end for; 
 		for all: reg_generic

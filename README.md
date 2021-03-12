@@ -16,13 +16,13 @@
  - Chiedere se va bene un for di lunghezza indefinita per la sintesi - Nope
 
 ## To Do List
- - Provare a mettere 0 ns nella sintesi di Synopsys con il multiplexer
- - Finire registro (enable)
- - Testare registro
+ - Provare a mettere 0 ns nella sintesi di Synopsys con il multiplexer :white_check_mark:
+ - Finire registro (enable) :white_check_mark:
+ - Testare registro :white_check_mark:
  - Sintetizzare registro
- - Cambiare nome rca
- - Sintetizzare rca
- - Finire mux
- - Sintetizzare mux
+ - Cambiare nome rca :white_check_mark:
+ - Sintetizzare rca :white_check_mark:
+ - Finire mux :white_check_mark:
+ - Sintetizzare mux :white_check_mark:
  - Testare accumulator
  - Sintetizzare accumulator
