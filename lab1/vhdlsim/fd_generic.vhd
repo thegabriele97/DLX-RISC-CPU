@@ -5,39 +5,61 @@ use WORK.constants.all;
 entity fd_generic is
 	Generic (NBIT: integer:= numBit);
 	Port (	D:	In	std_logic_vector(NBIT - 1 downto 0);
-					CK:	In	std_logic;
-					RESET:	In	std_logic;
-					ENABLE: In std_logic;
-					Q:	Out	std_logic_vector(NBIT - 1 downto 0));
+		CK:	In	std_logic;
+		RESET:	In	std_logic;
+		ENABLE: In std_logic;
+		Q:	Out	std_logic_vector(NBIT - 1 downto 0));
 end fd_generic;
 
 
 architecture structural of fd_generic is
 	component FD is
 		Port (	D:	In	std_logic;
-						CK:	In	std_logic;
-						RESET:	In	std_logic;
-						Q:	Out	std_logic);
+			CK:	In	std_logic;
+			RESET:	In	std_logic;
+			Q:	Out	std_logic);
 	end component;
-
+	component iv is
+		port (	
+			a:	in	std_logic;
+			y:	out	std_logic
+		);
+	end component;
+	
+	signal iv_out, reg_out, gated_clock: std_logic;
+begin
+	iv1: iv port map(a => CK, y => iv_out);
+	reg1: FD port map(D => ENABLE, CK => iv_out, RESET => '0', Q => reg_out);
+	gated_clock <= reg_out AND CK;
+	
 	fds: for i in 0 to NBIT - 1 generate
-			fdi: FD port map(D => D(i), CK => (CK AND ENABLE), RESET => RESET, Q => Q(i));
+		fdi: FD port map(D => D(i), CK => gated_clock, RESET => RESET, Q => Q(i));
 	end generate fds;
 end structural;
 
 
 configuration CFG_FD_GENERIC_SYNC of fd_generic is
 	for structural
-				for all: FD
-						use configuration WORK.CFG_FD_PIPPO;
-				end for;
+		for all: FD
+			use configuration WORK.CFG_FD_PIPPO;
+		end for;
+		for fds
+			for fdi: FD
+				use configuration WORK.CFG_FD_PIPPO;
+			end for;
+		end for;
 	end for;
-end CFG_IV_GENERIC_BEHAVIORAL;
+end CFG_FD_GENERIC_SYNC;
 
 configuration CFG_FD_GENERIC_ASYNC of fd_generic is
 	for structural
-			for all: FD
-					use configuration WORK.CFG_FD_PLUTO;
+		for all: FD
+			use configuration WORK.CFG_FD_PLUTO;
+		end for;
+		for fds
+			for fdi: FD
+				use configuration WORK.CFG_FD_PLUTO;
 			end for;
 		end for;
-end CFG_IV_GENERIC_STRUCTURAL;
+	end for;
+end CFG_FD_GENERIC_ASYNC;

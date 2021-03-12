@@ -42,7 +42,7 @@ begin
 	
 	PCLOCK : process(CK)
 	begin
-		CK <= not(CK) after 0.5 ns;	
+		CK <= not(CK) after 10 ns;	
 	end process;
 
 
@@ -54,10 +54,10 @@ end TEST;
 configuration FDGENTEST of TBFD_GENERIC is
    for TEST
       for UFD1 : fd_generic
-         use configuration WORK.CFG_FD_GEN_PIPPO; -- sincrono
+         use configuration WORK.CFG_FD_GENERIC_SYNC; -- sincrono
       end for;
       for UFD2 : fd_generic
-         use configuration WORK.CFG_FD_GEN_PLUTO; -- asincrono
+         use configuration WORK.CFG_FD_GENERIC_ASYNC; -- asincrono
       end for;
 
 
