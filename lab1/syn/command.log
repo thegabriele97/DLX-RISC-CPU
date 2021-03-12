@@ -1,6 +1,6 @@
 #@ # 
 #@ # Running dc_shell Version F-2011.09-SP3 for amd64 -- Jan 26, 2012
-#@ # Date:   Thu Mar 11 09:52:10 2021
+#@ # Date:   Fri Mar 12 11:45:07 2021
 #@ # Run by: ms21.16@localhost.localdomain
 #@ 
 
@@ -4772,14 +4772,44 @@ source /home/ms21.16/ms-lab/lab1/syn/.synopsys_dc.setup
 #@ # -- End source /home/ms21.16/ms-lab/lab1/syn/.synopsys_dc.setup
 
 gui_start
-analyze -library WORK -format vhdl {/home/ms21.16/ms-lab/lab1/syn/constants.vhd /home/ms21.16/ms-lab/lab1/syn/fd_generic.vhd}
-elaborate FD_GENERIC -architecture PIPPO_GENERIC -library DEFAULT -parameters "NBIT = 16"
+analyze -library WORK -format vhdl {/home/ms21.16/ms-lab/lab1/syn/constants.vhd /home/ms21.16/ms-lab/lab1/syn/fd_async.vhd /home/ms21.16/ms-lab/lab1/syn/reg_async_generic.vhd}
+elaborate REG_ASYNC_GENERIC -architecture STRUCTURAL_ASYNC -library DEFAULT -parameters "NBIT = 4"
 compile -exact_map
-change_selection [get_s FD_GENERIC_NBIT16]
-write -hierarchy -format vhdl -output /home/ms21.16/ms-lab/lab1/syn/fd_generic_syn_sync.vhdl
-elaborate FD_GENERIC -architecture PLUTO_GENERIC -library DEFAULT -parameters "NBIT = 16"
-change_selection [get_s FD_GENERIC_NBIT16_1]
+change_selection [get_s fdi2_3]
+analyze -library WORK -format vhdl {/home/ms21.16/ms-lab/lab1/syn/constants.vhd /home/ms21.16/ms-lab/lab1/syn/fd_sync.vhd /home/ms21.16/ms-lab/lab1/syn/reg_sync_generic.vhd}
+elaborate REG_SYNC_GENERIC -architecture STRUCTURAL_SYNC -library DEFAULT -parameters "NBIT = 4"
 compile -exact_map
-change_selection [get_s FD_GENERIC_NBIT16_1]
-gui_zoom -window [gui_get_current_window -view] -full
-write -hierarchy -format vhdl -output /home/ms21.16/ms-lab/lab1/syn/fd_generic_syn_sync.vhdl
+change_selection [get_s fdi1_1]
+analyze -library WORK -format vhdl {/home/ms21.16/ms-lab/lab1/syn/nd2_generic.vhd /home/ms21.16/ms-lab/lab1/syn/nd2.vhd /home/ms21.16/ms-lab/lab1/syn/mux21_generic.vhd /home/ms21.16/ms-lab/lab1/syn/iv_generic.vhd /home/ms21.16/ms-lab/lab1/syn/iv.vhd /home/ms21.16/ms-lab/lab1/syn/constants.vhd}
+analyze -library WORK -format vhdl {/home/ms21.16/ms-lab/lab1/syn/constants.vhd /home/ms21.16/ms-lab/lab1/syn/nd2.vhd /home/ms21.16/ms-lab/lab1/syn/nd2_generic.vhd /home/ms21.16/ms-lab/lab1/syn/iv.vhd /home/ms21.16/ms-lab/lab1/syn/iv_generic.vhd /home/ms21.16/ms-lab/lab1/syn/mux21_generic.vhd}
+elaborate MUX21_GENERIC -architecture BEHAVIOURAL -library WORK -parameters "NBIT = 4"
+compile -exact_map
+change_selection [get_s U11]
+change_selection [get_s U13]
+change_selection [get_s U13]
+change_selection [get_s U13]
+change_selection [get_s U13]
+change_selection [get_s U12]
+change_selection [get_s U12]
+change_selection [get_s U11]
+elaborate MUX21_GENERIC -architecture STRUCTURAL -library WORK -parameters "NBIT = 4"
+compile -exact_map
+change_selection [get_s UND1]
+change_selection [get_s UND1/ndi_2]
+change_selection [get_s UND1/ndi_2/U1]
+change_selection [get_s UND1/ndi_2/U1]
+change_selection [get_s UND1/ndi_0]
+change_selection [get_s UND1]
+change_selection 
+change_selection [get_s UND1]
+analyze -library WORK -format vhdl {/home/ms21.16/ms-lab/lab1/syn/constants.vhd /home/ms21.16/ms-lab/lab1/syn/nd2.vhd /home/ms21.16/ms-lab/lab1/syn/nd2_generic.vhd /home/ms21.16/ms-lab/lab1/syn/iv.vhd /home/ms21.16/ms-lab/lab1/syn/iv_generic.vhd /home/ms21.16/ms-lab/lab1/syn/mux21_generic.vhd}
+elaborate MUX21_GENERIC -architecture STRUCTURAL -library WORK -parameters "NBIT = 4"
+compile -exact_map
+change_selection [get_s UND1]
+change_selection [get_s UND1]
+change_selection [get_s UND1/U2]
+change_selection [get_s UND1/U2]
+change_selection [get_s UND1/U2]
+change_selection [get_s UND1/U2]
+change_selection [get_s UND1/U2]
+change_selection [get_s UND1/U2]

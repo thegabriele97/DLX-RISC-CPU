@@ -81,7 +81,7 @@ architecture structural of ACC_GENERIC is
 			S:	Out	std_logic_vector((nbit-1) downto 0);
 			Co:	Out	std_logic);
 	end component;
-	component fd_generic is
+	component reg_generic is
 		generic (NBIT : integer := NumBit);
 		Port (	D:	In	std_logic_vector(NBIT-1 downto 0);
 			CK:	In	std_logic;
@@ -97,7 +97,7 @@ begin
 			    PORT MAP(feed_back, B, ACCUMULATE, m1);
 	add1: rca GENERIC MAP(DRCAS, DRCAC, NBIT)
 		  PORT MAP(A, m1, '0', out_add, co1);
-	reg: fd_generic GENERIC MAP(NBIT)
+	reg: reg_generic GENERIC MAP(NBIT)
 			PORT MAP(out_add, CLK, rst_not, acc_en_not, feed_back);
 	Y <= feed_back;
 	acc_en_not <= NOT(ACC_EN_n);
@@ -118,8 +118,8 @@ configuration CFG_ACC_STRUCTURAL of ACC_GENERIC is
 		for all: rca
 			use configuration WORK.CFG_RCA_GEN_STRUCTURAL;
 		end for; 
-		for all: fd_generic
-			use configuration WORK.CFG_FD_GEN_PLUTO;
+		for all: reg_generic
+			use configuration WORK.CFG_REG_GENERIC_ASYNC;
 		end for; 
 	end for;
 end CFG_ACC_STRUCTURAL;

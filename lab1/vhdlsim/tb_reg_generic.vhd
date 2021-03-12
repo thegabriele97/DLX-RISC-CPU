@@ -2,10 +2,10 @@ library IEEE;
 use IEEE.std_logic_1164.all;
 use WORK.constants.all;
 
-entity TBFD_GENERIC is
-end TBFD_GENERIC;
+entity TBREG_GENERIC is
+end TBREG_GENERIC;
 
-architecture TEST of TBFD_GENERIC is
+architecture TEST of TBREG_GENERIC is
 
 	constant NBIT: integer := 16;
 	signal	CK:		std_logic :='0';
@@ -15,7 +15,7 @@ architecture TEST of TBFD_GENERIC is
 	signal	QSYNCH:		std_logic_vector(NBIT-1 downto 0);
 	signal	QASYNCH:	std_logic_vector(NBIT-1 downto 0);
 
-	component fd_generic is
+	component reg_generic is
 		generic (NBIT : integer := NumBit);
         	Port (  D:	In	std_logic_vector(NBIT-1 downto 0);
                 	CK:     In	std_logic;
@@ -25,11 +25,11 @@ architecture TEST of TBFD_GENERIC is
 	end component;	
 begin 
 		
-	UFD1 : fd_generic
+	UREG1 : reg_generic
 	Generic Map (NBIT)
 	Port Map ( D, CK, RESET, ENABLE, QSYNCH); -- sinc
 
-	UFD2 : fd_generic
+	UREG2 : reg_generic
 	Generic Map (NBIT)
 	Port Map ( D, CK, RESET, ENABLE, QASYNCH); -- asinc
 	
@@ -51,16 +51,16 @@ begin
 
 end TEST;
 
-configuration FDGENTEST of TBFD_GENERIC is
+configuration REGGENTEST of TBREG_GENERIC is
    for TEST
-      for UFD1 : fd_generic
-         use configuration WORK.CFG_FD_GEN_PIPPO; -- sincrono
+      for UREG1 : reg_generic
+         use configuration WORK.CFG_REG_GENERIC_SYNC; -- sincrono
       end for;
-      for UFD2 : fd_generic
-         use configuration WORK.CFG_FD_GEN_PLUTO; -- asincrono
+      for UREG2 : reg_generic
+         use configuration WORK.CFG_REG_GENERIC_ASYNC; -- asincrono
       end for;
 
 
    end for;
-end FDGENTEST;
+end REGGENTEST;
 

@@ -1,49 +1,57 @@
 library IEEE;
-use IEEE.std_logic_1164.all; --  libreria IEEE con definizione tipi standard logic
-use WORK.constants.all; -- libreria WORK user-defined
+use IEEE.std_logic_1164.all;
+use IEEE.numeric_std.all;
+use WORK.constants.all;
 
 entity nd2_generic is
-	Generic (NBIT: integer:= numBit);
-	Port (	
-		A:	In	std_logic_vector(NBIT - 1 downto 0);
-		B:	In	std_logic_vector(NBIT - 1 downto 0);
-		Y:	Out	std_logic_vector(NBIT - 1 downto 0)
-	);
-end nd2_generic;
+    generic (NBIT: integer := NumBit);
+    port (
+        a:	in	std_logic_vector(NBIT - 1 DOWNTO 0);
+		b:	in	std_logic_vector(NBIT - 1 DOWNTO 0);
+		y:	out	std_logic_vector(NBIT - 1 DOWNTO 0)
+    );
+end entity nd2_generic;
 
-
-architecture ARCH1 of nd2_generic is
-
+architecture structural of nd2_generic is
+    
+    component nd2 is
+        port (	
+            a:	in	std_logic;
+            b:	in	std_logic;
+            y:	out	std_logic
+        );
+    end component;
 begin
-	Y <= not( A and B) after NDDELAY; --  
+    
+    nands: for i in 0 to NBIT - 1 generate
+        ndi: nd2 port map(a => a(i), b => b(i), y =>y(i));
+    end generate nands;
 
-end ARCH1;
+end architecture structural;
 
-
--- Chiedere se si può togliere
-
--- architecture ARCH2 of ND2 is
-
--- begin
--- 	P1: process(A,B)
--- 	begin
--- 	  if (A ='1') and (B='1') then
--- 	    Y <='0' after NDDELAY;
--- 	  elsif (A='0') or (B='0') then 
--- 	    Y <='1' after NDDELAY;
--- 	  end if;
--- 	end process;
-
--- end ARCH2;
+architecture behavioural of nd2_generic is
+    
+begin
+    process(a, b)
+    begin 
+        y <= not(a and b); --  after NDDELAY;
+    end process;
+    
+end architecture behavioural;
 
 
-configuration CFG_ND2_ARCH1 of nd2_generic is
-	for ARCH1
+configuration CFG_ND2_GENERIC_BEHAVIOURAL of nd2_generic is
+	for behavioural
 	end for;
-end CFG_ND2_ARCH1;
+end CFG_ND2_GENERIC_BEHAVIOURAL;
 
--- configuration CFG_ND2_ARCH2 of ND2 is
--- 	for ARCH2
--- 	end for;
--- end CFG_ND2_ARCH2;
 
+configuration CFG_ND2_GENERIC_STRUCTURAL of nd2_generic is
+	for structural
+	for nands
+        for ndi: nd2
+            use configuration WORK.CFG_ND2_ARCH1;
+        end for;
+	end for;
+	end for;
+end CFG_ND2_GENERIC_STRUCTURAL;

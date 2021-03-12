@@ -16,14 +16,13 @@ use IEEE.std_logic_1164.all;
 
 use work.CONV_PACK_mux21_generic_NBIT16.all;
 
-entity nd2_generic_NBIT16_2 is
+entity nd2_47 is
 
-   port( A, B : in std_logic_vector (15 downto 0);  Y : out std_logic_vector 
-         (15 downto 0));
+   port( a, b : in std_logic;  y : out std_logic);
 
-end nd2_generic_NBIT16_2;
+end nd2_47;
 
-architecture SYN_ARCH1 of nd2_generic_NBIT16_2 is
+architecture SYN_arch1 of nd2_47 is
 
    component NAND2_X1
       port( A1, A2 : in std_logic;  ZN : out std_logic);
@@ -31,24 +30,1573 @@ architecture SYN_ARCH1 of nd2_generic_NBIT16_2 is
 
 begin
    
-   U1 : NAND2_X1 port map( A1 => B(9), A2 => A(9), ZN => Y(9));
-   U2 : NAND2_X1 port map( A1 => B(8), A2 => A(8), ZN => Y(8));
-   U3 : NAND2_X1 port map( A1 => B(7), A2 => A(7), ZN => Y(7));
-   U4 : NAND2_X1 port map( A1 => B(6), A2 => A(6), ZN => Y(6));
-   U5 : NAND2_X1 port map( A1 => B(5), A2 => A(5), ZN => Y(5));
-   U6 : NAND2_X1 port map( A1 => B(4), A2 => A(4), ZN => Y(4));
-   U7 : NAND2_X1 port map( A1 => B(3), A2 => A(3), ZN => Y(3));
-   U8 : NAND2_X1 port map( A1 => B(2), A2 => A(2), ZN => Y(2));
-   U9 : NAND2_X1 port map( A1 => B(1), A2 => A(1), ZN => Y(1));
-   U10 : NAND2_X1 port map( A1 => B(15), A2 => A(15), ZN => Y(15));
-   U11 : NAND2_X1 port map( A1 => B(14), A2 => A(14), ZN => Y(14));
-   U12 : NAND2_X1 port map( A1 => B(13), A2 => A(13), ZN => Y(13));
-   U13 : NAND2_X1 port map( A1 => B(12), A2 => A(12), ZN => Y(12));
-   U14 : NAND2_X1 port map( A1 => B(11), A2 => A(11), ZN => Y(11));
-   U15 : NAND2_X1 port map( A1 => B(10), A2 => A(10), ZN => Y(10));
-   U16 : NAND2_X1 port map( A1 => B(0), A2 => A(0), ZN => Y(0));
+   U1 : NAND2_X1 port map( A1 => b, A2 => a, ZN => y);
 
-end SYN_ARCH1;
+end SYN_arch1;
+
+library IEEE;
+
+use IEEE.std_logic_1164.all;
+
+use work.CONV_PACK_mux21_generic_NBIT16.all;
+
+entity nd2_46 is
+
+   port( a, b : in std_logic;  y : out std_logic);
+
+end nd2_46;
+
+architecture SYN_arch1 of nd2_46 is
+
+   component NAND2_X1
+      port( A1, A2 : in std_logic;  ZN : out std_logic);
+   end component;
+
+begin
+   
+   U1 : NAND2_X1 port map( A1 => b, A2 => a, ZN => y);
+
+end SYN_arch1;
+
+library IEEE;
+
+use IEEE.std_logic_1164.all;
+
+use work.CONV_PACK_mux21_generic_NBIT16.all;
+
+entity nd2_45 is
+
+   port( a, b : in std_logic;  y : out std_logic);
+
+end nd2_45;
+
+architecture SYN_arch1 of nd2_45 is
+
+   component NAND2_X1
+      port( A1, A2 : in std_logic;  ZN : out std_logic);
+   end component;
+
+begin
+   
+   U1 : NAND2_X1 port map( A1 => b, A2 => a, ZN => y);
+
+end SYN_arch1;
+
+library IEEE;
+
+use IEEE.std_logic_1164.all;
+
+use work.CONV_PACK_mux21_generic_NBIT16.all;
+
+entity nd2_44 is
+
+   port( a, b : in std_logic;  y : out std_logic);
+
+end nd2_44;
+
+architecture SYN_arch1 of nd2_44 is
+
+   component NAND2_X1
+      port( A1, A2 : in std_logic;  ZN : out std_logic);
+   end component;
+
+begin
+   
+   U1 : NAND2_X1 port map( A1 => b, A2 => a, ZN => y);
+
+end SYN_arch1;
+
+library IEEE;
+
+use IEEE.std_logic_1164.all;
+
+use work.CONV_PACK_mux21_generic_NBIT16.all;
+
+entity nd2_43 is
+
+   port( a, b : in std_logic;  y : out std_logic);
+
+end nd2_43;
+
+architecture SYN_arch1 of nd2_43 is
+
+   component NAND2_X1
+      port( A1, A2 : in std_logic;  ZN : out std_logic);
+   end component;
+
+begin
+   
+   U1 : NAND2_X1 port map( A1 => b, A2 => a, ZN => y);
+
+end SYN_arch1;
+
+library IEEE;
+
+use IEEE.std_logic_1164.all;
+
+use work.CONV_PACK_mux21_generic_NBIT16.all;
+
+entity nd2_42 is
+
+   port( a, b : in std_logic;  y : out std_logic);
+
+end nd2_42;
+
+architecture SYN_arch1 of nd2_42 is
+
+   component NAND2_X1
+      port( A1, A2 : in std_logic;  ZN : out std_logic);
+   end component;
+
+begin
+   
+   U1 : NAND2_X1 port map( A1 => b, A2 => a, ZN => y);
+
+end SYN_arch1;
+
+library IEEE;
+
+use IEEE.std_logic_1164.all;
+
+use work.CONV_PACK_mux21_generic_NBIT16.all;
+
+entity nd2_41 is
+
+   port( a, b : in std_logic;  y : out std_logic);
+
+end nd2_41;
+
+architecture SYN_arch1 of nd2_41 is
+
+   component NAND2_X1
+      port( A1, A2 : in std_logic;  ZN : out std_logic);
+   end component;
+
+begin
+   
+   U1 : NAND2_X1 port map( A1 => b, A2 => a, ZN => y);
+
+end SYN_arch1;
+
+library IEEE;
+
+use IEEE.std_logic_1164.all;
+
+use work.CONV_PACK_mux21_generic_NBIT16.all;
+
+entity nd2_40 is
+
+   port( a, b : in std_logic;  y : out std_logic);
+
+end nd2_40;
+
+architecture SYN_arch1 of nd2_40 is
+
+   component NAND2_X1
+      port( A1, A2 : in std_logic;  ZN : out std_logic);
+   end component;
+
+begin
+   
+   U1 : NAND2_X1 port map( A1 => b, A2 => a, ZN => y);
+
+end SYN_arch1;
+
+library IEEE;
+
+use IEEE.std_logic_1164.all;
+
+use work.CONV_PACK_mux21_generic_NBIT16.all;
+
+entity nd2_39 is
+
+   port( a, b : in std_logic;  y : out std_logic);
+
+end nd2_39;
+
+architecture SYN_arch1 of nd2_39 is
+
+   component NAND2_X1
+      port( A1, A2 : in std_logic;  ZN : out std_logic);
+   end component;
+
+begin
+   
+   U1 : NAND2_X1 port map( A1 => b, A2 => a, ZN => y);
+
+end SYN_arch1;
+
+library IEEE;
+
+use IEEE.std_logic_1164.all;
+
+use work.CONV_PACK_mux21_generic_NBIT16.all;
+
+entity nd2_38 is
+
+   port( a, b : in std_logic;  y : out std_logic);
+
+end nd2_38;
+
+architecture SYN_arch1 of nd2_38 is
+
+   component NAND2_X1
+      port( A1, A2 : in std_logic;  ZN : out std_logic);
+   end component;
+
+begin
+   
+   U1 : NAND2_X1 port map( A1 => b, A2 => a, ZN => y);
+
+end SYN_arch1;
+
+library IEEE;
+
+use IEEE.std_logic_1164.all;
+
+use work.CONV_PACK_mux21_generic_NBIT16.all;
+
+entity nd2_37 is
+
+   port( a, b : in std_logic;  y : out std_logic);
+
+end nd2_37;
+
+architecture SYN_arch1 of nd2_37 is
+
+   component NAND2_X1
+      port( A1, A2 : in std_logic;  ZN : out std_logic);
+   end component;
+
+begin
+   
+   U1 : NAND2_X1 port map( A1 => b, A2 => a, ZN => y);
+
+end SYN_arch1;
+
+library IEEE;
+
+use IEEE.std_logic_1164.all;
+
+use work.CONV_PACK_mux21_generic_NBIT16.all;
+
+entity nd2_36 is
+
+   port( a, b : in std_logic;  y : out std_logic);
+
+end nd2_36;
+
+architecture SYN_arch1 of nd2_36 is
+
+   component NAND2_X1
+      port( A1, A2 : in std_logic;  ZN : out std_logic);
+   end component;
+
+begin
+   
+   U1 : NAND2_X1 port map( A1 => b, A2 => a, ZN => y);
+
+end SYN_arch1;
+
+library IEEE;
+
+use IEEE.std_logic_1164.all;
+
+use work.CONV_PACK_mux21_generic_NBIT16.all;
+
+entity nd2_35 is
+
+   port( a, b : in std_logic;  y : out std_logic);
+
+end nd2_35;
+
+architecture SYN_arch1 of nd2_35 is
+
+   component NAND2_X1
+      port( A1, A2 : in std_logic;  ZN : out std_logic);
+   end component;
+
+begin
+   
+   U1 : NAND2_X1 port map( A1 => b, A2 => a, ZN => y);
+
+end SYN_arch1;
+
+library IEEE;
+
+use IEEE.std_logic_1164.all;
+
+use work.CONV_PACK_mux21_generic_NBIT16.all;
+
+entity nd2_34 is
+
+   port( a, b : in std_logic;  y : out std_logic);
+
+end nd2_34;
+
+architecture SYN_arch1 of nd2_34 is
+
+   component NAND2_X1
+      port( A1, A2 : in std_logic;  ZN : out std_logic);
+   end component;
+
+begin
+   
+   U1 : NAND2_X1 port map( A1 => b, A2 => a, ZN => y);
+
+end SYN_arch1;
+
+library IEEE;
+
+use IEEE.std_logic_1164.all;
+
+use work.CONV_PACK_mux21_generic_NBIT16.all;
+
+entity nd2_33 is
+
+   port( a, b : in std_logic;  y : out std_logic);
+
+end nd2_33;
+
+architecture SYN_arch1 of nd2_33 is
+
+   component NAND2_X1
+      port( A1, A2 : in std_logic;  ZN : out std_logic);
+   end component;
+
+begin
+   
+   U1 : NAND2_X1 port map( A1 => b, A2 => a, ZN => y);
+
+end SYN_arch1;
+
+library IEEE;
+
+use IEEE.std_logic_1164.all;
+
+use work.CONV_PACK_mux21_generic_NBIT16.all;
+
+entity nd2_32 is
+
+   port( a, b : in std_logic;  y : out std_logic);
+
+end nd2_32;
+
+architecture SYN_arch1 of nd2_32 is
+
+   component NAND2_X1
+      port( A1, A2 : in std_logic;  ZN : out std_logic);
+   end component;
+
+begin
+   
+   U1 : NAND2_X1 port map( A1 => b, A2 => a, ZN => y);
+
+end SYN_arch1;
+
+library IEEE;
+
+use IEEE.std_logic_1164.all;
+
+use work.CONV_PACK_mux21_generic_NBIT16.all;
+
+entity nd2_31 is
+
+   port( a, b : in std_logic;  y : out std_logic);
+
+end nd2_31;
+
+architecture SYN_arch1 of nd2_31 is
+
+   component NAND2_X1
+      port( A1, A2 : in std_logic;  ZN : out std_logic);
+   end component;
+
+begin
+   
+   U1 : NAND2_X1 port map( A1 => b, A2 => a, ZN => y);
+
+end SYN_arch1;
+
+library IEEE;
+
+use IEEE.std_logic_1164.all;
+
+use work.CONV_PACK_mux21_generic_NBIT16.all;
+
+entity nd2_30 is
+
+   port( a, b : in std_logic;  y : out std_logic);
+
+end nd2_30;
+
+architecture SYN_arch1 of nd2_30 is
+
+   component NAND2_X1
+      port( A1, A2 : in std_logic;  ZN : out std_logic);
+   end component;
+
+begin
+   
+   U1 : NAND2_X1 port map( A1 => b, A2 => a, ZN => y);
+
+end SYN_arch1;
+
+library IEEE;
+
+use IEEE.std_logic_1164.all;
+
+use work.CONV_PACK_mux21_generic_NBIT16.all;
+
+entity nd2_29 is
+
+   port( a, b : in std_logic;  y : out std_logic);
+
+end nd2_29;
+
+architecture SYN_arch1 of nd2_29 is
+
+   component NAND2_X1
+      port( A1, A2 : in std_logic;  ZN : out std_logic);
+   end component;
+
+begin
+   
+   U1 : NAND2_X1 port map( A1 => b, A2 => a, ZN => y);
+
+end SYN_arch1;
+
+library IEEE;
+
+use IEEE.std_logic_1164.all;
+
+use work.CONV_PACK_mux21_generic_NBIT16.all;
+
+entity nd2_28 is
+
+   port( a, b : in std_logic;  y : out std_logic);
+
+end nd2_28;
+
+architecture SYN_arch1 of nd2_28 is
+
+   component NAND2_X1
+      port( A1, A2 : in std_logic;  ZN : out std_logic);
+   end component;
+
+begin
+   
+   U1 : NAND2_X1 port map( A1 => b, A2 => a, ZN => y);
+
+end SYN_arch1;
+
+library IEEE;
+
+use IEEE.std_logic_1164.all;
+
+use work.CONV_PACK_mux21_generic_NBIT16.all;
+
+entity nd2_27 is
+
+   port( a, b : in std_logic;  y : out std_logic);
+
+end nd2_27;
+
+architecture SYN_arch1 of nd2_27 is
+
+   component NAND2_X1
+      port( A1, A2 : in std_logic;  ZN : out std_logic);
+   end component;
+
+begin
+   
+   U1 : NAND2_X1 port map( A1 => b, A2 => a, ZN => y);
+
+end SYN_arch1;
+
+library IEEE;
+
+use IEEE.std_logic_1164.all;
+
+use work.CONV_PACK_mux21_generic_NBIT16.all;
+
+entity nd2_26 is
+
+   port( a, b : in std_logic;  y : out std_logic);
+
+end nd2_26;
+
+architecture SYN_arch1 of nd2_26 is
+
+   component NAND2_X1
+      port( A1, A2 : in std_logic;  ZN : out std_logic);
+   end component;
+
+begin
+   
+   U1 : NAND2_X1 port map( A1 => b, A2 => a, ZN => y);
+
+end SYN_arch1;
+
+library IEEE;
+
+use IEEE.std_logic_1164.all;
+
+use work.CONV_PACK_mux21_generic_NBIT16.all;
+
+entity nd2_25 is
+
+   port( a, b : in std_logic;  y : out std_logic);
+
+end nd2_25;
+
+architecture SYN_arch1 of nd2_25 is
+
+   component NAND2_X1
+      port( A1, A2 : in std_logic;  ZN : out std_logic);
+   end component;
+
+begin
+   
+   U1 : NAND2_X1 port map( A1 => b, A2 => a, ZN => y);
+
+end SYN_arch1;
+
+library IEEE;
+
+use IEEE.std_logic_1164.all;
+
+use work.CONV_PACK_mux21_generic_NBIT16.all;
+
+entity nd2_24 is
+
+   port( a, b : in std_logic;  y : out std_logic);
+
+end nd2_24;
+
+architecture SYN_arch1 of nd2_24 is
+
+   component NAND2_X1
+      port( A1, A2 : in std_logic;  ZN : out std_logic);
+   end component;
+
+begin
+   
+   U1 : NAND2_X1 port map( A1 => b, A2 => a, ZN => y);
+
+end SYN_arch1;
+
+library IEEE;
+
+use IEEE.std_logic_1164.all;
+
+use work.CONV_PACK_mux21_generic_NBIT16.all;
+
+entity nd2_23 is
+
+   port( a, b : in std_logic;  y : out std_logic);
+
+end nd2_23;
+
+architecture SYN_arch1 of nd2_23 is
+
+   component NAND2_X1
+      port( A1, A2 : in std_logic;  ZN : out std_logic);
+   end component;
+
+begin
+   
+   U1 : NAND2_X1 port map( A1 => b, A2 => a, ZN => y);
+
+end SYN_arch1;
+
+library IEEE;
+
+use IEEE.std_logic_1164.all;
+
+use work.CONV_PACK_mux21_generic_NBIT16.all;
+
+entity nd2_22 is
+
+   port( a, b : in std_logic;  y : out std_logic);
+
+end nd2_22;
+
+architecture SYN_arch1 of nd2_22 is
+
+   component NAND2_X1
+      port( A1, A2 : in std_logic;  ZN : out std_logic);
+   end component;
+
+begin
+   
+   U1 : NAND2_X1 port map( A1 => b, A2 => a, ZN => y);
+
+end SYN_arch1;
+
+library IEEE;
+
+use IEEE.std_logic_1164.all;
+
+use work.CONV_PACK_mux21_generic_NBIT16.all;
+
+entity nd2_21 is
+
+   port( a, b : in std_logic;  y : out std_logic);
+
+end nd2_21;
+
+architecture SYN_arch1 of nd2_21 is
+
+   component NAND2_X1
+      port( A1, A2 : in std_logic;  ZN : out std_logic);
+   end component;
+
+begin
+   
+   U1 : NAND2_X1 port map( A1 => b, A2 => a, ZN => y);
+
+end SYN_arch1;
+
+library IEEE;
+
+use IEEE.std_logic_1164.all;
+
+use work.CONV_PACK_mux21_generic_NBIT16.all;
+
+entity nd2_20 is
+
+   port( a, b : in std_logic;  y : out std_logic);
+
+end nd2_20;
+
+architecture SYN_arch1 of nd2_20 is
+
+   component NAND2_X1
+      port( A1, A2 : in std_logic;  ZN : out std_logic);
+   end component;
+
+begin
+   
+   U1 : NAND2_X1 port map( A1 => b, A2 => a, ZN => y);
+
+end SYN_arch1;
+
+library IEEE;
+
+use IEEE.std_logic_1164.all;
+
+use work.CONV_PACK_mux21_generic_NBIT16.all;
+
+entity nd2_19 is
+
+   port( a, b : in std_logic;  y : out std_logic);
+
+end nd2_19;
+
+architecture SYN_arch1 of nd2_19 is
+
+   component NAND2_X1
+      port( A1, A2 : in std_logic;  ZN : out std_logic);
+   end component;
+
+begin
+   
+   U1 : NAND2_X1 port map( A1 => b, A2 => a, ZN => y);
+
+end SYN_arch1;
+
+library IEEE;
+
+use IEEE.std_logic_1164.all;
+
+use work.CONV_PACK_mux21_generic_NBIT16.all;
+
+entity nd2_18 is
+
+   port( a, b : in std_logic;  y : out std_logic);
+
+end nd2_18;
+
+architecture SYN_arch1 of nd2_18 is
+
+   component NAND2_X1
+      port( A1, A2 : in std_logic;  ZN : out std_logic);
+   end component;
+
+begin
+   
+   U1 : NAND2_X1 port map( A1 => b, A2 => a, ZN => y);
+
+end SYN_arch1;
+
+library IEEE;
+
+use IEEE.std_logic_1164.all;
+
+use work.CONV_PACK_mux21_generic_NBIT16.all;
+
+entity nd2_17 is
+
+   port( a, b : in std_logic;  y : out std_logic);
+
+end nd2_17;
+
+architecture SYN_arch1 of nd2_17 is
+
+   component NAND2_X1
+      port( A1, A2 : in std_logic;  ZN : out std_logic);
+   end component;
+
+begin
+   
+   U1 : NAND2_X1 port map( A1 => b, A2 => a, ZN => y);
+
+end SYN_arch1;
+
+library IEEE;
+
+use IEEE.std_logic_1164.all;
+
+use work.CONV_PACK_mux21_generic_NBIT16.all;
+
+entity nd2_16 is
+
+   port( a, b : in std_logic;  y : out std_logic);
+
+end nd2_16;
+
+architecture SYN_arch1 of nd2_16 is
+
+   component NAND2_X1
+      port( A1, A2 : in std_logic;  ZN : out std_logic);
+   end component;
+
+begin
+   
+   U1 : NAND2_X1 port map( A1 => b, A2 => a, ZN => y);
+
+end SYN_arch1;
+
+library IEEE;
+
+use IEEE.std_logic_1164.all;
+
+use work.CONV_PACK_mux21_generic_NBIT16.all;
+
+entity nd2_15 is
+
+   port( a, b : in std_logic;  y : out std_logic);
+
+end nd2_15;
+
+architecture SYN_arch1 of nd2_15 is
+
+   component NAND2_X1
+      port( A1, A2 : in std_logic;  ZN : out std_logic);
+   end component;
+
+begin
+   
+   U1 : NAND2_X1 port map( A1 => b, A2 => a, ZN => y);
+
+end SYN_arch1;
+
+library IEEE;
+
+use IEEE.std_logic_1164.all;
+
+use work.CONV_PACK_mux21_generic_NBIT16.all;
+
+entity nd2_14 is
+
+   port( a, b : in std_logic;  y : out std_logic);
+
+end nd2_14;
+
+architecture SYN_arch1 of nd2_14 is
+
+   component NAND2_X1
+      port( A1, A2 : in std_logic;  ZN : out std_logic);
+   end component;
+
+begin
+   
+   U1 : NAND2_X1 port map( A1 => b, A2 => a, ZN => y);
+
+end SYN_arch1;
+
+library IEEE;
+
+use IEEE.std_logic_1164.all;
+
+use work.CONV_PACK_mux21_generic_NBIT16.all;
+
+entity nd2_13 is
+
+   port( a, b : in std_logic;  y : out std_logic);
+
+end nd2_13;
+
+architecture SYN_arch1 of nd2_13 is
+
+   component NAND2_X1
+      port( A1, A2 : in std_logic;  ZN : out std_logic);
+   end component;
+
+begin
+   
+   U1 : NAND2_X1 port map( A1 => b, A2 => a, ZN => y);
+
+end SYN_arch1;
+
+library IEEE;
+
+use IEEE.std_logic_1164.all;
+
+use work.CONV_PACK_mux21_generic_NBIT16.all;
+
+entity nd2_12 is
+
+   port( a, b : in std_logic;  y : out std_logic);
+
+end nd2_12;
+
+architecture SYN_arch1 of nd2_12 is
+
+   component NAND2_X1
+      port( A1, A2 : in std_logic;  ZN : out std_logic);
+   end component;
+
+begin
+   
+   U1 : NAND2_X1 port map( A1 => b, A2 => a, ZN => y);
+
+end SYN_arch1;
+
+library IEEE;
+
+use IEEE.std_logic_1164.all;
+
+use work.CONV_PACK_mux21_generic_NBIT16.all;
+
+entity nd2_11 is
+
+   port( a, b : in std_logic;  y : out std_logic);
+
+end nd2_11;
+
+architecture SYN_arch1 of nd2_11 is
+
+   component NAND2_X1
+      port( A1, A2 : in std_logic;  ZN : out std_logic);
+   end component;
+
+begin
+   
+   U1 : NAND2_X1 port map( A1 => b, A2 => a, ZN => y);
+
+end SYN_arch1;
+
+library IEEE;
+
+use IEEE.std_logic_1164.all;
+
+use work.CONV_PACK_mux21_generic_NBIT16.all;
+
+entity nd2_10 is
+
+   port( a, b : in std_logic;  y : out std_logic);
+
+end nd2_10;
+
+architecture SYN_arch1 of nd2_10 is
+
+   component NAND2_X1
+      port( A1, A2 : in std_logic;  ZN : out std_logic);
+   end component;
+
+begin
+   
+   U1 : NAND2_X1 port map( A1 => b, A2 => a, ZN => y);
+
+end SYN_arch1;
+
+library IEEE;
+
+use IEEE.std_logic_1164.all;
+
+use work.CONV_PACK_mux21_generic_NBIT16.all;
+
+entity nd2_9 is
+
+   port( a, b : in std_logic;  y : out std_logic);
+
+end nd2_9;
+
+architecture SYN_arch1 of nd2_9 is
+
+   component NAND2_X1
+      port( A1, A2 : in std_logic;  ZN : out std_logic);
+   end component;
+
+begin
+   
+   U1 : NAND2_X1 port map( A1 => b, A2 => a, ZN => y);
+
+end SYN_arch1;
+
+library IEEE;
+
+use IEEE.std_logic_1164.all;
+
+use work.CONV_PACK_mux21_generic_NBIT16.all;
+
+entity nd2_8 is
+
+   port( a, b : in std_logic;  y : out std_logic);
+
+end nd2_8;
+
+architecture SYN_arch1 of nd2_8 is
+
+   component NAND2_X1
+      port( A1, A2 : in std_logic;  ZN : out std_logic);
+   end component;
+
+begin
+   
+   U1 : NAND2_X1 port map( A1 => b, A2 => a, ZN => y);
+
+end SYN_arch1;
+
+library IEEE;
+
+use IEEE.std_logic_1164.all;
+
+use work.CONV_PACK_mux21_generic_NBIT16.all;
+
+entity nd2_7 is
+
+   port( a, b : in std_logic;  y : out std_logic);
+
+end nd2_7;
+
+architecture SYN_arch1 of nd2_7 is
+
+   component NAND2_X1
+      port( A1, A2 : in std_logic;  ZN : out std_logic);
+   end component;
+
+begin
+   
+   U1 : NAND2_X1 port map( A1 => b, A2 => a, ZN => y);
+
+end SYN_arch1;
+
+library IEEE;
+
+use IEEE.std_logic_1164.all;
+
+use work.CONV_PACK_mux21_generic_NBIT16.all;
+
+entity nd2_6 is
+
+   port( a, b : in std_logic;  y : out std_logic);
+
+end nd2_6;
+
+architecture SYN_arch1 of nd2_6 is
+
+   component NAND2_X1
+      port( A1, A2 : in std_logic;  ZN : out std_logic);
+   end component;
+
+begin
+   
+   U1 : NAND2_X1 port map( A1 => b, A2 => a, ZN => y);
+
+end SYN_arch1;
+
+library IEEE;
+
+use IEEE.std_logic_1164.all;
+
+use work.CONV_PACK_mux21_generic_NBIT16.all;
+
+entity nd2_5 is
+
+   port( a, b : in std_logic;  y : out std_logic);
+
+end nd2_5;
+
+architecture SYN_arch1 of nd2_5 is
+
+   component NAND2_X1
+      port( A1, A2 : in std_logic;  ZN : out std_logic);
+   end component;
+
+begin
+   
+   U1 : NAND2_X1 port map( A1 => b, A2 => a, ZN => y);
+
+end SYN_arch1;
+
+library IEEE;
+
+use IEEE.std_logic_1164.all;
+
+use work.CONV_PACK_mux21_generic_NBIT16.all;
+
+entity nd2_4 is
+
+   port( a, b : in std_logic;  y : out std_logic);
+
+end nd2_4;
+
+architecture SYN_arch1 of nd2_4 is
+
+   component NAND2_X1
+      port( A1, A2 : in std_logic;  ZN : out std_logic);
+   end component;
+
+begin
+   
+   U1 : NAND2_X1 port map( A1 => b, A2 => a, ZN => y);
+
+end SYN_arch1;
+
+library IEEE;
+
+use IEEE.std_logic_1164.all;
+
+use work.CONV_PACK_mux21_generic_NBIT16.all;
+
+entity nd2_3 is
+
+   port( a, b : in std_logic;  y : out std_logic);
+
+end nd2_3;
+
+architecture SYN_arch1 of nd2_3 is
+
+   component NAND2_X1
+      port( A1, A2 : in std_logic;  ZN : out std_logic);
+   end component;
+
+begin
+   
+   U1 : NAND2_X1 port map( A1 => b, A2 => a, ZN => y);
+
+end SYN_arch1;
+
+library IEEE;
+
+use IEEE.std_logic_1164.all;
+
+use work.CONV_PACK_mux21_generic_NBIT16.all;
+
+entity nd2_2 is
+
+   port( a, b : in std_logic;  y : out std_logic);
+
+end nd2_2;
+
+architecture SYN_arch1 of nd2_2 is
+
+   component NAND2_X1
+      port( A1, A2 : in std_logic;  ZN : out std_logic);
+   end component;
+
+begin
+   
+   U1 : NAND2_X1 port map( A1 => b, A2 => a, ZN => y);
+
+end SYN_arch1;
+
+library IEEE;
+
+use IEEE.std_logic_1164.all;
+
+use work.CONV_PACK_mux21_generic_NBIT16.all;
+
+entity nd2_1 is
+
+   port( a, b : in std_logic;  y : out std_logic);
+
+end nd2_1;
+
+architecture SYN_arch1 of nd2_1 is
+
+   component NAND2_X1
+      port( A1, A2 : in std_logic;  ZN : out std_logic);
+   end component;
+
+begin
+   
+   U1 : NAND2_X1 port map( A1 => b, A2 => a, ZN => y);
+
+end SYN_arch1;
+
+library IEEE;
+
+use IEEE.std_logic_1164.all;
+
+use work.CONV_PACK_mux21_generic_NBIT16.all;
+
+entity iv_15 is
+
+   port( a : in std_logic;  y : out std_logic);
+
+end iv_15;
+
+architecture SYN_behavioural of iv_15 is
+
+   component INV_X1
+      port( A : in std_logic;  ZN : out std_logic);
+   end component;
+
+begin
+   
+   U1 : INV_X1 port map( A => a, ZN => y);
+
+end SYN_behavioural;
+
+library IEEE;
+
+use IEEE.std_logic_1164.all;
+
+use work.CONV_PACK_mux21_generic_NBIT16.all;
+
+entity iv_14 is
+
+   port( a : in std_logic;  y : out std_logic);
+
+end iv_14;
+
+architecture SYN_behavioural of iv_14 is
+
+   component INV_X1
+      port( A : in std_logic;  ZN : out std_logic);
+   end component;
+
+begin
+   
+   U1 : INV_X1 port map( A => a, ZN => y);
+
+end SYN_behavioural;
+
+library IEEE;
+
+use IEEE.std_logic_1164.all;
+
+use work.CONV_PACK_mux21_generic_NBIT16.all;
+
+entity iv_13 is
+
+   port( a : in std_logic;  y : out std_logic);
+
+end iv_13;
+
+architecture SYN_behavioural of iv_13 is
+
+   component INV_X1
+      port( A : in std_logic;  ZN : out std_logic);
+   end component;
+
+begin
+   
+   U1 : INV_X1 port map( A => a, ZN => y);
+
+end SYN_behavioural;
+
+library IEEE;
+
+use IEEE.std_logic_1164.all;
+
+use work.CONV_PACK_mux21_generic_NBIT16.all;
+
+entity iv_12 is
+
+   port( a : in std_logic;  y : out std_logic);
+
+end iv_12;
+
+architecture SYN_behavioural of iv_12 is
+
+   component INV_X1
+      port( A : in std_logic;  ZN : out std_logic);
+   end component;
+
+begin
+   
+   U1 : INV_X1 port map( A => a, ZN => y);
+
+end SYN_behavioural;
+
+library IEEE;
+
+use IEEE.std_logic_1164.all;
+
+use work.CONV_PACK_mux21_generic_NBIT16.all;
+
+entity iv_11 is
+
+   port( a : in std_logic;  y : out std_logic);
+
+end iv_11;
+
+architecture SYN_behavioural of iv_11 is
+
+   component INV_X1
+      port( A : in std_logic;  ZN : out std_logic);
+   end component;
+
+begin
+   
+   U1 : INV_X1 port map( A => a, ZN => y);
+
+end SYN_behavioural;
+
+library IEEE;
+
+use IEEE.std_logic_1164.all;
+
+use work.CONV_PACK_mux21_generic_NBIT16.all;
+
+entity iv_10 is
+
+   port( a : in std_logic;  y : out std_logic);
+
+end iv_10;
+
+architecture SYN_behavioural of iv_10 is
+
+   component INV_X1
+      port( A : in std_logic;  ZN : out std_logic);
+   end component;
+
+begin
+   
+   U1 : INV_X1 port map( A => a, ZN => y);
+
+end SYN_behavioural;
+
+library IEEE;
+
+use IEEE.std_logic_1164.all;
+
+use work.CONV_PACK_mux21_generic_NBIT16.all;
+
+entity iv_9 is
+
+   port( a : in std_logic;  y : out std_logic);
+
+end iv_9;
+
+architecture SYN_behavioural of iv_9 is
+
+   component INV_X1
+      port( A : in std_logic;  ZN : out std_logic);
+   end component;
+
+begin
+   
+   U1 : INV_X1 port map( A => a, ZN => y);
+
+end SYN_behavioural;
+
+library IEEE;
+
+use IEEE.std_logic_1164.all;
+
+use work.CONV_PACK_mux21_generic_NBIT16.all;
+
+entity iv_8 is
+
+   port( a : in std_logic;  y : out std_logic);
+
+end iv_8;
+
+architecture SYN_behavioural of iv_8 is
+
+   component INV_X1
+      port( A : in std_logic;  ZN : out std_logic);
+   end component;
+
+begin
+   
+   U1 : INV_X1 port map( A => a, ZN => y);
+
+end SYN_behavioural;
+
+library IEEE;
+
+use IEEE.std_logic_1164.all;
+
+use work.CONV_PACK_mux21_generic_NBIT16.all;
+
+entity iv_7 is
+
+   port( a : in std_logic;  y : out std_logic);
+
+end iv_7;
+
+architecture SYN_behavioural of iv_7 is
+
+   component INV_X1
+      port( A : in std_logic;  ZN : out std_logic);
+   end component;
+
+begin
+   
+   U1 : INV_X1 port map( A => a, ZN => y);
+
+end SYN_behavioural;
+
+library IEEE;
+
+use IEEE.std_logic_1164.all;
+
+use work.CONV_PACK_mux21_generic_NBIT16.all;
+
+entity iv_6 is
+
+   port( a : in std_logic;  y : out std_logic);
+
+end iv_6;
+
+architecture SYN_behavioural of iv_6 is
+
+   component INV_X1
+      port( A : in std_logic;  ZN : out std_logic);
+   end component;
+
+begin
+   
+   U1 : INV_X1 port map( A => a, ZN => y);
+
+end SYN_behavioural;
+
+library IEEE;
+
+use IEEE.std_logic_1164.all;
+
+use work.CONV_PACK_mux21_generic_NBIT16.all;
+
+entity iv_5 is
+
+   port( a : in std_logic;  y : out std_logic);
+
+end iv_5;
+
+architecture SYN_behavioural of iv_5 is
+
+   component INV_X1
+      port( A : in std_logic;  ZN : out std_logic);
+   end component;
+
+begin
+   
+   U1 : INV_X1 port map( A => a, ZN => y);
+
+end SYN_behavioural;
+
+library IEEE;
+
+use IEEE.std_logic_1164.all;
+
+use work.CONV_PACK_mux21_generic_NBIT16.all;
+
+entity iv_4 is
+
+   port( a : in std_logic;  y : out std_logic);
+
+end iv_4;
+
+architecture SYN_behavioural of iv_4 is
+
+   component INV_X1
+      port( A : in std_logic;  ZN : out std_logic);
+   end component;
+
+begin
+   
+   U1 : INV_X1 port map( A => a, ZN => y);
+
+end SYN_behavioural;
+
+library IEEE;
+
+use IEEE.std_logic_1164.all;
+
+use work.CONV_PACK_mux21_generic_NBIT16.all;
+
+entity iv_3 is
+
+   port( a : in std_logic;  y : out std_logic);
+
+end iv_3;
+
+architecture SYN_behavioural of iv_3 is
+
+   component INV_X1
+      port( A : in std_logic;  ZN : out std_logic);
+   end component;
+
+begin
+   
+   U1 : INV_X1 port map( A => a, ZN => y);
+
+end SYN_behavioural;
+
+library IEEE;
+
+use IEEE.std_logic_1164.all;
+
+use work.CONV_PACK_mux21_generic_NBIT16.all;
+
+entity iv_2 is
+
+   port( a : in std_logic;  y : out std_logic);
+
+end iv_2;
+
+architecture SYN_behavioural of iv_2 is
+
+   component INV_X1
+      port( A : in std_logic;  ZN : out std_logic);
+   end component;
+
+begin
+   
+   U1 : INV_X1 port map( A => a, ZN => y);
+
+end SYN_behavioural;
+
+library IEEE;
+
+use IEEE.std_logic_1164.all;
+
+use work.CONV_PACK_mux21_generic_NBIT16.all;
+
+entity iv_1 is
+
+   port( a : in std_logic;  y : out std_logic);
+
+end iv_1;
+
+architecture SYN_behavioural of iv_1 is
+
+   component INV_X1
+      port( A : in std_logic;  ZN : out std_logic);
+   end component;
+
+begin
+   
+   U1 : INV_X1 port map( A => a, ZN => y);
+
+end SYN_behavioural;
+
+library IEEE;
+
+use IEEE.std_logic_1164.all;
+
+use work.CONV_PACK_mux21_generic_NBIT16.all;
+
+entity nd2_generic_NBIT16_2 is
+
+   port( a, b : in std_logic_vector (15 downto 0);  y : out std_logic_vector 
+         (15 downto 0));
+
+end nd2_generic_NBIT16_2;
+
+architecture SYN_structural of nd2_generic_NBIT16_2 is
+
+   component nd2_17
+      port( a, b : in std_logic;  y : out std_logic);
+   end component;
+   
+   component nd2_18
+      port( a, b : in std_logic;  y : out std_logic);
+   end component;
+   
+   component nd2_19
+      port( a, b : in std_logic;  y : out std_logic);
+   end component;
+   
+   component nd2_20
+      port( a, b : in std_logic;  y : out std_logic);
+   end component;
+   
+   component nd2_21
+      port( a, b : in std_logic;  y : out std_logic);
+   end component;
+   
+   component nd2_22
+      port( a, b : in std_logic;  y : out std_logic);
+   end component;
+   
+   component nd2_23
+      port( a, b : in std_logic;  y : out std_logic);
+   end component;
+   
+   component nd2_24
+      port( a, b : in std_logic;  y : out std_logic);
+   end component;
+   
+   component nd2_25
+      port( a, b : in std_logic;  y : out std_logic);
+   end component;
+   
+   component nd2_26
+      port( a, b : in std_logic;  y : out std_logic);
+   end component;
+   
+   component nd2_27
+      port( a, b : in std_logic;  y : out std_logic);
+   end component;
+   
+   component nd2_28
+      port( a, b : in std_logic;  y : out std_logic);
+   end component;
+   
+   component nd2_29
+      port( a, b : in std_logic;  y : out std_logic);
+   end component;
+   
+   component nd2_30
+      port( a, b : in std_logic;  y : out std_logic);
+   end component;
+   
+   component nd2_31
+      port( a, b : in std_logic;  y : out std_logic);
+   end component;
+   
+   component nd2_32
+      port( a, b : in std_logic;  y : out std_logic);
+   end component;
+
+begin
+   
+   ndi_0 : nd2_32 port map( a => a(0), b => b(0), y => y(0));
+   ndi_1 : nd2_31 port map( a => a(1), b => b(1), y => y(1));
+   ndi_2 : nd2_30 port map( a => a(2), b => b(2), y => y(2));
+   ndi_3 : nd2_29 port map( a => a(3), b => b(3), y => y(3));
+   ndi_4 : nd2_28 port map( a => a(4), b => b(4), y => y(4));
+   ndi_5 : nd2_27 port map( a => a(5), b => b(5), y => y(5));
+   ndi_6 : nd2_26 port map( a => a(6), b => b(6), y => y(6));
+   ndi_7 : nd2_25 port map( a => a(7), b => b(7), y => y(7));
+   ndi_8 : nd2_24 port map( a => a(8), b => b(8), y => y(8));
+   ndi_9 : nd2_23 port map( a => a(9), b => b(9), y => y(9));
+   ndi_10 : nd2_22 port map( a => a(10), b => b(10), y => y(10));
+   ndi_11 : nd2_21 port map( a => a(11), b => b(11), y => y(11));
+   ndi_12 : nd2_20 port map( a => a(12), b => b(12), y => y(12));
+   ndi_13 : nd2_19 port map( a => a(13), b => b(13), y => y(13));
+   ndi_14 : nd2_18 port map( a => a(14), b => b(14), y => y(14));
+   ndi_15 : nd2_17 port map( a => a(15), b => b(15), y => y(15));
+
+end SYN_structural;
 
 library IEEE;
 
@@ -58,12 +1606,111 @@ use work.CONV_PACK_mux21_generic_NBIT16.all;
 
 entity nd2_generic_NBIT16_1 is
 
-   port( A, B : in std_logic_vector (15 downto 0);  Y : out std_logic_vector 
+   port( a, b : in std_logic_vector (15 downto 0);  y : out std_logic_vector 
          (15 downto 0));
 
 end nd2_generic_NBIT16_1;
 
-architecture SYN_ARCH1 of nd2_generic_NBIT16_1 is
+architecture SYN_structural of nd2_generic_NBIT16_1 is
+
+   component nd2_1
+      port( a, b : in std_logic;  y : out std_logic);
+   end component;
+   
+   component nd2_2
+      port( a, b : in std_logic;  y : out std_logic);
+   end component;
+   
+   component nd2_3
+      port( a, b : in std_logic;  y : out std_logic);
+   end component;
+   
+   component nd2_4
+      port( a, b : in std_logic;  y : out std_logic);
+   end component;
+   
+   component nd2_5
+      port( a, b : in std_logic;  y : out std_logic);
+   end component;
+   
+   component nd2_6
+      port( a, b : in std_logic;  y : out std_logic);
+   end component;
+   
+   component nd2_7
+      port( a, b : in std_logic;  y : out std_logic);
+   end component;
+   
+   component nd2_8
+      port( a, b : in std_logic;  y : out std_logic);
+   end component;
+   
+   component nd2_9
+      port( a, b : in std_logic;  y : out std_logic);
+   end component;
+   
+   component nd2_10
+      port( a, b : in std_logic;  y : out std_logic);
+   end component;
+   
+   component nd2_11
+      port( a, b : in std_logic;  y : out std_logic);
+   end component;
+   
+   component nd2_12
+      port( a, b : in std_logic;  y : out std_logic);
+   end component;
+   
+   component nd2_13
+      port( a, b : in std_logic;  y : out std_logic);
+   end component;
+   
+   component nd2_14
+      port( a, b : in std_logic;  y : out std_logic);
+   end component;
+   
+   component nd2_15
+      port( a, b : in std_logic;  y : out std_logic);
+   end component;
+   
+   component nd2_16
+      port( a, b : in std_logic;  y : out std_logic);
+   end component;
+
+begin
+   
+   ndi_0 : nd2_16 port map( a => a(0), b => b(0), y => y(0));
+   ndi_1 : nd2_15 port map( a => a(1), b => b(1), y => y(1));
+   ndi_2 : nd2_14 port map( a => a(2), b => b(2), y => y(2));
+   ndi_3 : nd2_13 port map( a => a(3), b => b(3), y => y(3));
+   ndi_4 : nd2_12 port map( a => a(4), b => b(4), y => y(4));
+   ndi_5 : nd2_11 port map( a => a(5), b => b(5), y => y(5));
+   ndi_6 : nd2_10 port map( a => a(6), b => b(6), y => y(6));
+   ndi_7 : nd2_9 port map( a => a(7), b => b(7), y => y(7));
+   ndi_8 : nd2_8 port map( a => a(8), b => b(8), y => y(8));
+   ndi_9 : nd2_7 port map( a => a(9), b => b(9), y => y(9));
+   ndi_10 : nd2_6 port map( a => a(10), b => b(10), y => y(10));
+   ndi_11 : nd2_5 port map( a => a(11), b => b(11), y => y(11));
+   ndi_12 : nd2_4 port map( a => a(12), b => b(12), y => y(12));
+   ndi_13 : nd2_3 port map( a => a(13), b => b(13), y => y(13));
+   ndi_14 : nd2_2 port map( a => a(14), b => b(14), y => y(14));
+   ndi_15 : nd2_1 port map( a => a(15), b => b(15), y => y(15));
+
+end SYN_structural;
+
+library IEEE;
+
+use IEEE.std_logic_1164.all;
+
+use work.CONV_PACK_mux21_generic_NBIT16.all;
+
+entity nd2_0 is
+
+   port( a, b : in std_logic;  y : out std_logic);
+
+end nd2_0;
+
+architecture SYN_arch1 of nd2_0 is
 
    component NAND2_X1
       port( A1, A2 : in std_logic;  ZN : out std_logic);
@@ -71,24 +1718,33 @@ architecture SYN_ARCH1 of nd2_generic_NBIT16_1 is
 
 begin
    
-   U1 : NAND2_X1 port map( A1 => B(9), A2 => A(9), ZN => Y(9));
-   U2 : NAND2_X1 port map( A1 => B(8), A2 => A(8), ZN => Y(8));
-   U3 : NAND2_X1 port map( A1 => B(7), A2 => A(7), ZN => Y(7));
-   U4 : NAND2_X1 port map( A1 => B(6), A2 => A(6), ZN => Y(6));
-   U5 : NAND2_X1 port map( A1 => B(5), A2 => A(5), ZN => Y(5));
-   U6 : NAND2_X1 port map( A1 => B(4), A2 => A(4), ZN => Y(4));
-   U7 : NAND2_X1 port map( A1 => B(3), A2 => A(3), ZN => Y(3));
-   U8 : NAND2_X1 port map( A1 => B(2), A2 => A(2), ZN => Y(2));
-   U9 : NAND2_X1 port map( A1 => B(1), A2 => A(1), ZN => Y(1));
-   U10 : NAND2_X1 port map( A1 => B(15), A2 => A(15), ZN => Y(15));
-   U11 : NAND2_X1 port map( A1 => B(14), A2 => A(14), ZN => Y(14));
-   U12 : NAND2_X1 port map( A1 => B(13), A2 => A(13), ZN => Y(13));
-   U13 : NAND2_X1 port map( A1 => B(12), A2 => A(12), ZN => Y(12));
-   U14 : NAND2_X1 port map( A1 => B(11), A2 => A(11), ZN => Y(11));
-   U15 : NAND2_X1 port map( A1 => B(10), A2 => A(10), ZN => Y(10));
-   U16 : NAND2_X1 port map( A1 => B(0), A2 => A(0), ZN => Y(0));
+   U1 : NAND2_X1 port map( A1 => b, A2 => a, ZN => y);
 
-end SYN_ARCH1;
+end SYN_arch1;
+
+library IEEE;
+
+use IEEE.std_logic_1164.all;
+
+use work.CONV_PACK_mux21_generic_NBIT16.all;
+
+entity iv_0 is
+
+   port( a : in std_logic;  y : out std_logic);
+
+end iv_0;
+
+architecture SYN_behavioural of iv_0 is
+
+   component INV_X1
+      port( A : in std_logic;  ZN : out std_logic);
+   end component;
+
+begin
+   
+   U1 : INV_X1 port map( A => a, ZN => y);
+
+end SYN_behavioural;
 
 library IEEE;
 
@@ -98,37 +1754,97 @@ use work.CONV_PACK_mux21_generic_NBIT16.all;
 
 entity nd2_generic_NBIT16_0 is
 
-   port( A, B : in std_logic_vector (15 downto 0);  Y : out std_logic_vector 
+   port( a, b : in std_logic_vector (15 downto 0);  y : out std_logic_vector 
          (15 downto 0));
 
 end nd2_generic_NBIT16_0;
 
-architecture SYN_ARCH1 of nd2_generic_NBIT16_0 is
+architecture SYN_structural of nd2_generic_NBIT16_0 is
 
-   component NAND2_X1
-      port( A1, A2 : in std_logic;  ZN : out std_logic);
+   component nd2_33
+      port( a, b : in std_logic;  y : out std_logic);
+   end component;
+   
+   component nd2_34
+      port( a, b : in std_logic;  y : out std_logic);
+   end component;
+   
+   component nd2_35
+      port( a, b : in std_logic;  y : out std_logic);
+   end component;
+   
+   component nd2_36
+      port( a, b : in std_logic;  y : out std_logic);
+   end component;
+   
+   component nd2_37
+      port( a, b : in std_logic;  y : out std_logic);
+   end component;
+   
+   component nd2_38
+      port( a, b : in std_logic;  y : out std_logic);
+   end component;
+   
+   component nd2_39
+      port( a, b : in std_logic;  y : out std_logic);
+   end component;
+   
+   component nd2_40
+      port( a, b : in std_logic;  y : out std_logic);
+   end component;
+   
+   component nd2_41
+      port( a, b : in std_logic;  y : out std_logic);
+   end component;
+   
+   component nd2_42
+      port( a, b : in std_logic;  y : out std_logic);
+   end component;
+   
+   component nd2_43
+      port( a, b : in std_logic;  y : out std_logic);
+   end component;
+   
+   component nd2_44
+      port( a, b : in std_logic;  y : out std_logic);
+   end component;
+   
+   component nd2_45
+      port( a, b : in std_logic;  y : out std_logic);
+   end component;
+   
+   component nd2_46
+      port( a, b : in std_logic;  y : out std_logic);
+   end component;
+   
+   component nd2_47
+      port( a, b : in std_logic;  y : out std_logic);
+   end component;
+   
+   component nd2_0
+      port( a, b : in std_logic;  y : out std_logic);
    end component;
 
 begin
    
-   U1 : NAND2_X1 port map( A1 => B(9), A2 => A(9), ZN => Y(9));
-   U2 : NAND2_X1 port map( A1 => B(8), A2 => A(8), ZN => Y(8));
-   U3 : NAND2_X1 port map( A1 => B(7), A2 => A(7), ZN => Y(7));
-   U4 : NAND2_X1 port map( A1 => B(6), A2 => A(6), ZN => Y(6));
-   U5 : NAND2_X1 port map( A1 => B(5), A2 => A(5), ZN => Y(5));
-   U6 : NAND2_X1 port map( A1 => B(4), A2 => A(4), ZN => Y(4));
-   U7 : NAND2_X1 port map( A1 => B(3), A2 => A(3), ZN => Y(3));
-   U8 : NAND2_X1 port map( A1 => B(2), A2 => A(2), ZN => Y(2));
-   U9 : NAND2_X1 port map( A1 => B(1), A2 => A(1), ZN => Y(1));
-   U10 : NAND2_X1 port map( A1 => B(15), A2 => A(15), ZN => Y(15));
-   U11 : NAND2_X1 port map( A1 => B(14), A2 => A(14), ZN => Y(14));
-   U12 : NAND2_X1 port map( A1 => B(13), A2 => A(13), ZN => Y(13));
-   U13 : NAND2_X1 port map( A1 => B(12), A2 => A(12), ZN => Y(12));
-   U14 : NAND2_X1 port map( A1 => B(11), A2 => A(11), ZN => Y(11));
-   U15 : NAND2_X1 port map( A1 => B(10), A2 => A(10), ZN => Y(10));
-   U16 : NAND2_X1 port map( A1 => B(0), A2 => A(0), ZN => Y(0));
+   ndi_0 : nd2_0 port map( a => a(0), b => b(0), y => y(0));
+   ndi_1 : nd2_47 port map( a => a(1), b => b(1), y => y(1));
+   ndi_2 : nd2_46 port map( a => a(2), b => b(2), y => y(2));
+   ndi_3 : nd2_45 port map( a => a(3), b => b(3), y => y(3));
+   ndi_4 : nd2_44 port map( a => a(4), b => b(4), y => y(4));
+   ndi_5 : nd2_43 port map( a => a(5), b => b(5), y => y(5));
+   ndi_6 : nd2_42 port map( a => a(6), b => b(6), y => y(6));
+   ndi_7 : nd2_41 port map( a => a(7), b => b(7), y => y(7));
+   ndi_8 : nd2_40 port map( a => a(8), b => b(8), y => y(8));
+   ndi_9 : nd2_39 port map( a => a(9), b => b(9), y => y(9));
+   ndi_10 : nd2_38 port map( a => a(10), b => b(10), y => y(10));
+   ndi_11 : nd2_37 port map( a => a(11), b => b(11), y => y(11));
+   ndi_12 : nd2_36 port map( a => a(12), b => b(12), y => y(12));
+   ndi_13 : nd2_35 port map( a => a(13), b => b(13), y => y(13));
+   ndi_14 : nd2_34 port map( a => a(14), b => b(14), y => y(14));
+   ndi_15 : nd2_33 port map( a => a(15), b => b(15), y => y(15));
 
-end SYN_ARCH1;
+end SYN_structural;
 
 library IEEE;
 
@@ -138,37 +1854,97 @@ use work.CONV_PACK_mux21_generic_NBIT16.all;
 
 entity iv_generic_NBIT16 is
 
-   port( A : in std_logic_vector (15 downto 0);  Y : out std_logic_vector (15 
+   port( a : in std_logic_vector (15 downto 0);  y : out std_logic_vector (15 
          downto 0));
 
 end iv_generic_NBIT16;
 
-architecture SYN_BEHAVIORAL of iv_generic_NBIT16 is
+architecture SYN_structural of iv_generic_NBIT16 is
 
-   component INV_X1
-      port( A : in std_logic;  ZN : out std_logic);
+   component iv_1
+      port( a : in std_logic;  y : out std_logic);
+   end component;
+   
+   component iv_2
+      port( a : in std_logic;  y : out std_logic);
+   end component;
+   
+   component iv_3
+      port( a : in std_logic;  y : out std_logic);
+   end component;
+   
+   component iv_4
+      port( a : in std_logic;  y : out std_logic);
+   end component;
+   
+   component iv_5
+      port( a : in std_logic;  y : out std_logic);
+   end component;
+   
+   component iv_6
+      port( a : in std_logic;  y : out std_logic);
+   end component;
+   
+   component iv_7
+      port( a : in std_logic;  y : out std_logic);
+   end component;
+   
+   component iv_8
+      port( a : in std_logic;  y : out std_logic);
+   end component;
+   
+   component iv_9
+      port( a : in std_logic;  y : out std_logic);
+   end component;
+   
+   component iv_10
+      port( a : in std_logic;  y : out std_logic);
+   end component;
+   
+   component iv_11
+      port( a : in std_logic;  y : out std_logic);
+   end component;
+   
+   component iv_12
+      port( a : in std_logic;  y : out std_logic);
+   end component;
+   
+   component iv_13
+      port( a : in std_logic;  y : out std_logic);
+   end component;
+   
+   component iv_14
+      port( a : in std_logic;  y : out std_logic);
+   end component;
+   
+   component iv_15
+      port( a : in std_logic;  y : out std_logic);
+   end component;
+   
+   component iv_0
+      port( a : in std_logic;  y : out std_logic);
    end component;
 
 begin
    
-   U1 : INV_X1 port map( A => A(9), ZN => Y(9));
-   U2 : INV_X1 port map( A => A(8), ZN => Y(8));
-   U3 : INV_X1 port map( A => A(7), ZN => Y(7));
-   U4 : INV_X1 port map( A => A(6), ZN => Y(6));
-   U5 : INV_X1 port map( A => A(5), ZN => Y(5));
-   U6 : INV_X1 port map( A => A(4), ZN => Y(4));
-   U7 : INV_X1 port map( A => A(3), ZN => Y(3));
-   U8 : INV_X1 port map( A => A(2), ZN => Y(2));
-   U9 : INV_X1 port map( A => A(1), ZN => Y(1));
-   U10 : INV_X1 port map( A => A(15), ZN => Y(15));
-   U11 : INV_X1 port map( A => A(14), ZN => Y(14));
-   U12 : INV_X1 port map( A => A(13), ZN => Y(13));
-   U13 : INV_X1 port map( A => A(12), ZN => Y(12));
-   U14 : INV_X1 port map( A => A(11), ZN => Y(11));
-   U15 : INV_X1 port map( A => A(10), ZN => Y(10));
-   U16 : INV_X1 port map( A => A(0), ZN => Y(0));
+   ivi_0 : iv_0 port map( a => a(0), y => y(0));
+   ivi_1 : iv_15 port map( a => a(1), y => y(1));
+   ivi_2 : iv_14 port map( a => a(2), y => y(2));
+   ivi_3 : iv_13 port map( a => a(3), y => y(3));
+   ivi_4 : iv_12 port map( a => a(4), y => y(4));
+   ivi_5 : iv_11 port map( a => a(5), y => y(5));
+   ivi_6 : iv_10 port map( a => a(6), y => y(6));
+   ivi_7 : iv_9 port map( a => a(7), y => y(7));
+   ivi_8 : iv_8 port map( a => a(8), y => y(8));
+   ivi_9 : iv_7 port map( a => a(9), y => y(9));
+   ivi_10 : iv_6 port map( a => a(10), y => y(10));
+   ivi_11 : iv_5 port map( a => a(11), y => y(11));
+   ivi_12 : iv_4 port map( a => a(12), y => y(12));
+   ivi_13 : iv_3 port map( a => a(13), y => y(13));
+   ivi_14 : iv_2 port map( a => a(14), y => y(14));
+   ivi_15 : iv_1 port map( a => a(15), y => y(15));
 
-end SYN_BEHAVIORAL;
+end SYN_structural;
 
 library IEEE;
 
@@ -178,7 +1954,7 @@ use work.CONV_PACK_mux21_generic_NBIT16.all;
 
 entity mux21_generic_NBIT16 is
 
-   port( A, B : in std_logic_vector (15 downto 0);  S : in std_logic;  Y : out 
+   port( a, b : in std_logic_vector (15 downto 0);  s : in std_logic;  y : out 
          std_logic_vector (15 downto 0));
 
 end mux21_generic_NBIT16;
@@ -186,98 +1962,98 @@ end mux21_generic_NBIT16;
 architecture SYN_structural of mux21_generic_NBIT16 is
 
    component nd2_generic_NBIT16_1
-      port( A, B : in std_logic_vector (15 downto 0);  Y : out std_logic_vector
+      port( a, b : in std_logic_vector (15 downto 0);  y : out std_logic_vector
             (15 downto 0));
    end component;
    
    component nd2_generic_NBIT16_2
-      port( A, B : in std_logic_vector (15 downto 0);  Y : out std_logic_vector
+      port( a, b : in std_logic_vector (15 downto 0);  y : out std_logic_vector
             (15 downto 0));
    end component;
    
    component nd2_generic_NBIT16_0
-      port( A, B : in std_logic_vector (15 downto 0);  Y : out std_logic_vector
+      port( a, b : in std_logic_vector (15 downto 0);  y : out std_logic_vector
             (15 downto 0));
    end component;
    
    component iv_generic_NBIT16
-      port( A : in std_logic_vector (15 downto 0);  Y : out std_logic_vector 
+      port( a : in std_logic_vector (15 downto 0);  y : out std_logic_vector 
             (15 downto 0));
    end component;
    
-   signal SB_15_port, SB_14_port, SB_13_port, SB_12_port, SB_11_port, 
-      SB_10_port, SB_9_port, SB_8_port, SB_7_port, SB_6_port, SB_5_port, 
-      SB_4_port, SB_3_port, SB_2_port, SB_1_port, SB_0_port, Y1_15_port, 
-      Y1_14_port, Y1_13_port, Y1_12_port, Y1_11_port, Y1_10_port, Y1_9_port, 
-      Y1_8_port, Y1_7_port, Y1_6_port, Y1_5_port, Y1_4_port, Y1_3_port, 
-      Y1_2_port, Y1_1_port, Y1_0_port, Y2_15_port, Y2_14_port, Y2_13_port, 
-      Y2_12_port, Y2_11_port, Y2_10_port, Y2_9_port, Y2_8_port, Y2_7_port, 
-      Y2_6_port, Y2_5_port, Y2_4_port, Y2_3_port, Y2_2_port, Y2_1_port, 
-      Y2_0_port : std_logic;
+   signal sb_15_port, sb_14_port, sb_13_port, sb_12_port, sb_11_port, 
+      sb_10_port, sb_9_port, sb_8_port, sb_7_port, sb_6_port, sb_5_port, 
+      sb_4_port, sb_3_port, sb_2_port, sb_1_port, sb_0_port, y1_15_port, 
+      y1_14_port, y1_13_port, y1_12_port, y1_11_port, y1_10_port, y1_9_port, 
+      y1_8_port, y1_7_port, y1_6_port, y1_5_port, y1_4_port, y1_3_port, 
+      y1_2_port, y1_1_port, y1_0_port, y2_15_port, y2_14_port, y2_13_port, 
+      y2_12_port, y2_11_port, y2_10_port, y2_9_port, y2_8_port, y2_7_port, 
+      y2_6_port, y2_5_port, y2_4_port, y2_3_port, y2_2_port, y2_1_port, 
+      y2_0_port : std_logic;
 
 begin
    
-   UIV : iv_generic_NBIT16 port map( A(15) => S, A(14) => S, A(13) => S, A(12) 
-                           => S, A(11) => S, A(10) => S, A(9) => S, A(8) => S, 
-                           A(7) => S, A(6) => S, A(5) => S, A(4) => S, A(3) => 
-                           S, A(2) => S, A(1) => S, A(0) => S, Y(15) => 
-                           SB_15_port, Y(14) => SB_14_port, Y(13) => SB_13_port
-                           , Y(12) => SB_12_port, Y(11) => SB_11_port, Y(10) =>
-                           SB_10_port, Y(9) => SB_9_port, Y(8) => SB_8_port, 
-                           Y(7) => SB_7_port, Y(6) => SB_6_port, Y(5) => 
-                           SB_5_port, Y(4) => SB_4_port, Y(3) => SB_3_port, 
-                           Y(2) => SB_2_port, Y(1) => SB_1_port, Y(0) => 
-                           SB_0_port);
-   UND1 : nd2_generic_NBIT16_0 port map( A(15) => A(15), A(14) => A(14), A(13) 
-                           => A(13), A(12) => A(12), A(11) => A(11), A(10) => 
-                           A(10), A(9) => A(9), A(8) => A(8), A(7) => A(7), 
-                           A(6) => A(6), A(5) => A(5), A(4) => A(4), A(3) => 
-                           A(3), A(2) => A(2), A(1) => A(1), A(0) => A(0), 
-                           B(15) => S, B(14) => S, B(13) => S, B(12) => S, 
-                           B(11) => S, B(10) => S, B(9) => S, B(8) => S, B(7) 
-                           => S, B(6) => S, B(5) => S, B(4) => S, B(3) => S, 
-                           B(2) => S, B(1) => S, B(0) => S, Y(15) => Y1_15_port
-                           , Y(14) => Y1_14_port, Y(13) => Y1_13_port, Y(12) =>
-                           Y1_12_port, Y(11) => Y1_11_port, Y(10) => Y1_10_port
-                           , Y(9) => Y1_9_port, Y(8) => Y1_8_port, Y(7) => 
-                           Y1_7_port, Y(6) => Y1_6_port, Y(5) => Y1_5_port, 
-                           Y(4) => Y1_4_port, Y(3) => Y1_3_port, Y(2) => 
-                           Y1_2_port, Y(1) => Y1_1_port, Y(0) => Y1_0_port);
-   UND2 : nd2_generic_NBIT16_2 port map( A(15) => B(15), A(14) => B(14), A(13) 
-                           => B(13), A(12) => B(12), A(11) => B(11), A(10) => 
-                           B(10), A(9) => B(9), A(8) => B(8), A(7) => B(7), 
-                           A(6) => B(6), A(5) => B(5), A(4) => B(4), A(3) => 
-                           B(3), A(2) => B(2), A(1) => B(1), A(0) => B(0), 
-                           B(15) => SB_15_port, B(14) => SB_14_port, B(13) => 
-                           SB_13_port, B(12) => SB_12_port, B(11) => SB_11_port
-                           , B(10) => SB_10_port, B(9) => SB_9_port, B(8) => 
-                           SB_8_port, B(7) => SB_7_port, B(6) => SB_6_port, 
-                           B(5) => SB_5_port, B(4) => SB_4_port, B(3) => 
-                           SB_3_port, B(2) => SB_2_port, B(1) => SB_1_port, 
-                           B(0) => SB_0_port, Y(15) => Y2_15_port, Y(14) => 
-                           Y2_14_port, Y(13) => Y2_13_port, Y(12) => Y2_12_port
-                           , Y(11) => Y2_11_port, Y(10) => Y2_10_port, Y(9) => 
-                           Y2_9_port, Y(8) => Y2_8_port, Y(7) => Y2_7_port, 
-                           Y(6) => Y2_6_port, Y(5) => Y2_5_port, Y(4) => 
-                           Y2_4_port, Y(3) => Y2_3_port, Y(2) => Y2_2_port, 
-                           Y(1) => Y2_1_port, Y(0) => Y2_0_port);
-   UND3 : nd2_generic_NBIT16_1 port map( A(15) => Y1_15_port, A(14) => 
-                           Y1_14_port, A(13) => Y1_13_port, A(12) => Y1_12_port
-                           , A(11) => Y1_11_port, A(10) => Y1_10_port, A(9) => 
-                           Y1_9_port, A(8) => Y1_8_port, A(7) => Y1_7_port, 
-                           A(6) => Y1_6_port, A(5) => Y1_5_port, A(4) => 
-                           Y1_4_port, A(3) => Y1_3_port, A(2) => Y1_2_port, 
-                           A(1) => Y1_1_port, A(0) => Y1_0_port, B(15) => 
-                           Y2_15_port, B(14) => Y2_14_port, B(13) => Y2_13_port
-                           , B(12) => Y2_12_port, B(11) => Y2_11_port, B(10) =>
-                           Y2_10_port, B(9) => Y2_9_port, B(8) => Y2_8_port, 
-                           B(7) => Y2_7_port, B(6) => Y2_6_port, B(5) => 
-                           Y2_5_port, B(4) => Y2_4_port, B(3) => Y2_3_port, 
-                           B(2) => Y2_2_port, B(1) => Y2_1_port, B(0) => 
-                           Y2_0_port, Y(15) => Y(15), Y(14) => Y(14), Y(13) => 
-                           Y(13), Y(12) => Y(12), Y(11) => Y(11), Y(10) => 
-                           Y(10), Y(9) => Y(9), Y(8) => Y(8), Y(7) => Y(7), 
-                           Y(6) => Y(6), Y(5) => Y(5), Y(4) => Y(4), Y(3) => 
-                           Y(3), Y(2) => Y(2), Y(1) => Y(1), Y(0) => Y(0));
+   UIV : iv_generic_NBIT16 port map( a(15) => s, a(14) => s, a(13) => s, a(12) 
+                           => s, a(11) => s, a(10) => s, a(9) => s, a(8) => s, 
+                           a(7) => s, a(6) => s, a(5) => s, a(4) => s, a(3) => 
+                           s, a(2) => s, a(1) => s, a(0) => s, y(15) => 
+                           sb_15_port, y(14) => sb_14_port, y(13) => sb_13_port
+                           , y(12) => sb_12_port, y(11) => sb_11_port, y(10) =>
+                           sb_10_port, y(9) => sb_9_port, y(8) => sb_8_port, 
+                           y(7) => sb_7_port, y(6) => sb_6_port, y(5) => 
+                           sb_5_port, y(4) => sb_4_port, y(3) => sb_3_port, 
+                           y(2) => sb_2_port, y(1) => sb_1_port, y(0) => 
+                           sb_0_port);
+   UND1 : nd2_generic_NBIT16_0 port map( a(15) => a(15), a(14) => a(14), a(13) 
+                           => a(13), a(12) => a(12), a(11) => a(11), a(10) => 
+                           a(10), a(9) => a(9), a(8) => a(8), a(7) => a(7), 
+                           a(6) => a(6), a(5) => a(5), a(4) => a(4), a(3) => 
+                           a(3), a(2) => a(2), a(1) => a(1), a(0) => a(0), 
+                           b(15) => s, b(14) => s, b(13) => s, b(12) => s, 
+                           b(11) => s, b(10) => s, b(9) => s, b(8) => s, b(7) 
+                           => s, b(6) => s, b(5) => s, b(4) => s, b(3) => s, 
+                           b(2) => s, b(1) => s, b(0) => s, y(15) => y1_15_port
+                           , y(14) => y1_14_port, y(13) => y1_13_port, y(12) =>
+                           y1_12_port, y(11) => y1_11_port, y(10) => y1_10_port
+                           , y(9) => y1_9_port, y(8) => y1_8_port, y(7) => 
+                           y1_7_port, y(6) => y1_6_port, y(5) => y1_5_port, 
+                           y(4) => y1_4_port, y(3) => y1_3_port, y(2) => 
+                           y1_2_port, y(1) => y1_1_port, y(0) => y1_0_port);
+   UND2 : nd2_generic_NBIT16_2 port map( a(15) => b(15), a(14) => b(14), a(13) 
+                           => b(13), a(12) => b(12), a(11) => b(11), a(10) => 
+                           b(10), a(9) => b(9), a(8) => b(8), a(7) => b(7), 
+                           a(6) => b(6), a(5) => b(5), a(4) => b(4), a(3) => 
+                           b(3), a(2) => b(2), a(1) => b(1), a(0) => b(0), 
+                           b(15) => sb_15_port, b(14) => sb_14_port, b(13) => 
+                           sb_13_port, b(12) => sb_12_port, b(11) => sb_11_port
+                           , b(10) => sb_10_port, b(9) => sb_9_port, b(8) => 
+                           sb_8_port, b(7) => sb_7_port, b(6) => sb_6_port, 
+                           b(5) => sb_5_port, b(4) => sb_4_port, b(3) => 
+                           sb_3_port, b(2) => sb_2_port, b(1) => sb_1_port, 
+                           b(0) => sb_0_port, y(15) => y2_15_port, y(14) => 
+                           y2_14_port, y(13) => y2_13_port, y(12) => y2_12_port
+                           , y(11) => y2_11_port, y(10) => y2_10_port, y(9) => 
+                           y2_9_port, y(8) => y2_8_port, y(7) => y2_7_port, 
+                           y(6) => y2_6_port, y(5) => y2_5_port, y(4) => 
+                           y2_4_port, y(3) => y2_3_port, y(2) => y2_2_port, 
+                           y(1) => y2_1_port, y(0) => y2_0_port);
+   UND3 : nd2_generic_NBIT16_1 port map( a(15) => y1_15_port, a(14) => 
+                           y1_14_port, a(13) => y1_13_port, a(12) => y1_12_port
+                           , a(11) => y1_11_port, a(10) => y1_10_port, a(9) => 
+                           y1_9_port, a(8) => y1_8_port, a(7) => y1_7_port, 
+                           a(6) => y1_6_port, a(5) => y1_5_port, a(4) => 
+                           y1_4_port, a(3) => y1_3_port, a(2) => y1_2_port, 
+                           a(1) => y1_1_port, a(0) => y1_0_port, b(15) => 
+                           y2_15_port, b(14) => y2_14_port, b(13) => y2_13_port
+                           , b(12) => y2_12_port, b(11) => y2_11_port, b(10) =>
+                           y2_10_port, b(9) => y2_9_port, b(8) => y2_8_port, 
+                           b(7) => y2_7_port, b(6) => y2_6_port, b(5) => 
+                           y2_5_port, b(4) => y2_4_port, b(3) => y2_3_port, 
+                           b(2) => y2_2_port, b(1) => y2_1_port, b(0) => 
+                           y2_0_port, y(15) => y(15), y(14) => y(14), y(13) => 
+                           y(13), y(12) => y(12), y(11) => y(11), y(10) => 
+                           y(10), y(9) => y(9), y(8) => y(8), y(7) => y(7), 
+                           y(6) => y(6), y(5) => y(5), y(4) => y(4), y(3) => 
+                           y(3), y(2) => y(2), y(1) => y(1), y(0) => y(0));
 
 end SYN_structural;
