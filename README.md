@@ -24,5 +24,5 @@
  - Sintetizzare rca :white_check_mark:
  - Finire mux :white_check_mark:
  - Sintetizzare mux :white_check_mark:
- - Testare accumulator
- - Sintetizzare accumulator
+ - Testare accumulator :white_check_mark:
+ - Sintetizzare accumulator 
