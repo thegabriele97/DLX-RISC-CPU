@@ -50,8 +50,10 @@ end CFG_ND2_GENERIC_BEHAVIOURAL;
 
 configuration CFG_ND2_GENERIC_STRUCTURAL of nd2_generic is
 	for structural
-        for all: nd2
+	for nands
+        for ndi: nd2
             use configuration WORK.CFG_ND2_ARCH1;
         end for;
+	end for;
 	end for;
 end CFG_ND2_GENERIC_STRUCTURAL;

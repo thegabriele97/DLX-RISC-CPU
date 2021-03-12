@@ -47,8 +47,10 @@ end CFG_IV_GENERIC_BEHAVIORAL;
 
 configuration CFG_IV_GENERIC_STRUCTURAL of iv_generic is
 	for structural
-        for all: iv
+	for inverters
+        for ivi: iv
             use configuration WORK.CFG_IV_BEHAVIORAL;
         end for;
+	end for;
 	end for;
 end CFG_IV_GENERIC_STRUCTURAL;
