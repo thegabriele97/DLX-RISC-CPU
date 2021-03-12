@@ -2,7 +2,7 @@ library ieee;
 use ieee.std_logic_1164.all; 
 use ieee.std_logic_unsigned.all;
 
-entity rca is 
+entity rca_generic is 
 	generic (DRCAS : 	Time := 0 ns;
 	         DRCAC : 	Time := 0 ns;
                  nbit  :        integer := 6);
@@ -11,9 +11,9 @@ entity rca is
 		Ci:	In	std_logic;
 		S:	Out	std_logic_vector((nbit-1) downto 0);
 		Co:	Out	std_logic);
-end rca; 
+end rca_generic; 
 
-architecture structural of rca is
+architecture structural of rca_generic is
 
   signal STMP : std_logic_vector((nbit-1) downto 0);
   signal CTMP : std_logic_vector(nbit downto 0);
@@ -42,7 +42,7 @@ begin
   
 end structural; 
 
-architecture behavioral of rca is
+architecture behavioral of rca_generic is
 
   signal stmp: std_logic_vector(nbit downto 0);
   
@@ -54,7 +54,7 @@ begin
   
 end behavioral;
 
-configuration CFG_RCA_GEN_STRUCTURAL of RCA is
+configuration CFG_RCA_GEN_STRUCTURAL of rca_generic is
   for STRUCTURAL 
     for ADDER1
       for all : FA
@@ -64,7 +64,7 @@ configuration CFG_RCA_GEN_STRUCTURAL of RCA is
   end for;
 end CFG_RCA_GEN_STRUCTURAL;
 
-configuration CFG_RCA_GEN_BEHAVIORAL of RCA is
+configuration CFG_RCA_GEN_BEHAVIORAL of rca_generic is
   for BEHAVIORAL 
   end for;
 end CFG_RCA_GEN_BEHAVIORAL;
