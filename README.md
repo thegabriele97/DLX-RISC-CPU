@@ -17,3 +17,12 @@
 
 ## To Do List
  - Provare a mettere 0 ns nella sintesi di Synopsys con il multiplexer
+ - Finire registro (enable)
+ - Testare registro
+ - Sintetizzare registro
+ - Cambiare nome rca
+ - Sintetizzare rca
+ - Finire mux
+ - Sintetizzare mux
+ - Testare accumulator
+ - Sintetizzare accumulator
