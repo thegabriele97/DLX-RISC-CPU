@@ -19,10 +19,10 @@
  - Provare a mettere 0 ns nella sintesi di Synopsys con il multiplexer :white_check_mark:
  - Finire registro (enable) :white_check_mark:
  - Testare registro :white_check_mark:
- - Sintetizzare registro
+ - Sintetizzare registro :white_check_mark:
  - Cambiare nome rca :white_check_mark:
  - Sintetizzare rca :white_check_mark:
  - Finire mux :white_check_mark:
- - Sintetizzare mux
+ - Sintetizzare mux :white_check_mark:
  - Testare accumulator :white_check_mark:
  - Sintetizzare accumulator 
