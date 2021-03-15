@@ -9,17 +9,6 @@ entity FD is
 		Q:	Out	std_logic);
 end FD;
 
-architecture PLUTO of FD is -- flip flop D with asyncronous reset
-begin
-	PASYNCH: process(CK,RESET)
-	begin
-	  if RESET='1' then
-	    Q <= '0';
-	  elsif CK'event and CK='1' and ENABLE = '1' then -- positive edge triggered:
-	    Q <= D; 
-	  end if;
-	end process;
-end PLUTO;
 
 architecture PIPPO of FD is -- flip flop D with syncronous reset
 begin
@@ -35,7 +24,17 @@ begin
 	end process;
 end PIPPO;
 
-
+architecture PLUTO of FD is -- flip flop D with asyncronous reset
+begin
+	PASYNCH: process(CK,RESET)
+	begin
+	  if RESET='1' then
+	    Q <= '0';
+	  elsif CK'event and CK='1' and ENABLE = '1' then -- positive edge triggered:
+	    Q <= D; 
+	  end if;
+	end process;
+end PLUTO;
 
 
 configuration CFG_FD_PIPPO of FD is

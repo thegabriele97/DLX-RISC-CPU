@@ -4,7 +4,7 @@ use IEEE.numeric_std.all;
 use WORK.constants.all;
 
 entity mux21_generic is
-    generic (NBIT: integer:= numBit); --  DELAY_MUX: Time:= tp_mux);
+    generic (NBIT: integer:= numBit);
 	Port (	
         a:	in	std_logic_vector(NBIT - 1 downto 0) ;
         b:	in	std_logic_vector(NBIT - 1 downto 0);
@@ -12,6 +12,26 @@ entity mux21_generic is
         y:	out	std_logic_vector(NBIT - 1 downto 0)
     );
 end entity mux21_generic;
+
+
+
+
+
+--- Behavioural architecture ----
+
+architecture behavioural of mux21_generic is
+    
+begin
+
+    pmux: process(a, b, s)
+	begin
+		if s = '1' then
+			y <= a;
+		else
+			y <= b;
+		end if;
+	end process;
+end architecture Behavioural;
 
 
 --- Structural architecture -----
@@ -50,24 +70,6 @@ begin
 	UND3 : nd2_generic generic map(NBIT) port map (y1, y2, y);
     
 end architecture structural;
-
-
---- Behavioural architecture ----
-
-architecture behavioural of mux21_generic is
-    
-begin
-
-    pmux: process(a, b, s)
-	begin
-		if s = '1' then
-			y <= a after DELAY_MUX;
-		else
-			y <= b after DELAY_MUX;
-		end if;
-	end process;
-end architecture Behavioural;
-
 
 configuration CFG_MUX21_GEN_BEHAVIORAL of mux21_generic is
 	for behavioural
