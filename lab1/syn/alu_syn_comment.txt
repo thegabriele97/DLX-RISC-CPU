@@ -1,0 +1,3 @@
+The ALU we designed is the complete one with the support for a barrel shifter. In this way, we can shift DATA1 of a certain amount defined in DATA2. The barrel shifter uses the "remainder" operator for the "rotate operation" in order to compute the proper amount of shift needed. 
+
+The compiled design results in a multi-level design where the worse path computed by Synopsis for a 4 bit ALU has a delay of 0.8 fs, from the FUNC input to OUTALU output, for a total of 104 combinational cells and of course 0 sequential cells. The total area is 114.38. 
