@@ -1,3 +1,3 @@
-analyze -library WORK -format vhdl {/home/ms21.16/pollo-ms-lab/ms-lab/lab1/syn/constants.vhd /home/ms21.16/pollo-ms-lab/ms-lab/lab1/syn/alu_type.vhd /home/ms21.16/pollo-ms-lab/ms-lab/lab1/syn/alu.vhd}
+analyze -library WORK -format vhdl {constants.vhd alu_type.vhd alu.vhd}
 elaborate ALU -architecture BEHAVIOR -library DEFAULT -parameters "N = 4"
 compile -exact_map
