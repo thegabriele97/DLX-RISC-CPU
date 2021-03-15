@@ -14,20 +14,18 @@ architecture TEST of TBFD is
 	signal	QASYNCH:	std_logic;
 	
 	component FD
-	
-	Port (	CK:	In	std_logic;
-		RESET:	In	std_logic;
-		D:	In	std_logic;
-		Q:	Out	std_logic);
+		Port (	CK:	In	std_logic;
+				RESET:	In	std_logic;
+				ENABLE:	In	std_logic;
+				D:	In	std_logic;
+				Q:	Out	std_logic);
 	end component;
 
 begin 
 		
-	UFD1 : FD
-	Port Map ( CK, RESET, D, QSYNCH); -- sinc
+	UFD1 : FD Port Map (CK, RESET, '1', D, QSYNCH); -- sinc
 
-	UFD2 : FD
-	Port Map ( CK, RESET, D, QASYNCH); -- asinc
+	UFD2 : FD Port Map (CK, RESET, '1', D, QASYNCH); -- asinc
 	
 
 	RESET <= '0', '1' after 0.6 ns, '0' after 1.1 ns, '1' after 2.2 ns, '0' after 3.2 ns;	
