@@ -25,4 +25,4 @@
  - Finire mux :white_check_mark:
  - Sintetizzare mux :white_check_mark:
  - Testare accumulator :white_check_mark:
- - Sintetizzare accumulator 
+ - Sintetizzare accumulator :white_check_mark: 
