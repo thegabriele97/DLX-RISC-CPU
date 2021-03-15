@@ -12,15 +12,17 @@ entity nd2_generic is
     );
 end entity nd2_generic;
 
+
 architecture behavioural of nd2_generic is
     
 begin
     process(a, b)
     begin 
-        y <= not(a and b); --  after NDDELAY;
+        y <= not(a and b);
     end process;
     
 end architecture behavioural;
+
 
 architecture structural of nd2_generic is
     
@@ -38,6 +40,7 @@ begin
     end generate nands;
 
 end architecture structural;
+
 
 configuration CFG_ND2_GENERIC_BEHAVIOURAL of nd2_generic is
 	for behavioural

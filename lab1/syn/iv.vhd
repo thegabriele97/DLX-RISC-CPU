@@ -13,7 +13,7 @@ end iv;
 architecture behavioural of iv is
 
 begin
-	y <= not(a); --  after IVDELAY;
+	y <= not(a) after IVDELAY;
 	
 end behavioural;
 

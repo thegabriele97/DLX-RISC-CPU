@@ -11,16 +11,18 @@ entity iv_generic is
     );
 end entity iv_generic;
 
+
 architecture behavioural of iv_generic is
     
 begin
     process(a)
     begin 
-        y <= not(a); --  after IVDELAY;
+        y <= not(a);
     end process;
     
     
 end architecture behavioural;
+
 
 architecture structural of iv_generic is
     component iv is 
@@ -36,6 +38,7 @@ begin
     end generate inverters;
     
 end architecture structural;
+
 
 configuration CFG_IV_GENERIC_BEHAVIORAL of iv_generic is
 	for behavioural

@@ -13,7 +13,7 @@ end nd2;
 
 architecture arch1 of nd2 is
 begin
-	y <= not(a and b); -- after NDDELAY;
+	y <= not(a and b);
 end arch1;
 
 configuration CFG_ND2_ARCH1 of ND2 is
