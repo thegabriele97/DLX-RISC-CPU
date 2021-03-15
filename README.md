@@ -26,4 +26,5 @@
  - Sintetizzare mux :white_check_mark:
  - Testare accumulator :white_check_mark:
  - Sintetizzare accumulator :white_check_mark: 
+ - Fare i report di timing, area e il compile script per la ALU :white_check_mark: 
  - Commentare i risultati (timing e area) della ALU
