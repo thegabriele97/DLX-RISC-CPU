@@ -1,6 +1,6 @@
 #@ # 
 #@ # Running dc_shell Version F-2011.09-SP3 for amd64 -- Jan 26, 2012
-#@ # Date:   Mon Mar 15 12:19:24 2021
+#@ # Date:   Mon Mar 15 19:54:44 2021
 #@ # Run by: ms21.16@localhost.localdomain
 #@ 
 
@@ -4720,7 +4720,7 @@ source /software/synopsys/syn_current_64.11/admin/setup/.synopsys_dc.setup
 #@ 
 #@ # -- End source /software/synopsys/syn_current_64.11/admin/setup/.synopsys_dc.setup
 
-source /home/ms21.16/matteo-ms-lab/lab1/syn/.synopsys_dc.setup
+source /home/ms21.16/pollo-ms-lab/ms-lab/lab1/syn/.synopsys_dc.setup
 #@ #
 #@ #		".synopsys_dc.setup" Initialization File for
 #@ #
@@ -4769,16 +4769,13 @@ source /home/ms21.16/matteo-ms-lab/lab1/syn/.synopsys_dc.setup
 #@ 
 #@ 
 #@ 
-#@ # -- End source /home/ms21.16/matteo-ms-lab/lab1/syn/.synopsys_dc.setup
+#@ # -- End source /home/ms21.16/pollo-ms-lab/ms-lab/lab1/syn/.synopsys_dc.setup
 
 gui_start
-uplevel #0 source /home/ms21.16/matteo-ms-lab/lab1/syn/compile.script
-#@ analyze -library WORK -format vhdl {/home/ms21.16/matteo-ms-lab/lab1/syn/constants.vhd /home/ms21.16/matteo-ms-lab/lab1/syn/fd.vhd /home/ms21.16/matteo-ms-lab/lab1/syn/reg_generic.vhd /home/ms21.16/matteo-ms-lab/lab1/syn/lfsr.vhd  /home/ms21.16/matteo-ms-lab/lab1/syn/iv.vhd /home/ms21.16/matteo-ms-lab/lab1/syn/iv_generic.vhd /home/ms21.16/matteo-ms-lab/lab1/syn/nd2.vhd /home/ms21.16/matteo-ms-lab/lab1/syn/nd2_generic.vhd /home/ms21.16/matteo-ms-lab/lab1/syn/fa.vhd /home/ms21.16/matteo-ms-lab/lab1/syn/rca_generic.vhd /home/ms21.16/matteo-ms-lab/lab1/syn/mux21_generic.vhd /home/ms21.16/matteo-ms-lab/lab1/syn/acc.vhd}
-#@ # -- End source /home/ms21.16/matteo-ms-lab/lab1/syn/compile.script
+uplevel #0 source /home/ms21.16/pollo-ms-lab/ms-lab/lab1/syn/compile_alu.script
+#@ analyze -library WORK -format vhdl {/home/ms21.16/pollo-ms-lab/ms-lab/lab1/syn/constants.vhd /home/ms21.16/pollo-ms-lab/ms-lab/lab1/syn/alu_type.vhd /home/ms21.16/pollo-ms-lab/ms-lab/lab1/syn/alu.vhd}
+#@ elaborate ALU -architecture BEHAVIOR -library DEFAULT -parameters "N = 4"
+#@ compile -exact_map
+#@ # -- End source /home/ms21.16/pollo-ms-lab/ms-lab/lab1/syn/compile_alu.script
 
-elaborate ACC_GENERIC -architecture STRUCTURAL -library DEFAULT -parameters "NBIT = 4"
-compile -exact_map
-change_selection [get_s reg]
-change_selection [get_s reg/fdi2_1]
-change_selection [get_s reg/fdi2_1/Q_reg]
-write -hierarchy -format vhdl -output /home/ms21.16/matteo-ms-lab/lab1/syn/acc_syn_str.vhdl
+change_selection [get_s ALU_N4]

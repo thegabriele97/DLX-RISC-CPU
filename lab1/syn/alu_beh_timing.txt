@@ -1,0 +1,50 @@
+ 
+****************************************
+Report : timing
+        -path full
+        -delay max
+        -max_paths 1
+        -sort_by group
+Design : ALU_N4
+Version: F-2011.09-SP3
+Date   : Mon Mar 15 19:53:52 2021
+****************************************
+
+Operating Conditions: typical   Library: NangateOpenCellLibrary
+Wire Load Model Mode: top
+
+  Startpoint: FUNC[0] (input port)
+  Endpoint: OUTALU[3] (output port)
+  Path Group: (none)
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  ALU_N4             5K_hvratio_1_1        NangateOpenCellLibrary
+
+  Point                                    Incr       Path
+  -----------------------------------------------------------
+  input external delay                     0.00       0.00 r
+  FUNC[0] (in)                             0.00       0.00 r
+  U224/ZN (INV_X1)                         0.02       0.02 f
+  U223/ZN (NOR2_X1)                        0.07       0.09 r
+  U222/ZN (NAND2_X1)                       0.07       0.16 f
+  U221/ZN (XNOR2_X1)                       0.08       0.24 f
+  U220/ZN (INV_X1)                         0.05       0.28 r
+  U176/ZN (OAI21_X1)                       0.03       0.32 f
+  U175/ZN (OAI21_X1)                       0.05       0.36 r
+  U157/ZN (INV_X1)                         0.03       0.39 f
+  U156/ZN (OAI21_X1)                       0.04       0.43 r
+  U155/ZN (OAI21_X1)                       0.05       0.48 f
+  U134/ZN (OAI21_X1)                       0.06       0.54 r
+  U133/ZN (OAI21_X1)                       0.04       0.57 f
+  U132/Z (XOR2_X1)                         0.07       0.64 f
+  U131/ZN (XNOR2_X1)                       0.06       0.70 f
+  U127/ZN (AOI221_X1)                      0.06       0.76 r
+  U126/ZN (OAI211_X1)                      0.04       0.80 f
+  OUTALU[3] (out)                          0.00       0.80 f
+  data arrival time                                   0.80
+  -----------------------------------------------------------
+  (Path is unconstrained)
+
+
