@@ -1,0 +1,3 @@
+analyze -library WORK -format vhdl {constants.vhd alu_type.vhd alu.vhd}
+elaborate ALU -architecture BEHAVIOR -library DEFAULT -parameters "N = 4"
+compile -exact_map

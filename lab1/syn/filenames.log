@@ -156,10 +156,10 @@
 /software/synopsys/syn_current_64.11/auxx/gui/common/pathinspector/create_window_and_menu.tcl
 /software/synopsys/syn_current_64.11/auxx/gui/common/misc/infotip.tcl
 /software/synopsys/syn_current_64.11/auxx/gui/common/misc/viewporthistory.tcl
-/home/ms21.16/pollo-ms-lab/ms-lab/lab1/syn/compile_alu.script
-/home/ms21.16/pollo-ms-lab/ms-lab/lab1/syn/constants.vhd
-/home/ms21.16/pollo-ms-lab/ms-lab/lab1/syn/alu_type.vhd
-/home/ms21.16/pollo-ms-lab/ms-lab/lab1/syn/alu.vhd
+/home/ms21.16/matteo-ms-lab/lab1/syn/compile_alu.script
+/home/ms21.16/matteo-ms-lab/lab1/syn/constants.vhd
+/home/ms21.16/matteo-ms-lab/lab1/syn/alu_type.vhd
+/home/ms21.16/matteo-ms-lab/lab1/syn/alu.vhd
 /home/mariagrazia.graziano/do/libnangate/NangateOpenCellLibrary_typical_ecsm.db
 /software/synopsys/syn_current_64.11/libraries/syn/gtech.db
 /software/synopsys/syn_current_64.11/libraries/syn/standard.sldb
