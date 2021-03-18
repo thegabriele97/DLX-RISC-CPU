@@ -3,8 +3,8 @@ import os
 
 clear = lambda: os.system('clear')
 
-N = 16
-I = 1
+N = 32
+I = 4
 
 flags = [ False, True, False, False, False, False, False ]
 circuit = [[], [], [], [], [], [], []]
@@ -52,6 +52,10 @@ for j in range (1, N + 2, 1):
             
             if (prev_index + k) % I != 0 and i > 1:
                 continue
+
+            if i > 1 and circuit[i-1][prev_index-1 -1] == "||":
+                raise Exception("Sta cosa funziona na volta si e 10 no, manca roba a " + str(i - 1) + "-" + str(prev_index - 1))
+
 
             circuit[i][prev_index + k - 1] = to_place + "[" + str(prev_index-1) + "]"
             print_circuit()
