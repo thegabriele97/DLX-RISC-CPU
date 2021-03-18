@@ -50,7 +50,7 @@ for j in range (1, N + 2, 1):
         for k in range(0, n_fnc):
             #print(prev_index + k, end=" -> ", flush=True)
             
-            if (prev_index + k) % I != 0:
+            if (prev_index + k) % I != 0 and i > 1:
                 continue
 
             circuit[i][prev_index + k - 1] = to_place + "[" + str(prev_index-1) + "]"
