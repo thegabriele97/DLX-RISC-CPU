@@ -3,8 +3,8 @@ import os
 
 clear = lambda: os.system('clear')
 
-N = 32
-I = 4
+N = 16
+I = 1
 
 flags = [ False, True, False, False, False, False, False ]
 circuit = [[], [], [], [], [], [], []]
@@ -37,6 +37,7 @@ for i in range(1, int(log2(N)) + 1, 1):
 print_circuit()
 
 for j in range (1, N + 2, 1):
+
     prev_index = j
 
     for i in range(1, int(log2(N)) + 1, 1):
@@ -44,16 +45,18 @@ for j in range (1, N + 2, 1):
         flags[i] ^= True
         if not flags[i]:
             break
-        else:
+        
+        n_fnc = 2**(i-1)
+        for k in range(0, n_fnc):
+            #print(prev_index + k, end=" -> ", flush=True)
+            
+            if (prev_index + k) % I != 0:
+                continue
 
-            n_fnc = 2**(i-1)
+            circuit[i][prev_index + k - 1] = to_place + "[" + str(prev_index-1) + "]"
+            print_circuit()
 
-            for k in range(0, n_fnc):
-                #print(prev_index + k, end=" -> ", flush=True)
-                circuit[i][prev_index + k - 1] = to_place + "[" + str(prev_index-1) + "]"
-                print_circuit()
-
-            prev_index += (k + 1)
+        prev_index += (k + 1)
         
         if i == int(log2(N)):
             to_place = "PG"
