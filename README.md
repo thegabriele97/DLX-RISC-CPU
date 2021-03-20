@@ -33,3 +33,4 @@
 ## Domande LAB 02
 - Chiedere cosa fare del Cin nel carry generator
 - Chiedere se si possono vedere i singoli fili nel caso i cui siano raggruppati
+- Modificare il carry generator per gestire le colonne alternate (a blocchi di 4 bit)
