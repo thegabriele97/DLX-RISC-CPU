@@ -28,3 +28,7 @@
  - Sintetizzare accumulator :white_check_mark: 
  - Fare i report di timing, area e il compile script per la ALU :white_check_mark: 
  - Commentare i risultati (timing e area) della ALU
+
+
+## Domande LAB 02
+- Chiedere cosa fare del Cin nel carry generator
