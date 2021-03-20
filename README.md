@@ -32,3 +32,4 @@
 
 ## Domande LAB 02
 - Chiedere cosa fare del Cin nel carry generator
+- Chiedere se si possono vedere i singoli fili nel caso i cui siano raggruppati
