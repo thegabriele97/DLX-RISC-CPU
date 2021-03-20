@@ -40,9 +40,9 @@ architecture structural of carry_select_block is
     signal sum_mux21_0, sum_mux21_1: std_logic_vector(NBIT - 1 DOWNTO 0);
 begin
 
-    rca_0: rca_generic generic map(0 ns, 0 ns, 8) port map(A => A, B => B, Ci => '0', S => sum_mux21_0, Co => cout);
-    rca_1: rca_generic generic map(0 ns, 0 ns, 8) port map(A => A, B => B, Ci => '1', S => sum_mux21_1, Co => cout);
-    mux: mux21_generic generic map(8) port map(a => sum_mux21_1, b => sum_mux21_0, s => cin, y => sum);
+    rca_0: rca_generic generic map(0 ns, 0 ns, NBIT) port map(A => A, B => B, Ci => '0', S => sum_mux21_0, Co => cout);
+    rca_1: rca_generic generic map(0 ns, 0 ns, NBIT) port map(A => A, B => B, Ci => '1', S => sum_mux21_1, Co => cout);
+    mux: mux21_generic generic map(NBIT) port map(a => sum_mux21_1, b => sum_mux21_0, s => cin, y => sum);
     
     
 end architecture structural;
