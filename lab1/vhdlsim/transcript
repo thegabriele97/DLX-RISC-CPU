@@ -1,0 +1,507 @@
+# //  Questa Sim-64
+# //  Version 10.7c linux_x86_64 Aug 17 2018
+# //
+# //  Copyright 1991-2018 Mentor Graphics Corporation
+# //  All Rights Reserved.
+# //
+# //  QuestaSim and its associated documentation contain trade
+# //  secrets and commercial or financial information that are the property of
+# //  Mentor Graphics Corporation and are privileged, confidential,
+# //  and exempt from disclosure under the Freedom of Information Act,
+# //  5 U.S.C. Section 552. Furthermore, this information
+# //  is prohibited from disclosure under the Trade Secrets Act,
+# //  18 U.S.C. Section 1905.
+# //
+vcom compile.bash
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 23:26:33 on Mar 15,2021
+# vcom -reportprogress 300 compile.bash 
+# -- Loading package STANDARD
+# ** Error: compile.bash(1): near "vcom": syntax error
+# End time: 23:26:33 on Mar 15,2021, Elapsed time: 0:00:00
+# Errors: 1, Warnings: 0
+# /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
+./compile.bash
+# Start time: 23:26:44 on Mar 15,2021
+# vcom constants.vhd 
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# -- Loading package STANDARD
+# -- Compiling package CONSTANTS
+# End time: 23:26:44 on Mar 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Start time: 23:26:44 on Mar 15,2021
+# vcom iv.vhd 
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package CONSTANTS
+# -- Compiling entity iv
+# -- Compiling architecture behavioural of iv
+# -- Compiling configuration CFG_IV_BEHAVIORAL
+# -- Loading entity iv
+# -- Loading architecture behavioural of iv
+# End time: 23:26:44 on Mar 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Start time: 23:26:44 on Mar 15,2021
+# vcom nd2.vhd 
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package CONSTANTS
+# -- Compiling entity nd2
+# -- Compiling architecture arch1 of nd2
+# -- Compiling configuration CFG_ND2_ARCH1
+# -- Loading entity nd2
+# -- Loading architecture arch1 of nd2
+# End time: 23:26:44 on Mar 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Start time: 23:26:44 on Mar 15,2021
+# vcom mux21.vhd 
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# ** Error: (vcom-7) Failed to open design unit file "mux21.vhd" in read mode.
+# No such file or directory. (errno = ENOENT)
+# End time: 23:26:44 on Mar 15,2021, Elapsed time: 0:00:00
+# Errors: 1, Warnings: 0
+# Start time: 23:26:44 on Mar 15,2021
+# vcom mux21_generic.vhd 
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package CONSTANTS
+# -- Compiling entity mux21_generic
+# -- Compiling architecture structural of mux21_generic
+# -- Compiling architecture behavioural of mux21_generic
+# -- Loading entity mux21_generic
+# -- Compiling configuration CFG_MUX21_GEN_BEHAVIORAL
+# -- Loading entity mux21_generic
+# -- Loading architecture behavioural of mux21_generic
+# -- Compiling configuration CFG_MUX21_GEN_STRUCTURAL
+# -- Loading entity mux21_generic
+# -- Loading architecture structural of mux21_generic
+# ** Error: (vcom-11) Could not find work.cfg_iv_generic_structural.
+# ** Error (suppressible): mux21_generic.vhd(80): (vcom-1195) Cannot find expanded name "work.CFG_IV_GENERIC_STRUCTURAL".
+# ** Error: mux21_generic.vhd(80): (vcom-1106) Name (expanded name) is not a configuration name.
+# ** Error: mux21_generic.vhd(80): Unknown expanded name.
+# ** Error: (vcom-11) Could not find work.cfg_nd2_generic_structural.
+# ** Error (suppressible): mux21_generic.vhd(83): (vcom-1195) Cannot find expanded name "work.CFG_ND2_GENERIC_STRUCTURAL".
+# ** Error: mux21_generic.vhd(83): (vcom-1106) Name (expanded name) is not a configuration name.
+# ** Error: mux21_generic.vhd(83): Unknown expanded name.
+# ** Note: mux21_generic.vhd(86): VHDL Compiler exiting
+# End time: 23:26:44 on Mar 15,2021, Elapsed time: 0:00:00
+# Errors: 8, Warnings: 0
+# Start time: 23:26:44 on Mar 15,2021
+# vcom register_generic.vhd 
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# ** Error: (vcom-7) Failed to open design unit file "register_generic.vhd" in read mode.
+# No such file or directory. (errno = ENOENT)
+# End time: 23:26:44 on Mar 15,2021, Elapsed time: 0:00:00
+# Errors: 1, Warnings: 0
+# Start time: 23:26:44 on Mar 15,2021
+# vcom acc.vhd 
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package CONSTANTS
+# -- Compiling entity ACC_GENERIC
+# -- Compiling architecture behav of ACC_GENERIC
+# -- Compiling architecture structural of ACC_GENERIC
+# -- Loading entity ACC_GENERIC
+# -- Compiling configuration CFG_ACC_BEHAVIORAL
+# -- Loading entity ACC_GENERIC
+# -- Loading architecture behav of ACC_GENERIC
+# -- Compiling configuration CFG_ACC_STRUCTURAL
+# -- Loading entity ACC_GENERIC
+# -- Loading architecture structural of ACC_GENERIC
+# -- Loading entity mux21_generic
+# ** Error: (vcom-11) Could not find work.cfg_mux21_gen_structural.
+# ** Error (suppressible): acc.vhd(116): (vcom-1195) Cannot find expanded name "work.CFG_MUX21_GEN_STRUCTURAL".
+# ** Error: acc.vhd(116): (vcom-1106) Name (expanded name) is not a configuration name.
+# ** Error: acc.vhd(116): Unknown expanded name.
+# ** Error: (vcom-11) Could not find work.cfg_rca_gen_structural.
+# ** Error (suppressible): acc.vhd(119): (vcom-1195) Cannot find expanded name "work.CFG_RCA_GEN_STRUCTURAL".
+# ** Error: acc.vhd(119): (vcom-1106) Name (expanded name) is not a configuration name.
+# ** Error: acc.vhd(119): Unknown expanded name.
+# ** Error: (vcom-11) Could not find work.cfg_reg_generic_async.
+# ** Error (suppressible): acc.vhd(122): (vcom-1195) Cannot find expanded name "work.CFG_REG_GENERIC_ASYNC".
+# ** Error: acc.vhd(122): (vcom-1106) Name (expanded name) is not a configuration name.
+# ** Error: acc.vhd(122): Unknown expanded name.
+# ** Note: acc.vhd(125): VHDL Compiler exiting
+# End time: 23:26:44 on Mar 15,2021, Elapsed time: 0:00:00
+# Errors: 12, Warnings: 0
+# Start time: 23:26:44 on Mar 15,2021
+# vcom tb_acc.vhd 
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package std_logic_arith
+# -- Loading package STD_LOGIC_UNSIGNED
+# -- Loading package CONSTANTS
+# -- Compiling entity tb_acc
+# -- Compiling architecture TEST of tb_acc
+# -- Compiling configuration CFG_TESTACC_BEH
+# -- Loading entity tb_acc
+# -- Loading architecture TEST of tb_acc
+# -- Loading package NUMERIC_STD
+# -- Loading entity ACC_GENERIC
+# -- Loading configuration cfg_acc_behavioral
+# -- Compiling configuration CFG_TESTACC_STRUCT
+# -- Loading entity tb_acc
+# -- Loading architecture TEST of tb_acc
+# -- Loading entity ACC_GENERIC
+# ** Error: (vcom-11) Could not find work.cfg_acc_structural.
+# ** Error (suppressible): tb_acc.vhd(143): (vcom-1195) Cannot find expanded name "work.CFG_ACC_STRUCTURAL".
+# ** Error: tb_acc.vhd(143): (vcom-1106) Name (expanded name) is not a configuration name.
+# ** Error: tb_acc.vhd(143): Unknown expanded name.
+# ** Note: tb_acc.vhd(146): VHDL Compiler exiting
+# End time: 23:26:45 on Mar 15,2021, Elapsed time: 0:00:01
+# Errors: 4, Warnings: 0
+# child process exited abnormally
+vcom fa.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 23:27:01 on Mar 15,2021
+# vcom -reportprogress 300 fa.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity FA
+# -- Compiling architecture BEHAVIORAL of FA
+# -- Compiling configuration CFG_FA_BEHAVIORAL
+# -- Loading entity FA
+# -- Loading architecture BEHAVIORAL of FA
+# End time: 23:27:01 on Mar 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom rca.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 23:27:03 on Mar 15,2021
+# vcom -reportprogress 300 rca.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package std_logic_arith
+# -- Loading package STD_LOGIC_UNSIGNED
+# -- Compiling entity RCA
+# -- Compiling architecture STRUCTURAL of RCA
+# -- Compiling architecture BEHAVIORAL of RCA
+# -- Loading entity RCA
+# -- Compiling configuration CFG_RCA_STRUCTURAL
+# -- Loading entity RCA
+# -- Loading architecture STRUCTURAL of RCA
+# -- Loading entity FA
+# -- Loading configuration cfg_fa_behavioral
+# -- Compiling configuration CFG_RCA_BEHAVIORAL
+# -- Loading entity RCA
+# -- Loading architecture BEHAVIORAL of RCA
+# End time: 23:27:03 on Mar 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom fd.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 23:27:06 on Mar 15,2021
+# vcom -reportprogress 300 fd.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity FD
+# -- Compiling architecture PIPPO of FD
+# -- Compiling architecture PLUTO of FD
+# -- Loading entity FD
+# -- Compiling configuration CFG_FD_PIPPO
+# -- Loading entity FD
+# -- Loading architecture PIPPO of FD
+# -- Compiling configuration CFG_FD_PLUTO
+# -- Loading entity FD
+# -- Loading architecture PLUTO of FD
+# End time: 23:27:07 on Mar 15,2021, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+vcom reg_generic.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 23:27:08 on Mar 15,2021
+# vcom -reportprogress 300 reg_generic.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package CONSTANTS
+# -- Compiling entity reg_generic
+# -- Compiling architecture structural_sync of reg_generic
+# -- Compiling architecture structural_async of reg_generic
+# -- Loading entity reg_generic
+# -- Compiling configuration CFG_REG_GENERIC_SYNC
+# -- Loading entity reg_generic
+# -- Loading architecture structural_sync of reg_generic
+# -- Loading entity FD
+# -- Loading configuration cfg_fd_pippo
+# -- Compiling configuration CFG_REG_GENERIC_ASYNC
+# -- Loading entity reg_generic
+# -- Loading architecture structural_async of reg_generic
+# -- Loading entity FD
+# -- Loading configuration cfg_fd_pluto
+# End time: 23:27:09 on Mar 15,2021, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+vcom nd2_generic.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 23:27:15 on Mar 15,2021
+# vcom -reportprogress 300 nd2_generic.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package CONSTANTS
+# -- Compiling entity nd2_generic
+# -- Compiling architecture behavioural of nd2_generic
+# -- Compiling architecture structural of nd2_generic
+# -- Loading entity nd2_generic
+# -- Compiling configuration CFG_ND2_GENERIC_BEHAVIOURAL
+# -- Loading entity nd2_generic
+# -- Loading architecture behavioural of nd2_generic
+# -- Compiling configuration CFG_ND2_GENERIC_STRUCTURAL
+# -- Loading entity nd2_generic
+# -- Loading architecture structural of nd2_generic
+# -- Loading entity nd2
+# -- Loading configuration cfg_nd2_arch1
+# End time: 23:27:15 on Mar 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom iv_generic.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 23:27:17 on Mar 15,2021
+# vcom -reportprogress 300 iv_generic.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package CONSTANTS
+# -- Compiling entity iv_generic
+# -- Compiling architecture behavioural of iv_generic
+# -- Compiling architecture structural of iv_generic
+# -- Loading entity iv_generic
+# -- Compiling configuration CFG_IV_GENERIC_BEHAVIORAL
+# -- Loading entity iv_generic
+# -- Loading architecture behavioural of iv_generic
+# -- Compiling configuration CFG_IV_GENERIC_STRUCTURAL
+# -- Loading entity iv_generic
+# -- Loading architecture structural of iv_generic
+# -- Loading entity iv
+# -- Loading configuration cfg_iv_behavioral
+# End time: 23:27:17 on Mar 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom mux21_generic.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 23:27:21 on Mar 15,2021
+# vcom -reportprogress 300 mux21_generic.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package CONSTANTS
+# -- Compiling entity mux21_generic
+# -- Compiling architecture structural of mux21_generic
+# -- Compiling architecture behavioural of mux21_generic
+# -- Loading entity mux21_generic
+# -- Compiling configuration CFG_MUX21_GEN_BEHAVIORAL
+# -- Loading entity mux21_generic
+# -- Loading architecture behavioural of mux21_generic
+# -- Compiling configuration CFG_MUX21_GEN_STRUCTURAL
+# -- Loading entity mux21_generic
+# -- Loading architecture structural of mux21_generic
+# -- Loading entity iv_generic
+# -- Loading entity nd2_generic
+# -- Loading configuration cfg_iv_generic_structural
+# -- Loading configuration cfg_nd2_generic_structural
+# End time: 23:27:21 on Mar 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom tb_acc.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 23:27:24 on Mar 15,2021
+# vcom -reportprogress 300 tb_acc.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package std_logic_arith
+# -- Loading package STD_LOGIC_UNSIGNED
+# -- Loading package CONSTANTS
+# -- Compiling entity tb_acc
+# -- Compiling architecture TEST of tb_acc
+# -- Compiling configuration CFG_TESTACC_BEH
+# -- Loading entity tb_acc
+# -- Loading architecture TEST of tb_acc
+# -- Loading package NUMERIC_STD
+# -- Loading entity ACC_GENERIC
+# -- Loading configuration cfg_acc_behavioral
+# -- Compiling configuration CFG_TESTACC_STRUCT
+# -- Loading entity tb_acc
+# -- Loading architecture TEST of tb_acc
+# -- Loading entity ACC_GENERIC
+# ** Error: (vcom-11) Could not find work.cfg_acc_structural.
+# ** Error (suppressible): tb_acc.vhd(143): (vcom-1195) Cannot find expanded name "work.CFG_ACC_STRUCTURAL".
+# ** Error: tb_acc.vhd(143): (vcom-1106) Name (expanded name) is not a configuration name.
+# ** Error: tb_acc.vhd(143): Unknown expanded name.
+# ** Note: tb_acc.vhd(146): VHDL Compiler exiting
+# End time: 23:27:24 on Mar 15,2021, Elapsed time: 0:00:00
+# Errors: 4, Warnings: 0
+# /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
+vcom acc.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 23:28:17 on Mar 15,2021
+# vcom -reportprogress 300 acc.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package CONSTANTS
+# -- Compiling entity ACC_GENERIC
+# -- Compiling architecture behav of ACC_GENERIC
+# -- Compiling architecture structural of ACC_GENERIC
+# -- Loading entity ACC_GENERIC
+# -- Compiling configuration CFG_ACC_BEHAVIORAL
+# -- Loading entity ACC_GENERIC
+# -- Loading architecture behav of ACC_GENERIC
+# -- Compiling configuration CFG_ACC_STRUCTURAL
+# -- Loading entity ACC_GENERIC
+# -- Loading architecture structural of ACC_GENERIC
+# -- Loading entity mux21_generic
+# -- Loading entity reg_generic
+# -- Loading configuration cfg_mux21_gen_structural
+# ** Error: (vcom-11) Could not find work.cfg_rca_gen_structural.
+# ** Error (suppressible): acc.vhd(119): (vcom-1195) Cannot find expanded name "work.CFG_RCA_GEN_STRUCTURAL".
+# ** Error: acc.vhd(119): (vcom-1106) Name (expanded name) is not a configuration name.
+# ** Error: acc.vhd(119): Unknown expanded name.
+# -- Loading configuration cfg_reg_generic_async
+# ** Note: acc.vhd(125): VHDL Compiler exiting
+# End time: 23:28:18 on Mar 15,2021, Elapsed time: 0:00:01
+# Errors: 4, Warnings: 0
+# /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
+vcom rca_generic.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 23:28:49 on Mar 15,2021
+# vcom -reportprogress 300 rca_generic.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package std_logic_arith
+# -- Loading package STD_LOGIC_UNSIGNED
+# -- Compiling entity rca_generic
+# -- Compiling architecture structural of rca_generic
+# -- Compiling architecture behavioral of rca_generic
+# -- Loading entity rca_generic
+# -- Compiling configuration CFG_RCA_GEN_STRUCTURAL
+# -- Loading entity rca_generic
+# -- Loading architecture structural of rca_generic
+# -- Loading entity FA
+# -- Loading configuration cfg_fa_behavioral
+# -- Compiling configuration CFG_RCA_GEN_BEHAVIORAL
+# -- Loading entity rca_generic
+# -- Loading architecture behavioral of rca_generic
+# End time: 23:28:49 on Mar 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom acc.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 23:28:52 on Mar 15,2021
+# vcom -reportprogress 300 acc.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package CONSTANTS
+# -- Compiling entity ACC_GENERIC
+# -- Compiling architecture behav of ACC_GENERIC
+# -- Compiling architecture structural of ACC_GENERIC
+# -- Loading entity ACC_GENERIC
+# -- Compiling configuration CFG_ACC_BEHAVIORAL
+# -- Loading entity ACC_GENERIC
+# -- Loading architecture behav of ACC_GENERIC
+# -- Compiling configuration CFG_ACC_STRUCTURAL
+# -- Loading entity ACC_GENERIC
+# -- Loading architecture structural of ACC_GENERIC
+# -- Loading entity mux21_generic
+# -- Loading package std_logic_arith
+# -- Loading package STD_LOGIC_UNSIGNED
+# -- Loading entity rca_generic
+# -- Loading entity reg_generic
+# -- Loading configuration cfg_mux21_gen_structural
+# -- Loading configuration cfg_rca_gen_structural
+# -- Loading configuration cfg_reg_generic_async
+# End time: 23:28:52 on Mar 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom tb_acc.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 23:28:54 on Mar 15,2021
+# vcom -reportprogress 300 tb_acc.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package std_logic_arith
+# -- Loading package STD_LOGIC_UNSIGNED
+# -- Loading package CONSTANTS
+# -- Compiling entity tb_acc
+# -- Compiling architecture TEST of tb_acc
+# -- Compiling configuration CFG_TESTACC_BEH
+# -- Loading entity tb_acc
+# -- Loading architecture TEST of tb_acc
+# -- Loading package NUMERIC_STD
+# -- Loading entity ACC_GENERIC
+# -- Loading configuration cfg_acc_behavioral
+# -- Compiling configuration CFG_TESTACC_STRUCT
+# -- Loading entity tb_acc
+# -- Loading architecture TEST of tb_acc
+# -- Loading entity ACC_GENERIC
+# -- Loading configuration cfg_acc_structural
+# End time: 23:28:55 on Mar 15,2021, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+vsim -t 10ps work.testacc_struct
+# vsim -t 10ps work.testacc_struct 
+# Start time: 23:29:17 on Mar 15,2021
+# ** Note: (vsim-3812) Design is being optimized...
+# ** Error: (vopt-13130) Failed to find design unit testacc_struct.
+#         Searched libraries:
+#             work
+# Optimization failed
+# Error loading design
+# End time: 23:29:18 on Mar 15,2021, Elapsed time: 0:00:01
+# Errors: 1, Warnings: 0
+vsim -t 10ps work.cfg_testacc_struct
+# vsim -t 10ps work.cfg_testacc_struct 
+# Start time: 23:29:27 on Mar 15,2021
+# ** Note: (vsim-3812) Design is being optimized...
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.std_logic_arith(body)
+# Loading ieee.std_logic_unsigned(body)
+# Loading work.constants
+# Loading ieee.numeric_std(body)
+# Loading work.cfg_testacc_struct#1
+# Loading work.tb_acc(test)#1
+# Loading work.cfg_acc_structural#1
+# Loading work.acc_generic(structural)#1
+# Loading work.cfg_mux21_gen_structural#1
+# Loading work.mux21_generic(structural)#1
+# Loading work.cfg_iv_generic_structural#1
+# Loading work.iv_generic(structural)#1
+# Loading work.cfg_iv_behavioral#1
+# Loading work.iv(behavioural)#1
+# Loading work.cfg_nd2_generic_structural#1
+# Loading work.nd2_generic(structural)#1
+# Loading work.cfg_nd2_arch1#1
+# Loading work.nd2(arch1)#1
+# Loading work.cfg_rca_gen_structural#1
+# Loading work.rca_generic(structural)#1
+# Loading work.cfg_fa_behavioral#1
+# Loading work.fa(behavioral)#1
+# Loading work.cfg_reg_generic_async#1
+# Loading work.reg_generic(structural_async)#1
+# Loading work.cfg_fd_pluto#1
+# Loading work.fd(pluto)#1
+add wave CLK_i
+add wave RST_n_i
+add wave ACCUMULATE_i ACC_EN_n_i
+add wave a_i
+add wave b_i y_i
+run 50 ns
+run 50 ns
+# End time: 23:44:22 on Mar 15,2021, Elapsed time: 0:14:55
+# Errors: 0, Warnings: 0
