@@ -9,7 +9,7 @@ end entity tb_carry_select_block;
 architecture testbench of tb_carry_select_block is
     
     component carry_select_block is
-    	generic(NBIT_PER_BLOCK: integer := NumBit);
+    	generic(NBIT_PER_BLOCK: integer := numBitXBlock);
     	port (
         	A, B: in std_logic_vector(NBIT_PER_BLOCK - 1 DOWNTO 0);
         	cin: in std_logic;

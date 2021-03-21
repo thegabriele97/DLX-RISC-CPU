@@ -9,8 +9,8 @@ end tb_sum_generator;
 architecture TEST of tb_sum_generator is
     component sum_generator is
         generic (
-            NBIT_PER_BLOCK: integer := NumBit;
-            NBLOCKS:        integer := NumBlocks
+            NBIT_PER_BLOCK: integer := numBitXBlock;
+            NBLOCKS:        integer := NumBit/numBitXBlock
         );
         port (
             A:	in	std_logic_vector(NBIT_PER_BLOCK*NBLOCKS-1 downto 0);

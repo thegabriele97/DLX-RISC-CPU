@@ -4,7 +4,7 @@ use IEEE.numeric_std.all;
 use WORK.constants.all;
 
 entity mux21_generic is
-    generic (NBIT: integer:= numBit);
+    generic (NBIT: integer:= numBitXBlock);
 	Port (	
         a:	in	std_logic_vector(NBIT - 1 downto 0) ;
         b:	in	std_logic_vector(NBIT - 1 downto 0);
@@ -18,7 +18,7 @@ end entity mux21_generic;
 -- architecture structural of mux21_generic is
 
 --     component iv_generic is
---         generic (NBIT: integer := NumBit);
+--         generic (NBIT: integer := numBitXBlock);
 --         port (
 --             a:	In	std_logic_vector(NBIT - 1 DOWNTO 0);
 --             y:	Out	std_logic_vector(NBIT - 1 DOWNTO 0)
@@ -26,7 +26,7 @@ end entity mux21_generic;
 --     end component;
 
 --     component nd2_generic is
---         generic (NBIT: integer := NumBit);
+--         generic (NBIT: integer := numBitXBlock);
 --         port (
 --             a:	in	std_logic_vector(NBIT - 1 DOWNTO 0);
 --             b:	in	std_logic_vector(NBIT - 1 DOWNTO 0);

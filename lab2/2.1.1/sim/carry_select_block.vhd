@@ -4,7 +4,7 @@ use IEEE.numeric_std.all;
 use WORK.constants.all;
 
 entity carry_select_block is
-    generic(NBIT_PER_BLOCK: integer := NumBit);
+    generic(NBIT_PER_BLOCK: integer := numBitXBlock);
     port (
         A, B: in std_logic_vector(NBIT_PER_BLOCK - 1 DOWNTO 0);
         cin: in std_logic;
@@ -16,7 +16,7 @@ architecture structural of carry_select_block is
     component rca_generic is
         generic (   DRCAS : 	Time := 0 ns;
                     DRCAC : 	Time := 0 ns;
-                    nbit  :     integer := NumBit
+                    nbit  :     integer := numBitXBlock
         );
         Port (	
             A:	In	std_logic_vector((nbit-1) downto 0);
@@ -28,7 +28,7 @@ architecture structural of carry_select_block is
     end component;
 
     component mux21_generic is
-        generic (NBIT: integer:= numBit);
+        generic (NBIT: integer:= numBitXBlock);
         Port (	
             a:	in	std_logic_vector(NBIT - 1 downto 0) ;
             b:	in	std_logic_vector(NBIT - 1 downto 0);

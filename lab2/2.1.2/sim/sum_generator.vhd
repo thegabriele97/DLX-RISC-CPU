@@ -5,8 +5,8 @@ use WORK.constants.all;
 
 entity sum_generator is
     generic (
-        NBIT_PER_BLOCK: integer := NumBit;
-        NBLOCKS:        integer := NumBlocks
+        NBIT_PER_BLOCK: integer := numBitXBlock;
+        NBLOCKS:        integer := NumBit/numBitXBlock
     );
     port (
         A:	in	std_logic_vector(NBIT_PER_BLOCK*NBLOCKS-1 downto 0);
@@ -19,7 +19,7 @@ end entity sum_generator;
 architecture structural of sum_generator is
     
     component carry_select_block is
-        generic(NBIT_PER_BLOCK: integer := NumBit);
+        generic(NBIT_PER_BLOCK: integer := numBitXBlock);
         port (
             A, B: in std_logic_vector(NBIT_PER_BLOCK - 1 DOWNTO 0);
             cin: in std_logic;

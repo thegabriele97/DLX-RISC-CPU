@@ -6,7 +6,7 @@ use WORK.constants.all;
 entity rca_generic is 
 	generic (   DRCAS : 	Time := 0 ns;
 	            DRCAC : 	Time := 0 ns;
-                nbit  :     integer := NumBit
+                nbit  :     integer := numBitXBlock
     );
 	Port (	
         A:	In	std_logic_vector((nbit-1) downto 0);
