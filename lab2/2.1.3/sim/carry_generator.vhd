@@ -114,7 +114,12 @@ begin
 
     end generate rowGen;
 
-    Co <= sigmtx(0, f_log2(NBIT));
+
+	coutSelect: for i in 0 to (NBIT/NBIT_PER_BLOCK) - 1 generate
+	
+    	Co(i) <= sigmtx(0, f_log2(NBIT))(i*NBIT_PER_BLOCK + 1);
+		
+	end generate coutSelect;
 
 
 end structural;
