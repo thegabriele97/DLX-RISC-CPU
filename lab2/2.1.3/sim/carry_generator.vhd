@@ -81,7 +81,7 @@ begin
         
         colGen: for j in 1 to NBIT generate
             
-            colCheck: if ((NBIT - j) mod (2**i) < 2**(i-1)) generate
+            colCheck: if ((NBIT - j) mod (2**i) < 2**(i-1) and (i = 1 or (j mod NBIT_PER_BLOCK) = 0)) generate
                 
                 GGBlockGen: if (j <= 2**i) generate
                     GGi: GG port map(
@@ -105,7 +105,7 @@ begin
 
             end generate colCheck;
 
-            passThrough: if (not ((NBIT - j) mod (2**i) < 2**(i-1))) generate
+            passThrough: if (not ((NBIT - j) mod (2**i) < 2**(i-1) and (i = 1 or (j mod NBIT_PER_BLOCK) = 0))) generate
                 sigmtx(0, i)(j) <= sigmtx(0, i-1)(j);
                 sigmtx(1, i)(j) <= sigmtx(1, i-1)(j);
             end generate passThrough;

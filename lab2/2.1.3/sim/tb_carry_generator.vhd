@@ -18,8 +18,8 @@ architecture TEST of TB_CARRY_GENERATOR is
 			Co :	out	std_logic_vector((NBIT/NBIT_PER_BLOCK)-1 downto 0));
 	end component;
 
-	constant N: integer := 8;
-	constant K: integer := 2;
+	constant N: integer := 16;
+	constant K: integer := 4;
 
 	signal a, b: std_logic_vector(N-1 downto 0);
 	signal co: std_logic_vector((N/K)-1 downto 0);
