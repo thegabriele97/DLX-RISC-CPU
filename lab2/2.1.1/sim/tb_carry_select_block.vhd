@@ -9,12 +9,12 @@ end entity tb_carry_select_block;
 architecture testbench of tb_carry_select_block is
     
     component carry_select_block is
-        generic(NBIT: integer := NumBit);
-        port (
-            A, B: in std_logic_vector(NBIT - 1 DOWNTO 0);
-            cin: in std_logic;
-            sum: out std_logic_vector(NBIT - 1 DOWNTO 0)
-        );
+    	generic(NBIT_PER_BLOCK: integer := NumBit);
+    	port (
+        	A, B: in std_logic_vector(NBIT_PER_BLOCK - 1 DOWNTO 0);
+        	cin: in std_logic;
+        	sum: out std_logic_vector(NBIT_PER_BLOCK - 1 DOWNTO 0)
+    	);
     end component;
 
     signal A_s, B_s, sum_s: std_logic_vector(7 DOWNTO 0);
@@ -41,3 +41,12 @@ begin
     end process;
 
 end architecture testbench;
+
+configuration CARRY_SEL_BLOCK_TEST of tb_carry_select_block is
+	for testbench
+		for all : carry_select_block
+			use configuration WORK.CFG_CARRY_SELECT_BLOCK_STRUCTURAL;
+		end for;
+	end for;
+end CARRY_SEL_BLOCK_TEST;
+
