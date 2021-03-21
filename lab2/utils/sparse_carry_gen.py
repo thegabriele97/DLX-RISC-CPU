@@ -46,7 +46,7 @@ for i in range(1, int(log2(N)) + 1):
             if (j <= 2**i):
                 circuit[i][j - 1] = "GG" + "[" + str(2**(i-1)) + "]"  
             else:
-                circuit[i][j - 1] = "FG" + "[" + str(j - 2**(i-1)) + "]"  
+                circuit[i][j - 1] = "FG" + "[" + str(j - 2**(i-1) + (N-j) % (2**(i))) + "]"  
 
             print_circuit()
             

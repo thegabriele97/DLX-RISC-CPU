@@ -1,0 +1,10 @@
+
+vcom constants.vhd
+vcom GG.vhd
+vcom PG.vhd
+vcom prop_gen.vhd
+vcom prop_gen_generic.vhd
+vcom carry_generator.vhd
+
+vcom tb_carry_generator.vhd
+

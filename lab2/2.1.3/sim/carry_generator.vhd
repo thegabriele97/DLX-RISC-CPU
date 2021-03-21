@@ -95,9 +95,9 @@ begin
                 PGBlockGen: if (j > 2**i) generate
                     PGi: PG port map(
                         p(1) => sigmtx(1, i-1)(j),
-                        p(0) => sigmtx(1, i-1)(j - (2**(i-1))),
+                        p(0) => sigmtx(1, i-1)(j - 2**(i-1) + (NBIT-j) mod (2**i)),
                         g(1) => sigmtx(0, i-1)(j),
-                        g(0) => sigmtx(0, i-1)(j - (2**(i-1))),
+                        g(0) => sigmtx(0, i-1)(j - 2**(i-1) + (NBIT-j) mod (2**i)),
                         po => sigmtx(1, i)(j),
                         go => sigmtx(0, i)(j)
                     );
