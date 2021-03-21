@@ -3,8 +3,9 @@ import os
 
 clear = lambda: os.system('clear')
 
-N = 32
-I = 4
+N = 16
+I = 1
+O = 4
 
 circuit = [[], [], [], [], [], [], []]
 
@@ -38,7 +39,7 @@ for i in range(1, int(log2(N)) + 1):
 
     for j in range(1, N + 1):
         
-        if ((N-j) % (2**(i)) < 2**(i-1)):
+        if ((N-j) % (2**(i)) < 2**(i-1)) and (i == 1 or (j % O) == 0):
 
             if (circuit[i][j - 1] != "XX"):
                 raise Exception("We can do it")
@@ -46,7 +47,7 @@ for i in range(1, int(log2(N)) + 1):
             if (j <= 2**i):
                 circuit[i][j - 1] = "GG" + "[" + str(2**(i-1)) + "]"  
             else:
-                circuit[i][j - 1] = "FG" + "[" + str(j - 2**(i-1) + (N-j) % (2**(i))) + "]"  
+                circuit[i][j - 1] = "PG" + "[" + str(j - 2**(i-1) + (N-j) % (2**(i))) + "]"  
 
             print_circuit()
             
@@ -54,8 +55,13 @@ for i in range(1, int(log2(N)) + 1):
             if (circuit[i][j - 1] != "XX"):
                 raise Exception("We can do it")
             
-            circuit[i][j - 1] = "|X"
+            circuit[i][j - 1] = "-|"
             print_circuit()
         
     
 
+for j in range(1, N+1):
+    if (j % O == 0):
+        circuit[int(log2(N))][j - 1] = circuit[int(log2(N))][j - 1] + ">"
+        print_circuit()
+    
