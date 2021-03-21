@@ -30,7 +30,7 @@ def print_circuit():
 
 for i in range(1, int(log2(N)) + 1, 1):
     for j in range(0, N):
-        circuit[i].append("||")
+        circuit[i].append("XX")
 
 
 
@@ -38,16 +38,24 @@ for i in range(1, int(log2(N)) + 1):
 
     for j in range(1, N + 1):
         
-        if (j % (2**(i)) == 0):
+        if ((N-j) % (2**(i)) < 2**(i-1)):
 
-            for k in range(0, 2**(i-1)):
+            if (circuit[i][j - 1] != "XX"):
+                raise Exception("We can do it")
 
-                if (j == 2**i):
-                    circuit[i][j - k - 1] = "GG" + "[" + str(2**(i-1)) + "]"  
-                else:
-                    circuit[i][j - k - 1] = "FG" + "[" + str(j - 2**(i-1)) + "]"  
+            if (j <= 2**i):
+                circuit[i][j - 1] = "GG" + "[" + str(2**(i-1)) + "]"  
+            else:
+                circuit[i][j - 1] = "FG" + "[" + str(j - 2**(i-1)) + "]"  
 
-                print_circuit()
+            print_circuit()
+            
+        else:
+            if (circuit[i][j - 1] != "XX"):
+                raise Exception("We can do it")
+            
+            circuit[i][j - 1] = "|X"
+            print_circuit()
         
     
 
