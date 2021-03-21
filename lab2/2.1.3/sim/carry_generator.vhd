@@ -105,7 +105,7 @@ begin
 
             end generate colCheck;
 
-            passThrough: if ((NBIT - j) mod (2**i) >= 2**(i-1)) generate
+            passThrough: if (not ((NBIT - j) mod (2**i) < 2**(i-1))) generate
                 sigmtx(0, i)(j) <= sigmtx(0, i-1)(j);
                 sigmtx(1, i)(j) <= sigmtx(1, i-1)(j);
             end generate passThrough;
@@ -117,7 +117,7 @@ begin
 
 	coutSelect: for i in 0 to (NBIT/NBIT_PER_BLOCK) - 1 generate
 	
-    	Co(i) <= sigmtx(0, f_log2(NBIT))(i*NBIT_PER_BLOCK + 1);
+    	Co(i) <= sigmtx(0, f_log2(NBIT))((i+1) * NBIT_PER_BLOCK);
 		
 	end generate coutSelect;
 
