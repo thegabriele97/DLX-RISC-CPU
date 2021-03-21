@@ -7,6 +7,6 @@ package CONSTANTS is
    constant DRCAS : time := 1 ns;
    constant DRCAC : time := 2 ns;
    constant NumBit : integer := 8;	
-   constant numBitXBlock   : integer := 1;
+   constant numBitXBlock   : integer := 8;
    constant TP_MUX : time := 0.5 ns; 	
 end CONSTANTS;

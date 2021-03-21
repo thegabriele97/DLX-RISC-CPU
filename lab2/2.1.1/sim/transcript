@@ -1,0 +1,174 @@
+# //  Questa Sim-64
+# //  Version 10.7c linux_x86_64 Aug 17 2018
+# //
+# //  Copyright 1991-2018 Mentor Graphics Corporation
+# //  All Rights Reserved.
+# //
+# //  QuestaSim and its associated documentation contain trade
+# //  secrets and commercial or financial information that are the property of
+# //  Mentor Graphics Corporation and are privileged, confidential,
+# //  and exempt from disclosure under the Freedom of Information Act,
+# //  5 U.S.C. Section 552. Furthermore, this information
+# //  is prohibited from disclosure under the Trade Secrets Act,
+# //  18 U.S.C. Section 1905.
+# //
+vcom constants.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 18:31:37 on Mar 21,2021
+# vcom -reportprogress 300 constants.vhd 
+# -- Loading package STANDARD
+# -- Compiling package CONSTANTS
+# End time: 18:31:37 on Mar 21,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom mux21_generic.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 18:31:40 on Mar 21,2021
+# vcom -reportprogress 300 mux21_generic.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package CONSTANTS
+# -- Compiling entity mux21_generic
+# -- Compiling architecture behavioural of mux21_generic
+# -- Compiling configuration CFG_MUX21_GEN_BEHAVIORAL
+# -- Loading entity mux21_generic
+# -- Loading architecture behavioural of mux21_generic
+# End time: 18:31:40 on Mar 21,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom fa.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 18:31:45 on Mar 21,2021
+# vcom -reportprogress 300 fa.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity FA
+# -- Compiling architecture BEHAVIORAL of FA
+# -- Compiling configuration CFG_FA_BEHAVIORAL
+# -- Loading entity FA
+# -- Loading architecture BEHAVIORAL of FA
+# End time: 18:31:45 on Mar 21,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom constants.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 18:34:04 on Mar 21,2021
+# vcom -reportprogress 300 constants.vhd 
+# -- Loading package STANDARD
+# -- Compiling package CONSTANTS
+# End time: 18:34:05 on Mar 21,2021, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+vcom mux21_generic.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 18:34:07 on Mar 21,2021
+# vcom -reportprogress 300 mux21_generic.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package CONSTANTS
+# -- Compiling entity mux21_generic
+# -- Compiling architecture behavioural of mux21_generic
+# -- Compiling configuration CFG_MUX21_GEN_BEHAVIORAL
+# -- Loading entity mux21_generic
+# -- Loading architecture behavioural of mux21_generic
+# End time: 18:34:07 on Mar 21,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom fa.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 18:34:08 on Mar 21,2021
+# vcom -reportprogress 300 fa.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity FA
+# -- Compiling architecture BEHAVIORAL of FA
+# -- Compiling configuration CFG_FA_BEHAVIORAL
+# -- Loading entity FA
+# -- Loading architecture BEHAVIORAL of FA
+# End time: 18:34:08 on Mar 21,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom rca_generic.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 18:34:13 on Mar 21,2021
+# vcom -reportprogress 300 rca_generic.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package std_logic_arith
+# -- Loading package STD_LOGIC_UNSIGNED
+# -- Loading package CONSTANTS
+# -- Compiling entity rca_generic
+# -- Compiling architecture structural of rca_generic
+# -- Compiling configuration CFG_RCA_GEN_STRUCTURAL
+# -- Loading entity rca_generic
+# -- Loading architecture structural of rca_generic
+# -- Loading entity FA
+# -- Loading configuration cfg_fa_behavioral
+# End time: 18:34:13 on Mar 21,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom carry_select_block.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 18:34:36 on Mar 21,2021
+# vcom -reportprogress 300 carry_select_block.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package CONSTANTS
+# -- Compiling entity carry_select_block
+# -- Compiling architecture structural of carry_select_block
+# -- Compiling configuration CFG_CARRY_SELECT_BLOCK_STRUCTURAL
+# -- Loading entity carry_select_block
+# -- Loading architecture structural of carry_select_block
+# -- Loading package std_logic_arith
+# -- Loading package STD_LOGIC_UNSIGNED
+# -- Loading entity rca_generic
+# -- Loading entity mux21_generic
+# -- Loading configuration cfg_rca_gen_structural
+# -- Loading configuration cfg_mux21_gen_behavioral
+# End time: 18:34:36 on Mar 21,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom tb_carry_select_block.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 18:34:40 on Mar 21,2021
+# vcom -reportprogress 300 tb_carry_select_block.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package CONSTANTS
+# -- Compiling entity tb_carry_select_block
+# -- Compiling architecture testbench of tb_carry_select_block
+# -- Compiling configuration CARRY_SEL_BLOCK_TEST
+# -- Loading entity tb_carry_select_block
+# -- Loading architecture testbench of tb_carry_select_block
+# -- Loading entity carry_select_block
+# -- Loading configuration cfg_carry_select_block_structural
+# End time: 18:34:40 on Mar 21,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vsim work.carry_sel_block_test
+# vsim work.carry_sel_block_test 
+# Start time: 18:35:01 on Mar 21,2021
+# ** Note: (vsim-3812) Design is being optimized...
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.constants
+# Loading ieee.std_logic_arith(body)
+# Loading ieee.std_logic_unsigned(body)
+# Loading work.carry_sel_block_test#1
+# Loading work.tb_carry_select_block(testbench)#1
+# Loading work.cfg_carry_select_block_structural#1
+# Loading work.carry_select_block(structural)#1
+# Loading work.cfg_rca_gen_structural#1
+# Loading work.rca_generic(structural)#1
+# Loading work.cfg_fa_behavioral#1
+# Loading work.fa(behavioral)#1
+# Loading work.cfg_mux21_gen_behavioral#1
+# Loading work.mux21_generic(behavioural)#1
+add wave *
+run 20ns
+# End time: 18:36:02 on Mar 21,2021, Elapsed time: 0:01:01
+# Errors: 0, Warnings: 0
