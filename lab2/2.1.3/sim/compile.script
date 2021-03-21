@@ -1,4 +1,3 @@
-
 vcom constants.vhd
 vcom GG.vhd
 vcom PG.vhd
@@ -7,4 +6,6 @@ vcom prop_gen_generic.vhd
 vcom carry_generator.vhd
 
 vcom tb_carry_generator.vhd
-
+vsim -t 10ps work.tb_carry_generator(test)
+add wave *
+run 600 ns
