@@ -66,6 +66,30 @@ begin
     b <= x"0a";
     wait for 1 ns;
 
+    a <= x"1f";
+    b <= x"0a";
+    wait for 1 ns;
+
+    a <= x"2f";
+    b <= x"0a";
+    wait for 1 ns;
+
+    a <= x"4f";
+    b <= x"0a";
+    wait for 1 ns;
+
+    a <= x"8f";
+    b <= x"0a";
+    wait for 1 ns;    
+
+    a <= x"ff";
+    b <= x"4d";
+    wait for 1 ns;
+
+    a <= x"f6";
+    b <= x"f6";
+    wait for 1 ns;
+
     wait;
 
   end process;

@@ -97,16 +97,16 @@ begin
     );
 
     ADDER0: adder generic map(
-        NBIT => NBIT
+        NBIT => (NBIT+1)
     ) port map(
         A => (others => '0'),
-        B => mux_out(0)(NBIT-1 downto 0),
+        B => mux_out(0)(NBIT downto 0),
         SUB_SUMn => sum_subn(0),
-        S => sum(0)(NBIT downto 0)
+        S => sum(0)(NBIT+1 downto 0)
     );
 
     -- sign extend
-    sum(0)((2*NBIT)+1 downto NBIT+1) <= (others => sum(0)(NBIT));
+    sum(0)((2*NBIT)+1 downto NBIT+2) <= (others => sum(0)(NBIT+1));
 
     blockGen: for i in 1 to (NBIT/2) generate
 
@@ -148,7 +148,7 @@ begin
         );
 
         -- Extending the sign of sum(i)
-        sum(i)((2*NBIT)+1 downto NBIT+(2*i)+2) <= (others => sum(i-1)((NBIT + 2*i)+1));
+        sum(i)((2*NBIT)+1 downto NBIT+(2*i)+2) <= (others => sum(i)((NBIT + 2*i)+1));
 
     end generate blockGen;
 
