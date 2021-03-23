@@ -1,0 +1,17 @@
+vcom constants.vhd
+vcom PG.vhd
+vcom GG.vhd
+vcom prop_gen.vhd
+vcom prop_gen_generic.vhd
+vcom fa.vhd
+vcom mux21_generic.vhd
+vcom rca_generic.vhd
+vcom carry_select_block.vhd
+vcom sum_generator.vhd
+vcom carry_generator.vhd
+vcom p4_adder.vhd
+vcom tb_p4_adder.vhd
+
+vsim -t 10ps work.tb_p4_adder
+add wave *
+run 10 ns
