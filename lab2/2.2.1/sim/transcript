@@ -1,0 +1,1166 @@
+# //  Questa Sim-64
+# //  Version 10.7c linux_x86_64 Aug 17 2018
+# //
+# //  Copyright 1991-2018 Mentor Graphics Corporation
+# //  All Rights Reserved.
+# //
+# //  QuestaSim and its associated documentation contain trade
+# //  secrets and commercial or financial information that are the property of
+# //  Mentor Graphics Corporation and are privileged, confidential,
+# //  and exempt from disclosure under the Freedom of Information Act,
+# //  5 U.S.C. Section 552. Furthermore, this information
+# //  is prohibited from disclosure under the Trade Secrets Act,
+# //  18 U.S.C. Section 1905.
+# //
+vcom encoder.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:26:22 on Mar 23,2021
+# vcom -reportprogress 300 encoder.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity encoder
+# -- Compiling architecture beahavioral of encoder
+# ** Warning: encoder.vhd(38): (vcom-1090) Possible infinite loop: Process contains no WAIT statement.
+# End time: 11:26:22 on Mar 23,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 1
+vcom encoder.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:26:48 on Mar 23,2021
+# vcom -reportprogress 300 encoder.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity encoder
+# -- Compiling architecture beahavioral of encoder
+# End time: 11:26:48 on Mar 23,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom mux.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:26:53 on Mar 23,2021
+# vcom -reportprogress 300 mux.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity mux
+# ** Error: mux.vhd(9): near ",": (vcom-1576) expecting ';' or ')'.
+# End time: 11:26:53 on Mar 23,2021, Elapsed time: 0:00:00
+# Errors: 1, Warnings: 0
+# /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
+vcom mux.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:27:06 on Mar 23,2021
+# vcom -reportprogress 300 mux.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity mux
+# ** Error: mux.vhd(12): (vcom-1136) Unknown identifier "std_logic_vecotr".
+# ** Note: mux.vhd(15): VHDL Compiler exiting
+# End time: 11:27:07 on Mar 23,2021, Elapsed time: 0:00:01
+# Errors: 1, Warnings: 0
+# /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
+vcom mux.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:27:18 on Mar 23,2021
+# vcom -reportprogress 300 mux.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity mux
+# -- Compiling architecture behav of mux
+# End time: 11:27:18 on Mar 23,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom adder.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:27:22 on Mar 23,2021
+# vcom -reportprogress 300 adder.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity adder
+# ** Error: adder.vhd(10): (vcom-1136) Unknown identifier "std_logic_vector".
+# ** Error: adder.vhd(11): (vcom-1136) Unknown identifier "std_logic_Vector".
+# ** Error: adder.vhd(12): (vcom-1136) Unknown identifier "std_logic".
+# ** Error: adder.vhd(13): (vcom-1136) Unknown identifier "std_logic_vector".
+# ** Note: adder.vhd(15): VHDL Compiler exiting
+# End time: 11:27:22 on Mar 23,2021, Elapsed time: 0:00:00
+# Errors: 4, Warnings: 0
+# /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
+vcom adder.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:27:46 on Mar 23,2021
+# vcom -reportprogress 300 adder.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity adder
+# -- Compiling architecture behav of adder
+# End time: 11:27:46 on Mar 23,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom multiplier.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:27:54 on Mar 23,2021
+# vcom -reportprogress 300 multiplier.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity multiplier
+# ** Error: multiplier.vhd(9): near ",": (vcom-1576) expecting ';' or ')'.
+# End time: 11:27:54 on Mar 23,2021, Elapsed time: 0:00:00
+# Errors: 1, Warnings: 0
+# /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
+vcom multiplier.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:28:20 on Mar 23,2021
+# vcom -reportprogress 300 multiplier.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity multiplier
+# -- Compiling architecture structural of multiplier
+# ** Error: multiplier.vhd(37): (vcom-1136) Unknown identifier "std_logic_vecotr".
+# ** Error: multiplier.vhd(81): near "Y": (vcom-1576) expecting ',' or ')'.
+# ** Error: multiplier.vhd(84): Statement cannot be labeled.
+# ** Error: multiplier.vhd(91): near ")": syntax error
+# ** Error: multiplier.vhd(94): Statement cannot be labeled.
+# ** Error: multiplier.vhd(113): near "Y": (vcom-1576) expecting ',' or ')'.
+# ** Error: multiplier.vhd(116): Statement cannot be labeled.
+# ** Error: multiplier.vhd(123): near ")": syntax error
+# ** Note: multiplier.vhd(129): VHDL Compiler exiting
+# End time: 11:28:20 on Mar 23,2021, Elapsed time: 0:00:00
+# Errors: 8, Warnings: 0
+# /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
+vcom multiplier.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:28:35 on Mar 23,2021
+# vcom -reportprogress 300 multiplier.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity multiplier
+# -- Compiling architecture structural of multiplier
+# ** Error: multiplier.vhd(81): near "Y": (vcom-1576) expecting ',' or ')'.
+# ** Error: multiplier.vhd(84): Statement cannot be labeled.
+# ** Error: multiplier.vhd(91): near ")": syntax error
+# ** Error: multiplier.vhd(94): Statement cannot be labeled.
+# ** Error: multiplier.vhd(113): near "Y": (vcom-1576) expecting ',' or ')'.
+# ** Error: multiplier.vhd(116): Statement cannot be labeled.
+# ** Error: multiplier.vhd(123): near ")": syntax error
+# ** Note: multiplier.vhd(129): VHDL Compiler exiting
+# End time: 11:28:36 on Mar 23,2021, Elapsed time: 0:00:01
+# Errors: 7, Warnings: 0
+# /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
+vcom multiplier.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:28:49 on Mar 23,2021
+# vcom -reportprogress 300 multiplier.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity multiplier
+# -- Compiling architecture structural of multiplier
+# ** Error: multiplier.vhd(81): (vcom-1450) Actual (slice name) for formal "Y" is not a static signal name.
+# ** Error: multiplier.vhd(81): (vcom-1136) Unknown identifier "i".
+# ** Error: multiplier.vhd(91): near ")": syntax error
+# ** Error: multiplier.vhd(94): Statement cannot be labeled.
+# ** Error: multiplier.vhd(113): near "Y": (vcom-1576) expecting ',' or ')'.
+# ** Error: multiplier.vhd(116): Statement cannot be labeled.
+# ** Error: multiplier.vhd(123): near ")": syntax error
+# ** Note: multiplier.vhd(129): VHDL Compiler exiting
+# End time: 11:28:49 on Mar 23,2021, Elapsed time: 0:00:00
+# Errors: 7, Warnings: 0
+# /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
+vcom multiplier.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:29:23 on Mar 23,2021
+# vcom -reportprogress 300 multiplier.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity multiplier
+# -- Compiling architecture structural of multiplier
+# ** Error: multiplier.vhd(91): near ")": syntax error
+# ** Error: multiplier.vhd(94): Statement cannot be labeled.
+# ** Error: multiplier.vhd(113): near "Y": (vcom-1576) expecting ',' or ')'.
+# ** Error: multiplier.vhd(116): Statement cannot be labeled.
+# ** Error: multiplier.vhd(123): near ")": syntax error
+# ** Note: multiplier.vhd(129): VHDL Compiler exiting
+# End time: 11:29:23 on Mar 23,2021, Elapsed time: 0:00:00
+# Errors: 5, Warnings: 0
+# /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
+vcom multiplier.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:29:32 on Mar 23,2021
+# vcom -reportprogress 300 multiplier.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity multiplier
+# -- Compiling architecture structural of multiplier
+# ** Error: multiplier.vhd(113): near "Y": (vcom-1576) expecting ',' or ')'.
+# ** Error: multiplier.vhd(116): Statement cannot be labeled.
+# ** Error: multiplier.vhd(123): near ")": syntax error
+# ** Note: multiplier.vhd(129): VHDL Compiler exiting
+# End time: 11:29:32 on Mar 23,2021, Elapsed time: 0:00:00
+# Errors: 3, Warnings: 0
+# /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
+vcom multiplier.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:29:43 on Mar 23,2021
+# vcom -reportprogress 300 multiplier.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity multiplier
+# -- Compiling architecture structural of multiplier
+# ** Error: multiplier.vhd(123): near ")": syntax error
+# ** Note: multiplier.vhd(129): VHDL Compiler exiting
+# End time: 11:29:43 on Mar 23,2021, Elapsed time: 0:00:00
+# Errors: 1, Warnings: 0
+# /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
+vcom multiplier.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:29:51 on Mar 23,2021
+# vcom -reportprogress 300 multiplier.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity multiplier
+# -- Compiling architecture structural of multiplier
+# End time: 11:29:52 on Mar 23,2021, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+vcom tb_multiplier.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:33:43 on Mar 23,2021
+# vcom -reportprogress 300 tb_multiplier.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package std_logic_arith
+# -- Loading package STD_LOGIC_UNSIGNED
+# ** Error: (vcom-11) Could not find work.constants.
+# ** Error (suppressible): tb_multiplier.vhd(4): (vcom-1195) Cannot find expanded name "work.constants".
+# ** Error: tb_multiplier.vhd(4): Unknown expanded name.
+# ** Note: tb_multiplier.vhd(6): VHDL Compiler exiting
+# End time: 11:33:43 on Mar 23,2021, Elapsed time: 0:00:00
+# Errors: 3, Warnings: 0
+# /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
+vcom tb_multiplier.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:33:58 on Mar 23,2021
+# vcom -reportprogress 300 tb_multiplier.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package std_logic_arith
+# -- Loading package STD_LOGIC_UNSIGNED
+# -- Compiling entity MULTIPLIER_tb
+# -- Compiling architecture TEST of MULTIPLIER_tb
+# End time: 11:33:58 on Mar 23,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vsim -t 10ps work.multiplier_tb
+# vsim -t 10ps work.multiplier_tb 
+# Start time: 11:34:16 on Mar 23,2021
+# ** Note: (vsim-3812) Design is being optimized...
+# ** Error (suppressible): multiplier.vhd(96): (vopt-1272) Length of expected is 16; length of actual is 17.
+# ** Error (suppressible): multiplier.vhd(96): (vopt-1272) Length of expected is 16; length of actual is 17.
+# ** Error (suppressible): multiplier.vhd(96): (vopt-1272) Length of expected is 16; length of actual is 17.
+# ** Error (suppressible): multiplier.vhd(96): (vopt-1272) Length of expected is 16; length of actual is 17.
+# ** Error: multiplier.vhd(122): (vopt-1167) Index value 16 (of type ieee.std_logic_1164.STD_LOGIC_VECTOR) is out of range 15 downto 0.
+# ** Note: Vopt Compiler exiting
+# ** Error: (vopt-2064) Compiler back-end code generation process terminated with code 2.
+# Error loading design
+# End time: 11:34:17 on Mar 23,2021, Elapsed time: 0:00:01
+# Errors: 6, Warnings: 0
+vsim -t 10ps work.multiplier_tb
+# vsim -t 10ps work.multiplier_tb 
+# Start time: 11:35:20 on Mar 23,2021
+# ** Note: (vsim-3812) Design is being optimized...
+# ** Error (suppressible): multiplier.vhd(96): (vopt-1272) Length of expected is 16; length of actual is 17.
+# ** Error (suppressible): multiplier.vhd(96): (vopt-1272) Length of expected is 16; length of actual is 17.
+# ** Error (suppressible): multiplier.vhd(96): (vopt-1272) Length of expected is 16; length of actual is 17.
+# ** Error (suppressible): multiplier.vhd(96): (vopt-1272) Length of expected is 16; length of actual is 17.
+# ** Error: multiplier.vhd(122): (vopt-1167) Index value 16 (of type ieee.std_logic_1164.STD_LOGIC_VECTOR) is out of range 15 downto 0.
+# ** Note: Vopt Compiler exiting
+# ** Error: (vopt-2064) Compiler back-end code generation process terminated with code 2.
+# Error loading design
+# End time: 11:35:20 on Mar 23,2021, Elapsed time: 0:00:00
+# Errors: 6, Warnings: 0
+vcom multiplier.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:35:30 on Mar 23,2021
+# vcom -reportprogress 300 multiplier.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity multiplier
+# -- Compiling architecture structural of multiplier
+# End time: 11:35:30 on Mar 23,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vsim -t 10ps work.multiplier_tb
+# vsim -t 10ps work.multiplier_tb 
+# Start time: 11:35:32 on Mar 23,2021
+# ** Note: (vsim-3812) Design is being optimized...
+# ** Error: multiplier.vhd(122): (vopt-1167) Index value 16 (of type ieee.std_logic_1164.STD_LOGIC_VECTOR) is out of range 15 downto 0.
+# ** Note: Vopt Compiler exiting
+# ** Error: (vopt-2064) Compiler back-end code generation process terminated with code 2.
+# Error loading design
+# End time: 11:35:33 on Mar 23,2021, Elapsed time: 0:00:01
+# Errors: 2, Warnings: 0
+vcom multiplier.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:36:24 on Mar 23,2021
+# vcom -reportprogress 300 multiplier.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity multiplier
+# -- Compiling architecture structural of multiplier
+# End time: 11:36:24 on Mar 23,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vsim -t 10ps work.multiplier_tb
+# vsim -t 10ps work.multiplier_tb 
+# Start time: 11:36:25 on Mar 23,2021
+# ** Note: (vsim-3812) Design is being optimized...
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.std_logic_arith(body)
+# Loading ieee.std_logic_unsigned(body)
+# Loading ieee.numeric_std(body)
+# Loading work.multiplier_tb(test)#1
+# ** Fatal: (vsim-3348) Port length (16) does not match actual length (8) for port "/multiplier_tb/DUT/Y".
+#    Time: 0 ps  Iteration: 0  Instance: /multiplier_tb/DUT File: multiplier.vhd Line: 11
+# FATAL ERROR while loading design
+# Error loading design
+# End time: 11:36:27 on Mar 23,2021, Elapsed time: 0:00:02
+# Errors: 1, Warnings: 0
+vsim -t 10ps work.multiplier_tb
+# vsim -t 10ps work.multiplier_tb 
+# Start time: 11:37:23 on Mar 23,2021
+# ** Note: (vsim-8009) Loading existing optimized design _opt
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.std_logic_arith(body)
+# Loading ieee.std_logic_unsigned(body)
+# Loading ieee.numeric_std(body)
+# Loading work.multiplier_tb(test)#1
+# ** Fatal: (vsim-3348) Port length (16) does not match actual length (8) for port "/multiplier_tb/DUT/Y".
+#    Time: 0 ps  Iteration: 0  Instance: /multiplier_tb/DUT File: multiplier.vhd Line: 11
+# FATAL ERROR while loading design
+# Error loading design
+# End time: 11:37:24 on Mar 23,2021, Elapsed time: 0:00:01
+# Errors: 1, Warnings: 0
+vcom multiplier.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:37:27 on Mar 23,2021
+# vcom -reportprogress 300 multiplier.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity multiplier
+# -- Compiling architecture structural of multiplier
+# End time: 11:37:27 on Mar 23,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vsim -t 10ps work.multiplier_tb
+# vsim -t 10ps work.multiplier_tb 
+# Start time: 11:37:29 on Mar 23,2021
+# ** Note: (vsim-8009) Loading existing optimized design _opt
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.std_logic_arith(body)
+# Loading ieee.std_logic_unsigned(body)
+# Loading ieee.numeric_std(body)
+# Loading work.multiplier_tb(test)#1
+# ** Fatal: (vsim-3348) Port length (16) does not match actual length (8) for port "/multiplier_tb/DUT/Y".
+#    Time: 0 ps  Iteration: 0  Instance: /multiplier_tb/DUT File: multiplier.vhd Line: 11
+# FATAL ERROR while loading design
+# Error loading design
+# End time: 11:37:29 on Mar 23,2021, Elapsed time: 0:00:00
+# Errors: 1, Warnings: 0
+vcom tb_multiplier.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:37:34 on Mar 23,2021
+# vcom -reportprogress 300 tb_multiplier.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package std_logic_arith
+# -- Loading package STD_LOGIC_UNSIGNED
+# -- Compiling entity MULTIPLIER_tb
+# -- Compiling architecture TEST of MULTIPLIER_tb
+# End time: 11:37:34 on Mar 23,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vsim -t 10ps work.multiplier_tb
+# vsim -t 10ps work.multiplier_tb 
+# Start time: 11:37:38 on Mar 23,2021
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.std_logic_arith(body)
+# Loading ieee.std_logic_unsigned(body)
+# Loading ieee.numeric_std(body)
+# Loading work.multiplier_tb(test)#1
+# Loading work.encoder(beahavioral)#1
+# Loading work.mux(behav)#1
+# ** Fatal: (vsim-3348) Port length (9) does not match actual length (8) for port "/multiplier_tb/DUT/MUX0/B".
+#    Time: 0 ps  Iteration: 0  Instance: /multiplier_tb/DUT/MUX0 File: mux.vhd Line: 10
+# FATAL ERROR while loading design
+# Error loading design
+# End time: 11:37:39 on Mar 23,2021, Elapsed time: 0:00:01
+# Errors: 1, Warnings: 0
+vcom multiplier.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:38:51 on Mar 23,2021
+# vcom -reportprogress 300 multiplier.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity multiplier
+# -- Compiling architecture structural of multiplier
+# End time: 11:38:51 on Mar 23,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vsim -t 10ps work.multiplier_tb
+# vsim -t 10ps work.multiplier_tb 
+# Start time: 11:38:53 on Mar 23,2021
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.std_logic_arith(body)
+# Loading ieee.std_logic_unsigned(body)
+# Loading ieee.numeric_std(body)
+# Loading work.multiplier_tb(test)#1
+# Loading work.encoder(beahavioral)#1
+# Loading work.mux(behav)#1
+# Loading work.adder(behav)#1
+# Loading work.mux(behav)#2
+# ** Fatal: (vsim-3348) Port length (11) does not match actual length (10) for port "/multiplier_tb/DUT/blockGen(1)/MUXi/B".
+#    Time: 0 ps  Iteration: 0  Instance: /multiplier_tb/DUT/blockGen(1)/MUXi File: mux.vhd Line: 10
+# FATAL ERROR while loading design
+# Error loading design
+# End time: 11:38:54 on Mar 23,2021, Elapsed time: 0:00:01
+# Errors: 1, Warnings: 0
+vcom multiplier.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:39:21 on Mar 23,2021
+# vcom -reportprogress 300 multiplier.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity multiplier
+# -- Compiling architecture structural of multiplier
+# End time: 11:39:21 on Mar 23,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vsim -t 10ps work.multiplier_tb
+# vsim -t 10ps work.multiplier_tb 
+# Start time: 11:39:22 on Mar 23,2021
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# ** Error: multiplier.vhd(110): (vopt-1167) Index value 16 (of type ieee.std_logic_1164.STD_LOGIC_VECTOR) is out of range 15 downto 0.
+# ** Error: multiplier.vhd(111): (vopt-1167) Index value 16 (of type ieee.std_logic_1164.STD_LOGIC_VECTOR) is out of range 15 downto 0.
+# ** Error: multiplier.vhd(113): (vopt-1167) Index value 16 (of type ieee.std_logic_1164.STD_LOGIC_VECTOR) is out of range 15 downto 0.
+# ** Note: Vopt Compiler exiting
+# ** Error: (vopt-2064) Compiler back-end code generation process terminated with code 2.
+# Error loading design
+# End time: 11:39:23 on Mar 23,2021, Elapsed time: 0:00:01
+# Errors: 4, Warnings: 0
+vcom multiplier.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:40:14 on Mar 23,2021
+# vcom -reportprogress 300 multiplier.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity multiplier
+# -- Compiling architecture structural of multiplier
+# End time: 11:40:14 on Mar 23,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vsim -t 10ps work.multiplier_tb
+# vsim -t 10ps work.multiplier_tb 
+# Start time: 11:40:15 on Mar 23,2021
+# ** Note: (vsim-3812) Design is being optimized...
+# ** Error (suppressible): multiplier.vhd(96): (vopt-1272) Length of expected is 17; length of actual is 16.
+# ** Error (suppressible): multiplier.vhd(96): (vopt-1272) Length of expected is 17; length of actual is 16.
+# ** Error (suppressible): multiplier.vhd(96): (vopt-1272) Length of expected is 17; length of actual is 16.
+# ** Error (suppressible): multiplier.vhd(96): (vopt-1272) Length of expected is 17; length of actual is 16.
+# ** Note: Vopt Compiler exiting
+# ** Error: (vopt-2064) Compiler back-end code generation process terminated with code 2.
+# Error loading design
+# End time: 11:40:15 on Mar 23,2021, Elapsed time: 0:00:00
+# Errors: 5, Warnings: 0
+vcom multiplier.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:40:35 on Mar 23,2021
+# vcom -reportprogress 300 multiplier.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity multiplier
+# -- Compiling architecture structural of multiplier
+# End time: 11:40:35 on Mar 23,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vsim -t 10ps work.multiplier_tb
+# vsim -t 10ps work.multiplier_tb 
+# Start time: 11:40:37 on Mar 23,2021
+# ** Note: (vsim-3812) Design is being optimized...
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.std_logic_arith(body)
+# Loading ieee.std_logic_unsigned(body)
+# Loading ieee.numeric_std(body)
+# Loading work.multiplier_tb(test)#1
+# Loading work.encoder(beahavioral)#1
+# Loading work.mux(behav)#1
+# Loading work.adder(behav)#1
+# Loading work.mux(behav)#2
+# Loading work.mux(behav)#3
+# Loading work.mux(behav)#4
+# Loading work.mux(behav)#5
+# ** Fatal: (vsim-3421) Value 9 is out of range 0 to 7.
+#    Time: 0 ps  Iteration: 0  Instance: /multiplier_tb/DUT/blockGen(4)/ENCi File: adder.vhd Line: 12
+# FATAL ERROR while loading design
+# Error loading design
+# End time: 11:40:38 on Mar 23,2021, Elapsed time: 0:00:01
+# Errors: 1, Warnings: 0
+vcom multiplier.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:42:41 on Mar 23,2021
+# vcom -reportprogress 300 multiplier.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity multiplier
+# -- Compiling architecture structural of multiplier
+# End time: 11:42:41 on Mar 23,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vsim -t 10ps work.multiplier_tb
+# vsim -t 10ps work.multiplier_tb 
+# Start time: 11:42:42 on Mar 23,2021
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# ** Error: multiplier.vhd(105): (vopt-1152) Index value 9 is out of index range 8 downto 0 of ieee.std_logic_1164.STD_LOGIC_VECTOR.
+# ** Note: Vopt Compiler exiting
+# ** Error: (vopt-2064) Compiler back-end code generation process terminated with code 2.
+# Error loading design
+# End time: 11:42:43 on Mar 23,2021, Elapsed time: 0:00:01
+# Errors: 2, Warnings: 0
+vcom multiplier.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:43:06 on Mar 23,2021
+# vcom -reportprogress 300 multiplier.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity multiplier
+# -- Compiling architecture structural of multiplier
+# End time: 11:43:06 on Mar 23,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vsim -t 10ps work.multiplier_tb
+# vsim -t 10ps work.multiplier_tb 
+# Start time: 11:43:07 on Mar 23,2021
+# ** Note: (vsim-3812) Design is being optimized...
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.std_logic_arith(body)
+# Loading ieee.std_logic_unsigned(body)
+# Loading ieee.numeric_std(body)
+# Loading work.multiplier_tb(test)#1
+# Loading work.encoder(beahavioral)#1
+# Loading work.mux(behav)#1
+# Loading work.adder(behav)#1
+# Loading work.mux(behav)#2
+# Loading work.mux(behav)#3
+# Loading work.mux(behav)#4
+# Loading work.mux(behav)#5
+# ** Warning: (vsim-8683) Uninitialized out port /multiplier_tb/DUT/Y(15 downto 0) has no driver.
+# This port will contribute value (16'hXXXX) to the signal network.
+add wave *
+vcom multiplier.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:44:30 on Mar 23,2021
+# vcom -reportprogress 300 multiplier.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity multiplier
+# -- Compiling architecture structural of multiplier
+# End time: 11:44:31 on Mar 23,2021, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+vsim -t 10ps work.multiplier_tb
+# End time: 11:44:35 on Mar 23,2021, Elapsed time: 0:01:28
+# Errors: 0, Warnings: 1
+# vsim -t 10ps work.multiplier_tb 
+# Start time: 11:44:35 on Mar 23,2021
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.std_logic_arith(body)
+# Loading ieee.std_logic_unsigned(body)
+# Loading ieee.numeric_std(body)
+# Loading work.multiplier_tb(test)#1
+# Loading work.encoder(beahavioral)#1
+# Loading work.mux(behav)#1
+# Loading work.adder(behav)#1
+# Loading work.mux(behav)#2
+# Loading work.mux(behav)#3
+# Loading work.mux(behav)#4
+# Loading work.mux(behav)#5
+add wave *
+run 1 ns
+# ** Fatal: (vsim-3420) Array lengths do not match. Left is 9 (8 downto 0). Right is 8 (7 downto 0).
+#    Time: 0 ps  Iteration: 2  Process: /multiplier_tb/DUT/ADDERi/line__20 File: adder.vhd
+# Fatal error in Architecture behav at adder.vhd line 21
+# 
+# HDL call sequence:
+# Stopped at adder.vhd 21 Architecture behav
+# 
+vcom adder.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:45:57 on Mar 23,2021
+# vcom -reportprogress 300 adder.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity adder
+# -- Compiling architecture behav of adder
+# End time: 11:45:57 on Mar 23,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom multiplier.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:46:01 on Mar 23,2021
+# vcom -reportprogress 300 multiplier.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity multiplier
+# -- Compiling architecture structural of multiplier
+# End time: 11:46:01 on Mar 23,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+restart -f
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.std_logic_arith(body)
+# Loading ieee.std_logic_unsigned(body)
+# Loading ieee.numeric_std(body)
+# Loading work.multiplier_tb(test)#1
+# Loading work.encoder(beahavioral)#1
+# Loading work.mux(behav)#1
+# Loading work.adder(behav)#1
+# Loading work.mux(behav)#2
+# Loading work.mux(behav)#3
+# Loading work.mux(behav)#4
+# Loading work.mux(behav)#5
+run 1 ns
+vcom multiplier.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:54:23 on Mar 23,2021
+# vcom -reportprogress 300 multiplier.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity multiplier
+# -- Compiling architecture structural of multiplier
+# ** Error: multiplier.vhd(82): (vcom-1024) Individually associated formal "B" must be identified with a locally static name.
+# ** Error: multiplier.vhd(83): (vcom-1024) Individually associated formal "B" must be identified with a locally static name.
+# ** Error (suppressible): multiplier.vhd(83): (vcom-1048) Non-locally static choice (association #2, choice #1) is allowed only if it is the only choice of the only association.
+# ** Note: multiplier.vhd(134): VHDL Compiler exiting
+# End time: 11:54:23 on Mar 23,2021, Elapsed time: 0:00:00
+# Errors: 3, Warnings: 0
+# /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
+vcom multiplier.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:55:04 on Mar 23,2021
+# vcom -reportprogress 300 multiplier.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity multiplier
+# -- Compiling architecture structural of multiplier
+# End time: 11:55:04 on Mar 23,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+restart -f
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.std_logic_arith(body)
+# Loading ieee.std_logic_unsigned(body)
+# Loading ieee.numeric_std(body)
+# Loading work.multiplier_tb(test)#1
+# Loading work.encoder(beahavioral)#1
+# Loading work.mux(behav)#1
+# Loading work.adder(behav)#1
+# Loading work.mux(behav)#2
+# Loading work.mux(behav)#3
+# Loading work.mux(behav)#4
+# Loading work.mux(behav)#5
+run 1 ns
+vcom multiplier.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:57:02 on Mar 23,2021
+# vcom -reportprogress 300 multiplier.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity multiplier
+# -- Compiling architecture structural of multiplier
+# End time: 11:57:02 on Mar 23,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+restart -f
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# ** Error (suppressible): multiplier.vhd(97): (vopt-1270) Bad default binding for component instance "ADDER0: adder".
+#  (Component port "SUB_SUMn" is not on the entity.)
+# ** Warning: multiplier.vhd(97): (vopt-3473) Component instance "/MULTIPLIER_tb/DUT/ADDER0 : adder" is not bound.
+# Optimization failed
+vcom multiplier.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:57:29 on Mar 23,2021
+# vcom -reportprogress 300 multiplier.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity multiplier
+# -- Compiling architecture structural of multiplier
+# End time: 11:57:29 on Mar 23,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+restart -f
+# No Design Loaded!
+vcom mux.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:57:40 on Mar 23,2021
+# vcom -reportprogress 300 mux.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity mux
+# -- Compiling architecture behav of mux
+# End time: 11:57:40 on Mar 23,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom adder.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:57:43 on Mar 23,2021
+# vcom -reportprogress 300 adder.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity adder
+# -- Compiling architecture behav of adder
+# End time: 11:57:43 on Mar 23,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom encoder.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:57:50 on Mar 23,2021
+# vcom -reportprogress 300 encoder.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity encoder
+# -- Compiling architecture beahavioral of encoder
+# End time: 11:57:50 on Mar 23,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom multiplier.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:57:52 on Mar 23,2021
+# vcom -reportprogress 300 multiplier.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity multiplier
+# -- Compiling architecture structural of multiplier
+# End time: 11:57:52 on Mar 23,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom tb_multiplier.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:57:54 on Mar 23,2021
+# vcom -reportprogress 300 tb_multiplier.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package std_logic_arith
+# -- Loading package STD_LOGIC_UNSIGNED
+# -- Compiling entity MULTIPLIER_tb
+# -- Compiling architecture TEST of MULTIPLIER_tb
+# End time: 11:57:54 on Mar 23,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vsim -t 10ps work.multiplier_tb
+# vsim -t 10ps work.multiplier_tb 
+# Start time: 11:44:35 on Mar 23,2021
+# ** Note: (vsim-3812) Design is being optimized...
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.std_logic_arith(body)
+# Loading ieee.std_logic_unsigned(body)
+# Loading ieee.numeric_std(body)
+# Loading work.multiplier_tb(test)#1
+# Loading work.encoder(beahavioral)#1
+# Loading work.mux(behav)#1
+# Loading work.adder(behav)#1
+# Loading work.mux(behav)#2
+# Loading work.mux(behav)#3
+# Loading work.mux(behav)#4
+# Loading work.mux(behav)#5
+run 1 ns
+vcom multiplier.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 12:02:02 on Mar 23,2021
+# vcom -reportprogress 300 multiplier.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity multiplier
+# -- Compiling architecture structural of multiplier
+# ** Error: multiplier.vhd(57): Aggregate expression cannot be scalar type ieee.std_logic_1164.STD_LOGIC.
+# ** Note: multiplier.vhd(135): VHDL Compiler exiting
+# End time: 12:02:02 on Mar 23,2021, Elapsed time: 0:00:00
+# Errors: 1, Warnings: 0
+# /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
+vcom adder.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 12:03:31 on Mar 23,2021
+# vcom -reportprogress 300 adder.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity adder
+# -- Compiling architecture behav of adder
+# End time: 12:03:31 on Mar 23,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom multiplier.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 12:03:33 on Mar 23,2021
+# vcom -reportprogress 300 multiplier.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity multiplier
+# -- Compiling architecture structural of multiplier
+# ** Error: multiplier.vhd(57): Aggregate expression cannot be scalar type ieee.std_logic_1164.STD_LOGIC.
+# ** Note: multiplier.vhd(135): VHDL Compiler exiting
+# End time: 12:03:33 on Mar 23,2021, Elapsed time: 0:00:00
+# Errors: 1, Warnings: 0
+# /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
+vcom multiplier.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 12:03:46 on Mar 23,2021
+# vcom -reportprogress 300 multiplier.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity multiplier
+# -- Compiling architecture structural of multiplier
+# End time: 12:03:46 on Mar 23,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+restart -f
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.std_logic_arith(body)
+# Loading ieee.std_logic_unsigned(body)
+# Loading ieee.numeric_std(body)
+# Loading work.multiplier_tb(test)#1
+# Loading work.encoder(beahavioral)#1
+# Loading work.mux(behav)#1
+# Loading work.adder(behav)#1
+# Loading work.mux(behav)#2
+# Loading work.mux(behav)#3
+# Loading work.mux(behav)#4
+# Loading work.mux(behav)#5
+run 1 ns
+restart -f
+# ** Note: (vsim-8009) Loading existing optimized design _opt
+run 1 ns
+vcom adder.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 12:05:26 on Mar 23,2021
+# vcom -reportprogress 300 adder.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity adder
+# -- Compiling architecture behav of adder
+# End time: 12:05:26 on Mar 23,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+restart -f
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.std_logic_arith(body)
+# Loading ieee.std_logic_unsigned(body)
+# Loading ieee.numeric_std(body)
+# Loading work.multiplier_tb(test)#1
+# Loading work.encoder(beahavioral)#1
+# Loading work.mux(behav)#1
+# Loading work.adder(behav)#1
+# Loading work.mux(behav)#2
+# Loading work.mux(behav)#3
+# Loading work.mux(behav)#4
+# Loading work.mux(behav)#5
+run 1 ns
+vcom adder.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 12:07:34 on Mar 23,2021
+# vcom -reportprogress 300 adder.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity adder
+# -- Compiling architecture behav of adder
+# End time: 12:07:35 on Mar 23,2021, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+vcom multiplier.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 12:07:36 on Mar 23,2021
+# vcom -reportprogress 300 multiplier.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity multiplier
+# -- Compiling architecture structural of multiplier
+# ** Warning: multiplier.vhd(55): (vcom-1013) Initial value of "ash" depends on value of signal "A".
+# End time: 12:07:36 on Mar 23,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 1
+vcom multiplier.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 12:09:29 on Mar 23,2021
+# vcom -reportprogress 300 multiplier.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity multiplier
+# -- Compiling architecture structural of multiplier
+# ** Error: multiplier.vhd(70): Target type ieee.std_logic_1164.STD_LOGIC_VECTOR in signal assignment is different from expression type ieee.std_logic_1164.STD_ULOGIC.
+# ** Note: multiplier.vhd(137): VHDL Compiler exiting
+# End time: 12:09:29 on Mar 23,2021, Elapsed time: 0:00:00
+# Errors: 1, Warnings: 0
+# /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
+vcom multiplier.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 12:09:49 on Mar 23,2021
+# vcom -reportprogress 300 multiplier.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity multiplier
+# -- Compiling architecture structural of multiplier
+# End time: 12:09:49 on Mar 23,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+restart -f
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.std_logic_arith(body)
+# Loading ieee.std_logic_unsigned(body)
+# Loading ieee.numeric_std(body)
+# Loading work.multiplier_tb(test)#1
+# Loading work.encoder(beahavioral)#1
+# Loading work.mux(behav)#1
+# Loading work.adder(behav)#1
+# Loading work.mux(behav)#2
+# Loading work.mux(behav)#3
+# Loading work.mux(behav)#4
+# Loading work.mux(behav)#5
+run 1 ns
+add wave -position insertpoint  \
+sim:/multiplier_tb/DUT/ash
+restart .f
+restart -f
+# ** Note: (vsim-8009) Loading existing optimized design _opt
+run 1 ns
+vcom multiplier.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 12:13:29 on Mar 23,2021
+# vcom -reportprogress 300 multiplier.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity multiplier
+# -- Compiling architecture structural of multiplier
+# ** Error: multiplier.vhd(102): Cannot resolve indexed name (type ieee.std_logic_1164.STD_LOGIC_VECTOR) as type ieee.std_logic_1164.STD_LOGIC.
+# ** Note: multiplier.vhd(139): VHDL Compiler exiting
+# End time: 12:13:29 on Mar 23,2021, Elapsed time: 0:00:00
+# Errors: 1, Warnings: 0
+# /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
+vcom multiplier.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 12:14:02 on Mar 23,2021
+# vcom -reportprogress 300 multiplier.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity multiplier
+# -- Compiling architecture structural of multiplier
+# End time: 12:14:02 on Mar 23,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+restart -f
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.std_logic_arith(body)
+# Loading ieee.std_logic_unsigned(body)
+# Loading ieee.numeric_std(body)
+# Loading work.multiplier_tb(test)#1
+# Loading work.encoder(beahavioral)#1
+# Loading work.mux(behav)#1
+# Loading work.adder(behav)#1
+# Loading work.mux(behav)#2
+# Loading work.mux(behav)#3
+# Loading work.mux(behav)#4
+# Loading work.mux(behav)#5
+run 1 ns
+add wave -position insertpoint  \
+sim:/multiplier_tb/DUT/sum
+restart -f
+# ** Note: (vsim-8009) Loading existing optimized design _opt
+run 1 ns
+vcom multiplier.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 12:22:26 on Mar 23,2021
+# vcom -reportprogress 300 multiplier.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity multiplier
+# -- Compiling architecture structural of multiplier
+# End time: 12:22:26 on Mar 23,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom multiplier.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 12:22:36 on Mar 23,2021
+# vcom -reportprogress 300 multiplier.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity multiplier
+# -- Compiling architecture structural of multiplier
+# End time: 12:22:36 on Mar 23,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+restart -f
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# ** Error: multiplier.vhd(120): (vopt-1167) Index value 17 (of type ieee.std_logic_1164.STD_LOGIC_VECTOR) is out of range 16 downto 0.
+# ** Note: Vopt Compiler exiting
+# ** Error: (vopt-2064) Compiler back-end code generation process terminated with code 2.
+vcom multiplier.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 12:22:51 on Mar 23,2021
+# vcom -reportprogress 300 multiplier.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity multiplier
+# -- Compiling architecture structural of multiplier
+# End time: 12:22:51 on Mar 23,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+restart -f
+# No Design Loaded!
+vcom adder.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 12:22:57 on Mar 23,2021
+# vcom -reportprogress 300 adder.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity adder
+# -- Compiling architecture behav of adder
+# End time: 12:22:57 on Mar 23,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom mux.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 12:22:59 on Mar 23,2021
+# vcom -reportprogress 300 mux.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity mux
+# -- Compiling architecture behav of mux
+# End time: 12:22:59 on Mar 23,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom enc
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 12:23:03 on Mar 23,2021
+# vcom -reportprogress 300 enc 
+# ** Error: (vcom-7) Failed to open design unit file "enc" in read mode.
+# No such file or directory. (errno = ENOENT)
+# End time: 12:23:04 on Mar 23,2021, Elapsed time: 0:00:01
+# Errors: 1, Warnings: 0
+# /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
+vcom encoder.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 12:23:05 on Mar 23,2021
+# vcom -reportprogress 300 encoder.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity encoder
+# -- Compiling architecture beahavioral of encoder
+# End time: 12:23:06 on Mar 23,2021, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+vcom multiplier.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 12:23:07 on Mar 23,2021
+# vcom -reportprogress 300 multiplier.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity multiplier
+# -- Compiling architecture structural of multiplier
+# End time: 12:23:07 on Mar 23,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom tb_multiplier.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 12:23:10 on Mar 23,2021
+# vcom -reportprogress 300 tb_multiplier.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package std_logic_arith
+# -- Loading package STD_LOGIC_UNSIGNED
+# -- Compiling entity MULTIPLIER_tb
+# -- Compiling architecture TEST of MULTIPLIER_tb
+# End time: 12:23:10 on Mar 23,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vsim -t 10ps work.multiplier_tb
+# vsim -t 10ps work.multiplier_tb 
+# Start time: 11:44:35 on Mar 23,2021
+# ** Note: (vsim-3812) Design is being optimized...
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.std_logic_arith(body)
+# Loading ieee.std_logic_unsigned(body)
+# Loading ieee.numeric_std(body)
+# Loading work.multiplier_tb(test)#1
+# Loading work.encoder(beahavioral)#1
+# Loading work.mux(behav)#1
+# Loading work.adder(behav)#1
+# Loading work.mux(behav)#2
+# ** Fatal: (vsim-3348) Port length (11) does not match actual length (10) for port "/multiplier_tb/DUT/blockGen(1)/MUXi/B".
+#    Time: 0 ps  Iteration: 0  Instance: /multiplier_tb/DUT/blockGen(1)/MUXi File: mux.vhd Line: 10
+# FATAL ERROR while loading design
+# Error loading design
+# End time: 12:23:22 on Mar 23,2021, Elapsed time: 0:38:47
+# Errors: 14, Warnings: 1
