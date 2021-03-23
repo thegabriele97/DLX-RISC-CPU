@@ -43,8 +43,32 @@ begin
 --
   DUT: multiplier generic map(8) port map(a, b, y);
 
-  a <= x"02";
-  b <= x"03";
+  process
+  begin
+
+    a <= x"02";
+    b <= x"03";
+    wait for 1 ns;
+
+    a <= x"02";
+    b <= x"05";
+    wait for 1 ns;
+
+    a <= x"03";
+    b <= x"02";
+    wait for 1 ns;
+
+    a <= x"05";
+    b <= x"02";
+    wait for 1 ns;
+
+    a <= x"05";
+    b <= x"0a";
+    wait for 1 ns;
+
+    wait;
+
+  end process;
 
 -- PROCESS FOR TESTING TEST - COMLETE CYCLE ---------
 --  test: process
