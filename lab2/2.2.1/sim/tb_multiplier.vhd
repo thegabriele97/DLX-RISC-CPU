@@ -1,12 +1,12 @@
 library ieee;
 use ieee.std_logic_1164.all;
-use ieee.std_logic_unsigned.all;
+--use ieee.std_logic_unsigned.all;
 --use WORK.constants.all;
 
-entity MULTIPLIER_tb is
-end MULTIPLIER_tb;
+entity tb_multiplier is
+end tb_multiplier;
 
-architecture TEST of MULTIPLIER_tb is
+architecture TEST of tb_multiplier is
 
   
   --constant numBit : integer := 4;    -- :=8  --:=16    
@@ -62,10 +62,18 @@ begin
     b <= x"02";
     wait for 1 ns;
 
-    a <= x"05";
+    a <= x"8F";
     b <= x"0a";
     wait for 1 ns;
 
+    a <= "11110110";
+    b <= "11110110";
+    wait for 1 ns;
+
+    a <= x"0a";
+    b <= x"8F";
+    wait for 1 ns;
+    
     wait;
 
   end process;

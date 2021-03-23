@@ -20,9 +20,9 @@ architecture structural of multiplier is
         );
         port (
             A: in std_logic_vector((NBIT-1) downto 0);
-            B: in std_logic_Vector((NBIT-1) downto 0);
+            B: in std_logic_vector((NBIT-1) downto 0);
             SUB_SUMn: in std_logic;
-            S: out std_logic_vector(NBIT downto 0)
+            S: out std_logic_vector(NBIT + 1 downto 0)
         );
     end component;
 
@@ -50,7 +50,7 @@ architecture structural of multiplier is
     type sel_t is array(0 to (NBIT/2)) of std_logic_vector(1 downto 0);
     type sum_subn_t is array(0 to (NBIT/2)) of std_logic;
     type mux_t is array(0 to (NBIT/2)) of std_logic_vector((2 * NBIT) downto 0);
-    type sum_t is array(0 to (NBIT/2)) of std_logic_vector((2 * NBIT)+1 downto 0);
+    type sum_t is array(0 to (NBIT/2)) of std_logic_vector((2 * NBIT) + 2 downto 0);
 
     signal ash4x: ash_t := (others => (others => '0'));
     signal ash8x: ash_t := (others => (others => '0'));
@@ -97,12 +97,12 @@ begin
     );
 
     ADDER0: adder generic map(
-        NBIT => NBIT
+        NBIT => NBIT + 1
     ) port map(
         A => (others => '0'),
-        B => mux_out(0)(NBIT-1 downto 0),
+        B => mux_out(0)(NBIT downto 0),
         SUB_SUMn => sum_subn(0),
-        S => sum(0)(NBIT downto 0)
+        S => sum(0)(NBIT + 2 downto 0)
     );
 
     -- sign extend
@@ -144,11 +144,11 @@ begin
             A => sum(i-1)((NBIT + 2*i) downto 0),
             B => mux_out(i)((NBIT + 2*i) downto 0),
             SUB_SUMn => sum_subn(i),
-            S => sum(i)((NBIT + 2*i)+1 downto 0) -- lower part of sum(i), needs sign extension
+            S => sum(i)(NBIT + 2 + 2*i downto 0) -- lower part of sum(i), needs sign extension
         );
 
         -- Extending the sign of sum(i)
-        sum(i)((2*NBIT)+1 downto NBIT+(2*i)+2) <= (others => sum(i-1)((NBIT + 2*i)+1));
+        --sum(i)((2*NBIT)+1 downto NBIT+(2*i)+2) <= (others => sum(i-1)((NBIT + 2*i)+1));
 
     end generate blockGen;
 
