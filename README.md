@@ -38,3 +38,4 @@
 - Che tipo di sommatore usare nel moltiplicatore
 - Chiedere se il mux per il multiplier bisogna farlo totalmente generico o solo il numero dei bit
 - Chiedere se il mux e l'encoder nel multiplier possono essere uniti
+- Chiedere se il multiplier deve funzionare con gli unsigned/solo unsigned
