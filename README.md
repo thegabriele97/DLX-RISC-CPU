@@ -35,3 +35,4 @@
 - Chiedere se si possono vedere i singoli fili nel caso i cui siano raggruppati
 - Modificare il carry generator per gestire le colonne alternate (a blocchi di 4 bit)
 - Chidere se va bene aggiungere un sommatore (per sommare 0 inizialmente)
+- Che tipo di sommatore usare nel moltiplicatore
