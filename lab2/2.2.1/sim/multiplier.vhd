@@ -50,65 +50,61 @@ architecture structural of multiplier is
     type sel_t is array(0 to (NBIT/2)) of std_logic_vector(1 downto 0);
     type sum_subn_t is array(0 to (NBIT/2)) of std_logic;
     type mux_t is array(0 to (NBIT/2)) of std_logic_vector((2 * NBIT) downto 0);
-    type sum_t is array(0 to (NBIT/2)) of std_logic_vector((2 * NBIT) downto 0);
+    type sum_t is array(0 to (NBIT/2)) of std_logic_vector((2 * NBIT)+1 downto 0);
 
-    signal ash: ash_t := (others => (others => '0'));
+    signal ash4x: ash_t := (others => (others => '0'));
+    signal ash8x: ash_t := (others => (others => '0'));
     signal sel: sel_t;
     signal sum_subn: sum_subn_t;
     signal mux_out: mux_t := (others => (others => '0'));
-    signal sum: sum_t := (others => (others => '0'));
+    signal sum: sum_t;
 
-    signal Ax: std_logic_vector(NBIT downto 0);
-    signal Bx: std_logic_vector(NBIT + 1 downto 0);
+    signal Bx: std_logic_vector(NBIT downto 0);
 
 begin
 
-    Ax <= A(NBIT-1) & A;
-    Bx <= B(NBIT-1) & B(NBIT-1) & B;
+    Bx <= B & '0';
 
-    -- ash(0) = A shifted by 2 to the left
-    ash(0)(2*NBIT downto NBIT+1) <= (others => A(NBIT-1));
-    ash(0)(NBIT downto 1) <= A;
-    ash(0)(0) <= '0';
+    -- ash4x(0) = A shifted by 0 to the left
+    -- with sign extend
+    ash4x(0)(2*NBIT downto NBIT) <= (others => A(NBIT-1));
+    ash4x(0)(NBIT-1 downto 0) <= A;
 
-    ENC0: encoder port map(
-        b(0) => '0',
-        b(1) => B(0),
-        b(2) => B(1),
-        vp(1 downto 0) => sel(0),
-        vp(2) => sum_subn(0)
-    );
+    -- ash8x(0) = A shifted by 1 to the left
+    -- with sign extend
+    ash8x(0)(2*NBIT downto NBIT+1) <= (others => A(NBIT-1));
+    ash8x(0)(NBIT downto 1) <= A;
+    ash8x(0)(0) <= '0';
 
-    MUX0: mux generic map(
-        NBIT => (NBIT + 1)
-    ) port map(
-        A => (others => '0'),
-        B => Ax,
-        C => ash(0)(NBIT downto 0),
-        S => sel(0),
-        Y => mux_out(0)(NBIT downto 0)
-    );
+    -- The first adder is used to compute -A and/or -2A so
+    -- we do 0 - (the first mux's output)
+    sum(0)(NBIT+1 downto 0) <= (others => '0');
+    
+    -- sign extend: we can directly do the same in the previous line
+    -- as sum(0) <= (others => '0'); but it's better to do this to leave
+    -- same structure on the next stages (where actually the sign is really extended)
+    sum(0)((2*NBIT)+1 downto NBIT+2) <= (others => sum(0)(NBIT+1));
 
-    ADDER0: adder generic map(
-        NBIT => NBIT
-    ) port map(
-        A => (others => '0'),
-        B => mux_out(0)(NBIT-1 downto 0),
-        SUB_SUMn => sum_subn(0),
-        S => sum(0)(NBIT downto 0)
-    );
+    -- for i=0 we have the generation of the first operand 
+    -- (-A or -2A or the positive ones)
+    blockGen: for i in 0 to (NBIT/2)-1 generate
 
-    -- sign extend
-    sum(0)(2*NBIT downto NBIT+1) <= (others => sum(0)(NBIT));
+        shiftBlock: if i > 0 generate
+            -- ash4x(i) is previous A shifted by 2 (4x)
+            -- The sign is already extended in ash4x(0) so 
+            -- ash4x(1) and so on will inherit it
+            ash4x(i) <= ash4x(i - 1)((2 * NBIT) - 2 downto 0) & "00";
 
-    blockGen: for i in 1 to (NBIT/2) generate
-
-        ash(i) <= ash(i - 1)((2 * NBIT) - 1 downto 0) & '0';
+            -- ash8x(i) is previous A shifted by 3 (8x)
+            -- The sign is already extended in ash4x(0) so 
+            -- ash4x(1) and so on will inherit it
+            ash8x(i) <= ash4x(i - 1)((2 * NBIT) - 3 downto 0) & "000";
+        end generate shiftBlock;
 
         ENCi: encoder port map(
-            b(0) => Bx(2*i - 1),
-            b(1) => Bx(i*2),
-            b(2) => Bx(2*i + 1),
+            b(0) => Bx(2*i),
+            b(1) => Bx(i*2 + 1),
+            b(2) => Bx(2*i + 2),
             vp(1 downto 0) => sel(i),
             vp(2) => sum_subn(i)
         );
@@ -117,20 +113,23 @@ begin
             NBIT => (NBIT + (1 + 2*i))
         ) port map(
             A => (others => '0'),
-            B => ash(i-1)((NBIT + 2*i) downto 1),
-            C => ash(i)((NBIT + 2*i) downto 0),
+            B => ash4x(i)((NBIT + 2*i) downto 0),
+            C => ash8x(i)((NBIT + 2*i) downto 0),
             S => sel(i),
             Y => mux_out(i)((NBIT + 2*i) downto 0)
         );
 
         ADDERi: adder generic map(
-            NBIT => (NBIT + 2*i)
+            NBIT => (NBIT + 1 + 2*i)
         ) port map(
-            A => sum(i-1)((NBIT + 2*i)-1 downto 0),
-            B => mux_out(i)((NBIT + 2*i)-1 downto 0),
+            A => sum(i)((NBIT + 2*i) downto 0),
+            B => mux_out(i)((NBIT + 2*i) downto 0),
             SUB_SUMn => sum_subn(i),
-            S => sum(i)((NBIT + 2*i) downto 0)
+            S => sum(i+1)((NBIT + 2*i)+1 downto 0) -- lower part of sum(i+1), needs sign extension
         );
+
+        -- Extending the sign of the result sum(i+1)
+        sum(i+1)((2*NBIT)+1 downto NBIT+(2*i)+2) <= (others => sum(i+1)((NBIT + 2*i)+1));
 
     end generate blockGen;
 
