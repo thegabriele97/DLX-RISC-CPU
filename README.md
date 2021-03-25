@@ -33,9 +33,6 @@
 ## Domande LAB 02
 - Chiedere cosa fare del Cin nel carry generator
 - Chiedere se si possono vedere i singoli fili nel caso i cui siano raggruppati
-- Modificare il carry generator per gestire le colonne alternate (a blocchi di 4 bit)
-- Chidere se va bene aggiungere un sommatore (per sommare 0 inizialmente)
-- Che tipo di sommatore usare nel moltiplicatore
 - Chiedere se il mux per il multiplier bisogna farlo totalmente generico o solo il numero dei bit
 - Chiedere se il mux e l'encoder nel multiplier possono essere uniti
-- Chiedere se il multiplier deve funzionare con gli unsigned/solo unsigned
+- Chiedere se il multiplier deve funzionare con gli unsigned/solo unsigned? signed
