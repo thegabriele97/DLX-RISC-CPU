@@ -25,24 +25,30 @@ architecture TEST of TB_P4_ADDER is
 begin
 	
 	DUT: P4_ADDER generic map(32) port map(a, b, '0', s, co);
-	
+
 	process
 	begin
 
 		a <= x"ffffffff";
 		b <= x"00000001";
 		wait for 1 ns;
+		assert co = '1';
 
 		a <= x"ffffffff";
 		b <= x"00000002";
 		wait for 1 ns;
-
+		assert co = '1';
+		
 		a <= x"abcd3456";
 		b <= x"fdedcdde";
 		wait for 1 ns;
-
+		assert co = '1';
+		
 		a <= x"00000002";
 		b <= x"00000002";
+		wait for 1 ns;
+		assert co = '0';
+
 		wait;
 
 	end process;

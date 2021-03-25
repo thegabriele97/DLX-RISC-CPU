@@ -1,0 +1,75 @@
+Information: Updating design information... (UID-85)
+ 
+****************************************
+Report : timing
+        -path full
+        -delay max
+        -max_paths 1
+Design : P4_ADDER_NBIT32
+Version: F-2011.09-SP3
+Date   : Thu Mar 25 11:19:24 2021
+****************************************
+
+Operating Conditions: typical   Library: NangateOpenCellLibrary
+Wire Load Model Mode: top
+
+  Startpoint: A[3] (input port)
+  Endpoint: S[31] (output port)
+  Path Group: (none)
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  P4_ADDER_NBIT32    5K_hvratio_1_1        NangateOpenCellLibrary
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  input external delay                                    0.00       0.00 f
+  A[3] (in)                                               0.00       0.00 f
+  CARRYGEN/A[3] (CARRY_GENERATOR_NBIT32_NBIT_PER_BLOCK4)
+                                                          0.00       0.00 f
+  CARRYGEN/PGNet/a[3] (prop_gen_generic_NBIT32)           0.00       0.00 f
+  CARRYGEN/PGNet/pg_network_i_3/a (prop_gen_29)           0.00       0.00 f
+  CARRYGEN/PGNet/pg_network_i_3/U1/Z (XOR2_X1)            0.08       0.08 f
+  CARRYGEN/PGNet/pg_network_i_3/p (prop_gen_29)           0.00       0.08 f
+  CARRYGEN/PGNet/p[3] (prop_gen_generic_NBIT32)           0.00       0.08 f
+  CARRYGEN/PGi_1_4/p[1] (PG_0)                            0.00       0.08 f
+  CARRYGEN/PGi_1_4/U3/ZN (AOI21_X1)                       0.05       0.13 r
+  CARRYGEN/PGi_1_4/U2/ZN (INV_X1)                         0.02       0.15 f
+  CARRYGEN/PGi_1_4/go (PG_0)                              0.00       0.15 f
+  CARRYGEN/GGi_2_4/g[1] (GG_8)                            0.00       0.15 f
+  CARRYGEN/GGi_2_4/U2/ZN (AOI21_X1)                       0.05       0.20 r
+  CARRYGEN/GGi_2_4/U1/ZN (INV_X1)                         0.04       0.24 f
+  CARRYGEN/GGi_2_4/go (GG_8)                              0.00       0.24 f
+  CARRYGEN/GGi_3_8/g[0] (GG_7)                            0.00       0.24 f
+  CARRYGEN/GGi_3_8/U2/ZN (AOI21_X1)                       0.05       0.29 r
+  CARRYGEN/GGi_3_8/U1/ZN (INV_X1)                         0.04       0.34 f
+  CARRYGEN/GGi_3_8/go (GG_7)                              0.00       0.34 f
+  CARRYGEN/GGi_4_16/g[0] (GG_5)                           0.00       0.34 f
+  CARRYGEN/GGi_4_16/U2/ZN (AOI21_X1)                      0.05       0.39 r
+  CARRYGEN/GGi_4_16/U1/ZN (INV_X1)                        0.05       0.44 f
+  CARRYGEN/GGi_4_16/go (GG_5)                             0.00       0.44 f
+  CARRYGEN/GGi_5_28/g[0] (GG_2)                           0.00       0.44 f
+  CARRYGEN/GGi_5_28/U2/ZN (AOI21_X1)                      0.06       0.50 r
+  CARRYGEN/GGi_5_28/U1/ZN (INV_X1)                        0.04       0.53 f
+  CARRYGEN/GGi_5_28/go (GG_2)                             0.00       0.53 f
+  CARRYGEN/Co[6] (CARRY_GENERATOR_NBIT32_NBIT_PER_BLOCK4)
+                                                          0.00       0.53 f
+  SUMGEM/Ci[7] (sum_generator_NBIT_PER_BLOCK4_NBLOCKS8)
+                                                          0.00       0.53 f
+  SUMGEM/csb_7/cin (carry_select_block_NBIT_PER_BLOCK4_1)
+                                                          0.00       0.53 f
+  SUMGEM/csb_7/mux/s (mux21_generic_NBIT4_1)              0.00       0.53 f
+  SUMGEM/csb_7/mux/U1/Z (MUX2_X1)                         0.07       0.60 r
+  SUMGEM/csb_7/mux/y[3] (mux21_generic_NBIT4_1)           0.00       0.60 r
+  SUMGEM/csb_7/sum[3] (carry_select_block_NBIT_PER_BLOCK4_1)
+                                                          0.00       0.60 r
+  SUMGEM/S[31] (sum_generator_NBIT_PER_BLOCK4_NBLOCKS8)
+                                                          0.00       0.60 r
+  S[31] (out)                                             0.00       0.60 r
+  data arrival time                                                  0.60
+  --------------------------------------------------------------------------
+  (Path is unconstrained)
+
+
+1
