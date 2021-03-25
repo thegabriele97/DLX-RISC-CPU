@@ -81,7 +81,7 @@ begin
         
         colGen: for j in 1 to NBIT generate
             
-            colCheck: if ((NBIT - j) mod (2**i) < 2**(i-1)) generate
+            colCheck: if ((NBIT - j) mod (2**i) < 2**(i-1) and (i = 1 or (j mod NBIT_PER_BLOCK) = 0)) generate
                 
                 GGBlockGen: if (j <= 2**i) generate
                     GGi: GG port map(
@@ -95,9 +95,9 @@ begin
                 PGBlockGen: if (j > 2**i) generate
                     PGi: PG port map(
                         p(1) => sigmtx(1, i-1)(j),
-                        p(0) => sigmtx(1, i-1)(j - (2**(i-1))),
+                        p(0) => sigmtx(1, i-1)(j - 2**(i-1) + (NBIT-j) mod (2**i)),
                         g(1) => sigmtx(0, i-1)(j),
-                        g(0) => sigmtx(0, i-1)(j - (2**(i-1))),
+                        g(0) => sigmtx(0, i-1)(j - 2**(i-1) + (NBIT-j) mod (2**i)),
                         po => sigmtx(1, i)(j),
                         go => sigmtx(0, i)(j)
                     );
@@ -105,7 +105,7 @@ begin
 
             end generate colCheck;
 
-            passThrough: if ((NBIT - j) mod (2**i) >= 2**(i-1)) generate
+            passThrough: if (not ((NBIT - j) mod (2**i) < 2**(i-1) and (i = 1 or (j mod NBIT_PER_BLOCK) = 0))) generate
                 sigmtx(0, i)(j) <= sigmtx(0, i-1)(j);
                 sigmtx(1, i)(j) <= sigmtx(1, i-1)(j);
             end generate passThrough;
@@ -114,7 +114,12 @@ begin
 
     end generate rowGen;
 
-    Co <= sigmtx(0, f_log2(NBIT));
+
+	coutSelect: for i in 0 to (NBIT/NBIT_PER_BLOCK) - 1 generate
+	
+    	Co(i) <= sigmtx(0, f_log2(NBIT))((i+1) * NBIT_PER_BLOCK);
+		
+	end generate coutSelect;
 
 
 end structural;
