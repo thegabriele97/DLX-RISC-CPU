@@ -1,3 +1,0 @@
-analyze -library WORK -format vhdl {constants.vhd prop_gen.vhd prop_gen_generic.vhd PG.vhd GG.vhd carry_generator.vhd}
-
-elaborate CARRY_GENERATOR -architecture STRUCTURAL -library WORK -parameters "NBIT = 4, NBIT_PER_BLOCK = 1"

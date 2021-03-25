@@ -1,6 +1,6 @@
 #@ # 
 #@ # Running dc_shell Version F-2011.09-SP3 for amd64 -- Jan 26, 2012
-#@ # Date:   Sat Mar 20 15:47:13 2021
+#@ # Date:   Thu Mar 25 10:00:45 2021
 #@ # Run by: ms21.16@localhost.localdomain
 #@ 
 
@@ -4720,7 +4720,7 @@ source /software/synopsys/syn_current_64.11/admin/setup/.synopsys_dc.setup
 #@ 
 #@ # -- End source /software/synopsys/syn_current_64.11/admin/setup/.synopsys_dc.setup
 
-source /home/ms21.16/gabri-ms-lab/ms-lab/lab2/2.1.3/syn/.synopsys_dc.setup
+source /home/ms21.16/gabri-ms-lab/ms-lab/lab2/2.1.5/syn/.synopsys_dc.setup
 #@ #
 #@ #		".synopsys_dc.setup" Initialization File for
 #@ #
@@ -4769,78 +4769,40 @@ source /home/ms21.16/gabri-ms-lab/ms-lab/lab2/2.1.3/syn/.synopsys_dc.setup
 #@ 
 #@ 
 #@ 
-#@ # -- End source /home/ms21.16/gabri-ms-lab/ms-lab/lab2/2.1.3/syn/.synopsys_dc.setup
+#@ # -- End source /home/ms21.16/gabri-ms-lab/ms-lab/lab2/2.1.5/syn/.synopsys_dc.setup
 
 gui_start
-sh mkdir WORK
-define_design_lib WORK -path ./WORK
-analyze -library WORK -format vhdl {/home/ms21.16/gabri-ms-lab/ms-lab/lab2/2.1.3/syn/constants.vhd /home/ms21.16/gabri-ms-lab/ms-lab/lab2/2.1.3/syn/prop_gen.vhd /home/ms21.16/gabri-ms-lab/ms-lab/lab2/2.1.3/syn/prop_gen_generic.vhd /home/ms21.16/gabri-ms-lab/ms-lab/lab2/2.1.3/syn/PG.vhd /home/ms21.16/gabri-ms-lab/ms-lab/lab2/2.1.3/syn/GG.vhd /home/ms21.16/gabri-ms-lab/ms-lab/lab2/2.1.3/syn/carry_generator.vhd}
-analyze -library WORK -format vhdl {/home/ms21.16/gabri-ms-lab/ms-lab/lab2/2.1.3/syn/constants.vhd /home/ms21.16/gabri-ms-lab/ms-lab/lab2/2.1.3/syn/prop_gen.vhd /home/ms21.16/gabri-ms-lab/ms-lab/lab2/2.1.3/syn/prop_gen_generic.vhd /home/ms21.16/gabri-ms-lab/ms-lab/lab2/2.1.3/syn/PG.vhd /home/ms21.16/gabri-ms-lab/ms-lab/lab2/2.1.3/syn/GG.vhd /home/ms21.16/gabri-ms-lab/ms-lab/lab2/2.1.3/syn/carry_generator.vhd}
-analyze -library WORK -format vhdl {/home/ms21.16/gabri-ms-lab/ms-lab/lab2/2.1.3/syn/constants.vhd /home/ms21.16/gabri-ms-lab/ms-lab/lab2/2.1.3/syn/prop_gen.vhd /home/ms21.16/gabri-ms-lab/ms-lab/lab2/2.1.3/syn/prop_gen_generic.vhd /home/ms21.16/gabri-ms-lab/ms-lab/lab2/2.1.3/syn/PG.vhd /home/ms21.16/gabri-ms-lab/ms-lab/lab2/2.1.3/syn/GG.vhd /home/ms21.16/gabri-ms-lab/ms-lab/lab2/2.1.3/syn/carry_generator.vhd}
-analyze -library WORK -format vhdl {/home/ms21.16/gabri-ms-lab/ms-lab/lab2/2.1.3/syn/constants.vhd /home/ms21.16/gabri-ms-lab/ms-lab/lab2/2.1.3/syn/prop_gen.vhd /home/ms21.16/gabri-ms-lab/ms-lab/lab2/2.1.3/syn/prop_gen_generic.vhd /home/ms21.16/gabri-ms-lab/ms-lab/lab2/2.1.3/syn/PG.vhd /home/ms21.16/gabri-ms-lab/ms-lab/lab2/2.1.3/syn/GG.vhd /home/ms21.16/gabri-ms-lab/ms-lab/lab2/2.1.3/syn/carry_generator.vhd}
-./compile.script
-compile.script
-file compile.script
-uplevel #0 source /home/ms21.16/gabri-ms-lab/ms-lab/lab2/2.1.3/syn/compile_carry_gen.script
-#@ analyze -library WORK -format vhdl {constants.vhd prop_gen.vhd prop_gen_generic.vhd PG.vhd GG.vhd carry_generator.vhd}
-#@ # -- End source /home/ms21.16/gabri-ms-lab/ms-lab/lab2/2.1.3/syn/compile_carry_gen.script
+source compile_p4.source
+source compile_p4.script
+#@ analyze -library WORK -format vhdl {constants.vhd prop_gen.vhd prop_gen_generic.vhd PG.vhd GG.vhd carry_generator.vhd fa.vhd mux21_generic.vhd rca_generic.vhd carry_select_block.vhd sum_generator.vhd p4_adder.vhd }
+#@ 
+#@ elaborate P4_ADDER -architecture STRUCTURAL -library WORK -parameters "NBIT = 8"
+#@ # -- End source compile_p4.script
 
-source compile.script
-uplevel #0 source compile_carry_gen.script
-#@ analyze -library WORK -format vhdl {constants.vhd prop_gen.vhd prop_gen_generic.vhd PG.vhd GG.vhd carry_generator.vhd}
-#@ # -- End source compile_carry_gen.script
+compile -exact_map
+change_selection [get_s CARRYGEN]
+change_selection [get_s CARRYGEN/PGi_1_8]
+source compile_p4.script
+#@ analyze -library WORK -format vhdl {constants.vhd prop_gen.vhd prop_gen_generic.vhd PG.vhd GG.vhd carry_generator.vhd fa.vhd mux21_generic.vhd rca_generic.vhd carry_select_block.vhd sum_generator.vhd p4_adder.vhd }
+#@ 
+#@ elaborate P4_ADDER -architecture STRUCTURAL -library WORK -parameters "NBIT = 16"
+#@ # -- End source compile_p4.script
 
-source compile_carry_gen.script
-#@ analyze -library WORK -format vhdl {constants.vhd prop_gen.vhd prop_gen_generic.vhd PG.vhd GG.vhd carry_generator.vhd}
-#@ # -- End source compile_carry_gen.script
+compile -exact_map
+change_selection [get_s CARRYGEN]
+change_selection [get_s CARRYGEN/GGi_1_2]
+source compile_p4.script
+#@ analyze -library WORK -format vhdl {constants.vhd prop_gen.vhd prop_gen_generic.vhd PG.vhd GG.vhd carry_generator.vhd fa.vhd mux21_generic.vhd rca_generic.vhd carry_select_block.vhd sum_generator.vhd p4_adder.vhd }
+#@ 
+#@ elaborate P4_ADDER -architecture STRUCTURAL -library WORK -parameters "NBIT = 32"
+#@ # -- End source compile_p4.script
 
-compile_carry_gen.script
-source compile_carry_gen.script
-#@ analyze -library WORK -format vhdl {constants.vhd prop_gen.vhd prop_gen_generic.vhd PG.vhd GG.vhd carry_generator.vhd}
-#@ # -- End source compile_carry_gen.script
-
-elaborate CARRY_GENERATOR -architecture STRUCTURAL -library WORK -parameters "NBIT = 4, NBIT_PER_BLOCK = 1"
+compile -exact_map
 gui_zoom -window [gui_get_current_window -view] -full
-change_selection [get_s PGNet]
+change_selection [get_s CARRYGEN]
+change_selection [get_s CARRYGEN/PGi_2_12]
 change_selection 
-change_selection [get_s GGi_2_4_1]
-change_selection 
-change_selection [get_s {{GGi_2_4_1/g[1:0]} {GGi_2_4_1/g[1]} {GGi_2_4_1/g[0]}}]
-change_selection 
-change_selection [get_s {{sigmtx[0][1][4],Co[1]} {sigmtx[0][1][4]} {Co[1]}}]
-change_selection 
-change_selection [get_s {{GGi_2_4_1/g[1:0]} {GGi_2_4_1/g[1]} {GGi_2_4_1/g[0]}}]
-gui_zoom -window [gui_get_current_window -view] -factor 2.0
-gui_zoom -window [gui_get_current_window -view] -factor 2.0
-gui_zoom -window [gui_get_current_window -view] -factor 2.0
-gui_zoom -window [gui_get_current_window -view] -full
-change_selection [get_s {{GGi_2_4_1/g[1:0]} {GGi_2_4_1/g[1]} {GGi_2_4_1/g[0]}}]
-change_selection [get_s {{GGi_2_4_1/g[1:0]} {GGi_2_4_1/g[1]} {GGi_2_4_1/g[0]}}]
-change_selection [get_s GGi_2_4_1]
-change_selection 
-change_selection [get_s {{Co[3]}}]
-change_selection [get_s {{Co[3:0]} {Co[3]} {Co[2]} {Co[1]} {Co[0]}}]
-change_selection 
-change_selection [get_s {{3 nets(sigmtx[1][0][4],...)} {sigmtx[1][0][4]} {sigmtx[1][0][3]} {sigmtx[1][0][2]}}]
-change_selection [get_s {{4 nets(sigmtx[0][0][4],...)} {sigmtx[0][0][4]} {Co[2]} {sigmtx[0][0][2]} {Co[0]}}]
-change_selection [get_s {{4 nets(sigmtx[0][0][4],...)} {sigmtx[0][0][4]} {Co[2]} {sigmtx[0][0][2]} {Co[0]}}]
-change_selection [get_s {{3 nets(sigmtx[1][0][4],...)} {sigmtx[1][0][4]} {sigmtx[1][0][3]} {sigmtx[1][0][2]}}]
-change_selection [get_s {{4 nets(sigmtx[0][0][4],...)} {sigmtx[0][0][4]} {Co[2]} {sigmtx[0][0][2]} {Co[0]}}]
-elaborate CARRY_GENERATOR -architecture STRUCTURAL -library WORK -parameters "NBIT = 16, NBIT_PER_BLOCK = 1"
-gui_zoom -window [gui_get_current_window -view] -full
-change_selection [get_s GGi_1_2_0]
-change_selection [get_s GGi_2_4_0]
-change_selection [get_s GGi_2_4_1]
-change_selection [get_s GGi_3_8_0]
-change_selection [get_s GGi_3_8_1]
-change_selection [get_s GGi_3_8_2]
-change_selection [get_s GGi_3_8_3]
-change_selection [get_s GGi_4_16_0]
-change_selection [get_s GGi_4_16_1]
-change_selection [get_s GGi_4_16_2]
-change_selection [get_s GGi_4_16_3]
-change_selection [get_s GGi_4_16_4]
-change_selection [get_s GGi_4_16_6]
-change_selection [get_s GGi_4_16_5]
-change_selection [get_s GGi_4_16_7]
-change_selection 
+write -hierarchy -format vhdl -output /home/ms21.16/gabri-ms-lab/ms-lab/lab2/2.1.5/syn/p4_adder_syn_0.vhdl
+report_timing -nworst 10
+uplevel #0 { report_timing -path full -delay max -nworst 10 -max_paths 1 -significant_digits 2 -sort_by group }
+report_timing -nworst 10 > report_timing_worst10.txt
