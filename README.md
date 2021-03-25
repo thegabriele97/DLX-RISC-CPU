@@ -32,7 +32,7 @@
 
 ## Domande LAB 02
 - Chiedere cosa fare del Cin nel carry generator
-- Chiedere se si possono vedere i singoli fili nel caso i cui siano raggruppati
+- Chiedere se si possono vedere i singoli fili nel caso i cui siano raggruppati? Set the current design to a certain level, then ungroup the block. Command 'ungroup' in the terminal
 - Chiedere se il mux per il multiplier bisogna farlo totalmente generico o solo il numero dei bit
 - Chiedere se il mux e l'encoder nel multiplier possono essere uniti
 - Chiedere se il multiplier deve funzionare con gli unsigned/solo unsigned? signed
