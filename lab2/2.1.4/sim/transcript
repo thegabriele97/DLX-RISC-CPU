@@ -12,46 +12,55 @@
 # //  is prohibited from disclosure under the Trade Secrets Act,
 # //  18 U.S.C. Section 1905.
 # //
+vcom compile.script
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 17:28:47 on Mar 28,2021
+# vcom -reportprogress 300 compile.script 
+# -- Loading package STANDARD
+# ** Error: compile.script(1): near "vcom": syntax error
+# End time: 17:28:48 on Mar 28,2021, Elapsed time: 0:00:01
+# Errors: 1, Warnings: 0
+# /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
 do compile.script
 # QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 11:30:26 on Mar 25,2021
+# Start time: 17:28:57 on Mar 28,2021
 # vcom -reportprogress 300 constants.vhd 
 # -- Loading package STANDARD
 # -- Compiling package CONSTANTS
-# End time: 11:30:26 on Mar 25,2021, Elapsed time: 0:00:00
+# End time: 17:28:57 on Mar 28,2021, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 11:30:26 on Mar 25,2021
+# Start time: 17:28:57 on Mar 28,2021
 # vcom -reportprogress 300 PG.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
 # -- Loading package std_logic_1164
 # -- Compiling entity PG
 # -- Compiling architecture behav of PG
-# End time: 11:30:26 on Mar 25,2021, Elapsed time: 0:00:00
+# End time: 17:28:57 on Mar 28,2021, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 11:30:26 on Mar 25,2021
+# Start time: 17:28:57 on Mar 28,2021
 # vcom -reportprogress 300 GG.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
 # -- Loading package std_logic_1164
 # -- Compiling entity GG
 # -- Compiling architecture behav of GG
-# End time: 11:30:26 on Mar 25,2021, Elapsed time: 0:00:00
+# End time: 17:28:57 on Mar 28,2021, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 11:30:26 on Mar 25,2021
+# Start time: 17:28:57 on Mar 28,2021
 # vcom -reportprogress 300 prop_gen.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
 # -- Loading package std_logic_1164
 # -- Compiling entity prop_gen
 # -- Compiling architecture behavioral of prop_gen
-# End time: 11:30:27 on Mar 25,2021, Elapsed time: 0:00:01
+# End time: 17:28:57 on Mar 28,2021, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 11:30:27 on Mar 25,2021
+# Start time: 17:28:57 on Mar 28,2021
 # vcom -reportprogress 300 prop_gen_generic.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -59,10 +68,10 @@ do compile.script
 # -- Loading package CONSTANTS
 # -- Compiling entity prop_gen_generic
 # -- Compiling architecture structural of prop_gen_generic
-# End time: 11:30:27 on Mar 25,2021, Elapsed time: 0:00:00
+# End time: 17:28:58 on Mar 28,2021, Elapsed time: 0:00:01
 # Errors: 0, Warnings: 0
 # QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 11:30:27 on Mar 25,2021
+# Start time: 17:28:58 on Mar 28,2021
 # vcom -reportprogress 300 fa.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -72,10 +81,10 @@ do compile.script
 # -- Compiling configuration CFG_FA_BEHAVIORAL
 # -- Loading entity FA
 # -- Loading architecture BEHAVIORAL of FA
-# End time: 11:30:27 on Mar 25,2021, Elapsed time: 0:00:00
+# End time: 17:28:58 on Mar 28,2021, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 11:30:27 on Mar 25,2021
+# Start time: 17:28:58 on Mar 28,2021
 # vcom -reportprogress 300 mux21_generic.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -87,10 +96,10 @@ do compile.script
 # -- Compiling configuration CFG_MUX21_GEN_BEHAVIORAL
 # -- Loading entity mux21_generic
 # -- Loading architecture behavioural of mux21_generic
-# End time: 11:30:27 on Mar 25,2021, Elapsed time: 0:00:00
+# End time: 17:28:58 on Mar 28,2021, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 11:30:27 on Mar 25,2021
+# Start time: 17:28:58 on Mar 28,2021
 # vcom -reportprogress 300 rca_generic.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -105,10 +114,10 @@ do compile.script
 # -- Loading architecture structural of rca_generic
 # -- Loading entity FA
 # -- Loading configuration cfg_fa_behavioral
-# End time: 11:30:27 on Mar 25,2021, Elapsed time: 0:00:00
+# End time: 17:28:58 on Mar 28,2021, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 11:30:27 on Mar 25,2021
+# Start time: 17:28:58 on Mar 28,2021
 # vcom -reportprogress 300 carry_select_block.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -126,10 +135,10 @@ do compile.script
 # -- Loading entity mux21_generic
 # -- Loading configuration cfg_rca_gen_structural
 # -- Loading configuration cfg_mux21_gen_behavioral
-# End time: 11:30:27 on Mar 25,2021, Elapsed time: 0:00:00
+# End time: 17:28:58 on Mar 28,2021, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 11:30:27 on Mar 25,2021
+# Start time: 17:28:58 on Mar 28,2021
 # vcom -reportprogress 300 sum_generator.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -143,10 +152,10 @@ do compile.script
 # -- Loading architecture structural of sum_generator
 # -- Loading entity carry_select_block
 # -- Loading configuration cfg_carry_select_block_structural
-# End time: 11:30:27 on Mar 25,2021, Elapsed time: 0:00:00
+# End time: 17:28:58 on Mar 28,2021, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 11:30:27 on Mar 25,2021
+# Start time: 17:28:59 on Mar 28,2021
 # vcom -reportprogress 300 carry_generator.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -154,10 +163,10 @@ do compile.script
 # -- Loading package CONSTANTS
 # -- Compiling entity CARRY_GENERATOR
 # -- Compiling architecture structural of CARRY_GENERATOR
-# End time: 11:30:28 on Mar 25,2021, Elapsed time: 0:00:01
+# End time: 17:28:59 on Mar 28,2021, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 11:30:28 on Mar 25,2021
+# Start time: 17:28:59 on Mar 28,2021
 # vcom -reportprogress 300 p4_adder.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -165,10 +174,10 @@ do compile.script
 # -- Loading package CONSTANTS
 # -- Compiling entity P4_ADDER
 # -- Compiling architecture structural of P4_ADDER
-# End time: 11:30:28 on Mar 25,2021, Elapsed time: 0:00:00
+# End time: 17:28:59 on Mar 28,2021, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 11:30:28 on Mar 25,2021
+# Start time: 17:28:59 on Mar 28,2021
 # vcom -reportprogress 300 tb_p4_adder.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -177,10 +186,10 @@ do compile.script
 # -- Loading package STD_LOGIC_UNSIGNED
 # -- Compiling entity TB_P4_ADDER
 # -- Compiling architecture TEST of TB_P4_ADDER
-# End time: 11:30:28 on Mar 25,2021, Elapsed time: 0:00:00
+# End time: 17:28:59 on Mar 28,2021, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # vsim -t 10ps work.tb_p4_adder 
-# Start time: 11:30:28 on Mar 25,2021
+# Start time: 17:28:59 on Mar 28,2021
 # ** Note: (vsim-3812) Design is being optimized...
 # Loading std.standard
 # Loading std.textio(body)
@@ -194,321 +203,9 @@ do compile.script
 # Loading work.gg(behav)#1
 # Loading work.pg(behav)#1
 # Loading work.carry_select_block(structural)#1
-# ** Error: (vish-4014) No objects found matching '*'.
-# Error in macro ./compile.script line 16
-# (vish-4014) No objects found matching '*'.
-#     while executing
-# "add wave *"
-add wave *
-run 10 ns
-log * -f
-# ambiguous option "-f": must be -class, -depth, -drivers, -flush, -howmany, -in, -inout, -internals, -mvcall, -mvcovm, -mvcreccomplete, -noflush, -optcells, -out, -ports, -recursive, -type, -wdbwave, -obj, -filter, or -nofilter
-# Usage: log -flush <object> | {[-class <classtype>] [-filter <f> | -nofilter <f>] [-howmany] {[-in] [-inout] [-out] | [-ports]} [-internal] [-mvcall] [-mvcovm] [-mvcreccomplete] [-optcells] [-recursive [-depth <level>]] <object_name> ...}
-log * -r
-restart -f
-# ** Note: (vsim-8009) Loading existing optimized design _opt
-run 10 ns
-restart -f
-# ** Note: (vsim-8009) Loading existing optimized design _opt
-run 4 ns
-add wave -position insertpoint  \
-sim:/tb_p4_adder/DUT/carry_sum
-vcom tb_p4_adder.vhd
+vcom p4_adder.vhd
 # QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 11:35:09 on Mar 25,2021
-# vcom -reportprogress 300 tb_p4_adder.vhd 
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package std_logic_arith
-# -- Loading package STD_LOGIC_UNSIGNED
-# -- Compiling entity TB_P4_ADDER
-# -- Compiling architecture TEST of TB_P4_ADDER
-# End time: 11:35:09 on Mar 25,2021, Elapsed time: 0:00:00
-# Errors: 0, Warnings: 0
-restart -f
-# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
-# Loading std.standard
-# Loading std.textio(body)
-# Loading ieee.std_logic_1164(body)
-# Loading ieee.std_logic_arith(body)
-# Loading ieee.std_logic_unsigned(body)
-# Loading work.constants
-# Loading ieee.numeric_std(body)
-# Loading work.tb_p4_adder(test)#1
-# Loading work.carry_generator(structural)#1
-# Loading work.gg(behav)#1
-# Loading work.pg(behav)#1
-# Loading work.carry_select_block(structural)#1
-run 4 ns
-vcom tb_p4_adder.vhd
-# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 11:35:25 on Mar 25,2021
-# vcom -reportprogress 300 tb_p4_adder.vhd 
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package std_logic_arith
-# -- Loading package STD_LOGIC_UNSIGNED
-# -- Compiling entity TB_P4_ADDER
-# -- Compiling architecture TEST of TB_P4_ADDER
-# End time: 11:35:25 on Mar 25,2021, Elapsed time: 0:00:00
-# Errors: 0, Warnings: 0
-restart -f
-# ** Note: (vsim-8009) Loading existing optimized design _opt
-vsim -t 100 ps work.tb_p4_adder
-# End time: 11:35:38 on Mar 25,2021, Elapsed time: 0:05:10
-# Errors: 4, Warnings: 0
-# ** Error: (vsim-3000) Invalid resolution limit (-t 100).
-# Use the -help option for complete vsim usage.
-# vsim -t 100 ps work.tb_p4_adder 
-# Error loading design
-# Errors: 1, Warnings: 0
-vsim -t 100ps work.tb_p4_adder
-# vsim -t 100ps work.tb_p4_adder 
-# Start time: 11:35:50 on Mar 25,2021
-# ** Note: (vsim-8009) Loading existing optimized design _opt
-# Loading std.standard
-# Loading std.textio(body)
-# Loading ieee.std_logic_1164(body)
-# Loading ieee.std_logic_arith(body)
-# Loading ieee.std_logic_unsigned(body)
-# Loading work.constants
-# Loading ieee.numeric_std(body)
-# Loading work.tb_p4_adder(test)#1
-# Loading work.carry_generator(structural)#1
-# Loading work.gg(behav)#1
-# Loading work.pg(behav)#1
-# Loading work.carry_select_block(structural)#1
-vcom tb_p4_adder.vhd
-# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 11:36:17 on Mar 25,2021
-# vcom -reportprogress 300 tb_p4_adder.vhd 
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package std_logic_arith
-# -- Loading package STD_LOGIC_UNSIGNED
-# -- Compiling entity TB_P4_ADDER
-# -- Compiling architecture TEST of TB_P4_ADDER
-# End time: 11:36:17 on Mar 25,2021, Elapsed time: 0:00:00
-# Errors: 0, Warnings: 0
-restart -f
-# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
-# Loading std.standard
-# Loading std.textio(body)
-# Loading ieee.std_logic_1164(body)
-# Loading ieee.std_logic_arith(body)
-# Loading ieee.std_logic_unsigned(body)
-# Loading work.constants
-# Loading ieee.numeric_std(body)
-# Loading work.tb_p4_adder(test)#1
-# Loading work.carry_generator(structural)#1
-# Loading work.gg(behav)#1
-# Loading work.pg(behav)#1
-# Loading work.carry_select_block(structural)#1
-vsim -t 100ps work.tb_p4_adder -novopt
-# End time: 11:38:12 on Mar 25,2021, Elapsed time: 0:02:22
-# Errors: 0, Warnings: 0
-# vsim -t 100ps work.tb_p4_adder -novopt 
-# Start time: 11:38:12 on Mar 25,2021
-# ** Error (suppressible): (vsim-12110) All optimizations are disabled because the -novopt option is in effect. This will cause your simulation to run very slowly. If you are using this switch to preserve visibility for Debug or PLI features, please see the User's Manual section on Preserving Object Visibility with vopt. -novopt option is now deprecated and will be removed in future releases.
-# Error loading design
-# End time: 11:38:12 on Mar 25,2021, Elapsed time: 0:00:00
-# Errors: 1, Warnings: 0
-vsim -t 100ps -novopt work.tb_p4_adder
-# vsim -t 100ps -novopt work.tb_p4_adder 
-# Start time: 11:38:47 on Mar 25,2021
-# ** Error (suppressible): (vsim-12110) All optimizations are disabled because the -novopt option is in effect. This will cause your simulation to run very slowly. If you are using this switch to preserve visibility for Debug or PLI features, please see the User's Manual section on Preserving Object Visibility with vopt. -novopt option is now deprecated and will be removed in future releases.
-# Error loading design
-# End time: 11:38:47 on Mar 25,2021, Elapsed time: 0:00:00
-# Errors: 1, Warnings: 0
-vsim -t 100ps -novopt work.tb_p4_adder(test)
-# vsim -t 100ps -novopt work.tb_p4_adder(test) 
-# Start time: 11:39:12 on Mar 25,2021
-# ** Error (suppressible): (vsim-12110) All optimizations are disabled because the -novopt option is in effect. This will cause your simulation to run very slowly. If you are using this switch to preserve visibility for Debug or PLI features, please see the User's Manual section on Preserving Object Visibility with vopt. -novopt option is now deprecated and will be removed in future releases.
-# Error loading design
-# End time: 11:39:12 on Mar 25,2021, Elapsed time: 0:00:00
-# Errors: 1, Warnings: 0
-vsim -t 100ps work.tb_p4_adder
-# vsim -t 100ps work.tb_p4_adder 
-# Start time: 11:39:29 on Mar 25,2021
-# ** Note: (vsim-8009) Loading existing optimized design _opt
-# Loading std.standard
-# Loading std.textio(body)
-# Loading ieee.std_logic_1164(body)
-# Loading ieee.std_logic_arith(body)
-# Loading ieee.std_logic_unsigned(body)
-# Loading work.constants
-# Loading ieee.numeric_std(body)
-# Loading work.tb_p4_adder(test)#1
-# Loading work.carry_generator(structural)#1
-# Loading work.gg(behav)#1
-# Loading work.pg(behav)#1
-# Loading work.carry_select_block(structural)#1
-vsim -t 100ps work.tb_p4_adder -novopt
-# End time: 11:39:39 on Mar 25,2021, Elapsed time: 0:00:10
-# Errors: 0, Warnings: 0
-# vsim -t 100ps work.tb_p4_adder -novopt 
-# Start time: 11:39:39 on Mar 25,2021
-# ** Error (suppressible): (vsim-12110) All optimizations are disabled because the -novopt option is in effect. This will cause your simulation to run very slowly. If you are using this switch to preserve visibility for Debug or PLI features, please see the User's Manual section on Preserving Object Visibility with vopt. -novopt option is now deprecated and will be removed in future releases.
-# Error loading design
-# End time: 11:39:40 on Mar 25,2021, Elapsed time: 0:00:01
-# Errors: 1, Warnings: 0
-vsim -t 100ps work.tb_p4_adder -novopt --suppres
-# ** Error: (vish-3296) Unknown option '--suppres'.
-# Use the -help option for complete vsim usage.
-# Error loading design
-vsim -t 100ps work.tb_p4_adder -novopt --suppress
-# ** Error: (vish-3296) Unknown option '--suppress'.
-# Use the -help option for complete vsim usage.
-# Error loading design
-do compile.script
-# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 11:41:29 on Mar 25,2021
-# vcom -reportprogress 300 constants.vhd 
-# -- Loading package STANDARD
-# -- Compiling package CONSTANTS
-# End time: 11:41:29 on Mar 25,2021, Elapsed time: 0:00:00
-# Errors: 0, Warnings: 0
-# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 11:41:29 on Mar 25,2021
-# vcom -reportprogress 300 PG.vhd 
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Compiling entity PG
-# -- Compiling architecture behav of PG
-# End time: 11:41:29 on Mar 25,2021, Elapsed time: 0:00:00
-# Errors: 0, Warnings: 0
-# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 11:41:29 on Mar 25,2021
-# vcom -reportprogress 300 GG.vhd 
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Compiling entity GG
-# -- Compiling architecture behav of GG
-# End time: 11:41:29 on Mar 25,2021, Elapsed time: 0:00:00
-# Errors: 0, Warnings: 0
-# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 11:41:29 on Mar 25,2021
-# vcom -reportprogress 300 prop_gen.vhd 
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Compiling entity prop_gen
-# -- Compiling architecture behavioral of prop_gen
-# End time: 11:41:30 on Mar 25,2021, Elapsed time: 0:00:01
-# Errors: 0, Warnings: 0
-# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 11:41:30 on Mar 25,2021
-# vcom -reportprogress 300 prop_gen_generic.vhd 
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package CONSTANTS
-# -- Compiling entity prop_gen_generic
-# -- Compiling architecture structural of prop_gen_generic
-# End time: 11:41:30 on Mar 25,2021, Elapsed time: 0:00:00
-# Errors: 0, Warnings: 0
-# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 11:41:30 on Mar 25,2021
-# vcom -reportprogress 300 fa.vhd 
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Compiling entity FA
-# -- Compiling architecture BEHAVIORAL of FA
-# -- Compiling configuration CFG_FA_BEHAVIORAL
-# -- Loading entity FA
-# -- Loading architecture BEHAVIORAL of FA
-# End time: 11:41:30 on Mar 25,2021, Elapsed time: 0:00:00
-# Errors: 0, Warnings: 0
-# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 11:41:30 on Mar 25,2021
-# vcom -reportprogress 300 mux21_generic.vhd 
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Loading package CONSTANTS
-# -- Compiling entity mux21_generic
-# -- Compiling architecture behavioural of mux21_generic
-# -- Compiling configuration CFG_MUX21_GEN_BEHAVIORAL
-# -- Loading entity mux21_generic
-# -- Loading architecture behavioural of mux21_generic
-# End time: 11:41:30 on Mar 25,2021, Elapsed time: 0:00:00
-# Errors: 0, Warnings: 0
-# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 11:41:30 on Mar 25,2021
-# vcom -reportprogress 300 rca_generic.vhd 
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package std_logic_arith
-# -- Loading package STD_LOGIC_UNSIGNED
-# -- Loading package CONSTANTS
-# -- Compiling entity rca_generic
-# -- Compiling architecture structural of rca_generic
-# -- Compiling configuration CFG_RCA_GEN_STRUCTURAL
-# -- Loading entity rca_generic
-# -- Loading architecture structural of rca_generic
-# -- Loading entity FA
-# -- Loading configuration cfg_fa_behavioral
-# End time: 11:41:30 on Mar 25,2021, Elapsed time: 0:00:00
-# Errors: 0, Warnings: 0
-# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 11:41:30 on Mar 25,2021
-# vcom -reportprogress 300 carry_select_block.vhd 
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Loading package CONSTANTS
-# -- Compiling entity carry_select_block
-# -- Compiling architecture structural of carry_select_block
-# -- Compiling configuration CFG_CARRY_SELECT_BLOCK_STRUCTURAL
-# -- Loading entity carry_select_block
-# -- Loading architecture structural of carry_select_block
-# -- Loading package std_logic_arith
-# -- Loading package STD_LOGIC_UNSIGNED
-# -- Loading entity rca_generic
-# -- Loading entity mux21_generic
-# -- Loading configuration cfg_rca_gen_structural
-# -- Loading configuration cfg_mux21_gen_behavioral
-# End time: 11:41:30 on Mar 25,2021, Elapsed time: 0:00:00
-# Errors: 0, Warnings: 0
-# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 11:41:30 on Mar 25,2021
-# vcom -reportprogress 300 sum_generator.vhd 
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Loading package CONSTANTS
-# -- Compiling entity sum_generator
-# -- Compiling architecture structural of sum_generator
-# -- Compiling configuration CFG_SUM_GENERATOR_STRUCTURAL
-# -- Loading entity sum_generator
-# -- Loading architecture structural of sum_generator
-# -- Loading entity carry_select_block
-# -- Loading configuration cfg_carry_select_block_structural
-# End time: 11:41:30 on Mar 25,2021, Elapsed time: 0:00:00
-# Errors: 0, Warnings: 0
-# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 11:41:31 on Mar 25,2021
-# vcom -reportprogress 300 carry_generator.vhd 
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package CONSTANTS
-# -- Compiling entity CARRY_GENERATOR
-# -- Compiling architecture structural of CARRY_GENERATOR
-# End time: 11:41:31 on Mar 25,2021, Elapsed time: 0:00:00
-# Errors: 0, Warnings: 0
-# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 11:41:31 on Mar 25,2021
+# Start time: 17:34:29 on Mar 28,2021
 # vcom -reportprogress 300 p4_adder.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -516,181 +213,17 @@ do compile.script
 # -- Loading package CONSTANTS
 # -- Compiling entity P4_ADDER
 # -- Compiling architecture structural of P4_ADDER
-# End time: 11:41:31 on Mar 25,2021, Elapsed time: 0:00:00
-# Errors: 0, Warnings: 0
+# ** Error: p4_adder.vhd(50): (vcom-1136) Unknown identifier "N".
+# ** Error: p4_adder.vhd(50): (vcom-1591) Bad expression in right bound of range expression.
+# ** Error: p4_adder.vhd(50): Cannot resolve expression type.
+# ** Warning: p4_adder.vhd(50): (vcom-1147) Range in parameter specification of FOR GENERATE must be static.
+# ** Note: p4_adder.vhd(76): VHDL Compiler exiting
+# End time: 17:34:29 on Mar 28,2021, Elapsed time: 0:00:00
+# Errors: 3, Warnings: 1
+# /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
+vcom p4_adder.vhd
 # QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 11:41:31 on Mar 25,2021
-# vcom -reportprogress 300 tb_p4_adder.vhd 
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package std_logic_arith
-# -- Loading package STD_LOGIC_UNSIGNED
-# -- Compiling entity TB_P4_ADDER
-# -- Compiling architecture TEST of TB_P4_ADDER
-# End time: 11:41:31 on Mar 25,2021, Elapsed time: 0:00:00
-# Errors: 0, Warnings: 0
-# vsim -t 10ps work.tb_p4_adder 
-# Start time: 11:41:31 on Mar 25,2021
-# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
-# Loading std.standard
-# Loading std.textio(body)
-# Loading ieee.std_logic_1164(body)
-# Loading ieee.std_logic_arith(body)
-# Loading ieee.std_logic_unsigned(body)
-# Loading work.constants
-# Loading ieee.numeric_std(body)
-# Loading work.tb_p4_adder(test)#1
-# Loading work.carry_generator(structural)#1
-# Loading work.gg(behav)#1
-# Loading work.pg(behav)#1
-# Loading work.carry_select_block(structural)#1
-do compile.script
-# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 11:42:14 on Mar 25,2021
-# vcom -reportprogress 300 constants.vhd 
-# -- Loading package STANDARD
-# -- Compiling package CONSTANTS
-# End time: 11:42:15 on Mar 25,2021, Elapsed time: 0:00:01
-# Errors: 0, Warnings: 0
-# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 11:42:15 on Mar 25,2021
-# vcom -reportprogress 300 PG.vhd 
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Compiling entity PG
-# -- Compiling architecture behav of PG
-# End time: 11:42:15 on Mar 25,2021, Elapsed time: 0:00:00
-# Errors: 0, Warnings: 0
-# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 11:42:15 on Mar 25,2021
-# vcom -reportprogress 300 GG.vhd 
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Compiling entity GG
-# -- Compiling architecture behav of GG
-# End time: 11:42:15 on Mar 25,2021, Elapsed time: 0:00:00
-# Errors: 0, Warnings: 0
-# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 11:42:15 on Mar 25,2021
-# vcom -reportprogress 300 prop_gen.vhd 
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Compiling entity prop_gen
-# -- Compiling architecture behavioral of prop_gen
-# End time: 11:42:15 on Mar 25,2021, Elapsed time: 0:00:00
-# Errors: 0, Warnings: 0
-# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 11:42:15 on Mar 25,2021
-# vcom -reportprogress 300 prop_gen_generic.vhd 
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package CONSTANTS
-# -- Compiling entity prop_gen_generic
-# -- Compiling architecture structural of prop_gen_generic
-# End time: 11:42:15 on Mar 25,2021, Elapsed time: 0:00:00
-# Errors: 0, Warnings: 0
-# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 11:42:15 on Mar 25,2021
-# vcom -reportprogress 300 fa.vhd 
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Compiling entity FA
-# -- Compiling architecture BEHAVIORAL of FA
-# -- Compiling configuration CFG_FA_BEHAVIORAL
-# -- Loading entity FA
-# -- Loading architecture BEHAVIORAL of FA
-# End time: 11:42:15 on Mar 25,2021, Elapsed time: 0:00:00
-# Errors: 0, Warnings: 0
-# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 11:42:15 on Mar 25,2021
-# vcom -reportprogress 300 mux21_generic.vhd 
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Loading package CONSTANTS
-# -- Compiling entity mux21_generic
-# -- Compiling architecture behavioural of mux21_generic
-# -- Compiling configuration CFG_MUX21_GEN_BEHAVIORAL
-# -- Loading entity mux21_generic
-# -- Loading architecture behavioural of mux21_generic
-# End time: 11:42:16 on Mar 25,2021, Elapsed time: 0:00:01
-# Errors: 0, Warnings: 0
-# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 11:42:16 on Mar 25,2021
-# vcom -reportprogress 300 rca_generic.vhd 
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package std_logic_arith
-# -- Loading package STD_LOGIC_UNSIGNED
-# -- Loading package CONSTANTS
-# -- Compiling entity rca_generic
-# -- Compiling architecture structural of rca_generic
-# -- Compiling configuration CFG_RCA_GEN_STRUCTURAL
-# -- Loading entity rca_generic
-# -- Loading architecture structural of rca_generic
-# -- Loading entity FA
-# -- Loading configuration cfg_fa_behavioral
-# End time: 11:42:16 on Mar 25,2021, Elapsed time: 0:00:00
-# Errors: 0, Warnings: 0
-# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 11:42:16 on Mar 25,2021
-# vcom -reportprogress 300 carry_select_block.vhd 
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Loading package CONSTANTS
-# -- Compiling entity carry_select_block
-# -- Compiling architecture structural of carry_select_block
-# -- Compiling configuration CFG_CARRY_SELECT_BLOCK_STRUCTURAL
-# -- Loading entity carry_select_block
-# -- Loading architecture structural of carry_select_block
-# -- Loading package std_logic_arith
-# -- Loading package STD_LOGIC_UNSIGNED
-# -- Loading entity rca_generic
-# -- Loading entity mux21_generic
-# -- Loading configuration cfg_rca_gen_structural
-# -- Loading configuration cfg_mux21_gen_behavioral
-# End time: 11:42:16 on Mar 25,2021, Elapsed time: 0:00:00
-# Errors: 0, Warnings: 0
-# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 11:42:16 on Mar 25,2021
-# vcom -reportprogress 300 sum_generator.vhd 
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Loading package CONSTANTS
-# -- Compiling entity sum_generator
-# -- Compiling architecture structural of sum_generator
-# -- Compiling configuration CFG_SUM_GENERATOR_STRUCTURAL
-# -- Loading entity sum_generator
-# -- Loading architecture structural of sum_generator
-# -- Loading entity carry_select_block
-# -- Loading configuration cfg_carry_select_block_structural
-# End time: 11:42:16 on Mar 25,2021, Elapsed time: 0:00:00
-# Errors: 0, Warnings: 0
-# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 11:42:16 on Mar 25,2021
-# vcom -reportprogress 300 carry_generator.vhd 
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package CONSTANTS
-# -- Compiling entity CARRY_GENERATOR
-# -- Compiling architecture structural of CARRY_GENERATOR
-# End time: 11:42:16 on Mar 25,2021, Elapsed time: 0:00:00
-# Errors: 0, Warnings: 0
-# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 11:42:16 on Mar 25,2021
+# Start time: 17:34:40 on Mar 28,2021
 # vcom -reportprogress 300 p4_adder.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -698,24 +231,9 @@ do compile.script
 # -- Loading package CONSTANTS
 # -- Compiling entity P4_ADDER
 # -- Compiling architecture structural of P4_ADDER
-# End time: 11:42:16 on Mar 25,2021, Elapsed time: 0:00:00
+# End time: 17:34:40 on Mar 28,2021, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
-# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 11:42:16 on Mar 25,2021
-# vcom -reportprogress 300 tb_p4_adder.vhd 
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package std_logic_arith
-# -- Loading package STD_LOGIC_UNSIGNED
-# -- Compiling entity TB_P4_ADDER
-# -- Compiling architecture TEST of TB_P4_ADDER
-# End time: 11:42:17 on Mar 25,2021, Elapsed time: 0:00:01
-# Errors: 0, Warnings: 0
-# End time: 11:42:18 on Mar 25,2021, Elapsed time: 0:00:47
-# Errors: 0, Warnings: 0
-# vsim -t 10ps work.tb_p4_adder 
-# Start time: 11:42:18 on Mar 25,2021
+restart -f
 # ** Note: (vsim-3813) Design is being optimized due to module recompilation...
 # Loading std.standard
 # Loading std.textio(body)
@@ -729,197 +247,28 @@ do compile.script
 # Loading work.gg(behav)#1
 # Loading work.pg(behav)#1
 # Loading work.carry_select_block(structural)#1
-do compile.script
-# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 11:43:16 on Mar 25,2021
-# vcom -reportprogress 300 constants.vhd 
-# -- Loading package STANDARD
-# -- Compiling package CONSTANTS
-# End time: 11:43:16 on Mar 25,2021, Elapsed time: 0:00:00
-# Errors: 0, Warnings: 0
-# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 11:43:16 on Mar 25,2021
-# vcom -reportprogress 300 PG.vhd 
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Compiling entity PG
-# -- Compiling architecture behav of PG
-# End time: 11:43:16 on Mar 25,2021, Elapsed time: 0:00:00
-# Errors: 0, Warnings: 0
-# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 11:43:16 on Mar 25,2021
-# vcom -reportprogress 300 GG.vhd 
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Compiling entity GG
-# -- Compiling architecture behav of GG
-# End time: 11:43:17 on Mar 25,2021, Elapsed time: 0:00:01
-# Errors: 0, Warnings: 0
-# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 11:43:17 on Mar 25,2021
-# vcom -reportprogress 300 prop_gen.vhd 
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Compiling entity prop_gen
-# -- Compiling architecture behavioral of prop_gen
-# End time: 11:43:17 on Mar 25,2021, Elapsed time: 0:00:00
-# Errors: 0, Warnings: 0
-# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 11:43:17 on Mar 25,2021
-# vcom -reportprogress 300 prop_gen_generic.vhd 
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package CONSTANTS
-# -- Compiling entity prop_gen_generic
-# -- Compiling architecture structural of prop_gen_generic
-# End time: 11:43:17 on Mar 25,2021, Elapsed time: 0:00:00
-# Errors: 0, Warnings: 0
-# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 11:43:17 on Mar 25,2021
-# vcom -reportprogress 300 fa.vhd 
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Compiling entity FA
-# -- Compiling architecture BEHAVIORAL of FA
-# -- Compiling configuration CFG_FA_BEHAVIORAL
-# -- Loading entity FA
-# -- Loading architecture BEHAVIORAL of FA
-# End time: 11:43:17 on Mar 25,2021, Elapsed time: 0:00:00
-# Errors: 0, Warnings: 0
-# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 11:43:17 on Mar 25,2021
-# vcom -reportprogress 300 mux21_generic.vhd 
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Loading package CONSTANTS
-# -- Compiling entity mux21_generic
-# -- Compiling architecture behavioural of mux21_generic
-# -- Compiling configuration CFG_MUX21_GEN_BEHAVIORAL
-# -- Loading entity mux21_generic
-# -- Loading architecture behavioural of mux21_generic
-# End time: 11:43:17 on Mar 25,2021, Elapsed time: 0:00:00
-# Errors: 0, Warnings: 0
-# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 11:43:17 on Mar 25,2021
-# vcom -reportprogress 300 rca_generic.vhd 
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package std_logic_arith
-# -- Loading package STD_LOGIC_UNSIGNED
-# -- Loading package CONSTANTS
-# -- Compiling entity rca_generic
-# -- Compiling architecture structural of rca_generic
-# -- Compiling configuration CFG_RCA_GEN_STRUCTURAL
-# -- Loading entity rca_generic
-# -- Loading architecture structural of rca_generic
-# -- Loading entity FA
-# -- Loading configuration cfg_fa_behavioral
-# End time: 11:43:17 on Mar 25,2021, Elapsed time: 0:00:00
-# Errors: 0, Warnings: 0
-# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 11:43:17 on Mar 25,2021
-# vcom -reportprogress 300 carry_select_block.vhd 
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Loading package CONSTANTS
-# -- Compiling entity carry_select_block
-# -- Compiling architecture structural of carry_select_block
-# -- Compiling configuration CFG_CARRY_SELECT_BLOCK_STRUCTURAL
-# -- Loading entity carry_select_block
-# -- Loading architecture structural of carry_select_block
-# -- Loading package std_logic_arith
-# -- Loading package STD_LOGIC_UNSIGNED
-# -- Loading entity rca_generic
-# -- Loading entity mux21_generic
-# -- Loading configuration cfg_rca_gen_structural
-# -- Loading configuration cfg_mux21_gen_behavioral
-# End time: 11:43:18 on Mar 25,2021, Elapsed time: 0:00:01
-# Errors: 0, Warnings: 0
-# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 11:43:18 on Mar 25,2021
-# vcom -reportprogress 300 sum_generator.vhd 
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Loading package CONSTANTS
-# -- Compiling entity sum_generator
-# -- Compiling architecture structural of sum_generator
-# -- Compiling configuration CFG_SUM_GENERATOR_STRUCTURAL
-# -- Loading entity sum_generator
-# -- Loading architecture structural of sum_generator
-# -- Loading entity carry_select_block
-# -- Loading configuration cfg_carry_select_block_structural
-# End time: 11:43:18 on Mar 25,2021, Elapsed time: 0:00:00
-# Errors: 0, Warnings: 0
-# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 11:43:18 on Mar 25,2021
-# vcom -reportprogress 300 carry_generator.vhd 
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package CONSTANTS
-# -- Compiling entity CARRY_GENERATOR
-# -- Compiling architecture structural of CARRY_GENERATOR
-# End time: 11:43:18 on Mar 25,2021, Elapsed time: 0:00:00
-# Errors: 0, Warnings: 0
-# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 11:43:18 on Mar 25,2021
-# vcom -reportprogress 300 p4_adder.vhd 
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package CONSTANTS
-# -- Compiling entity P4_ADDER
-# -- Compiling architecture structural of P4_ADDER
-# End time: 11:43:18 on Mar 25,2021, Elapsed time: 0:00:00
-# Errors: 0, Warnings: 0
-# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 11:43:18 on Mar 25,2021
-# vcom -reportprogress 300 tb_p4_adder.vhd 
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package std_logic_arith
-# -- Loading package STD_LOGIC_UNSIGNED
-# -- Compiling entity TB_P4_ADDER
-# -- Compiling architecture TEST of TB_P4_ADDER
-# End time: 11:43:18 on Mar 25,2021, Elapsed time: 0:00:00
-# Errors: 0, Warnings: 0
-# End time: 11:43:19 on Mar 25,2021, Elapsed time: 0:01:01
-# Errors: 0, Warnings: 0
-# vsim -t 10ps work.tb_p4_adder 
-# Start time: 11:43:19 on Mar 25,2021
-# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
-# Loading std.standard
-# Loading std.textio(body)
-# Loading ieee.std_logic_1164(body)
-# Loading ieee.std_logic_arith(body)
-# Loading ieee.std_logic_unsigned(body)
-# Loading work.constants
-# Loading ieee.numeric_std(body)
-# Loading work.tb_p4_adder(test)#1
-# Loading work.carry_generator(structural)#1
-# Loading work.gg(behav)#1
-# Loading work.pg(behav)#1
-# Loading work.carry_select_block(structural)#1
+run 10000 ns
+# ** Error: Assertion violation.
+#    Time: 3 ns  Iteration: 0  Instance: /tb_p4_adder
+# ** Error: Assertion violation.
+#    Time: 4 ns  Iteration: 0  Instance: /tb_p4_adder
 restart -f
 # ** Note: (vsim-8009) Loading existing optimized design _opt
-log * -r
-run 4 ns
+run 10000 ns
+# ** Error: Assertion violation.
+#    Time: 3 ns  Iteration: 0  Instance: /tb_p4_adder
+# ** Error: Assertion violation.
+#    Time: 4 ns  Iteration: 0  Instance: /tb_p4_adder
+restart -f
+# ** Note: (vsim-8009) Loading existing optimized design _opt
+run 5 ns
+# ** Error: Assertion violation.
+#    Time: 3 ns  Iteration: 0  Instance: /tb_p4_adder
+# ** Error: Assertion violation.
+#    Time: 4 ns  Iteration: 0  Instance: /tb_p4_adder
 vcom tb_p4_adder.vhd
 # QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 11:45:13 on Mar 25,2021
+# Start time: 17:42:47 on Mar 28,2021
 # vcom -reportprogress 300 tb_p4_adder.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -928,7 +277,7 @@ vcom tb_p4_adder.vhd
 # -- Loading package STD_LOGIC_UNSIGNED
 # -- Compiling entity TB_P4_ADDER
 # -- Compiling architecture TEST of TB_P4_ADDER
-# End time: 11:45:13 on Mar 25,2021, Elapsed time: 0:00:00
+# End time: 17:42:47 on Mar 28,2021, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 restart -f
 # ** Note: (vsim-3813) Design is being optimized due to module recompilation...
@@ -944,8 +293,36 @@ restart -f
 # Loading work.gg(behav)#1
 # Loading work.pg(behav)#1
 # Loading work.carry_select_block(structural)#1
-run 4 ns
-add wave -position insertpoint  \
-sim:/tb_p4_adder/DUT/carry_sum
-# End time: 11:51:02 on Mar 25,2021, Elapsed time: 0:07:43
+run 5 ns
+vcom tb_p4_adder.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 17:43:53 on Mar 28,2021
+# vcom -reportprogress 300 tb_p4_adder.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package std_logic_arith
+# -- Loading package STD_LOGIC_UNSIGNED
+# -- Compiling entity TB_P4_ADDER
+# -- Compiling architecture TEST of TB_P4_ADDER
+# End time: 17:43:53 on Mar 28,2021, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
+restart -f
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.std_logic_arith(body)
+# Loading ieee.std_logic_unsigned(body)
+# Loading work.constants
+# Loading ieee.numeric_std(body)
+# Loading work.tb_p4_adder(test)#1
+# Loading work.carry_generator(structural)#1
+# Loading work.gg(behav)#1
+# Loading work.pg(behav)#1
+# Loading work.carry_select_block(structural)#1
+run 5 ns
+# ** Error: Assertion violation.
+#    Time: 3 ns  Iteration: 0  Instance: /tb_p4_adder
+# ** Error: Assertion violation.
+#    Time: 4 ns  Iteration: 0  Instance: /tb_p4_adder

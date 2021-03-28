@@ -41,18 +41,23 @@ architecture structural of P4_ADDER is
 
     signal carry: std_logic_vector((NBIT/4)-1 downto 0);
     signal carry_sum: std_logic_vector((NBIT/4)-1 downto 0);
+    signal Bxored: std_logic_vector(NBIT-1 downto 0);
 
 begin
 
-    carry_sum <= carry((NBIT/4)-2 downto 0) & '0';
+    carry_sum <= carry((NBIT/4)-2 downto 0) & Cin;
+    
+    XORGEN: for i in 0 to NBIT-1 generate
+        Bxored(i) <= B(i) xor Cin;
+    end generate XORGEN;
 
     CARRYGEN: CARRY_GENERATOR generic map(
         NBIT => NBIT,
         NBIT_PER_BLOCK => 4
     ) port map(
         A => A,
-        B => B,
-        Cin => '0',
+        B => Bxored,
+        Cin => Cin,
         Co => carry
     );
 
@@ -61,7 +66,7 @@ begin
         NBLOCKS => (NBIT/4)
     ) port map(
         A => A,
-        B => B,
+        B => Bxored,
         Ci => carry_sum,
         S => S
     );

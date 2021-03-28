@@ -51,6 +51,7 @@ architecture structural of CARRY_GENERATOR is
         generic(NBIT: integer := numBit);
         port (
             a, b: in std_logic_vector(NBIT - 1 DOWNTO 0);
+            cin: in std_logic;
             p, g: out std_logic_vector(NBIT - 1 DOWNTO 0)
         );
     end component;
@@ -72,6 +73,7 @@ begin
     ) port map(
         a => A,
         b => B,
+        cin => Cin,
         p => sigmtx(1, 0),
         g => sigmtx(0, 0)
     );
