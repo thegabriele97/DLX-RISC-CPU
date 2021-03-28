@@ -51,6 +51,7 @@ architecture structural of CARRY_GENERATOR is
         generic(NBIT: integer := numBit);
         port (
             a, b: in std_logic_vector(NBIT - 1 DOWNTO 0);
+            cin: in std_logic;
             p, g: out std_logic_vector(NBIT - 1 DOWNTO 0)
         );
     end component;
@@ -61,9 +62,12 @@ architecture structural of CARRY_GENERATOR is
     -- 1: P Line
     -- 
     type sigmtx_t is array(0 to 1, 0 to f_log2(NBIT)) of std_logic_vector(NBIT downto 1);
+    type sigmtx_t2 is array(0 to 1, 0 to f_log2(NBIT)) of std_logic_vector(NBIT downto 0);
 
     -- Signals declaration
     signal sigmtx: sigmtx_t;
+    signal sigmtx2: sigmtx_t2;
+    signal prova: std_logic;
 
 begin
 
@@ -72,9 +76,21 @@ begin
     ) port map(
         a => A,
         b => B,
+        cin => Cin,
         p => sigmtx(1, 0),
-        g => sigmtx(0, 0)
+        g => sigmtx2(0, 0)(NBIT DOWNTO 1)
     );
+
+
+    GG0: GG port map(
+        p => sigmtx(1, 0)(1),
+        g(1) => sigmtx2(0, 0)(1),
+        g(0) => Cin,
+        go => sigmtx(0, 0)(1)
+    );
+
+    sigmtx(0, 0)(NBIT DOWNTO 2) <= sigmtx2(0, 0)(NBIT DOWNTO 2);
+    -- sigmtx(0, 1)(NBIT DOWNTO 1) <= sigmtx2(0, 0)(NBIT DOWNTO 1);
 
     -- Tree Generation
     rowGen: for i in 1 to f_log2(NBIT) generate

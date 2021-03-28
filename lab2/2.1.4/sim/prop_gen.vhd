@@ -4,6 +4,7 @@ use IEEE.std_logic_1164.all;
 entity prop_gen is
     port (
         a, b: in std_logic;
+        cin: in std_logic;
         p, g: out std_logic
     );
 end entity prop_gen;
@@ -13,7 +14,7 @@ architecture behavioral of prop_gen is
 begin
     process(a, b)
     begin 
-        p <= a XOR b;
-        g <= a AND b;
+        p <= a XOR (cin XOR b);
+        g <= a AND (cin XOR b);
     end process;
 end architecture behavioral;

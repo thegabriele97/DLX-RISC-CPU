@@ -52,7 +52,7 @@ begin
     ) port map(
         A => A,
         B => B,
-        Cin => '0',
+        Cin => Cin,
         Co => carry
     );
 
