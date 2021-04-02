@@ -44,24 +44,44 @@ begin
   test: process
   begin
 
-    for i in 0 to (2**numBit)-1 loop
-      for j in 0 to (2**numBit)-1 loop
+--    for i in 1 to (2**numBit)-1 loop
+--    for j in 1 to (2**numBit)-1 loop
 
-        A_mp_i <= std_logic_vector(TO_UNSIGNED(i, A_mp_i'length));
-        B_mp_i <= std_logic_vector(TO_UNSIGNED(j, B_mp_i'length));
-        wait for 0.5 ns;
+--	if (i mod (((2**numBit)/100)+1) = 0 and j mod (((2**numBit)/100)+1) = 0) then
 
-        if (signed(Y_mp_i) /= (signed(A_mp_i) * signed(B_mp_i))) then
-          assert signed(Y_mp_i) = (signed(A_mp_i) * signed(B_mp_i)) report "Error!!";
-          wait;
-        end if;
+--        	A_mp_i <= std_logic_vector(TO_UNSIGNED(i, A_mp_i'length));
+--       		B_mp_i <= std_logic_vector(TO_UNSIGNED(j, B_mp_i'length));
+--       		wait for 0.5 ns;
 
-        wait for 0.5 ns;
+--	        if (signed(Y_mp_i) /= (signed(A_mp_i) * signed(B_mp_i))) then
+--        		  assert signed(Y_mp_i) = (signed(A_mp_i) * signed(B_mp_i)) report "Error!!";
+--          		  wait;
+--        	end if;
 
-      end loop;
-    end loop;
+--       		wait for 0.5 ns;
 
-    wait;
+--	end if;
+
+--      end loop;
+--    end loop;
+
+--    wait;
+
+  A_mp_i <= x"0000";
+  B_mp_i <= x"0000";
+  wait for 1 ns;
+
+  A_mp_i <= x"ffff";
+  B_mp_i <= x"ffff";
+  wait for 1 ns;
+
+  A_mp_i <= x"7fff";
+  B_mp_i <= x"8000";
+  wait for 1 ns;
+
+  A_mp_i <= x"0002";
+  B_mp_i <= x"0003";
+  wait;
 
   end process test;
 
