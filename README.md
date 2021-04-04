@@ -15,7 +15,7 @@
  - Chiedere se si può usare la funzione rem - ???
  - Chiedere se va bene un for di lunghezza indefinita per la sintesi - Nope
 
-## To Do List
+## To Do List LAB 01
  - Provare a mettere 0 ns nella sintesi di Synopsys con il multiplexer :white_check_mark:
  - Finire registro (enable) :white_check_mark:
  - Testare registro :white_check_mark:
@@ -36,3 +36,7 @@
 - Chiedere se il mux per il multiplier bisogna farlo totalmente generico o solo il numero dei bit
 - Chiedere se il mux e l'encoder nel multiplier possono essere uniti
 - Chiedere se il multiplier deve funzionare con gli unsigned/solo unsigned? signed
+
+
+## To Do List LAB 02
+- Mettere le meaningful waveforms in una cartella waveforms
