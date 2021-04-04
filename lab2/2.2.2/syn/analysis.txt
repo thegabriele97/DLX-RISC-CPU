@@ -4,4 +4,7 @@ Question 2) Now we imposed the limit of 3.688ns  (3.9ns), which is 20% less, and
 
 Question 3) The script result are equivalent. It simply adds 3 file: the post synthesis netlist in ddc, vhdl and verilog
 
-Question 4) The results are identical. For this reason the slack is exactly 0 and the constraints are met. In fact in the file is written slack (MET). In the constrained design there are some buffers that are inserted in order to reduce the delay. AREA OPTIMIZED: 1741.502005     AREA NON OPTIMIZED: 2281.215981       The area is reduced because there are no buffers. We lost in term of area but we improve performance
+Question 4) The results are identical. For this reason the slack is exactly 0 and the constraints are met. In fact in the report is written slack (MET). In the constrained design there are some buffers that are inserted by the synthesizer in order to reduce the delay. 
+AREA OPTIMIZED: 2281.215981     
+AREA NON OPTIMIZED: 1741.502005       
+The area is larger because there are buffers added. As we can expect, we lost in term of area but we improved the overall performance.
