@@ -1,0 +1,456 @@
+ 
+****************************************
+Report : timing
+        -path full
+        -delay max
+        -nworst 10
+        -max_paths 10
+Design : multiplier_NBIT4
+Version: F-2011.09-SP3
+Date   : Fri Apr  2 11:13:38 2021
+****************************************
+
+Operating Conditions: typical   Library: NangateOpenCellLibrary
+Wire Load Model Mode: top
+
+  Startpoint: B[0] (input port)
+  Endpoint: Y[7] (output port)
+  Path Group: (none)
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  multiplier_NBIT4   5K_hvratio_1_1        NangateOpenCellLibrary
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  input external delay                                    0.00       0.00 f
+  B[0] (in)                                               0.00       0.00 f
+  ENCi_0/b[1] (encoder_28)                                0.00       0.00 f
+  ENCi_0/U3/Z (XOR2_X1)                                   0.08       0.08 f
+  ENCi_0/U1/ZN (NOR2_X1)                                  0.11       0.19 r
+  ENCi_0/vp[1] (encoder_28)                               0.00       0.19 r
+  MUXi_0/S[1] (mux_NBIT5)                                 0.00       0.19 r
+  MUXi_0/U12/ZN (NOR2_X1)                                 0.06       0.24 f
+  MUXi_0/U2/ZN (AOI222_X1)                                0.10       0.35 r
+  MUXi_0/U1/ZN (INV_X1)                                   0.03       0.37 f
+  MUXi_0/Y[0] (mux_NBIT5)                                 0.00       0.37 f
+  ADDERi_0/B[0] (adder_NBIT5)                             0.00       0.37 f
+  ADDERi_0/U5/Z (XOR2_X1)                                 0.08       0.45 f
+  ADDERi_0/r56/U1_0/CO (FA_X1)                            0.10       0.55 f
+  ADDERi_0/r56/U1_1/CO (FA_X1)                            0.09       0.64 f
+  ADDERi_0/r56/U1_2/CO (FA_X1)                            0.09       0.73 f
+  ADDERi_0/r56/U1_3/CO (FA_X1)                            0.09       0.82 f
+  ADDERi_0/r56/U1_4/CO (FA_X1)                            0.09       0.90 f
+  ADDERi_0/r56/U1_5/S (FA_X1)                             0.13       1.03 f
+  ADDERi_0/S[5] (adder_NBIT5)                             0.00       1.03 f
+  ADDERi_1/A[5] (adder_NBIT7)                             0.00       1.03 f
+  ADDERi_1/r56/A[5] (adder_NBIT7_DW01_addsub_0)           0.00       1.03 f
+  ADDERi_1/r56/U1_5/CO (FA_X1)                            0.11       1.15 f
+  ADDERi_1/r56/U1_6/CO (FA_X1)                            0.09       1.24 f
+  ADDERi_1/r56/U1_7/S (FA_X1)                             0.13       1.37 r
+  ADDERi_1/r56/SUM[7] (adder_NBIT7_DW01_addsub_0)         0.00       1.37 r
+  ADDERi_1/S[7] (adder_NBIT7)                             0.00       1.37 r
+  Y[7] (out)                                              0.00       1.37 r
+  data arrival time                                                  1.37
+  --------------------------------------------------------------------------
+  (Path is unconstrained)
+
+
+  Startpoint: B[0] (input port)
+  Endpoint: Y[7] (output port)
+  Path Group: (none)
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  multiplier_NBIT4   5K_hvratio_1_1        NangateOpenCellLibrary
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  input external delay                                    0.00       0.00 f
+  B[0] (in)                                               0.00       0.00 f
+  ENCi_0/b[1] (encoder_28)                                0.00       0.00 f
+  ENCi_0/U3/Z (XOR2_X1)                                   0.08       0.08 f
+  ENCi_0/U1/ZN (NOR2_X1)                                  0.11       0.19 r
+  ENCi_0/vp[1] (encoder_28)                               0.00       0.19 r
+  MUXi_0/S[1] (mux_NBIT5)                                 0.00       0.19 r
+  MUXi_0/U12/ZN (NOR2_X1)                                 0.06       0.24 f
+  MUXi_0/U2/ZN (AOI222_X1)                                0.10       0.35 r
+  MUXi_0/U1/ZN (INV_X1)                                   0.03       0.37 f
+  MUXi_0/Y[0] (mux_NBIT5)                                 0.00       0.37 f
+  ADDERi_0/B[0] (adder_NBIT5)                             0.00       0.37 f
+  ADDERi_0/U5/Z (XOR2_X1)                                 0.08       0.45 f
+  ADDERi_0/r56/U1_0/CO (FA_X1)                            0.10       0.55 f
+  ADDERi_0/r56/U1_1/CO (FA_X1)                            0.09       0.64 f
+  ADDERi_0/r56/U1_2/CO (FA_X1)                            0.09       0.73 f
+  ADDERi_0/r56/U1_3/CO (FA_X1)                            0.09       0.82 f
+  ADDERi_0/r56/U1_4/CO (FA_X1)                            0.09       0.90 f
+  ADDERi_0/r56/U1_5/S (FA_X1)                             0.13       1.03 f
+  ADDERi_0/S[5] (adder_NBIT5)                             0.00       1.03 f
+  ADDERi_1/A[5] (adder_NBIT7)                             0.00       1.03 f
+  ADDERi_1/r56/A[5] (adder_NBIT7_DW01_addsub_0)           0.00       1.03 f
+  ADDERi_1/r56/U1_5/CO (FA_X1)                            0.11       1.15 f
+  ADDERi_1/r56/U1_6/CO (FA_X1)                            0.09       1.24 f
+  ADDERi_1/r56/U1_7/S (FA_X1)                             0.13       1.36 r
+  ADDERi_1/r56/SUM[7] (adder_NBIT7_DW01_addsub_0)         0.00       1.36 r
+  ADDERi_1/S[7] (adder_NBIT7)                             0.00       1.36 r
+  Y[7] (out)                                              0.00       1.37 r
+  data arrival time                                                  1.37
+  --------------------------------------------------------------------------
+  (Path is unconstrained)
+
+
+  Startpoint: B[0] (input port)
+  Endpoint: Y[7] (output port)
+  Path Group: (none)
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  multiplier_NBIT4   5K_hvratio_1_1        NangateOpenCellLibrary
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  input external delay                                    0.00       0.00 f
+  B[0] (in)                                               0.00       0.00 f
+  ENCi_0/b[1] (encoder_28)                                0.00       0.00 f
+  ENCi_0/U3/Z (XOR2_X1)                                   0.08       0.08 f
+  ENCi_0/U1/ZN (NOR2_X1)                                  0.11       0.19 r
+  ENCi_0/vp[1] (encoder_28)                               0.00       0.19 r
+  MUXi_0/S[1] (mux_NBIT5)                                 0.00       0.19 r
+  MUXi_0/U12/ZN (NOR2_X1)                                 0.06       0.24 f
+  MUXi_0/U2/ZN (AOI222_X1)                                0.10       0.35 r
+  MUXi_0/U1/ZN (INV_X1)                                   0.03       0.37 f
+  MUXi_0/Y[0] (mux_NBIT5)                                 0.00       0.37 f
+  ADDERi_0/B[0] (adder_NBIT5)                             0.00       0.37 f
+  ADDERi_0/U5/Z (XOR2_X1)                                 0.08       0.45 f
+  ADDERi_0/r56/U1_0/CO (FA_X1)                            0.10       0.55 f
+  ADDERi_0/r56/U1_1/CO (FA_X1)                            0.09       0.64 f
+  ADDERi_0/r56/U1_2/CO (FA_X1)                            0.09       0.73 f
+  ADDERi_0/r56/U1_3/CO (FA_X1)                            0.09       0.82 f
+  ADDERi_0/r56/U1_4/CO (FA_X1)                            0.09       0.90 f
+  ADDERi_0/r56/U1_5/S (FA_X1)                             0.13       1.03 f
+  ADDERi_0/S[5] (adder_NBIT5)                             0.00       1.03 f
+  ADDERi_1/A[5] (adder_NBIT7)                             0.00       1.03 f
+  ADDERi_1/r56/A[5] (adder_NBIT7_DW01_addsub_0)           0.00       1.03 f
+  ADDERi_1/r56/U1_5/CO (FA_X1)                            0.11       1.15 f
+  ADDERi_1/r56/U1_6/CO (FA_X1)                            0.09       1.24 f
+  ADDERi_1/r56/U1_7/S (FA_X1)                             0.13       1.36 r
+  ADDERi_1/r56/SUM[7] (adder_NBIT7_DW01_addsub_0)         0.00       1.36 r
+  ADDERi_1/S[7] (adder_NBIT7)                             0.00       1.36 r
+  Y[7] (out)                                              0.00       1.36 r
+  data arrival time                                                  1.36
+  --------------------------------------------------------------------------
+  (Path is unconstrained)
+
+
+  Startpoint: B[0] (input port)
+  Endpoint: Y[7] (output port)
+  Path Group: (none)
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  multiplier_NBIT4   5K_hvratio_1_1        NangateOpenCellLibrary
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  input external delay                                    0.00       0.00 f
+  B[0] (in)                                               0.00       0.00 f
+  ENCi_0/b[1] (encoder_28)                                0.00       0.00 f
+  ENCi_0/U3/Z (XOR2_X1)                                   0.08       0.08 f
+  ENCi_0/U1/ZN (NOR2_X1)                                  0.11       0.19 r
+  ENCi_0/vp[1] (encoder_28)                               0.00       0.19 r
+  MUXi_0/S[1] (mux_NBIT5)                                 0.00       0.19 r
+  MUXi_0/U12/ZN (NOR2_X1)                                 0.06       0.24 f
+  MUXi_0/U2/ZN (AOI222_X1)                                0.10       0.35 r
+  MUXi_0/U1/ZN (INV_X1)                                   0.03       0.37 f
+  MUXi_0/Y[0] (mux_NBIT5)                                 0.00       0.37 f
+  ADDERi_0/B[0] (adder_NBIT5)                             0.00       0.37 f
+  ADDERi_0/U5/Z (XOR2_X1)                                 0.08       0.45 f
+  ADDERi_0/r56/U1_0/CO (FA_X1)                            0.10       0.55 f
+  ADDERi_0/r56/U1_1/CO (FA_X1)                            0.09       0.64 f
+  ADDERi_0/r56/U1_2/CO (FA_X1)                            0.09       0.73 f
+  ADDERi_0/r56/U1_3/CO (FA_X1)                            0.09       0.82 f
+  ADDERi_0/r56/U1_4/CO (FA_X1)                            0.09       0.90 f
+  ADDERi_0/r56/U1_5/S (FA_X1)                             0.13       1.03 f
+  ADDERi_0/S[5] (adder_NBIT5)                             0.00       1.03 f
+  ADDERi_1/A[5] (adder_NBIT7)                             0.00       1.03 f
+  ADDERi_1/r56/A[5] (adder_NBIT7_DW01_addsub_0)           0.00       1.03 f
+  ADDERi_1/r56/U1_5/CO (FA_X1)                            0.11       1.15 f
+  ADDERi_1/r56/U1_6/CO (FA_X1)                            0.09       1.24 f
+  ADDERi_1/r56/U1_7/S (FA_X1)                             0.12       1.36 r
+  ADDERi_1/r56/SUM[7] (adder_NBIT7_DW01_addsub_0)         0.00       1.36 r
+  ADDERi_1/S[7] (adder_NBIT7)                             0.00       1.36 r
+  Y[7] (out)                                              0.00       1.36 r
+  data arrival time                                                  1.36
+  --------------------------------------------------------------------------
+  (Path is unconstrained)
+
+
+  Startpoint: B[0] (input port)
+  Endpoint: Y[7] (output port)
+  Path Group: (none)
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  multiplier_NBIT4   5K_hvratio_1_1        NangateOpenCellLibrary
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  input external delay                                    0.00       0.00 f
+  B[0] (in)                                               0.00       0.00 f
+  ENCi_0/b[1] (encoder_28)                                0.00       0.00 f
+  ENCi_0/U3/Z (XOR2_X1)                                   0.08       0.08 f
+  ENCi_0/U1/ZN (NOR2_X1)                                  0.11       0.19 r
+  ENCi_0/vp[1] (encoder_28)                               0.00       0.19 r
+  MUXi_0/S[1] (mux_NBIT5)                                 0.00       0.19 r
+  MUXi_0/U12/ZN (NOR2_X1)                                 0.06       0.24 f
+  MUXi_0/U2/ZN (AOI222_X1)                                0.10       0.35 r
+  MUXi_0/U1/ZN (INV_X1)                                   0.03       0.37 f
+  MUXi_0/Y[0] (mux_NBIT5)                                 0.00       0.37 f
+  ADDERi_0/B[0] (adder_NBIT5)                             0.00       0.37 f
+  ADDERi_0/U5/Z (XOR2_X1)                                 0.08       0.45 f
+  ADDERi_0/r56/U1_0/CO (FA_X1)                            0.10       0.55 f
+  ADDERi_0/r56/U1_1/CO (FA_X1)                            0.09       0.64 f
+  ADDERi_0/r56/U1_2/CO (FA_X1)                            0.09       0.73 f
+  ADDERi_0/r56/U1_3/CO (FA_X1)                            0.09       0.82 f
+  ADDERi_0/r56/U1_4/CO (FA_X1)                            0.09       0.90 f
+  ADDERi_0/r56/U1_5/S (FA_X1)                             0.13       1.03 f
+  ADDERi_0/S[5] (adder_NBIT5)                             0.00       1.03 f
+  ADDERi_1/A[5] (adder_NBIT7)                             0.00       1.03 f
+  ADDERi_1/r56/A[5] (adder_NBIT7_DW01_addsub_0)           0.00       1.03 f
+  ADDERi_1/r56/U1_5/CO (FA_X1)                            0.11       1.15 f
+  ADDERi_1/r56/U1_6/CO (FA_X1)                            0.09       1.23 f
+  ADDERi_1/r56/U1_7/S (FA_X1)                             0.13       1.36 r
+  ADDERi_1/r56/SUM[7] (adder_NBIT7_DW01_addsub_0)         0.00       1.36 r
+  ADDERi_1/S[7] (adder_NBIT7)                             0.00       1.36 r
+  Y[7] (out)                                              0.00       1.36 r
+  data arrival time                                                  1.36
+  --------------------------------------------------------------------------
+  (Path is unconstrained)
+
+
+  Startpoint: B[0] (input port)
+  Endpoint: Y[7] (output port)
+  Path Group: (none)
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  multiplier_NBIT4   5K_hvratio_1_1        NangateOpenCellLibrary
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  input external delay                                    0.00       0.00 f
+  B[0] (in)                                               0.00       0.00 f
+  ENCi_0/b[1] (encoder_28)                                0.00       0.00 f
+  ENCi_0/U3/Z (XOR2_X1)                                   0.08       0.08 f
+  ENCi_0/U1/ZN (NOR2_X1)                                  0.11       0.19 r
+  ENCi_0/vp[1] (encoder_28)                               0.00       0.19 r
+  MUXi_0/S[1] (mux_NBIT5)                                 0.00       0.19 r
+  MUXi_0/U12/ZN (NOR2_X1)                                 0.06       0.24 f
+  MUXi_0/U2/ZN (AOI222_X1)                                0.10       0.35 r
+  MUXi_0/U1/ZN (INV_X1)                                   0.03       0.37 f
+  MUXi_0/Y[0] (mux_NBIT5)                                 0.00       0.37 f
+  ADDERi_0/B[0] (adder_NBIT5)                             0.00       0.37 f
+  ADDERi_0/U5/Z (XOR2_X1)                                 0.08       0.45 f
+  ADDERi_0/r56/U1_0/CO (FA_X1)                            0.10       0.55 f
+  ADDERi_0/r56/U1_1/CO (FA_X1)                            0.09       0.64 f
+  ADDERi_0/r56/U1_2/CO (FA_X1)                            0.09       0.73 f
+  ADDERi_0/r56/U1_3/CO (FA_X1)                            0.09       0.82 f
+  ADDERi_0/r56/U1_4/CO (FA_X1)                            0.09       0.90 f
+  ADDERi_0/r56/U1_5/S (FA_X1)                             0.13       1.03 f
+  ADDERi_0/S[5] (adder_NBIT5)                             0.00       1.03 f
+  ADDERi_1/A[5] (adder_NBIT7)                             0.00       1.03 f
+  ADDERi_1/r56/A[5] (adder_NBIT7_DW01_addsub_0)           0.00       1.03 f
+  ADDERi_1/r56/U1_5/CO (FA_X1)                            0.11       1.15 f
+  ADDERi_1/r56/U1_6/CO (FA_X1)                            0.09       1.24 f
+  ADDERi_1/r56/U1_7/S (FA_X1)                             0.12       1.36 r
+  ADDERi_1/r56/SUM[7] (adder_NBIT7_DW01_addsub_0)         0.00       1.36 r
+  ADDERi_1/S[7] (adder_NBIT7)                             0.00       1.36 r
+  Y[7] (out)                                              0.00       1.36 r
+  data arrival time                                                  1.36
+  --------------------------------------------------------------------------
+  (Path is unconstrained)
+
+
+  Startpoint: B[0] (input port)
+  Endpoint: Y[7] (output port)
+  Path Group: (none)
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  multiplier_NBIT4   5K_hvratio_1_1        NangateOpenCellLibrary
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  input external delay                                    0.00       0.00 f
+  B[0] (in)                                               0.00       0.00 f
+  ENCi_0/b[1] (encoder_28)                                0.00       0.00 f
+  ENCi_0/U3/Z (XOR2_X1)                                   0.08       0.08 f
+  ENCi_0/U1/ZN (NOR2_X1)                                  0.11       0.19 r
+  ENCi_0/vp[1] (encoder_28)                               0.00       0.19 r
+  MUXi_0/S[1] (mux_NBIT5)                                 0.00       0.19 r
+  MUXi_0/U12/ZN (NOR2_X1)                                 0.06       0.24 f
+  MUXi_0/U2/ZN (AOI222_X1)                                0.10       0.35 r
+  MUXi_0/U1/ZN (INV_X1)                                   0.03       0.37 f
+  MUXi_0/Y[0] (mux_NBIT5)                                 0.00       0.37 f
+  ADDERi_0/B[0] (adder_NBIT5)                             0.00       0.37 f
+  ADDERi_0/U5/Z (XOR2_X1)                                 0.08       0.45 f
+  ADDERi_0/r56/U1_0/CO (FA_X1)                            0.10       0.55 f
+  ADDERi_0/r56/U1_1/CO (FA_X1)                            0.09       0.64 f
+  ADDERi_0/r56/U1_2/CO (FA_X1)                            0.09       0.73 f
+  ADDERi_0/r56/U1_3/CO (FA_X1)                            0.09       0.82 f
+  ADDERi_0/r56/U1_4/CO (FA_X1)                            0.09       0.90 f
+  ADDERi_0/r56/U1_5/S (FA_X1)                             0.13       1.03 f
+  ADDERi_0/S[5] (adder_NBIT5)                             0.00       1.03 f
+  ADDERi_1/A[5] (adder_NBIT7)                             0.00       1.03 f
+  ADDERi_1/r56/A[5] (adder_NBIT7_DW01_addsub_0)           0.00       1.03 f
+  ADDERi_1/r56/U1_5/CO (FA_X1)                            0.11       1.15 f
+  ADDERi_1/r56/U1_6/CO (FA_X1)                            0.09       1.24 f
+  ADDERi_1/r56/U1_7/S (FA_X1)                             0.12       1.36 r
+  ADDERi_1/r56/SUM[7] (adder_NBIT7_DW01_addsub_0)         0.00       1.36 r
+  ADDERi_1/S[7] (adder_NBIT7)                             0.00       1.36 r
+  Y[7] (out)                                              0.00       1.36 r
+  data arrival time                                                  1.36
+  --------------------------------------------------------------------------
+  (Path is unconstrained)
+
+
+  Startpoint: B[0] (input port)
+  Endpoint: Y[7] (output port)
+  Path Group: (none)
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  multiplier_NBIT4   5K_hvratio_1_1        NangateOpenCellLibrary
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  input external delay                                    0.00       0.00 f
+  B[0] (in)                                               0.00       0.00 f
+  ENCi_0/b[1] (encoder_28)                                0.00       0.00 f
+  ENCi_0/U3/Z (XOR2_X1)                                   0.08       0.08 f
+  ENCi_0/U1/ZN (NOR2_X1)                                  0.11       0.19 r
+  ENCi_0/vp[1] (encoder_28)                               0.00       0.19 r
+  MUXi_0/S[1] (mux_NBIT5)                                 0.00       0.19 r
+  MUXi_0/U12/ZN (NOR2_X1)                                 0.06       0.24 f
+  MUXi_0/U2/ZN (AOI222_X1)                                0.10       0.35 r
+  MUXi_0/U1/ZN (INV_X1)                                   0.03       0.37 f
+  MUXi_0/Y[0] (mux_NBIT5)                                 0.00       0.37 f
+  ADDERi_0/B[0] (adder_NBIT5)                             0.00       0.37 f
+  ADDERi_0/U5/Z (XOR2_X1)                                 0.08       0.45 f
+  ADDERi_0/r56/U1_0/CO (FA_X1)                            0.10       0.55 f
+  ADDERi_0/r56/U1_1/S (FA_X1)                             0.11       0.67 f
+  ADDERi_0/S[1] (adder_NBIT5)                             0.00       0.67 f
+  ADDERi_1/A[1] (adder_NBIT7)                             0.00       0.67 f
+  ADDERi_1/r56/A[1] (adder_NBIT7_DW01_addsub_0)           0.00       0.67 f
+  ADDERi_1/r56/U1_1/CO (FA_X1)                            0.10       0.77 f
+  ADDERi_1/r56/U1_2/CO (FA_X1)                            0.09       0.86 f
+  ADDERi_1/r56/U1_3/CO (FA_X1)                            0.09       0.95 f
+  ADDERi_1/r56/U1_4/CO (FA_X1)                            0.09       1.05 f
+  ADDERi_1/r56/U1_5/CO (FA_X1)                            0.09       1.14 f
+  ADDERi_1/r56/U1_6/CO (FA_X1)                            0.09       1.23 f
+  ADDERi_1/r56/U1_7/S (FA_X1)                             0.13       1.36 r
+  ADDERi_1/r56/SUM[7] (adder_NBIT7_DW01_addsub_0)         0.00       1.36 r
+  ADDERi_1/S[7] (adder_NBIT7)                             0.00       1.36 r
+  Y[7] (out)                                              0.00       1.36 r
+  data arrival time                                                  1.36
+  --------------------------------------------------------------------------
+  (Path is unconstrained)
+
+
+  Startpoint: B[0] (input port)
+  Endpoint: Y[7] (output port)
+  Path Group: (none)
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  multiplier_NBIT4   5K_hvratio_1_1        NangateOpenCellLibrary
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  input external delay                                    0.00       0.00 f
+  B[0] (in)                                               0.00       0.00 f
+  ENCi_0/b[1] (encoder_28)                                0.00       0.00 f
+  ENCi_0/U3/Z (XOR2_X1)                                   0.08       0.08 f
+  ENCi_0/U1/ZN (NOR2_X1)                                  0.11       0.19 r
+  ENCi_0/vp[1] (encoder_28)                               0.00       0.19 r
+  MUXi_0/S[1] (mux_NBIT5)                                 0.00       0.19 r
+  MUXi_0/U12/ZN (NOR2_X1)                                 0.06       0.24 f
+  MUXi_0/U2/ZN (AOI222_X1)                                0.10       0.35 r
+  MUXi_0/U1/ZN (INV_X1)                                   0.03       0.37 f
+  MUXi_0/Y[0] (mux_NBIT5)                                 0.00       0.37 f
+  ADDERi_0/B[0] (adder_NBIT5)                             0.00       0.37 f
+  ADDERi_0/U5/Z (XOR2_X1)                                 0.08       0.45 f
+  ADDERi_0/r56/U1_0/S (FA_X1)                             0.12       0.57 f
+  ADDERi_0/S[0] (adder_NBIT5)                             0.00       0.57 f
+  ADDERi_1/A[0] (adder_NBIT7)                             0.00       0.57 f
+  ADDERi_1/r56/A[0] (adder_NBIT7_DW01_addsub_0)           0.00       0.57 f
+  ADDERi_1/r56/U1_0/CO (FA_X1)                            0.10       0.68 f
+  ADDERi_1/r56/U1_1/CO (FA_X1)                            0.09       0.77 f
+  ADDERi_1/r56/U1_2/CO (FA_X1)                            0.09       0.86 f
+  ADDERi_1/r56/U1_3/CO (FA_X1)                            0.09       0.95 f
+  ADDERi_1/r56/U1_4/CO (FA_X1)                            0.09       1.04 f
+  ADDERi_1/r56/U1_5/CO (FA_X1)                            0.09       1.14 f
+  ADDERi_1/r56/U1_6/CO (FA_X1)                            0.09       1.23 f
+  ADDERi_1/r56/U1_7/S (FA_X1)                             0.13       1.35 r
+  ADDERi_1/r56/SUM[7] (adder_NBIT7_DW01_addsub_0)         0.00       1.35 r
+  ADDERi_1/S[7] (adder_NBIT7)                             0.00       1.35 r
+  Y[7] (out)                                              0.00       1.36 r
+  data arrival time                                                  1.36
+  --------------------------------------------------------------------------
+  (Path is unconstrained)
+
+
+  Startpoint: B[0] (input port)
+  Endpoint: Y[7] (output port)
+  Path Group: (none)
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  multiplier_NBIT4   5K_hvratio_1_1        NangateOpenCellLibrary
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  input external delay                                    0.00       0.00 f
+  B[0] (in)                                               0.00       0.00 f
+  ENCi_0/b[1] (encoder_28)                                0.00       0.00 f
+  ENCi_0/U3/Z (XOR2_X1)                                   0.08       0.08 f
+  ENCi_0/U1/ZN (NOR2_X1)                                  0.11       0.19 r
+  ENCi_0/vp[1] (encoder_28)                               0.00       0.19 r
+  MUXi_0/S[1] (mux_NBIT5)                                 0.00       0.19 r
+  MUXi_0/U12/ZN (NOR2_X1)                                 0.06       0.24 f
+  MUXi_0/U2/ZN (AOI222_X1)                                0.09       0.33 r
+  MUXi_0/U1/ZN (INV_X1)                                   0.03       0.36 f
+  MUXi_0/Y[0] (mux_NBIT5)                                 0.00       0.36 f
+  ADDERi_0/B[0] (adder_NBIT5)                             0.00       0.36 f
+  ADDERi_0/U5/Z (XOR2_X1)                                 0.08       0.44 f
+  ADDERi_0/r56/U1_0/CO (FA_X1)                            0.10       0.54 f
+  ADDERi_0/r56/U1_1/CO (FA_X1)                            0.09       0.63 f
+  ADDERi_0/r56/U1_2/CO (FA_X1)                            0.09       0.72 f
+  ADDERi_0/r56/U1_3/CO (FA_X1)                            0.09       0.80 f
+  ADDERi_0/r56/U1_4/CO (FA_X1)                            0.09       0.89 f
+  ADDERi_0/r56/U1_5/S (FA_X1)                             0.13       1.02 f
+  ADDERi_0/S[5] (adder_NBIT5)                             0.00       1.02 f
+  ADDERi_1/A[5] (adder_NBIT7)                             0.00       1.02 f
+  ADDERi_1/r56/A[5] (adder_NBIT7_DW01_addsub_0)           0.00       1.02 f
+  ADDERi_1/r56/U1_5/CO (FA_X1)                            0.11       1.14 f
+  ADDERi_1/r56/U1_6/CO (FA_X1)                            0.09       1.23 f
+  ADDERi_1/r56/U1_7/S (FA_X1)                             0.13       1.35 r
+  ADDERi_1/r56/SUM[7] (adder_NBIT7_DW01_addsub_0)         0.00       1.35 r
+  ADDERi_1/S[7] (adder_NBIT7)                             0.00       1.35 r
+  Y[7] (out)                                              0.00       1.36 r
+  data arrival time                                                  1.36
+  --------------------------------------------------------------------------
+  (Path is unconstrained)
+
+
+1

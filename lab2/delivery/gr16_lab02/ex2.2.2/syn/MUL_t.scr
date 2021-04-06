@@ -1,0 +1,34 @@
+##############################################################
+#SCRIPT FOR SPEEDING UP and RECORDING the MULTIPLIER SYNTHESIS#
+# analyzing and checking vhdl netlist#
+# here the analyze command is used for each file from bottom to top #
+##############################################################
+
+analyze -library WORK -format vhdl {encoder.vhd mux.vhd adder.vhd multiplier.vhd}
+
+##############################################################
+# elaborating the top entity -- here supposed BOOTHMUL#
+# choose the architecture you want
+
+elaborate MULTIPLIER -architecture STRUCTURAL -library WORK -parameters "NBIT = 16"
+
+##########################################
+# first compilation, without constraints #
+compile 
+# reporting riming and power after the first synthesis without constraints #
+report_timing > mul_timeopt_1t.rpt
+report_area > mul_timeopt_1a.rpt
+# forces a combinational max delay of REQUIRED_TIME from each of the inputs
+# to each of th eoutput, that is a delay lower than the one found after
+# the first compilation step #
+# often this is the working clock period of your system #
+set_max_delay 3.688 -from [all_inputs] -to [all_outputs]
+# optimize
+compile -map_effort high
+# save report
+report_timing > mul_timeopt_2t.rpt
+report_area > mul_timeopt_2a.rpt
+# saving files
+write -hierarchy -format ddc -output BOOTHMUL-structural-topt.ddc
+write -hierarchy -format vhdl -output BOOTHMUL-structural-topt.vhdl
+write -hierarchy -format verilog -output BOOTHMUL-structural-topt.v

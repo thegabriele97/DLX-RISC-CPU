@@ -1,0 +1,28 @@
+ 
+****************************************
+Report : area
+Design : P4_ADDER_NBIT32
+Version: F-2011.09-SP3
+Date   : Thu Mar 25 11:19:24 2021
+****************************************
+
+Library(s) Used:
+
+    NangateOpenCellLibrary (File: /home/mariagrazia.graziano/do/libnangate/NangateOpenCellLibrary_typical_ecsm.db)
+
+Number of ports:                           98
+Number of nets:                           105
+Number of cells:                            2
+Number of combinational cells:              0
+Number of sequential cells:                 0
+Number of macros:                           0
+Number of buf/inv:                          0
+Number of references:                       2
+
+Combinational area:        554.343997
+Noncombinational area:       0.000000
+Net Interconnect area:      undefined  (Wire load has zero net area)
+
+Total cell area:           554.343997
+Total area:                 undefined
+1

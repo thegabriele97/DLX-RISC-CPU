@@ -1,0 +1,18 @@
+analyze -library WORK -format vhdl {encoder.vhd mux.vhd adder.vhd multiplier.vhd}
+elaborate MULTIPLIER -architecture STRUCTURAL -library WORK -parameters "NBIT = 4"
+
+compile -exact_map
+report_timing > timing_8bit_not_opt.txt
+report_timing -nworst 10 > timing_n10_8bit_not_opt.txt
+
+elaborate MULTIPLIER -architecture STRUCTURAL -library WORK -parameters "NBIT = 16"
+compile -exact_map
+report_timing > mul-timing-no-opt.txt
+report_area > mul-area-no-opt.txt
+
+set_max_delay 3.688 -from [all_inputs] -to [all_outputs]
+compile -map_effort high
+report_timing > mul-timing-opt.txt
+
+
+

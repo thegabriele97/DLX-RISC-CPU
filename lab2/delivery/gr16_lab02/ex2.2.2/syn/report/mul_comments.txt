@@ -1,0 +1,10 @@
+Question 5) The analysed path are the 10 worst one. The critical path was B[0]-Y[7] and was 1.37ns. Indeed for a 32 bits implementation we found that the critical path was B[0]-Y[31] and was 4.61ns
+
+Question 2) Now we imposed the limit of 3.688ns  (3.9ns), which is 20% less, and we obtained that the critical path is exactly 3.688ns (3.9ns). The starting and the end point of the critical path has changed and is B[1] - Y[31]. 
+
+Question 3) The script result are equivalent. It simply adds 3 file: the post synthesis netlist in ddc, vhdl and verilog
+
+Question 4) The results are identical. For this reason the slack is exactly 0 and the constraints are met. In fact in the report is written slack (MET). In the constrained design there are some buffers that are inserted by the synthesizer in order to reduce the delay. 
+AREA OPTIMIZED: 2281.215981     
+AREA NON OPTIMIZED: 1741.502005       
+The area is larger because there are buffers added. As we can expect, we lost in term of area but we improved the overall performance.

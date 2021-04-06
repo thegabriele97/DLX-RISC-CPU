@@ -1,0 +1,116 @@
+Information: Updating design information... (UID-85)
+ 
+****************************************
+Report : timing
+        -path full
+        -delay max
+        -max_paths 1
+Design : multiplier_NBIT16
+Version: F-2011.09-SP3
+Date   : Fri Apr  2 11:49:40 2021
+****************************************
+
+Operating Conditions: typical   Library: NangateOpenCellLibrary
+Wire Load Model Mode: top
+
+  Startpoint: B[0] (input port)
+  Endpoint: Y[31] (output port)
+  Path Group: (none)
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  multiplier_NBIT16  5K_hvratio_1_1        NangateOpenCellLibrary
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  input external delay                                    0.00       0.00 f
+  B[0] (in)                                               0.00       0.00 f
+  ENCi_0/b[1] (encoder_0)                                 0.00       0.00 f
+  ENCi_0/U3/Z (XOR2_X1)                                   0.08       0.08 f
+  ENCi_0/U1/ZN (NOR2_X2)                                  0.17       0.25 r
+  ENCi_0/vp[1] (encoder_0)                                0.00       0.25 r
+  MUXi_0/S[1] (mux_NBIT17)                                0.00       0.25 r
+  MUXi_0/U2/ZN (NOR2_X2)                                  0.11       0.36 f
+  MUXi_0/U4/ZN (AOI222_X1)                                0.12       0.48 r
+  MUXi_0/U3/ZN (INV_X1)                                   0.03       0.50 f
+  MUXi_0/Y[0] (mux_NBIT17)                                0.00       0.50 f
+  ADDERi_0/B[0] (adder_NBIT17)                            0.00       0.50 f
+  ADDERi_0/r56/B[0] (adder_NBIT17_DW01_addsub_0)          0.00       0.50 f
+  ADDERi_0/r56/U17/Z (XOR2_X1)                            0.07       0.57 f
+  ADDERi_0/r56/U1_0/CO (FA_X1)                            0.10       0.68 f
+  ADDERi_0/r56/U1_1/S (FA_X1)                             0.11       0.79 f
+  ADDERi_0/r56/SUM[1] (adder_NBIT17_DW01_addsub_0)        0.00       0.79 f
+  ADDERi_0/S[1] (adder_NBIT17)                            0.00       0.79 f
+  ADDERi_1/A[1] (adder_NBIT19)                            0.00       0.79 f
+  ADDERi_1/r56/A[1] (adder_NBIT19_DW01_addsub_0)          0.00       0.79 f
+  ADDERi_1/r56/U1_1/CO (FA_X1)                            0.10       0.89 f
+  ADDERi_1/r56/U1_2/CO (FA_X1)                            0.09       0.99 f
+  ADDERi_1/r56/U1_3/CO (FA_X1)                            0.09       1.08 f
+  ADDERi_1/r56/U1_4/CO (FA_X1)                            0.09       1.17 f
+  ADDERi_1/r56/U1_5/CO (FA_X1)                            0.09       1.26 f
+  ADDERi_1/r56/U1_6/CO (FA_X1)                            0.09       1.35 f
+  ADDERi_1/r56/U1_7/CO (FA_X1)                            0.09       1.44 f
+  ADDERi_1/r56/U1_8/CO (FA_X1)                            0.09       1.54 f
+  ADDERi_1/r56/U1_9/CO (FA_X1)                            0.09       1.63 f
+  ADDERi_1/r56/U1_10/CO (FA_X1)                           0.09       1.72 f
+  ADDERi_1/r56/U1_11/CO (FA_X1)                           0.09       1.81 f
+  ADDERi_1/r56/U1_12/CO (FA_X1)                           0.09       1.90 f
+  ADDERi_1/r56/U1_13/CO (FA_X1)                           0.09       1.99 f
+  ADDERi_1/r56/U1_14/CO (FA_X1)                           0.09       2.08 f
+  ADDERi_1/r56/U1_15/CO (FA_X1)                           0.09       2.18 f
+  ADDERi_1/r56/U1_16/CO (FA_X1)                           0.09       2.27 f
+  ADDERi_1/r56/U1_17/CO (FA_X1)                           0.09       2.36 f
+  ADDERi_1/r56/U1_18/CO (FA_X1)                           0.09       2.45 f
+  ADDERi_1/r56/U1_19/S (FA_X1)                            0.13       2.58 f
+  ADDERi_1/r56/SUM[19] (adder_NBIT19_DW01_addsub_0)       0.00       2.58 f
+  ADDERi_1/S[19] (adder_NBIT19)                           0.00       2.58 f
+  ADDERi_2/A[19] (adder_NBIT21)                           0.00       2.58 f
+  ADDERi_2/r56/A[19] (adder_NBIT21_DW01_addsub_0)         0.00       2.58 f
+  ADDERi_2/r56/U1_19/CO (FA_X1)                           0.11       2.70 f
+  ADDERi_2/r56/U1_20/CO (FA_X1)                           0.09       2.79 f
+  ADDERi_2/r56/U1_21/S (FA_X1)                            0.13       2.92 f
+  ADDERi_2/r56/SUM[21] (adder_NBIT21_DW01_addsub_0)       0.00       2.92 f
+  ADDERi_2/S[21] (adder_NBIT21)                           0.00       2.92 f
+  ADDERi_3/A[21] (adder_NBIT23)                           0.00       2.92 f
+  ADDERi_3/r56/A[21] (adder_NBIT23_DW01_addsub_0)         0.00       2.92 f
+  ADDERi_3/r56/U1_21/CO (FA_X1)                           0.11       3.03 f
+  ADDERi_3/r56/U1_22/CO (FA_X1)                           0.09       3.13 f
+  ADDERi_3/r56/U1_23/S (FA_X1)                            0.13       3.26 f
+  ADDERi_3/r56/SUM[23] (adder_NBIT23_DW01_addsub_0)       0.00       3.26 f
+  ADDERi_3/S[23] (adder_NBIT23)                           0.00       3.26 f
+  ADDERi_4/A[23] (adder_NBIT25)                           0.00       3.26 f
+  ADDERi_4/r56/A[23] (adder_NBIT25_DW01_addsub_0)         0.00       3.26 f
+  ADDERi_4/r56/U1_23/CO (FA_X1)                           0.11       3.37 f
+  ADDERi_4/r56/U1_24/CO (FA_X1)                           0.09       3.46 f
+  ADDERi_4/r56/U1_25/S (FA_X1)                            0.13       3.60 f
+  ADDERi_4/r56/SUM[25] (adder_NBIT25_DW01_addsub_0)       0.00       3.60 f
+  ADDERi_4/S[25] (adder_NBIT25)                           0.00       3.60 f
+  ADDERi_5/A[25] (adder_NBIT27)                           0.00       3.60 f
+  ADDERi_5/r56/A[25] (adder_NBIT27_DW01_addsub_0)         0.00       3.60 f
+  ADDERi_5/r56/U1_25/CO (FA_X1)                           0.11       3.71 f
+  ADDERi_5/r56/U1_26/CO (FA_X1)                           0.09       3.80 f
+  ADDERi_5/r56/U1_27/S (FA_X1)                            0.13       3.93 f
+  ADDERi_5/r56/SUM[27] (adder_NBIT27_DW01_addsub_0)       0.00       3.93 f
+  ADDERi_5/S[27] (adder_NBIT27)                           0.00       3.93 f
+  ADDERi_6/A[27] (adder_NBIT29)                           0.00       3.93 f
+  ADDERi_6/r56/A[27] (adder_NBIT29_DW01_addsub_0)         0.00       3.93 f
+  ADDERi_6/r56/U1_27/CO (FA_X1)                           0.11       4.05 f
+  ADDERi_6/r56/U1_28/CO (FA_X1)                           0.09       4.14 f
+  ADDERi_6/r56/U1_29/S (FA_X1)                            0.13       4.27 f
+  ADDERi_6/r56/SUM[29] (adder_NBIT29_DW01_addsub_0)       0.00       4.27 f
+  ADDERi_6/S[29] (adder_NBIT29)                           0.00       4.27 f
+  ADDERi_7/A[29] (adder_NBIT31)                           0.00       4.27 f
+  ADDERi_7/r56/A[29] (adder_NBIT31_DW01_addsub_0)         0.00       4.27 f
+  ADDERi_7/r56/U1_29/CO (FA_X1)                           0.11       4.39 f
+  ADDERi_7/r56/U1_30/CO (FA_X1)                           0.09       4.48 f
+  ADDERi_7/r56/U1_31/S (FA_X1)                            0.13       4.60 r
+  ADDERi_7/r56/SUM[31] (adder_NBIT31_DW01_addsub_0)       0.00       4.60 r
+  ADDERi_7/S[31] (adder_NBIT31)                           0.00       4.60 r
+  Y[31] (out)                                             0.00       4.61 r
+  data arrival time                                                  4.61
+  --------------------------------------------------------------------------
+  (Path is unconstrained)
+
+
+1

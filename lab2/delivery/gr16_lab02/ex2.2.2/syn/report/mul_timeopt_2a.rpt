@@ -1,0 +1,28 @@
+ 
+****************************************
+Report : area
+Design : multiplier_NBIT16
+Version: F-2011.09-SP3
+Date   : Fri Apr  2 11:52:21 2021
+****************************************
+
+Library(s) Used:
+
+    NangateOpenCellLibrary (File: /home/mariagrazia.graziano/do/libnangate/NangateOpenCellLibrary_typical_ecsm.db)
+
+Number of ports:                           64
+Number of nets:                           456
+Number of cells:                           31
+Number of combinational cells:              7
+Number of sequential cells:                 0
+Number of macros:                           0
+Number of buf/inv:                          7
+Number of references:                      26
+
+Combinational area:       2281.215981
+Noncombinational area:       0.000000
+Net Interconnect area:      undefined  (Wire load has zero net area)
+
+Total cell area:          2281.215981
+Total area:                 undefined
+1

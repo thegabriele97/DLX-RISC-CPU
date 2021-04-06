@@ -1,0 +1,82 @@
+Information: Updating design information... (UID-85)
+ 
+****************************************
+Report : timing
+        -path full
+        -delay max
+        -max_paths 1
+Design : P4_ADDER_NBIT32
+Version: F-2011.09-SP3
+Date   : Thu Mar 25 11:19:44 2021
+****************************************
+
+Operating Conditions: typical   Library: NangateOpenCellLibrary
+Wire Load Model Mode: top
+
+  Startpoint: B[9] (input port)
+  Endpoint: S[24] (output port)
+  Path Group: default
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  P4_ADDER_NBIT32    5K_hvratio_1_1        NangateOpenCellLibrary
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  input external delay                                    0.00       0.00 r
+  B[9] (in)                                               0.00       0.00 r
+  CARRYGEN/B[9] (CARRY_GENERATOR_NBIT32_NBIT_PER_BLOCK4)
+                                                          0.00       0.00 r
+  CARRYGEN/PGNet/b[9] (prop_gen_generic_NBIT32)           0.00       0.00 r
+  CARRYGEN/PGNet/pg_network_i_9/b (prop_gen_23)           0.00       0.00 r
+  CARRYGEN/PGNet/pg_network_i_9/U2/Z (XOR2_X1)            0.07       0.07 r
+  CARRYGEN/PGNet/pg_network_i_9/p (prop_gen_23)           0.00       0.07 r
+  CARRYGEN/PGNet/p[9] (prop_gen_generic_NBIT32)           0.00       0.07 r
+  CARRYGEN/PGi_1_10/p[1] (PG_24)                          0.00       0.07 r
+  CARRYGEN/PGi_1_10/U1/ZN (NOR2_X1)                       0.03       0.10 f
+  CARRYGEN/PGi_1_10/U3/ZN (NOR2_X1)                       0.04       0.14 r
+  CARRYGEN/PGi_1_10/go (PG_24)                            0.00       0.14 r
+  CARRYGEN/PGi_2_12/g[0] (PG_11)                          0.00       0.14 r
+  CARRYGEN/PGi_2_12/U3/ZN (NAND2_X1)                      0.03       0.17 f
+  CARRYGEN/PGi_2_12/U2/ZN (NAND2_X1)                      0.03       0.19 r
+  CARRYGEN/PGi_2_12/go (PG_11)                            0.00       0.19 r
+  CARRYGEN/PGi_3_16/g[0] (PG_5)                           0.00       0.19 r
+  CARRYGEN/PGi_3_16/U3/ZN (INV_X1)                        0.02       0.22 f
+  CARRYGEN/PGi_3_16/U2/ZN (OAI21_X1)                      0.04       0.26 r
+  CARRYGEN/PGi_3_16/go (PG_5)                             0.00       0.26 r
+  CARRYGEN/GGi_4_16/g[1] (GG_5)                           0.00       0.26 r
+  CARRYGEN/GGi_4_16/U1/ZN (AOI21_X1)                      0.03       0.29 f
+  CARRYGEN/GGi_4_16/U2/ZN (INV_X1)                        0.04       0.32 r
+  CARRYGEN/GGi_4_16/go (GG_5)                             0.00       0.32 r
+  CARRYGEN/GGi_5_24/g[0] (GG_3)                           0.00       0.32 r
+  CARRYGEN/GGi_5_24/U2/ZN (NAND2_X1)                      0.03       0.36 f
+  CARRYGEN/GGi_5_24/U3/ZN (NAND2_X1)                      0.05       0.40 r
+  CARRYGEN/GGi_5_24/go (GG_3)                             0.00       0.40 r
+  CARRYGEN/Co[5] (CARRY_GENERATOR_NBIT32_NBIT_PER_BLOCK4)
+                                                          0.00       0.40 r
+  SUMGEM/Ci[6] (sum_generator_NBIT_PER_BLOCK4_NBLOCKS8)
+                                                          0.00       0.40 r
+  SUMGEM/csb_6/cin (carry_select_block_NBIT_PER_BLOCK4_2)
+                                                          0.00       0.40 r
+  SUMGEM/csb_6/mux/s (mux21_generic_NBIT4_2)              0.00       0.40 r
+  SUMGEM/csb_6/mux/U1/Z (MUX2_X1)                         0.08       0.48 f
+  SUMGEM/csb_6/mux/y[0] (mux21_generic_NBIT4_2)           0.00       0.48 f
+  SUMGEM/csb_6/sum[0] (carry_select_block_NBIT_PER_BLOCK4_2)
+                                                          0.00       0.48 f
+  SUMGEM/S[24] (sum_generator_NBIT_PER_BLOCK4_NBLOCKS8)
+                                                          0.00       0.48 f
+  S[24] (out)                                             0.00       0.48 f
+  data arrival time                                                  0.48
+
+  max_delay                                               0.48       0.48
+  output external delay                                   0.00       0.48
+  data required time                                                 0.48
+  --------------------------------------------------------------------------
+  data required time                                                 0.48
+  data arrival time                                                 -0.48
+  --------------------------------------------------------------------------
+  slack (MET)                                                        0.00
+
+
+1

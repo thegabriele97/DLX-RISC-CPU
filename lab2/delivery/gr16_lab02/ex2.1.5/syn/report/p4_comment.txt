@@ -1,0 +1,15 @@
+Question 1) The analysed path are the 10 worst one. In fact, as expected, are the last 10, because they have the logest delay. The critical path was A[3]-S[31] and was 0.60ns
+
+Question 2) Now we imposed the limit of 0.48ns and we obtained that the critical path is 0.48ns. The starting and the end point of the critical path has changed and is B[9] - S[24]. The path distribution shows that the majority of paths have a slack near to 0. Only the two LSB have a high value of the slack, because they are the shorstest path.
+
+Question 3) The script result are equivalent. It simply adds 3 file: the post synthesis netlist in ddc, vhdl and verilog
+
+Question 4) The results are identical. For this reason the slack is positive and the constraints are met. In fact in the file is written slack (MET). In the constrained design there are some buffers that are inserted in order to reduce the delay. AREA OPTIMIZED: 592.11     AREA NON OPTIMIZED: 554.34       The area is reduced because there are no buffers. We lost in term of area but we improve performance
+
+
+
+
+
+
+
+

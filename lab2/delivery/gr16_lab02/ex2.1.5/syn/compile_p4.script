@@ -1,0 +1,3 @@
+analyze -library WORK -format vhdl {constants.vhd prop_gen.vhd prop_gen_generic.vhd PG.vhd GG.vhd carry_generator.vhd fa.vhd mux21_generic.vhd rca_generic.vhd carry_select_block.vhd sum_generator.vhd p4_adder.vhd }
+
+elaborate P4_ADDER -architecture STRUCTURAL -library WORK -parameters "NBIT = 32"
