@@ -40,26 +40,15 @@ begin
             if (RESET = '1') then
                 REGISTERS <= (OTHERS => (OTHERS =>'0'));
             elsif (ENABLE = '1') then
-                if (WR = '1' and RD1 = '0' and RD2 = '0') then
+                if (WR = '1') then
                     REGISTERS(to_integer(unsigned(ADD_WR))) <= DATAIN; 
-                elsif (WR = '0' and RD1 ='1' and RD2 = '0') then
-                    OUT1 <= REGISTERS(to_integer(unsigned(ADD_RD1)));
-                elsif (WR = '0' and RD1 = '0' and RD2 = '1' ) then
-                    OUT2 <= REGISTERS(to_integer(unsigned(ADD_RD2)));
-                elsif (WR = '0' and RD1 = '1' and RD2 = '1') then
-                    OUT1 <= REGISTERS(to_integer(unsigned(ADD_RD1)));
-                    OUT2 <= REGISTERS(to_integer(unsigned(ADD_RD2)));
-                elsif (WR = '1' and RD1 = '1' and RD2 = '0') then
-                    OUT1 <= REGISTERS(to_integer(unsigned(ADD_RD1)));
-                    REGISTERS(to_integer(unsigned(ADD_WR))) <= DATAIN; 
-                elsif (WR = '1' and RD1 = '0' and RD2 = '1') then
-                    REGISTERS(to_integer(unsigned(ADD_WR))) <= DATAIN; 
-                    OUT2 <= REGISTERS(to_integer(unsigned(ADD_RD2)));
-                elsif (WR = '1' and RD2 = '1' and RD2 = '1') then
-                    OUT1 <= REGISTERS(to_integer(unsigned(ADD_RD1)));
-                    OUT2 <= REGISTERS(to_integer(unsigned(ADD_RD2)));
-                    REGISTERS(to_integer(unsigned(ADD_WR))) <= DATAIN; 
-                end if ;
+                end if;
+                if (RD1 ='1') then
+                    OUT1 <= REGISTERS(to_integer(unsigned(ADD_RD1))); 
+                end if;
+                if (RD2 ='1') then
+                    OUT2 <= REGISTERS(to_integer(unsigned(ADD_RD1)));
+                end if; 
             end if;
         end if;
     end process;
