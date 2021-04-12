@@ -39,4 +39,10 @@
 
 
 ## To Do List LAB 02
-- Mettere le meaningful waveforms in una cartella waveforms
+- Mettere le meaningful waveforms in una cartella waveforms :white_check_mark: 
+
+
+## Domande LAB 03
+- Chiedere quanti colpi di clock di vogliono per fare il push in memoria
+- CHiedere cosa fa la CPU mentre faccio il push
+
