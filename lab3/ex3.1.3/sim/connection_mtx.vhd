@@ -44,17 +44,18 @@ architecture struct of connection_mtx is
 
 begin
 
-    -- Dispatching the window to its bus
-    DISP_WINi: for i in 0 to F-1 generate
-        bus_win(i) <= (others => win(i)); -- (7 downto 0) <= win(i);
-    end generate DISP_WINi;
-
+    
     -- Dispatching the decoder output to the correct bus
     bus_global <= dec(M-1 downto 0);
     bus_in <= dec(M+(N-1) downto M);
     bus_local <= dec(M+(2*N)-1 downto M+N);
     bus_out <= dec(M+(3*N)-1 downto M+(2*N));
-
+    
+    
+    -- Dispatching the window to its bus
+    DISP_WINi: for i in 0 to F-1 generate
+        bus_win(i) <= (others => win(i)); -- (7 downto 0) <= win(i);
+    end generate DISP_WINi;
 
     -- Dispatching the LOCAL, IN, OUT buses into their array
     -- beucase for each bus we have #_WINDOW of them
@@ -75,7 +76,7 @@ begin
 
 
 
-    -- Connecting the LOCAL bus: 
+    -- Connecting the LOCAL bus, layer 0 ==> layer 1
     LOGIC_BUS_LOCALi: for i in 0 to F-1 generate
 
         -- An AND with the current window
@@ -84,7 +85,7 @@ begin
     end generate LOGIC_BUS_LOCALi;
 
 
-    -- Connecting the IO bus layer 1 to layer 0:
+    -- Connecting the IO bus, layer 0 ==> layer 1
     -- Layer 1 exists only for possible future additions to add some logic to the BUS
     LOGIC_BUS_IOi: for i in 0 to F-1 generate
 
