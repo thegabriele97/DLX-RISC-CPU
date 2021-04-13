@@ -27,9 +27,7 @@ architecture struct of connection_mtx is
     -- Array of buses signals initialization
     signal bus_arr_io: bus_array_t; -- the buses bus_in, bus_out will become one bus_arr_io with an OR gate
     signal bus_arr_local: bus_array_t;
-    
-    -- Array of bus_in but negated (we need to for bus_arr_io)
-    signal bus_arr_in_neg: bus_array_t;
+
 
     -- Array of window-buses 
     -- first index is the window. 
@@ -52,17 +50,19 @@ begin
 
 
     -- Dispatching the LOCAL, IN, OUT buses into their array
-    -- beucase for each bus we have N_OF_WINDOW of them
+    -- beucase for each bus we have #_WINDOW of them
     -- IN and OUT are in OR so single bus after that (towards layer 0)
     DISP_BUS_2_ARRi: for i in 0 to 4 generate
+
         bus_arr_local(i, 0) <= bus_local;
-        bus_arr_io(i, 0) <= bus_in or bus_out;
+        
+        logic_eq0: if (i = 0) generate
+            bus_arr_io(i, 0) <= (bus_in and bus_win(i)) or (bus_out and bus_win(5-1));
+        end generate logic_eq0;
 
-        -- Defining bus_arr_in_neg content as not bus_in
-        bus_arr_in_neg(i, 0) <= not bus_in;
-
-        -- There is only one useful layer, so layer 1 = layer 0
-        bus_arr_in_neg(i, 1) <= bus_arr_in_neg(i, 0);
+        logic_gt0: if (i > 0) generate
+            bus_arr_io(i, 0) <= (bus_in and bus_win(i)) or (bus_out and bus_win(i-1));
+        end generate logic_gt0;
 
     end generate DISP_BUS_2_ARRi;
 
@@ -71,32 +71,17 @@ begin
     -- Connecting the LOCAL bus: 
     LOGIC_BUS_LOCALi: for i in 0 to 4 generate
 
-    -- and with the window
+        -- An AND with the current window
         bus_arr_local(i, 1) <= bus_arr_local(i, 0) and bus_win(i);
 
     end generate LOGIC_BUS_LOCALi;
 
 
-    -- Connecting the IO bus: 
+    -- Connecting the IO bus layer 1 to layer 0:
+    -- Layer 1 exists only for possible future additions to add some logic to the BUS
     LOGIC_BUS_IOi: for i in 0 to 4 generate
 
-        -- and between {
-        --  layer 0
-        --  or (win_i, win_(i-1))
-        --  not io(i-1, 1)
-        --}
-
-        logic_eq0: if (i = 0) generate
-
-            bus_arr_io(i, 1) <= bus_arr_io(i, 0) and not bus_arr_io(5-1, 1) and (bus_win(i) or (bus_win(5 - 1)));
-
-        end generate logic_eq0;
-
-        logic_gt0: if (i > 0) generate
-
-            bus_arr_io(i, 1) <= bus_arr_io(i, 0) and not bus_arr_io(i-1, 1) and (bus_win(i) or (bus_win(i - 1)));
-
-        end generate logic_gt0;
+        bus_arr_io(i, 1) <= bus_arr_io(i, 0);
 
     end generate LOGIC_BUS_IOi;
 
