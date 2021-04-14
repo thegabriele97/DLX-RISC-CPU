@@ -9,23 +9,24 @@ architecture behav of tb_select_block is
     
     component select_block is
         generic(
+            NBIT_DATA:  integer := 64;
             N:          integer := 8; -- number of registers in each IN, OUT, LOCAL
             F:          integer := 5  -- number of windows
         );
         port(
-            regs:           in std_logic_vector(2*N*F-1 downto 0); -- the order is (LSB first): INx - LOCALx ; INx+1 - LOCALx+1, ...
+            regs:           in std_logic_vector(NBIT_DATA*2*N*F-1 downto 0); -- the order is (LSB first): INx - LOCALx ; INx+1 - LOCALx+1, ...
             win:            in std_logic_vector(F-1 downto 0);
-            curr_proc_regs: out std_logic_vector(3*N-1 downto 0) -- the order is (LSB first): IN, LOCAL, OUT
+            curr_proc_regs: out std_logic_vector(NBIT_DATA*3*N-1 downto 0) -- the order is (LSB first): IN, LOCAL, OUT
         );
     end component;
 
-    signal regs: std_logic_vector(2*8*5-1 downto 0);
+    signal regs: std_logic_vector(64*2*8*5-1 downto 0);
     signal win: std_logic_vector(5-1 downto 0);
-    signal cpr: std_logic_vector(3*8-1 downto 0);
+    signal cpr: std_logic_vector(64*3*8-1 downto 0);
 
 begin
 
-    DUT: select_block generic map(8, 5) port map(regs, win, cpr);
+    DUT: select_block generic map(64, 8, 5) port map(regs, win, cpr);
 
     process
     begin
@@ -35,7 +36,7 @@ begin
 
                 --regs <= std_logic_vector(TO_UNSIGNED(j, regs'length));
                 regs <= (others => '0');
-                regs(j) <= '1';
+                regs(64*j) <= '1';
 
                 win <= (others => '0');
                 win(i) <= '1';
