@@ -1,7 +1,7 @@
 library IEEE;
 use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
-use WORK.all;
+use WORK.utils.all;
 
 entity windowing_rf is
     generic(
@@ -38,9 +38,10 @@ end windowing_rf;
 
 architecture mix of windowing_rf is
 
-    component register IS
+    component reg_generic IS
         GENERIC (
-            N: integer := 4
+            N:          integer := 4;
+            RSTVAL:     integer := 0
         );
         PORT(
             D:          IN std_logic_vector (N-1 DOWNTO 0);
@@ -51,76 +52,173 @@ architecture mix of windowing_rf is
         );
     END component;
 
-    ENTITY decoder IS
+    component decoder IS
         GENERIC (
             N: integer := 4
         );
         PORT(
-            Q:      IN std_logic_vector(N-1 downto 0)
+            Q:      IN std_logic_vector(N-1 downto 0);
             Y:      OUT std_logic_vector(2**N-1 downto 0)
         );
-    END ENTITY;
+    END component;
 
-    ENTITY mux IS
+    component mux IS
         GENERIC (
-            N: integer := 4, -- number of bits per port
+            N: integer := 4; -- number of bits per port
             M: integer := 2  -- number of port
         );
         PORT(
-            S:      IN std_logic_vector(f_log2(M)-1 downto 0)
-            Q:      IN std_logic_vector(M*N-1 downto 0)
+            S:      IN std_logic_vector(f_log2(M)-1 downto 0);
+            Q:      IN std_logic_vector(M*N-1 downto 0);
             Y:      OUT std_logic_vector(N downto 0)
         );
-    END ENTITY;
+    END component;
 
-    signal en_regi: std_logic_vector(M + N * (3 + (F - 1) * 2) - 1 downto 0);
-    signal en_dec: std_logic_vector(M + N * (3 + (F - 1) * 2) - 1 downto 0);
-    signal en_cwp: std_logic_vector(N * (3 + (F - 1) * 2) - 1 downto 0);
+    component connection_mtx is
+        generic(
+            M:          integer := 8; -- number of global register
+            N:          integer := 8; -- number of registers in each IN, OUT, LOCAL
+            F:          integer := 5  -- number of windows
+        );
+        port(
+            dec:            in std_logic_vector((M + N*3)-1 downto 0);
+            win:            in std_logic_vector(F-1 downto 0);
+            sel:            out std_logic_vector((M + (N*2) * F)-1 downto 0)
+        );
+    end component;
+
+    component select_block is
+        generic(
+            NBIT_DATA:  integer := 64;
+            N:          integer := 8; -- number of registers in each IN, OUT, LOCAL
+            F:          integer := 5  -- number of windows
+        );
+        port(
+            regs:           in std_logic_vector(NBIT_DATA*2*N*F-1 downto 0); -- the order is (LSB first): INx - LOCALx ; INx+1 - LOCALx+1, ...
+            win:            in std_logic_vector(F-1 downto 0);
+            curr_proc_regs: out std_logic_vector(NBIT_DATA*3*N-1 downto 0) -- the order is (LSB first): IN, LOCAL, OUT
+        );
+    end component;
+
+    signal dec_output : std_logic_vector(3*N+M-1 downto 0);
+    signal c_win: std_logic_vector(F-1 downto 0);
+    signal en_regi: std_logic_vector(M+2*N*F-1 downto 0);
+
+    signal bus_reg_dataout: std_logic_vector(NBIT_DATA*2*N*F-1 downto 0);
+    signal bus_global_dataout: std_logic_vector(NBIT_DATA*M-1 downto 0);
+
+    signal bus_selected_win_data: std_logic_vector(NBIT_DATA*3*N-1 downto 0);
+    signal bus_complete_win_data: std_logic_vector(NBIT_DATA*(M + 3*N)-1 downto 0);
+
+    signal internal_out1: std_logic_vector(NBIT_DATA-1 downto 0);
+    signal internal_out2: std_logic_vector(NBIT_DATA-1 downto 0);
 
 begin
 
     -- SWP
-    SWP: register generic map(N => F)
-        port map(
-            Clk => CLK,
-            Rst => RESET,
-            ----------------------
-        );
+    --SWP: register generic map(N => F)
+    --    port map(
+    --        Clk => CLK,
+    --        Rst => RESET,
+    --        ----------------------
+    --    );
 
     -- CWP
-    CWP: register generic map(N => F)
+    CWP: reg_generic generic map(N => F, RSTVAL => 1)
         port map(
             Clk => CLK,
             Rst => RESET,
-            Q => ---------
+            Enable => '1',
+            D => "00001",
+            Q => c_win
+        );
+
+
+    SEL_BLK: select_block generic map(NBIT_DATA, N, F) 
+        port map(
+            regs => bus_reg_dataout,
+            win => c_win,
+            curr_proc_regs => bus_selected_win_data
+        );
+
+
+    bus_complete_win_data <= bus_selected_win_data & bus_global_dataout;
+
+
+    RDPORT0: mux generic map(N => NBIT_DATA, M => M + 3*N)
+        port map(
+            S => ADD_RD1,
+            Q => bus_complete_win_data,
+            Y => internal_out1
+        );
+
+    RDPORT0_OUTREG: reg_generic generic map(N => NBIT_DATA, RSTVAL => 0)
+        port map(
+            Clk => CLK,
+            Rst => RESET,
+            Enable => RD1,
+            D => internal_out1,
+            Q => OUT1
+        );
+
+
+    RDPORT1: mux generic map(N => NBIT_DATA, M => M + 3*N)
+        port map(
+            S => ADD_RD2,
+            Q => bus_complete_win_data,
+            Y => internal_out2
+        );
+
+    RDPORT1_OUTREG: reg_generic generic map(N => NBIT_DATA, RSTVAL => 0)
+        port map(
+            Clk => CLK,
+            Rst => RESET,
+            Enable => RD2,
+            D => internal_out2,
+            Q => OUT2
         );
 
 
     -- Registers STACK
-    REGS: for i in 0 to (M + N * (3 + (F - 1) * 2) - 1) generate
+    REGS: for i in 0 to ((M + (N*2) * F)-1) generate
 
-        REGi: register generic map(N => NBIT_DATA)
-        port map(
-            Clk => CLK,
-            Rst => RESET,
-            Enable => en_regi(i),
-            ---------------------
-        );
+        GLOB_BLK: if (i < M) generate
+            BLOCK_GLOB: reg_generic generic map(N => NBIT_DATA, RSTVAL => 0)
+                port map(
+                    Clk => CLK,
+                    Rst => RESET,
+                    Enable => en_regi(i),
+                    D => DATAIN,
+                    Q => bus_global_dataout(i*NBIT_DATA+NBIT_DATA-1 downto i*NBIT_DATA)
+                );
+        end generate GLOB_BLK;
+
+        PROC_BLOCKSi: if (not (i < M)) generate
+            BLOCKi: reg_generic generic map(N => NBIT_DATA, RSTVAL => 0)
+                port map(
+                    Clk => CLK,
+                    Rst => RESET,
+                    Enable => en_regi(i),
+                    D => DATAIN,
+                    Q => bus_reg_dataout((i-M)*NBIT_DATA+NBIT_DATA-1 downto (i-M)*NBIT_DATA)
+                );
+        end generate PROC_BLOCKSi;
 
     end generate REGS;
+
+
+    ConnMtx: connection_mtx generic map(M, N, F)
+        port map(
+            dec => dec_output,
+            win => c_win,
+            sel => en_regi
+        );
 
     DEC: decoder generic map(N => NBIT_ADD)
         port map(
             Q => ADD_WR,
-            Y => en_dec(i)
-        );
-
-    
-    -- global always active: en_regi driven only by decoder
-    en_regi(M-1 downto 0) <= en_dec(M-1 downto 0);
-
-    -- in, local, out: en_regi driven by decoder AND cwp
-    en_regi <= en_dec(M + N * (3 + (F - 1) * 2) - 1 downto M) and en_cwp(N * (3 + (F - 1) * 2) - 1 downto 0);
+            Y => dec_output
+        );  
 
     
 end mix;

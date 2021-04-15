@@ -12,69 +12,560 @@
 # //  is prohibited from disclosure under the Trade Secrets Act,
 # //  18 U.S.C. Section 1905.
 # //
-vcom connection_mtx.vhd
+vcom utils.vhd
 # QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 20:03:08 on Apr 13,2021
-# vcom -reportprogress 300 connection_mtx.vhd 
+# Start time: 09:12:23 on Apr 15,2021
+# vcom -reportprogress 300 utils.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
 # -- Loading package std_logic_1164
 # -- Loading package NUMERIC_STD
-# ** Error: connection_mtx.vhd(3): Bad selected name in USE clause.
-# ** Note: connection_mtx.vhd(6): VHDL Compiler exiting
-# End time: 20:03:08 on Apr 13,2021, Elapsed time: 0:00:00
+# -- Loading package MATH_REAL
+# -- Compiling package utils
+# -- Compiling package body utils
+# -- Loading package utils
+# End time: 09:12:23 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom mux.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:12:25 on Apr 15,2021
+# vcom -reportprogress 300 mux.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Loading package utils
+# -- Compiling entity mux
+# -- Compiling architecture behav of mux
+# End time: 09:12:25 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom tb_mux.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:12:27 on Apr 15,2021
+# vcom -reportprogress 300 tb_mux.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Loading package utils
+# -- Compiling entity tb_mux
+# -- Compiling architecture testbench of tb_mux
+# End time: 09:12:27 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vsim -t 1ns work.tb_mux
+# vsim -t 1ns work.tb_mux 
+# Start time: 09:12:46 on Apr 15,2021
+# ** Note: (vsim-3812) Design is being optimized...
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading ieee.math_real(body)
+# Loading work.utils(body)
+# Loading work.tb_mux(testbench)#1
+run 10 ns
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ns  Iteration: 0  Instance: /tb_mux/DUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ns  Iteration: 0  Instance: /tb_mux/DUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ns  Iteration: 0  Instance: /tb_mux/DUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ns  Iteration: 0  Instance: /tb_mux/DUT
+vcom mux.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:15:03 on Apr 15,2021
+# vcom -reportprogress 300 mux.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Loading package utils
+# -- Compiling entity mux
+# -- Compiling architecture behav of mux
+# End time: 09:15:03 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+restart -f
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading ieee.math_real(body)
+# Loading work.utils(body)
+# Loading work.tb_mux(testbench)#1
+run 10 ns
+# ** Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+#    Time: 0 ns  Iteration: 0  Instance: /tb_mux/DUT
+# ** Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+#    Time: 0 ns  Iteration: 0  Instance: /tb_mux/DUT
+# ** Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+#    Time: 0 ns  Iteration: 0  Instance: /tb_mux/DUT
+# ** Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+#    Time: 0 ns  Iteration: 0  Instance: /tb_mux/DUT
+vcom mux.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:15:28 on Apr 15,2021
+# vcom -reportprogress 300 mux.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Loading package utils
+# -- Compiling entity mux
+# -- Compiling architecture behav of mux
+# End time: 09:15:28 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+restart -f
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading ieee.math_real(body)
+# Loading work.utils(body)
+# Loading work.tb_mux(testbench)#1
+run 10 ns
+# ** Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+#    Time: 0 ns  Iteration: 0  Instance: /tb_mux/DUT
+# ** Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+#    Time: 0 ns  Iteration: 0  Instance: /tb_mux/DUT
+# ** Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+#    Time: 0 ns  Iteration: 0  Instance: /tb_mux/DUT
+# ** Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+#    Time: 0 ns  Iteration: 0  Instance: /tb_mux/DUT
+# ** Fatal: (vsim-3420) Array lengths do not match. Left is 8 (7 downto 0). Right is 16 (15 downto 0).
+#    Time: 0 ns  Iteration: 1  Process: /tb_mux/DUT/line__21 File: mux.vhd
+# Fatal error in ForLoop loop at mux.vhd line 26
+# 
+# HDL call sequence:
+# Stopped at mux.vhd 26 ForLoop loop
+# 
+vcom mux.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:15:47 on Apr 15,2021
+# vcom -reportprogress 300 mux.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Loading package utils
+# -- Compiling entity mux
+# -- Compiling architecture behav of mux
+# End time: 09:15:47 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+restart -f
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading ieee.math_real(body)
+# Loading work.utils(body)
+# Loading work.tb_mux(testbench)#1
+run 10 ns
+# ** Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+#    Time: 0 ns  Iteration: 0  Instance: /tb_mux/DUT
+# ** Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+#    Time: 0 ns  Iteration: 0  Instance: /tb_mux/DUT
+# ** Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+#    Time: 0 ns  Iteration: 0  Instance: /tb_mux/DUT
+# ** Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+#    Time: 0 ns  Iteration: 0  Instance: /tb_mux/DUT
+vcom mux.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:18:38 on Apr 15,2021
+# vcom -reportprogress 300 mux.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Loading package utils
+# -- Compiling entity mux
+# -- Compiling architecture behav of mux
+# End time: 09:18:38 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+restart -f
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading ieee.math_real(body)
+# Loading work.utils(body)
+# Loading work.tb_mux(testbench)#1
+run 10 ns
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ns  Iteration: 0  Instance: /tb_mux/DUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ns  Iteration: 0  Instance: /tb_mux/DUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ns  Iteration: 0  Instance: /tb_mux/DUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ns  Iteration: 0  Instance: /tb_mux/DUT
+vcom mux.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:18:55 on Apr 15,2021
+# vcom -reportprogress 300 mux.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Loading package utils
+# -- Compiling entity mux
+# -- Compiling architecture behav of mux
+# End time: 09:18:55 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+restart -f
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading ieee.math_real(body)
+# Loading work.utils(body)
+# Loading work.tb_mux(testbench)#1
+run 10 ns
+# ** Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+#    Time: 0 ns  Iteration: 0  Instance: /tb_mux/DUT
+# ** Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+#    Time: 0 ns  Iteration: 0  Instance: /tb_mux/DUT
+# ** Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+#    Time: 0 ns  Iteration: 0  Instance: /tb_mux/DUT
+# ** Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+#    Time: 0 ns  Iteration: 0  Instance: /tb_mux/DUT
+vcom mux.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:19:12 on Apr 15,2021
+# vcom -reportprogress 300 mux.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Loading package utils
+# -- Compiling entity mux
+# -- Compiling architecture behav of mux
+# End time: 09:19:12 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+restart -f
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading ieee.math_real(body)
+# Loading work.utils(body)
+# Loading work.tb_mux(testbench)#1
+run 10 ns
+# ** Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+#    Time: 0 ns  Iteration: 0  Instance: /tb_mux/DUT
+# ** Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+#    Time: 0 ns  Iteration: 0  Instance: /tb_mux/DUT
+# ** Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+#    Time: 0 ns  Iteration: 0  Instance: /tb_mux/DUT
+# ** Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+#    Time: 0 ns  Iteration: 0  Instance: /tb_mux/DUT
+vcom mux.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:20:06 on Apr 15,2021
+# vcom -reportprogress 300 mux.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Loading package utils
+# -- Compiling entity mux
+# -- Compiling architecture behav of mux
+# End time: 09:20:06 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+restart -f
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading ieee.math_real(body)
+# Loading work.utils(body)
+# Loading work.tb_mux(testbench)#1
+run 10 ns
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ns  Iteration: 0  Instance: /tb_mux/DUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ns  Iteration: 0  Instance: /tb_mux/DUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ns  Iteration: 0  Instance: /tb_mux/DUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ns  Iteration: 0  Instance: /tb_mux/DUT
+restart -f
+# ** Note: (vsim-8009) Loading existing optimized design _opt1
+add wave *
+run 10 ns
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ns  Iteration: 0  Instance: /tb_mux/DUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ns  Iteration: 0  Instance: /tb_mux/DUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ns  Iteration: 0  Instance: /tb_mux/DUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ns  Iteration: 0  Instance: /tb_mux/DUT
+vcom mux.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:24:12 on Apr 15,2021
+# vcom -reportprogress 300 mux.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Loading package utils
+# -- Compiling entity mux
+# -- Compiling architecture behav of mux
+# End time: 09:24:12 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+restart -f
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading ieee.math_real(body)
+# Loading work.utils(body)
+# Loading work.tb_mux(testbench)#1
+run 10 ns
+vcom mux.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:25:44 on Apr 15,2021
+# vcom -reportprogress 300 mux.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Loading package utils
+# -- Compiling entity mux
+# -- Compiling architecture behav of mux
+# End time: 09:25:44 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+restart -f
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading ieee.math_real(body)
+# Loading work.utils(body)
+# Loading work.tb_mux(testbench)#1
+run 10 ns
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ns  Iteration: 1  Instance: /tb_mux/DUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ns  Iteration: 1  Instance: /tb_mux/DUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ns  Iteration: 1  Instance: /tb_mux/DUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ns  Iteration: 1  Instance: /tb_mux/DUT
+vcom mux.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:26:53 on Apr 15,2021
+# vcom -reportprogress 300 mux.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Loading package utils
+# -- Compiling entity mux
+# -- Compiling architecture behav of mux
+# End time: 09:26:53 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+restart -f
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading ieee.math_real(body)
+# Loading work.utils(body)
+# Loading work.tb_mux(testbench)#1
+run 10 ns
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ns  Iteration: 0  Instance: /tb_mux/DUT
+vcom mux.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:27:20 on Apr 15,2021
+# vcom -reportprogress 300 mux.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Loading package utils
+# -- Compiling entity mux
+# -- Compiling architecture behav of mux
+# End time: 09:27:20 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+restart -f
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading ieee.math_real(body)
+# Loading work.utils(body)
+# Loading work.tb_mux(testbench)#1
+run 10 ns
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ns  Iteration: 0  Instance: /tb_mux/DUT
+restart -f
+# ** Note: (vsim-8009) Loading existing optimized design _opt1
+source compile.script
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:36:19 on Apr 15,2021
+# vcom -reportprogress 300 mux.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Loading package utils
+# -- Compiling entity mux
+# -- Compiling architecture behav of mux
+# End time: 09:36:19 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:36:19 on Apr 15,2021
+# vcom -reportprogress 300 decoder.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity decoder
+# ** Error: decoder.vhd(11): (vcom-1136) Unknown identifier "Y".
+# ** Error: decoder.vhd(11): Bad resolution function (STD_LOGIC_VECTOR) for type (error).
+# ** Error: decoder.vhd(11): near ":": (vcom-1576) expecting ';' or ')'.
+# End time: 09:36:19 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 3, Warnings: 0
+# /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
+source compile.script
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:36:41 on Apr 15,2021
+# vcom -reportprogress 300 mux.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Loading package utils
+# -- Compiling entity mux
+# -- Compiling architecture behav of mux
+# End time: 09:36:41 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:36:41 on Apr 15,2021
+# vcom -reportprogress 300 decoder.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity decoder
+# -- Compiling architecture Behavioural of nbit_register
+# ** Error: (vcom-11) Could not find work.nbit_register.
+# ** Note: decoder.vhd(15): VHDL Compiler exiting
+# End time: 09:36:41 on Apr 15,2021, Elapsed time: 0:00:00
 # Errors: 1, Warnings: 0
 # /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
-vcom connection_mtx.vhd
+source compile.script
 # QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 20:03:24 on Apr 13,2021
-# vcom -reportprogress 300 connection_mtx.vhd 
+# Start time: 09:37:04 on Apr 15,2021
+# vcom -reportprogress 300 mux.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
 # -- Loading package std_logic_1164
 # -- Loading package NUMERIC_STD
-# -- Compiling entity connection_mtx
-# -- Compiling architecture struct of connection_mtx
-# ** Error: connection_mtx.vhd(17): near "std_logic_vector": syntax error
-# ** Error: connection_mtx.vhd(18): (vcom-1136) Unknown identifier "bus_t".
-# ** Error: connection_mtx.vhd(19): (vcom-1136) Unknown identifier "bus_t".
-# ** Error: connection_mtx.vhd(22): (vcom-1136) Unknown identifier "bus_t".
-# ** Error: connection_mtx.vhd(23): (vcom-1136) Unknown identifier "bus_t".
-# ** Error: connection_mtx.vhd(24): (vcom-1136) Unknown identifier "bus_t".
-# ** Error: connection_mtx.vhd(25): (vcom-1136) Unknown identifier "bus_t".
-# ** Error: connection_mtx.vhd(40): Target type (error) in signal assignment is different from expression type.
-# ** Error: connection_mtx.vhd(40): Cannot resolve indexed name (type ieee.std_logic_1164.STD_ULOGIC) as type (error).
-# ** Error: connection_mtx.vhd(40): (vcom-1076) OTHERS choice cannot be used in unconstrained array aggregate.
-# ** Error: connection_mtx.vhd(44): Cannot resolve slice name as type (error).
-# ** Error: connection_mtx.vhd(45): Cannot resolve slice name as type (error).
-# ** Error: connection_mtx.vhd(46): near "bus_local": (vcom-1576) expecting ';'.
-# ** Error: connection_mtx.vhd(47): Cannot resolve slice name as type (error).
-# ** Error: connection_mtx.vhd(55): (vcom-1581) No feasible entries for infix operator 'or'.
-# ** Error: connection_mtx.vhd(55): Bad right hand side (infix expression) in signal assignment.
-# ** Error: connection_mtx.vhd(67): (vcom-1581) No feasible entries for infix operator 'and'.
-# ** Error: connection_mtx.vhd(67): Bad right hand side (infix expression) in signal assignment.
-# ** Error: connection_mtx.vhd(83): (vcom-1581) No feasible entries for prefix operator 'not'.
-# ** Error: connection_mtx.vhd(83): (vcom-1590) Bad expression in right operand of infix expression 'and'.
-# ** Error: connection_mtx.vhd(83): (vcom-1581) No feasible entries for infix operator 'or'.
-# ** Error: connection_mtx.vhd(83): (vcom-1590) Bad expression in left operand of infix expression 'and'.
-# ** Error: connection_mtx.vhd(83): (vcom-1590) Bad expression in right operand of infix expression 'and'.
-# ** Error: connection_mtx.vhd(83): Bad right hand side (infix expression) in signal assignment.
-# ** Error: connection_mtx.vhd(89): (vcom-1581) No feasible entries for prefix operator 'not'.
-# ** Error: connection_mtx.vhd(89): (vcom-1590) Bad expression in right operand of infix expression 'and'.
-# ** Error: connection_mtx.vhd(89): (vcom-1581) No feasible entries for infix operator 'or'.
-# ** Error: connection_mtx.vhd(89): (vcom-1590) Bad expression in left operand of infix expression 'and'.
-# ** Error: connection_mtx.vhd(89): (vcom-1590) Bad expression in right operand of infix expression 'and'.
-# ** Error: connection_mtx.vhd(89): Bad right hand side (infix expression) in signal assignment.
-# ** Error: connection_mtx.vhd(98): Target type ieee.std_logic_1164.STD_LOGIC_VECTOR in signal assignment is different from expression type (error).
-# ** Error: connection_mtx.vhd(101): Target type ieee.std_logic_1164.STD_LOGIC_VECTOR in signal assignment is different from expression type (error).
-# ** Error: connection_mtx.vhd(102): Target type ieee.std_logic_1164.STD_LOGIC_VECTOR in signal assignment is different from expression type (error).
-# ** Note: connection_mtx.vhd(106): VHDL Compiler exiting
-# End time: 20:03:24 on Apr 13,2021, Elapsed time: 0:00:00
-# Errors: 33, Warnings: 0
+# -- Loading package MATH_REAL
+# -- Loading package utils
+# -- Compiling entity mux
+# -- Compiling architecture behav of mux
+# End time: 09:37:04 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:37:05 on Apr 15,2021
+# vcom -reportprogress 300 decoder.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity decoder
+# -- Compiling architecture Behavioural of nbit_register
+# ** Error: (vcom-11) Could not find work.nbit_register.
+# ** Note: decoder.vhd(15): VHDL Compiler exiting
+# End time: 09:37:05 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 1, Warnings: 0
 # /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
-vcom connection_mtx.vhd
+source compile.script
 # QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 20:04:05 on Apr 13,2021
+# Start time: 09:37:20 on Apr 15,2021
+# vcom -reportprogress 300 mux.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Loading package utils
+# -- Compiling entity mux
+# -- Compiling architecture behav of mux
+# End time: 09:37:20 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:37:20 on Apr 15,2021
+# vcom -reportprogress 300 decoder.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity decoder
+# -- Compiling architecture Behavioural of decoder
+# ** Error: decoder.vhd(19): near ":": syntax error
+# ** Note: decoder.vhd(27): VHDL Compiler exiting
+# End time: 09:37:20 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 1, Warnings: 0
+# /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
+source compile.script
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:37:30 on Apr 15,2021
+# vcom -reportprogress 300 mux.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Loading package utils
+# -- Compiling entity mux
+# -- Compiling architecture behav of mux
+# End time: 09:37:31 on Apr 15,2021, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:37:31 on Apr 15,2021
+# vcom -reportprogress 300 decoder.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity decoder
+# -- Compiling architecture Behavioural of decoder
+# End time: 09:37:31 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:37:31 on Apr 15,2021
 # vcom -reportprogress 300 connection_mtx.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -82,15 +573,893 @@ vcom connection_mtx.vhd
 # -- Loading package NUMERIC_STD
 # -- Compiling entity connection_mtx
 # -- Compiling architecture struct of connection_mtx
-# ** Error: connection_mtx.vhd(46): near "bus_local": (vcom-1576) expecting ';'.
-# ** Error: connection_mtx.vhd(67): (vcom-1152) Index value 2 is out of index range 0 to 1 of work.connection_mtx(struct).bus_array_t.
-# ** Note: connection_mtx.vhd(106): VHDL Compiler exiting
-# End time: 20:04:05 on Apr 13,2021, Elapsed time: 0:00:00
+# End time: 09:37:31 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:37:31 on Apr 15,2021
+# vcom -reportprogress 300 register.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# ** Error: register.vhd(5): near "register": (vcom-1576) expecting IDENTIFIER.
+# End time: 09:37:31 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 1, Warnings: 0
+# /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
+source compile.script
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:38:10 on Apr 15,2021
+# vcom -reportprogress 300 mux.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Loading package utils
+# -- Compiling entity mux
+# -- Compiling architecture behav of mux
+# End time: 09:38:11 on Apr 15,2021, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:38:11 on Apr 15,2021
+# vcom -reportprogress 300 decoder.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity decoder
+# -- Compiling architecture Behavioural of decoder
+# End time: 09:38:11 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:38:11 on Apr 15,2021
+# vcom -reportprogress 300 connection_mtx.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity connection_mtx
+# -- Compiling architecture struct of connection_mtx
+# End time: 09:38:11 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:38:11 on Apr 15,2021
+# vcom -reportprogress 300 register.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# ** Error: register.vhd(5): near "register": (vcom-1576) expecting IDENTIFIER.
+# End time: 09:38:11 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 1, Warnings: 0
+# /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
+source compile.script
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:40:00 on Apr 15,2021
+# vcom -reportprogress 300 mux.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Loading package utils
+# -- Compiling entity mux
+# -- Compiling architecture behav of mux
+# End time: 09:40:00 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:40:00 on Apr 15,2021
+# vcom -reportprogress 300 decoder.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity decoder
+# -- Compiling architecture Behavioural of decoder
+# End time: 09:40:00 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:40:00 on Apr 15,2021
+# vcom -reportprogress 300 connection_mtx.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity connection_mtx
+# -- Compiling architecture struct of connection_mtx
+# End time: 09:40:00 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:40:00 on Apr 15,2021
+# vcom -reportprogress 300 register.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# ** Error: register.vhd(5): near "register": (vcom-1576) expecting IDENTIFIER.
+# End time: 09:40:00 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 1, Warnings: 0
+# /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
+source compile.script
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:40:12 on Apr 15,2021
+# vcom -reportprogress 300 mux.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Loading package utils
+# -- Compiling entity mux
+# -- Compiling architecture behav of mux
+# End time: 09:40:12 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:40:12 on Apr 15,2021
+# vcom -reportprogress 300 decoder.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity decoder
+# -- Compiling architecture Behavioural of decoder
+# End time: 09:40:12 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:40:12 on Apr 15,2021
+# vcom -reportprogress 300 connection_mtx.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity connection_mtx
+# -- Compiling architecture struct of connection_mtx
+# End time: 09:40:13 on Apr 15,2021, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:40:13 on Apr 15,2021
+# vcom -reportprogress 300 register.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# ** Error: register.vhd(5): near "register": (vcom-1576) expecting IDENTIFIER.
+# End time: 09:40:13 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 1, Warnings: 0
+# /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
+source compile.script
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:40:54 on Apr 15,2021
+# vcom -reportprogress 300 mux.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Loading package utils
+# -- Compiling entity mux
+# -- Compiling architecture behav of mux
+# End time: 09:40:54 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:40:54 on Apr 15,2021
+# vcom -reportprogress 300 decoder.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity decoder
+# -- Compiling architecture Behavioural of decoder
+# End time: 09:40:54 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:40:55 on Apr 15,2021
+# vcom -reportprogress 300 connection_mtx.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity connection_mtx
+# -- Compiling architecture struct of connection_mtx
+# End time: 09:40:55 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:40:55 on Apr 15,2021
+# vcom -reportprogress 300 register.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# ** Error: register.vhd(5): near "register": (vcom-1576) expecting IDENTIFIER.
+# End time: 09:40:55 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 1, Warnings: 0
+# /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
+source compile.script
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:41:00 on Apr 15,2021
+# vcom -reportprogress 300 mux.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Loading package utils
+# -- Compiling entity mux
+# -- Compiling architecture behav of mux
+# End time: 09:41:01 on Apr 15,2021, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:41:01 on Apr 15,2021
+# vcom -reportprogress 300 decoder.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity decoder
+# -- Compiling architecture Behavioural of decoder
+# End time: 09:41:01 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:41:01 on Apr 15,2021
+# vcom -reportprogress 300 connection_mtx.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity connection_mtx
+# -- Compiling architecture struct of connection_mtx
+# End time: 09:41:01 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:41:01 on Apr 15,2021
+# vcom -reportprogress 300 register.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# ** Error: register.vhd(4): near "register": (vcom-1576) expecting IDENTIFIER.
+# End time: 09:41:01 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 1, Warnings: 0
+# /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
+source compile.script
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:41:31 on Apr 15,2021
+# vcom -reportprogress 300 mux.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Loading package utils
+# -- Compiling entity mux
+# -- Compiling architecture behav of mux
+# End time: 09:41:31 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:41:32 on Apr 15,2021
+# vcom -reportprogress 300 decoder.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity decoder
+# -- Compiling architecture Behavioural of decoder
+# End time: 09:41:32 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:41:32 on Apr 15,2021
+# vcom -reportprogress 300 connection_mtx.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity connection_mtx
+# -- Compiling architecture struct of connection_mtx
+# End time: 09:41:32 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:41:32 on Apr 15,2021
+# vcom -reportprogress 300 register.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity zdsadw
+# ** Error: register.vhd(17): near "register": (vcom-1576) expecting IDENTIFIER.
+# End time: 09:41:32 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 1, Warnings: 0
+# /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
+source compile.script
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:42:41 on Apr 15,2021
+# vcom -reportprogress 300 mux.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Loading package utils
+# -- Compiling entity mux
+# -- Compiling architecture behav of mux
+# End time: 09:42:41 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:42:42 on Apr 15,2021
+# vcom -reportprogress 300 decoder.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity decoder
+# -- Compiling architecture Behavioural of decoder
+# End time: 09:42:42 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:42:42 on Apr 15,2021
+# vcom -reportprogress 300 connection_mtx.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity connection_mtx
+# -- Compiling architecture struct of connection_mtx
+# End time: 09:42:42 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:42:42 on Apr 15,2021
+# vcom -reportprogress 300 register.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity zdsadw
+# -- Compiling architecture Behavioural of zdsadw
+# End time: 09:42:42 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:42:42 on Apr 15,2021
+# vcom -reportprogress 300 select_block.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity select_block
+# -- Compiling architecture behav of select_block
+# End time: 09:42:42 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:42:42 on Apr 15,2021
+# vcom -reportprogress 300 windowing_rf.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity windowing_rf
+# -- Compiling architecture mix of windowing_rf
+# ** Error: windowing_rf.vhd(41): near "register": (vcom-1576) expecting IDENTIFIER.
+# End time: 09:42:42 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 1, Warnings: 0
+# /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
+source compile.script
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:43:07 on Apr 15,2021
+# vcom -reportprogress 300 mux.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Loading package utils
+# -- Compiling entity mux
+# -- Compiling architecture behav of mux
+# End time: 09:43:07 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:43:07 on Apr 15,2021
+# vcom -reportprogress 300 decoder.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity decoder
+# -- Compiling architecture Behavioural of decoder
+# End time: 09:43:07 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:43:07 on Apr 15,2021
+# vcom -reportprogress 300 connection_mtx.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity connection_mtx
+# -- Compiling architecture struct of connection_mtx
+# End time: 09:43:07 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:43:07 on Apr 15,2021
+# vcom -reportprogress 300 register.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# ** Error: register.vhd(4): near "register": (vcom-1576) expecting IDENTIFIER.
+# End time: 09:43:07 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 1, Warnings: 0
+# /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
+source compile.script
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:44:16 on Apr 15,2021
+# vcom -reportprogress 300 mux.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Loading package utils
+# -- Compiling entity mux
+# -- Compiling architecture behav of mux
+# End time: 09:44:16 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:44:16 on Apr 15,2021
+# vcom -reportprogress 300 decoder.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity decoder
+# -- Compiling architecture Behavioural of decoder
+# End time: 09:44:17 on Apr 15,2021, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:44:17 on Apr 15,2021
+# vcom -reportprogress 300 connection_mtx.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity connection_mtx
+# -- Compiling architecture struct of connection_mtx
+# End time: 09:44:17 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:44:17 on Apr 15,2021
+# vcom -reportprogress 300 register.vhd 
+# ** Error: (vcom-7) Failed to open design unit file "register.vhd" in read mode.
+# No such file or directory. (errno = ENOENT)
+# End time: 09:44:17 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 1, Warnings: 0
+# /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
+source compile.script
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:44:26 on Apr 15,2021
+# vcom -reportprogress 300 mux.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Loading package utils
+# -- Compiling entity mux
+# -- Compiling architecture behav of mux
+# End time: 09:44:26 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:44:26 on Apr 15,2021
+# vcom -reportprogress 300 decoder.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity decoder
+# -- Compiling architecture Behavioural of decoder
+# End time: 09:44:27 on Apr 15,2021, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:44:27 on Apr 15,2021
+# vcom -reportprogress 300 connection_mtx.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity connection_mtx
+# -- Compiling architecture struct of connection_mtx
+# End time: 09:44:27 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:44:27 on Apr 15,2021
+# vcom -reportprogress 300 reg_generic.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity reg_generic
+# -- Compiling architecture Behavioural of reg_generic
+# End time: 09:44:27 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:44:27 on Apr 15,2021
+# vcom -reportprogress 300 select_block.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity select_block
+# -- Compiling architecture behav of select_block
+# End time: 09:44:27 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:44:27 on Apr 15,2021
+# vcom -reportprogress 300 windowing_rf.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity windowing_rf
+# -- Compiling architecture mix of windowing_rf
+# ** Error: windowing_rf.vhd(60): (vcom-1136) Unknown identifier "Y".
+# ** Error: windowing_rf.vhd(60): Bad resolution function (STD_LOGIC_VECTOR) for type (error).
+# ** Error: windowing_rf.vhd(60): near ":": (vcom-1576) expecting ';' or ')'.
+# End time: 09:44:27 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 3, Warnings: 0
+# /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
+source compile.script
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:44:43 on Apr 15,2021
+# vcom -reportprogress 300 mux.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Loading package utils
+# -- Compiling entity mux
+# -- Compiling architecture behav of mux
+# End time: 09:44:43 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:44:43 on Apr 15,2021
+# vcom -reportprogress 300 decoder.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity decoder
+# -- Compiling architecture Behavioural of decoder
+# End time: 09:44:43 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:44:43 on Apr 15,2021
+# vcom -reportprogress 300 connection_mtx.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity connection_mtx
+# -- Compiling architecture struct of connection_mtx
+# End time: 09:44:43 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:44:43 on Apr 15,2021
+# vcom -reportprogress 300 reg_generic.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity reg_generic
+# -- Compiling architecture Behavioural of reg_generic
+# End time: 09:44:44 on Apr 15,2021, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:44:44 on Apr 15,2021
+# vcom -reportprogress 300 select_block.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity select_block
+# -- Compiling architecture behav of select_block
+# End time: 09:44:44 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:44:44 on Apr 15,2021
+# vcom -reportprogress 300 windowing_rf.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity windowing_rf
+# -- Compiling architecture mix of windowing_rf
+# ** Error: windowing_rf.vhd(66): near ",": (vcom-1576) expecting ';' or ')'.
+# End time: 09:44:44 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 1, Warnings: 0
+# /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
+source compile.script
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:45:07 on Apr 15,2021
+# vcom -reportprogress 300 mux.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Loading package utils
+# -- Compiling entity mux
+# -- Compiling architecture behav of mux
+# End time: 09:45:07 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:45:07 on Apr 15,2021
+# vcom -reportprogress 300 decoder.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity decoder
+# -- Compiling architecture Behavioural of decoder
+# End time: 09:45:07 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:45:07 on Apr 15,2021
+# vcom -reportprogress 300 connection_mtx.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity connection_mtx
+# -- Compiling architecture struct of connection_mtx
+# End time: 09:45:07 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:45:07 on Apr 15,2021
+# vcom -reportprogress 300 reg_generic.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity reg_generic
+# -- Compiling architecture Behavioural of reg_generic
+# End time: 09:45:07 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:45:07 on Apr 15,2021
+# vcom -reportprogress 300 select_block.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity select_block
+# -- Compiling architecture behav of select_block
+# End time: 09:45:08 on Apr 15,2021, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:45:08 on Apr 15,2021
+# vcom -reportprogress 300 windowing_rf.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity windowing_rf
+# -- Compiling architecture mix of windowing_rf
+# ** Error: windowing_rf.vhd(70): (vcom-1136) Unknown identifier "f_log2".
+# ** Error: windowing_rf.vhd(70): (vcom-1591) Bad expression in left bound of range expression.
+# ** Error: windowing_rf.vhd(70): Type error in range expression.
+# ** Error: windowing_rf.vhd(129): (vcom-1035) Formal port "Enable" has OPEN or no actual associated with it.
+# ** Error: windowing_rf.vhd(181): near ")": syntax error
+# ** Error: windowing_rf.vhd(183): Statement cannot be labeled.
+# ** Note: windowing_rf.vhd(190): VHDL Compiler exiting
+# End time: 09:45:08 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 6, Warnings: 0
+# /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
+source compile.script
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:45:30 on Apr 15,2021
+# vcom -reportprogress 300 utils.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Compiling package utils
+# -- Compiling package body utils
+# -- Loading package utils
+# End time: 09:45:30 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:45:30 on Apr 15,2021
+# vcom -reportprogress 300 mux.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Loading package utils
+# -- Compiling entity mux
+# -- Compiling architecture behav of mux
+# End time: 09:45:30 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:45:30 on Apr 15,2021
+# vcom -reportprogress 300 decoder.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity decoder
+# -- Compiling architecture Behavioural of decoder
+# End time: 09:45:31 on Apr 15,2021, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:45:31 on Apr 15,2021
+# vcom -reportprogress 300 connection_mtx.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity connection_mtx
+# -- Compiling architecture struct of connection_mtx
+# End time: 09:45:31 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:45:31 on Apr 15,2021
+# vcom -reportprogress 300 reg_generic.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity reg_generic
+# -- Compiling architecture Behavioural of reg_generic
+# End time: 09:45:31 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:45:31 on Apr 15,2021
+# vcom -reportprogress 300 select_block.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity select_block
+# -- Compiling architecture behav of select_block
+# End time: 09:45:31 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:45:31 on Apr 15,2021
+# vcom -reportprogress 300 windowing_rf.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Loading package utils
+# -- Compiling entity windowing_rf
+# -- Compiling architecture mix of windowing_rf
+# ** Error: windowing_rf.vhd(129): (vcom-1035) Formal port "Enable" has OPEN or no actual associated with it.
+# ** Error: windowing_rf.vhd(181): near ")": syntax error
+# ** Error: windowing_rf.vhd(183): Statement cannot be labeled.
+# ** Note: windowing_rf.vhd(190): VHDL Compiler exiting
+# End time: 09:45:31 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 3, Warnings: 0
+# /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
+source compile.script
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:45:57 on Apr 15,2021
+# vcom -reportprogress 300 utils.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Compiling package utils
+# -- Compiling package body utils
+# -- Loading package utils
+# End time: 09:45:57 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:45:57 on Apr 15,2021
+# vcom -reportprogress 300 mux.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Loading package utils
+# -- Compiling entity mux
+# -- Compiling architecture behav of mux
+# End time: 09:45:58 on Apr 15,2021, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:45:58 on Apr 15,2021
+# vcom -reportprogress 300 decoder.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity decoder
+# -- Compiling architecture Behavioural of decoder
+# End time: 09:45:58 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:45:58 on Apr 15,2021
+# vcom -reportprogress 300 connection_mtx.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity connection_mtx
+# -- Compiling architecture struct of connection_mtx
+# End time: 09:45:58 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:45:58 on Apr 15,2021
+# vcom -reportprogress 300 reg_generic.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity reg_generic
+# -- Compiling architecture Behavioural of reg_generic
+# End time: 09:45:58 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:45:58 on Apr 15,2021
+# vcom -reportprogress 300 select_block.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity select_block
+# -- Compiling architecture behav of select_block
+# End time: 09:45:58 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:45:58 on Apr 15,2021
+# vcom -reportprogress 300 windowing_rf.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Loading package utils
+# -- Compiling entity windowing_rf
+# -- Compiling architecture mix of windowing_rf
+# ** Error: windowing_rf.vhd(182): near ")": syntax error
+# ** Error: windowing_rf.vhd(184): Statement cannot be labeled.
+# ** Note: windowing_rf.vhd(191): VHDL Compiler exiting
+# End time: 09:45:58 on Apr 15,2021, Elapsed time: 0:00:00
 # Errors: 2, Warnings: 0
 # /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
-vcom connection_mtx.vhd
+source compile.script
 # QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 20:04:39 on Apr 13,2021
+# Start time: 09:46:32 on Apr 15,2021
+# vcom -reportprogress 300 utils.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Compiling package utils
+# -- Compiling package body utils
+# -- Loading package utils
+# End time: 09:46:32 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:46:32 on Apr 15,2021
+# vcom -reportprogress 300 mux.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Loading package utils
+# -- Compiling entity mux
+# -- Compiling architecture behav of mux
+# End time: 09:46:32 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:46:32 on Apr 15,2021
+# vcom -reportprogress 300 decoder.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity decoder
+# -- Compiling architecture Behavioural of decoder
+# End time: 09:46:32 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:46:32 on Apr 15,2021
 # vcom -reportprogress 300 connection_mtx.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -98,82 +1467,86 @@ vcom connection_mtx.vhd
 # -- Loading package NUMERIC_STD
 # -- Compiling entity connection_mtx
 # -- Compiling architecture struct of connection_mtx
-# ** Error: connection_mtx.vhd(67): (vcom-1152) Index value 2 is out of index range 0 to 1 of work.connection_mtx(struct).bus_array_t.
-# ** Note: connection_mtx.vhd(106): VHDL Compiler exiting
-# End time: 20:04:39 on Apr 13,2021, Elapsed time: 0:00:00
-# Errors: 1, Warnings: 0
-# /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
-vcom connection_mtx.vhd
+# End time: 09:46:32 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
 # QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 20:04:58 on Apr 13,2021
-# vcom -reportprogress 300 connection_mtx.vhd 
+# Start time: 09:46:32 on Apr 15,2021
+# vcom -reportprogress 300 reg_generic.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity reg_generic
+# -- Compiling architecture Behavioural of reg_generic
+# End time: 09:46:32 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:46:32 on Apr 15,2021
+# vcom -reportprogress 300 select_block.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
 # -- Loading package std_logic_1164
 # -- Loading package NUMERIC_STD
-# -- Compiling entity connection_mtx
-# -- Compiling architecture struct of connection_mtx
-# End time: 20:04:58 on Apr 13,2021, Elapsed time: 0:00:00
+# -- Compiling entity select_block
+# -- Compiling architecture behav of select_block
+# End time: 09:46:33 on Apr 15,2021, Elapsed time: 0:00:01
 # Errors: 0, Warnings: 0
-vcom tb_connection_mtx.vhd
 # QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 20:05:01 on Apr 13,2021
-# vcom -reportprogress 300 tb_connection_mtx.vhd 
+# Start time: 09:46:33 on Apr 15,2021
+# vcom -reportprogress 300 windowing_rf.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
 # -- Loading package std_logic_1164
-# -- Compiling entity tb_connection_mtx
-# -- Compiling architecture behav of tb_connection_mtx
-# ** Error: tb_connection_mtx.vhd(9): near "entity": (vcom-1576) expecting BEGIN.
-# End time: 20:05:01 on Apr 13,2021, Elapsed time: 0:00:00
-# Errors: 1, Warnings: 0
-# /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
-vcom tb_connection_mtx.vhd
-# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 20:06:19 on Apr 13,2021
-# vcom -reportprogress 300 tb_connection_mtx.vhd 
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Compiling entity tb_connection_mtx
-# -- Compiling architecture behav of tb_connection_mtx
-# ** Error: tb_connection_mtx.vhd(34): Illegal target for signal assignment.
-# ** Error: tb_connection_mtx.vhd(34): (vcom-1136) Unknown identifier "mux".
-# ** Error: tb_connection_mtx.vhd(35): Illegal target for signal assignment.
-# ** Error: tb_connection_mtx.vhd(35): (vcom-1136) Unknown identifier "mux".
-# ** Note: tb_connection_mtx.vhd(44): VHDL Compiler exiting
-# End time: 20:06:19 on Apr 13,2021, Elapsed time: 0:00:00
-# Errors: 4, Warnings: 0
-# /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
-vcom tb_connection_mtx.vhd
-# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 20:06:47 on Apr 13,2021
-# vcom -reportprogress 300 tb_connection_mtx.vhd 
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Compiling entity tb_connection_mtx
-# -- Compiling architecture behav of tb_connection_mtx
-# End time: 20:06:47 on Apr 13,2021, Elapsed time: 0:00:00
-# Errors: 0, Warnings: 0
-add log -r *
-# Active logfile is not in simulation mode
-log -r *
-# Active logfile is not in simulation mode
-add wave *
-vsim -t 100ps work.tb_connection_mtx
-# vsim -t 100ps work.tb_connection_mtx 
-# Start time: 20:07:19 on Apr 13,2021
-# ** Note: (vsim-3812) Design is being optimized...
-# ** Error: connection_mtx.vhd(80): (vopt-1152) Index value -1 is out of index range 0 to 4 of work.connection_mtx(struct).win_array_t.
-# ** Note: Vopt Compiler exiting
-# ** Error: (vopt-2064) Compiler back-end code generation process terminated with code 2.
-# Error loading design
-# End time: 20:07:20 on Apr 13,2021, Elapsed time: 0:00:01
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Loading package utils
+# -- Compiling entity windowing_rf
+# -- Compiling architecture mix of windowing_rf
+# ** Error: windowing_rf.vhd(182): near ")": syntax error
+# ** Error: windowing_rf.vhd(184): Statement cannot be labeled.
+# ** Note: windowing_rf.vhd(191): VHDL Compiler exiting
+# End time: 09:46:33 on Apr 15,2021, Elapsed time: 0:00:00
 # Errors: 2, Warnings: 0
-vcom connection_mtx.vhd
+# /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
+source compile.script
 # QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 20:07:54 on Apr 13,2021
+# Start time: 09:46:38 on Apr 15,2021
+# vcom -reportprogress 300 utils.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Compiling package utils
+# -- Compiling package body utils
+# -- Loading package utils
+# End time: 09:46:38 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:46:38 on Apr 15,2021
+# vcom -reportprogress 300 mux.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Loading package utils
+# -- Compiling entity mux
+# -- Compiling architecture behav of mux
+# End time: 09:46:38 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:46:38 on Apr 15,2021
+# vcom -reportprogress 300 decoder.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity decoder
+# -- Compiling architecture Behavioural of decoder
+# End time: 09:46:38 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:46:38 on Apr 15,2021
 # vcom -reportprogress 300 connection_mtx.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -181,447 +1554,690 @@ vcom connection_mtx.vhd
 # -- Loading package NUMERIC_STD
 # -- Compiling entity connection_mtx
 # -- Compiling architecture struct of connection_mtx
-# End time: 20:07:55 on Apr 13,2021, Elapsed time: 0:00:01
+# End time: 09:46:38 on Apr 15,2021, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
-vsim -t 100ps work.tb_connection_mtx
-# vsim -t 100ps work.tb_connection_mtx 
-# Start time: 20:07:57 on Apr 13,2021
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:46:38 on Apr 15,2021
+# vcom -reportprogress 300 reg_generic.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity reg_generic
+# -- Compiling architecture Behavioural of reg_generic
+# End time: 09:46:39 on Apr 15,2021, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:46:39 on Apr 15,2021
+# vcom -reportprogress 300 select_block.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity select_block
+# -- Compiling architecture behav of select_block
+# End time: 09:46:39 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:46:39 on Apr 15,2021
+# vcom -reportprogress 300 windowing_rf.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Loading package utils
+# -- Compiling entity windowing_rf
+# -- Compiling architecture mix of windowing_rf
+# End time: 09:46:39 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom tb_windowing_rf.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:50:17 on Apr 15,2021
+# vcom -reportprogress 300 tb_windowing_rf.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity tb_registerfile_generic
+# -- Compiling architecture testbench of tb_registerfile_generic
+# ** Error (suppressible): tb_windowing_rf.vhd(60): (vcom-1141) Identifier "registerfile_generic" does not identify a component declaration.
+# ** Note: tb_windowing_rf.vhd(79): VHDL Compiler exiting
+# End time: 09:50:17 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 1, Warnings: 0
+# /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
+vcom tb_windowing_rf.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:50:35 on Apr 15,2021
+# vcom -reportprogress 300 tb_windowing_rf.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity tb_registerfile_generic
+# -- Compiling architecture testbench of tb_registerfile_generic
+# End time: 09:50:35 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vsim -t 1ns work.tb_registerfile_generic
+# End time: 09:51:03 on Apr 15,2021, Elapsed time: 0:38:17
+# Errors: 55, Warnings: 0
+# vsim -t 1ns work.tb_registerfile_generic 
+# Start time: 09:51:03 on Apr 15,2021
 # ** Note: (vsim-3812) Design is being optimized...
-# Loading std.standard
-# Loading std.textio(body)
-# Loading ieee.std_logic_1164(body)
-# Loading ieee.numeric_std(body)
-# Loading work.tb_connection_mtx(behav)#1
-log -r *
-run 1 ns
-restart -f
-# ** Note: (vsim-8009) Loading existing optimized design _opt
-add wave *
-run 1 ns
-vcom connection_mtx.vhd
-# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 20:10:53 on Apr 13,2021
-# vcom -reportprogress 300 connection_mtx.vhd 
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Compiling entity connection_mtx
-# -- Compiling architecture struct of connection_mtx
-# End time: 20:10:54 on Apr 13,2021, Elapsed time: 0:00:01
-# Errors: 0, Warnings: 0
-restart -f
-# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
-# Loading std.standard
-# Loading std.textio(body)
-# Loading ieee.std_logic_1164(body)
-# Loading ieee.numeric_std(body)
-# Loading work.tb_connection_mtx(behav)#1
-run 1 ns
-run 1 ns
-run 1 ns
-restart -f
-# ** Note: (vsim-8009) Loading existing optimized design _opt
-run 1 ns
-run 1 ns
-run 1 ns
-run 1 ns
-run 1 ns
-run 1 ns
-run 1 ns
-run 1 ns
-run 1 ns
-run 1 ns
-run 1 ns
-run 1 ns
-run 1 ns
-run 1 ns
-run 1 ns
-run 1 ns
-run 1 ns
-run 1 ns
-run 1 ns
-run 1 ns
-run 1 ns
-run 1 ns
-run 1 ns
-run 1 ns
-run 1 ns
-vcom connection_mtx.vhd
-# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 20:17:28 on Apr 13,2021
-# vcom -reportprogress 300 connection_mtx.vhd 
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Compiling entity connection_mtx
-# -- Compiling architecture struct of connection_mtx
-# ** Error: connection_mtx.vhd(80): (vcom-1581) No feasible entries for infix operator 'and'.
-# ** Error: connection_mtx.vhd(80): (vcom-1590) Bad expression in left operand of infix expression 'and'.
-# ** Error: connection_mtx.vhd(80): Bad right hand side (infix expression) in signal assignment.
-# ** Error: connection_mtx.vhd(86): (vcom-1581) No feasible entries for infix operator 'and'.
-# ** Error: connection_mtx.vhd(86): (vcom-1590) Bad expression in left operand of infix expression 'and'.
-# ** Error: connection_mtx.vhd(86): Bad right hand side (infix expression) in signal assignment.
-# ** Note: connection_mtx.vhd(103): VHDL Compiler exiting
-# End time: 20:17:28 on Apr 13,2021, Elapsed time: 0:00:00
-# Errors: 6, Warnings: 0
-# /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
-vcom connection_mtx.vhd
-# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 20:18:16 on Apr 13,2021
-# vcom -reportprogress 300 connection_mtx.vhd 
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Compiling entity connection_mtx
-# -- Compiling architecture struct of connection_mtx
-# ** Error: connection_mtx.vhd(80): (vcom-1581) No feasible entries for infix operator 'and'.
-# ** Error: connection_mtx.vhd(80): (vcom-1590) Bad expression in left operand of infix expression 'and'.
-# ** Error: connection_mtx.vhd(80): Bad right hand side (infix expression) in signal assignment.
-# ** Error: connection_mtx.vhd(86): (vcom-1581) No feasible entries for infix operator 'and'.
-# ** Error: connection_mtx.vhd(86): (vcom-1590) Bad expression in left operand of infix expression 'and'.
-# ** Error: connection_mtx.vhd(86): Bad right hand side (infix expression) in signal assignment.
-# ** Note: connection_mtx.vhd(103): VHDL Compiler exiting
-# End time: 20:18:16 on Apr 13,2021, Elapsed time: 0:00:00
-# Errors: 6, Warnings: 0
-# /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
-vcom connection_mtx.vhd
-# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 20:19:21 on Apr 13,2021
-# vcom -reportprogress 300 connection_mtx.vhd 
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Compiling entity connection_mtx
-# -- Compiling architecture struct of connection_mtx
-# End time: 20:19:21 on Apr 13,2021, Elapsed time: 0:00:00
-# Errors: 0, Warnings: 0
-restart -f
-# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
-# Loading std.standard
-# Loading std.textio(body)
-# Loading ieee.std_logic_1164(body)
-# Loading ieee.numeric_std(body)
-# Loading work.tb_connection_mtx(behav)#1
-run 1 ns
-run 1 ns
-run 1 ns
-run 1 ns
-run 1 ns
-run 1 ns
-run 1 ns
-run 1 ns
-run 1 ns
-vcom connection_mtx.vhd
-# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 20:21:05 on Apr 13,2021
-# vcom -reportprogress 300 connection_mtx.vhd 
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Compiling entity connection_mtx
-# -- Compiling architecture struct of connection_mtx
-# ** Error: connection_mtx.vhd(80): (vcom-1581) No feasible entries for infix operator 'and'.
-# ** Error: connection_mtx.vhd(80): (vcom-1590) Bad expression in left operand of infix expression 'and'.
-# ** Error: connection_mtx.vhd(80): Bad right hand side (infix expression) in signal assignment.
-# ** Error: connection_mtx.vhd(86): (vcom-1581) No feasible entries for infix operator 'and'.
-# ** Error: connection_mtx.vhd(86): (vcom-1590) Bad expression in left operand of infix expression 'and'.
-# ** Error: connection_mtx.vhd(86): Bad right hand side (infix expression) in signal assignment.
-# ** Note: connection_mtx.vhd(103): VHDL Compiler exiting
-# End time: 20:21:05 on Apr 13,2021, Elapsed time: 0:00:00
-# Errors: 6, Warnings: 0
-# /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
-vcom connection_mtx.vhd
-# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 20:28:03 on Apr 13,2021
-# vcom -reportprogress 300 connection_mtx.vhd 
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Compiling entity connection_mtx
-# -- Compiling architecture struct of connection_mtx
-# ** Error: connection_mtx.vhd(86): (vcom-1581) No feasible entries for infix operator 'and'.
-# ** Error: connection_mtx.vhd(86): (vcom-1590) Bad expression in left operand of infix expression 'and'.
-# ** Error: connection_mtx.vhd(86): Bad right hand side (infix expression) in signal assignment.
-# ** Error: connection_mtx.vhd(92): (vcom-1581) No feasible entries for infix operator 'and'.
-# ** Error: connection_mtx.vhd(92): (vcom-1590) Bad expression in left operand of infix expression 'and'.
-# ** Error: connection_mtx.vhd(92): Bad right hand side (infix expression) in signal assignment.
-# ** Note: connection_mtx.vhd(109): VHDL Compiler exiting
-# End time: 20:28:04 on Apr 13,2021, Elapsed time: 0:00:01
-# Errors: 6, Warnings: 0
-# /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
-vcom connection_mtx.vhd
-# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 20:28:20 on Apr 13,2021
-# vcom -reportprogress 300 connection_mtx.vhd 
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Compiling entity connection_mtx
-# -- Compiling architecture struct of connection_mtx
-# ** Error: connection_mtx.vhd(86): (vcom-1581) No feasible entries for infix operator 'and'.
-# ** Error: connection_mtx.vhd(86): near ";": (vcom-1576) expecting ')'.
-# ** Error: connection_mtx.vhd(92): (vcom-1581) No feasible entries for infix operator 'and'.
-# ** Error: connection_mtx.vhd(92): near ";": (vcom-1576) expecting ')'.
-# ** Note: connection_mtx.vhd(109): VHDL Compiler exiting
-# End time: 20:28:20 on Apr 13,2021, Elapsed time: 0:00:00
-# Errors: 4, Warnings: 0
-# /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
-vcom connection_mtx.vhd
-# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 20:28:38 on Apr 13,2021
-# vcom -reportprogress 300 connection_mtx.vhd 
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Compiling entity connection_mtx
-# -- Compiling architecture struct of connection_mtx
-# ** Error: connection_mtx.vhd(86): (vcom-1581) No feasible entries for infix operator 'and'.
-# ** Error: connection_mtx.vhd(86): (vcom-1590) Bad expression in left operand of infix expression 'and'.
-# ** Error: connection_mtx.vhd(86): Bad right hand side (infix expression) in signal assignment.
-# ** Error: connection_mtx.vhd(92): (vcom-1581) No feasible entries for infix operator 'and'.
-# ** Error: connection_mtx.vhd(92): (vcom-1590) Bad expression in left operand of infix expression 'and'.
-# ** Error: connection_mtx.vhd(92): Bad right hand side (infix expression) in signal assignment.
-# ** Note: connection_mtx.vhd(109): VHDL Compiler exiting
-# End time: 20:28:38 on Apr 13,2021, Elapsed time: 0:00:00
-# Errors: 6, Warnings: 0
-# /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
-vcom connection_mtx.vhd
-# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 20:28:56 on Apr 13,2021
-# vcom -reportprogress 300 connection_mtx.vhd 
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Compiling entity connection_mtx
-# -- Compiling architecture struct of connection_mtx
-# ** Error: connection_mtx.vhd(86): (vcom-1581) No feasible entries for infix operator 'and'.
-# ** Error: connection_mtx.vhd(86): (vcom-1590) Bad expression in left operand of infix expression 'and'.
-# ** Error: connection_mtx.vhd(86): Bad right hand side (infix expression) in signal assignment.
-# ** Error: connection_mtx.vhd(92): (vcom-1581) No feasible entries for infix operator 'and'.
-# ** Error: connection_mtx.vhd(92): (vcom-1590) Bad expression in left operand of infix expression 'and'.
-# ** Error: connection_mtx.vhd(92): Bad right hand side (infix expression) in signal assignment.
-# ** Note: connection_mtx.vhd(109): VHDL Compiler exiting
-# End time: 20:28:56 on Apr 13,2021, Elapsed time: 0:00:00
-# Errors: 6, Warnings: 0
-# /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
-vcom connection_mtx.vhd
-# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 20:36:06 on Apr 13,2021
-# vcom -reportprogress 300 connection_mtx.vhd 
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Compiling entity connection_mtx
-# -- Compiling architecture struct of connection_mtx
-# End time: 20:36:06 on Apr 13,2021, Elapsed time: 0:00:00
-# Errors: 0, Warnings: 0
-restart -f
-# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
-# Loading std.standard
-# Loading std.textio(body)
-# Loading ieee.std_logic_1164(body)
-# Loading ieee.numeric_std(body)
-# Loading work.tb_connection_mtx(behav)#1
-run 1 ns
-run 1 ns
-run 1 ns
-run 1 ns
-run 1 ns
-run 1 ns
-run 1 ns
-run 1 ns
-
-run 1 ns
-restart -f
-# ** Note: (vsim-8009) Loading existing optimized design _opt
-vcom connection_mtx.vhd
-# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 20:39:11 on Apr 13,2021
-# vcom -reportprogress 300 connection_mtx.vhd 
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Compiling entity connection_mtx
-# -- Compiling architecture struct of connection_mtx
-# End time: 20:39:11 on Apr 13,2021, Elapsed time: 0:00:00
-# Errors: 0, Warnings: 0
-restart -f
-# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
-# ** Error: connection_mtx.vhd(91): (vopt-1152) Index value -1 is out of index range 0 to 4 of work.connection_mtx(struct).bus_array_t.
-# ** Note: Vopt Compiler exiting
-# ** Error: (vopt-2064) Compiler back-end code generation process terminated with code 2.
-run 1 ns
-# No Design Loaded!
-vsim -t 100ps work.tb_connection_mtx
-# vsim -t 100ps work.tb_connection_mtx 
-# Start time: 20:07:57 on Apr 13,2021
-# ** Note: (vsim-3812) Design is being optimized...
-# ** Error: connection_mtx.vhd(91): (vopt-1152) Index value -1 is out of index range 0 to 4 of work.connection_mtx(struct).bus_array_t.
-# ** Note: Vopt Compiler exiting
+# ** Error (suppressible): windowing_rf.vhd(141): (vopt-1272) Length of expected is 2048; length of actual is 1544.
+# ** Error: windowing_rf.vhd(171): (vopt-1167) Index value 5183 (of type ieee.std_logic_1164.STD_LOGIC_VECTOR) is out of range 5119 downto 0.
+# ** Error: windowing_rf.vhd(171): (vopt-1167) Index value 5120 (of type ieee.std_logic_1164.STD_LOGIC_VECTOR) is out of range 5119 downto 0.
+# ** Error: windowing_rf.vhd(171): (vopt-1167) Index value 5247 (of type ieee.std_logic_1164.STD_LOGIC_VECTOR) is out of range 5119 downto 0.
+# ** Error: windowing_rf.vhd(171): (vopt-1167) Index value 5184 (of type ieee.std_logic_1164.STD_LOGIC_VECTOR) is out of range 5119 downto 0.
+# ** Error: windowing_rf.vhd(171): (vopt-1167) Index value 5311 (of type ieee.std_logic_1164.STD_LOGIC_VECTOR) is out of range 5119 downto 0.
+# ** Error: windowing_rf.vhd(171): (vopt-1167) Index value 5248 (of type ieee.std_logic_1164.STD_LOGIC_VECTOR) is out of range 5119 downto 0.
+# ** Error: windowing_rf.vhd(171): (vopt-1167) Index value 5375 (of type ieee.std_logic_1164.STD_LOGIC_VECTOR) is out of range 5119 downto 0.
+# ** Error: windowing_rf.vhd(171): (vopt-1167) Index value 5312 (of type ieee.std_logic_1164.STD_LOGIC_VECTOR) is out of range 5119 downto 0.
+# ** Error: windowing_rf.vhd(171): (vopt-1167) Index value 5439 (of type ieee.std_logic_1164.STD_LOGIC_VECTOR) is out of range 5119 downto 0.
+# ** Error: windowing_rf.vhd(171): (vopt-1167) Index value 5376 (of type ieee.std_logic_1164.STD_LOGIC_VECTOR) is out of range 5119 downto 0.
+# ** Error: windowing_rf.vhd(171): (vopt-1167) Index value 5503 (of type ieee.std_logic_1164.STD_LOGIC_VECTOR) is out of range 5119 downto 0.
+# ** Error: windowing_rf.vhd(171): (vopt-1167) Index value 5440 (of type ieee.std_logic_1164.STD_LOGIC_VECTOR) is out of range 5119 downto 0.
+# ** Error: windowing_rf.vhd(171): (vopt-1167) Index value 5567 (of type ieee.std_logic_1164.STD_LOGIC_VECTOR) is out of range 5119 downto 0.
+# ** Error: windowing_rf.vhd(171): (vopt-1167) Index value 5504 (of type ieee.std_logic_1164.STD_LOGIC_VECTOR) is out of range 5119 downto 0.
+# ** Error: windowing_rf.vhd(171): (vopt-1167) Index value 5631 (of type ieee.std_logic_1164.STD_LOGIC_VECTOR) is out of range 5119 downto 0.
+# ** Error: windowing_rf.vhd(171): (vopt-1167) Index value 5568 (of type ieee.std_logic_1164.STD_LOGIC_VECTOR) is out of range 5119 downto 0.
+# ** Note: windowing_rf.vhd(191): Vopt Compiler exiting
 # ** Error: (vopt-2064) Compiler back-end code generation process terminated with code 2.
 # Error loading design
-# End time: 20:39:23 on Apr 13,2021, Elapsed time: 0:31:26
-# Errors: 51, Warnings: 0
-vcom connection_mtx.vhd
+# End time: 09:51:04 on Apr 15,2021, Elapsed time: 0:00:01
+# Errors: 18, Warnings: 0
+vcom windowing_rf.vhd
 # QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 20:39:33 on Apr 13,2021
-# vcom -reportprogress 300 connection_mtx.vhd 
+# Start time: 09:55:05 on Apr 15,2021
+# vcom -reportprogress 300 windowing_rf.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
 # -- Loading package std_logic_1164
 # -- Loading package NUMERIC_STD
-# -- Compiling entity connection_mtx
-# -- Compiling architecture struct of connection_mtx
-# End time: 20:39:33 on Apr 13,2021, Elapsed time: 0:00:00
+# -- Loading package MATH_REAL
+# -- Loading package utils
+# -- Compiling entity windowing_rf
+# -- Compiling architecture mix of windowing_rf
+# End time: 09:55:05 on Apr 15,2021, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
-vcom connection_mtx.vhd
+vsim -t 1ns work.tb_registerfile_generic
+# vsim -t 1ns work.tb_registerfile_generic 
+# Start time: 09:55:09 on Apr 15,2021
+# ** Note: (vsim-3812) Design is being optimized...
+# ** Error (suppressible): windowing_rf.vhd(141): (vopt-1272) Length of expected is 2048; length of actual is 1544.
+# ** Error: windowing_rf.vhd(172): (vopt-1167) Index value 5183 (of type ieee.std_logic_1164.STD_LOGIC_VECTOR) is out of range 5119 downto 0.
+# ** Error: windowing_rf.vhd(172): (vopt-1167) Index value 5120 (of type ieee.std_logic_1164.STD_LOGIC_VECTOR) is out of range 5119 downto 0.
+# ** Error: windowing_rf.vhd(172): (vopt-1167) Index value 5247 (of type ieee.std_logic_1164.STD_LOGIC_VECTOR) is out of range 5119 downto 0.
+# ** Error: windowing_rf.vhd(172): (vopt-1167) Index value 5184 (of type ieee.std_logic_1164.STD_LOGIC_VECTOR) is out of range 5119 downto 0.
+# ** Error: windowing_rf.vhd(172): (vopt-1167) Index value 5311 (of type ieee.std_logic_1164.STD_LOGIC_VECTOR) is out of range 5119 downto 0.
+# ** Error: windowing_rf.vhd(172): (vopt-1167) Index value 5248 (of type ieee.std_logic_1164.STD_LOGIC_VECTOR) is out of range 5119 downto 0.
+# ** Error: windowing_rf.vhd(172): (vopt-1167) Index value 5375 (of type ieee.std_logic_1164.STD_LOGIC_VECTOR) is out of range 5119 downto 0.
+# ** Error: windowing_rf.vhd(172): (vopt-1167) Index value 5312 (of type ieee.std_logic_1164.STD_LOGIC_VECTOR) is out of range 5119 downto 0.
+# ** Error: windowing_rf.vhd(172): (vopt-1167) Index value 5439 (of type ieee.std_logic_1164.STD_LOGIC_VECTOR) is out of range 5119 downto 0.
+# ** Error: windowing_rf.vhd(172): (vopt-1167) Index value 5376 (of type ieee.std_logic_1164.STD_LOGIC_VECTOR) is out of range 5119 downto 0.
+# ** Error: windowing_rf.vhd(172): (vopt-1167) Index value 5503 (of type ieee.std_logic_1164.STD_LOGIC_VECTOR) is out of range 5119 downto 0.
+# ** Error: windowing_rf.vhd(172): (vopt-1167) Index value 5440 (of type ieee.std_logic_1164.STD_LOGIC_VECTOR) is out of range 5119 downto 0.
+# ** Error: windowing_rf.vhd(172): (vopt-1167) Index value 5567 (of type ieee.std_logic_1164.STD_LOGIC_VECTOR) is out of range 5119 downto 0.
+# ** Error: windowing_rf.vhd(172): (vopt-1167) Index value 5504 (of type ieee.std_logic_1164.STD_LOGIC_VECTOR) is out of range 5119 downto 0.
+# ** Error: windowing_rf.vhd(172): (vopt-1167) Index value 5631 (of type ieee.std_logic_1164.STD_LOGIC_VECTOR) is out of range 5119 downto 0.
+# ** Error: windowing_rf.vhd(172): (vopt-1167) Index value 5568 (of type ieee.std_logic_1164.STD_LOGIC_VECTOR) is out of range 5119 downto 0.
+# ** Note: windowing_rf.vhd(193): Vopt Compiler exiting
+# ** Error: (vopt-2064) Compiler back-end code generation process terminated with code 2.
+# Error loading design
+# End time: 09:55:10 on Apr 15,2021, Elapsed time: 0:00:01
+# Errors: 18, Warnings: 0
+vcom windowing_rf.vhd
 # QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 20:39:35 on Apr 13,2021
-# vcom -reportprogress 300 connection_mtx.vhd 
+# Start time: 09:57:10 on Apr 15,2021
+# vcom -reportprogress 300 windowing_rf.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
 # -- Loading package std_logic_1164
 # -- Loading package NUMERIC_STD
-# -- Compiling entity connection_mtx
-# -- Compiling architecture struct of connection_mtx
-# End time: 20:39:35 on Apr 13,2021, Elapsed time: 0:00:00
+# -- Loading package MATH_REAL
+# -- Loading package utils
+# -- Compiling entity windowing_rf
+# -- Compiling architecture mix of windowing_rf
+# End time: 09:57:10 on Apr 15,2021, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
-vsim -t 100ps work.tb_connection_mtx
-# vsim -t 100ps work.tb_connection_mtx 
-# Start time: 20:39:42 on Apr 13,2021
+vsim -t 1ns work.tb_registerfile_generic
+# vsim -t 1ns work.tb_registerfile_generic 
+# Start time: 09:57:12 on Apr 15,2021
+# ** Note: (vsim-3812) Design is being optimized...
+# ** Error (suppressible): windowing_rf.vhd(141): (vopt-1272) Length of expected is 2048; length of actual is 1544.
+# ** Note: windowing_rf.vhd(193): Vopt Compiler exiting
+# ** Error: (vopt-2064) Compiler back-end code generation process terminated with code 2.
+# Error loading design
+# End time: 09:57:13 on Apr 15,2021, Elapsed time: 0:00:01
+# Errors: 2, Warnings: 0
+vsim -t 1ns work.tb_registerfile_generic
+# vsim -t 1ns work.tb_registerfile_generic 
+# Start time: 09:59:12 on Apr 15,2021
+# ** Note: (vsim-3812) Design is being optimized...
+# ** Error (suppressible): windowing_rf.vhd(141): (vopt-1272) Length of expected is 2048; length of actual is 1544.
+# ** Note: windowing_rf.vhd(193): Vopt Compiler exiting
+# ** Error: (vopt-2064) Compiler back-end code generation process terminated with code 2.
+# Error loading design
+# End time: 09:59:13 on Apr 15,2021, Elapsed time: 0:00:01
+# Errors: 2, Warnings: 0
+vcom windowing_rf.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:59:31 on Apr 15,2021
+# vcom -reportprogress 300 windowing_rf.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Loading package utils
+# -- Compiling entity windowing_rf
+# -- Compiling architecture mix of windowing_rf
+# End time: 09:59:32 on Apr 15,2021, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+vsim -t 1ns work.tb_registerfile_generic
+# vsim -t 1ns work.tb_registerfile_generic 
+# Start time: 09:59:32 on Apr 15,2021
 # ** Note: (vsim-3812) Design is being optimized...
 # Loading std.standard
 # Loading std.textio(body)
 # Loading ieee.std_logic_1164(body)
+# Loading work.tb_registerfile_generic(testbench)#1
 # Loading ieee.numeric_std(body)
-# Loading work.tb_connection_mtx(behav)#1
+# Loading ieee.math_real(body)
+# Loading work.utils(body)
+# Loading work.windowing_rf(mix)#1
+# Loading work.select_block(behav)#1
+# ** Fatal: (vsim-3348) Port length (6) does not match actual length (5) for port "/tb_registerfile_generic/RG/RDPORT0/S".
+#    Time: 0 ns  Iteration: 0  Instance: /tb_registerfile_generic/RG/RDPORT0 File: mux.vhd Line: 12
+# FATAL ERROR while loading design
+# Error loading design
+# End time: 09:59:34 on Apr 15,2021, Elapsed time: 0:00:02
+# Errors: 1, Warnings: 0
+vsim -t 1ns work.tb_registerfile_generic
+# vsim -t 1ns work.tb_registerfile_generic 
+# Start time: 10:01:39 on Apr 15,2021
+# ** Note: (vsim-8009) Loading existing optimized design _opt2
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading work.tb_registerfile_generic(testbench)#1
+# Loading ieee.numeric_std(body)
+# Loading ieee.math_real(body)
+# Loading work.utils(body)
+# Loading work.windowing_rf(mix)#1
+# Loading work.select_block(behav)#1
+# ** Fatal: (vsim-3348) Port length (6) does not match actual length (5) for port "/tb_registerfile_generic/RG/RDPORT0/S".
+#    Time: 0 ns  Iteration: 0  Instance: /tb_registerfile_generic/RG/RDPORT0 File: mux.vhd Line: 12
+# FATAL ERROR while loading design
+# Error loading design
+# End time: 10:01:40 on Apr 15,2021, Elapsed time: 0:00:01
+# Errors: 1, Warnings: 0
+vcom windowing_rf.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 10:01:42 on Apr 15,2021
+# vcom -reportprogress 300 windowing_rf.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Loading package utils
+# -- Compiling entity windowing_rf
+# -- Compiling architecture mix of windowing_rf
+# End time: 10:01:42 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vsim -t 1ns work.tb_registerfile_generic
+# vsim -t 1ns work.tb_registerfile_generic 
+# Start time: 10:01:43 on Apr 15,2021
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading work.tb_registerfile_generic(testbench)#1
+# Loading ieee.numeric_std(body)
+# Loading ieee.math_real(body)
+# Loading work.utils(body)
+# Loading work.windowing_rf(mix)#1
+# Loading work.select_block(behav)#1
+# Loading work.connection_mtx(struct)#1
+# ** Fatal: (vsim-3348) Port length (88) does not match actual length (1536) for port "/tb_registerfile_generic/RG/ConnMtx/sel".
+#    Time: 0 ns  Iteration: 0  Instance: /tb_registerfile_generic/RG/ConnMtx File: connection_mtx.vhd Line: 15
+# FATAL ERROR while loading design
+# Error loading design
+# End time: 10:01:45 on Apr 15,2021, Elapsed time: 0:00:02
+# Errors: 1, Warnings: 0
+vcom windowing_rf.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 10:03:33 on Apr 15,2021
+# vcom -reportprogress 300 windowing_rf.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Loading package utils
+# -- Compiling entity windowing_rf
+# -- Compiling architecture mix of windowing_rf
+# End time: 10:03:34 on Apr 15,2021, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+vsim -t 1ns work.tb_registerfile_generic
+# vsim -t 1ns work.tb_registerfile_generic 
+# Start time: 10:03:34 on Apr 15,2021
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading work.tb_registerfile_generic(testbench)#1
+# Loading ieee.numeric_std(body)
+# Loading ieee.math_real(body)
+# Loading work.utils(body)
+# Loading work.windowing_rf(mix)#1
+# Loading work.select_block(behav)#1
+# Loading work.connection_mtx(struct)#1
+# ** Warning: (vsim-8683) Uninitialized out port /tb_registerfile_generic/RG/OUT2(63 downto 0) has no driver.
+# This port will contribute value (64'hXXXXXXXXXXXXXXXX) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_registerfile_generic/RG/FILL has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_registerfile_generic/RG/SPILL has no driver.
+# This port will contribute value (U) to the signal network.
+log -r *
+add wave *
+run 1 ns
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ns  Iteration: 0  Instance: /tb_registerfile_generic/RG/DEC
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ns  Iteration: 0  Instance: /tb_registerfile_generic/RG/RDPORT0
+run 1 ns
+run 1 ns
+run 1 ns
+run 1 ns
+run 1 ns
+run 1 ns
+run 1 ns
+run 1 ns
+run 1 ns
+run 1 ns
+run 1 ns
+run 1 ns
+source compile.script
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 10:17:54 on Apr 15,2021
+# vcom -reportprogress 300 utils.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Compiling package utils
+# -- Compiling package body utils
+# -- Loading package utils
+# End time: 10:17:54 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 10:17:54 on Apr 15,2021
+# vcom -reportprogress 300 mux.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Loading package utils
+# -- Compiling entity mux
+# -- Compiling architecture behav of mux
+# End time: 10:17:54 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 10:17:54 on Apr 15,2021
+# vcom -reportprogress 300 decoder.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity decoder
+# -- Compiling architecture Behavioural of decoder
+# End time: 10:17:54 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 10:17:54 on Apr 15,2021
+# vcom -reportprogress 300 connection_mtx.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity connection_mtx
+# -- Compiling architecture struct of connection_mtx
+# End time: 10:17:54 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 10:17:54 on Apr 15,2021
+# vcom -reportprogress 300 reg_generic.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity reg_generic
+# ** Error: reg_generic.vhd(8): (vcom-1136) Unknown identifier "RSTVAL".
+# ** Error: reg_generic.vhd(8): near ":": (vcom-1576) expecting ';' or ')'.
+# End time: 10:17:55 on Apr 15,2021, Elapsed time: 0:00:01
+# Errors: 2, Warnings: 0
+# /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
+source compile.script
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 10:20:13 on Apr 15,2021
+# vcom -reportprogress 300 utils.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Compiling package utils
+# -- Compiling package body utils
+# -- Loading package utils
+# End time: 10:20:13 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 10:20:13 on Apr 15,2021
+# vcom -reportprogress 300 mux.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Loading package utils
+# -- Compiling entity mux
+# -- Compiling architecture behav of mux
+# End time: 10:20:13 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 10:20:13 on Apr 15,2021
+# vcom -reportprogress 300 decoder.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity decoder
+# -- Compiling architecture Behavioural of decoder
+# End time: 10:20:13 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 10:20:13 on Apr 15,2021
+# vcom -reportprogress 300 connection_mtx.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity connection_mtx
+# -- Compiling architecture struct of connection_mtx
+# End time: 10:20:14 on Apr 15,2021, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 10:20:14 on Apr 15,2021
+# vcom -reportprogress 300 reg_generic.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity reg_generic
+# -- Compiling architecture Behavioural of reg_generic
+# End time: 10:20:14 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 10:20:14 on Apr 15,2021
+# vcom -reportprogress 300 select_block.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity select_block
+# -- Compiling architecture behav of select_block
+# End time: 10:20:14 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 10:20:14 on Apr 15,2021
+# vcom -reportprogress 300 windowing_rf.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Loading package utils
+# -- Compiling entity windowing_rf
+# -- Compiling architecture mix of windowing_rf
+# ** Error: windowing_rf.vhd(124): (vcom-1136) Unknown identifier "RSTVAL".
+# ** Error: windowing_rf.vhd(124): (vcom-1023) Positional association (infix expression) found after named association.
+# ** Error: windowing_rf.vhd(156): (vcom-1136) Unknown identifier "RSTVAL".
+# ** Error: windowing_rf.vhd(156): (vcom-1023) Positional association (infix expression) found after named association.
+# ** Error: windowing_rf.vhd(167): (vcom-1136) Unknown identifier "RSTVAL".
+# ** Error: windowing_rf.vhd(167): (vcom-1023) Positional association (infix expression) found after named association.
+# ** Note: windowing_rf.vhd(194): VHDL Compiler exiting
+# End time: 10:20:14 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 6, Warnings: 0
+# /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
+source compile.script
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 10:20:43 on Apr 15,2021
+# vcom -reportprogress 300 utils.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Compiling package utils
+# -- Compiling package body utils
+# -- Loading package utils
+# End time: 10:20:44 on Apr 15,2021, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 10:20:44 on Apr 15,2021
+# vcom -reportprogress 300 mux.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Loading package utils
+# -- Compiling entity mux
+# -- Compiling architecture behav of mux
+# End time: 10:20:44 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 10:20:44 on Apr 15,2021
+# vcom -reportprogress 300 decoder.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity decoder
+# -- Compiling architecture Behavioural of decoder
+# End time: 10:20:44 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 10:20:44 on Apr 15,2021
+# vcom -reportprogress 300 connection_mtx.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity connection_mtx
+# -- Compiling architecture struct of connection_mtx
+# End time: 10:20:44 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 10:20:44 on Apr 15,2021
+# vcom -reportprogress 300 reg_generic.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity reg_generic
+# -- Compiling architecture Behavioural of reg_generic
+# End time: 10:20:44 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 10:20:44 on Apr 15,2021
+# vcom -reportprogress 300 select_block.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity select_block
+# -- Compiling architecture behav of select_block
+# End time: 10:20:44 on Apr 15,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 10:20:44 on Apr 15,2021
+# vcom -reportprogress 300 windowing_rf.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Loading package utils
+# -- Compiling entity windowing_rf
+# -- Compiling architecture mix of windowing_rf
+# End time: 10:20:45 on Apr 15,2021, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+restart -f
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading work.tb_registerfile_generic(testbench)#1
+# Loading ieee.numeric_std(body)
+# Loading ieee.math_real(body)
+# Loading work.utils(body)
+# Loading work.windowing_rf(mix)#1
+# Loading work.select_block(behav)#1
+# Loading work.connection_mtx(struct)#1
+# ** Warning: (vsim-8683) Uninitialized out port /tb_registerfile_generic/RG/OUT2(63 downto 0) has no driver.
+# This port will contribute value (64'hXXXXXXXXXXXXXXXX) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_registerfile_generic/RG/FILL has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_registerfile_generic/RG/SPILL has no driver.
+# This port will contribute value (U) to the signal network.
+run 1 ns
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ns  Iteration: 0  Instance: /tb_registerfile_generic/RG/DEC
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ns  Iteration: 0  Instance: /tb_registerfile_generic/RG/RDPORT0
+run 1 ns
+vsim -t 10ps work.tb_registerfile_generic
+# End time: 10:21:24 on Apr 15,2021, Elapsed time: 0:17:50
+# Errors: 10, Warnings: 2
+# vsim -t 10ps work.tb_registerfile_generic 
+# Start time: 10:21:24 on Apr 15,2021
+# ** Note: (vsim-8009) Loading existing optimized design _opt2
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading work.tb_registerfile_generic(testbench)#1
+# Loading ieee.numeric_std(body)
+# Loading ieee.math_real(body)
+# Loading work.utils(body)
+# Loading work.windowing_rf(mix)#1
+# Loading work.select_block(behav)#1
+# Loading work.connection_mtx(struct)#1
+# ** Warning: (vsim-8683) Uninitialized out port /tb_registerfile_generic/RG/OUT2(63 downto 0) has no driver.
+# This port will contribute value (64'hXXXXXXXXXXXXXXXX) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_registerfile_generic/RG/FILL has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_registerfile_generic/RG/SPILL has no driver.
+# This port will contribute value (U) to the signal network.
 log -r *
 run 1 ns
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_registerfile_generic/RG/DEC
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_registerfile_generic/RG/RDPORT0
+run 1 ns
+restart -f
+# ** Note: (vsim-8009) Loading existing optimized design _opt2
+# ** Warning: (vsim-8683) Uninitialized out port /tb_registerfile_generic/RG/OUT2(63 downto 0) has no driver.
+# This port will contribute value (64'hXXXXXXXXXXXXXXXX) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_registerfile_generic/RG/FILL has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_registerfile_generic/RG/SPILL has no driver.
+# This port will contribute value (U) to the signal network.
+add wave *
+run 1 ns
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_registerfile_generic/RG/DEC
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_registerfile_generic/RG/RDPORT0
 run 1 ns
 run 1 ns
-run 1 ns
-run 1 ns
-run 1 ns
-run 1 ns
-run 1 ns
-run 1 ns
-vcom connection_mtx.vhd
+run 10 ns
+vcom windowing_rf.vhd
 # QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 20:40:44 on Apr 13,2021
-# vcom -reportprogress 300 connection_mtx.vhd 
+# Start time: 10:24:42 on Apr 15,2021
+# vcom -reportprogress 300 windowing_rf.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
 # -- Loading package std_logic_1164
 # -- Loading package NUMERIC_STD
-# -- Compiling entity connection_mtx
-# -- Compiling architecture struct of connection_mtx
-# End time: 20:40:44 on Apr 13,2021, Elapsed time: 0:00:00
+# -- Loading package MATH_REAL
+# -- Loading package utils
+# -- Compiling entity windowing_rf
+# -- Compiling architecture mix of windowing_rf
+# End time: 10:24:42 on Apr 15,2021, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 restart -f
 # ** Note: (vsim-3813) Design is being optimized due to module recompilation...
 # Loading std.standard
 # Loading std.textio(body)
 # Loading ieee.std_logic_1164(body)
+# Loading work.tb_registerfile_generic(testbench)#1
 # Loading ieee.numeric_std(body)
-# Loading work.tb_connection_mtx(behav)#1
-run 7 ns
-run 1 ns
-run 1 ns
-run 1 ns
-run 1 ns
-run 1 ns
-run 1 ns
-run 1 ns
-run 1 ns
-run 1 ns
-run 1 ns
-run 1 ns
-run 1 ns
-run 1 ns
-run 1 ns
-run 1 ns
-run 1 ns
-run 1 ns
-run 1 ns
-run 1 ns
-run 1 ns
-run 1 ns
-run 1 ns
-run 1 ns
-run 1 ns
-run 1 ns
-run 1 ns
-run 1 ns
-run 1 ns
-run 1 ns
-run 1 ns
-run 1 ns
-run 1 ns
-run 1 ns
-run 1 ns
-run 1 ns
-run 1 ns
-run 1 ns
-run 1 ns
-run 1 ns
-run 1 ns
-run 1 ns
-run 1 ns
-run 1 ns
-run 1 ns
-run 1 ns
-run 1 ns
-run 1 ns
-run 1 ns
-run 1 ns
-run 1 ns
-vcom connection_mtx.vhd
+# Loading ieee.math_real(body)
+# Loading work.utils(body)
+# Loading work.windowing_rf(mix)#1
+# Loading work.select_block(behav)#1
+# Loading work.connection_mtx(struct)#1
+# ** Warning: (vsim-8683) Uninitialized out port /tb_registerfile_generic/RG/FILL has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_registerfile_generic/RG/SPILL has no driver.
+# This port will contribute value (U) to the signal network.
+run 10 ns
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_registerfile_generic/RG/DEC
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_registerfile_generic/RG/RDPORT1
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_registerfile_generic/RG/RDPORT0
+run 10 ns
+vcom windowing_rf.vhd
 # QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 20:49:07 on Apr 13,2021
-# vcom -reportprogress 300 connection_mtx.vhd 
+# Start time: 10:29:58 on Apr 15,2021
+# vcom -reportprogress 300 windowing_rf.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
 # -- Loading package std_logic_1164
 # -- Loading package NUMERIC_STD
-# -- Compiling entity connection_mtx
-# -- Compiling architecture struct of connection_mtx
-# End time: 20:49:07 on Apr 13,2021, Elapsed time: 0:00:00
+# -- Loading package MATH_REAL
+# -- Loading package utils
+# -- Compiling entity windowing_rf
+# -- Compiling architecture mix of windowing_rf
+# End time: 10:29:58 on Apr 15,2021, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 restart -f
 # ** Note: (vsim-3813) Design is being optimized due to module recompilation...
 # Loading std.standard
 # Loading std.textio(body)
 # Loading ieee.std_logic_1164(body)
+# Loading work.tb_registerfile_generic(testbench)#1
 # Loading ieee.numeric_std(body)
-# Loading work.tb_connection_mtx(behav)#1
-run 1 ns
-run 1 ns
-run 1 ns
-run 1 ns
-run 1 ns
-run 1 ns
-run 1 ns
-run 1 ns
-run 1 ns
-restart -f
-# ** Note: (vsim-8009) Loading existing optimized design _opt
-run 1 ns
-run 1 ns
-run 1 ns
-run 1 ns
-run 1 ns
-run 1 ns
-run 1 ns
-run 1 ns
-run 1 ns
+# Loading ieee.math_real(body)
+# Loading work.utils(body)
+# Loading work.windowing_rf(mix)#1
+# Loading work.select_block(behav)#1
+# Loading work.connection_mtx(struct)#1
+# ** Warning: (vsim-8683) Uninitialized out port /tb_registerfile_generic/RG/FILL has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_registerfile_generic/RG/SPILL has no driver.
+# This port will contribute value (U) to the signal network.
+run 10 ns
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_registerfile_generic/RG/DEC
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_registerfile_generic/RG/RDPORT1
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_registerfile_generic/RG/RDPORT0
+run 10 ns
+run 10 ns

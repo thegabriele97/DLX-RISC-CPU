@@ -7,16 +7,16 @@ ENTITY decoder IS
         N: integer := 4
     );
     PORT(
-        Q:      IN std_logic_vector(N-1 downto 0)
+        Q:      IN std_logic_vector(N-1 downto 0);
         Y:      OUT std_logic_vector(2**N-1 downto 0)
     );
 END ENTITY;
 
-ARCHITECTURE Behavioural OF nbit_register IS
+ARCHITECTURE Behavioural OF decoder IS
 
 BEGIN
     
-    process(Q):
+    process(Q)
     begin
 
         Y <= (others => '0');
