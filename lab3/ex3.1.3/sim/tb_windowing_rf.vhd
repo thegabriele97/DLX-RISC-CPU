@@ -61,14 +61,17 @@ begin
         GENERIC MAP (64, 5, 8, 8, 5) 
         PORT MAP (CLK, RESET, ENABLE, RD1, RD2, WR, ADD_WR, ADD_RD1, ADD_RD2, DATAIN, OUT1, OUT2, CALL, RET, FILL, SPILL);
 
+    CALL <= '0', '1' after 12 ns, '0' after 13 ns, '1' after 28 ns, '0' after 30.7 ns;
+    RET <= '0', '1' after 24 ns, '0' after 25 ns;
+
 	RESET <= '1','0' after 5 ns;
 	ENABLE <= '0','1' after 3 ns, '0' after 10 ns, '1' after 15 ns;
 	WR <= '0','1' after 6 ns, '0' after 7 ns, '1' after 10 ns, '0' after 20 ns;
-	RD1 <= '1','0' after 5 ns, '1' after 13 ns, '0' after 20 ns; 
+	RD1 <= '1','0' after 5 ns, '1' after 13 ns, '0' after 20 ns, '1' after 21 ns; 
 	RD2 <= '0','1' after 17 ns;
-	ADD_WR <= "10110", "01000" after 9 ns, "00100" after 18 ns;
-	ADD_RD1 <="10110", "01000" after 9 ns, "00100" after 18 ns;
-	ADD_RD2<= "11100", "01000" after 9 ns, "00100" after 18 ns;
+	ADD_WR <= "10110", "01000" after 9 ns, "00100" after 18 ns, "10101" after 20 ns;
+	ADD_RD1 <="10110", "01000" after 9 ns, "00100" after 18 ns, "10101" after 20 ns;
+	ADD_RD2<= "11100", "01000" after 9 ns, "00100" after 18 ns, "10101" after 20 ns;
 	DATAIN<=(others => '0'),(others => '1') after 8 ns;
 
 	PCLOCK : process(CLK)

@@ -100,7 +100,20 @@ architecture mix of windowing_rf is
         );
     end component;
 
-    signal dec_output : std_logic_vector(3*N+M-1 downto 0);
+    component equal_check is
+        generic(
+            N:      integer := 4
+        );
+        port(
+            A:      in std_logic_vector(N-1 downto 0);
+            B:      in std_logic_vector(N-1 downto 0);
+            EQUAL:     out std_logic
+        );
+    end component;
+
+    signal dec_output: std_logic_vector(3*N+M-1 downto 0);
+    signal writeen_ext: std_logic_vector(3*N+M-1 downto 0);
+    signal dec_out_with_wen: std_logic_vector(3*N+M-1 downto 0);
     signal c_win: std_logic_vector(F-1 downto 0);
     signal en_regi: std_logic_vector(M+2*N*F-1 downto 0);
 
@@ -113,15 +126,44 @@ architecture mix of windowing_rf is
     signal internal_out1: std_logic_vector(NBIT_DATA-1 downto 0);
     signal internal_out2: std_logic_vector(NBIT_DATA-1 downto 0);
 
+    signal call_ret_encoding: std_logic_vector(1 downto 0);
+    signal callret_cwp_mux_input: std_logic_vector(4*F-1 downto 0);
+    signal next_cwp: std_logic_vector(F-1 downto 0);
+
+    signal int_WR: std_logic;
+    signal int_RD1: std_logic;
+    signal int_RD2: std_logic;
+
+    signal cwin_plus2: std_logic_vector(F-1 downto 0); 
+    signal c_swin: std_logic_vector(F-1 downto 0); 
+    signal int_PUSH: std_logic;
+
 begin
 
-    -- SWP
-    --SWP: register generic map(N => F)
-    --    port map(
-    --        Clk => CLK,
-    --        Rst => RESET,
-    --        ----------------------
-    --    );
+    int_WR <= ENABLE and WR;
+    int_RD1 <= ENABLE and RD1;
+    int_RD2 <= ENABLE and RD2;
+
+
+    call_ret_encoding <= RET & CALL;
+    
+    -- call_ret_encoding = 00 => c_win
+    callret_cwp_mux_input(F-1 downto 0) <= c_win;
+    callret_cwp_mux_input(4*F-1 downto 3*F) <= c_win;
+
+    -- call_ret_encoding = 01 => (c_win << 1)
+    callret_cwp_mux_input(2*F-1 downto F) <= c_win(F-2 downto 0) & c_win(F-1);
+    
+    -- call_ret_encoding = 10 => (c_win << 1)
+    callret_cwp_mux_input(3*F-1 downto 2*F) <= c_win(0) & c_win(F-1 downto 1);
+    
+
+    CALLRET_CWP_MUX: mux generic map(N => F, M => 4)
+        port map(
+            S => call_ret_encoding,
+            Q => callret_cwp_mux_input,
+            Y => next_cwp
+        ); 
 
     -- CWP
     CWP: reg_generic generic map(N => F, RSTVAL => 1)
@@ -129,7 +171,7 @@ begin
             Clk => CLK,
             Rst => RESET,
             Enable => '1',
-            D => "00001",
+            D => next_cwp,
             Q => c_win
         );
 
@@ -156,10 +198,11 @@ begin
         port map(
             Clk => CLK,
             Rst => RESET,
-            Enable => RD1,
+            Enable => int_RD1,
             D => internal_out1,
             Q => OUT1
         );
+
 
 
     RDPORT1: mux generic map(N => NBIT_DATA, M => M + 3*N)
@@ -173,7 +216,7 @@ begin
         port map(
             Clk => CLK,
             Rst => RESET,
-            Enable => RD2,
+            Enable => int_RD2,
             D => internal_out2,
             Q => OUT2
         );
@@ -207,18 +250,41 @@ begin
     end generate REGS;
 
 
-    ConnMtx: connection_mtx generic map(M, N, F)
-        port map(
-            dec => dec_output,
-            win => c_win,
-            sel => en_regi
-        );
-
     DEC: decoder generic map(N => NBIT_ADD)
         port map(
             Q => ADD_WR,
             Y => dec_output
         );  
 
+    writeen_ext <= (others => int_WR);
+    dec_out_with_wen <= dec_output and writeen_ext;
+
+    ConnMtx: connection_mtx generic map(M, N, F)
+        port map(
+            dec => dec_out_with_wen,
+            win => c_win,
+            sel => en_regi
+        );
+
+
+    -- SWP
+    SWP: reg_generic generic map(N => F, RSTVAL => 1)
+        port map(
+            Clk => CLK,
+            Rst => RESET,
+            Enable => '1',
+            D => "00001",
+            Q => c_swin
+        );
+
+    cwin_plus2 <= c_win(F-3 downto 0) & c_win(F-1 downto F-2);
+    FILL <= int_PUSH;    
+
+    EQ_CHECK: equal_check generic map(N => F)
+        port map(
+            A => cwin_plus2,
+            B => c_swin,
+            EQUAL => int_PUSH
+        );
     
 end mix;

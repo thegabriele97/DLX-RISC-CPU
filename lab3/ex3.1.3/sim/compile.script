@@ -5,5 +5,6 @@ vcom decoder.vhd
 vcom connection_mtx.vhd
 vcom reg_generic.vhd
 vcom select_block.vhd
+vcom equal_check.vhd
 
 vcom windowing_rf.vhd
