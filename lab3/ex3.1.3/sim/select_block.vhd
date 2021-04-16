@@ -48,6 +48,9 @@ begin
     SELECT_PROC: process(bus_arr_io, bus_arr_local, win)
     begin
 
+        -- we need to assign it in principle otherwise we have an inferred latch! 
+        curr_proc_regs <= (others => '0');
+
         for i in 0 to F-1 loop   
             if (win(i) = '1') then
 
