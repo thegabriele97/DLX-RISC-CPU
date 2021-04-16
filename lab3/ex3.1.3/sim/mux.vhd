@@ -26,6 +26,9 @@ begin
 
         S_dummy := TO_INTEGER(unsigned(S));
 
+        -- we need to assign Y in principle otherwise we have an inferred latch! 
+        Y <= (others => '0');
+
         for i in 0 to M-1 loop
             if (i = S_dummy) then
                 Y <= Q(i*N+N-1 downto i*N);
