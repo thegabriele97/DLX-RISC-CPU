@@ -30,8 +30,8 @@ entity windowing_rf is
         -- Other I/O
         CALL:       IN std_logic;
         RET:        IN std_logic;
-        FILL:       OUT std_logic; -- PUSH towards memory
-        SPILL:      OUT std_logic  -- POP towards memory
+        FILL:       OUT std_logic; -- POP towards memory
+        SPILL:      OUT std_logic  -- PUSH towards memory
 
     );
 end windowing_rf;
@@ -278,7 +278,7 @@ begin
         );
 
     cwin_plus2 <= c_win(F-3 downto 0) & c_win(F-1 downto F-2);
-    FILL <= int_PUSH;    
+    SPILL <= int_PUSH;    
 
     EQ_CHECK: equal_check generic map(N => F)
         port map(
