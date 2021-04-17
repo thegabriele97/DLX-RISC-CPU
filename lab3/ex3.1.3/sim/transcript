@@ -12,9 +12,11 @@
 # //  is prohibited from disclosure under the Trade Secrets Act,
 # //  18 U.S.C. Section 1905.
 # //
+source windowing_rf.vhd
+# bad option "IEEE": must be blank, cget, configure, copy, data, get, put, read, redither, transparency, or write
 source compile.script
 # QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 11:54:07 on Apr 15,2021
+# Start time: 10:18:27 on Apr 17,2021
 # vcom -reportprogress 300 utils.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -24,10 +26,10 @@ source compile.script
 # -- Compiling package utils
 # -- Compiling package body utils
 # -- Loading package utils
-# End time: 11:54:07 on Apr 15,2021, Elapsed time: 0:00:00
+# End time: 10:18:28 on Apr 17,2021, Elapsed time: 0:00:01
 # Errors: 0, Warnings: 0
 # QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 11:54:07 on Apr 15,2021
+# Start time: 10:18:28 on Apr 17,2021
 # vcom -reportprogress 300 mux.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -37,10 +39,10 @@ source compile.script
 # -- Loading package utils
 # -- Compiling entity mux
 # -- Compiling architecture behav of mux
-# End time: 11:54:07 on Apr 15,2021, Elapsed time: 0:00:00
+# End time: 10:18:28 on Apr 17,2021, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 11:54:07 on Apr 15,2021
+# Start time: 10:18:28 on Apr 17,2021
 # vcom -reportprogress 300 decoder.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -48,10 +50,10 @@ source compile.script
 # -- Loading package NUMERIC_STD
 # -- Compiling entity decoder
 # -- Compiling architecture Behavioural of decoder
-# End time: 11:54:07 on Apr 15,2021, Elapsed time: 0:00:00
+# End time: 10:18:28 on Apr 17,2021, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 11:54:08 on Apr 15,2021
+# Start time: 10:18:28 on Apr 17,2021
 # vcom -reportprogress 300 connection_mtx.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -59,10 +61,10 @@ source compile.script
 # -- Loading package NUMERIC_STD
 # -- Compiling entity connection_mtx
 # -- Compiling architecture struct of connection_mtx
-# End time: 11:54:08 on Apr 15,2021, Elapsed time: 0:00:00
+# End time: 10:18:28 on Apr 17,2021, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 11:54:08 on Apr 15,2021
+# Start time: 10:18:28 on Apr 17,2021
 # vcom -reportprogress 300 reg_generic.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -70,10 +72,10 @@ source compile.script
 # -- Loading package NUMERIC_STD
 # -- Compiling entity reg_generic
 # -- Compiling architecture Behavioural of reg_generic
-# End time: 11:54:08 on Apr 15,2021, Elapsed time: 0:00:00
+# End time: 10:18:28 on Apr 17,2021, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 11:54:08 on Apr 15,2021
+# Start time: 10:18:28 on Apr 17,2021
 # vcom -reportprogress 300 select_block.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -81,10 +83,10 @@ source compile.script
 # -- Loading package NUMERIC_STD
 # -- Compiling entity select_block
 # -- Compiling architecture behav of select_block
-# End time: 11:54:08 on Apr 15,2021, Elapsed time: 0:00:00
+# End time: 10:18:28 on Apr 17,2021, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 11:54:08 on Apr 15,2021
+# Start time: 10:18:28 on Apr 17,2021
 # vcom -reportprogress 300 equal_check.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -94,10 +96,10 @@ source compile.script
 # -- Loading package utils
 # -- Compiling entity equal_check
 # -- Compiling architecture behav of equal_check
-# End time: 11:54:08 on Apr 15,2021, Elapsed time: 0:00:00
+# End time: 10:18:28 on Apr 17,2021, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 11:54:08 on Apr 15,2021
+# Start time: 10:18:29 on Apr 17,2021
 # vcom -reportprogress 300 windowing_rf.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -107,179 +109,1669 @@ source compile.script
 # -- Loading package utils
 # -- Compiling entity windowing_rf
 # -- Compiling architecture mix of windowing_rf
-# End time: 11:54:08 on Apr 15,2021, Elapsed time: 0:00:00
+# ** Error: windowing_rf.vhd(117): near ")": (vcom-1576) expecting FUNCTION or PROCEDURE or IMPURE or PURE.
+# End time: 10:18:29 on Apr 17,2021, Elapsed time: 0:00:00
+# Errors: 1, Warnings: 0
+# /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
+source compile.script
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 10:19:09 on Apr 17,2021
+# vcom -reportprogress 300 utils.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Compiling package utils
+# -- Compiling package body utils
+# -- Loading package utils
+# End time: 10:19:09 on Apr 17,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 10:19:09 on Apr 17,2021
+# vcom -reportprogress 300 nwin_calc.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Loading package utils
+# -- Compiling entity nwin_calc
+# ** Error: nwin_calc.vhd(9): near ")": (vcom-1576) expecting FUNCTION or PROCEDURE or IMPURE or PURE.
+# End time: 10:19:09 on Apr 17,2021, Elapsed time: 0:00:00
+# Errors: 1, Warnings: 0
+# /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
+source compile.script
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 10:19:36 on Apr 17,2021
+# vcom -reportprogress 300 utils.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Compiling package utils
+# -- Compiling package body utils
+# -- Loading package utils
+# End time: 10:19:37 on Apr 17,2021, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 10:19:37 on Apr 17,2021
+# vcom -reportprogress 300 nwin_calc.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Loading package utils
+# -- Compiling entity nwin_calc
+# -- Compiling architecture struct of nwin_calc
+# End time: 10:19:37 on Apr 17,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 10:19:37 on Apr 17,2021
+# vcom -reportprogress 300 in_loc_selblock.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity in_loc_selblock
+# -- Compiling architecture behav of in_loc_selblock
+# End time: 10:19:37 on Apr 17,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 10:19:37 on Apr 17,2021
+# vcom -reportprogress 300 mux.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Loading package utils
+# -- Compiling entity mux
+# -- Compiling architecture behav of mux
+# End time: 10:19:37 on Apr 17,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 10:19:37 on Apr 17,2021
+# vcom -reportprogress 300 decoder.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity decoder
+# -- Compiling architecture Behavioural of decoder
+# End time: 10:19:37 on Apr 17,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 10:19:37 on Apr 17,2021
+# vcom -reportprogress 300 connection_mtx.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity connection_mtx
+# -- Compiling architecture struct of connection_mtx
+# End time: 10:19:37 on Apr 17,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 10:19:37 on Apr 17,2021
+# vcom -reportprogress 300 reg_generic.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity reg_generic
+# -- Compiling architecture Behavioural of reg_generic
+# End time: 10:19:38 on Apr 17,2021, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 10:19:38 on Apr 17,2021
+# vcom -reportprogress 300 select_block.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity select_block
+# -- Compiling architecture behav of select_block
+# End time: 10:19:38 on Apr 17,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 10:19:38 on Apr 17,2021
+# vcom -reportprogress 300 equal_check.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Loading package utils
+# -- Compiling entity equal_check
+# -- Compiling architecture behav of equal_check
+# End time: 10:19:38 on Apr 17,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 10:19:38 on Apr 17,2021
+# vcom -reportprogress 300 windowing_rf.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Loading package utils
+# -- Compiling entity windowing_rf
+# -- Compiling architecture mix of windowing_rf
+# ** Error: windowing_rf.vhd(117): near ")": (vcom-1576) expecting FUNCTION or PROCEDURE or IMPURE or PURE.
+# End time: 10:19:38 on Apr 17,2021, Elapsed time: 0:00:00
+# Errors: 1, Warnings: 0
+# /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
+source compile.script
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 10:19:53 on Apr 17,2021
+# vcom -reportprogress 300 utils.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Compiling package utils
+# -- Compiling package body utils
+# -- Loading package utils
+# End time: 10:19:54 on Apr 17,2021, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 10:19:54 on Apr 17,2021
+# vcom -reportprogress 300 nwin_calc.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Loading package utils
+# -- Compiling entity nwin_calc
+# -- Compiling architecture struct of nwin_calc
+# End time: 10:19:54 on Apr 17,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 10:19:54 on Apr 17,2021
+# vcom -reportprogress 300 in_loc_selblock.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity in_loc_selblock
+# -- Compiling architecture behav of in_loc_selblock
+# End time: 10:19:54 on Apr 17,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 10:19:54 on Apr 17,2021
+# vcom -reportprogress 300 mux.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Loading package utils
+# -- Compiling entity mux
+# -- Compiling architecture behav of mux
+# End time: 10:19:54 on Apr 17,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 10:19:54 on Apr 17,2021
+# vcom -reportprogress 300 decoder.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity decoder
+# -- Compiling architecture Behavioural of decoder
+# End time: 10:19:54 on Apr 17,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 10:19:54 on Apr 17,2021
+# vcom -reportprogress 300 connection_mtx.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity connection_mtx
+# -- Compiling architecture struct of connection_mtx
+# End time: 10:19:54 on Apr 17,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 10:19:54 on Apr 17,2021
+# vcom -reportprogress 300 reg_generic.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity reg_generic
+# -- Compiling architecture Behavioural of reg_generic
+# End time: 10:19:54 on Apr 17,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 10:19:54 on Apr 17,2021
+# vcom -reportprogress 300 select_block.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity select_block
+# -- Compiling architecture behav of select_block
+# End time: 10:19:55 on Apr 17,2021, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 10:19:55 on Apr 17,2021
+# vcom -reportprogress 300 equal_check.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Loading package utils
+# -- Compiling entity equal_check
+# -- Compiling architecture behav of equal_check
+# End time: 10:19:55 on Apr 17,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 10:19:55 on Apr 17,2021
+# vcom -reportprogress 300 windowing_rf.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Loading package utils
+# -- Compiling entity windowing_rf
+# -- Compiling architecture mix of windowing_rf
+# End time: 10:19:55 on Apr 17,2021, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 vcom tb_windowing_rf.vhd
 # QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 11:54:38 on Apr 15,2021
+# Start time: 10:19:59 on Apr 17,2021
 # vcom -reportprogress 300 tb_windowing_rf.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
 # -- Loading package std_logic_1164
 # -- Compiling entity tb_registerfile_generic
 # -- Compiling architecture testbench of tb_registerfile_generic
-# End time: 11:54:38 on Apr 15,2021, Elapsed time: 0:00:00
+# End time: 10:19:59 on Apr 17,2021, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 vsim -t 10ps work.tb_registerfile_generic
 # vsim -t 10ps work.tb_registerfile_generic 
-# Start time: 11:54:48 on Apr 15,2021
+# Start time: 10:20:09 on Apr 17,2021
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading work.tb_registerfile_generic(testbench)#1
+# Loading ieee.numeric_std(body)
+# Loading ieee.math_real(body)
+# Loading work.utils(body)
+# Loading work.windowing_rf(mix)#1
+# Loading work.select_block(behav)#1
+# Loading work.connection_mtx(struct)#1
+# ** Warning: (vsim-8683) Uninitialized out port /tb_registerfile_generic/RG/FILL has no driver.
+# This port will contribute value (U) to the signal network.
+add wave *
+run 40 ns
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_registerfile_generic/RG/DEC
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_registerfile_generic/RG/RDPORT1
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_registerfile_generic/RG/RDPORT0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_registerfile_generic/RG/CWP_NEXT_CALC/MUX_SEL
+source compile.script
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:06:21 on Apr 17,2021
+# vcom -reportprogress 300 utils.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Compiling package utils
+# -- Compiling package body utils
+# -- Loading package utils
+# End time: 11:06:21 on Apr 17,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:06:21 on Apr 17,2021
+# vcom -reportprogress 300 nwin_calc.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Loading package utils
+# -- Compiling entity nwin_calc
+# -- Compiling architecture struct of nwin_calc
+# End time: 11:06:21 on Apr 17,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:06:21 on Apr 17,2021
+# vcom -reportprogress 300 in_loc_selblock.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity in_loc_selblock
+# -- Compiling architecture behav of in_loc_selblock
+# End time: 11:06:22 on Apr 17,2021, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:06:22 on Apr 17,2021
+# vcom -reportprogress 300 addr_encoder.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Loading package utils
+# -- Compiling entity addr_encoder
+# -- Compiling architecture behav of addr_encoder
+# End time: 11:06:22 on Apr 17,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:06:22 on Apr 17,2021
+# vcom -reportprogress 300 addr_generator.vhd 
+# ** Error: (vcom-7) Failed to open design unit file "addr_generator.vhd" in read mode.
+# No such file or directory. (errno = ENOENT)
+# End time: 11:06:22 on Apr 17,2021, Elapsed time: 0:00:00
+# Errors: 1, Warnings: 0
+# /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
+source compile.script
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:06:34 on Apr 17,2021
+# vcom -reportprogress 300 utils.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Compiling package utils
+# -- Compiling package body utils
+# -- Loading package utils
+# End time: 11:06:35 on Apr 17,2021, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:06:35 on Apr 17,2021
+# vcom -reportprogress 300 nwin_calc.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Loading package utils
+# -- Compiling entity nwin_calc
+# -- Compiling architecture struct of nwin_calc
+# End time: 11:06:35 on Apr 17,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:06:35 on Apr 17,2021
+# vcom -reportprogress 300 in_loc_selblock.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity in_loc_selblock
+# -- Compiling architecture behav of in_loc_selblock
+# End time: 11:06:35 on Apr 17,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:06:35 on Apr 17,2021
+# vcom -reportprogress 300 addr_encoder.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Loading package utils
+# -- Compiling entity addr_encoder
+# -- Compiling architecture behav of addr_encoder
+# End time: 11:06:35 on Apr 17,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:06:35 on Apr 17,2021
+# vcom -reportprogress 300 address_generator.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Loading package utils
+# -- Compiling entity address_generator
+# -- Compiling architecture struct of address_generator
+# ** Error (suppressible): address_generator.vhd(36): (vcom-1218) Expecting a component name, found "addr_encoder" (indexed name) instead.
+# ** Error: address_generator.vhd(54): near "proces": (vcom-1576) expecting PROCESS.
+# ** Error: address_generator.vhd(56): Illegal sequential statement.
+# ** Error: address_generator.vhd(70): near "process": (vcom-1576) expecting ';'.
+# End time: 11:06:35 on Apr 17,2021, Elapsed time: 0:00:00
+# Errors: 4, Warnings: 0
+# /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
+source compile.script
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:06:51 on Apr 17,2021
+# vcom -reportprogress 300 utils.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Compiling package utils
+# -- Compiling package body utils
+# -- Loading package utils
+# End time: 11:06:51 on Apr 17,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:06:51 on Apr 17,2021
+# vcom -reportprogress 300 nwin_calc.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Loading package utils
+# -- Compiling entity nwin_calc
+# -- Compiling architecture struct of nwin_calc
+# End time: 11:06:51 on Apr 17,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:06:51 on Apr 17,2021
+# vcom -reportprogress 300 in_loc_selblock.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity in_loc_selblock
+# -- Compiling architecture behav of in_loc_selblock
+# End time: 11:06:51 on Apr 17,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:06:51 on Apr 17,2021
+# vcom -reportprogress 300 addr_encoder.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Loading package utils
+# -- Compiling entity addr_encoder
+# -- Compiling architecture behav of addr_encoder
+# End time: 11:06:52 on Apr 17,2021, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:06:52 on Apr 17,2021
+# vcom -reportprogress 300 address_generator.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Loading package utils
+# -- Compiling entity address_generator
+# -- Compiling architecture struct of address_generator
+# ** Error (suppressible): address_generator.vhd(36): (vcom-1218) Expecting a component name, found "addr_encoder" (indexed name) instead.
+# ** Error: address_generator.vhd(70): near "process": (vcom-1576) expecting ';'.
+# End time: 11:06:52 on Apr 17,2021, Elapsed time: 0:00:00
+# Errors: 2, Warnings: 0
+# /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
+source compile.script
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:07:06 on Apr 17,2021
+# vcom -reportprogress 300 utils.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Compiling package utils
+# -- Compiling package body utils
+# -- Loading package utils
+# End time: 11:07:06 on Apr 17,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:07:06 on Apr 17,2021
+# vcom -reportprogress 300 nwin_calc.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Loading package utils
+# -- Compiling entity nwin_calc
+# -- Compiling architecture struct of nwin_calc
+# End time: 11:07:06 on Apr 17,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:07:06 on Apr 17,2021
+# vcom -reportprogress 300 in_loc_selblock.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity in_loc_selblock
+# -- Compiling architecture behav of in_loc_selblock
+# End time: 11:07:06 on Apr 17,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:07:06 on Apr 17,2021
+# vcom -reportprogress 300 addr_encoder.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Loading package utils
+# -- Compiling entity addr_encoder
+# -- Compiling architecture behav of addr_encoder
+# End time: 11:07:06 on Apr 17,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:07:06 on Apr 17,2021
+# vcom -reportprogress 300 address_generator.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Loading package utils
+# -- Compiling entity address_generator
+# -- Compiling architecture struct of address_generator
+# ** Error (suppressible): address_generator.vhd(36): (vcom-1218) Expecting a component name, found "addr_encoder" (indexed name) instead.
+# ** Note: address_generator.vhd(70): VHDL Compiler exiting
+# End time: 11:07:06 on Apr 17,2021, Elapsed time: 0:00:00
+# Errors: 1, Warnings: 0
+# /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
+source compile.script
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:07:52 on Apr 17,2021
+# vcom -reportprogress 300 utils.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Compiling package utils
+# -- Compiling package body utils
+# -- Loading package utils
+# End time: 11:07:52 on Apr 17,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:07:52 on Apr 17,2021
+# vcom -reportprogress 300 nwin_calc.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Loading package utils
+# -- Compiling entity nwin_calc
+# -- Compiling architecture struct of nwin_calc
+# End time: 11:07:52 on Apr 17,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:07:52 on Apr 17,2021
+# vcom -reportprogress 300 in_loc_selblock.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity in_loc_selblock
+# -- Compiling architecture behav of in_loc_selblock
+# End time: 11:07:52 on Apr 17,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:07:52 on Apr 17,2021
+# vcom -reportprogress 300 addr_encoder.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Loading package utils
+# -- Compiling entity addr_encoder
+# -- Compiling architecture behav of addr_encoder
+# End time: 11:07:52 on Apr 17,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:07:52 on Apr 17,2021
+# vcom -reportprogress 300 address_generator.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Loading package utils
+# -- Compiling entity address_generator
+# -- Compiling architecture struct of address_generator
+# End time: 11:07:53 on Apr 17,2021, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:07:53 on Apr 17,2021
+# vcom -reportprogress 300 mux.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Loading package utils
+# -- Compiling entity mux
+# -- Compiling architecture behav of mux
+# End time: 11:07:53 on Apr 17,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:07:53 on Apr 17,2021
+# vcom -reportprogress 300 decoder.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity decoder
+# -- Compiling architecture Behavioural of decoder
+# End time: 11:07:53 on Apr 17,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:07:53 on Apr 17,2021
+# vcom -reportprogress 300 connection_mtx.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity connection_mtx
+# -- Compiling architecture struct of connection_mtx
+# End time: 11:07:53 on Apr 17,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:07:53 on Apr 17,2021
+# vcom -reportprogress 300 reg_generic.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity reg_generic
+# -- Compiling architecture Behavioural of reg_generic
+# End time: 11:07:53 on Apr 17,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:07:53 on Apr 17,2021
+# vcom -reportprogress 300 select_block.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity select_block
+# -- Compiling architecture behav of select_block
+# End time: 11:07:53 on Apr 17,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:07:53 on Apr 17,2021
+# vcom -reportprogress 300 equal_check.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Loading package utils
+# -- Compiling entity equal_check
+# -- Compiling architecture behav of equal_check
+# End time: 11:07:53 on Apr 17,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:07:54 on Apr 17,2021
+# vcom -reportprogress 300 windowing_rf.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Loading package utils
+# -- Compiling entity windowing_rf
+# ** Error: windowing_rf.vhd(37): (vcom-1136) Unknown identifier "BUS_TOMEM".
+# ** Error: windowing_rf.vhd(37): Bad resolution function (STD_LOGIC) for type (error).
+# ** Error: windowing_rf.vhd(37): near ":": (vcom-1576) expecting ';' or ')'.
+# End time: 11:07:54 on Apr 17,2021, Elapsed time: 0:00:00
+# Errors: 3, Warnings: 0
+# /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
+source compile.script
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:08:27 on Apr 17,2021
+# vcom -reportprogress 300 utils.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Compiling package utils
+# -- Compiling package body utils
+# -- Loading package utils
+# End time: 11:08:27 on Apr 17,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:08:27 on Apr 17,2021
+# vcom -reportprogress 300 nwin_calc.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Loading package utils
+# -- Compiling entity nwin_calc
+# -- Compiling architecture struct of nwin_calc
+# End time: 11:08:27 on Apr 17,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:08:27 on Apr 17,2021
+# vcom -reportprogress 300 in_loc_selblock.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity in_loc_selblock
+# -- Compiling architecture behav of in_loc_selblock
+# End time: 11:08:27 on Apr 17,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:08:27 on Apr 17,2021
+# vcom -reportprogress 300 addr_encoder.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Loading package utils
+# -- Compiling entity addr_encoder
+# -- Compiling architecture behav of addr_encoder
+# End time: 11:08:27 on Apr 17,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:08:27 on Apr 17,2021
+# vcom -reportprogress 300 address_generator.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Loading package utils
+# -- Compiling entity address_generator
+# -- Compiling architecture struct of address_generator
+# End time: 11:08:27 on Apr 17,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:08:27 on Apr 17,2021
+# vcom -reportprogress 300 mux.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Loading package utils
+# -- Compiling entity mux
+# -- Compiling architecture behav of mux
+# End time: 11:08:28 on Apr 17,2021, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:08:28 on Apr 17,2021
+# vcom -reportprogress 300 decoder.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity decoder
+# -- Compiling architecture Behavioural of decoder
+# End time: 11:08:28 on Apr 17,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:08:28 on Apr 17,2021
+# vcom -reportprogress 300 connection_mtx.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity connection_mtx
+# -- Compiling architecture struct of connection_mtx
+# End time: 11:08:28 on Apr 17,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:08:28 on Apr 17,2021
+# vcom -reportprogress 300 reg_generic.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity reg_generic
+# -- Compiling architecture Behavioural of reg_generic
+# End time: 11:08:28 on Apr 17,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:08:28 on Apr 17,2021
+# vcom -reportprogress 300 select_block.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity select_block
+# -- Compiling architecture behav of select_block
+# End time: 11:08:28 on Apr 17,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:08:28 on Apr 17,2021
+# vcom -reportprogress 300 equal_check.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Loading package utils
+# -- Compiling entity equal_check
+# -- Compiling architecture behav of equal_check
+# End time: 11:08:28 on Apr 17,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:08:28 on Apr 17,2021
+# vcom -reportprogress 300 windowing_rf.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Loading package utils
+# -- Compiling entity windowing_rf
+# -- Compiling architecture mix of windowing_rf
+# ** Error: windowing_rf.vhd(339): near "addr": (vcom-1576) expecting ',' or ')'.
+# ** Error: windowing_rf.vhd(342): Statement cannot be labeled.
+# ** Note: windowing_rf.vhd(349): VHDL Compiler exiting
+# End time: 11:08:28 on Apr 17,2021, Elapsed time: 0:00:00
+# Errors: 2, Warnings: 0
+# /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
+source compile.script
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:08:45 on Apr 17,2021
+# vcom -reportprogress 300 utils.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Compiling package utils
+# -- Compiling package body utils
+# -- Loading package utils
+# End time: 11:08:46 on Apr 17,2021, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:08:46 on Apr 17,2021
+# vcom -reportprogress 300 nwin_calc.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Loading package utils
+# -- Compiling entity nwin_calc
+# -- Compiling architecture struct of nwin_calc
+# End time: 11:08:46 on Apr 17,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:08:46 on Apr 17,2021
+# vcom -reportprogress 300 in_loc_selblock.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity in_loc_selblock
+# -- Compiling architecture behav of in_loc_selblock
+# End time: 11:08:46 on Apr 17,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:08:46 on Apr 17,2021
+# vcom -reportprogress 300 addr_encoder.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Loading package utils
+# -- Compiling entity addr_encoder
+# -- Compiling architecture behav of addr_encoder
+# End time: 11:08:46 on Apr 17,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:08:46 on Apr 17,2021
+# vcom -reportprogress 300 address_generator.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Loading package utils
+# -- Compiling entity address_generator
+# -- Compiling architecture struct of address_generator
+# End time: 11:08:46 on Apr 17,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:08:46 on Apr 17,2021
+# vcom -reportprogress 300 mux.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Loading package utils
+# -- Compiling entity mux
+# -- Compiling architecture behav of mux
+# End time: 11:08:46 on Apr 17,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:08:46 on Apr 17,2021
+# vcom -reportprogress 300 decoder.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity decoder
+# -- Compiling architecture Behavioural of decoder
+# End time: 11:08:46 on Apr 17,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:08:47 on Apr 17,2021
+# vcom -reportprogress 300 connection_mtx.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity connection_mtx
+# -- Compiling architecture struct of connection_mtx
+# End time: 11:08:47 on Apr 17,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:08:47 on Apr 17,2021
+# vcom -reportprogress 300 reg_generic.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity reg_generic
+# -- Compiling architecture Behavioural of reg_generic
+# End time: 11:08:47 on Apr 17,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:08:47 on Apr 17,2021
+# vcom -reportprogress 300 select_block.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity select_block
+# -- Compiling architecture behav of select_block
+# End time: 11:08:47 on Apr 17,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:08:47 on Apr 17,2021
+# vcom -reportprogress 300 equal_check.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Loading package utils
+# -- Compiling entity equal_check
+# -- Compiling architecture behav of equal_check
+# End time: 11:08:47 on Apr 17,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:08:47 on Apr 17,2021
+# vcom -reportprogress 300 windowing_rf.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Loading package utils
+# -- Compiling entity windowing_rf
+# -- Compiling architecture mix of windowing_rf
+# End time: 11:08:47 on Apr 17,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom tb_windowing_rf.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:08:52 on Apr 17,2021
+# vcom -reportprogress 300 tb_windowing_rf.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity tb_registerfile_generic
+# -- Compiling architecture testbench of tb_registerfile_generic
+# End time: 11:08:52 on Apr 17,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vsim -t 10ps work.tb_registerfile_generic
+# End time: 11:08:57 on Apr 17,2021, Elapsed time: 0:48:48
+# Errors: 16, Warnings: 5
+# vsim -t 10ps work.tb_registerfile_generic 
+# Start time: 11:08:57 on Apr 17,2021
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading work.tb_registerfile_generic(testbench)#1
+# Loading ieee.numeric_std(body)
+# Loading ieee.math_real(body)
+# Loading work.utils(body)
+# Loading work.windowing_rf(mix)#1
+# Loading work.select_block(behav)#1
+# Loading work.connection_mtx(struct)#1
+# ** Warning: (vsim-8683) Uninitialized out port /tb_registerfile_generic/RG/FILL has no driver.
+# This port will contribute value (U) to the signal network.
+log -r *
+run 40 ns
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_registerfile_generic/RG/RDPORT_SPILL
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_registerfile_generic/RG/DEC
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_registerfile_generic/RG/RDPORT1
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_registerfile_generic/RG/RDPORT0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_registerfile_generic/RG/CWP_NEXT_CALC/MUX_SEL
+restart -f
+# ** Note: (vsim-8009) Loading existing optimized design _opt
+# ** Warning: (vsim-8683) Uninitialized out port /tb_registerfile_generic/RG/FILL has no driver.
+# This port will contribute value (U) to the signal network.
+add wave *
+run 40 ns
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_registerfile_generic/RG/RDPORT_SPILL
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_registerfile_generic/RG/DEC
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_registerfile_generic/RG/RDPORT1
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_registerfile_generic/RG/RDPORT0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_registerfile_generic/RG/CWP_NEXT_CALC/MUX_SEL
+vcom tb_windowing_rf.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:10:22 on Apr 17,2021
+# vcom -reportprogress 300 tb_windowing_rf.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity tb_registerfile_generic
+# -- Compiling architecture testbench of tb_registerfile_generic
+# End time: 11:10:23 on Apr 17,2021, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+vsim -t 10ps work.tb_registerfile_generic
+# End time: 11:10:27 on Apr 17,2021, Elapsed time: 0:01:30
+# Errors: 0, Warnings: 5
+# vsim -t 10ps work.tb_registerfile_generic 
+# Start time: 11:10:27 on Apr 17,2021
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading work.tb_registerfile_generic(testbench)#1
+# Loading ieee.numeric_std(body)
+# Loading ieee.math_real(body)
+# Loading work.utils(body)
+# Loading work.windowing_rf(mix)#1
+# Loading work.select_block(behav)#1
+# Loading work.connection_mtx(struct)#1
+# ** Warning: (vsim-8683) Uninitialized out port /tb_registerfile_generic/RG/FILL has no driver.
+# This port will contribute value (U) to the signal network.
+vcom tb_windowing_rf.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:11:26 on Apr 17,2021
+# vcom -reportprogress 300 tb_windowing_rf.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity tb_registerfile_generic
+# -- Compiling architecture testbench of tb_registerfile_generic
+# End time: 11:11:26 on Apr 17,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vsim -t 10ps work.tb_registerfile_generic
+# End time: 11:11:29 on Apr 17,2021, Elapsed time: 0:01:02
+# Errors: 0, Warnings: 1
+# vsim -t 10ps work.tb_registerfile_generic 
+# Start time: 11:11:29 on Apr 17,2021
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading work.tb_registerfile_generic(testbench)#1
+# Loading ieee.numeric_std(body)
+# Loading ieee.math_real(body)
+# Loading work.utils(body)
+# Loading work.windowing_rf(mix)#1
+# Loading work.select_block(behav)#1
+# Loading work.connection_mtx(struct)#1
+# ** Warning: (vsim-8683) Uninitialized out port /tb_registerfile_generic/RG/FILL has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_registerfile_generic/RG/BUS_FROMEM(63 downto 0) has no driver.
+# This port will contribute value (64'hXXXXXXXXXXXXXXXX) to the signal network.
+add wave *
+log -r *
+run 40 ns
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_registerfile_generic/RG/RDPORT_SPILL
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_registerfile_generic/RG/DEC
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_registerfile_generic/RG/RDPORT1
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_registerfile_generic/RG/RDPORT0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_registerfile_generic/RG/CWP_NEXT_CALC/MUX_SEL
+add wave -position insertpoint  \
+sim:/tb_registerfile_generic/RG/spill_address
+vcom tb_windowing_rf2.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:20:32 on Apr 17,2021
+# vcom -reportprogress 300 tb_windowing_rf2.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity tb_registerfile_generic
+# -- Compiling architecture testbench of tb_registerfile_generic
+# ** Error: tb_windowing_rf2.vhd(88): (vcom-1136) Unknown identifier "TO_UNSIGNED".
+# ** Error: tb_windowing_rf2.vhd(89): (vcom-1136) Unknown identifier "TO_UNSIGNED".
+# ** Error: tb_windowing_rf2.vhd(90): (vcom-1136) Unknown identifier "TO_UNSIGNED".
+# ** Error: tb_windowing_rf2.vhd(92): (vcom-1136) Unknown identifier "TO_UNSIGNED".
+# ** Note: tb_windowing_rf2.vhd(107): VHDL Compiler exiting
+# End time: 11:20:33 on Apr 17,2021, Elapsed time: 0:00:01
+# Errors: 4, Warnings: 0
+# /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
+vcom tb_windowing_rf2.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:20:42 on Apr 17,2021
+# vcom -reportprogress 300 tb_windowing_rf2.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity tb_registerfile_generic
+# -- Compiling architecture testbench of tb_registerfile_generic
+# End time: 11:20:42 on Apr 17,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom tb_windowing_rf2.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:21:16 on Apr 17,2021
+# vcom -reportprogress 300 tb_windowing_rf2.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity tb_windowing_rf2
+# -- Compiling architecture testbench of tb_windowing_rf2
+# End time: 11:21:16 on Apr 17,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vsim -t 10ps work.tb_windowing_rf2
+# End time: 11:21:29 on Apr 17,2021, Elapsed time: 0:10:00
+# Errors: 5, Warnings: 7
+# vsim -t 10ps work.tb_windowing_rf2 
+# Start time: 11:21:29 on Apr 17,2021
 # ** Note: (vsim-3812) Design is being optimized...
 # Loading std.standard
 # Loading std.textio(body)
 # Loading ieee.std_logic_1164(body)
-# Loading work.tb_registerfile_generic(testbench)#1
 # Loading ieee.numeric_std(body)
+# Loading work.tb_windowing_rf2(testbench)#1
 # Loading ieee.math_real(body)
 # Loading work.utils(body)
 # Loading work.windowing_rf(mix)#1
 # Loading work.select_block(behav)#1
 # Loading work.connection_mtx(struct)#1
-# ** Warning: (vsim-8683) Uninitialized out port /tb_registerfile_generic/RG/SPILL has no driver.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_windowing_rf2/RG/FILL has no driver.
 # This port will contribute value (U) to the signal network.
-log -r *
+# ** Warning: (vsim-8683) Uninitialized out port /tb_windowing_rf2/RG/BUS_FROMEM(63 downto 0) has no driver.
+# This port will contribute value (64'hXXXXXXXXXXXXXXXX) to the signal network.
 add wave *
-run 40 ns
+log -r *
+run 17
 # ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
-#    Time: 0 ps  Iteration: 0  Instance: /tb_registerfile_generic/RG/DEC
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf2/RG/RDPORT_SPILL
 # ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
-#    Time: 0 ps  Iteration: 0  Instance: /tb_registerfile_generic/RG/RDPORT1
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf2/RG/DEC
 # ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
-#    Time: 0 ps  Iteration: 0  Instance: /tb_registerfile_generic/RG/RDPORT0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf2/RG/RDPORT1
 # ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
-#    Time: 0 ps  Iteration: 0  Instance: /tb_registerfile_generic/RG/CALLRET_CWP_MUX
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf2/RG/RDPORT0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf2/RG/CWP_NEXT_CALC/MUX_SEL
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 2  Instance: /tb_windowing_rf2/RG/RDPORT0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 2  Instance: /tb_windowing_rf2/RG/RDPORT1
+restart -f
+# ** Note: (vsim-8009) Loading existing optimized design _opt2
+# ** Warning: (vsim-8683) Uninitialized out port /tb_windowing_rf2/RG/FILL has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_windowing_rf2/RG/BUS_FROMEM(63 downto 0) has no driver.
+# This port will contribute value (64'hXXXXXXXXXXXXXXXX) to the signal network.
+run 17 ns
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf2/RG/RDPORT_SPILL
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf2/RG/DEC
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf2/RG/RDPORT1
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf2/RG/RDPORT0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf2/RG/CWP_NEXT_CALC/MUX_SEL
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 2  Instance: /tb_windowing_rf2/RG/RDPORT0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 2  Instance: /tb_windowing_rf2/RG/RDPORT1
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf2/RG/CWP_NEXT_CALC/MUX_SEL
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf2/RG/RDPORT0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf2/RG/RDPORT1
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 3  Instance: /tb_windowing_rf2/RG/RDPORT0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 3  Instance: /tb_windowing_rf2/RG/RDPORT1
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 5  Instance: /tb_windowing_rf2/RG/RDPORT0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 5  Instance: /tb_windowing_rf2/RG/RDPORT1
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 17 ns  Iteration: 2  Instance: /tb_windowing_rf2/RG/CWP_NEXT_CALC/MUX_SEL
+add wave -position insertpoint  \
+sim:/tb_windowing_rf2/RG/SEL_BLK/curr_proc_regs
+vcom tb_windowing_rf2.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:30:35 on Apr 17,2021
+# vcom -reportprogress 300 tb_windowing_rf2.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity tb_windowing_rf2
+# -- Compiling architecture testbench of tb_windowing_rf2
+# End time: 11:30:35 on Apr 17,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+restart -f
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.tb_windowing_rf2(testbench)#1
+# Loading ieee.math_real(body)
+# Loading work.utils(body)
+# Loading work.windowing_rf(mix)#1
+# Loading work.select_block(behav)#1
+# Loading work.connection_mtx(struct)#1
+# ** Warning: (vsim-8683) Uninitialized out port /tb_windowing_rf2/RG/FILL has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_windowing_rf2/RG/BUS_FROMEM(63 downto 0) has no driver.
+# This port will contribute value (64'hXXXXXXXXXXXXXXXX) to the signal network.
+run 34 ns
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf2/RG/RDPORT_SPILL
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf2/RG/DEC
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf2/RG/RDPORT1
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf2/RG/RDPORT0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf2/RG/CWP_NEXT_CALC/MUX_SEL
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 2  Instance: /tb_windowing_rf2/RG/RDPORT0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 2  Instance: /tb_windowing_rf2/RG/RDPORT1
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf2/RG/CWP_NEXT_CALC/MUX_SEL
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf2/RG/RDPORT0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf2/RG/RDPORT1
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 3  Instance: /tb_windowing_rf2/RG/RDPORT0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 3  Instance: /tb_windowing_rf2/RG/RDPORT1
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 5  Instance: /tb_windowing_rf2/RG/RDPORT0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 5  Instance: /tb_windowing_rf2/RG/RDPORT1
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 33 ns  Iteration: 2  Instance: /tb_windowing_rf2/RG/CWP_NEXT_CALC/MUX_SEL
+run 1 ns
+vcom tb_windowing_rf2.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:37:38 on Apr 17,2021
+# vcom -reportprogress 300 tb_windowing_rf2.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity tb_windowing_rf2
+# -- Compiling architecture testbench of tb_windowing_rf2
+# End time: 11:37:38 on Apr 17,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
 restart .f
 restart -f
-# ** Note: (vsim-8009) Loading existing optimized design _opt
-# ** Warning: (vsim-8683) Uninitialized out port /tb_registerfile_generic/RG/SPILL has no driver.
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.tb_windowing_rf2(testbench)#1
+# Loading ieee.math_real(body)
+# Loading work.utils(body)
+# Loading work.windowing_rf(mix)#1
+# Loading work.select_block(behav)#1
+# Loading work.connection_mtx(struct)#1
+# ** Warning: (vsim-8683) Uninitialized out port /tb_windowing_rf2/RG/FILL has no driver.
 # This port will contribute value (U) to the signal network.
-add wave *
-run 40 ns
+# ** Warning: (vsim-8683) Uninitialized out port /tb_windowing_rf2/RG/BUS_FROMEM(63 downto 0) has no driver.
+# This port will contribute value (64'hXXXXXXXXXXXXXXXX) to the signal network.
+run 34 ns
 # ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
-#    Time: 0 ps  Iteration: 0  Instance: /tb_registerfile_generic/RG/DEC
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf2/RG/RDPORT_SPILL
 # ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
-#    Time: 0 ps  Iteration: 0  Instance: /tb_registerfile_generic/RG/RDPORT1
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf2/RG/DEC
 # ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
-#    Time: 0 ps  Iteration: 0  Instance: /tb_registerfile_generic/RG/RDPORT0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf2/RG/RDPORT1
 # ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
-#    Time: 0 ps  Iteration: 0  Instance: /tb_registerfile_generic/RG/CALLRET_CWP_MUX
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf2/RG/RDPORT0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf2/RG/CWP_NEXT_CALC/MUX_SEL
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 2  Instance: /tb_windowing_rf2/RG/RDPORT0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 2  Instance: /tb_windowing_rf2/RG/RDPORT1
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf2/RG/CWP_NEXT_CALC/MUX_SEL
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf2/RG/RDPORT0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf2/RG/RDPORT1
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 3  Instance: /tb_windowing_rf2/RG/RDPORT0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 3  Instance: /tb_windowing_rf2/RG/RDPORT1
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 5  Instance: /tb_windowing_rf2/RG/RDPORT0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 5  Instance: /tb_windowing_rf2/RG/RDPORT1
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 1 ns  Iteration: 2  Instance: /tb_windowing_rf2/RG/CWP_NEXT_CALC/MUX_SEL
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 33 ns  Iteration: 2  Instance: /tb_windowing_rf2/RG/CWP_NEXT_CALC/MUX_SEL
+run 1ns
 add wave -position insertpoint  \
-sim:/tb_registerfile_generic/RG/c_win
+sim:/tb_windowing_rf2/RG/c_win
+run 1 ns
+run 1 ns
+vcom tb_windowing_rf2.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:39:37 on Apr 17,2021
+# vcom -reportprogress 300 tb_windowing_rf2.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity tb_windowing_rf2
+# -- Compiling architecture testbench of tb_windowing_rf2
+# End time: 11:39:37 on Apr 17,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+restart -f
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.tb_windowing_rf2(testbench)#1
+# Loading ieee.math_real(body)
+# Loading work.utils(body)
+# Loading work.windowing_rf(mix)#1
+# Loading work.select_block(behav)#1
+# Loading work.connection_mtx(struct)#1
+# ** Warning: (vsim-8683) Uninitialized out port /tb_windowing_rf2/RG/FILL has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_windowing_rf2/RG/BUS_FROMEM(63 downto 0) has no driver.
+# This port will contribute value (64'hXXXXXXXXXXXXXXXX) to the signal network.
+run 34 ns
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf2/RG/RDPORT_SPILL
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf2/RG/DEC
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf2/RG/RDPORT1
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf2/RG/RDPORT0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf2/RG/CWP_NEXT_CALC/MUX_SEL
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 2  Instance: /tb_windowing_rf2/RG/RDPORT0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 2  Instance: /tb_windowing_rf2/RG/RDPORT1
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf2/RG/CWP_NEXT_CALC/MUX_SEL
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf2/RG/RDPORT0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf2/RG/RDPORT1
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 3  Instance: /tb_windowing_rf2/RG/RDPORT0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 3  Instance: /tb_windowing_rf2/RG/RDPORT1
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 5  Instance: /tb_windowing_rf2/RG/RDPORT0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 5  Instance: /tb_windowing_rf2/RG/RDPORT1
+run 1 ns
+run 1 ns
+run 1 ns
+vcom tb_windowing_rf2.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:41:18 on Apr 17,2021
+# vcom -reportprogress 300 tb_windowing_rf2.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity tb_windowing_rf2
+# -- Compiling architecture testbench of tb_windowing_rf2
+# End time: 11:41:18 on Apr 17,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+restart -f
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.tb_windowing_rf2(testbench)#1
+# Loading ieee.math_real(body)
+# Loading work.utils(body)
+# Loading work.windowing_rf(mix)#1
+# Loading work.select_block(behav)#1
+# Loading work.connection_mtx(struct)#1
+# ** Warning: (vsim-8683) Uninitialized out port /tb_windowing_rf2/RG/FILL has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_windowing_rf2/RG/BUS_FROMEM(63 downto 0) has no driver.
+# This port will contribute value (64'hXXXXXXXXXXXXXXXX) to the signal network.
+run 34 ns
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf2/RG/RDPORT_SPILL
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf2/RG/DEC
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf2/RG/RDPORT1
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf2/RG/RDPORT0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf2/RG/CWP_NEXT_CALC/MUX_SEL
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 2  Instance: /tb_windowing_rf2/RG/RDPORT0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 2  Instance: /tb_windowing_rf2/RG/RDPORT1
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf2/RG/CWP_NEXT_CALC/MUX_SEL
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf2/RG/RDPORT0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf2/RG/RDPORT1
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 3  Instance: /tb_windowing_rf2/RG/RDPORT0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 3  Instance: /tb_windowing_rf2/RG/RDPORT1
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 5  Instance: /tb_windowing_rf2/RG/RDPORT0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 5  Instance: /tb_windowing_rf2/RG/RDPORT1
+run 1 ns
+run 1 ns
+run 1 ns
+run 1 ns
+vcom tb_windowing_rf2.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:42:06 on Apr 17,2021
+# vcom -reportprogress 300 tb_windowing_rf2.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity tb_windowing_rf2
+# -- Compiling architecture testbench of tb_windowing_rf2
+# End time: 11:42:06 on Apr 17,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+restart -f
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.tb_windowing_rf2(testbench)#1
+# Loading ieee.math_real(body)
+# Loading work.utils(body)
+# Loading work.windowing_rf(mix)#1
+# Loading work.select_block(behav)#1
+# Loading work.connection_mtx(struct)#1
+# ** Warning: (vsim-8683) Uninitialized out port /tb_windowing_rf2/RG/FILL has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_windowing_rf2/RG/BUS_FROMEM(63 downto 0) has no driver.
+# This port will contribute value (64'hXXXXXXXXXXXXXXXX) to the signal network.
+run 34 ns
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf2/RG/RDPORT_SPILL
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf2/RG/DEC
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf2/RG/RDPORT1
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf2/RG/RDPORT0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf2/RG/CWP_NEXT_CALC/MUX_SEL
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 2  Instance: /tb_windowing_rf2/RG/RDPORT0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 2  Instance: /tb_windowing_rf2/RG/RDPORT1
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf2/RG/CWP_NEXT_CALC/MUX_SEL
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf2/RG/RDPORT0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf2/RG/RDPORT1
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 3  Instance: /tb_windowing_rf2/RG/RDPORT0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 3  Instance: /tb_windowing_rf2/RG/RDPORT1
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 5  Instance: /tb_windowing_rf2/RG/RDPORT0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 5  Instance: /tb_windowing_rf2/RG/RDPORT1
+run 1 ns
+run 1 ns
+run 1 ns
+run 1 ns
+run 1 ns
+run 1 ns
+run 1 ns
+run 1 ns
+run 1 ns
+run 1 ns
+run 1 ns
+run 1 ns
+run 1 ns
+run 1 ns
+run 1 ns
+run 1 ns
+vcom windowing_rf.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:48:16 on Apr 17,2021
+# vcom -reportprogress 300 windowing_rf.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Loading package utils
+# -- Compiling entity windowing_rf
+# -- Compiling architecture mix of windowing_rf
+# End time: 11:48:16 on Apr 17,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+restart -f
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.tb_windowing_rf2(testbench)#1
+# Loading ieee.math_real(body)
+# Loading work.utils(body)
+# Loading work.windowing_rf(mix)#1
+# Loading work.select_block(behav)#1
+# Loading work.connection_mtx(struct)#1
+# ** Warning: (vsim-8683) Uninitialized out port /tb_windowing_rf2/RG/FILL has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_windowing_rf2/RG/BUS_FROMEM(63 downto 0) has no driver.
+# This port will contribute value (64'hXXXXXXXXXXXXXXXX) to the signal network.
+run 50 ns
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf2/RG/RDPORT_SPILL
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf2/RG/SWP_NEXT_CALC/MUX_SEL
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf2/RG/DEC
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf2/RG/RDPORT1
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf2/RG/RDPORT0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf2/RG/CWP_NEXT_CALC/MUX_SEL
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 1  Instance: /tb_windowing_rf2/RG/SWP_NEXT_CALC/MUX_SEL
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 2  Instance: /tb_windowing_rf2/RG/RDPORT0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 2  Instance: /tb_windowing_rf2/RG/RDPORT1
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf2/RG/SWP_NEXT_CALC/MUX_SEL
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf2/RG/CWP_NEXT_CALC/MUX_SEL
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf2/RG/RDPORT0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf2/RG/RDPORT1
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 3  Instance: /tb_windowing_rf2/RG/RDPORT0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 3  Instance: /tb_windowing_rf2/RG/RDPORT1
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 5  Instance: /tb_windowing_rf2/RG/RDPORT0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 5  Instance: /tb_windowing_rf2/RG/RDPORT1
+run 1 ns
 add wave -position insertpoint  \
-sim:/tb_registerfile_generic/RG/cwin_plus2
-restart -f
-# ** Note: (vsim-8009) Loading existing optimized design _opt
-# ** Warning: (vsim-8683) Uninitialized out port /tb_registerfile_generic/RG/SPILL has no driver.
-# This port will contribute value (U) to the signal network.
-run 40 ns
-# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
-#    Time: 0 ps  Iteration: 0  Instance: /tb_registerfile_generic/RG/DEC
-# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
-#    Time: 0 ps  Iteration: 0  Instance: /tb_registerfile_generic/RG/RDPORT1
-# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
-#    Time: 0 ps  Iteration: 0  Instance: /tb_registerfile_generic/RG/RDPORT0
-# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
-#    Time: 0 ps  Iteration: 0  Instance: /tb_registerfile_generic/RG/CALLRET_CWP_MUX
-vcom tb_windowing_rf.vhd
-# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 11:59:00 on Apr 15,2021
-# vcom -reportprogress 300 tb_windowing_rf.vhd 
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Compiling entity tb_registerfile_generic
-# -- Compiling architecture testbench of tb_registerfile_generic
-# End time: 11:59:00 on Apr 15,2021, Elapsed time: 0:00:00
-# Errors: 0, Warnings: 0
-restart -f
-# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
-# Loading std.standard
-# Loading std.textio(body)
-# Loading ieee.std_logic_1164(body)
-# Loading work.tb_registerfile_generic(testbench)#1
-# Loading ieee.numeric_std(body)
-# Loading ieee.math_real(body)
-# Loading work.utils(body)
-# Loading work.windowing_rf(mix)#1
-# Loading work.select_block(behav)#1
-# Loading work.connection_mtx(struct)#1
-# ** Warning: (vsim-8683) Uninitialized out port /tb_registerfile_generic/RG/SPILL has no driver.
-# This port will contribute value (U) to the signal network.
-run 40 ns
-# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
-#    Time: 0 ps  Iteration: 0  Instance: /tb_registerfile_generic/RG/DEC
-# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
-#    Time: 0 ps  Iteration: 0  Instance: /tb_registerfile_generic/RG/RDPORT1
-# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
-#    Time: 0 ps  Iteration: 0  Instance: /tb_registerfile_generic/RG/RDPORT0
-# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
-#    Time: 0 ps  Iteration: 0  Instance: /tb_registerfile_generic/RG/CALLRET_CWP_MUX
-vcom tb_windowing_rf.vhd
-# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 12:02:14 on Apr 15,2021
-# vcom -reportprogress 300 tb_windowing_rf.vhd 
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Compiling entity tb_registerfile_generic
-# -- Compiling architecture testbench of tb_registerfile_generic
-# End time: 12:02:14 on Apr 15,2021, Elapsed time: 0:00:00
-# Errors: 0, Warnings: 0
-restart -f
-# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
-# Loading std.standard
-# Loading std.textio(body)
-# Loading ieee.std_logic_1164(body)
-# Loading work.tb_registerfile_generic(testbench)#1
-# Loading ieee.numeric_std(body)
-# Loading ieee.math_real(body)
-# Loading work.utils(body)
-# Loading work.windowing_rf(mix)#1
-# Loading work.select_block(behav)#1
-# Loading work.connection_mtx(struct)#1
-# ** Warning: (vsim-8683) Uninitialized out port /tb_registerfile_generic/RG/SPILL has no driver.
-# This port will contribute value (U) to the signal network.
-run 40 ns
-# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
-#    Time: 0 ps  Iteration: 0  Instance: /tb_registerfile_generic/RG/DEC
-# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
-#    Time: 0 ps  Iteration: 0  Instance: /tb_registerfile_generic/RG/RDPORT1
-# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
-#    Time: 0 ps  Iteration: 0  Instance: /tb_registerfile_generic/RG/RDPORT0
-# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
-#    Time: 0 ps  Iteration: 0  Instance: /tb_registerfile_generic/RG/CALLRET_CWP_MUX
-vcom tb_windowing_rf.vhd
-# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 12:02:52 on Apr 15,2021
-# vcom -reportprogress 300 tb_windowing_rf.vhd 
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Compiling entity tb_registerfile_generic
-# -- Compiling architecture testbench of tb_registerfile_generic
-# End time: 12:02:52 on Apr 15,2021, Elapsed time: 0:00:00
-# Errors: 0, Warnings: 0
-restart -f
-# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
-# Loading std.standard
-# Loading std.textio(body)
-# Loading ieee.std_logic_1164(body)
-# Loading work.tb_registerfile_generic(testbench)#1
-# Loading ieee.numeric_std(body)
-# Loading ieee.math_real(body)
-# Loading work.utils(body)
-# Loading work.windowing_rf(mix)#1
-# Loading work.select_block(behav)#1
-# Loading work.connection_mtx(struct)#1
-# ** Warning: (vsim-8683) Uninitialized out port /tb_registerfile_generic/RG/SPILL has no driver.
-# This port will contribute value (U) to the signal network.
-run 40 ns
-# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
-#    Time: 0 ps  Iteration: 0  Instance: /tb_registerfile_generic/RG/DEC
-# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
-#    Time: 0 ps  Iteration: 0  Instance: /tb_registerfile_generic/RG/RDPORT1
-# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
-#    Time: 0 ps  Iteration: 0  Instance: /tb_registerfile_generic/RG/RDPORT0
-# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
-#    Time: 0 ps  Iteration: 0  Instance: /tb_registerfile_generic/RG/CALLRET_CWP_MUX
-# End time: 12:06:57 on Apr 15,2021, Elapsed time: 0:12:09
-# Errors: 0, Warnings: 4
+sim:/tb_windowing_rf2/RG/done_spill
+add wave -position insertpoint  \
+sim:/tb_windowing_rf2/RG/c_swin
+run 1 ns
+run 1 ns
+run 1 ns

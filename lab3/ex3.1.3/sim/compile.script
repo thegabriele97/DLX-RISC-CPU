@@ -1,5 +1,9 @@
 
 vcom utils.vhd
+vcom nwin_calc.vhd
+vcom in_loc_selblock.vhd
+vcom addr_encoder.vhd
+vcom address_generator.vhd
 vcom mux.vhd
 vcom decoder.vhd
 vcom connection_mtx.vhd

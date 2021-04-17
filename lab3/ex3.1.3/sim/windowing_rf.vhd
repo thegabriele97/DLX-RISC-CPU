@@ -31,7 +31,11 @@ entity windowing_rf is
         CALL:       IN std_logic;
         RET:        IN std_logic;
         FILL:       OUT std_logic; -- POP towards memory
-        SPILL:      OUT std_logic  -- PUSH towards memory
+        SPILL:      OUT std_logic; -- PUSH towards memory
+
+        -- TO MEMORY
+        BUS_TOMEM:  OUT std_logic_vector(NBIT_DATA - 1 downto 0);
+        BUS_FROMEM:  OUT std_logic_vector(NBIT_DATA - 1 downto 0)
 
     );
 end windowing_rf;
@@ -111,6 +115,43 @@ architecture mix of windowing_rf is
         );
     end component;
 
+    component nwin_calc is
+        generic(
+            F:          integer := 8
+        );
+        port(
+            c_win:           in std_logic_vector(F-1 downto 0);
+            sel:            in std_logic_vector(1 downto 0);         
+            n_win:           out std_logic_vector(F-1 downto 0)
+        );
+    end component;
+
+    component in_loc_selblock is
+        generic(
+            NBIT_DATA:  integer := 64;
+            N:          integer := 8; -- number of registers in each IN, OUT, LOCAL
+            F:          integer := 5  -- number of windows
+        );
+        port(
+            regs:           in std_logic_vector(NBIT_DATA*2*N*F-1 downto 0); -- the order is (LSB first): INx - LOCALx ; INx+1 - LOCALx+1, ...
+            win:            in std_logic_vector(F-1 downto 0);
+            curr_proc_regs: out std_logic_vector(NBIT_DATA*2*N-1 downto 0) -- the order is (LSB first): IN, LOCAL, OUT
+        );
+    end component;
+
+    component address_generator is
+        generic(
+            N:          integer := 8
+        );
+        port(
+            clk:        in std_logic;
+            rst:        in std_logic;
+            enable:     in std_logic;
+            done:       out std_logic;
+            addr:       out std_logic_vector(f_log2(N)-1 downto 0)
+        );
+    end component;
+
     signal dec_output: std_logic_vector(3*N+M-1 downto 0);
     signal writeen_ext: std_logic_vector(3*N+M-1 downto 0);
     signal dec_out_with_wen: std_logic_vector(3*N+M-1 downto 0);
@@ -127,16 +168,23 @@ architecture mix of windowing_rf is
     signal internal_out2: std_logic_vector(NBIT_DATA-1 downto 0);
 
     signal call_ret_encoding: std_logic_vector(1 downto 0);
-    signal callret_cwp_mux_input: std_logic_vector(4*F-1 downto 0);
     signal next_cwp: std_logic_vector(F-1 downto 0);
 
     signal int_WR: std_logic;
     signal int_RD1: std_logic;
     signal int_RD2: std_logic;
 
+    signal donespill_donefill_encoding: std_logic_vector(1 downto 0);
+    signal next_swp: std_logic_vector(F-1 downto 0);
+
     signal cwin_plus2: std_logic_vector(F-1 downto 0); 
     signal c_swin: std_logic_vector(F-1 downto 0); 
     signal int_PUSH: std_logic;
+
+    signal bus_sel_savedwin_data: std_logic_vector(NBIT_DATA*2*N-1 downto 0);
+    signal spill_address: std_logic_vector(f_log2(2*N)-1 downto 0);
+
+    signal done_spill: std_logic;
 
 begin
 
@@ -147,23 +195,12 @@ begin
 
     call_ret_encoding <= RET & CALL;
     
-    -- call_ret_encoding = 00 => c_win
-    callret_cwp_mux_input(F-1 downto 0) <= c_win;
-    callret_cwp_mux_input(4*F-1 downto 3*F) <= c_win;
-
-    -- call_ret_encoding = 01 => (c_win << 1)
-    callret_cwp_mux_input(2*F-1 downto F) <= c_win(F-2 downto 0) & c_win(F-1);
-    
-    -- call_ret_encoding = 10 => (c_win << 1)
-    callret_cwp_mux_input(3*F-1 downto 2*F) <= c_win(0) & c_win(F-1 downto 1);
-    
-
-    CALLRET_CWP_MUX: mux generic map(N => F, M => 4)
+    CWP_NEXT_CALC: nwin_calc generic map(F => F) 
         port map(
-            S => call_ret_encoding,
-            Q => callret_cwp_mux_input,
-            Y => next_cwp
-        ); 
+            c_win => c_win,
+            sel => call_ret_encoding,
+            n_win => next_cwp
+        );
 
     -- CWP
     CWP: reg_generic generic map(N => F, RSTVAL => 1)
@@ -267,13 +304,23 @@ begin
         );
 
 
+    --TODO: a day it will be: done_fill & done_spill
+    donespill_donefill_encoding <= '0' & done_spill;
+    
+    SWP_NEXT_CALC: nwin_calc generic map(F => F) 
+        port map(
+            c_win => c_swin,
+            sel => donespill_donefill_encoding,
+            n_win => next_swp
+        );
+
     -- SWP
     SWP: reg_generic generic map(N => F, RSTVAL => 1)
         port map(
             Clk => CLK,
             Rst => RESET,
             Enable => '1',
-            D => "00001",
+            D => next_swp,
             Q => c_swin
         );
 
@@ -285,6 +332,30 @@ begin
             A => cwin_plus2,
             B => c_swin,
             EQUAL => int_PUSH
+        );
+
+
+    SELBLOCK_INLOC: in_loc_selblock generic map(NBIT_DATA, N, F) 
+        port map(
+            regs => bus_reg_dataout,
+            win => c_swin,
+            curr_proc_regs => bus_sel_savedwin_data
+        );
+
+    PUSH_ADDRGEN: address_generator generic map(N => 2*N)
+        port map(
+            clk => CLK,
+            rst => RESET,
+            enable => int_PUSH,
+            done => done_spill,
+            addr => spill_address
+        );
+
+    RDPORT_SPILL: mux generic map(N => NBIT_DATA, M => 16)
+        port map(
+            S => spill_address,
+            Q => bus_sel_savedwin_data,
+            Y => BUS_TOMEM
         );
     
 end mix;

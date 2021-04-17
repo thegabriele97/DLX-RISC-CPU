@@ -1,11 +1,12 @@
 library IEEE;
 
 use IEEE.std_logic_1164.all;
+use ieee.numeric_std.all;
 
-entity tb_registerfile_generic is
-end tb_registerfile_generic;
+entity tb_windowing_rf2 is
+end tb_windowing_rf2;
 
-architecture testbench of tb_registerfile_generic is
+architecture testbench of tb_windowing_rf2 is
 	
     signal CLK: std_logic := '0';
     signal RESET: std_logic;
@@ -66,31 +67,46 @@ begin
         GENERIC MAP (64, 5, 8, 8, 5) 
         PORT MAP (CLK, RESET, ENABLE, RD1, RD2, WR, ADD_WR, ADD_RD1, ADD_RD2, DATAIN, OUT1, OUT2, CALL, RET, FILL, SPILL, TOMEM, FROMEM);
 
-    CALL <= '0', '1' after 12 ns, '0' after 13 ns, '1' after 28 ns, '0' after 30.7 ns;
-    RET <= '0', '1' after 24 ns, '0' after 25 ns;
-
-	RESET <= '1','0' after 5 ns;
-	ENABLE <= '0','1' after 3 ns, '0' after 10 ns, '1' after 15 ns;
-	WR <= '0','1' after 6 ns, '0' after 7 ns, '1' after 10 ns, '0' after 20 ns;
-	RD1 <= '1','0' after 5 ns, '1' after 13 ns, '0' after 20 ns, '1' after 21 ns; 
-	RD2 <= '0','1' after 17 ns;
-	ADD_WR <= "10110", "01000" after 9 ns, "00100" after 18 ns, "10101" after 20 ns;
-	ADD_RD1 <="10110", "01000" after 9 ns, "00100" after 18 ns, "10101" after 20 ns;
-	ADD_RD2<= "11100", "01000" after 9 ns, "00100" after 18 ns, "10101" after 20 ns;
-	DATAIN<=(others => '0'),(others => '1') after 8 ns;
-
-	PCLOCK : process(CLK)
+    PCLOCK : process(CLK)
 	begin
 		CLK <= not(CLK) after 0.5 ns;	
 	end process;
 
-end testbench;
+    process
+    begin
 
----
--- configuration CFG_TESTRF of tb_registerfile is
---   for testbench
--- 	for RG : register_file
--- 		use configuration WORK.CFG_RF_BEH;
--- 	end for; 
---   end for;
--- end CFG_TESTRF;
+        RESET <= '1';
+        wait for 1 ns;
+
+        RESET <= '0';
+        ENABLE <= '1';
+        CALL <= '0';
+        RET <= '0';
+        
+        WR <= '1';
+        RD1 <= '1';
+        RD2 <= '1';
+        for i in 1 to 16 loop
+            
+            ADD_WR <= std_logic_vector(TO_UNSIGNED(8+i-1, ADD_WR'length));
+            ADD_RD1 <= std_logic_vector(TO_UNSIGNED(8+i-1, ADD_RD1'length));
+            ADD_RD2 <= std_logic_vector(TO_UNSIGNED(8+i-1, ADD_RD2'length));
+
+            DATAIN <= std_logic_vector(TO_UNSIGNED(i, DATAIN'length));
+
+            wait for 2 ns;
+
+        end loop;
+
+        WR <= '0';
+
+        CALL <= '1';
+        wait for 3 ns;
+
+        CALL <= '0';
+
+        wait;
+
+    end process;
+
+end testbench;
