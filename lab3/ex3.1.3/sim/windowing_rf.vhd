@@ -193,7 +193,7 @@ begin
     int_RD2 <= ENABLE and RD2;
 
 
-    call_ret_encoding <= RET & CALL;
+    call_ret_encoding <= RET & (CALL and not int_PUSH);
     
     CWP_NEXT_CALC: nwin_calc generic map(F => F) 
         port map(
