@@ -3174,3 +3174,66 @@ run 150 ns
 #    Time: 500 ps  Iteration: 5  Instance: /tb_windowing_rf2/RG/RDPORT0
 # ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
 #    Time: 500 ps  Iteration: 5  Instance: /tb_windowing_rf2/RG/RDPORT1
+vcom windowing_rf.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 21:49:17 on Apr 19,2021
+# vcom -reportprogress 300 windowing_rf.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Loading package utils
+# -- Compiling entity windowing_rf
+# -- Compiling architecture mix of windowing_rf
+# End time: 21:49:17 on Apr 19,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+restart -f
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.tb_windowing_rf2(testbench)#1
+# Loading ieee.math_real(body)
+# Loading work.utils(body)
+# Loading work.windowing_rf(mix)#1
+# Loading work.select_block(behav)#1
+# Loading work.connection_mtx(struct)#1
+run 150 ns
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf2/RG/RDPORT_SPILL
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf2/RG/SWP_NEXT_CALC/MUX_SEL
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf2/RG/DEC
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf2/RG/RDPORT1
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf2/RG/RDPORT0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf2/RG/CWP_NEXT_CALC/MUX_SEL
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 2  Instance: /tb_windowing_rf2/RG/RDPORT0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 2  Instance: /tb_windowing_rf2/RG/RDPORT1
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf2/RG/CWP_NEXT_CALC/MUX_SEL
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf2/RG/RDPORT0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf2/RG/RDPORT1
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf2/RG/SWP_NEXT_CALC/MUX_SEL
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 3  Instance: /tb_windowing_rf2/RG/RDPORT0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 3  Instance: /tb_windowing_rf2/RG/RDPORT1
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 3  Instance: /tb_windowing_rf2/RG/CWP_NEXT_CALC/MUX_SEL
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 5  Instance: /tb_windowing_rf2/RG/RDPORT0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 5  Instance: /tb_windowing_rf2/RG/RDPORT1
+# End time: 23:09:49 on Apr 19,2021, Elapsed time: 11:14:07
+# Errors: 14, Warnings: 19
