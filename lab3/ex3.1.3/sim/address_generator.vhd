@@ -12,32 +12,18 @@ entity address_generator is
         rst:        in std_logic;
         enable:     in std_logic;
         done:       out std_logic;
-        addr:       out std_logic_vector(f_log2(N)-1 downto 0)
+        addr:       out std_logic_vector(N-1 downto 0)
     );
 end address_generator;
 
 architecture struct of address_generator is
-
-    component addr_encoder is
-        generic(
-            N:          integer := 8
-        );
-        port(
-            Q:           in std_logic_vector(N-1 downto 0); 
-            Y:           out std_logic_vector(f_log2(N)-1 downto 0)
-        );
-    end component;
 
     signal curr_addr: std_logic_vector(N-1 downto 0);
     signal next_addr: std_logic_vector(N-1 downto 0);
 
 begin
 
-    addr_enc: addr_encoder generic map(N => N)
-        port map(
-            Q => curr_addr,
-            Y => addr
-        );
+    addr <= curr_addr;
 
     -- done = '1' if msb = '1'
     done <= curr_addr(N-1);
@@ -45,10 +31,11 @@ begin
     process(curr_addr, enable)
     begin
 
-        next_addr <= (curr_addr(N-2 downto 0) & curr_addr(N-1));
-        if (enable = '0') then
-            next_addr <= (others => '0');
-            next_addr(0) <= '1';
+        next_addr <= (others => '0');
+        next_addr(0) <= '1';
+
+        if (enable = '1' or (curr_addr(0) = '0' and not (curr_addr(N-1) = '1'))) then
+            next_addr <= (curr_addr(N-2 downto 0) & curr_addr(N-1));
         end if;
 
     end process;

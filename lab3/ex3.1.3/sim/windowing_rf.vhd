@@ -35,7 +35,7 @@ entity windowing_rf is
 
         -- TO MEMORY
         BUS_TOMEM:  OUT std_logic_vector(NBIT_DATA - 1 downto 0);
-        BUS_FROMEM:  OUT std_logic_vector(NBIT_DATA - 1 downto 0)
+        BUS_FROMEM:  IN std_logic_vector(NBIT_DATA - 1 downto 0)
 
     );
 end windowing_rf;
@@ -148,7 +148,17 @@ architecture mix of windowing_rf is
             rst:        in std_logic;
             enable:     in std_logic;
             done:       out std_logic;
-            addr:       out std_logic_vector(f_log2(N)-1 downto 0)
+            addr:       out std_logic_vector(N-1 downto 0)
+        );
+    end component;
+
+    component addr_encoder is
+        generic(
+            N:          integer := 8
+        );
+        port(
+            Q:           in std_logic_vector(N-1 downto 0); 
+            Y:           out std_logic_vector(f_log2(N)-1 downto 0)
         );
     end component;
 
@@ -177,14 +187,28 @@ architecture mix of windowing_rf is
     signal donespill_donefill_encoding: std_logic_vector(1 downto 0);
     signal next_swp: std_logic_vector(F-1 downto 0);
 
+    signal cwin_minus2: std_logic_vector(F-1 downto 0);
     signal cwin_plus2: std_logic_vector(F-1 downto 0); 
     signal c_swin: std_logic_vector(F-1 downto 0); 
+    signal filleq: std_logic;
+    signal spilleq: std_logic;
+    
+    signal int_POP: std_logic;
     signal int_PUSH: std_logic;
+    signal trigger_PUSH: std_logic;
+    signal trigger_POP: std_logic;
+    signal working_PUSH: std_logic;
+    signal working_POP: std_logic;
 
     signal bus_sel_savedwin_data: std_logic_vector(NBIT_DATA*2*N-1 downto 0);
+    
+    signal spill_address_ext: std_logic_vector(2*N-1 downto 0);
     signal spill_address: std_logic_vector(f_log2(2*N)-1 downto 0);
 
+    signal fill_address_ext: std_logic_vector(2*N-1 downto 0);
+
     signal done_spill: std_logic;
+    signal done_fill: std_logic;
 
 begin
 
@@ -193,7 +217,7 @@ begin
     int_RD2 <= ENABLE and RD2;
 
 
-    call_ret_encoding <= RET & (CALL and not int_PUSH);
+    call_ret_encoding <= ((RET and not int_POP) or done_fill) & ((CALL and not int_PUSH) or done_spill);
     
     CWP_NEXT_CALC: nwin_calc generic map(F => F) 
         port map(
@@ -305,7 +329,7 @@ begin
 
 
     --TODO: a day it will be: done_fill & done_spill
-    donespill_donefill_encoding <= '0' & done_spill;
+    donespill_donefill_encoding <= done_fill & done_spill;
     
     SWP_NEXT_CALC: nwin_calc generic map(F => F) 
         port map(
@@ -331,9 +355,14 @@ begin
         port map(
             A => cwin_plus2,
             B => c_swin,
-            EQUAL => int_PUSH
+            EQUAL => spilleq
         );
 
+
+    working_PUSH <= not spill_address_ext(0);
+    trigger_PUSH <= spilleq and CALL;
+    
+    int_PUSH <= trigger_PUSH or working_PUSH;
 
     SELBLOCK_INLOC: in_loc_selblock generic map(NBIT_DATA, N, F) 
         port map(
@@ -348,7 +377,13 @@ begin
             rst => RESET,
             enable => int_PUSH,
             done => done_spill,
-            addr => spill_address
+            addr => spill_address_ext
+        );
+
+    SPILLADDR_ENC: addr_encoder generic map(N => 2*N)
+        port map(
+            Q => spill_address_ext,
+            Y => spill_address
         );
 
     RDPORT_SPILL: mux generic map(N => NBIT_DATA, M => 16)
@@ -357,5 +392,35 @@ begin
             Q => bus_sel_savedwin_data,
             Y => BUS_TOMEM
         );
+
+
+    
+    
+    --cwin_minus2 <= c_win(1 downto 0) & c_win(F-1 downto 2);
+    FILL <= int_POP;
+    
+    EQ_CHECK_POP: equal_check generic map(N => F)
+    port map(
+        A => c_win,
+        B => c_swin,
+        EQUAL => filleq
+        );
+    
+    working_POP <= not fill_address_ext(0);
+    trigger_POP <= filleq and RET;
+
+    int_POP <= working_POP or trigger_POP;
+    
+    POP_ADDRGEN: address_generator generic map(N => 2*N)
+        port map(
+            clk => CLK,
+            rst => RESET,
+            enable => int_POP,
+            done => done_fill,
+            addr => fill_address_ext
+        );
+
+    
+
     
 end mix;

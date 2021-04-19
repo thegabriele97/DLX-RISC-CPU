@@ -56,10 +56,15 @@ architecture testbench of tb_windowing_rf2 is
 
             -- TO MEMORY
             BUS_TOMEM:  OUT std_logic_vector(NBIT_DATA - 1 downto 0);
-            BUS_FROMEM:  OUT std_logic_vector(NBIT_DATA - 1 downto 0)
+            BUS_FROMEM:  IN std_logic_vector(NBIT_DATA - 1 downto 0)
 
         );
     end component;
+
+    type mem_t is array(0 to 10*2*8) of std_logic_vector(64-1 downto 0);
+
+    signal mem: mem_t := (others => (others => '0'));
+    signal curr_ptr: integer := 0;
 
 begin 
 
@@ -100,12 +105,91 @@ begin
 
         WR <= '0';
 
-        CALL <= '1';
-        wait for 3 ns;
+        -- DO 3 CALL
+        for i in 0 to 2 loop
+            CALL <= '1';
+            wait for 1 ns;
+            
+            CALL <= '0';
+            wait for 1 ns;
+        end loop;
 
+        -- DO 1 CALL (out of windows => PUSH)
+        CALL <= '1';
+        wait for 1 ns;
         CALL <= '0';
+        wait for 1 ns;
+
+        -- waiting enough time for PUSH to be completed
+        wait for 20 ns;
+
+        -- DO 1 CALL (out of windows => PUSH)
+        CALL <= '1';
+        wait for 1 ns;
+        CALL <= '0';
+        wait for 1 ns;
+
+        wait for 20 ns;
+
+        -- DO 3 RET
+        for i in 0 to 2 loop
+            RET <= '1';
+            wait for 1 ns;
+            
+            RET <= '0';
+            wait for 1 ns;
+        end loop;
+
+        -- DO 1 CALL (if we do another RET instead, we have POP because window 1 doesn't exist yet)
+        CALL <= '1';
+        wait for 1 ns;
+        CALL <= '0';
+        wait for 1 ns;
+
+        -- DO 2 RET (the 2nd RET will cause a POP)
+        for i in 0 to 1 loop
+            RET <= '1';
+            wait for 1 ns;
+            
+            RET <= '0';
+            wait for 1 ns;
+        end loop;
+
+        wait for 20 ns;
+
+        RET <= '1';
+        wait for 1 ns;
+        RET <= '0';
+        wait for 1 ns;
 
         wait;
+
+    end process;
+
+
+    process(CLK)
+
+        variable v_cptr: integer;
+    
+    begin
+
+        if (rising_edge(CLK)) then
+
+            v_cptr := curr_ptr;
+
+            if (SPILL = '1') then
+                mem(curr_ptr) <= TOMEM;
+                curr_ptr <= curr_ptr + 1;
+            elsif (FILL = '1') then
+                if (v_cptr > 0) then
+                    v_cptr := v_cptr - 1;
+                    curr_ptr <= v_cptr;
+                end if;
+
+                FROMEM <= mem(v_cptr);
+            end if;
+
+        end if;
 
     end process;
 
