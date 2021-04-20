@@ -11,7 +11,9 @@ entity connection_mtx is
     );
     port(
         dec:            in std_logic_vector((M + N*3)-1 downto 0);
+        addr_pop:       in std_logic_vector(2*N-1 downto 0);
         win:            in std_logic_vector(F-1 downto 0);
+        swp:           in std_logic_vector(F-1 downto 0);
         sel:            out std_logic_vector((M + (N*2) * F)-1 downto 0)
     );
 end connection_mtx;
@@ -40,9 +42,17 @@ architecture struct of connection_mtx is
     -- first index is the window. 
     -- The result is a std_logic_vector (7 downto 0), each bit is the same (expanded bus from 1 bit of the window to many bits)
     signal bus_win: win_array_t;
+    signal bus_swp: win_array_t;
+
+    signal addr_pop_inverted: std_logic_vector(2*N-1 downto 0);
 
 
 begin
+
+
+    ADDRPOP_INVERT: for i in 0 to addr_pop_inverted'length-1 generate
+        addr_pop_inverted(i) <= addr_pop(addr_pop_inverted'length-1-i);
+    end generate ADDRPOP_INVERT;
 
     
     -- Dispatching the decoder output to the correct bus
@@ -55,6 +65,7 @@ begin
     -- Dispatching the window to its bus
     DISP_WINi: for i in 0 to F-1 generate
         bus_win(i) <= (others => win(i)); -- (7 downto 0) <= win(i);
+        bus_swp(i) <= (others => swp(i));
     end generate DISP_WINi;
 
     -- Dispatching the LOCAL, IN, OUT buses into their array
@@ -62,7 +73,7 @@ begin
     -- IN and OUT are in OR so single bus after that (towards layer 0)
     DISP_BUS_2_ARRi: for i in 0 to F-1 generate
 
-        bus_arr_local(i, 0) <= bus_local;
+        bus_arr_local(i, 0) <= bus_local and bus_win(i);
         
         logic_eq0: if (i = 0) generate
             bus_arr_io(i, 0) <= (bus_in and bus_win(i)) or (bus_out and bus_win(F-1));
@@ -80,7 +91,7 @@ begin
     LOGIC_BUS_LOCALi: for i in 0 to F-1 generate
 
         -- An AND with the current window
-        bus_arr_local(i, 1) <= bus_arr_local(i, 0) and bus_win(i);
+        bus_arr_local(i, 1) <= bus_arr_local(i, 0) or (bus_swp(i) and addr_pop_inverted(2*N-1 downto N));
 
     end generate LOGIC_BUS_LOCALi;
 
@@ -89,7 +100,7 @@ begin
     -- Layer 1 exists only for possible future additions to add some logic to the BUS
     LOGIC_BUS_IOi: for i in 0 to F-1 generate
 
-        bus_arr_io(i, 1) <= bus_arr_io(i, 0);
+        bus_arr_io(i, 1) <= bus_arr_io(i, 0) or (bus_swp(i) and addr_pop_inverted(N-1 downto 0));
 
     end generate LOGIC_BUS_IOi;
 

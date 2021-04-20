@@ -61,10 +61,10 @@ architecture testbench of tb_windowing_rf2 is
         );
     end component;
 
-    type mem_t is array(0 to 10*2*8) of std_logic_vector(64-1 downto 0);
+    type mem_t is array(0 to 10*2*8-1) of std_logic_vector(64-1 downto 0);
 
     signal mem: mem_t := (others => (others => '0'));
-    signal curr_ptr: integer := 0;
+    signal curr_ptr: integer := mem'length-1;
 
 begin 
 
@@ -108,10 +108,11 @@ begin
         -- DO 3 CALL
         for i in 0 to 2 loop
             CALL <= '1';
-            wait for 1 ns;
+            wait for 0.5 ns;
             
             CALL <= '0';
-            wait for 1 ns;
+            wait for 1.5 ns;
+
         end loop;
 
         -- DO 1 CALL (out of windows => PUSH)
@@ -123,13 +124,29 @@ begin
         -- waiting enough time for PUSH to be completed
         wait for 20 ns;
 
+        
         -- DO 1 CALL (out of windows => PUSH)
         CALL <= '1';
         wait for 1 ns;
         CALL <= '0';
         wait for 1 ns;
-
+        
         wait for 20 ns;
+        
+        WR <= '1';
+        for i in 1 to 16 loop
+            
+            ADD_WR <= std_logic_vector(TO_UNSIGNED(8+i-1, ADD_WR'length));
+            ADD_RD1 <= std_logic_vector(TO_UNSIGNED(8+i-1, ADD_RD1'length));
+            ADD_RD2 <= std_logic_vector(TO_UNSIGNED(8+i-1, ADD_RD2'length));
+
+            DATAIN <= std_logic_vector(TO_UNSIGNED(i*8, DATAIN'length));
+
+            wait for 2 ns;
+
+        end loop;
+
+        WR <= '0';
 
         -- DO 3 RET
         for i in 0 to 2 loop
@@ -162,6 +179,17 @@ begin
         RET <= '0';
         wait for 1 ns;
 
+        wait for 20 ns;
+
+        for i in 23 downto 8 loop
+            
+            ADD_RD1 <= std_logic_vector(TO_UNSIGNED(i, ADD_RD1'length));
+            ADD_RD2 <= std_logic_vector(TO_UNSIGNED(i, ADD_RD2'length));
+
+            wait for 2 ns;
+
+        end loop;
+
         wait;
 
     end process;
@@ -178,15 +206,33 @@ begin
             v_cptr := curr_ptr;
 
             if (SPILL = '1') then
-                mem(curr_ptr) <= TOMEM;
-                curr_ptr <= curr_ptr + 1;
-            elsif (FILL = '1') then
-                if (v_cptr > 0) then
-                    v_cptr := v_cptr - 1;
-                    curr_ptr <= v_cptr;
+                v_cptr := v_cptr + 1;
+                if (v_cptr = mem'length) then
+                    v_cptr := 0;
                 end if;
 
-                FROMEM <= mem(v_cptr);
+                mem(v_cptr) <= TOMEM;
+
+                curr_ptr <= v_cptr;
+            else
+                if (v_cptr >= 0) then
+                    
+                    if (FILL = '1') then
+                        v_cptr := v_cptr - 1;
+
+                        if (v_cptr = -1) then
+                            v_cptr := mem'length-1;
+                        end if;
+
+                        curr_ptr <= v_cptr;
+                    end if;
+                    
+                    FROMEM <= mem(v_cptr);
+
+                else
+                    FROMEM <= (others => '0');
+                end if;
+
             end if;
 
         end if;

@@ -86,7 +86,9 @@ architecture mix of windowing_rf is
         );
         port(
             dec:            in std_logic_vector((M + N*3)-1 downto 0);
+            addr_pop:       in std_logic_vector(2*N-1 downto 0);
             win:            in std_logic_vector(F-1 downto 0);
+            swp:            in std_logic_vector(F-1 downto 0);
             sel:            out std_logic_vector((M + (N*2) * F)-1 downto 0)
         );
     end component;
@@ -162,6 +164,9 @@ architecture mix of windowing_rf is
         );
     end component;
 
+    type word_array_t is array(0 to F-1) of std_logic_vector(NBIT_DATA-1 downto 0);
+    type sel_1bit_t is array(0 to F-1) of std_logic_vector(0 downto 0);
+
     signal dec_output: std_logic_vector(3*N+M-1 downto 0);
     signal writeen_ext: std_logic_vector(3*N+M-1 downto 0);
     signal dec_out_with_wen: std_logic_vector(3*N+M-1 downto 0);
@@ -189,10 +194,16 @@ architecture mix of windowing_rf is
 
     signal cwin_minus2: std_logic_vector(F-1 downto 0);
     signal cwin_plus2: std_logic_vector(F-1 downto 0); 
-    signal c_swin: std_logic_vector(F-1 downto 0); 
+    signal swin_minus1: std_logic_vector(F-1 downto 0);
+    signal c_swin: std_logic_vector(F-1 downto 0);
+    signal c_swin_masked: std_logic_vector(F-1 downto 0);
+    signal c_swin_masked_1bit: sel_1bit_t;
     signal filleq: std_logic;
     signal spilleq: std_logic;
-    
+
+    signal bus_fromem_indata: std_logic_vector(2*NBIT_DATA - 1 downto 0);
+    signal internal_inloc_data: word_array_t;
+
     signal int_POP: std_logic;
     signal int_PUSH: std_logic;
     signal trigger_PUSH: std_logic;
@@ -283,6 +294,8 @@ begin
         );
 
 
+    bus_fromem_indata <= BUS_FROMEM & DATAIN;
+
     -- Registers STACK
     REGS: for i in 0 to ((M + (N*2) * F)-1) generate
 
@@ -298,12 +311,26 @@ begin
         end generate GLOB_BLK;
 
         PROC_BLOCKSi: if (not (i < M)) generate
+
+            MUX_DATAIN: if ((i-M) mod 2*N = 0) generate
+
+                c_swin_masked_1bit((i-M) / (2*N))(0) <= c_swin_masked((i-M) / (2*N));
+
+                MUX_SELINPUT: mux generic map(N => NBIT_DATA, M => 2)
+                    port map(
+                        S => c_swin_masked_1bit((i-M) / (2*N)),
+                        Q => bus_fromem_indata,
+                        Y => internal_inloc_data((i-M) / (2*N))
+                    );
+
+            end generate MUX_DATAIN;
+
             BLOCKi: reg_generic generic map(N => NBIT_DATA, RSTVAL => 0)
                 port map(
                     Clk => CLK,
                     Rst => RESET,
                     Enable => en_regi(i),
-                    D => DATAIN,
+                    D => internal_inloc_data((i-M) / (2*N)),
                     Q => bus_reg_dataout((i-M)*NBIT_DATA+NBIT_DATA-1 downto (i-M)*NBIT_DATA)
                 );
         end generate PROC_BLOCKSi;
@@ -323,7 +350,9 @@ begin
     ConnMtx: connection_mtx generic map(M, N, F)
         port map(
             dec => dec_out_with_wen,
+            addr_pop => fill_address_ext,
             win => c_win,
+            swp => c_swin_masked,
             sel => en_regi
         );
 
@@ -421,6 +450,11 @@ begin
         );
 
     
+    swin_minus1 <= c_swin(0) & c_swin(F-1 downto 1);
+
+    CSWIN_MASK: for i in c_swin'range generate
+        c_swin_masked(i) <= swin_minus1(i) and int_POP;
+    end generate CSWIN_MASK;
 
     
 end mix;
