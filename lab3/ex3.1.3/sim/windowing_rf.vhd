@@ -69,12 +69,12 @@ architecture mix of windowing_rf is
     component mux IS
         GENERIC (
             N: integer := 4; -- number of bits per port
-            M: integer := 2  -- number of port
+            M: integer := 2  -- log of number of port
         );
         PORT(
-            S:      IN std_logic_vector(f_log2(M)-1 downto 0);
-            Q:      IN std_logic_vector(M*N-1 downto 0);
-            Y:      OUT std_logic_vector(N downto 0)
+            S:      IN std_logic_vector(M-1 downto 0);
+            Q:      IN std_logic_vector((2**M)*N-1 downto 0);
+            Y:      OUT std_logic_vector(N-1 downto 0)
         );
     END component;
 
@@ -150,17 +150,18 @@ architecture mix of windowing_rf is
             rst:        in std_logic;
             enable:     in std_logic;
             done:       out std_logic;
+            working:    out std_logic;
             addr:       out std_logic_vector(N-1 downto 0)
         );
     end component;
 
     component addr_encoder is
         generic(
-            N:          integer := 8
+            N:          integer := 3 -- log of N bits (output size)
         );
         port(
-            Q:           in std_logic_vector(N-1 downto 0); 
-            Y:           out std_logic_vector(f_log2(N)-1 downto 0)
+            Q:           in std_logic_vector(2**N-1 downto 0); 
+            Y:           out std_logic_vector(N-1 downto 0)
         );
     end component;
 
@@ -259,7 +260,7 @@ begin
     bus_complete_win_data <= bus_selected_win_data & bus_global_dataout;
 
 
-    RDPORT0: mux generic map(N => NBIT_DATA, M => M + 3*N)
+    RDPORT0: mux generic map(N => NBIT_DATA, M => f_log2(M + 3*N))
         port map(
             S => ADD_RD1,
             Q => bus_complete_win_data,
@@ -277,7 +278,7 @@ begin
 
 
 
-    RDPORT1: mux generic map(N => NBIT_DATA, M => M + 3*N)
+    RDPORT1: mux generic map(N => NBIT_DATA, M => f_log2(M + 3*N))
         port map(
             S => ADD_RD2,
             Q => bus_complete_win_data,
@@ -316,7 +317,7 @@ begin
 
                 c_swin_masked_1bit((i-M) / (2*N))(0) <= c_swin_masked((i-M) / (2*N));
 
-                MUX_SELINPUT: mux generic map(N => NBIT_DATA, M => 2)
+                MUX_SELINPUT: mux generic map(N => NBIT_DATA, M => f_log2(2))
                     port map(
                         S => c_swin_masked_1bit((i-M) / (2*N)),
                         Q => bus_fromem_indata,
@@ -388,9 +389,7 @@ begin
         );
 
 
-    working_PUSH <= not spill_address_ext(0);
     trigger_PUSH <= spilleq and CALL;
-    
     int_PUSH <= trigger_PUSH or working_PUSH;
 
     SELBLOCK_INLOC: in_loc_selblock generic map(NBIT_DATA, N, F) 
@@ -406,16 +405,17 @@ begin
             rst => RESET,
             enable => int_PUSH,
             done => done_spill,
+            working => working_PUSH,
             addr => spill_address_ext
         );
 
-    SPILLADDR_ENC: addr_encoder generic map(N => 2*N)
+    SPILLADDR_ENC: addr_encoder generic map(N => f_log2(2*N))
         port map(
             Q => spill_address_ext,
             Y => spill_address
         );
 
-    RDPORT_SPILL: mux generic map(N => NBIT_DATA, M => 16)
+    RDPORT_SPILL: mux generic map(N => NBIT_DATA, M => f_log2(2*N))
         port map(
             S => spill_address,
             Q => bus_sel_savedwin_data,
@@ -435,9 +435,7 @@ begin
         EQUAL => filleq
         );
     
-    working_POP <= not fill_address_ext(0);
     trigger_POP <= filleq and RET;
-
     int_POP <= working_POP or trigger_POP;
     
     POP_ADDRGEN: address_generator generic map(N => 2*N)
@@ -446,6 +444,7 @@ begin
             rst => RESET,
             enable => int_POP,
             done => done_fill,
+            working => working_POP,
             addr => fill_address_ext
         );
 

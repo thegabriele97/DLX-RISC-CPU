@@ -19,12 +19,12 @@ architecture struct of nwin_calc is
     component mux IS
         GENERIC (
             N: integer := 4; -- number of bits per port
-            M: integer := 2  -- number of port
+            M: integer := 2  -- log of number of port
         );
         PORT(
-            S:      IN std_logic_vector(f_log2(M)-1 downto 0);
-            Q:      IN std_logic_vector(M*N-1 downto 0);
-            Y:      OUT std_logic_vector(N downto 0)
+            S:      IN std_logic_vector(M-1 downto 0);
+            Q:      IN std_logic_vector((2**M)*N-1 downto 0);
+            Y:      OUT std_logic_vector(N-1 downto 0)
         );
     END component;
 
@@ -43,7 +43,7 @@ begin
     mux_input(3*F-1 downto 2*F) <= c_win(0) & c_win(F-1 downto 1);
     
 
-    MUX_SEL: mux generic map(N => F, M => 4)
+    MUX_SEL: mux generic map(N => F, M => 2)
         port map(
             S => sel,
             Q => mux_input,

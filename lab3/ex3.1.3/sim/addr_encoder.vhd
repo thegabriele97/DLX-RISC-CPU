@@ -5,11 +5,11 @@ use WORK.utils.all;
 
 entity addr_encoder is
     generic(
-        N:          integer := 8
+        N:          integer := 3 -- log of N bits (output size)
     );
     port(
-        Q:           in std_logic_vector(N-1 downto 0); 
-        Y:           out std_logic_vector(f_log2(N)-1 downto 0)
+        Q:           in std_logic_vector(2**N-1 downto 0); 
+        Y:           out std_logic_vector(N-1 downto 0)
     );
 end addr_encoder;
 

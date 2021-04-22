@@ -1,0 +1,59 @@
+Information: Updating design information... (UID-85)
+Warning: Design 'windowing_rf_NBIT_DATA64_NBIT_ADD5_M8_N8_F5' contains 1 high-fanout nets. A fanout number of 1000 will be used for delay calculations involving these nets. (TIM-134)
+ 
+****************************************
+Report : timing
+        -path full
+        -delay max
+        -max_paths 1
+Design : windowing_rf_NBIT_DATA64_NBIT_ADD5_M8_N8_F5
+Version: F-2011.09-SP3
+Date   : Thu Apr 22 12:14:45 2021
+****************************************
+
+ # A fanout number of 1000 was used for high fanout net computations.
+
+Operating Conditions: typical   Library: NangateOpenCellLibrary
+Wire Load Model Mode: top
+
+  Startpoint: SWP/Q_reg[4]
+              (rising edge-triggered flip-flop)
+  Endpoint: BUS_TOMEM[63]
+            (output port)
+  Path Group: (none)
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  windowing_rf_NBIT_DATA64_NBIT_ADD5_M8_N8_F5
+                     5K_hvratio_1_1        NangateOpenCellLibrary
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  SWP/Q_reg[4]/CK (DFF_X1)                                0.00 #     0.00 r
+  SWP/Q_reg[4]/Q (DFF_X1)                                 0.18       0.18 r
+  SWP/Q[4] (reg_generic_N5_RSTVAL1_1)                     0.00       0.18 r
+  SELBLOCK_INLOC/win[4] (in_loc_selblock_NBIT_DATA64_N8_F5)
+                                                          0.00       0.18 r
+  SELBLOCK_INLOC/U81/Z (BUF_X1)                           0.06       0.23 r
+  SELBLOCK_INLOC/U426/Z (CLKBUF_X1)                       0.10       0.33 r
+  SELBLOCK_INLOC/U3591/ZN (NOR2_X1)                       0.04       0.37 f
+  SELBLOCK_INLOC/U3583/ZN (AND3_X1)                       0.08       0.45 f
+  SELBLOCK_INLOC/U40/Z (BUF_X1)                           0.06       0.51 f
+  SELBLOCK_INLOC/U258/Z (CLKBUF_X1)                       0.10       0.61 f
+  SELBLOCK_INLOC/U3420/ZN (AOI222_X1)                     0.13       0.74 r
+  SELBLOCK_INLOC/U3419/ZN (NAND2_X1)                      0.03       0.78 f
+  SELBLOCK_INLOC/curr_proc_regs[127] (in_loc_selblock_NBIT_DATA64_N8_F5)
+                                                          0.00       0.78 f
+  RDPORT_SPILL/Q[127] (mux_N64_M4)                        0.00       0.78 f
+  RDPORT_SPILL/U65/ZN (AOI22_X1)                          0.06       0.83 r
+  RDPORT_SPILL/U63/ZN (NAND4_X1)                          0.04       0.87 f
+  RDPORT_SPILL/U62/ZN (OR2_X1)                            0.06       0.93 f
+  RDPORT_SPILL/Y[63] (mux_N64_M4)                         0.00       0.93 f
+  BUS_TOMEM[63] (out)                                     0.00       0.93 f
+  data arrival time                                                  0.93
+  --------------------------------------------------------------------------
+  (Path is unconstrained)
+
+
+1

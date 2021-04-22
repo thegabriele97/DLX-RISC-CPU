@@ -12,6 +12,7 @@ entity address_generator is
         rst:        in std_logic;
         enable:     in std_logic;
         done:       out std_logic;
+        working:    out std_logic;
         addr:       out std_logic_vector(N-1 downto 0)
     );
 end address_generator;
@@ -27,6 +28,7 @@ begin
 
     -- done = '1' if msb = '1'
     done <= curr_addr(N-1);
+    working <= not curr_addr(0);
 
     process(curr_addr, enable)
     begin
