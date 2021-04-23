@@ -1,0 +1,40 @@
+Information: Updating design information... (UID-85)
+Warning: Design 'registerfile_generic_NBIT_DATA32_NBIT_ADD5' contains 1 high-fanout nets. A fanout number of 1000 will be used for delay calculations involving these nets. (TIM-134)
+ 
+****************************************
+Report : timing
+        -path full
+        -delay max
+        -max_paths 1
+Design : registerfile_generic_NBIT_DATA32_NBIT_ADD5
+Version: F-2011.09-SP3
+Date   : Fri Apr 23 16:02:10 2021
+****************************************
+
+ # A fanout number of 1000 was used for high fanout net computations.
+
+Operating Conditions: typical   Library: NangateOpenCellLibrary
+Wire Load Model Mode: top
+
+  Startpoint: OUT1_reg[31]
+              (rising edge-triggered flip-flop)
+  Endpoint: OUT1[31] (output port)
+  Path Group: (none)
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  registerfile_generic_NBIT_DATA32_NBIT_ADD5
+                     5K_hvratio_1_1        NangateOpenCellLibrary
+
+  Point                                    Incr       Path
+  -----------------------------------------------------------
+  OUT1_reg[31]/CK (DFF_X1)                 0.00 #     0.00 r
+  OUT1_reg[31]/Q (DFF_X1)                  0.08       0.08 r
+  OUT1[31] (out)                           0.00       0.08 r
+  data arrival time                                   0.08
+  -----------------------------------------------------------
+  (Path is unconstrained)
+
+
+1

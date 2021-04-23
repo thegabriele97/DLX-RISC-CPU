@@ -1,0 +1,22 @@
+
+
+analyze -library WORK -format vhdl {registerfile_generic.vhd}
+elaborate REGISTERFILE_GENERIC -architecture BEHAVIOURAL -library WORK -parameters "NBIT_DATA = 32, NBIT_ADD = 5"
+
+compile -exact_map
+
+report_timing > registerfile_generic_timing_nopt.rpt
+report_area > registerfile_generic_area_nopt.rpt
+
+create_clock -name "PLK" -period 2 CLK
+report_clock
+compile
+
+set_max_delay 2 -from [all_inputs] -to [all_outputs]
+compile
+
+report_timing > registerfile_generic_timing_opt.rpt
+report_area > registerfile_generic_area_opt.rpt
+
+write -hierarchy -format vhdl -output registerfile_generic_syn.vhdl
+

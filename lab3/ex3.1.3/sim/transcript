@@ -14,7 +14,7 @@
 # //
 source compile.script
 # QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 11:52:02 on Apr 22,2021
+# Start time: 16:29:11 on Apr 23,2021
 # vcom -reportprogress 300 utils.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -24,10 +24,10 @@ source compile.script
 # -- Compiling package utils
 # -- Compiling package body utils
 # -- Loading package utils
-# End time: 11:52:02 on Apr 22,2021, Elapsed time: 0:00:00
+# End time: 16:29:12 on Apr 23,2021, Elapsed time: 0:00:01
 # Errors: 0, Warnings: 0
 # QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 11:52:02 on Apr 22,2021
+# Start time: 16:29:12 on Apr 23,2021
 # vcom -reportprogress 300 nwin_calc.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -37,10 +37,10 @@ source compile.script
 # -- Loading package utils
 # -- Compiling entity nwin_calc
 # -- Compiling architecture struct of nwin_calc
-# End time: 11:52:03 on Apr 22,2021, Elapsed time: 0:00:01
+# End time: 16:29:12 on Apr 23,2021, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 11:52:03 on Apr 22,2021
+# Start time: 16:29:12 on Apr 23,2021
 # vcom -reportprogress 300 in_loc_selblock.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -48,10 +48,10 @@ source compile.script
 # -- Loading package NUMERIC_STD
 # -- Compiling entity in_loc_selblock
 # -- Compiling architecture behav of in_loc_selblock
-# End time: 11:52:03 on Apr 22,2021, Elapsed time: 0:00:00
+# End time: 16:29:12 on Apr 23,2021, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 11:52:03 on Apr 22,2021
+# Start time: 16:29:12 on Apr 23,2021
 # vcom -reportprogress 300 addr_encoder.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -61,10 +61,10 @@ source compile.script
 # -- Loading package utils
 # -- Compiling entity addr_encoder
 # -- Compiling architecture behav of addr_encoder
-# End time: 11:52:03 on Apr 22,2021, Elapsed time: 0:00:00
+# End time: 16:29:12 on Apr 23,2021, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 11:52:03 on Apr 22,2021
+# Start time: 16:29:12 on Apr 23,2021
 # vcom -reportprogress 300 address_generator.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -74,10 +74,10 @@ source compile.script
 # -- Loading package utils
 # -- Compiling entity address_generator
 # -- Compiling architecture struct of address_generator
-# End time: 11:52:03 on Apr 22,2021, Elapsed time: 0:00:00
+# End time: 16:29:12 on Apr 23,2021, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 11:52:03 on Apr 22,2021
+# Start time: 16:29:12 on Apr 23,2021
 # vcom -reportprogress 300 mux.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -87,10 +87,10 @@ source compile.script
 # -- Loading package utils
 # -- Compiling entity mux
 # -- Compiling architecture behav of mux
-# End time: 11:52:03 on Apr 22,2021, Elapsed time: 0:00:00
+# End time: 16:29:13 on Apr 23,2021, Elapsed time: 0:00:01
 # Errors: 0, Warnings: 0
 # QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 11:52:03 on Apr 22,2021
+# Start time: 16:29:13 on Apr 23,2021
 # vcom -reportprogress 300 decoder.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -98,10 +98,10 @@ source compile.script
 # -- Loading package NUMERIC_STD
 # -- Compiling entity decoder
 # -- Compiling architecture Behavioural of decoder
-# End time: 11:52:03 on Apr 22,2021, Elapsed time: 0:00:00
+# End time: 16:29:13 on Apr 23,2021, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 11:52:03 on Apr 22,2021
+# Start time: 16:29:13 on Apr 23,2021
 # vcom -reportprogress 300 connection_mtx.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -109,10 +109,10 @@ source compile.script
 # -- Loading package NUMERIC_STD
 # -- Compiling entity connection_mtx
 # -- Compiling architecture struct of connection_mtx
-# End time: 11:52:04 on Apr 22,2021, Elapsed time: 0:00:01
+# End time: 16:29:13 on Apr 23,2021, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 11:52:04 on Apr 22,2021
+# Start time: 16:29:13 on Apr 23,2021
 # vcom -reportprogress 300 reg_generic.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -120,10 +120,10 @@ source compile.script
 # -- Loading package NUMERIC_STD
 # -- Compiling entity reg_generic
 # -- Compiling architecture Behavioural of reg_generic
-# End time: 11:52:04 on Apr 22,2021, Elapsed time: 0:00:00
+# End time: 16:29:13 on Apr 23,2021, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 11:52:04 on Apr 22,2021
+# Start time: 16:29:13 on Apr 23,2021
 # vcom -reportprogress 300 select_block.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -131,10 +131,10 @@ source compile.script
 # -- Loading package NUMERIC_STD
 # -- Compiling entity select_block
 # -- Compiling architecture behav of select_block
-# End time: 11:52:04 on Apr 22,2021, Elapsed time: 0:00:00
+# End time: 16:29:13 on Apr 23,2021, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 11:52:04 on Apr 22,2021
+# Start time: 16:29:13 on Apr 23,2021
 # vcom -reportprogress 300 equal_check.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -144,10 +144,10 @@ source compile.script
 # -- Loading package utils
 # -- Compiling entity equal_check
 # -- Compiling architecture behav of equal_check
-# End time: 11:52:04 on Apr 22,2021, Elapsed time: 0:00:00
+# End time: 16:29:14 on Apr 23,2021, Elapsed time: 0:00:01
 # Errors: 0, Warnings: 0
 # QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 11:52:04 on Apr 22,2021
+# Start time: 16:29:14 on Apr 23,2021
 # vcom -reportprogress 300 windowing_rf.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -157,11 +157,11 @@ source compile.script
 # -- Loading package utils
 # -- Compiling entity windowing_rf
 # -- Compiling architecture mix of windowing_rf
-# End time: 11:52:04 on Apr 22,2021, Elapsed time: 0:00:00
+# End time: 16:29:14 on Apr 23,2021, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 vcom tb_windowing_rf3.vhd
 # QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
-# Start time: 11:52:09 on Apr 22,2021
+# Start time: 16:29:38 on Apr 23,2021
 # vcom -reportprogress 300 tb_windowing_rf3.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -169,12 +169,12 @@ vcom tb_windowing_rf3.vhd
 # -- Loading package NUMERIC_STD
 # -- Compiling entity tb_windowing_rf3
 # -- Compiling architecture testbench of tb_windowing_rf3
-# End time: 11:52:10 on Apr 22,2021, Elapsed time: 0:00:01
+# End time: 16:29:39 on Apr 23,2021, Elapsed time: 0:00:01
 # Errors: 0, Warnings: 0
 vsim -t 10ps work.tb_windowing_rf3
 # vsim -t 10ps work.tb_windowing_rf3 
-# Start time: 11:52:19 on Apr 22,2021
-# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# Start time: 16:29:55 on Apr 23,2021
+# ** Note: (vsim-8009) Loading existing optimized design _opt1
 # Loading std.standard
 # Loading std.textio(body)
 # Loading ieee.std_logic_1164(body)
@@ -187,9 +187,7 @@ vsim -t 10ps work.tb_windowing_rf3
 # Loading work.mux(behav)#2
 # Loading work.connection_mtx(struct)#1
 # Loading work.addr_encoder(behav)#1
-log -r *
-add wave *
-run 2500 ns
+run 3000 ns
 # ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
 #    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf3/RG/RDPORT_SPILL
 # ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
@@ -446,5 +444,529 @@ run 2500 ns
 #    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/CWP_NEXT_CALC/MUX_SEL
 # ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
 #    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/SWP_NEXT_CALC/MUX_SEL
-# End time: 11:54:06 on Apr 22,2021, Elapsed time: 0:01:47
+restart -f
+# ** Note: (vsim-8009) Loading existing optimized design _opt1
+add wave *
+run 3000 ns
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf3/RG/RDPORT_SPILL
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf3/RG/SWP_NEXT_CALC/MUX_SEL
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf3/RG/DEC
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf3/RG/REGS(86)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf3/RG/REGS(84)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf3/RG/REGS(82)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf3/RG/REGS(80)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf3/RG/REGS(78)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf3/RG/REGS(76)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf3/RG/REGS(74)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf3/RG/REGS(72)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf3/RG/REGS(70)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf3/RG/REGS(68)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf3/RG/REGS(66)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf3/RG/REGS(64)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf3/RG/REGS(62)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf3/RG/REGS(60)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf3/RG/REGS(58)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf3/RG/REGS(56)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf3/RG/REGS(54)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf3/RG/REGS(52)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf3/RG/REGS(50)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf3/RG/REGS(48)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf3/RG/REGS(46)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf3/RG/REGS(44)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf3/RG/REGS(42)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf3/RG/REGS(40)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf3/RG/REGS(38)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf3/RG/REGS(36)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf3/RG/REGS(34)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf3/RG/REGS(32)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf3/RG/REGS(30)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf3/RG/REGS(28)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf3/RG/REGS(26)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf3/RG/REGS(24)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf3/RG/REGS(22)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf3/RG/REGS(20)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf3/RG/REGS(18)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf3/RG/REGS(16)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf3/RG/REGS(14)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf3/RG/REGS(12)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf3/RG/REGS(10)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf3/RG/REGS(8)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf3/RG/RDPORT1
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf3/RG/RDPORT0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf3/RG/CWP_NEXT_CALC/MUX_SEL
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(8)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(10)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(12)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(14)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(16)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(18)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(20)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(22)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(24)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(26)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(28)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(30)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(32)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(34)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(36)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(38)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(40)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(42)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(44)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(46)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(48)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(50)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(52)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(54)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(56)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(58)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(60)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(62)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(64)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(66)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(68)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(70)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(72)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(74)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(76)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(78)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(80)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(82)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(84)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(86)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(8)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(10)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(12)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(14)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(16)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(18)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(20)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(22)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(24)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(26)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(28)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(30)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(32)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(34)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(36)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(38)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(40)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(42)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(44)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(46)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(48)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(50)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(52)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(54)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(56)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(58)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(60)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(62)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(64)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(66)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(68)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(70)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(72)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(74)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(76)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(78)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(80)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(82)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(84)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(86)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/CWP_NEXT_CALC/MUX_SEL
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/SWP_NEXT_CALC/MUX_SEL
+add wave -position insertpoint  \
+sim:/tb_windowing_rf3/RG/c_win
+add wave -position insertpoint  \
+sim:/tb_windowing_rf3/RG/c_swin
+log -r *
+restart -f
+# ** Note: (vsim-8009) Loading existing optimized design _opt1
+run 3000 ns
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf3/RG/RDPORT_SPILL
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf3/RG/SWP_NEXT_CALC/MUX_SEL
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf3/RG/DEC
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf3/RG/REGS(86)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf3/RG/REGS(84)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf3/RG/REGS(82)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf3/RG/REGS(80)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf3/RG/REGS(78)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf3/RG/REGS(76)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf3/RG/REGS(74)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf3/RG/REGS(72)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf3/RG/REGS(70)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf3/RG/REGS(68)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf3/RG/REGS(66)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf3/RG/REGS(64)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf3/RG/REGS(62)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf3/RG/REGS(60)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf3/RG/REGS(58)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf3/RG/REGS(56)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf3/RG/REGS(54)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf3/RG/REGS(52)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf3/RG/REGS(50)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf3/RG/REGS(48)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf3/RG/REGS(46)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf3/RG/REGS(44)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf3/RG/REGS(42)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf3/RG/REGS(40)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf3/RG/REGS(38)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf3/RG/REGS(36)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf3/RG/REGS(34)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf3/RG/REGS(32)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf3/RG/REGS(30)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf3/RG/REGS(28)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf3/RG/REGS(26)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf3/RG/REGS(24)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf3/RG/REGS(22)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf3/RG/REGS(20)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf3/RG/REGS(18)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf3/RG/REGS(16)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf3/RG/REGS(14)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf3/RG/REGS(12)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf3/RG/REGS(10)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf3/RG/REGS(8)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf3/RG/RDPORT1
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf3/RG/RDPORT0
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_windowing_rf3/RG/CWP_NEXT_CALC/MUX_SEL
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(8)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(10)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(12)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(14)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(16)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(18)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(20)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(22)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(24)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(26)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(28)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(30)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(32)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(34)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(36)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(38)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(40)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(42)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(44)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(46)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(48)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(50)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(52)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(54)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(56)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(58)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(60)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(62)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(64)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(66)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(68)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(70)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(72)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(74)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(76)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(78)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(80)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(82)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(84)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(86)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(8)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(10)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(12)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(14)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(16)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(18)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(20)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(22)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(24)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(26)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(28)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(30)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(32)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(34)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(36)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(38)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(40)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(42)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(44)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(46)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(48)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(50)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(52)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(54)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(56)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(58)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(60)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(62)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(64)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(66)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(68)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(70)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(72)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(74)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(76)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(78)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(80)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(82)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(84)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/REGS(86)/PROC_BLOCKSi/MUX_DATAIN/MUX_SELINPUT
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/CWP_NEXT_CALC/MUX_SEL
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 500 ps  Iteration: 2  Instance: /tb_windowing_rf3/RG/SWP_NEXT_CALC/MUX_SEL
+# End time: 16:47:50 on Apr 23,2021, Elapsed time: 0:17:55
 # Errors: 0, Warnings: 128

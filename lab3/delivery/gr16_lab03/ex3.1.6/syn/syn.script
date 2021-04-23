@@ -1,0 +1,26 @@
+
+
+analyze -library WORK -format vhdl {sipisoAluControl.vhd sipisoalu.vhd}
+elaborate SIPISOALU -architecture A -library WORK
+
+compile -exact_map
+
+report_timing > sipisoalu_timing_nopt.rpt
+report_power > sipisoalu_power_nopt.rpt
+report_power -cell
+report_power -net
+
+create_clock -name "CLK" -period 0.44 CLK
+#set_max_delay 0.4 -from [all_inputs] -to [all_outputs]
+
+report_power 
+set_max_dynamic_power 330 uW
+
+
+compile -map_effort high
+
+report_timing > sipisoalu_timing_opt.rpt
+report_power > sipisoalu_power_opt.rpt
+
+write -hierarchy -format vhdl -output sipisoalu_syn.vhdl
+

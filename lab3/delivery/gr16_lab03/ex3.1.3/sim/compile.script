@@ -1,0 +1,14 @@
+
+vcom utils.vhd
+vcom nwin_calc.vhd
+vcom in_loc_selblock.vhd
+vcom addr_encoder.vhd
+vcom address_generator.vhd
+vcom mux.vhd
+vcom decoder.vhd
+vcom connection_mtx.vhd
+vcom reg_generic.vhd
+vcom select_block.vhd
+vcom equal_check.vhd
+
+vcom windowing_rf.vhd

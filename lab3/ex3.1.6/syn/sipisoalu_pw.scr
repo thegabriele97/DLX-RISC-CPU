@@ -1,0 +1,27 @@
+# Include all the analyze, elaborate and compile steps here
+analyze -library WORK -format vhdl {sipisoAluControl.vhd sipisoalu.vhd}
+elaborate SIPISOALU -architecture A -library WORK
+
+
+# Define a new variable Period force the value you want
+set Period 10 
+#Forces a clock of period Period connected to the input port CLK #
+create_clock -name "CLK" -period $Period {"CLK"}
+#forces a combinational max delay of Period ns from each of the inputs
+#to each of th output in case combinational paths are present 
+set_max_delay $Period -from [all_inputs] -to [all_outputs]
+compile -map_effort high
+report_power > sipiso_timeopt_1pw.rpt
+report_timing > sipiso_timeopt_1t.rpt
+#
+# forcing the maximum power 
+# suppose you had as initial power 130uW, no force to 100uW
+# change numbers accordigly to yours
+set_max_dynamic_power 100 uW
+compile -map_effort high 
+report_power > rca_pwopt_2pw.rpt
+report_timing > rca_pwopt_2t.rpt
+report_power -cell > rca_constraint_power_cell.rpt
+report_power -net > rca_constraint_power_net.rpt
+
+

@@ -1,0 +1,97 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 d/home/ms21.16/gabri-ms-lab/ms-lab/lab3/ex3.1.1/sim
+T_opt
+!s110 1619185806
+VgXh>7nDSP=WCiT0WR0dV91
+04 23 9 work tb_registerfile_generic testbench 1
+=2-000ae431a4f1-6082d08e-b1bc7-1798
+o-quiet -auto_acc_if_foreign -work work
+tCvgOpt 0
+n@_opt
+OL;O;10.7c;67
+Eregisterfile_generic
+Z1 w1618213250
+Z2 DPx4 ieee 11 numeric_std 0 22 aU^R8eGcicLcUFIaBQSL>3
+Z3 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
+Z4 DPx4 ieee 14 std_logic_1164 0 22 cVAk:aDinOX8^VGI1ekP<3
+R0
+Z5 8registerfile_generic.vhd
+Z6 Fregisterfile_generic.vhd
+l0
+L7
+VN]U=7_G;^aKoLKSKThT1`1
+!s100 b0bKb0VK7Yg5zLFPOUb^Z3
+Z7 OL;C;10.7c;67
+32
+Z8 !s110 1619185102
+!i10b 1
+Z9 !s108 1619185102.000000
+Z10 !s90 -reportprogress|300|registerfile_generic.vhd|
+Z11 !s107 registerfile_generic.vhd|
+!i113 0
+Z12 tExplicit 1 CvgOpt 0
+Abehavioural
+R2
+R3
+R4
+DEx4 work 20 registerfile_generic 0 22 N]U=7_G;^aKoLKSKThT1`1
+l32
+L25
+Vo;lTK?DXhY5@Wo6JIR3d?3
+!s100 W@eeC3hLK=5:5AHjDeY[N0
+R7
+32
+R8
+!i10b 1
+R9
+R10
+R11
+!i113 0
+R12
+Etb_registerfile_generic
+Z13 w1619185797
+R2
+R3
+R4
+R0
+Z14 8tb_registerfile_generic.vhd
+Z15 Ftb_registerfile_generic.vhd
+l0
+L6
+VK:Ro>PNlgUk@mjzo]nE^Q1
+!s100 <g0X3VzeQK;MZ8JLo39]i2
+R7
+32
+Z16 !s110 1619185801
+!i10b 1
+Z17 !s108 1619185801.000000
+Z18 !s90 -reportprogress|300|tb_registerfile_generic.vhd|
+Z19 !s107 tb_registerfile_generic.vhd|
+!i113 0
+R12
+Atestbench
+R2
+R3
+R4
+DEx4 work 23 tb_registerfile_generic 0 22 K:Ro>PNlgUk@mjzo]nE^Q1
+l42
+L9
+VlO2?:hF^3YzGKVP?f?W^M0
+!s100 G9BONZiNe0aG4U47Nh8VW1
+R7
+32
+R16
+!i10b 1
+R17
+R18
+R19
+!i113 0
+R12

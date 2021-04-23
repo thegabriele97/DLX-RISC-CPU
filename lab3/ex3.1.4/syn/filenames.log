@@ -156,7 +156,6 @@
 /software/synopsys/syn_current_64.11/auxx/gui/common/pathinspector/create_window_and_menu.tcl
 /software/synopsys/syn_current_64.11/auxx/gui/common/misc/infotip.tcl
 /software/synopsys/syn_current_64.11/auxx/gui/common/misc/viewporthistory.tcl
-/home/ms21.16/gabri-ms-lab/ms-lab/lab3/ex3.1.4/syn/syn.script
 /home/ms21.16/gabri-ms-lab/ms-lab/lab3/ex3.1.4/syn/utils.vhd
 /home/ms21.16/gabri-ms-lab/ms-lab/lab3/ex3.1.4/syn/mux.vhd
 /home/ms21.16/gabri-ms-lab/ms-lab/lab3/ex3.1.4/syn/select_block.vhd

@@ -1,0 +1,10 @@
+# Define a new variable Period force the value you want
+set Period 10
+#Forces a clock of period Period connected to the input port CLK #
+create_clock -name "CLK" -period $Period {"CLK"}
+#forces a combinational max delay of Period ns from each of the inputs
+#to each of th output in case combinational paths are present 
+set_max_delay $Period -from [all_inputs] -to [all_outputs]
+compile -map_effort high
+report_power > sipiso_timeopt_2pw.rpt
+report_timing > sipiso_timeopt_2t.rpt
