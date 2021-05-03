@@ -46,3 +46,8 @@
 - Chiedere quanti colpi di clock di vogliono per fare il push in memoria
 - CHiedere cosa fa la CPU mentre faccio il push
 
+## Domande LAB 04
+
+- Chiedere come prendere RA ed INP1 nonostante arrivino dallo stesso mux ed entrino nella stessa parte della ALU
+- Chiedere come gestire SUBI1, perchè farebbe Inp1 - RA
+
