@@ -1,0 +1,2016 @@
+# //  Questa Sim-64
+# //  Version 10.7c linux_x86_64 Aug 17 2018
+# //
+# //  Copyright 1991-2018 Mentor Graphics Corporation
+# //  All Rights Reserved.
+# //
+# //  QuestaSim and its associated documentation contain trade
+# //  secrets and commercial or financial information that are the property of
+# //  Mentor Graphics Corporation and are privileged, confidential,
+# //  and exempt from disclosure under the Freedom of Information Act,
+# //  5 U.S.C. Section 552. Furthermore, this information
+# //  is prohibited from disclosure under the Trade Secrets Act,
+# //  18 U.S.C. Section 1905.
+# //
+vcom myTypes.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:21:45 on May 03,2021
+# vcom -reportprogress 300 myTypes.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling package myTypes
+# End time: 11:21:46 on May 03,2021, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+vcom CU_LUT.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:21:51 on May 03,2021
+# vcom -reportprogress 300 CU_LUT.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package myTypes
+# -- Compiling entity CU_LUT
+# -- Compiling architecture mix of CU_LUT
+# End time: 11:21:51 on May 03,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom tb_CU_LUT.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:21:54 on May 03,2021
+# vcom -reportprogress 300 tb_CU_LUT.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package myTypes
+# -- Compiling entity tb_cu_lut
+# -- Compiling architecture test of tb_cu_lut
+# End time: 11:21:54 on May 03,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vsim -t10ps work.tb_cu_lut
+# ** Error: (vish-3296) Unknown option '-t10ps'.
+# Use the -help option for complete vsim usage.
+# Error loading design
+vsim -t 10ps work.tb_cu_lut
+# vsim -t 10ps work.tb_cu_lut 
+# Start time: 11:22:12 on May 03,2021
+# ** Note: (vsim-8009) Loading existing optimized design _opt
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.mytypes
+# Loading work.tb_cu_lut(test)#1
+vsim -t 10ps work.tb_cu_lut -novpt
+# ** Error: (vish-3296) Unknown option '-novpt'.
+# Use the -help option for complete vsim usage.
+# Error loading design
+vsim -t 10ps work.tb_cu_lut -novopt
+# End time: 11:22:48 on May 03,2021, Elapsed time: 0:00:36
+# Errors: 3, Warnings: 0
+# vsim -t 10ps work.tb_cu_lut -novopt 
+# Start time: 11:22:48 on May 03,2021
+# ** Error (suppressible): (vsim-12110) All optimizations are disabled because the -novopt option is in effect. This will cause your simulation to run very slowly. If you are using this switch to preserve visibility for Debug or PLI features, please see the User's Manual section on Preserving Object Visibility with vopt. -novopt option is now deprecated and will be removed in future releases.
+# Error loading design
+# End time: 11:22:48 on May 03,2021, Elapsed time: 0:00:00
+# Errors: 1, Warnings: 0
+vopt +acc 
+# QuestaSim-64 vopt 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:24:03 on May 03,2021
+# vopt -reportprogress 300 "+acc" 
+# Usage: vopt [options] designUnit -o designName
+# Options:
+#   -help              Print this message
+#   -version           Print the version of the compiler
+#   -32                Run in 32-bit mode
+#   -64                Run in 64-bit mode
+#   -work <path>       Specify library WORK
+#   -cpppath </path/to/[gcc|g++]>  
+#                      Specify path to the desired GNU compiler.
+#                      Use same compiler path as specified on the sccom
+#                      command line.
+#   -cppinstall <[gcc|g++ version]>  
+#                      Specify the version of the desired GNU compiler
+#                      supported and distributed by Mentor.
+#                      Use same compiler version as specified on the sccom
+#                      command line.
+#   -fatal <msgNumber>[,<msgNumber>...]
+#                      Report the listed messages as fatal
+#   -error <msgNumber>[,<msgNumber>...]
+#                      Report the listed messages as errors
+#   -warning <msgNumber>[,<msgNumber>...]
+#                      Report the listed messages as warnings
+#   -warning error     Report all warnings as errors
+#   -note <msgNumber>[,<msgNumber>...]
+#                      Report the listed message as notes
+#   -suppress <msgNumber/msgGroup>[,<msgNumber/msgGroup>...]
+#                      Suppress the listed messages using number or group.
+#                      Valid <msgGroup> are All, GroupNote, GroupWarning, GroupFLI, GroupPLI, 
+#                      GroupSDF, GroupVCD, GroupVital, GroupWLF, GroupTCHK, GroupPA, GroupLRM
+#   -msglimit [all,|none,][-|+]<msgNumber>[,[-|+]<msgNumber>...]
+#                      Limit the reporting of listed messages to default count
+#   -msglimit [error|warning]
+#                      Limit the total number of errors/warnings to default count
+#   -msglimitcount <limit_value> -msglimit [all,|none,][-|+]<msgNumber>[,[-|+]<msgNumber>...]
+#                      Limit the reporting of listed messages to user defined count
+#   -msglimitcount <limit_value> -msglimit [error|warning]
+#                      Limit the total number of errors/warnings to user defined count
+#   -msgsingleline     Display the messages in a single line.
+#   -svfilesuffix=<extension>[,<extension>...]
+#                      filename extensions for SystemVerilog code
+#   -vamsfilesuffix=<extension>[,<extension>...]
+#                      filename extensions for Verilog-AMS code
+#   -87                Enable support for VHDL 1076-1987 in VHDL-style PSL files
+#                      specified with -pslfile_vh <file>
+#   -93                Enable support for VHDL 1076-1993 in VHDL-style PSL files
+#                      specified with -pslfile_vh <file>
+#   -2002              Enable support for VHDL 1076-2002 in VHDL-style PSL files
+#                      specified with -pslfile_vh <file>
+#   -2008              Enable support for VHDL 1076-2008 in VHDL-style PSL files
+#                      specified with -pslfile_vh <file>
+#   -check_synthesis   Check for compliance to some synthesis rules
+#   --------  Access Control and Debug Options  --------
+#           These modifiers help maximize simulation performance while retaining
+#           access to objects of interest, which might otherwise be optimized
+#           away. By default, this option has effect on all design units in the
+#           design. +<selection> can be used to target the extent of this option
+#           to only a specified design unit or instance using following syntax:
+#              [<library>.]<entity>[(<architecture>)] (for VHDL design units)
+#              [<library>.]<design_unit> (for Verilog design units)
+#              <inst_name> (for Verilog/VHDL design regions, and objects)
+#              [<library>.]<design_unit>/<inst_path> (for Verilog/VHDL instances)
+#           When [<library>.]<design_unit> is specified, all instances of that
+#           design unit from the specified <library> are affected by this
+#           option. If <library> is not specified, all instances of that design
+#           unit are considered. In VHDL, a user may further qualify the
+#           selection using <architecture>.
+#           When +<inst_name> is specified, only objects in that part of the
+#           design are affected.
+#           If a trailing '.' is present, the option is also applied recursively
+#           downwards. Or, a user can specify the number of recursion levels
+#           (0 to 127) with this option. Recursion level 128 indicates full
+#           recursion.
+# 
+#                      Examples:
+#                         VHDL Design Unit:    -floatgenerics+myentity(myarch)
+#                         Verilog Design Unit: -bitscalars+Demux
+#                         Library and du :     -primitiveaccess+work.mux
+#                         Du and Inst:         -linedebug+dut/r
+#                         Instance and below:  -assertdebug+/top/u1.
+#                         Object:              -randmetastable+/top/myreg
+#                         Region and below:    -fsmdebug+'/top/gen(3).'
+#                         Region and 2 levels below: -nobitscalars+'/top/gen(3)+2'
+# 
+#           Most of these options can be negated by adding 'no' prefix to them.
+#           These no* options allow objects to be optimized and they can also
+#           take <selection> and <recurse_level> modifilers.
+#   +[no]acc[=<spec>][+<selection>[+<recurse_level>|.]]
+#                      Enable/disable access to certain objects. 
+#                      <spec> consists of one or more of the following letter codes:
+#                         m (module, program, and interface instances)
+#                         n (nets)
+#                         p (ports)
+#                         r (Verilog variables and parameters)
+#                         t (task and function scopes)
+#                         v (VHDL variables, constants, and aliases
+#   -[no]assertdebug[+<selection>[+<recurse_level>|.]]
+#                      Enable/disable debugging SVA/PSL objects.
+#   -assertverbose <fileName>
+#                      Print messages about assertion optimizations during vopt
+#   -[no]fsmdebug[+<selection>[+<recurse_level>|.]]
+#                      Enable/disable finite state machine recognition.
+#   -floatgenerics+<selection>[+<recurse_level>|.]
+#                      Do not lock down generic values during optimization.
+#                      This enables use of the vsim -g/G options on the affected
+#                      generics.
+#   -floatparameters+<selection>[+<recurse_level>|.]
+#                      Do not lock down parameter values during optimization.
+#   -nosparse[+<selection>[+<recurse_level>]]
+#                      Do not to mark memories as sparse by default.
+#   --------
+#   -cellreport <fileName>
+#                      Write a report of optimized/unoptimized cells into <fileName>.
+#   -compat            Disable optimizations that result in different event ordering
+#                      than Verilog-XL (at expense of performance).
+#   -createlib[=compress]
+#                      Create libraries that do not exist.
+#                      The =compress modifier creates compressed libraries.
+#   -nocreatelib       Do not create libraries that do not exist.
+#   -coverclkoptbuiltins, -nocoverclkoptbuiltins
+#                      Enable or disable clkOpt optimization builtins for code coverage.
+#   +cover[=<spec>][+<selection>[+<recurse_level>|.]]
+#                      <spec> is used to enable code coverage metrics for certain
+#                      kinds of constructs.
+#                      <spec> consists of one or more of the following letter codes:
+#                         s (statement)
+#                         b (branch)
+#                         c (condition)
+#                         e (expression)
+#                         f (finite state machine)
+#                         t (toggle)
+#                         x (extended toggle
+#                      If no <spec> characters are given, sbceft is the default.
+#                      The <selection>, <recurse_level> and '.'modifiers are
+#                      described in the help text for the +acc option.
+#   +nocover[=<spec>][+<selection>[+<recurse_level>|.]]
+#                      This option disables code coverage metrics for certain
+#                      kinds of constructs specified by <spec> and in the
+#                      region specified by +<selection> modifiers.
+#                      The <spec> modifiers are described in the help text for
+#                      the +cover option. The +<selection>, <recurse_level
+#                      and '.' modifiers are described in the help text for
+#                      the +acc option.
+#   -coverenhanced     Enables functionality which may change the appearance or content of coverage
+#                      metrics. A detailed list of these changes can be found by searching in the
+#                      release notes for 'coverenhanced'. This option only takes meaningful effect in
+#                      letter releases (e.g. 10.2b). It has no effect in initial major releases (e.g. 10.2).
+#   -coveropt <i>      Specify a digit for code coverage optimization level: 1 through 4.
+#   -coverexcludedefault Automatically exclude case default clauses.
+#   -coverfec          Enable Focused Expression Coverage analysis for conditions and expressions.
+#   -nocoverfec        Disable Focused Expression Coverage analysis for conditions and expressions.
+#   -coverrec          Enable Rapid Expression Coverage mode of FEC for conditions and expressions.
+#   -nocoverrec        Disable Rapid Expression Coverage mode of FEC for conditions and expressions.
+#   -coverudp          Enable UDP Coverage analysis for conditions and expressions.
+#   -nocoverudp        Disable UDP Coverage analysis for conditions and expressions.
+#   -nocovershort      Disable short circuiting of expressions/condition when coverage is enabled.
+#   -coverexpandrdpfx  Bit-blast multi-bit operands of reduction prefix expressions for expression/condition coverage.
+#   -nocoverexpandrdpfx Don't bit-blast multi-bit operands of reduction prefix expressions for expression/condition coverage.
+#   -nocoverexcludedefault Don't automatically exclude case default clauses.
+#   -covercells        Enable code coverage options in cells.
+#   -nocovercells      Disable code coverage options in cells.
+#   -covercebi         Enable collapse of else-begin-if to an 'elsif' equivalent for coverage.
+#   -nocovercebi       Disable collapse of else-begin-if to an 'elsif' equivalent for coverage.
+#   -constimmedassert  Show constant immediate assertions in GUI/UCDB/reports etc.
+#   -togglecountlimit n Quit collecting toggle info after count n is reached.
+#   -togglewidthlimit n Don't collect toggle data on reg's or arrays wider than n.
+#   -extendedtogglemode [1|2|3]
+#                      Change the level of support for extended toggles.
+#                      The levels of support are:
+#                      1 - 0L->1H & 1H->0L & any one 'Z' transition (to/from 'Z')
+#                      2 - 0L->1H & 1H->0L & one transition to 'Z' & one transition from 'Z'
+#                      3 - 0L->1H & 1H->0L & all 'Z' transitions
+#   -toggleportsonly   Enable toggle statistics collection only for ports.
+#   -maxudprows n      Max number of rows allowed in UDP tables for code coverage.
+#   -maxfecrows n      Max number of input patterns allowed in FEC table for code coverage.
+#   -fecudpeffort n    Limit the size of expressions and conditions considered for expr/cond coverage.
+#                      Levels supported are:
+#                      1 - (low) Only small expressions and conditions considered for coverage.
+#                      2 - (medium) Bigger expressions and conditions considered for coverage.
+#                      3 - (high) Very large expressions and conditions considered for coverage.
+#   -coverreportcancelled Report coverage items that have been optimized away.
+#   -coverdeglitch <period> Report only the last execution of non-clocked processes/continuous assignments
+#                      within time greater than <period>, where <period> is 0 or
+#                      a time string with units
+#   -deferSubpgmCheck  Defer compile-time range checking on constant index and
+#                      slice expressions in subprograms until run time
+#   -debugCellOpt      Indicate why certain cells were not optimized
+#   -deglitchalways    Make always blocks insensitive to variable
+#                      glitches, potentially breaking zero delay oscillations
+#                      among combinatorial always blocks. (default)
+#   -nodeglitchalways  Disable -deglitchalways behavior.
+#   +delay_mode_distributed
+#                      Use structural delays and ignore path delays
+#   +delay_mode_path   Set structural delays to zero and use path delays
+#   +delay_mode_unit   Set non-zero structural delays to one
+#   +delay_mode_zero   Set structural delays to zero
+#   -seq_udp_delay <value>[<unit>]
+#                      Specify a constant delay for sequential UDPs and
+#                      set all other structural delays to zero
+#                      for example, -seq_udp_delay 2.3ns
+#   -add_seq_delay <value>[<unit>]
+#                      Specify a constant delay for undelayed sequential UDPs 
+#                      for example, -add_seq_delay 2.3ns
+#   -dpiforceheader    Force generation of dpi header file even when
+#                      empty of function prototypes
+#   -dpiheader <filename>
+#                      Save the generated declarations of SystemVerilog DPI
+#                      tasks and functions into <filename>
+#   -designfile <bin-filename>
+#                      Specifies a name for the Visualizer .bin file
+#   -f <filename>      Specify a file containing more command line arguments
+#   -F <filename>      Specify a file containing more command line arguments. Prefixes relative
+#                      file names within the arguments file with the absolute path of arguments file,
+#                      if lookup with relative path fails.
+#   -outf <filename>   Specify a file to save the final list of options after recursively expanding
+#                      all -f, -file and -F files.
+#   -optionset <optionset_name>
+#                      Calls an option set in modelsim.ini.
+#   -nofsmresettrans   Disable recognition of implicit asynchronous reset transitions for FSMs
+#   -fsmresettrans     Enable recognition of implicit asynchronous reset transitions for FSMs
+#   -nofsmsingle       Disable recognition FSMs having single bit current state variable
+#   -fsmsingle         Enable recognition FSMs having single bit current state variable
+#   -fsmimplicittrans  Enable recognition of implicit transitions in FSMs
+#   -nofsmimplicittrans Disable recognition of implicit transitions in FSMs
+#   -fsmmultitrans     Enable recognition of Multi-state transitions in FSMs
+#   -fsmverbose [b|t|w]
+#                      Provides information about FSMs recognized, including state reachability analysis.
+#                      There are three detail levels that can be set with this option.
+#                         b (displays only basic information)
+#                         t (displays a transition table in addition to the basic information)
+#                         w (displays any warning messages in addition to the basic information)
+#                      If no character is specified, btw is the default.
+#   -nofsmxassign      Disable recognition of FSMs containing x assignment
+#   -fsmxassign        Enable recognition of FSMs containing x assignment
+#   -g <generic>=<value>
+#   -G <generic>=<value>
+#                      Specify value for Verilog parameter or VHDL generic.
+#                      -G overrides all matching generics and parameters.
+#                      -g only overrides items without explicit settings in source code.
+#   -hds               HDS mode.
+#   -hds_lib           HDS lib name.
+#   -hds_output        HDS output file name.
+#   -hds_unit          HDS unit name.
+#   -immedalways       Run combinatorial always blocks with the same high priority as
+#                      continuous assignments and primitives in order to miminize the
+#                      effect of optimizations on race dependent results.
+#   -noimmedalways     Disable -immedalways behavior. (default)
+#   -initoutcompositeparam
+#                      Initialize array and record mode OUT parameters of subprograms
+#   -noinitoutcompositeparam
+#                      Do not initialize array and record mode OUT parameters of subprograms
+#   -hazards           Enable run-time hazard checking code
+#   +incdir+<dir>      Search directory for files included with
+#                      `include "filename"
+#   -incr              Enable incremental compilation
+#   +initmem[=<spec>][+0|1|X|Z][+<selection>[+<recurse_level>|.]]
+#                      Initialize fixed-size arrays of type indicated by <spec>.
+#   +noinitmem[+<selection>[+<recurse_level>|.]]
+#                      Do not initialize arrays indicated by <spec>.
+#   +initreg[=<spec>][+0|1|X|Z][+<selection>[+<recurse_level>|.]]
+#                      Initialize variables of type indicated by <spec>.
+#                      Valid values of <spec> are:
+#                         r (4-state integral types)
+#                         b (2-state integral types)
+#                         e (enum types)
+#                         u (udp types)
+#                      If no <spec> is given, all these types are enabled.
+#                      If 0|1|X|Z is specified, all the bits in the variable
+#                      are initialized to that value.  Otherwise, these variables
+#                      are prepared for randomization during vsim.
+#                      Refer to the +acc option's help text for <selection>.
+#   +noinitreg[+<selection>[+<recurse_level>|.]]
+#                      Do not initialize variables indicated by <spec>.
+#   +initwire[+0|1|X|Z]
+#                      Initialize unconnected wires with given value.
+#                      If no value is given, unconnected wires are initialized with 0.
+#   -j <num>           Set maximum number of processes to create for code generation.
+#                      Setting this value to "0" disables this feature.
+#   -keep_delta        Exclude optimizations that remove delta delays
+#   -L <libname>       Search library for design units needed when optimizing
+#   -Lf <libname>      Same as -L, but libraries are searched before `uselib
+#   -Ldir <dirname>    Specify the container folder for libraries passed with -L & -Lf options.
+#   -libverbose[=prlib]
+#                      Verbose messaging about library mappings, search and resolution.
+#                      The =prlib modifier prints out the -L/-Lf/-Ltop option that was used
+#                      to locate each design unit loaded in vopt.
+#   -noltop            Stops promotion of libraries containing top design units to searchable libraries.
+#   -l <filename>      Write optimization log to <filename>
+#   -lowercasepragma   Allow only lower case pragmas
+#   -lowercasepslpragma   Allow only lower case PSL pragmas
+#   -modelsimini <modelsim.ini>
+#                      Specify path to the modelsim.ini file
+#   +maxdelays         Use maximum timing from min:typ:max expressions
+#   +mindelays         Use minimum timing from min:typ:max expressions
+#   -memopt[=n]        Enables memory optimization mode. Value of n can be 0|1|2|3|4.
+#                      Mode 3 is default on. Mode 0 disables this optimization. Mode 1, 2
+#                      and 4 can be used to select less/more aggresive optimization modes.
+#   -mixedansiports    Enables mixing of ANSI-style and non-ANSI-style declarations
+#   -mti_trace_vlog_calls
+#                      Enables viewing of SystemVerilog class contents in the Wave window.
+#   -mvchome  <path>   Location of Questa Verification IP installation.
+#                      Overrides 'MvcHome' modelsim.ini setting
+#   -noautoldlibpath   Disable setting of LD_LIBRARY_PATH internally.
+#   +check<CODE>       Enable specified cell optimization inhibitor.
+#                      ALL   - Enables all +check codes
+#                      CLUP  - Optimize cells containing connectivity loops
+#                      DELAY - Use with +delay_mode_path.  See Command Ref.
+#                      DNET  - Disallows both port and delayed port to be used in cell
+#                      OPRD  - Disallows cell output port to be read inside cell
+#                      SUDP  - Disallows sequential UDP to drive another sequential UDP
+#                      INTRI - Disallows input of net type tri1 or tri0
+#                      IPDOP - Disallows input port with direct path to output port
+#                      AWA   - Disallows always block to drive another always block
+#                      NWOT  - Disallows notifier register to be written to outside timing checks
+#   -nocover           Disable code coverage even if vlog -cover was used on source files.
+#   -nodebug[=ports][=pli][=ports+pli]
+#                      Do not put symbolic debugging information into the library
+#   -noexcludeternary <design_unit>
+#                      Disables exclusion of ternary expressions in UCDB.
+#   -noincr            Forces complete analysis and code generation, effectively turning
+#                      off incremental compilation
+#   +nolibcell         Do not automatically define library modules as cells(default)
+#   +libcell           Define library modules (found with -v|-y search) as cells
+#   -nologo            Disable startup banner
+#   -[w]prof=<filename> Enables CPU (-prof) or WALL (-wprof) time based profiling
+#                       and saves the profile data to the given filename.
+#   -proftick=<integer> Set the time interval between the profile data collection.
+#                       Default value is 10.
+#   +nospecify         Disable specify path delays and timing checks
+#   +notimingchecks    Disable timing checks
+#   -nowarn <number>   Disable specified category of warning messages; verror 1907 to see them
+#   +nowarn<CODE>      Disable specified warning message
+#   +num_opt_cell_conds+<value> 
+#                      Restricts gate-level optimization capacity for accepting cells with
+#                      I/O path and timing check conditions.
+#                      <value> integer between 32 and 1023, inclusive. where the default 
+#                      value is 1023.
+#   -noconstimmedassert  Do not show constant immediate assertions in GUI/UCDB/reports etc.
+#   -o <design_name>   Specify optimized output design name
+#   -ocf <ocf_file>    Specify a file containing optimization control requests
+#                      (see also -f and -tab for other visibility control options)
+#   -O0                Disable optimizations
+#   -O1                Enable some optimizations
+#   -O4                Enable most optimizations (default)
+#   -O5                Enable additional compiler optimizations
+#   -pedanticerrors    Enforce strict language checks
+#   -permissive        Relax some language error checks to warnings.
+#   -pdu               Create a Preoptimized Design Unit (black-box).
+#                      (Equivalent to the deprecated "-bbox" option).
+#   -pdusavehierrefs[=<filename>]
+#                      Create a file with +acc settings required to maintain
+#                      necessary visibility of hierarchical references.
+#                      The output filename is "mti_pdu_hier_refs" by default or
+#                      may be specified with the optional <filename> argument.
+#                      (Equivalent to the deprecated "-save_bbox_hier_refs" option
+#                      that by default creates the output file "mti_bbox_hier_refs").
+#   -pduspec+[[[<libName>.]<moduleName>] | [<instancePathName>]][[+facc|+focf]=<fileName>]
+#   -pduspec[+i=<instancePathName>] | [+m=[<libName>.]<moduleName>][[+facc|+focf]=<fileName>]
+#                      The -pduspec switch extracts corresponding visibility requirements
+#                      (acc or ocf statements) for the objects that are under the specified
+#                      boundaries.  If "+facc" is specified with, an output file containing
+#                      +acc statements is generated, while "+focf" will cause a .ocf format
+#                      (output from "-learn" flow) file to be created. The generated output
+#                      files are then used with vopt to create PDUs for those boundary
+#                      modules or instances.
+# 
+#                      Example:
+#                      vopt -pduspec+modA+facc=pdu-A.acc ... <other vopt options>
+#                      vopt -pduspec+i=/top/dut1+facc=pdu-dut1.acc ... <other vopt options>
+#   -pslext            Enable PSL LTL/Universal operators
+#   -pslfile_vh <file> Compile and bind VHDL-style PSL vunits specified by <file>
+#   -pslfile_vl <file> Compile and bind Verilog-style PSL vunits specified by <file>
+#   -quiet             Disable 'Loading' messages
+#   -rnmautointerconnect
+#                      Convert qualifying wires connected to real/wreal/nettype/interconnect ports to interconnect.
+#   -sc22              Use the IEEE 1666-2005 standard (default: IEEE 1666-2011)
+#   -sclib <libname>   Load the SystemC shared library from <libname>
+#                      (Default: work)
+#   -sc_arg <arg>      Specify a SystemC command line argument
+#                      accessible using sc_main(), sc_argc() 
+#                      and sc_argv()
+#   -noscmainscopename Strip sc_main() scope from the hierarchical path.
+#   -noscelab          Disables vopt elaboration of SystemC design hierarchy
+#                      and any HDL sub-hierarchy.
+#   -enablescstdout    Enables printing of messages from SystemC
+#                      source code to stdout. stdout is suppressed 
+#                      by default when the SystemC code is elaborated.
+#   -gblso <shared_obj>[,<shared_obj>...] Open the specified shared object(s) with global
+#                      symbol visibility. If multiple shared objects are specified,
+#                      they will first be merged internally and then loaded as single
+#                      shared object.
+#   -undefsyms=[<args>] Generate stubs for undefined symbols in the shared libraries being loaded.
+#                      <args> are on, off, verbose
+#   -dpilib <libname>   Specify the library that contains DPI exports and object files.
+#                      (Default: work)
+#   -sdfmax[@<delayScale>] [<instance>=]<sdffile>
+#                      Annotate VITAL or Verilog <instance> with maximum
+#                      timing from <sdffile>, scaled by <delayScale>
+#   -sdfmin[@<delayScale>] [<instance>=]<sdffile>
+#                      Annotate VITAL or Verilog <instance> with minimum
+#                      timing from <sdffile>, scaled by <delayScale>
+#   -sdftyp[@<delayScale>] [<instance>=]<sdffile>
+#                      Annotate VITAL or Verilog <instance> with typical
+#                      timing from <sdffile>, scaled by <delayScale>
+#   -sdfmaxerrors <n>  Max number of missing instances reported (default is 5)
+#   -source            Print the source line with error messages
+#   -stats[=[+-]<args>] Enables compiler statistics
+#                      <args> are all,none,time,cmd,msg,perf,verbose,list,kb
+#   -svext[=[+|-]<extension>[,[+|-]<extension>]*]
+#                      Enable SystemVerilog language extensions.
+#                      Valid extensions are:
+#                      acum  - Assignment Compatible Untyped Mailbox.
+#                      acade - Add always_comb driven elements in the senstivity list.
+#                      ared  - Iterate over innermost array elements for array reduction methods.
+#                      arif  - Allow ref args in fork.
+#                      aswe  - Allow symmetric wild equality operator.
+#                      atpi  - Allow Types in Port Identifiers.
+#                      bstr  - Allow usage of string builtin method bittostr.
+#                      catx  - Concat extensions.
+#                      ctlc  - Cast time literal in constraint context to time datatype.
+#                      ddup  - Drive default unconnected port.
+#                      dbpp  - Decrypt before preprocessing.
+#                      defervda - Defer variable declaration assignments until after top-blocking always are sensitized.
+#                      dmsbw - Drive MSB unconnected bits of the wider hiconn (output) or the wider loconn (input) in an otherwise collapsible port connection.
+#                      evdactor - Do early variable declaration assignments in constructors.
+#                      evis  - Expand Environment Variables within Include String literals.
+#                      alltsic - Allow local lookup of this & super in inline constraints.
+#                      feci  - Treat constant expressions in foreach loop variable indices as constant.
+#                      fin0  - $finish() system call works as $finish(0), prints no diagnostic information.
+#                      hiercross1 - Allow hierarchical cross feature.
+#                      hiercross2 - Allow an alternate hierarchical cross feature.
+#                      ias   - Iterate on always @* evaluations until inputs settle.
+#                      idcl  - Pass import DPI call location as implicit scope.
+#                      iddp  - Ignore DPI disable protocol check.
+#                      altdpiheader - Alternative style function signature generated in DPI header.
+#                      mewq  - Allow macro expansion within quotes for string literals.
+#                      mttd  - Within macro expansion treat ``" as `".
+#                      noexptc  - ignore DPI export SV type name overloading check
+#                      ifca  - Iterate on feedback continuous assignment until inputs settle.
+#                      ifslvbefr - Allow solve/before constraint under a constant If condition (Default).
+#                      sffi  - Allow same function and formal identifier in case of functions with void return type.
+#                      islm  - Ignore String Literals within Macros.
+#                      mtdl  - Macro expansion treats `" more like a string literal.
+#                      ncref - Ref formal in covergroup new is not treated as constant ref.
+#                      scref - Ref formal in covergroup sample is treated as constant ref.
+#                      pae1  - Automatically export all symbols imported(referenced or not) in a package.
+#                      pae   - Automatically export all symbols imported and referenced in a package.
+#                      pctap - Promote Concat To Assignment Pattern using heuristics such as presence of unsized literals.
+#                      qcat  - Allow use of an assignment pattern for concatenating onto a queue.
+#                      realrand - Support randomize() with real variables and constraints (Default).
+#                      thrdrngshfl - use the thread RNG for array.shuffle.
+#                      sas   - Strict LRM @* implicit sensitivity (whole variable and net identifiers rather than longest static prefix).
+#                      sccts - String concatenation convert to string.
+#                      sceq  - Allow string comparison with case equality operator.
+#                      spsl  - Search for packages in source libraries specified with -y and +libext.
+#                      stop0 - $stop() system call works as $stop(0), prints no diagnostic information.
+#                      substr1 - Allow one argument in substr() builtin method. Second argument will be end of string.
+#                      tzas  - Run a top-blocking always @* at time zero, same as is done for an always_comb.
+#                      ubdic - Allows the use of a variable in a SystemVerilog class before it is defined.
+#                      udm0  - UnDefined Macro is assume to be defined as the value 1'b0.
+#                      uslt  - Promote unused design units to top-level design units.
+#                      vmctor- Honor virtual method calls in class constructor.
+#   -vamsext[=[+|-]<extension>[,[+|-]<extension>]*]
+#                      Enable Verilog-AMS language extensions.
+#                      Valid extensions are:
+#                      nnummacro  - Verilog-AMS: Enclose macros defined as negative numbers inside parens upon expansion.
+#   -reporthrefs+[[[<libName>.]<moduleName>] | [<instancePathName>]][+f=<fileName>][+g]
+#   -reporthrefs[+i=<instancePathName>] | [+m=[<libName>.]<moduleName>][+f=<fileName>][+g]
+# 
+#                      The -reporthrefs switch extracts module, filename and line number
+#                      information for HDL hierarchical references that cross into the
+#                      specified module or instance boundary. This information will be written
+#                      into the output file specified with "+f" option. Any floating of 
+#                      parameters or generics is internally disabled in reporthrefs mode. 
+#                      "+g" option can be used to force floating.
+# 
+#                      Example:
+#                      vopt -reporthrefs+modA+f=reporthrefs-modA.acc ... <other vopt options>
+#                      vopt -reporthrefs+i=/top/dut1+f=reporthrefs-dut1.acc ... <other vopt options>
+#   -tab <path>        Specify PLI TAB file
+#   -timescale[=]<timescale>
+#                      Specify the default timescale for modules not having an
+#                      explicit timescale. The format of <timescale> is the same
+#                      as that of the `timescale directive.
+#                      For example, -timescale "1 ns / 1 ps".
+#   -override_timescale[=]<timescale>
+#                      Override the timescale specified in the source code.
+#   -override_precision
+#                      Override the precision of timescale specified in the source code.
+#   +typdelays         Use typical timing from min:typ:max expressions
+#   -pa_upf <filename> To specify a UPF File
+#   -pa_upflist <filename> To specify a list of UPF Files
+#   -pa_genrpt=<mode> 
+#                      To generate a report file for the Power Aware Mode
+#                      mode:
+#                         nv => non-verbose mode, dumps only counts of matched Power Cells 
+#                         v  => verbose mode, dumps counts along with hier-paths of matched Power Cells
+#                         us => Dump static report about specified UPF file
+#                         ud => Enable dynamic reporting for UPF
+#                         u  => Enable both static and dynamic reporting for UPF
+#                         b  => Dump bitwise expanded information for isolated and level shifted ports.
+#                         conn => Dump UPF connections report.
+#                         To enable multiple report generations use + operator (e.g -pa_genrpt=nv+us).
+#   -pa_reportdir <DIR name> 
+#                      To specify a directory name for report files.
+#                      (Default: current working directory)
+#   -pa_lib <libname>  Create PA specific dumps in <libname> library (Default:work)
+#   -pa_db <dbfilelocation>  To specify a file name for QPADB (Default:Current Working Directory)
+#   -pa_checks[=<spec>] 
+#                      Enables Power Aware specific static and dynamic checks of type indicated by <spec>. 
+#                      Valid types of <spec> are: 
+#                      all (enable all static and dynamic PA Checks)
+#                      d (enable all dynamic PA Checks, it is also default mode if no option is specified then all dynamic checks will be enabled)
+#                      s  (static level shifter and isolation checks) : [sl(all static level shifter check) | si(all static isolation check)]
+#                      Individual static Level shifter Checks [ sdl | sil | sml | snl | srl | svl ]
+#                      Individual static Isolation Checks [ sdi | sii | smi | sni | sri | svi ]
+#                      ul (dynamic level shifter checks) : [uml | uil]           (Individual checks)
+#                      umi (dynamic missing isolation check)
+#                      r  (All retention checks) : [rop | rpo | rcs | rsa]       (Individual checks)
+#                      i  (dynamic isolation checks) : [iep | idp | irc | it | isa | icp | ifc | iepcoa | idpcoa | ira]  (Individual checks)
+#                      t  (Toggle checks)
+#                      cp (Control signal corruption checks)
+#                      p  (Power-Domain switching info)
+#                      upc(Power supply check for retention and isolation cells[UPF only])
+#                      npu(Asynchronous control check for non-retention flops at power up)
+#                      ugc(Glitch check for control ports [UPF only])
+#                      pis (Illegal PST/Port state check)
+#                      gls_checks (PST/UPF intent based static level shifter and isolation checks)
+#                      If <spec> is not specified, all these checks are enabled.
+#                      Multiple checks are enabled using + operator between <spec> (e.g -pa_checks=r+it+irc).
+#   -pa_excludefile <filename>
+#                      Excludes instances specified in the filename for  processing.
+#   -pa_intcrptval0    Corrupt integers to 0 instead of default `left value for Power Aware simulation.
+#   -pa_upfsyntaxchecks
+#                      Check only syntax of specified UPF file
+#   -pa_upfsanitychecks
+#                      Checks syntax of specified UPF file and performs sanity checks.
+#   -pa_rtlinfo        Run Power Aware vopt in verbose mode.
+#   -pa_defertop       Change root of DUT hierarchy to <new_root_path> at
+#                      vsim time using the option -pa_top <new_root_path>.
+#   -pa_connectpgpin=<spec> 
+#                      Bypasses connection of a supply net to a port using 'connect_supply_net' upf command 
+#                      when the port is missing in the verification model but is a pg pin in the liberty model. 
+#                      Valid types of <spec> are:  
+#                      i (Ignore)    : The 'connect_supply_net' upf command to these ports is ignored. 
+#                      a (Always on) : The 'connect_supply_net' upf command to these ports is ignored 
+#                                      and the power aware simulation semantics of the parent instance 
+#                                      of the port are disabled . 
+#                      c (Connect)   : The 'connect_supply_net' upf command to these ports is honored 
+#                                      by creating the port 
+#                      e (Error)     : Flag error message for these ports. This is the default behaviour 
+#   -pa_upfextensions  Enables non-standard extensions to UPF
+#   -pa_top            To specify DUT hierarchy for PA analysis of UPF file. This option is used to support
+#                      PA analysis of UPF from hierarchy other than vopt TOP hierarchy. If vopt is run from
+#                      testbench(tb) and UPF scope is from DUT(which is instantiated in testbench as dut_inst),
+#                      then -pa_top "/tb/dut_inst" should be specified
+#   -libertyfiles=<comma separated liberty files> 
+#                      To specify liberty files 
+#   -libertysearchdir=<comma separated liberty search directories>
+#                      Search directories for liberty files. By default all files
+#                      with .lib extension are processed. The extension can be
+#                      changed by -libertysearchext option
+#   -libertysearchext=<ext> 
+#                      To specify extension of liberty files to be processed from libertysearchdir path(s) 
+#   -pa_dumplibertydb=<liberty database for liberty dumps> 
+#                      To specify liberty database where the liberty library dumps are created 
+#   -pa_loadlibertydb=<comma separated liberty databases> 
+#                      To specify list of liberty databases from where the liberty dumps are to be loaded 
+#   -pa_libertyupdate  To replace the existing liberty library dump in the liberty database with the new one, 
+#                      in case the dump for same library already exists in the liberty database
+#   -pa_libertyrefresh To refresh all the liberty library dumps in the liberty database specified with 
+#                      -pa_loadlibertydb and -pa_dumplibertydb with the current questasim version
+#   -pa_excludedelayedbuffer
+#                      Avoid corruption of delayed buffers.
+#   -pa_dbgstatic=<spec> 
+#                      Enables more information to be dumped in report.static.txt for violations of static checks. 
+#                      It should be used with -pa_checks option. 
+#                      Valid types of <spec> are:  
+#                      msk (It will dump mask information for ports reported in violation messages)
+#                      rsn (It will dump possible reason for violation of static check)
+#   -pa_lsthreshold <real>
+#                      Used to specify global threshold value for multi-voltage analysis.
+#                      Static level shifter checks will honor this global threshold.
+#   -pa_dumpupf <filename>
+#                     Generates a upf file in an uninterpreted mode in <filename> file 
+#   -pa_tclfile <filename>
+#                     To specify a tcl file with Questa Specific UPF options
+#   -pa_tclvar=<pair> 
+#                      To initialize/override tcl variables with  specific value before UPF processing. 
+#                      Valid format of <pair> is: 
+#                      variable_name:variable_value .
+#                      Multiple varibale name can be set using + operator between <pair>.
+#   -pa_enable=<spec>
+#                     To enable various PA features
+#                     Some of the commonly used spec options are: 
+#                     detectiso|detectls|detectret => Detect isolation | level shifter | retention cells.(Default on)
+#                     insertiso|insertls|insertret => Insert isolation | level shifter | retention cells.(Default on)
+#                     lowerboundary                => Perform isolation on lower boundary ports of power domain(Default on)
+#                     highlight                    => Enables highlighting in wave window
+#                     nonoptimizedflow             => Must be used if using -novopt flow.
+#                     supplynetworkdebug           => Enables visualization of UPF objects in GUI.
+#   -pa_disable=<spec>
+#                     To disable various PA features
+#                     The various spec options used are same as -pa_enable.
+#   -pa_upfversion=<mode>
+#                     Use to control the PA UPF semantics
+#                     mode:
+#                     1.0 => Power Aware Semantics will be according to UPF 1.0
+#                     2.0 => Power Aware Semantics will be according to UPF 2.0
+#                     2.1 => Power Aware Semantics will be according to UPF 2.1
+#                     3.0 => Power Aware Semantics will be according to UPF 3.0
+#   -pa_coverage=checks
+#                     To enable PA checks coverage
+#   -pa_rslvnetcheck
+#                     Enables the check to flag a warning message when different states are driven by active drivers 
+#                     of a supply net with resolve type -parallel.
+#   -pa_corrupt={real | integer | realval0} | -pa_nocorrupt={real | integer | realval0}
+#                     Controls the corruption of various types in the design.
+#   -pa_enable=<value>[+<value>] | -pa_disable=<value>[+<value>]
+#                     Enable or disable certain actions that the simulator performs during
+#                     Power Aware simulation. You can use these values to control 
+#                     compatibility with previous releases.
+#   -debugdb          To enable Schematic Debug features
+#   -pa_powertop lib.module
+#                     To specify the module under which a supply net/port should be searched
+#   -xprop[,mode=<mode>][,report=<severitylevel>][,object=<objectselection>]
+#                     To enable xprop based simulation.
+#                     Valid <mode> are: [resolve | pass | xtrap | none]
+#                            resolve => (Default) If any condition goes 'X', all possible branches are evaluated.
+#                                       If the output values from all branches are the same, the output is driven to that known value.
+#                                       If the output values are not the same, an assertion message is thrown and output is driven to 'X'.
+#                                       Simulation is affected and can fail.
+#                            pass => if any condition goes 'X', an assertion message is thrown and all writers are driven to 'X'.
+#                                    Simulation is affected and can fail.
+#                            trap => if any condition goes 'X', only assertion message is thrown.
+#                                    Simulation behavior is unaffected.
+#                            none => To exclude modules and instances from xprop behavior.
+#                     Valid <severitylevel> are: [fatal|error|warning|info|suppress]
+#                            To specifiy the severity of assertion mesaage thrown in xprop. Error is default.
+#                     Valid <objectselection> are: [<full_instance_hier_path> | <du_name>][<+>/<.>/<*>/<hierlevel>]
+#                            '+' => to select multiple objects.
+#                            '.' => to apply xprop recursively.
+#                            '*' => for specifying wildcard in design unit name.
+#                            <hierlevel> => positive integer to specifiy number of levels of hierarchy to be included for xprop.
+#   +staticchecks[=<spec>]
+#                      Enables static checks of type indicated by <spec>.
+#                      Valid types of <spec> are:
+#                         r (Race)
+#                         s (Sensitivity List)
+#                         c (Case Statement)
+#                         f (Subprogram/Function)
+#                         x (4-state values)
+#                         d (Non Synthesizable clocking style)
+#                      If <spec> is not specified, all these checks are enabled.
+#                      To enable multiple checks append	individual <spec> (e.g +staticchecks=rs).
+#   -staticchecksfile <filename>
+#                      To specify a file name for static checks report
+#                      (Default: static_checks.txt)
+#   -staticchecksmdvhdl
+#                      When used with +staticchecks=r, enables the check on multiple driver
+#                      race conditions for VHDL designs. 
+#                      By default, this check is deactivated because the multiple driver for
+#                      VHDL could be related to a resolution function.
+#   -showsubprograms   Show VHDL subprogram scopes in GUI windows (e.g. Structure) and CLI commands (e.g. show).
+#   -noshowsubprograms Don't show VHDL subprogram scopes in GUI windows (e.g. Structure) and CLI commands (e.g. show).(Default on)
+#   -adaptive          Enable adaptive exclusion feature.
+#   -adaptive_debug    Enable debugging for adaptive exclusion feature - Dumping adaptive exclusion database data.
+# /software/mentor/questa10.7c/questasim/linux_x86_64/vopt failed.
+vopt +acc tb_cu_lut
+# QuestaSim-64 vopt 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:24:16 on May 03,2021
+# vopt -reportprogress 300 "+acc" tb_cu_lut 
+# ** Error: (vopt-1928) A name for the optimized design must be specified with the -o argument to vopt.
+# Use the -help option for complete vopt usage.
+# /software/mentor/questa10.7c/questasim/linux_x86_64/vopt failed.
+vopt +acc -o tb_cu_lut
+# QuestaSim-64 vopt 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:24:27 on May 03,2021
+# vopt -reportprogress 300 "+acc" -o tb_cu_lut 
+# Usage: vopt [options] designUnit -o designName
+# Options:
+#   -help              Print this message
+#   -version           Print the version of the compiler
+#   -32                Run in 32-bit mode
+#   -64                Run in 64-bit mode
+#   -work <path>       Specify library WORK
+#   -cpppath </path/to/[gcc|g++]>  
+#                      Specify path to the desired GNU compiler.
+#                      Use same compiler path as specified on the sccom
+#                      command line.
+#   -cppinstall <[gcc|g++ version]>  
+#                      Specify the version of the desired GNU compiler
+#                      supported and distributed by Mentor.
+#                      Use same compiler version as specified on the sccom
+#                      command line.
+#   -fatal <msgNumber>[,<msgNumber>...]
+#                      Report the listed messages as fatal
+#   -error <msgNumber>[,<msgNumber>...]
+#                      Report the listed messages as errors
+#   -warning <msgNumber>[,<msgNumber>...]
+#                      Report the listed messages as warnings
+#   -warning error     Report all warnings as errors
+#   -note <msgNumber>[,<msgNumber>...]
+#                      Report the listed message as notes
+#   -suppress <msgNumber/msgGroup>[,<msgNumber/msgGroup>...]
+#                      Suppress the listed messages using number or group.
+#                      Valid <msgGroup> are All, GroupNote, GroupWarning, GroupFLI, GroupPLI, 
+#                      GroupSDF, GroupVCD, GroupVital, GroupWLF, GroupTCHK, GroupPA, GroupLRM
+#   -msglimit [all,|none,][-|+]<msgNumber>[,[-|+]<msgNumber>...]
+#                      Limit the reporting of listed messages to default count
+#   -msglimit [error|warning]
+#                      Limit the total number of errors/warnings to default count
+#   -msglimitcount <limit_value> -msglimit [all,|none,][-|+]<msgNumber>[,[-|+]<msgNumber>...]
+#                      Limit the reporting of listed messages to user defined count
+#   -msglimitcount <limit_value> -msglimit [error|warning]
+#                      Limit the total number of errors/warnings to user defined count
+#   -msgsingleline     Display the messages in a single line.
+#   -svfilesuffix=<extension>[,<extension>...]
+#                      filename extensions for SystemVerilog code
+#   -vamsfilesuffix=<extension>[,<extension>...]
+#                      filename extensions for Verilog-AMS code
+#   -87                Enable support for VHDL 1076-1987 in VHDL-style PSL files
+#                      specified with -pslfile_vh <file>
+#   -93                Enable support for VHDL 1076-1993 in VHDL-style PSL files
+#                      specified with -pslfile_vh <file>
+#   -2002              Enable support for VHDL 1076-2002 in VHDL-style PSL files
+#                      specified with -pslfile_vh <file>
+#   -2008              Enable support for VHDL 1076-2008 in VHDL-style PSL files
+#                      specified with -pslfile_vh <file>
+#   -check_synthesis   Check for compliance to some synthesis rules
+#   --------  Access Control and Debug Options  --------
+#           These modifiers help maximize simulation performance while retaining
+#           access to objects of interest, which might otherwise be optimized
+#           away. By default, this option has effect on all design units in the
+#           design. +<selection> can be used to target the extent of this option
+#           to only a specified design unit or instance using following syntax:
+#              [<library>.]<entity>[(<architecture>)] (for VHDL design units)
+#              [<library>.]<design_unit> (for Verilog design units)
+#              <inst_name> (for Verilog/VHDL design regions, and objects)
+#              [<library>.]<design_unit>/<inst_path> (for Verilog/VHDL instances)
+#           When [<library>.]<design_unit> is specified, all instances of that
+#           design unit from the specified <library> are affected by this
+#           option. If <library> is not specified, all instances of that design
+#           unit are considered. In VHDL, a user may further qualify the
+#           selection using <architecture>.
+#           When +<inst_name> is specified, only objects in that part of the
+#           design are affected.
+#           If a trailing '.' is present, the option is also applied recursively
+#           downwards. Or, a user can specify the number of recursion levels
+#           (0 to 127) with this option. Recursion level 128 indicates full
+#           recursion.
+# 
+#                      Examples:
+#                         VHDL Design Unit:    -floatgenerics+myentity(myarch)
+#                         Verilog Design Unit: -bitscalars+Demux
+#                         Library and du :     -primitiveaccess+work.mux
+#                         Du and Inst:         -linedebug+dut/r
+#                         Instance and below:  -assertdebug+/top/u1.
+#                         Object:              -randmetastable+/top/myreg
+#                         Region and below:    -fsmdebug+'/top/gen(3).'
+#                         Region and 2 levels below: -nobitscalars+'/top/gen(3)+2'
+# 
+#           Most of these options can be negated by adding 'no' prefix to them.
+#           These no* options allow objects to be optimized and they can also
+#           take <selection> and <recurse_level> modifilers.
+#   +[no]acc[=<spec>][+<selection>[+<recurse_level>|.]]
+#                      Enable/disable access to certain objects. 
+#                      <spec> consists of one or more of the following letter codes:
+#                         m (module, program, and interface instances)
+#                         n (nets)
+#                         p (ports)
+#                         r (Verilog variables and parameters)
+#                         t (task and function scopes)
+#                         v (VHDL variables, constants, and aliases
+#   -[no]assertdebug[+<selection>[+<recurse_level>|.]]
+#                      Enable/disable debugging SVA/PSL objects.
+#   -assertverbose <fileName>
+#                      Print messages about assertion optimizations during vopt
+#   -[no]fsmdebug[+<selection>[+<recurse_level>|.]]
+#                      Enable/disable finite state machine recognition.
+#   -floatgenerics+<selection>[+<recurse_level>|.]
+#                      Do not lock down generic values during optimization.
+#                      This enables use of the vsim -g/G options on the affected
+#                      generics.
+#   -floatparameters+<selection>[+<recurse_level>|.]
+#                      Do not lock down parameter values during optimization.
+#   -nosparse[+<selection>[+<recurse_level>]]
+#                      Do not to mark memories as sparse by default.
+#   --------
+#   -cellreport <fileName>
+#                      Write a report of optimized/unoptimized cells into <fileName>.
+#   -compat            Disable optimizations that result in different event ordering
+#                      than Verilog-XL (at expense of performance).
+#   -createlib[=compress]
+#                      Create libraries that do not exist.
+#                      The =compress modifier creates compressed libraries.
+#   -nocreatelib       Do not create libraries that do not exist.
+#   -coverclkoptbuiltins, -nocoverclkoptbuiltins
+#                      Enable or disable clkOpt optimization builtins for code coverage.
+#   +cover[=<spec>][+<selection>[+<recurse_level>|.]]
+#                      <spec> is used to enable code coverage metrics for certain
+#                      kinds of constructs.
+#                      <spec> consists of one or more of the following letter codes:
+#                         s (statement)
+#                         b (branch)
+#                         c (condition)
+#                         e (expression)
+#                         f (finite state machine)
+#                         t (toggle)
+#                         x (extended toggle
+#                      If no <spec> characters are given, sbceft is the default.
+#                      The <selection>, <recurse_level> and '.'modifiers are
+#                      described in the help text for the +acc option.
+#   +nocover[=<spec>][+<selection>[+<recurse_level>|.]]
+#                      This option disables code coverage metrics for certain
+#                      kinds of constructs specified by <spec> and in the
+#                      region specified by +<selection> modifiers.
+#                      The <spec> modifiers are described in the help text for
+#                      the +cover option. The +<selection>, <recurse_level
+#                      and '.' modifiers are described in the help text for
+#                      the +acc option.
+#   -coverenhanced     Enables functionality which may change the appearance or content of coverage
+#                      metrics. A detailed list of these changes can be found by searching in the
+#                      release notes for 'coverenhanced'. This option only takes meaningful effect in
+#                      letter releases (e.g. 10.2b). It has no effect in initial major releases (e.g. 10.2).
+#   -coveropt <i>      Specify a digit for code coverage optimization level: 1 through 4.
+#   -coverexcludedefault Automatically exclude case default clauses.
+#   -coverfec          Enable Focused Expression Coverage analysis for conditions and expressions.
+#   -nocoverfec        Disable Focused Expression Coverage analysis for conditions and expressions.
+#   -coverrec          Enable Rapid Expression Coverage mode of FEC for conditions and expressions.
+#   -nocoverrec        Disable Rapid Expression Coverage mode of FEC for conditions and expressions.
+#   -coverudp          Enable UDP Coverage analysis for conditions and expressions.
+#   -nocoverudp        Disable UDP Coverage analysis for conditions and expressions.
+#   -nocovershort      Disable short circuiting of expressions/condition when coverage is enabled.
+#   -coverexpandrdpfx  Bit-blast multi-bit operands of reduction prefix expressions for expression/condition coverage.
+#   -nocoverexpandrdpfx Don't bit-blast multi-bit operands of reduction prefix expressions for expression/condition coverage.
+#   -nocoverexcludedefault Don't automatically exclude case default clauses.
+#   -covercells        Enable code coverage options in cells.
+#   -nocovercells      Disable code coverage options in cells.
+#   -covercebi         Enable collapse of else-begin-if to an 'elsif' equivalent for coverage.
+#   -nocovercebi       Disable collapse of else-begin-if to an 'elsif' equivalent for coverage.
+#   -constimmedassert  Show constant immediate assertions in GUI/UCDB/reports etc.
+#   -togglecountlimit n Quit collecting toggle info after count n is reached.
+#   -togglewidthlimit n Don't collect toggle data on reg's or arrays wider than n.
+#   -extendedtogglemode [1|2|3]
+#                      Change the level of support for extended toggles.
+#                      The levels of support are:
+#                      1 - 0L->1H & 1H->0L & any one 'Z' transition (to/from 'Z')
+#                      2 - 0L->1H & 1H->0L & one transition to 'Z' & one transition from 'Z'
+#                      3 - 0L->1H & 1H->0L & all 'Z' transitions
+#   -toggleportsonly   Enable toggle statistics collection only for ports.
+#   -maxudprows n      Max number of rows allowed in UDP tables for code coverage.
+#   -maxfecrows n      Max number of input patterns allowed in FEC table for code coverage.
+#   -fecudpeffort n    Limit the size of expressions and conditions considered for expr/cond coverage.
+#                      Levels supported are:
+#                      1 - (low) Only small expressions and conditions considered for coverage.
+#                      2 - (medium) Bigger expressions and conditions considered for coverage.
+#                      3 - (high) Very large expressions and conditions considered for coverage.
+#   -coverreportcancelled Report coverage items that have been optimized away.
+#   -coverdeglitch <period> Report only the last execution of non-clocked processes/continuous assignments
+#                      within time greater than <period>, where <period> is 0 or
+#                      a time string with units
+#   -deferSubpgmCheck  Defer compile-time range checking on constant index and
+#                      slice expressions in subprograms until run time
+#   -debugCellOpt      Indicate why certain cells were not optimized
+#   -deglitchalways    Make always blocks insensitive to variable
+#                      glitches, potentially breaking zero delay oscillations
+#                      among combinatorial always blocks. (default)
+#   -nodeglitchalways  Disable -deglitchalways behavior.
+#   +delay_mode_distributed
+#                      Use structural delays and ignore path delays
+#   +delay_mode_path   Set structural delays to zero and use path delays
+#   +delay_mode_unit   Set non-zero structural delays to one
+#   +delay_mode_zero   Set structural delays to zero
+#   -seq_udp_delay <value>[<unit>]
+#                      Specify a constant delay for sequential UDPs and
+#                      set all other structural delays to zero
+#                      for example, -seq_udp_delay 2.3ns
+#   -add_seq_delay <value>[<unit>]
+#                      Specify a constant delay for undelayed sequential UDPs 
+#                      for example, -add_seq_delay 2.3ns
+#   -dpiforceheader    Force generation of dpi header file even when
+#                      empty of function prototypes
+#   -dpiheader <filename>
+#                      Save the generated declarations of SystemVerilog DPI
+#                      tasks and functions into <filename>
+#   -designfile <bin-filename>
+#                      Specifies a name for the Visualizer .bin file
+#   -f <filename>      Specify a file containing more command line arguments
+#   -F <filename>      Specify a file containing more command line arguments. Prefixes relative
+#                      file names within the arguments file with the absolute path of arguments file,
+#                      if lookup with relative path fails.
+#   -outf <filename>   Specify a file to save the final list of options after recursively expanding
+#                      all -f, -file and -F files.
+#   -optionset <optionset_name>
+#                      Calls an option set in modelsim.ini.
+#   -nofsmresettrans   Disable recognition of implicit asynchronous reset transitions for FSMs
+#   -fsmresettrans     Enable recognition of implicit asynchronous reset transitions for FSMs
+#   -nofsmsingle       Disable recognition FSMs having single bit current state variable
+#   -fsmsingle         Enable recognition FSMs having single bit current state variable
+#   -fsmimplicittrans  Enable recognition of implicit transitions in FSMs
+#   -nofsmimplicittrans Disable recognition of implicit transitions in FSMs
+#   -fsmmultitrans     Enable recognition of Multi-state transitions in FSMs
+#   -fsmverbose [b|t|w]
+#                      Provides information about FSMs recognized, including state reachability analysis.
+#                      There are three detail levels that can be set with this option.
+#                         b (displays only basic information)
+#                         t (displays a transition table in addition to the basic information)
+#                         w (displays any warning messages in addition to the basic information)
+#                      If no character is specified, btw is the default.
+#   -nofsmxassign      Disable recognition of FSMs containing x assignment
+#   -fsmxassign        Enable recognition of FSMs containing x assignment
+#   -g <generic>=<value>
+#   -G <generic>=<value>
+#                      Specify value for Verilog parameter or VHDL generic.
+#                      -G overrides all matching generics and parameters.
+#                      -g only overrides items without explicit settings in source code.
+#   -hds               HDS mode.
+#   -hds_lib           HDS lib name.
+#   -hds_output        HDS output file name.
+#   -hds_unit          HDS unit name.
+#   -immedalways       Run combinatorial always blocks with the same high priority as
+#                      continuous assignments and primitives in order to miminize the
+#                      effect of optimizations on race dependent results.
+#   -noimmedalways     Disable -immedalways behavior. (default)
+#   -initoutcompositeparam
+#                      Initialize array and record mode OUT parameters of subprograms
+#   -noinitoutcompositeparam
+#                      Do not initialize array and record mode OUT parameters of subprograms
+#   -hazards           Enable run-time hazard checking code
+#   +incdir+<dir>      Search directory for files included with
+#                      `include "filename"
+#   -incr              Enable incremental compilation
+#   +initmem[=<spec>][+0|1|X|Z][+<selection>[+<recurse_level>|.]]
+#                      Initialize fixed-size arrays of type indicated by <spec>.
+#   +noinitmem[+<selection>[+<recurse_level>|.]]
+#                      Do not initialize arrays indicated by <spec>.
+#   +initreg[=<spec>][+0|1|X|Z][+<selection>[+<recurse_level>|.]]
+#                      Initialize variables of type indicated by <spec>.
+#                      Valid values of <spec> are:
+#                         r (4-state integral types)
+#                         b (2-state integral types)
+#                         e (enum types)
+#                         u (udp types)
+#                      If no <spec> is given, all these types are enabled.
+#                      If 0|1|X|Z is specified, all the bits in the variable
+#                      are initialized to that value.  Otherwise, these variables
+#                      are prepared for randomization during vsim.
+#                      Refer to the +acc option's help text for <selection>.
+#   +noinitreg[+<selection>[+<recurse_level>|.]]
+#                      Do not initialize variables indicated by <spec>.
+#   +initwire[+0|1|X|Z]
+#                      Initialize unconnected wires with given value.
+#                      If no value is given, unconnected wires are initialized with 0.
+#   -j <num>           Set maximum number of processes to create for code generation.
+#                      Setting this value to "0" disables this feature.
+#   -keep_delta        Exclude optimizations that remove delta delays
+#   -L <libname>       Search library for design units needed when optimizing
+#   -Lf <libname>      Same as -L, but libraries are searched before `uselib
+#   -Ldir <dirname>    Specify the container folder for libraries passed with -L & -Lf options.
+#   -libverbose[=prlib]
+#                      Verbose messaging about library mappings, search and resolution.
+#                      The =prlib modifier prints out the -L/-Lf/-Ltop option that was used
+#                      to locate each design unit loaded in vopt.
+#   -noltop            Stops promotion of libraries containing top design units to searchable libraries.
+#   -l <filename>      Write optimization log to <filename>
+#   -lowercasepragma   Allow only lower case pragmas
+#   -lowercasepslpragma   Allow only lower case PSL pragmas
+#   -modelsimini <modelsim.ini>
+#                      Specify path to the modelsim.ini file
+#   +maxdelays         Use maximum timing from min:typ:max expressions
+#   +mindelays         Use minimum timing from min:typ:max expressions
+#   -memopt[=n]        Enables memory optimization mode. Value of n can be 0|1|2|3|4.
+#                      Mode 3 is default on. Mode 0 disables this optimization. Mode 1, 2
+#                      and 4 can be used to select less/more aggresive optimization modes.
+#   -mixedansiports    Enables mixing of ANSI-style and non-ANSI-style declarations
+#   -mti_trace_vlog_calls
+#                      Enables viewing of SystemVerilog class contents in the Wave window.
+#   -mvchome  <path>   Location of Questa Verification IP installation.
+#                      Overrides 'MvcHome' modelsim.ini setting
+#   -noautoldlibpath   Disable setting of LD_LIBRARY_PATH internally.
+#   +check<CODE>       Enable specified cell optimization inhibitor.
+#                      ALL   - Enables all +check codes
+#                      CLUP  - Optimize cells containing connectivity loops
+#                      DELAY - Use with +delay_mode_path.  See Command Ref.
+#                      DNET  - Disallows both port and delayed port to be used in cell
+#                      OPRD  - Disallows cell output port to be read inside cell
+#                      SUDP  - Disallows sequential UDP to drive another sequential UDP
+#                      INTRI - Disallows input of net type tri1 or tri0
+#                      IPDOP - Disallows input port with direct path to output port
+#                      AWA   - Disallows always block to drive another always block
+#                      NWOT  - Disallows notifier register to be written to outside timing checks
+#   -nocover           Disable code coverage even if vlog -cover was used on source files.
+#   -nodebug[=ports][=pli][=ports+pli]
+#                      Do not put symbolic debugging information into the library
+#   -noexcludeternary <design_unit>
+#                      Disables exclusion of ternary expressions in UCDB.
+#   -noincr            Forces complete analysis and code generation, effectively turning
+#                      off incremental compilation
+#   +nolibcell         Do not automatically define library modules as cells(default)
+#   +libcell           Define library modules (found with -v|-y search) as cells
+#   -nologo            Disable startup banner
+#   -[w]prof=<filename> Enables CPU (-prof) or WALL (-wprof) time based profiling
+#                       and saves the profile data to the given filename.
+#   -proftick=<integer> Set the time interval between the profile data collection.
+#                       Default value is 10.
+#   +nospecify         Disable specify path delays and timing checks
+#   +notimingchecks    Disable timing checks
+#   -nowarn <number>   Disable specified category of warning messages; verror 1907 to see them
+#   +nowarn<CODE>      Disable specified warning message
+#   +num_opt_cell_conds+<value> 
+#                      Restricts gate-level optimization capacity for accepting cells with
+#                      I/O path and timing check conditions.
+#                      <value> integer between 32 and 1023, inclusive. where the default 
+#                      value is 1023.
+#   -noconstimmedassert  Do not show constant immediate assertions in GUI/UCDB/reports etc.
+#   -o <design_name>   Specify optimized output design name
+#   -ocf <ocf_file>    Specify a file containing optimization control requests
+#                      (see also -f and -tab for other visibility control options)
+#   -O0                Disable optimizations
+#   -O1                Enable some optimizations
+#   -O4                Enable most optimizations (default)
+#   -O5                Enable additional compiler optimizations
+#   -pedanticerrors    Enforce strict language checks
+#   -permissive        Relax some language error checks to warnings.
+#   -pdu               Create a Preoptimized Design Unit (black-box).
+#                      (Equivalent to the deprecated "-bbox" option).
+#   -pdusavehierrefs[=<filename>]
+#                      Create a file with +acc settings required to maintain
+#                      necessary visibility of hierarchical references.
+#                      The output filename is "mti_pdu_hier_refs" by default or
+#                      may be specified with the optional <filename> argument.
+#                      (Equivalent to the deprecated "-save_bbox_hier_refs" option
+#                      that by default creates the output file "mti_bbox_hier_refs").
+#   -pduspec+[[[<libName>.]<moduleName>] | [<instancePathName>]][[+facc|+focf]=<fileName>]
+#   -pduspec[+i=<instancePathName>] | [+m=[<libName>.]<moduleName>][[+facc|+focf]=<fileName>]
+#                      The -pduspec switch extracts corresponding visibility requirements
+#                      (acc or ocf statements) for the objects that are under the specified
+#                      boundaries.  If "+facc" is specified with, an output file containing
+#                      +acc statements is generated, while "+focf" will cause a .ocf format
+#                      (output from "-learn" flow) file to be created. The generated output
+#                      files are then used with vopt to create PDUs for those boundary
+#                      modules or instances.
+# 
+#                      Example:
+#                      vopt -pduspec+modA+facc=pdu-A.acc ... <other vopt options>
+#                      vopt -pduspec+i=/top/dut1+facc=pdu-dut1.acc ... <other vopt options>
+#   -pslext            Enable PSL LTL/Universal operators
+#   -pslfile_vh <file> Compile and bind VHDL-style PSL vunits specified by <file>
+#   -pslfile_vl <file> Compile and bind Verilog-style PSL vunits specified by <file>
+#   -quiet             Disable 'Loading' messages
+#   -rnmautointerconnect
+#                      Convert qualifying wires connected to real/wreal/nettype/interconnect ports to interconnect.
+#   -sc22              Use the IEEE 1666-2005 standard (default: IEEE 1666-2011)
+#   -sclib <libname>   Load the SystemC shared library from <libname>
+#                      (Default: work)
+#   -sc_arg <arg>      Specify a SystemC command line argument
+#                      accessible using sc_main(), sc_argc() 
+#                      and sc_argv()
+#   -noscmainscopename Strip sc_main() scope from the hierarchical path.
+#   -noscelab          Disables vopt elaboration of SystemC design hierarchy
+#                      and any HDL sub-hierarchy.
+#   -enablescstdout    Enables printing of messages from SystemC
+#                      source code to stdout. stdout is suppressed 
+#                      by default when the SystemC code is elaborated.
+#   -gblso <shared_obj>[,<shared_obj>...] Open the specified shared object(s) with global
+#                      symbol visibility. If multiple shared objects are specified,
+#                      they will first be merged internally and then loaded as single
+#                      shared object.
+#   -undefsyms=[<args>] Generate stubs for undefined symbols in the shared libraries being loaded.
+#                      <args> are on, off, verbose
+#   -dpilib <libname>   Specify the library that contains DPI exports and object files.
+#                      (Default: work)
+#   -sdfmax[@<delayScale>] [<instance>=]<sdffile>
+#                      Annotate VITAL or Verilog <instance> with maximum
+#                      timing from <sdffile>, scaled by <delayScale>
+#   -sdfmin[@<delayScale>] [<instance>=]<sdffile>
+#                      Annotate VITAL or Verilog <instance> with minimum
+#                      timing from <sdffile>, scaled by <delayScale>
+#   -sdftyp[@<delayScale>] [<instance>=]<sdffile>
+#                      Annotate VITAL or Verilog <instance> with typical
+#                      timing from <sdffile>, scaled by <delayScale>
+#   -sdfmaxerrors <n>  Max number of missing instances reported (default is 5)
+#   -source            Print the source line with error messages
+#   -stats[=[+-]<args>] Enables compiler statistics
+#                      <args> are all,none,time,cmd,msg,perf,verbose,list,kb
+#   -svext[=[+|-]<extension>[,[+|-]<extension>]*]
+#                      Enable SystemVerilog language extensions.
+#                      Valid extensions are:
+#                      acum  - Assignment Compatible Untyped Mailbox.
+#                      acade - Add always_comb driven elements in the senstivity list.
+#                      ared  - Iterate over innermost array elements for array reduction methods.
+#                      arif  - Allow ref args in fork.
+#                      aswe  - Allow symmetric wild equality operator.
+#                      atpi  - Allow Types in Port Identifiers.
+#                      bstr  - Allow usage of string builtin method bittostr.
+#                      catx  - Concat extensions.
+#                      ctlc  - Cast time literal in constraint context to time datatype.
+#                      ddup  - Drive default unconnected port.
+#                      dbpp  - Decrypt before preprocessing.
+#                      defervda - Defer variable declaration assignments until after top-blocking always are sensitized.
+#                      dmsbw - Drive MSB unconnected bits of the wider hiconn (output) or the wider loconn (input) in an otherwise collapsible port connection.
+#                      evdactor - Do early variable declaration assignments in constructors.
+#                      evis  - Expand Environment Variables within Include String literals.
+#                      alltsic - Allow local lookup of this & super in inline constraints.
+#                      feci  - Treat constant expressions in foreach loop variable indices as constant.
+#                      fin0  - $finish() system call works as $finish(0), prints no diagnostic information.
+#                      hiercross1 - Allow hierarchical cross feature.
+#                      hiercross2 - Allow an alternate hierarchical cross feature.
+#                      ias   - Iterate on always @* evaluations until inputs settle.
+#                      idcl  - Pass import DPI call location as implicit scope.
+#                      iddp  - Ignore DPI disable protocol check.
+#                      altdpiheader - Alternative style function signature generated in DPI header.
+#                      mewq  - Allow macro expansion within quotes for string literals.
+#                      mttd  - Within macro expansion treat ``" as `".
+#                      noexptc  - ignore DPI export SV type name overloading check
+#                      ifca  - Iterate on feedback continuous assignment until inputs settle.
+#                      ifslvbefr - Allow solve/before constraint under a constant If condition (Default).
+#                      sffi  - Allow same function and formal identifier in case of functions with void return type.
+#                      islm  - Ignore String Literals within Macros.
+#                      mtdl  - Macro expansion treats `" more like a string literal.
+#                      ncref - Ref formal in covergroup new is not treated as constant ref.
+#                      scref - Ref formal in covergroup sample is treated as constant ref.
+#                      pae1  - Automatically export all symbols imported(referenced or not) in a package.
+#                      pae   - Automatically export all symbols imported and referenced in a package.
+#                      pctap - Promote Concat To Assignment Pattern using heuristics such as presence of unsized literals.
+#                      qcat  - Allow use of an assignment pattern for concatenating onto a queue.
+#                      realrand - Support randomize() with real variables and constraints (Default).
+#                      thrdrngshfl - use the thread RNG for array.shuffle.
+#                      sas   - Strict LRM @* implicit sensitivity (whole variable and net identifiers rather than longest static prefix).
+#                      sccts - String concatenation convert to string.
+#                      sceq  - Allow string comparison with case equality operator.
+#                      spsl  - Search for packages in source libraries specified with -y and +libext.
+#                      stop0 - $stop() system call works as $stop(0), prints no diagnostic information.
+#                      substr1 - Allow one argument in substr() builtin method. Second argument will be end of string.
+#                      tzas  - Run a top-blocking always @* at time zero, same as is done for an always_comb.
+#                      ubdic - Allows the use of a variable in a SystemVerilog class before it is defined.
+#                      udm0  - UnDefined Macro is assume to be defined as the value 1'b0.
+#                      uslt  - Promote unused design units to top-level design units.
+#                      vmctor- Honor virtual method calls in class constructor.
+#   -vamsext[=[+|-]<extension>[,[+|-]<extension>]*]
+#                      Enable Verilog-AMS language extensions.
+#                      Valid extensions are:
+#                      nnummacro  - Verilog-AMS: Enclose macros defined as negative numbers inside parens upon expansion.
+#   -reporthrefs+[[[<libName>.]<moduleName>] | [<instancePathName>]][+f=<fileName>][+g]
+#   -reporthrefs[+i=<instancePathName>] | [+m=[<libName>.]<moduleName>][+f=<fileName>][+g]
+# 
+#                      The -reporthrefs switch extracts module, filename and line number
+#                      information for HDL hierarchical references that cross into the
+#                      specified module or instance boundary. This information will be written
+#                      into the output file specified with "+f" option. Any floating of 
+#                      parameters or generics is internally disabled in reporthrefs mode. 
+#                      "+g" option can be used to force floating.
+# 
+#                      Example:
+#                      vopt -reporthrefs+modA+f=reporthrefs-modA.acc ... <other vopt options>
+#                      vopt -reporthrefs+i=/top/dut1+f=reporthrefs-dut1.acc ... <other vopt options>
+#   -tab <path>        Specify PLI TAB file
+#   -timescale[=]<timescale>
+#                      Specify the default timescale for modules not having an
+#                      explicit timescale. The format of <timescale> is the same
+#                      as that of the `timescale directive.
+#                      For example, -timescale "1 ns / 1 ps".
+#   -override_timescale[=]<timescale>
+#                      Override the timescale specified in the source code.
+#   -override_precision
+#                      Override the precision of timescale specified in the source code.
+#   +typdelays         Use typical timing from min:typ:max expressions
+#   -pa_upf <filename> To specify a UPF File
+#   -pa_upflist <filename> To specify a list of UPF Files
+#   -pa_genrpt=<mode> 
+#                      To generate a report file for the Power Aware Mode
+#                      mode:
+#                         nv => non-verbose mode, dumps only counts of matched Power Cells 
+#                         v  => verbose mode, dumps counts along with hier-paths of matched Power Cells
+#                         us => Dump static report about specified UPF file
+#                         ud => Enable dynamic reporting for UPF
+#                         u  => Enable both static and dynamic reporting for UPF
+#                         b  => Dump bitwise expanded information for isolated and level shifted ports.
+#                         conn => Dump UPF connections report.
+#                         To enable multiple report generations use + operator (e.g -pa_genrpt=nv+us).
+#   -pa_reportdir <DIR name> 
+#                      To specify a directory name for report files.
+#                      (Default: current working directory)
+#   -pa_lib <libname>  Create PA specific dumps in <libname> library (Default:work)
+#   -pa_db <dbfilelocation>  To specify a file name for QPADB (Default:Current Working Directory)
+#   -pa_checks[=<spec>] 
+#                      Enables Power Aware specific static and dynamic checks of type indicated by <spec>. 
+#                      Valid types of <spec> are: 
+#                      all (enable all static and dynamic PA Checks)
+#                      d (enable all dynamic PA Checks, it is also default mode if no option is specified then all dynamic checks will be enabled)
+#                      s  (static level shifter and isolation checks) : [sl(all static level shifter check) | si(all static isolation check)]
+#                      Individual static Level shifter Checks [ sdl | sil | sml | snl | srl | svl ]
+#                      Individual static Isolation Checks [ sdi | sii | smi | sni | sri | svi ]
+#                      ul (dynamic level shifter checks) : [uml | uil]           (Individual checks)
+#                      umi (dynamic missing isolation check)
+#                      r  (All retention checks) : [rop | rpo | rcs | rsa]       (Individual checks)
+#                      i  (dynamic isolation checks) : [iep | idp | irc | it | isa | icp | ifc | iepcoa | idpcoa | ira]  (Individual checks)
+#                      t  (Toggle checks)
+#                      cp (Control signal corruption checks)
+#                      p  (Power-Domain switching info)
+#                      upc(Power supply check for retention and isolation cells[UPF only])
+#                      npu(Asynchronous control check for non-retention flops at power up)
+#                      ugc(Glitch check for control ports [UPF only])
+#                      pis (Illegal PST/Port state check)
+#                      gls_checks (PST/UPF intent based static level shifter and isolation checks)
+#                      If <spec> is not specified, all these checks are enabled.
+#                      Multiple checks are enabled using + operator between <spec> (e.g -pa_checks=r+it+irc).
+#   -pa_excludefile <filename>
+#                      Excludes instances specified in the filename for  processing.
+#   -pa_intcrptval0    Corrupt integers to 0 instead of default `left value for Power Aware simulation.
+#   -pa_upfsyntaxchecks
+#                      Check only syntax of specified UPF file
+#   -pa_upfsanitychecks
+#                      Checks syntax of specified UPF file and performs sanity checks.
+#   -pa_rtlinfo        Run Power Aware vopt in verbose mode.
+#   -pa_defertop       Change root of DUT hierarchy to <new_root_path> at
+#                      vsim time using the option -pa_top <new_root_path>.
+#   -pa_connectpgpin=<spec> 
+#                      Bypasses connection of a supply net to a port using 'connect_supply_net' upf command 
+#                      when the port is missing in the verification model but is a pg pin in the liberty model. 
+#                      Valid types of <spec> are:  
+#                      i (Ignore)    : The 'connect_supply_net' upf command to these ports is ignored. 
+#                      a (Always on) : The 'connect_supply_net' upf command to these ports is ignored 
+#                                      and the power aware simulation semantics of the parent instance 
+#                                      of the port are disabled . 
+#                      c (Connect)   : The 'connect_supply_net' upf command to these ports is honored 
+#                                      by creating the port 
+#                      e (Error)     : Flag error message for these ports. This is the default behaviour 
+#   -pa_upfextensions  Enables non-standard extensions to UPF
+#   -pa_top            To specify DUT hierarchy for PA analysis of UPF file. This option is used to support
+#                      PA analysis of UPF from hierarchy other than vopt TOP hierarchy. If vopt is run from
+#                      testbench(tb) and UPF scope is from DUT(which is instantiated in testbench as dut_inst),
+#                      then -pa_top "/tb/dut_inst" should be specified
+#   -libertyfiles=<comma separated liberty files> 
+#                      To specify liberty files 
+#   -libertysearchdir=<comma separated liberty search directories>
+#                      Search directories for liberty files. By default all files
+#                      with .lib extension are processed. The extension can be
+#                      changed by -libertysearchext option
+#   -libertysearchext=<ext> 
+#                      To specify extension of liberty files to be processed from libertysearchdir path(s) 
+#   -pa_dumplibertydb=<liberty database for liberty dumps> 
+#                      To specify liberty database where the liberty library dumps are created 
+#   -pa_loadlibertydb=<comma separated liberty databases> 
+#                      To specify list of liberty databases from where the liberty dumps are to be loaded 
+#   -pa_libertyupdate  To replace the existing liberty library dump in the liberty database with the new one, 
+#                      in case the dump for same library already exists in the liberty database
+#   -pa_libertyrefresh To refresh all the liberty library dumps in the liberty database specified with 
+#                      -pa_loadlibertydb and -pa_dumplibertydb with the current questasim version
+#   -pa_excludedelayedbuffer
+#                      Avoid corruption of delayed buffers.
+#   -pa_dbgstatic=<spec> 
+#                      Enables more information to be dumped in report.static.txt for violations of static checks. 
+#                      It should be used with -pa_checks option. 
+#                      Valid types of <spec> are:  
+#                      msk (It will dump mask information for ports reported in violation messages)
+#                      rsn (It will dump possible reason for violation of static check)
+#   -pa_lsthreshold <real>
+#                      Used to specify global threshold value for multi-voltage analysis.
+#                      Static level shifter checks will honor this global threshold.
+#   -pa_dumpupf <filename>
+#                     Generates a upf file in an uninterpreted mode in <filename> file 
+#   -pa_tclfile <filename>
+#                     To specify a tcl file with Questa Specific UPF options
+#   -pa_tclvar=<pair> 
+#                      To initialize/override tcl variables with  specific value before UPF processing. 
+#                      Valid format of <pair> is: 
+#                      variable_name:variable_value .
+#                      Multiple varibale name can be set using + operator between <pair>.
+#   -pa_enable=<spec>
+#                     To enable various PA features
+#                     Some of the commonly used spec options are: 
+#                     detectiso|detectls|detectret => Detect isolation | level shifter | retention cells.(Default on)
+#                     insertiso|insertls|insertret => Insert isolation | level shifter | retention cells.(Default on)
+#                     lowerboundary                => Perform isolation on lower boundary ports of power domain(Default on)
+#                     highlight                    => Enables highlighting in wave window
+#                     nonoptimizedflow             => Must be used if using -novopt flow.
+#                     supplynetworkdebug           => Enables visualization of UPF objects in GUI.
+#   -pa_disable=<spec>
+#                     To disable various PA features
+#                     The various spec options used are same as -pa_enable.
+#   -pa_upfversion=<mode>
+#                     Use to control the PA UPF semantics
+#                     mode:
+#                     1.0 => Power Aware Semantics will be according to UPF 1.0
+#                     2.0 => Power Aware Semantics will be according to UPF 2.0
+#                     2.1 => Power Aware Semantics will be according to UPF 2.1
+#                     3.0 => Power Aware Semantics will be according to UPF 3.0
+#   -pa_coverage=checks
+#                     To enable PA checks coverage
+#   -pa_rslvnetcheck
+#                     Enables the check to flag a warning message when different states are driven by active drivers 
+#                     of a supply net with resolve type -parallel.
+#   -pa_corrupt={real | integer | realval0} | -pa_nocorrupt={real | integer | realval0}
+#                     Controls the corruption of various types in the design.
+#   -pa_enable=<value>[+<value>] | -pa_disable=<value>[+<value>]
+#                     Enable or disable certain actions that the simulator performs during
+#                     Power Aware simulation. You can use these values to control 
+#                     compatibility with previous releases.
+#   -debugdb          To enable Schematic Debug features
+#   -pa_powertop lib.module
+#                     To specify the module under which a supply net/port should be searched
+#   -xprop[,mode=<mode>][,report=<severitylevel>][,object=<objectselection>]
+#                     To enable xprop based simulation.
+#                     Valid <mode> are: [resolve | pass | xtrap | none]
+#                            resolve => (Default) If any condition goes 'X', all possible branches are evaluated.
+#                                       If the output values from all branches are the same, the output is driven to that known value.
+#                                       If the output values are not the same, an assertion message is thrown and output is driven to 'X'.
+#                                       Simulation is affected and can fail.
+#                            pass => if any condition goes 'X', an assertion message is thrown and all writers are driven to 'X'.
+#                                    Simulation is affected and can fail.
+#                            trap => if any condition goes 'X', only assertion message is thrown.
+#                                    Simulation behavior is unaffected.
+#                            none => To exclude modules and instances from xprop behavior.
+#                     Valid <severitylevel> are: [fatal|error|warning|info|suppress]
+#                            To specifiy the severity of assertion mesaage thrown in xprop. Error is default.
+#                     Valid <objectselection> are: [<full_instance_hier_path> | <du_name>][<+>/<.>/<*>/<hierlevel>]
+#                            '+' => to select multiple objects.
+#                            '.' => to apply xprop recursively.
+#                            '*' => for specifying wildcard in design unit name.
+#                            <hierlevel> => positive integer to specifiy number of levels of hierarchy to be included for xprop.
+#   +staticchecks[=<spec>]
+#                      Enables static checks of type indicated by <spec>.
+#                      Valid types of <spec> are:
+#                         r (Race)
+#                         s (Sensitivity List)
+#                         c (Case Statement)
+#                         f (Subprogram/Function)
+#                         x (4-state values)
+#                         d (Non Synthesizable clocking style)
+#                      If <spec> is not specified, all these checks are enabled.
+#                      To enable multiple checks append	individual <spec> (e.g +staticchecks=rs).
+#   -staticchecksfile <filename>
+#                      To specify a file name for static checks report
+#                      (Default: static_checks.txt)
+#   -staticchecksmdvhdl
+#                      When used with +staticchecks=r, enables the check on multiple driver
+#                      race conditions for VHDL designs. 
+#                      By default, this check is deactivated because the multiple driver for
+#                      VHDL could be related to a resolution function.
+#   -showsubprograms   Show VHDL subprogram scopes in GUI windows (e.g. Structure) and CLI commands (e.g. show).
+#   -noshowsubprograms Don't show VHDL subprogram scopes in GUI windows (e.g. Structure) and CLI commands (e.g. show).(Default on)
+#   -adaptive          Enable adaptive exclusion feature.
+#   -adaptive_debug    Enable debugging for adaptive exclusion feature - Dumping adaptive exclusion database data.
+# /software/mentor/questa10.7c/questasim/linux_x86_64/vopt failed.
+vopt +acc test -o test
+# QuestaSim-64 vopt 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:25:18 on May 03,2021
+# vopt -reportprogress 300 "+acc" test -o test 
+# 
+# Top level modules:
+# 	test
+# 
+# Analyzing design...
+# ** Error: (vopt-13130) Failed to find design unit test.
+#         Searched libraries:
+#             work
+# Optimization failed
+# End time: 11:25:19 on May 03,2021, Elapsed time: 0:00:01
+# Errors: 1, Warnings: 0
+# /software/mentor/questa10.7c/questasim/linux_x86_64/vopt failed.
+vsim -t 10ps work.tb_cu_lut -classdebug
+# vsim -t 10ps work.tb_cu_lut -classdebug 
+# Start time: 11:25:41 on May 03,2021
+# ** Note: (vsim-8009) Loading existing optimized design _opt
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.mytypes
+# Loading work.tb_cu_lut(test)#1
+vopt +acc test -o tb_cu_lut
+# QuestaSim-64 vopt 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:26:20 on May 03,2021
+# vopt -reportprogress 300 "+acc" test -o tb_cu_lut 
+# ** Error: (vopt-1927) "tb_cu_lut" cannot be used as an optimized design name because it is the name of an existing design unit.
+# End time: 11:26:20 on May 03,2021, Elapsed time: 0:00:00
+# Errors: 1, Warnings: 0
+# /software/mentor/questa10.7c/questasim/linux_x86_64/vopt failed.
+vopt +acc test -o tb_cu_lut2
+# QuestaSim-64 vopt 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:26:27 on May 03,2021
+# vopt -reportprogress 300 "+acc" test -o tb_cu_lut2 
+# 
+# Top level modules:
+# 	test
+# 
+# Analyzing design...
+# ** Error: (vopt-13130) Failed to find design unit test.
+#         Searched libraries:
+#             work
+# Optimization failed
+# End time: 11:26:28 on May 03,2021, Elapsed time: 0:00:01
+# Errors: 1, Warnings: 0
+# /software/mentor/questa10.7c/questasim/linux_x86_64/vopt failed.
+vopt +acc tb_cu_lut2 -o tb_cu_lut
+# QuestaSim-64 vopt 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:26:41 on May 03,2021
+# vopt -reportprogress 300 "+acc" tb_cu_lut2 -o tb_cu_lut 
+# ** Error: (vopt-1927) "tb_cu_lut" cannot be used as an optimized design name because it is the name of an existing design unit.
+# End time: 11:26:41 on May 03,2021, Elapsed time: 0:00:00
+# Errors: 1, Warnings: 0
+# /software/mentor/questa10.7c/questasim/linux_x86_64/vopt failed.
+vopt +acc tb_cu_lut -o tb_cu_lut2
+# QuestaSim-64 vopt 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:26:45 on May 03,2021
+# vopt -reportprogress 300 "+acc" tb_cu_lut -o tb_cu_lut2 
+# 
+# Top level modules:
+# 	tb_cu_lut
+# 
+# Analyzing design...
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package myTypes
+# -- Loading entity tb_cu_lut
+# -- Loading architecture test of tb_cu_lut
+# -- Loading entity CU_LUT
+# -- Loading architecture mix of CU_LUT
+# Optimizing 3 design-units (inlining 0/2 architecture instances):
+# -- Optimizing architecture mix of CU_LUT
+# -- Optimizing architecture test of tb_cu_lut
+# -- Optimizing package myTypes
+# Optimized design name is tb_cu_lut2
+# End time: 11:26:46 on May 03,2021, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+vsim -t 10ps work.tb_cu_lut2
+# End time: 11:26:55 on May 03,2021, Elapsed time: 0:01:14
+# Errors: 3, Warnings: 0
+# vsim -t 10ps work.tb_cu_lut2 
+# Start time: 11:26:55 on May 03,2021
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.mytypes
+# Loading work.tb_cu_lut(test)#1
+# Loading work.cu_lut(mix)#1
+log -r *
+add wave *
+run 10 ns
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_cu_lut/DUT
+run 10 ns
+vcom tb_CU_LUT.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:29:15 on May 03,2021
+# vcom -reportprogress 300 tb_CU_LUT.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package myTypes
+# -- Compiling entity tb_cu_lut
+# -- Compiling architecture test of tb_cu_lut
+# ** Error (suppressible): tb_CU_LUT.vhd(71): (vcom-1272) Length of expected is 6; length of actual is 11.
+# ** Note: tb_CU_LUT.vhd(88): VHDL Compiler exiting
+# End time: 11:29:15 on May 03,2021, Elapsed time: 0:00:00
+# Errors: 1, Warnings: 0
+# /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
+vcom tb_CU_LUT.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:29:33 on May 03,2021
+# vcom -reportprogress 300 tb_CU_LUT.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package myTypes
+# -- Compiling entity tb_cu_lut
+# -- Compiling architecture test of tb_cu_lut
+# ** Error (suppressible): tb_CU_LUT.vhd(71): (vcom-1272) Length of expected is 6; length of actual is 11.
+# ** Note: tb_CU_LUT.vhd(88): VHDL Compiler exiting
+# End time: 11:29:33 on May 03,2021, Elapsed time: 0:00:00
+# Errors: 1, Warnings: 0
+# /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
+vcom myTypes.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:30:02 on May 03,2021
+# vcom -reportprogress 300 myTypes.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling package myTypes
+# ** Error (suppressible): myTypes.vhd(17): (vcom-1272) Length of expected is 11; length of actual is 6.
+# ** Note: myTypes.vhd(28): VHDL Compiler exiting
+# End time: 11:30:02 on May 03,2021, Elapsed time: 0:00:00
+# Errors: 1, Warnings: 0
+# /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
+vcom myTypes.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:30:11 on May 03,2021
+# vcom -reportprogress 300 myTypes.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling package myTypes
+# End time: 11:30:11 on May 03,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom tb_CU_LUT.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:30:14 on May 03,2021
+# vcom -reportprogress 300 tb_CU_LUT.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package myTypes
+# -- Compiling entity tb_cu_lut
+# -- Compiling architecture test of tb_cu_lut
+# End time: 11:30:14 on May 03,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+restart -f
+# Loading work.mytypes
+# Loading work.tb_cu_lut(test)#1
+run 20 ns
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_cu_lut/DUT
+restart -f
+# Loading work.mytypes
+# Loading work.tb_cu_lut(test)#1
+vcom CU_LUT.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:31:48 on May 03,2021
+# vcom -reportprogress 300 CU_LUT.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package myTypes
+# -- Compiling entity CU_LUT
+# -- Compiling architecture mix of CU_LUT
+# ** Error: CU_LUT.vhd(51): near "1110100100101": (vcom-1576) expecting ')'.
+# ** Error: CU_LUT.vhd(99): (vcom-1136) Unknown identifier "lut".
+# ** Note: CU_LUT.vhd(108): VHDL Compiler exiting
+# End time: 11:31:48 on May 03,2021, Elapsed time: 0:00:00
+# Errors: 2, Warnings: 0
+# /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
+vcom CU_LUT.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:31:58 on May 03,2021
+# vcom -reportprogress 300 CU_LUT.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package myTypes
+# -- Compiling entity CU_LUT
+# -- Compiling architecture mix of CU_LUT
+# End time: 11:31:58 on May 03,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+restart -f
+# Loading work.mytypes
+# Loading work.tb_cu_lut(test)#1
+# Loading work.cu_lut(mix)#1
+run 20 ns
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_cu_lut/DUT
+vcom tb_CU_LUT.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:33:07 on May 03,2021
+# vcom -reportprogress 300 tb_CU_LUT.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package myTypes
+# -- Compiling entity tb_cu_lut
+# -- Compiling architecture test of tb_cu_lut
+# End time: 11:33:07 on May 03,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+restart -f
+# Loading work.mytypes
+# Loading work.tb_cu_lut(test)#1
+# Loading work.cu_lut(mix)#1
+run 20 ns
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_cu_lut/DUT
+vopt +acc tb_cu_lut -o tb_cu_lut2
+# QuestaSim-64 vopt 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:33:22 on May 03,2021
+# vopt -reportprogress 300 "+acc" tb_cu_lut -o tb_cu_lut2 
+# 
+# Top level modules:
+# 	tb_cu_lut
+# 
+# Analyzing design...
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package myTypes
+# -- Loading entity tb_cu_lut
+# -- Loading architecture test of tb_cu_lut
+# -- Loading entity CU_LUT
+# -- Loading architecture mix of CU_LUT
+# Incremental compilation check found no design-units (out of 3) may be reused.
+# Optimizing 3 design-units (inlining 0/2 architecture instances):
+# -- Optimizing architecture mix of CU_LUT
+# -- Optimizing architecture test of tb_cu_lut
+# -- Optimizing package myTypes
+# Optimized design name is tb_cu_lut2
+# End time: 11:33:23 on May 03,2021, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+restart -f
+# Loading work.mytypes
+# Loading work.tb_cu_lut(test)#1
+# Loading work.cu_lut(mix)#1
+run 20 ns
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_cu_lut/DUT
+vsim -t 10ps work.tb_cu_lut2
+# End time: 11:33:41 on May 03,2021, Elapsed time: 0:06:46
+# Errors: 6, Warnings: 1
+# vsim -t 10ps work.tb_cu_lut2 
+# Start time: 11:33:41 on May 03,2021
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.mytypes
+# Loading work.tb_cu_lut(test)#1
+# Loading work.cu_lut(mix)#1
+run 20 ns
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_cu_lut/DUT
+restart -f
+log -r *
+add wave *
+run 20 ns
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_cu_lut/DUT
+vcom myTypes.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:34:25 on May 03,2021
+# vcom -reportprogress 300 myTypes.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling package myTypes
+# End time: 11:34:25 on May 03,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+restart -f
+# Loading work.mytypes
+run 20 ns
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_cu_lut/DUT
+vsim -t 10ps work.tb_cu_lut
+# End time: 11:35:19 on May 03,2021, Elapsed time: 0:01:38
+# Errors: 0, Warnings: 1
+# vsim -t 10ps work.tb_cu_lut 
+# Start time: 11:35:19 on May 03,2021
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# ** Warning: (vopt-13) Recompile work.tb_cu_lut because work.mytypes has changed.
+# ** Warning: (vopt-12) Recompile work.tb_cu_lut(test) after work.tb_cu_lut is recompiled.
+# ** Warning: (vopt-13) Recompile work.tb_cu_lut(test) because work.mytypes has changed.
+# ** Error (suppressible): tb_CU_LUT.vhd(55): (vopt-1127) Entity work.cu_lut was not selected for default binding because it is out of date relative to dependency work.mytypes. 
+# ** Warning: tb_CU_LUT.vhd(55): (vopt-3473) Component instance "/tb_cu_lut/DUT : CU_LUT" is not bound.
+# Optimization failed
+# Error loading design
+# End time: 11:35:20 on May 03,2021, Elapsed time: 0:00:01
+# Errors: 1, Warnings: 4
+vcom CU_LUT.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:35:57 on May 03,2021
+# vcom -reportprogress 300 CU_LUT.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package myTypes
+# -- Compiling entity CU_LUT
+# -- Compiling architecture mix of CU_LUT
+# End time: 11:35:57 on May 03,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vsim -t 10ps work.tb_cu_lut
+# vsim -t 10ps work.tb_cu_lut 
+# Start time: 11:35:58 on May 03,2021
+# ** Note: (vsim-3812) Design is being optimized...
+# ** Warning: (vopt-13) Recompile work.tb_cu_lut because work.mytypes has changed.
+# ** Warning: (vopt-12) Recompile work.tb_cu_lut(test) after work.tb_cu_lut is recompiled.
+# ** Warning: (vopt-13) Recompile work.tb_cu_lut(test) because work.mytypes has changed.
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.mytypes
+# Loading work.tb_cu_lut(test)#1
+add wave *
+run 20 ns
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_cu_lut/DUT
+vopt +acc tb_cu_lut -o tb_cu_lut2
+# QuestaSim-64 vopt 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:36:26 on May 03,2021
+# vopt -reportprogress 300 "+acc" tb_cu_lut -o tb_cu_lut2 
+# 
+# Top level modules:
+# 	tb_cu_lut
+# 
+# Analyzing design...
+# ** Warning: (vopt-13) Recompile work.tb_cu_lut because work.mytypes has changed.
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package myTypes
+# -- Loading entity tb_cu_lut
+# ** Warning: (vopt-12) Recompile work.tb_cu_lut(test) after work.tb_cu_lut is recompiled.
+# ** Warning: (vopt-13) Recompile work.tb_cu_lut(test) because work.mytypes has changed.
+# -- Loading architecture test of tb_cu_lut
+# -- Loading entity CU_LUT
+# -- Loading architecture mix of CU_LUT
+# Incremental compilation check found no design-units (out of 3) may be reused.
+# Optimizing 3 design-units (inlining 0/2 architecture instances):
+# -- Optimizing architecture mix of CU_LUT
+# -- Optimizing architecture test of tb_cu_lut
+# -- Optimizing package myTypes
+# Optimized design name is tb_cu_lut2
+# End time: 11:36:26 on May 03,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 3
+vsim -t 10ps work.tb_cu_lut2
+# End time: 11:36:31 on May 03,2021, Elapsed time: 0:00:33
+# Errors: 0, Warnings: 4
+# vsim -t 10ps work.tb_cu_lut2 
+# Start time: 11:36:31 on May 03,2021
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.mytypes
+# Loading work.tb_cu_lut(test)#1
+# Loading work.cu_lut(mix)#1
+add wave *
+run 20 ns
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_cu_lut/DUT
+vcom tb_CU_LUT.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:37:32 on May 03,2021
+# vcom -reportprogress 300 tb_CU_LUT.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package myTypes
+# -- Compiling entity tb_cu_lut
+# -- Compiling architecture test of tb_cu_lut
+# End time: 11:37:32 on May 03,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+restart -f
+# Loading work.tb_cu_lut(test)#1
+run 20 ns
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_cu_lut/DUT
+vopt +acc tb_cu_lut -o tb_cu_lut2
+# QuestaSim-64 vopt 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:37:50 on May 03,2021
+# vopt -reportprogress 300 "+acc" tb_cu_lut -o tb_cu_lut2 
+# 
+# Top level modules:
+# 	tb_cu_lut
+# 
+# Analyzing design...
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package myTypes
+# -- Loading entity tb_cu_lut
+# -- Loading architecture test of tb_cu_lut
+# -- Loading entity CU_LUT
+# -- Loading architecture mix of CU_LUT
+# Incremental compilation check found 2 design-units (out of 3) may be reused.
+# Optimizing 1 design-unit (inlining 0/2 architecture instances):
+# -- Optimizing architecture test of tb_cu_lut
+# Optimized design name is tb_cu_lut2
+# End time: 11:37:51 on May 03,2021, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+restart -f
+# Loading work.tb_cu_lut(test)#1
+run 20 ns
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_cu_lut/DUT
+vcom CU_LUT.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 12:15:32 on May 03,2021
+# vcom -reportprogress 300 CU_LUT.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package myTypes
+# -- Compiling entity CU_LUT
+# ** Error: CU_LUT.vhd(37): (vcom-1136) Unknown identifier "WF1".
+# ** Error: CU_LUT.vhd(37): Bad resolution function (STD_LOGIC) for type (error).
+# ** Error: CU_LUT.vhd(37): near ":": (vcom-1576) expecting ';' or ')'.
+# End time: 12:15:32 on May 03,2021, Elapsed time: 0:00:00
+# Errors: 3, Warnings: 0
+# /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
+vcom CU_LUT.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 12:15:47 on May 03,2021
+# vcom -reportprogress 300 CU_LUT.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package myTypes
+# -- Compiling entity CU_LUT
+# -- Compiling architecture mix of CU_LUT
+# ** Error: CU_LUT.vhd(50): (vcom-1192) Array length is 16; aggregate length is 17.
+# ** Note: CU_LUT.vhd(123): VHDL Compiler exiting
+# End time: 12:15:47 on May 03,2021, Elapsed time: 0:00:00
+# Errors: 1, Warnings: 0
+# /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
+vcom CU_LUT.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 12:17:50 on May 03,2021
+# vcom -reportprogress 300 CU_LUT.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package myTypes
+# -- Compiling entity CU_LUT
+# -- Compiling architecture mix of CU_LUT
+# End time: 12:17:50 on May 03,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom myTypes.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 12:17:55 on May 03,2021
+# vcom -reportprogress 300 myTypes.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling package myTypes
+# ** Error (suppressible): myTypes.vhd(24): (vcom-1272) Length of expected is 6; length of actual is 7.
+# ** Note: myTypes.vhd(39): VHDL Compiler exiting
+# End time: 12:17:55 on May 03,2021, Elapsed time: 0:00:00
+# Errors: 1, Warnings: 0
+# /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
+vcom myTypes.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 12:18:13 on May 03,2021
+# vcom -reportprogress 300 myTypes.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling package myTypes
+# End time: 12:18:13 on May 03,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom tb_CU_LUT.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 12:18:20 on May 03,2021
+# vcom -reportprogress 300 tb_CU_LUT.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package myTypes
+# -- Compiling entity tb_cu_lut
+# -- Compiling architecture test of tb_cu_lut
+# End time: 12:18:20 on May 03,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vopt +acc tb_cu_lut -o tb_cu_lut2
+# QuestaSim-64 vopt 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 12:18:25 on May 03,2021
+# vopt -reportprogress 300 "+acc" tb_cu_lut -o tb_cu_lut2 
+# 
+# Top level modules:
+# 	tb_cu_lut
+# 
+# Analyzing design...
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package myTypes
+# -- Loading entity tb_cu_lut
+# -- Loading architecture test of tb_cu_lut
+# ** Error (suppressible): tb_CU_LUT.vhd(55): (vopt-1127) Entity work.cu_lut was not selected for default binding because it is out of date relative to dependency work.mytypes. 
+# ** Warning: tb_CU_LUT.vhd(55): (vopt-3473) Component instance "/tb_cu_lut/DUT : CU_LUT" is not bound.
+# Optimization failed
+# End time: 12:18:25 on May 03,2021, Elapsed time: 0:00:00
+# Errors: 1, Warnings: 1
+# /software/mentor/questa10.7c/questasim/linux_x86_64/vopt failed.
+vcom CU_LUT.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 12:18:39 on May 03,2021
+# vcom -reportprogress 300 CU_LUT.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package myTypes
+# -- Compiling entity CU_LUT
+# -- Compiling architecture mix of CU_LUT
+# End time: 12:18:39 on May 03,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vopt +acc tb_cu_lut -o tb_cu_lut2
+# QuestaSim-64 vopt 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 12:18:40 on May 03,2021
+# vopt -reportprogress 300 "+acc" tb_cu_lut -o tb_cu_lut2 
+# 
+# Top level modules:
+# 	tb_cu_lut
+# 
+# Analyzing design...
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package myTypes
+# -- Loading entity tb_cu_lut
+# -- Loading architecture test of tb_cu_lut
+# -- Loading entity CU_LUT
+# -- Loading architecture mix of CU_LUT
+# Optimizing 3 design-units (inlining 0/2 architecture instances):
+# -- Optimizing architecture mix of CU_LUT
+# -- Optimizing package myTypes
+# -- Optimizing architecture test of tb_cu_lut
+# Optimized design name is tb_cu_lut2
+# End time: 12:18:41 on May 03,2021, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+restart -f
+# Loading work.mytypes
+# Loading work.tb_cu_lut(test)#1
+# Loading work.cu_lut(mix)#1
+run 60 ns
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_cu_lut/DUT
+# Causality operation skipped due to absence of debug database file
