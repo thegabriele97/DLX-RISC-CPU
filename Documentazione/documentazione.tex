@@ -1,0 +1,129 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{titling} % package per il titolo
+\usepackage{graphicx}
+\usepackage{hyperref} % package per i collegamenti cliccabili
+\usepackage{listings} % package per inserire il codice
+\usepackage{xcolor} % package per i colori
+\usepackage{float} % usato per le immagini \begin{figure}[H] per mettere la H che evita che le immagini vadano in pagine successive
+\usepackage{amsmath}
+\usepackage{parskip}
+
+
+\definecolor{shellGreen}{RGB}{19,193,106}
+\definecolor{backcolor}{rgb}{0.95,0.95,0.92}
+\definecolor{mateBlack}{RGB}{45,45,50}
+\definecolor{comment}{rgb}{0.1,0.6,0.2}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+
+% Definisce i colori per il codice in VHDL
+\lstdefinestyle{vhdl}{
+    language=vhdl,
+    frame=single,
+    basicstyle=\scriptsize,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    backgroundcolor=\color{backcolor},
+    keywordstyle=[1]\color{blue}\bf,
+    keywordstyle=[2]\color{red}\bf,
+    keywordstyle=[3]\color{cyan!50}\bf,
+    stringstyle=\color{orange},
+    commentstyle=\color{comment},
+    tabsize=2,
+    numbers=left,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    moredelim=[s][\textcolor{green}]{component}{is},
+    morekeywords=[1]{
+        library, use ,all,entty,is,port,in,out,end,architecture,of, body,
+        function, variable, begin,and,or,Not,downto,ALL, signal, process, if,
+        else, elsif, case, when, then, range, to, component, type, with, select,
+        others, constant, inout, buffer, map, true, false, array, subtype, wait,
+        wait for, generic, =, <, >, <=, >=, =>,
+    },
+    alsoletter={=, <, >},
+    morekeywords=[2]{
+            STD_LOGIC_VECTOR,STD_LOGIC,IEEE,STD_LOGIC_1164, work, local, real,
+            math_real, time, NUMERIC_STD,STD_LOGIC_ARITH,STD_LOGIC_UNSIGNED,
+            std_logic_vectr, std_logic, ieee, numeric_std, std_ulogic,
+            std_logic_1164, natural, bit, bit_vector, signed, unsigned,
+            boolean, integer
+    },
+    morekeywords=[3]{rising_edge, falling_edge, resize, to_signed, to_unsigned},
+    morecomment=[l]{--},
+    morecomment=[s][\color{orange}]{'}{'},
+    numbers=left,
+}
+
+
+\lstset{style=vhdl}
+\renewcommand{\lstlistingname}{Code} % cambia il nome per le caption da "Listing" a "Code"
+
+
+
+\title{\huge Documentazione}
+\author{
+\Large \textbf{Matteo Battilana} Numero Matricola \\
+\Large \textbf{Salvatore Gabriele La Greca} s281589 \\
+\Large \textbf{Giovanni Pollo} s290136}
+\date{}
+\renewcommand\maketitlehooka{
+  \begin{center}
+    \includegraphics[width=1\textwidth]{Immagini/Logo_Polito.jpg} % Dimensioni per l'immagine
+  \end{center}
+}
+
+
+%%%%%%%%%%%%%%%%%%%% Start of the Document %%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\begin{titlepage}
+  \centering
+  \vspace{2px}
+\end{titlepage}
+\maketitle
+
+\newpage
+
+\tableofcontents
+
+\newpage
+
+\section{Register File}
+
+This section will be divided into subsections in which we describe single components.
+
+\subsection{Decoder}
+
+This block receives as input the \emph{write address} on \textbf{NBIT\_ADD} bits and outputs \(\mathbf{2^{NBIT\_ADD} - 1} \) bits. It has the utility of converting the address of the register at which we need to write into its enable signal. 
+
+The idea is that if the input is \(0b00010\) the output will be \(0b00000000000000000000000000000100\). In fact if the input is decimal 2, it means that we need to write the second register of the \emph{GLOBAL} block. In terms of enable it can be translated by having the bit with index 2 at one. In fact in the output we see that the it with index 2 has value 1, while the others are all 0. 
+
+The output is divided (in the schematic) in order to represent the group of bits. In particular we have that: 
+\begin{itemize}
+    \item M - 1 DOWNTO 0: bits associated to the \emph{GLOBAL} register
+    \item M + N - 1 DOWNTO M: bits associated to the \emph{IN} register
+    \item M + 2N - 1 DOWNTO M + N: bits associated to the \emph{LOCAL} register
+    \item M + 3N - 1 DOWNTO M + 2N: bits associated to the \emph{OUT} register
+\end{itemize}
+
+On the top of the schematic (\autoref{decoder}) we can see an AND logic port between \emph{ENABLE} and \emph{WR} signals. If both \emph{ENABLE} and \emph{WR} are 1, it means that our register need to work. In fact, the output of the dedocer is anded with 1 and so we maintain the value. Otherwise, if one signal between \emph{ENABLE} and \emph{WR} is 0, the output will be 0 and so the AND with the output of the \emph{decoder} will return all 0. 
+
+This signal goes into the \emph{connection matrix}, that is next block to be described. 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{Immagini/Decoder.pdf}
+    \caption{Schematic of the Decoder}
+    \label{decoder}
+\end{figure}
+
+\subsection{Connection Matrix}
+
+With the previous block, we generated all our enable signals. The problem is that we have more window. So how do we decide which window needs to be activated? Here comes is the connection matrix. This block receives as inputs the signal coming from the decoder, the current window, the saved window and the address for the pop (fill) operation. The output is a signal that contains the enable signals ready for all the registers of all windows. 
+
+\end{document}
+
