@@ -1,0 +1,869 @@
+# //  Questa Sim-64
+# //  Version 10.7c linux_x86_64 Aug 17 2018
+# //
+# //  Copyright 1991-2018 Mentor Graphics Corporation
+# //  All Rights Reserved.
+# //
+# //  QuestaSim and its associated documentation contain trade
+# //  secrets and commercial or financial information that are the property of
+# //  Mentor Graphics Corporation and are privileged, confidential,
+# //  and exempt from disclosure under the Freedom of Information Act,
+# //  5 U.S.C. Section 552. Furthermore, this information
+# //  is prohibited from disclosure under the Trade Secrets Act,
+# //  18 U.S.C. Section 1905.
+# //
+vcom myTypes.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:44:14 on May 06,2021
+# vcom -reportprogress 300 myTypes.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling package myTypes
+# End time: 09:44:15 on May 06,2021, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+vcom CU_FSM.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:44:36 on May 06,2021
+# vcom -reportprogress 300 CU_FSM.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package myTypes
+# -- Compiling entity CU_FSM
+# -- Compiling architecture behav of CU_FSM
+# ** Error (suppressible): CU_FSM.vhd(85): (vcom-1014) Array type case expression must be of a locally static subtype.
+# ** Error: CU_FSM.vhd(87): Illegal target for signal assignment.
+# ** Error: CU_FSM.vhd(87): (vcom-1136) Unknown identifier "next_state".
+# ** Error: CU_FSM.vhd(90): Illegal target for signal assignment.
+# ** Error: CU_FSM.vhd(90): (vcom-1136) Unknown identifier "next_state".
+# ** Error: CU_FSM.vhd(92): (vcom-1136) Unknown identifier "ITYPE_SUB1".
+# ** Error (suppressible): CU_FSM.vhd(92): (vcom-1937) Choice in CASE statement alternative must be locally static.
+# ** Error: CU_FSM.vhd(92): (vcom-1136) Unknown identifier "ITYPE_AND1".
+# ** Error (suppressible): CU_FSM.vhd(92): (vcom-1937) Choice in CASE statement alternative must be locally static.
+# ** Error: CU_FSM.vhd(92): (vcom-1136) Unknown identifier "ITYPE_OR1".
+# ** Error (suppressible): CU_FSM.vhd(92): (vcom-1937) Choice in CASE statement alternative must be locally static.
+# ** Error: CU_FSM.vhd(93): Illegal target for signal assignment.
+# ** Error: CU_FSM.vhd(93): (vcom-1136) Unknown identifier "next_state".
+# ** Error: CU_FSM.vhd(95): (vcom-1136) Unknown identifier "ITYPE_SUB2".
+# ** Error (suppressible): CU_FSM.vhd(95): (vcom-1937) Choice in CASE statement alternative must be locally static.
+# ** Error: CU_FSM.vhd(95): (vcom-1136) Unknown identifier "ITYPE_AND2".
+# ** Error (suppressible): CU_FSM.vhd(95): (vcom-1937) Choice in CASE statement alternative must be locally static.
+# ** Error: CU_FSM.vhd(95): (vcom-1136) Unknown identifier "ITYPE_OR2".
+# ** Error (suppressible): CU_FSM.vhd(95): (vcom-1937) Choice in CASE statement alternative must be locally static.
+# ** Error: CU_FSM.vhd(96): Illegal target for signal assignment.
+# ** Error: CU_FSM.vhd(96): (vcom-1136) Unknown identifier "next_state".
+# ** Error: CU_FSM.vhd(99): Illegal target for signal assignment.
+# ** Error: CU_FSM.vhd(99): (vcom-1136) Unknown identifier "next_state".
+# ** Error: CU_FSM.vhd(102): Illegal target for signal assignment.
+# ** Error: CU_FSM.vhd(102): (vcom-1136) Unknown identifier "next_state".
+# ** Error: CU_FSM.vhd(105): Illegal target for signal assignment.
+# ** Error: CU_FSM.vhd(105): (vcom-1136) Unknown identifier "next_state".
+# ** Error: CU_FSM.vhd(108): Illegal target for signal assignment.
+# ** Error: CU_FSM.vhd(108): (vcom-1136) Unknown identifier "next_state".
+# ** Error: CU_FSM.vhd(111): Illegal target for signal assignment.
+# ** Error: CU_FSM.vhd(111): (vcom-1136) Unknown identifier "next_state".
+# ** Error: CU_FSM.vhd(114): Illegal target for signal assignment.
+# ** Error: CU_FSM.vhd(114): (vcom-1136) Unknown identifier "next_state".
+# ** Warning: CU_FSM.vhd(117): Function 'get_nextstate' may complete without a RETURN at line 87.
+# ** Warning: CU_FSM.vhd(117): Function 'get_nextstate' may complete without a RETURN at line 90.
+# ** Warning: CU_FSM.vhd(117): Function 'get_nextstate' may complete without a RETURN at line 93.
+# ** Warning: CU_FSM.vhd(117): Function 'get_nextstate' may complete without a RETURN at line 96.
+# ** Warning: CU_FSM.vhd(117): Function 'get_nextstate' may complete without a RETURN at line 99.
+# ** Warning: CU_FSM.vhd(117): Function 'get_nextstate' may complete without a RETURN at line 102.
+# ** Warning: CU_FSM.vhd(117): Function 'get_nextstate' may complete without a RETURN at line 105.
+# ** Warning: CU_FSM.vhd(117): Function 'get_nextstate' may complete without a RETURN at line 108.
+# ** Warning: CU_FSM.vhd(117): Function 'get_nextstate' may complete without a RETURN at line 111.
+# ** Warning: CU_FSM.vhd(117): Function 'get_nextstate' may complete without a RETURN at line 114.
+# ** Error: CU_FSM.vhd(161): (vcom-1136) Unknown identifier "op_rtype0".
+# ** Error (suppressible): CU_FSM.vhd(161): (vcom-1937) Choice in CASE statement alternative must be locally static.
+# ** Error: CU_FSM.vhd(163): (vcom-1136) Unknown identifier "op_rtype1".
+# ** Error: CU_FSM.vhd(165): (vcom-1136) Unknown identifier "op_rtype1".
+# ** Error (suppressible): CU_FSM.vhd(165): (vcom-1937) Choice in CASE statement alternative must be locally static.
+# ** Error: CU_FSM.vhd(168): (vcom-1136) Unknown identifier "op_rtype2".
+# ** Error: CU_FSM.vhd(170): (vcom-1136) Unknown identifier "op_rtype2".
+# ** Error (suppressible): CU_FSM.vhd(170): (vcom-1937) Choice in CASE statement alternative must be locally static.
+# ** Note: CU_FSM.vhd(193): VHDL Compiler exiting
+# End time: 09:44:36 on May 06,2021, Elapsed time: 0:00:00
+# Errors: 41, Warnings: 10
+# /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
+vcom CU_FSM.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:47:29 on May 06,2021
+# vcom -reportprogress 300 CU_FSM.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package myTypes
+# -- Compiling entity CU_FSM
+# -- Compiling architecture behav of CU_FSM
+# ** Error (suppressible): CU_FSM.vhd(85): (vcom-1014) Array type case expression must be of a locally static subtype.
+# ** Error: CU_FSM.vhd(90): (vcom-1136) Unknown identifier "op_rtype0".
+# ** Error: CU_FSM.vhd(92): (vcom-1136) Unknown identifier "ITYPE_SUB1".
+# ** Error (suppressible): CU_FSM.vhd(92): (vcom-1937) Choice in CASE statement alternative must be locally static.
+# ** Error: CU_FSM.vhd(92): (vcom-1136) Unknown identifier "ITYPE_AND1".
+# ** Error (suppressible): CU_FSM.vhd(92): (vcom-1937) Choice in CASE statement alternative must be locally static.
+# ** Error: CU_FSM.vhd(92): (vcom-1136) Unknown identifier "ITYPE_OR1".
+# ** Error (suppressible): CU_FSM.vhd(92): (vcom-1937) Choice in CASE statement alternative must be locally static.
+# ** Error: CU_FSM.vhd(95): (vcom-1136) Unknown identifier "ITYPE_SUB2".
+# ** Error (suppressible): CU_FSM.vhd(95): (vcom-1937) Choice in CASE statement alternative must be locally static.
+# ** Error: CU_FSM.vhd(95): (vcom-1136) Unknown identifier "ITYPE_AND2".
+# ** Error (suppressible): CU_FSM.vhd(95): (vcom-1937) Choice in CASE statement alternative must be locally static.
+# ** Error: CU_FSM.vhd(95): (vcom-1136) Unknown identifier "ITYPE_OR2".
+# ** Error (suppressible): CU_FSM.vhd(95): (vcom-1937) Choice in CASE statement alternative must be locally static.
+# ** Error: CU_FSM.vhd(161): (vcom-1136) Unknown identifier "op_rtype0".
+# ** Error (suppressible): CU_FSM.vhd(161): (vcom-1937) Choice in CASE statement alternative must be locally static.
+# ** Error: CU_FSM.vhd(163): (vcom-1136) Unknown identifier "op_rtype1".
+# ** Error: CU_FSM.vhd(165): (vcom-1136) Unknown identifier "op_rtype1".
+# ** Error (suppressible): CU_FSM.vhd(165): (vcom-1937) Choice in CASE statement alternative must be locally static.
+# ** Error: CU_FSM.vhd(168): (vcom-1136) Unknown identifier "op_rtype2".
+# ** Error: CU_FSM.vhd(170): (vcom-1136) Unknown identifier "op_rtype2".
+# ** Error (suppressible): CU_FSM.vhd(170): (vcom-1937) Choice in CASE statement alternative must be locally static.
+# ** Note: CU_FSM.vhd(193): VHDL Compiler exiting
+# End time: 09:47:29 on May 06,2021, Elapsed time: 0:00:00
+# Errors: 22, Warnings: 0
+# /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
+vcom CU_FSM.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:50:20 on May 06,2021
+# vcom -reportprogress 300 CU_FSM.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package myTypes
+# -- Compiling entity CU_FSM
+# -- Compiling architecture behav of CU_FSM
+# ** Error (suppressible): CU_FSM.vhd(85): (vcom-1014) Array type case expression must be of a locally static subtype.
+# ** Error: CU_FSM.vhd(92): (vcom-1136) Unknown identifier "ITYPE_SUB1".
+# ** Error (suppressible): CU_FSM.vhd(92): (vcom-1937) Choice in CASE statement alternative must be locally static.
+# ** Error: CU_FSM.vhd(92): (vcom-1136) Unknown identifier "ITYPE_AND1".
+# ** Error (suppressible): CU_FSM.vhd(92): (vcom-1937) Choice in CASE statement alternative must be locally static.
+# ** Error: CU_FSM.vhd(92): (vcom-1136) Unknown identifier "ITYPE_OR1".
+# ** Error (suppressible): CU_FSM.vhd(92): (vcom-1937) Choice in CASE statement alternative must be locally static.
+# ** Error: CU_FSM.vhd(95): (vcom-1136) Unknown identifier "ITYPE_SUB2".
+# ** Error (suppressible): CU_FSM.vhd(95): (vcom-1937) Choice in CASE statement alternative must be locally static.
+# ** Error: CU_FSM.vhd(95): (vcom-1136) Unknown identifier "ITYPE_AND2".
+# ** Error (suppressible): CU_FSM.vhd(95): (vcom-1937) Choice in CASE statement alternative must be locally static.
+# ** Error: CU_FSM.vhd(95): (vcom-1136) Unknown identifier "ITYPE_OR2".
+# ** Error (suppressible): CU_FSM.vhd(95): (vcom-1937) Choice in CASE statement alternative must be locally static.
+# ** Error: CU_FSM.vhd(185): (vcom-1136) Unknown identifier "op_nop0".
+# ** Note: CU_FSM.vhd(193): VHDL Compiler exiting
+# End time: 09:50:20 on May 06,2021, Elapsed time: 0:00:00
+# Errors: 14, Warnings: 0
+# /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
+vcom CU_FSM.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:51:08 on May 06,2021
+# vcom -reportprogress 300 CU_FSM.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package myTypes
+# -- Compiling entity CU_FSM
+# -- Compiling architecture behav of CU_FSM
+# ** Error (suppressible): CU_FSM.vhd(85): (vcom-1014) Array type case expression must be of a locally static subtype.
+# ** Error: CU_FSM.vhd(185): (vcom-1136) Unknown identifier "op_nop0".
+# ** Note: CU_FSM.vhd(193): VHDL Compiler exiting
+# End time: 09:51:09 on May 06,2021, Elapsed time: 0:00:01
+# Errors: 2, Warnings: 0
+# /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
+clear
+# [3;J[H[2J
+vcom CU_FSM.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:51:14 on May 06,2021
+# vcom -reportprogress 300 CU_FSM.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package myTypes
+# -- Compiling entity CU_FSM
+# -- Compiling architecture behav of CU_FSM
+# ** Error (suppressible): CU_FSM.vhd(85): (vcom-1014) Array type case expression must be of a locally static subtype.
+# ** Error: CU_FSM.vhd(185): (vcom-1136) Unknown identifier "op_nop0".
+# ** Note: CU_FSM.vhd(193): VHDL Compiler exiting
+# End time: 09:51:14 on May 06,2021, Elapsed time: 0:00:00
+# Errors: 2, Warnings: 0
+# /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
+vcom CU_FSM.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:51:26 on May 06,2021
+# vcom -reportprogress 300 CU_FSM.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package myTypes
+# -- Compiling entity CU_FSM
+# -- Compiling architecture behav of CU_FSM
+# ** Error (suppressible): CU_FSM.vhd(85): (vcom-1014) Array type case expression must be of a locally static subtype.
+# ** Note: CU_FSM.vhd(193): VHDL Compiler exiting
+# End time: 09:51:26 on May 06,2021, Elapsed time: 0:00:00
+# Errors: 1, Warnings: 0
+# /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
+vcom CU_FSM.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:52:26 on May 06,2021
+# vcom -reportprogress 300 CU_FSM.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package myTypes
+# -- Compiling entity CU_FSM
+# -- Compiling architecture behav of CU_FSM
+# ** Error (suppressible): CU_FSM.vhd(87): (vcom-1014) Array type case expression must be of a locally static subtype.
+# ** Note: CU_FSM.vhd(195): VHDL Compiler exiting
+# End time: 09:52:26 on May 06,2021, Elapsed time: 0:00:00
+# Errors: 1, Warnings: 0
+# /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
+vcom CU_FSM.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:52:43 on May 06,2021
+# vcom -reportprogress 300 CU_FSM.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package myTypes
+# -- Compiling entity CU_FSM
+# -- Compiling architecture behav of CU_FSM
+# ** Error (suppressible): CU_FSM.vhd(87): (vcom-1014) Array type case expression must be of a locally static subtype.
+# ** Note: CU_FSM.vhd(195): VHDL Compiler exiting
+# End time: 09:52:43 on May 06,2021, Elapsed time: 0:00:00
+# Errors: 1, Warnings: 0
+# /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
+vcom CU_FSM.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:53:03 on May 06,2021
+# vcom -reportprogress 300 CU_FSM.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package myTypes
+# -- Compiling entity CU_FSM
+# -- Compiling architecture behav of CU_FSM
+# ** Error (suppressible): CU_FSM.vhd(87): (vcom-1014) Array type case expression must be of a locally static subtype.
+# ** Note: CU_FSM.vhd(195): VHDL Compiler exiting
+# End time: 09:53:04 on May 06,2021, Elapsed time: 0:00:01
+# Errors: 1, Warnings: 0
+# /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
+vcom CU_FSM.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:54:34 on May 06,2021
+# vcom -reportprogress 300 CU_FSM.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package myTypes
+# -- Compiling entity CU_FSM
+# -- Compiling architecture behav of CU_FSM
+# ** Error: CU_FSM.vhd(81): near "std_logic_vector": syntax error
+# ** Error: CU_FSM.vhd(83): (vcom-1136) Unknown identifier "opcode_t".
+# ** Error: CU_FSM.vhd(87): (vcom-1489) Case expression must be of a discrete type.
+# ** Error: CU_FSM.vhd(88): Constant "NOP" is type ieee.std_logic_1164.STD_LOGIC_VECTOR; expecting type (error).
+# ** Error: CU_FSM.vhd(91): Constant "RTYPE" is type ieee.std_logic_1164.STD_LOGIC_VECTOR; expecting type (error).
+# ** Error: CU_FSM.vhd(94): Constant "ITYPE_ADDI1" is type ieee.std_logic_1164.STD_LOGIC_VECTOR; expecting type (error).
+# ** Error: CU_FSM.vhd(94): Constant "ITYPE_SUBI1" is type ieee.std_logic_1164.STD_LOGIC_VECTOR; expecting type (error).
+# ** Error: CU_FSM.vhd(94): Constant "ITYPE_ANDI1" is type ieee.std_logic_1164.STD_LOGIC_VECTOR; expecting type (error).
+# ** Error: CU_FSM.vhd(94): Constant "ITYPE_ORI1" is type ieee.std_logic_1164.STD_LOGIC_VECTOR; expecting type (error).
+# ** Error: CU_FSM.vhd(97): Constant "ITYPE_ADDI2" is type ieee.std_logic_1164.STD_LOGIC_VECTOR; expecting type (error).
+# ** Error: CU_FSM.vhd(97): Constant "ITYPE_SUBI2" is type ieee.std_logic_1164.STD_LOGIC_VECTOR; expecting type (error).
+# ** Error: CU_FSM.vhd(97): Constant "ITYPE_ANDI2" is type ieee.std_logic_1164.STD_LOGIC_VECTOR; expecting type (error).
+# ** Error: CU_FSM.vhd(97): Constant "ITYPE_ORI2" is type ieee.std_logic_1164.STD_LOGIC_VECTOR; expecting type (error).
+# ** Error: CU_FSM.vhd(100): Constant "ITYPE_MOV" is type ieee.std_logic_1164.STD_LOGIC_VECTOR; expecting type (error).
+# ** Error: CU_FSM.vhd(103): Constant "ITYPE_SREG1" is type ieee.std_logic_1164.STD_LOGIC_VECTOR; expecting type (error).
+# ** Error: CU_FSM.vhd(103): Constant "ITYPE_SREG2" is type ieee.std_logic_1164.STD_LOGIC_VECTOR; expecting type (error).
+# ** Error: CU_FSM.vhd(106): Constant "ITYPE_SMEM2" is type ieee.std_logic_1164.STD_LOGIC_VECTOR; expecting type (error).
+# ** Error: CU_FSM.vhd(109): Constant "ITYPE_LMEM1" is type ieee.std_logic_1164.STD_LOGIC_VECTOR; expecting type (error).
+# ** Error: CU_FSM.vhd(112): Constant "ITYPE_LMEM2" is type ieee.std_logic_1164.STD_LOGIC_VECTOR; expecting type (error).
+# ** Error: CU_FSM.vhd(161): Function call prefix of indexed name does not return an array.
+# ** Error: CU_FSM.vhd(161): Cannot resolve indexed name as type fsm_state.
+# ** Error: CU_FSM.vhd(174): Function call prefix of indexed name does not return an array.
+# ** Error: CU_FSM.vhd(174): Cannot resolve indexed name as type fsm_state.
+# ** Note: CU_FSM.vhd(195): VHDL Compiler exiting
+# End time: 09:54:34 on May 06,2021, Elapsed time: 0:00:00
+# Errors: 23, Warnings: 0
+# /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
+vcom CU_FSM.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:57:15 on May 06,2021
+# vcom -reportprogress 300 CU_FSM.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package myTypes
+# -- Compiling entity CU_FSM
+# -- Compiling architecture behav of CU_FSM
+# ** Error (suppressible): CU_FSM.vhd(87): (vcom-1014) Array type case expression must be of a locally static subtype.
+# ** Note: CU_FSM.vhd(195): VHDL Compiler exiting
+# End time: 09:57:15 on May 06,2021, Elapsed time: 0:00:00
+# Errors: 1, Warnings: 0
+# /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
+vcom CU_FSM.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 09:58:39 on May 06,2021
+# vcom -reportprogress 300 CU_FSM.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package myTypes
+# -- Compiling entity CU_FSM
+# -- Compiling architecture behav of CU_FSM
+# ** Error (suppressible): CU_FSM.vhd(90): (vcom-1014) Array type case expression must be of a locally static subtype.
+# ** Note: CU_FSM.vhd(198): VHDL Compiler exiting
+# End time: 09:58:39 on May 06,2021, Elapsed time: 0:00:00
+# Errors: 1, Warnings: 0
+# /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
+vcom CU_FSM.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 10:00:04 on May 06,2021
+# vcom -reportprogress 300 CU_FSM.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package myTypes
+# -- Compiling entity CU_FSM
+# -- Compiling architecture behav of CU_FSM
+# ** Error (suppressible): CU_FSM.vhd(90): (vcom-1014) Array type case expression must be of a locally static subtype.
+# ** Note: CU_FSM.vhd(198): VHDL Compiler exiting
+# End time: 10:00:04 on May 06,2021, Elapsed time: 0:00:00
+# Errors: 1, Warnings: 0
+# /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
+vcom CU_FSM.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 10:00:47 on May 06,2021
+# vcom -reportprogress 300 CU_FSM.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package myTypes
+# -- Compiling entity CU_FSM
+# -- Compiling architecture behav of CU_FSM
+# ** Error (suppressible): CU_FSM.vhd(90): (vcom-1014) Array type case expression must be of a locally static subtype.
+# ** Note: CU_FSM.vhd(198): VHDL Compiler exiting
+# End time: 10:00:47 on May 06,2021, Elapsed time: 0:00:00
+# Errors: 1, Warnings: 0
+# /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
+vcom CU_FSM.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 10:01:06 on May 06,2021
+# vcom -reportprogress 300 CU_FSM.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package myTypes
+# -- Compiling entity CU_FSM
+# -- Compiling architecture behav of CU_FSM
+# ** Error (suppressible): CU_FSM.vhd(90): (vcom-1014) Array type case expression must be of a locally static subtype.
+# ** Error (suppressible): CU_FSM.vhd(90): (vcom-1339) Case statement choices cover only 1 out of 531441 cases.
+# ** Note: CU_FSM.vhd(198): VHDL Compiler exiting
+# End time: 10:01:06 on May 06,2021, Elapsed time: 0:00:00
+# Errors: 2, Warnings: 0
+# /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
+vcom CU_FSM.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 10:01:25 on May 06,2021
+# vcom -reportprogress 300 CU_FSM.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package myTypes
+# -- Compiling entity CU_FSM
+# -- Compiling architecture behav of CU_FSM
+# ** Error (suppressible): CU_FSM.vhd(90): (vcom-1014) Array type case expression must be of a locally static subtype.
+# ** Error (suppressible): CU_FSM.vhd(90): (vcom-1339) Case statement choices cover only 1 out of 531441 cases.
+# ** Note: CU_FSM.vhd(198): VHDL Compiler exiting
+# End time: 10:01:25 on May 06,2021, Elapsed time: 0:00:00
+# Errors: 2, Warnings: 0
+# /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
+vcom CU_FSM.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 10:01:45 on May 06,2021
+# vcom -reportprogress 300 CU_FSM.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package myTypes
+# -- Compiling entity CU_FSM
+# -- Compiling architecture behav of CU_FSM
+# ** Error (suppressible): CU_FSM.vhd(91): (vcom-1014) Array type case expression must be of a locally static subtype.
+# ** Error (suppressible): CU_FSM.vhd(91): (vcom-1339) Case statement choices cover only 1 out of 531441 cases.
+# ** Note: CU_FSM.vhd(199): VHDL Compiler exiting
+# End time: 10:01:45 on May 06,2021, Elapsed time: 0:00:00
+# Errors: 2, Warnings: 0
+# /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
+vcom CU_FSM.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 10:02:33 on May 06,2021
+# vcom -reportprogress 300 CU_FSM.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package myTypes
+# -- Compiling entity CU_FSM
+# -- Compiling architecture behav of CU_FSM
+# ** Error (suppressible): CU_FSM.vhd(91): (vcom-1339) Case statement choices cover only 1 out of 531441 cases.
+# ** Note: CU_FSM.vhd(199): VHDL Compiler exiting
+# End time: 10:02:33 on May 06,2021, Elapsed time: 0:00:00
+# Errors: 1, Warnings: 0
+# /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
+vcom CU_FSM.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 10:03:45 on May 06,2021
+# vcom -reportprogress 300 CU_FSM.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package myTypes
+# -- Compiling entity CU_FSM
+# -- Compiling architecture behav of CU_FSM
+# ** Error: CU_FSM.vhd(83): near ",": (vcom-1576) expecting ';' or ')'.
+# ** Error: CU_FSM.vhd(87): (vcom-1136) Unknown identifier "opcode2_t".
+# ** Error: CU_FSM.vhd(91): (vcom-1489) Case expression must be of a discrete type.
+# ** Error: CU_FSM.vhd(93): RETURN statement in procedure must not return a value.
+# ** Error: CU_FSM.vhd(123): Labels do not match: 'behav' and 'get_nextstate'.
+# ** Note: CU_FSM.vhd(123): VHDL Compiler exiting
+# End time: 10:03:45 on May 06,2021, Elapsed time: 0:00:00
+# Errors: 5, Warnings: 0
+# /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
+vcom CU_FSM.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 10:03:57 on May 06,2021
+# vcom -reportprogress 300 CU_FSM.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package myTypes
+# -- Compiling entity CU_FSM
+# -- Compiling architecture behav of CU_FSM
+# ** Error (suppressible): CU_FSM.vhd(91): (vcom-1014) Array type case expression must be of a locally static subtype.
+# ** Error: CU_FSM.vhd(165): (vcom-1600) No feasible entries for subprogram "get_nextstate".
+#    Visible subprograms are:
+#       (explicit) behav.get_nextstate[opcode_t, INTEGER return fsm_state] at CU_FSM.vhd(83)
+# ** Error: CU_FSM.vhd(178): (vcom-1600) No feasible entries for subprogram "get_nextstate".
+#    Visible subprograms are:
+#       (explicit) behav.get_nextstate[opcode_t, INTEGER return fsm_state] at CU_FSM.vhd(83)
+# ** Error (suppressible): CU_FSM.vhd(91): (vcom-1339) Case statement choices cover only 1 out of 531441 cases.
+# ** Note: CU_FSM.vhd(199): VHDL Compiler exiting
+# End time: 10:03:57 on May 06,2021, Elapsed time: 0:00:00
+# Errors: 4, Warnings: 0
+# /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
+vcom CU_FSM.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 10:04:12 on May 06,2021
+# vcom -reportprogress 300 CU_FSM.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package myTypes
+# -- Compiling entity CU_FSM
+# -- Compiling architecture behav of CU_FSM
+# ** Error (suppressible): CU_FSM.vhd(91): (vcom-1014) Array type case expression must be of a locally static subtype.
+# ** Error (suppressible): CU_FSM.vhd(91): (vcom-1339) Case statement choices cover only 1 out of 531441 cases.
+# ** Note: CU_FSM.vhd(199): VHDL Compiler exiting
+# End time: 10:04:12 on May 06,2021, Elapsed time: 0:00:00
+# Errors: 2, Warnings: 0
+# /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
+vcom CU_FSM.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 10:06:03 on May 06,2021
+# vcom -reportprogress 300 CU_FSM.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package myTypes
+# -- Compiling entity CU_FSM
+# -- Compiling architecture behav of CU_FSM
+# ** Error: CU_FSM.vhd(88): (vcom-1136) Unknown identifier "TO_INTEGER".
+# ** Error (suppressible): CU_FSM.vhd(88): (vcom-1937) Choice in CASE statement alternative must be locally static.
+# ** Error: CU_FSM.vhd(161): (vcom-1600) No feasible entries for subprogram "get_nextstate".
+#    Visible subprograms are:
+#       (explicit) behav.get_nextstate[INTEGER return fsm_state] at CU_FSM.vhd(83)
+# ** Error: CU_FSM.vhd(174): (vcom-1600) No feasible entries for subprogram "get_nextstate".
+#    Visible subprograms are:
+#       (explicit) behav.get_nextstate[INTEGER return fsm_state] at CU_FSM.vhd(83)
+# ** Error (suppressible): CU_FSM.vhd(87): (vcom-1339) Case statement choices cover only 1 out of 4294967296 cases.
+# ** Note: CU_FSM.vhd(195): VHDL Compiler exiting
+# End time: 10:06:03 on May 06,2021, Elapsed time: 0:00:00
+# Errors: 5, Warnings: 0
+# /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
+vcom CU_FSM.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 10:06:28 on May 06,2021
+# vcom -reportprogress 300 CU_FSM.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package myTypes
+# -- Compiling entity CU_FSM
+# -- Compiling architecture behav of CU_FSM
+# ** Error: CU_FSM.vhd(88): (vcom-1136) Unknown identifier "TO_INTEGER".
+# ** Error (suppressible): CU_FSM.vhd(88): (vcom-1937) Choice in CASE statement alternative must be locally static.
+# ** Error: CU_FSM.vhd(161): (vcom-1136) Unknown identifier "TO_INTEGER".
+# ** Error (suppressible): CU_FSM.vhd(87): (vcom-1339) Case statement choices cover only 1 out of 4294967296 cases.
+# ** Note: CU_FSM.vhd(195): VHDL Compiler exiting
+# End time: 10:06:28 on May 06,2021, Elapsed time: 0:00:00
+# Errors: 4, Warnings: 0
+# /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
+vcom CU_FSM.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 10:06:39 on May 06,2021
+# vcom -reportprogress 300 CU_FSM.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package myTypes
+# -- Compiling entity CU_FSM
+# -- Compiling architecture behav of CU_FSM
+# ** Warning: CU_FSM.vhd(89): (vcom-1937) Choice in CASE statement alternative must be locally static.
+# ** Error: CU_FSM.vhd(162): (vcom-1136) Unknown identifier "R_OPCODE".
+# ** Error (suppressible): CU_FSM.vhd(88): (vcom-1339) Case statement choices cover only 1 out of 4294967296 cases.
+# ** Note: CU_FSM.vhd(196): VHDL Compiler exiting
+# End time: 10:06:39 on May 06,2021, Elapsed time: 0:00:00
+# Errors: 2, Warnings: 1
+# /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
+vcom myTypes.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 10:08:05 on May 06,2021
+# vcom -reportprogress 300 myTypes.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling package myTypes
+# End time: 10:08:05 on May 06,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom CU_FSM.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 10:08:07 on May 06,2021
+# vcom -reportprogress 300 CU_FSM.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package myTypes
+# -- Compiling entity CU_FSM
+# -- Compiling architecture behav of CU_FSM
+# ** Error (suppressible): CU_FSM.vhd(88): (vcom-1339) Case statement choices cover only 1 out of 4294967296 cases.
+# ** Note: CU_FSM.vhd(196): VHDL Compiler exiting
+# End time: 10:08:07 on May 06,2021, Elapsed time: 0:00:00
+# Errors: 1, Warnings: 0
+# /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
+vcom CU_FSM.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 10:08:37 on May 06,2021
+# vcom -reportprogress 300 CU_FSM.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package myTypes
+# -- Compiling entity CU_FSM
+# -- Compiling architecture behav of CU_FSM
+# ** Error (suppressible): CU_FSM.vhd(88): (vcom-1339) Case statement choices cover only 1 out of 4294967296 cases.
+# ** Note: CU_FSM.vhd(196): VHDL Compiler exiting
+# End time: 10:08:37 on May 06,2021, Elapsed time: 0:00:00
+# Errors: 1, Warnings: 0
+# /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
+vcom myTypes.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 10:08:40 on May 06,2021
+# vcom -reportprogress 300 myTypes.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling package myTypes
+# ** Error: myTypes.vhd(36): (vcom-1136) Unknown identifier "TO_INTEGER".
+# ** Note: myTypes.vhd(40): VHDL Compiler exiting
+# End time: 10:08:40 on May 06,2021, Elapsed time: 0:00:00
+# Errors: 1, Warnings: 0
+# /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
+vcom myTypes.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 10:08:48 on May 06,2021
+# vcom -reportprogress 300 myTypes.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling package myTypes
+# End time: 10:08:48 on May 06,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom CU_FSM.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 10:08:50 on May 06,2021
+# vcom -reportprogress 300 CU_FSM.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package myTypes
+# -- Compiling entity CU_FSM
+# -- Compiling architecture behav of CU_FSM
+# ** Warning: CU_FSM.vhd(89): (vcom-1937) Choice in CASE statement alternative must be locally static.
+# ** Error (suppressible): CU_FSM.vhd(88): (vcom-1339) Case statement choices cover only 1 out of 4294967296 cases.
+# ** Note: CU_FSM.vhd(196): VHDL Compiler exiting
+# End time: 10:08:50 on May 06,2021, Elapsed time: 0:00:00
+# Errors: 1, Warnings: 1
+# /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
+vcom myTypes.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 10:10:31 on May 06,2021
+# vcom -reportprogress 300 myTypes.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling package myTypes
+# End time: 10:10:31 on May 06,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom CU_FSM.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 10:10:32 on May 06,2021
+# vcom -reportprogress 300 CU_FSM.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package myTypes
+# -- Compiling entity CU_FSM
+# -- Compiling architecture behav of CU_FSM
+# ** Error: CU_FSM.vhd(121): (vcom-1136) Unknown identifier "OPCODE".
+# ** Error: CU_FSM.vhd(122): Constant "NOP" is type ieee.std_logic_1164.STD_LOGIC_VECTOR; expecting type (error).
+# ** Error: CU_FSM.vhd(125): Constant "RTYPE" is type ieee.std_logic_1164.STD_LOGIC_VECTOR; expecting type (error).
+# ** Error: CU_FSM.vhd(128): Constant "ITYPE_ADDI1" is type ieee.std_logic_1164.STD_LOGIC_VECTOR; expecting type (error).
+# ** Error: CU_FSM.vhd(128): Constant "ITYPE_SUBI1" is type ieee.std_logic_1164.STD_LOGIC_VECTOR; expecting type (error).
+# ** Error: CU_FSM.vhd(128): Constant "ITYPE_ANDI1" is type ieee.std_logic_1164.STD_LOGIC_VECTOR; expecting type (error).
+# ** Error: CU_FSM.vhd(128): Constant "ITYPE_ORI1" is type ieee.std_logic_1164.STD_LOGIC_VECTOR; expecting type (error).
+# ** Error: CU_FSM.vhd(131): Constant "ITYPE_ADDI2" is type ieee.std_logic_1164.STD_LOGIC_VECTOR; expecting type (error).
+# ** Error: CU_FSM.vhd(131): Constant "ITYPE_SUBI2" is type ieee.std_logic_1164.STD_LOGIC_VECTOR; expecting type (error).
+# ** Error: CU_FSM.vhd(131): Constant "ITYPE_ANDI2" is type ieee.std_logic_1164.STD_LOGIC_VECTOR; expecting type (error).
+# ** Error: CU_FSM.vhd(131): Constant "ITYPE_ORI2" is type ieee.std_logic_1164.STD_LOGIC_VECTOR; expecting type (error).
+# ** Error: CU_FSM.vhd(134): Constant "ITYPE_MOV" is type ieee.std_logic_1164.STD_LOGIC_VECTOR; expecting type (error).
+# ** Error: CU_FSM.vhd(137): Constant "ITYPE_SREG1" is type ieee.std_logic_1164.STD_LOGIC_VECTOR; expecting type (error).
+# ** Error: CU_FSM.vhd(137): Constant "ITYPE_SREG2" is type ieee.std_logic_1164.STD_LOGIC_VECTOR; expecting type (error).
+# ** Error: CU_FSM.vhd(140): Constant "ITYPE_SMEM2" is type ieee.std_logic_1164.STD_LOGIC_VECTOR; expecting type (error).
+# ** Error: CU_FSM.vhd(143): Constant "ITYPE_LMEM1" is type ieee.std_logic_1164.STD_LOGIC_VECTOR; expecting type (error).
+# ** Error: CU_FSM.vhd(146): Constant "ITYPE_LMEM2" is type ieee.std_logic_1164.STD_LOGIC_VECTOR; expecting type (error).
+# ** Error: CU_FSM.vhd(164): (vcom-1136) Unknown identifier "OPCODE".
+# ** Error: CU_FSM.vhd(165): Constant "NOP" is type ieee.std_logic_1164.STD_LOGIC_VECTOR; expecting type (error).
+# ** Error: CU_FSM.vhd(168): Constant "RTYPE" is type ieee.std_logic_1164.STD_LOGIC_VECTOR; expecting type (error).
+# ** Error: CU_FSM.vhd(171): Constant "ITYPE_ADDI1" is type ieee.std_logic_1164.STD_LOGIC_VECTOR; expecting type (error).
+# ** Error: CU_FSM.vhd(171): Constant "ITYPE_SUBI1" is type ieee.std_logic_1164.STD_LOGIC_VECTOR; expecting type (error).
+# ** Error: CU_FSM.vhd(171): Constant "ITYPE_ANDI1" is type ieee.std_logic_1164.STD_LOGIC_VECTOR; expecting type (error).
+# ** Error: CU_FSM.vhd(171): Constant "ITYPE_ORI1" is type ieee.std_logic_1164.STD_LOGIC_VECTOR; expecting type (error).
+# ** Error: CU_FSM.vhd(174): Constant "ITYPE_ADDI2" is type ieee.std_logic_1164.STD_LOGIC_VECTOR; expecting type (error).
+# ** Error: CU_FSM.vhd(174): Constant "ITYPE_SUBI2" is type ieee.std_logic_1164.STD_LOGIC_VECTOR; expecting type (error).
+# ** Error: CU_FSM.vhd(174): Constant "ITYPE_ANDI2" is type ieee.std_logic_1164.STD_LOGIC_VECTOR; expecting type (error).
+# ** Error: CU_FSM.vhd(174): Constant "ITYPE_ORI2" is type ieee.std_logic_1164.STD_LOGIC_VECTOR; expecting type (error).
+# ** Error: CU_FSM.vhd(177): Constant "ITYPE_MOV" is type ieee.std_logic_1164.STD_LOGIC_VECTOR; expecting type (error).
+# ** Error: CU_FSM.vhd(180): Constant "ITYPE_SREG1" is type ieee.std_logic_1164.STD_LOGIC_VECTOR; expecting type (error).
+# ** Error: CU_FSM.vhd(180): Constant "ITYPE_SREG2" is type ieee.std_logic_1164.STD_LOGIC_VECTOR; expecting type (error).
+# ** Error: CU_FSM.vhd(183): Constant "ITYPE_SMEM2" is type ieee.std_logic_1164.STD_LOGIC_VECTOR; expecting type (error).
+# ** Error: CU_FSM.vhd(186): Constant "ITYPE_LMEM1" is type ieee.std_logic_1164.STD_LOGIC_VECTOR; expecting type (error).
+# ** Error: CU_FSM.vhd(189): Constant "ITYPE_LMEM2" is type ieee.std_logic_1164.STD_LOGIC_VECTOR; expecting type (error).
+# ** Note: CU_FSM.vhd(215): VHDL Compiler exiting
+# End time: 10:10:32 on May 06,2021, Elapsed time: 0:00:00
+# Errors: 34, Warnings: 0
+# /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
+vcom CU_FSM.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 10:11:15 on May 06,2021
+# vcom -reportprogress 300 CU_FSM.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package myTypes
+# -- Compiling entity CU_FSM
+# -- Compiling architecture behav of CU_FSM
+# ** Error (suppressible): CU_FSM.vhd(121): (vcom-1014) Array type case expression must be of a locally static subtype.
+# ** Error (suppressible): CU_FSM.vhd(164): (vcom-1014) Array type case expression must be of a locally static subtype.
+# ** Note: CU_FSM.vhd(215): VHDL Compiler exiting
+# End time: 10:11:15 on May 06,2021, Elapsed time: 0:00:00
+# Errors: 2, Warnings: 0
+# /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
+vcom CU_FSM.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 10:13:58 on May 06,2021
+# vcom -reportprogress 300 CU_FSM.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package myTypes
+# -- Compiling entity CU_FSM
+# -- Compiling architecture behav of CU_FSM
+# End time: 10:13:58 on May 06,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom CU_FSM.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 10:15:50 on May 06,2021
+# vcom -reportprogress 300 CU_FSM.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package myTypes
+# -- Compiling entity CU_FSM
+# -- Compiling architecture behav of CU_FSM
+# End time: 10:15:50 on May 06,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom CU_FSM.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 10:18:35 on May 06,2021
+# vcom -reportprogress 300 CU_FSM.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package myTypes
+# -- Compiling entity CU_FSM
+# -- Compiling architecture behav of CU_FSM
+# End time: 10:18:35 on May 06,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom tb_CU_FSM.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 10:18:56 on May 06,2021
+# vcom -reportprogress 300 tb_CU_FSM.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package myTypes
+# -- Compiling entity tb_cu_fsm
+# -- Compiling architecture test of tb_cu_fsm
+# End time: 10:18:56 on May 06,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vopt +acc tb_cu_fsm -o tb_cu_fsm2
+# QuestaSim-64 vopt 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 10:20:24 on May 06,2021
+# vopt -reportprogress 300 "+acc" tb_cu_fsm -o tb_cu_fsm2 
+# 
+# Top level modules:
+# 	tb_cu_fsm
+# 
+# Analyzing design...
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package myTypes
+# -- Loading entity tb_cu_fsm
+# -- Loading architecture test of tb_cu_fsm
+# -- Loading entity CU_FSM
+# -- Loading architecture behav of CU_FSM
+# Optimizing 3 design-units (inlining 0/2 architecture instances):
+# -- Optimizing architecture behav of CU_FSM
+# -- Optimizing package myTypes
+# -- Optimizing architecture test of tb_cu_fsm
+# Optimized design name is tb_cu_fsm2
+# End time: 10:20:25 on May 06,2021, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+vsim -t 10ps work.tb_cu_fsm2
+# vsim -t 10ps work.tb_cu_fsm2 
+# Start time: 10:21:28 on May 06,2021
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.mytypes
+# Loading work.tb_cu_fsm(test)#1
+# Loading work.cu_fsm(behav)#1
+add wave *
+log -3 +
+# bad option "-3": must be -class, -depth, -drivers, -flush, -howmany, -in, -inout, -internals, -mvcall, -mvcovm, -mvcreccomplete, -noflush, -optcells, -out, -ports, -recursive, -type, -wdbwave, -obj, -filter, or -nofilter
+# Usage: log -flush <object> | {[-class <classtype>] [-filter <f> | -nofilter <f>] [-howmany] {[-in] [-inout] [-out] | [-ports]} [-internal] [-mvcall] [-mvcovm] [-mvcreccomplete] [-optcells] [-recursive [-depth <level>]] <object_name> ...}
+log -r *
+run 50 ns
+vcom tb_CU_FSM.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 10:23:51 on May 06,2021
+# vcom -reportprogress 300 tb_CU_FSM.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package myTypes
+# -- Compiling entity tb_cu_fsm
+# -- Compiling architecture test of tb_cu_fsm
+# End time: 10:23:52 on May 06,2021, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+restart -f
+# Loading work.tb_cu_fsm(test)#1
+run 50 ns
+add wave -position insertpoint  \
+sim:/tb_cu_fsm/DUT/curr_state
+vopt +acc tb_cu_fsm -o tb_cu_fsm2
+# QuestaSim-64 vopt 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 10:25:03 on May 06,2021
+# vopt -reportprogress 300 "+acc" tb_cu_fsm -o tb_cu_fsm2 
+# 
+# Top level modules:
+# 	tb_cu_fsm
+# 
+# Analyzing design...
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package myTypes
+# -- Loading entity tb_cu_fsm
+# -- Loading architecture test of tb_cu_fsm
+# -- Loading entity CU_FSM
+# -- Loading architecture behav of CU_FSM
+# Incremental compilation check found 2 design-units (out of 3) may be reused.
+# Optimizing 1 design-unit (inlining 0/2 architecture instances):
+# -- Optimizing architecture test of tb_cu_fsm
+# Optimized design name is tb_cu_fsm2
+# End time: 10:25:04 on May 06,2021, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+restart -f
+# Loading work.tb_cu_fsm(test)#1
+run 50 ns
+vcom CU_FSM.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 10:26:55 on May 06,2021
+# vcom -reportprogress 300 CU_FSM.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package myTypes
+# -- Compiling entity CU_FSM
+# -- Compiling architecture behav of CU_FSM
+# End time: 10:26:55 on May 06,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom tb_CU_FSM.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 10:26:56 on May 06,2021
+# vcom -reportprogress 300 tb_CU_FSM.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package myTypes
+# -- Compiling entity tb_cu_fsm
+# -- Compiling architecture test of tb_cu_fsm
+# End time: 10:26:57 on May 06,2021, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+vopt +acc tb_cu_fsm -o tb_cu_fsm2
+# QuestaSim-64 vopt 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 10:26:59 on May 06,2021
+# vopt -reportprogress 300 "+acc" tb_cu_fsm -o tb_cu_fsm2 
+# 
+# Top level modules:
+# 	tb_cu_fsm
+# 
+# Analyzing design...
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package myTypes
+# -- Loading entity tb_cu_fsm
+# -- Loading architecture test of tb_cu_fsm
+# -- Loading entity CU_FSM
+# -- Loading architecture behav of CU_FSM
+# Incremental compilation check found 1 design-unit (out of 3) may be reused.
+# Optimizing 2 design-units (inlining 0/2 architecture instances):
+# -- Optimizing architecture behav of CU_FSM
+# -- Optimizing architecture test of tb_cu_fsm
+# Optimized design name is tb_cu_fsm2
+# End time: 10:27:00 on May 06,2021, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+restart -f
+# Loading work.tb_cu_fsm(test)#1
+# Loading work.cu_fsm(behav)#1
+run 50 ns
