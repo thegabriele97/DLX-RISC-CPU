@@ -202,8 +202,22 @@ begin
             when op_itype_alu1_2 =>
                 cw(CW_SIZE-4 downto CW_SIZE-8) <= "00101";
                 next_state <= get_nextstate(IR_OPCODE);
-
-            
+                
+            when op_ldmem1_0 => 
+                cw(CW_SIZE-1 downto CW_SIZE-3) <= "011";
+                next_state <= op_ldmem1_1;
+            when op_ldmem2_0 =>
+                cw(CW_SIZE-1 downto CW_SIZE-3) <= "101";
+                next_state <= op_ldmem2_1;
+            when op_ldmem1_1 =>
+                cw(CW_SIZE-4 downto CW_SIZE-8) <= "11001";
+                next_state <= op_ldmem_2;
+            when op_ldmem2_1 => 
+                cw(CW_SIZE-4 downto CW_SIZE-8) <= "00001";
+                next_state <= op_ldmem_2;
+            when op_ldmem_2 => 
+                cw(CW_SIZE-9 downto CW_SIZE-13) <= "10111";
+                next_state <= get_nextstate(IR_OPCODE);
 
             when others => 
                 next_state <= init;
