@@ -1,0 +1,353 @@
+# //  Questa Sim-64
+# //  Version 10.7c linux_x86_64 Aug 17 2018
+# //
+# //  Copyright 1991-2018 Mentor Graphics Corporation
+# //  All Rights Reserved.
+# //
+# //  QuestaSim and its associated documentation contain trade
+# //  secrets and commercial or financial information that are the property of
+# //  Mentor Graphics Corporation and are privileged, confidential,
+# //  and exempt from disclosure under the Freedom of Information Act,
+# //  5 U.S.C. Section 552. Furthermore, this information
+# //  is prohibited from disclosure under the Trade Secrets Act,
+# //  18 U.S.C. Section 1905.
+# //
+vcom myTypes.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:09:48 on May 06,2021
+# vcom -reportprogress 300 myTypes.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling package myTypes
+# End time: 11:09:48 on May 06,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom CU_UP.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:09:52 on May 06,2021
+# vcom -reportprogress 300 CU_UP.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package myTypes
+# -- Compiling entity CU_UP
+# -- Compiling architecture mix of CU_UP
+# End time: 11:09:52 on May 06,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom tb_CU_UP.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:09:55 on May 06,2021
+# vcom -reportprogress 300 tb_CU_UP.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package myTypes
+# -- Compiling entity tb_cu_up
+# -- Compiling architecture test of tb_cu_up
+# End time: 11:09:55 on May 06,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vopt +acc tb_cu_up -o tb_cu_up2
+# QuestaSim-64 vopt 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:10:37 on May 06,2021
+# vopt -reportprogress 300 "+acc" tb_cu_up -o tb_cu_up2 
+# 
+# Top level modules:
+# 	tb_cu_up
+# 
+# Analyzing design...
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package myTypes
+# -- Loading entity tb_cu_up
+# -- Loading architecture test of tb_cu_up
+# -- Loading entity CU_UP
+# -- Loading architecture mix of CU_UP
+# Optimizing 3 design-units (inlining 0/2 architecture instances):
+# -- Optimizing architecture mix of CU_UP
+# -- Optimizing package myTypes
+# -- Optimizing architecture test of tb_cu_up
+# Optimized design name is tb_cu_up2
+# End time: 11:10:38 on May 06,2021, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+vsim -t 10ps work.tb_cu_up2
+# vsim -t 10ps work.tb_cu_up2 
+# Start time: 11:10:45 on May 06,2021
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.mytypes
+# Loading work.tb_cu_up(test)#1
+# Loading work.cu_up(mix)#1
+log -r *
+add wave *
+run 50 ns
+# ** Fatal: (vsim-3421) Value -2147483648 is out of range 0 to 47.
+#    Time: 0 ps  Iteration: 0  Process: /tb_cu_up/DUT/line__163 File: CU_UP.vhd
+# Fatal error in Process line__163 at CU_UP.vhd line 166
+# 
+# HDL call sequence:
+# Stopped at CU_UP.vhd 166 Process line__163
+# 
+vcom tb_CU_UP.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:13:02 on May 06,2021
+# vcom -reportprogress 300 tb_CU_UP.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package myTypes
+# -- Compiling entity tb_cu_up
+# -- Compiling architecture test of tb_cu_up
+# End time: 11:13:02 on May 06,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vopt +acc tb_cu_up -o tb_cu_up2
+# QuestaSim-64 vopt 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:13:05 on May 06,2021
+# vopt -reportprogress 300 "+acc" tb_cu_up -o tb_cu_up2 
+# 
+# Top level modules:
+# 	tb_cu_up
+# 
+# Analyzing design...
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package myTypes
+# -- Loading entity tb_cu_up
+# -- Loading architecture test of tb_cu_up
+# -- Loading entity CU_UP
+# -- Loading architecture mix of CU_UP
+# Incremental compilation check found 2 design-units (out of 3) may be reused.
+# Optimizing 1 design-unit (inlining 0/2 architecture instances):
+# -- Optimizing architecture test of tb_cu_up
+# Optimized design name is tb_cu_up2
+# End time: 11:13:05 on May 06,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+restart -f
+# Loading work.tb_cu_up(test)#1
+run 50 ns
+# ** Fatal: (vsim-3421) Value -2147483648 is out of range 0 to 47.
+#    Time: 0 ps  Iteration: 0  Process: /tb_cu_up/DUT/line__163 File: CU_UP.vhd
+# Fatal error in Process line__163 at CU_UP.vhd line 166
+# 
+# HDL call sequence:
+# Stopped at CU_UP.vhd 166 Process line__163
+# 
+vcom CU_UP.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:13:46 on May 06,2021
+# vcom -reportprogress 300 CU_UP.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package myTypes
+# -- Compiling entity CU_UP
+# -- Compiling architecture mix of CU_UP
+# End time: 11:13:46 on May 06,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+restart -f
+# Loading work.cu_up(mix)#1
+vopt +acc tb_cu_up -o tb_cu_up2
+# QuestaSim-64 vopt 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:13:50 on May 06,2021
+# vopt -reportprogress 300 "+acc" tb_cu_up -o tb_cu_up2 
+# 
+# Top level modules:
+# 	tb_cu_up
+# 
+# Analyzing design...
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package myTypes
+# -- Loading entity tb_cu_up
+# -- Loading architecture test of tb_cu_up
+# -- Loading entity CU_UP
+# -- Loading architecture mix of CU_UP
+# Incremental compilation check found 1 design-unit (out of 3) may be reused.
+# Optimizing 2 design-units (inlining 0/2 architecture instances):
+# -- Optimizing architecture mix of CU_UP
+# -- Optimizing architecture test of tb_cu_up
+# Optimized design name is tb_cu_up2
+# End time: 11:13:51 on May 06,2021, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+restart -f
+# Loading work.tb_cu_up(test)#1
+# Loading work.cu_up(mix)#1
+run 50 ns
+add wave -position insertpoint  \
+sim:/tb_cu_up/DUT/uPC
+add wave -position insertpoint  \
+sim:/tb_cu_up/DUT/counter
+vcom CU_UP.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:16:04 on May 06,2021
+# vcom -reportprogress 300 CU_UP.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package myTypes
+# -- Compiling entity CU_UP
+# -- Compiling architecture mix of CU_UP
+# End time: 11:16:04 on May 06,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+restart -f
+# Loading work.cu_up(mix)#1
+vopt +acc tb_cu_up -o tb_cu_up2
+# QuestaSim-64 vopt 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:16:09 on May 06,2021
+# vopt -reportprogress 300 "+acc" tb_cu_up -o tb_cu_up2 
+# 
+# Top level modules:
+# 	tb_cu_up
+# 
+# Analyzing design...
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package myTypes
+# -- Loading entity tb_cu_up
+# -- Loading architecture test of tb_cu_up
+# -- Loading entity CU_UP
+# -- Loading architecture mix of CU_UP
+# Incremental compilation check found 1 design-unit (out of 3) may be reused.
+# Optimizing 2 design-units (inlining 0/2 architecture instances):
+# -- Optimizing architecture mix of CU_UP
+# -- Optimizing architecture test of tb_cu_up
+# Optimized design name is tb_cu_up2
+# End time: 11:16:10 on May 06,2021, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+restart -f
+# Loading work.tb_cu_up(test)#1
+# Loading work.cu_up(mix)#1
+run 50 ns
+vcom CU_UP.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:16:55 on May 06,2021
+# vcom -reportprogress 300 CU_UP.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package myTypes
+# -- Compiling entity CU_UP
+# -- Compiling architecture mix of CU_UP
+# ** Error: CU_UP.vhd(169): near "counter": (vcom-1576) expecting THEN.
+# ** Error: CU_UP.vhd(181): near "if": (vcom-1576) expecting PROCESS.
+# End time: 11:16:55 on May 06,2021, Elapsed time: 0:00:00
+# Errors: 2, Warnings: 0
+# /software/mentor/questa10.7c/questasim/linux_x86_64/vcom failed.
+vcom CU_UP.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:17:04 on May 06,2021
+# vcom -reportprogress 300 CU_UP.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package myTypes
+# -- Compiling entity CU_UP
+# -- Compiling architecture mix of CU_UP
+# End time: 11:17:04 on May 06,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+restart -f
+# Loading work.cu_up(mix)#1
+run 50 ns
+vcom CU_UP.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:17:26 on May 06,2021
+# vcom -reportprogress 300 CU_UP.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package myTypes
+# -- Compiling entity CU_UP
+# -- Compiling architecture mix of CU_UP
+# End time: 11:17:26 on May 06,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vopt +acc tb_cu_up -o tb_cu_up2
+# QuestaSim-64 vopt 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:17:29 on May 06,2021
+# vopt -reportprogress 300 "+acc" tb_cu_up -o tb_cu_up2 
+# 
+# Top level modules:
+# 	tb_cu_up
+# 
+# Analyzing design...
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package myTypes
+# -- Loading entity tb_cu_up
+# -- Loading architecture test of tb_cu_up
+# -- Loading entity CU_UP
+# -- Loading architecture mix of CU_UP
+# Incremental compilation check found 1 design-unit (out of 3) may be reused.
+# Optimizing 2 design-units (inlining 0/2 architecture instances):
+# -- Optimizing architecture mix of CU_UP
+# -- Optimizing architecture test of tb_cu_up
+# Optimized design name is tb_cu_up2
+# End time: 11:17:29 on May 06,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+restart -f
+# Loading work.tb_cu_up(test)#1
+# Loading work.cu_up(mix)#1
+run 50 ns
+vcom CU_UP.vhd
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:17:54 on May 06,2021
+# vcom -reportprogress 300 CU_UP.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package myTypes
+# -- Compiling entity CU_UP
+# -- Compiling architecture mix of CU_UP
+# End time: 11:17:54 on May 06,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vopt +acc tb_cu_up -o tb_cu_up2
+# QuestaSim-64 vopt 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 11:17:56 on May 06,2021
+# vopt -reportprogress 300 "+acc" tb_cu_up -o tb_cu_up2 
+# 
+# Top level modules:
+# 	tb_cu_up
+# 
+# Analyzing design...
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package myTypes
+# -- Loading entity tb_cu_up
+# -- Loading architecture test of tb_cu_up
+# -- Loading entity CU_UP
+# -- Loading architecture mix of CU_UP
+# Incremental compilation check found 1 design-unit (out of 3) may be reused.
+# Optimizing 2 design-units (inlining 0/2 architecture instances):
+# -- Optimizing architecture mix of CU_UP
+# -- Optimizing architecture test of tb_cu_up
+# Optimized design name is tb_cu_up2
+# End time: 11:17:57 on May 06,2021, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+restart -f
+# Loading work.tb_cu_up(test)#1
+# Loading work.cu_up(mix)#1
+run 50 ns
+# Causality operation skipped due to absence of debug database file
+# End time: 11:44:43 on May 06,2021, Elapsed time: 0:33:58
+# Errors: 5, Warnings: 1
