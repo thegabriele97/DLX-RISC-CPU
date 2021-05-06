@@ -174,7 +174,36 @@ begin
                 cw(CW_SIZE-9 downto CW_SIZE-13) <= "00101";
                 next_state <= get_nextstate(IR_OPCODE);
 
-            --TODO: to be completed
+            when op_itype_alu1_0 =>
+                cw(CW_SIZE-1 downto CW_SIZE-3) <= "011";
+                
+                if (IR_OPCODE = ITYPE_ADDI1) then
+                    next_state <= op_itype_alu1_add;
+                elsif (IR_OPCODE = ITYPE_SUBI1) then
+                    next_state <= op_itype_alu1_sub;
+                elsif (IR_OPCODE = ITYPE_ANDI1) then
+                    next_state <= op_itype_alu1_and;
+                elsif (IR_OPCODE = ITYPE_ORI1) then
+                    next_state <= op_itype_alu1_or;
+                end if;
+
+            when op_itype_alu1_add =>
+                cw(CW_SIZE-4 downto CW_SIZE-8) <= "11001";
+                next_state <= op_itype_alu1_2;
+
+            when op_itype_alu1_add =>
+                cw(CW_SIZE-4 downto CW_SIZE-8) <= "11001";
+                next_state <= op_itype_alu1_2;
+
+            when op_itype_alu1_add =>
+                cw(CW_SIZE-4 downto CW_SIZE-8) <= "11001";
+                next_state <= op_itype_alu1_2;
+            
+            when op_itype_alu1_2 =>
+                cw(CW_SIZE-4 downto CW_SIZE-8) <= "00101";
+                next_state <= get_nextstate(IR_OPCODE);
+
+            
 
             when others => 
                 next_state <= init;
