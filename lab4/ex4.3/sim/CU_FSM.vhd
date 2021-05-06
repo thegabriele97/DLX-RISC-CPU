@@ -219,6 +219,30 @@ begin
                 cw(CW_SIZE-9 downto CW_SIZE-13) <= "10111";
                 next_state <= get_nextstate(IR_OPCODE);
 
+			when op_mov_0 =>
+                cw(CW_SIZE-1 downto CW_SIZE-3) <= "101";
+                next_state <= op_mov_1;
+
+			when op_mov_1 =>
+                cw(CW_SIZE-4 downto CW_SIZE-8) <= "00001";
+                next_state <= op_mov_2;
+
+			when op_mov_1 =>
+                cw(CW_SIZE-9 downto CW_SIZE-13) <= "00101";
+                next_state <= get_nextstate(IR_OPCODE);
+
+			when op_sreg_0 =>
+                cw(CW_SIZE-1 downto CW_SIZE-3) <= "001";
+                next_state <= op_sreg_1;
+
+			when op_sreg_1 =>
+                cw(CW_SIZE-4 downto CW_SIZE-8) <= "10001";
+                next_state <= op_sreg_2;
+
+			when op_sreg_2 =>
+                cw(CW_SIZE-9 downto CW_SIZE-13) <= "00101";
+                next_state <= get_nextstate(IR_OPCODE);
+
             when others => 
                 next_state <= init;
 
