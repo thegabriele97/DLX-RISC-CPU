@@ -191,12 +191,16 @@ begin
                 cw(CW_SIZE-4 downto CW_SIZE-8) <= "11001";
                 next_state <= op_itype_alu1_2;
 
-            when op_itype_alu1_add =>
-                cw(CW_SIZE-4 downto CW_SIZE-8) <= "11001";
+            when op_itype_alu1_sub =>
+                cw(CW_SIZE-4 downto CW_SIZE-8) <= "11011";
                 next_state <= op_itype_alu1_2;
 
-            when op_itype_alu1_add =>
-                cw(CW_SIZE-4 downto CW_SIZE-8) <= "11001";
+            when op_itype_alu1_and =>
+                cw(CW_SIZE-4 downto CW_SIZE-8) <= "11101";
+                next_state <= op_itype_alu1_2;
+
+            when op_itype_alu1_or =>
+                cw(CW_SIZE-4 downto CW_SIZE-8) <= "11111";
                 next_state <= op_itype_alu1_2;
             
             when op_itype_alu1_2 =>
@@ -242,6 +246,55 @@ begin
 			when op_sreg_2 =>
                 cw(CW_SIZE-9 downto CW_SIZE-13) <= "00101";
                 next_state <= get_nextstate(IR_OPCODE);
+            
+            
+            when op_itype_alu2_0 =>
+                cw(CW_SIZE-1 downto CW_SIZE-3) <= "101";
+                
+                if (IR_OPCODE = ITYPE_ADDI1) then
+                    next_state <= op_itype_alu2_add;
+                elsif (IR_OPCODE = ITYPE_SUBI1) then
+                    next_state <= op_itype_alu2_sub;
+                elsif (IR_OPCODE = ITYPE_ANDI1) then
+                    next_state <= op_itype_alu2_and;
+                elsif (IR_OPCODE = ITYPE_ORI1) then
+                    next_state <= op_itype_alu2_or;
+                end if;
+
+            when op_itype_alu2_add =>
+                cw(CW_SIZE-4 downto CW_SIZE-8) <= "00001";
+                next_state <= op_itype_alu2_2;
+
+            when op_itype_alu2_sub =>
+                cw(CW_SIZE-4 downto CW_SIZE-8) <= "00011";
+                next_state <= op_itype_alu2_2;
+
+            when op_itype_alu2_and =>
+                cw(CW_SIZE-4 downto CW_SIZE-8) <= "00101";
+                next_state <= op_itype_alu2_2;
+
+            when op_itype_alu2_or =>
+                cw(CW_SIZE-4 downto CW_SIZE-8) <= "00111";
+                next_state <= op_itype_alu2_2;
+            
+            when op_itype_alu2_2 =>
+                cw(CW_SIZE-4 downto CW_SIZE-8) <= "00101";
+                next_state <= get_nextstate(IR_OPCODE);
+
+
+            
+            when op_stmem_0 =>
+                cw(CW_SIZE-1 downto CW_SIZE-3) <= "111";
+                next_state <= op_rtype_1;
+
+            when op_stmem_1 =>
+                cw(CW_SIZE-4 downto CW_SIZE-8) <= "00001";
+                next_state <= op_rtype_2;
+
+            when op_stmem_2 =>
+                cw(CW_SIZE-9 downto CW_SIZE-13) <= "01100";
+                next_state <= get_nextstate(IR_OPCODE);
+            
 
             when others => 
                 next_state <= init;
