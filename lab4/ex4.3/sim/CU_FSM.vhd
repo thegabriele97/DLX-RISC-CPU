@@ -204,7 +204,7 @@ begin
                 next_state <= op_itype_alu1_2;
             
             when op_itype_alu1_2 =>
-                cw(CW_SIZE-4 downto CW_SIZE-8) <= "00101";
+                cw(CW_SIZE-9 downto CW_SIZE-13) <= "00101";
                 next_state <= get_nextstate(IR_OPCODE);
                 
             when op_ldmem1_0 => 
@@ -231,7 +231,7 @@ begin
                 cw(CW_SIZE-4 downto CW_SIZE-8) <= "00001";
                 next_state <= op_mov_2;
 
-			when op_mov_1 =>
+			when op_mov_2 =>
                 cw(CW_SIZE-9 downto CW_SIZE-13) <= "00101";
                 next_state <= get_nextstate(IR_OPCODE);
 
@@ -278,18 +278,18 @@ begin
                 next_state <= op_itype_alu2_2;
             
             when op_itype_alu2_2 =>
-                cw(CW_SIZE-4 downto CW_SIZE-8) <= "00101";
+                cw(CW_SIZE-9 downto CW_SIZE-13) <= "00101";
                 next_state <= get_nextstate(IR_OPCODE);
 
 
             
             when op_stmem_0 =>
                 cw(CW_SIZE-1 downto CW_SIZE-3) <= "111";
-                next_state <= op_rtype_1;
+                next_state <= op_stmem_1;
 
             when op_stmem_1 =>
                 cw(CW_SIZE-4 downto CW_SIZE-8) <= "00001";
-                next_state <= op_rtype_2;
+                next_state <= op_stmem_2;
 
             when op_stmem_2 =>
                 cw(CW_SIZE-9 downto CW_SIZE-13) <= "01100";
