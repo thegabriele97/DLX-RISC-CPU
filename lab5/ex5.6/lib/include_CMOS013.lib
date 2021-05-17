@@ -1,0 +1,19 @@
+
+
+
+
+.lib CMOS013lib
+.param MOSHS_DEV = 0
+.param MOSLL_DEV = 0
+
+
+
+
+.lib './mos_bsim3_LL.lib' mosll_TT
+.lib './mos_bsim3_HS.lib' moshs_TT
+.lib './common_poly.lib' PRO_TT
+.lib './common_active.lib' PRO_TT
+.lib './common_go1.lib' PRO_TT
+.lib './common_go2.lib' PRO_TT
+.lib './diode.lib' diode_typ
+.endl CMOS013lib

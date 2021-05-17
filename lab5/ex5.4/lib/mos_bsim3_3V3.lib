@@ -1,0 +1,2189 @@
+
+
+*----------------------------------------------------------------------
+*                           Process Variations
+*----------------------------------------------------------------------
+* TEMPLATE   : statistic_eldoN.t,v 2.0 2002/04/03 15:02:24
+* PARAMETERS : statistic.dds,v 2.8 2002/06/04 11:44:06
+* TRANSLATOR : ddspp.tcl,v 1.47 2001/09/11 08:03:16
+* Translated by re11 on June 14, 2002
+* PACKAGE    : modelString.tcl,v 1.13 2002/04/10 07:19:16
+* PACKAGE    : statPackage.tcl,v 1.15 2001/11/26 16:05:19
+*----------------------------------------------------------------------
+* (C) Copyright STMicroelectronics
+*     Unauthorized Reproduction and Communication Strictly Prohibited.
+*----------------------------------------------------------------------
+
+
+*----------------------------------------------------------------------
+*                            MOSFET HIGH SPEED
+*----------------------------------------------------------------------
+* (C) Copyright STMicroelectronics
+*     Unauthorized Reproduction and Communication Strictly Prohibited.
+* TEMPLATE   : mos_bsim3_3V3_eldoN.t,v 1.2 2000/12/06 15:39:20
+* PARAMETERS : mos_bsim3_3V3.dds,v 2.6 2002/06/14 13:11:46
+* TRANSLATOR : ddspp.tcl,v 1.48 2002/06/19 09:12:40
+* Translated by re11 on June 19, 2002
+*----------------------------------------------------------------------
+
+
+.lib mos3v3_TT
+
+.param nsigma_nmos3v3_dcjb  =  0
+.param nsigma_nmos3v3_dcjgate  =  0
+.param nsigma_nmos3v3_dcjsw  =  0
+.param nsigma_nmos3v3_djsdbr  =  0
+.param nsigma_nmos3v3_djsdgr  =  0
+.param nsigma_nmos3v3_djsdsr  =  0
+.param nsigma_nmos3v3_djsgbr  =  0
+.param nsigma_nmos3v3_djsggr  =  0
+.param nsigma_nmos3v3_djsgsr  =  0
+.param nsigma_nmos3v3_dmu  =  0
+.param nsigma_nmos3v3_drdsw  =  0
+.param nsigma_nmos3v3_dvarmaxrdsw  =  0
+.param nsigma_nmos3v3_dvarmaxu0  =  0
+.param nsigma_nmos3v3_varmaxvth00  =  0
+.param nsigma_nmos3v3_vth0  =  0
+
+.param nsigma_pmos3v3_dcjb  =  0
+.param nsigma_pmos3v3_dcjgate  =  0
+.param nsigma_pmos3v3_dcjsw  =  0
+.param nsigma_pmos3v3_djsdbr  =  0
+.param nsigma_pmos3v3_djsdgr  =  0
+.param nsigma_pmos3v3_djsdsr  =  0
+.param nsigma_pmos3v3_djsgbr  =  0
+.param nsigma_pmos3v3_djsggr  =  0
+.param nsigma_pmos3v3_djsgsr  =  0
+.param nsigma_pmos3v3_dmu  =  0
+.param nsigma_pmos3v3_drdsw  =  0
+.param nsigma_pmos3v3_dvarmaxrdsw  =  0
+.param nsigma_pmos3v3_dvarmaxu0  =  0
+.param nsigma_pmos3v3_varmaxvth00  =  0
+.param nsigma_pmos3v3_vth0  =  0
+
+
+
+.lib "mos_bsim3_3V3.lib" mos3v3_PARAM
+.lib "mos_bsim3_3V3.lib" mos3v3_CORREL
+.lib "mos_bsim3_3V3.lib" mos3v3_MODEL
+ 
+.endl mos3v3_TT
+
+
+.lib mos3v3_FFA
+
+.param nsigma_nmos3v3_dcjb  =  -2
+.param nsigma_nmos3v3_dcjgate  =  -2
+.param nsigma_nmos3v3_dcjsw  =  -2
+.param nsigma_nmos3v3_djsdbr  =  2
+.param nsigma_nmos3v3_djsdgr  =  2
+.param nsigma_nmos3v3_djsdsr  =  2
+.param nsigma_nmos3v3_djsgbr  =  2
+.param nsigma_nmos3v3_djsggr  =  2
+.param nsigma_nmos3v3_djsgsr  =  2
+.param nsigma_nmos3v3_dmu  =  2
+.param nsigma_nmos3v3_drdsw  =  -2
+.param nsigma_nmos3v3_dvarmaxrdsw  =  2
+.param nsigma_nmos3v3_dvarmaxu0  =  2
+.param nsigma_nmos3v3_varmaxvth00  =  0
+.param nsigma_nmos3v3_vth0  =  -2
+
+.param nsigma_pmos3v3_dcjb  =  -2
+.param nsigma_pmos3v3_dcjgate  =  -2
+.param nsigma_pmos3v3_dcjsw  =  -2
+.param nsigma_pmos3v3_djsdbr  =  2
+.param nsigma_pmos3v3_djsdgr  =  2
+.param nsigma_pmos3v3_djsdsr  =  2
+.param nsigma_pmos3v3_djsgbr  =  2
+.param nsigma_pmos3v3_djsggr  =  2
+.param nsigma_pmos3v3_djsgsr  =  2
+.param nsigma_pmos3v3_dmu  =  2
+.param nsigma_pmos3v3_drdsw  =  -2
+.param nsigma_pmos3v3_dvarmaxrdsw  =  -2
+.param nsigma_pmos3v3_dvarmaxu0  =  -2
+.param nsigma_pmos3v3_varmaxvth00  =  0
+.param nsigma_pmos3v3_vth0  =  2
+
+
+
+.lib "mos_bsim3_3V3.lib" mos3v3_PARAM
+.lib "mos_bsim3_3V3.lib" mos3v3_CORREL
+.lib "mos_bsim3_3V3.lib" mos3v3_MODEL
+ 
+.endl mos3v3_FFA
+
+
+.lib mos3v3_SSA
+
+.param nsigma_nmos3v3_dcjb  =  2
+.param nsigma_nmos3v3_dcjgate  =  2
+.param nsigma_nmos3v3_dcjsw  =  2
+.param nsigma_nmos3v3_djsdbr  =  -2
+.param nsigma_nmos3v3_djsdgr  =  -2
+.param nsigma_nmos3v3_djsdsr  =  -2
+.param nsigma_nmos3v3_djsgbr  =  -2
+.param nsigma_nmos3v3_djsggr  =  -2
+.param nsigma_nmos3v3_djsgsr  =  -2
+.param nsigma_nmos3v3_dmu  =  -2
+.param nsigma_nmos3v3_drdsw  =  2
+.param nsigma_nmos3v3_dvarmaxrdsw  =  -2
+.param nsigma_nmos3v3_dvarmaxu0  =  -2
+.param nsigma_nmos3v3_varmaxvth00  =  0
+.param nsigma_nmos3v3_vth0  =  2
+
+.param nsigma_pmos3v3_dcjb  =  2
+.param nsigma_pmos3v3_dcjgate  =  2
+.param nsigma_pmos3v3_dcjsw  =  2
+.param nsigma_pmos3v3_djsdbr  =  -2
+.param nsigma_pmos3v3_djsdgr  =  -2
+.param nsigma_pmos3v3_djsdsr  =  -2
+.param nsigma_pmos3v3_djsgbr  =  -2
+.param nsigma_pmos3v3_djsggr  =  -2
+.param nsigma_pmos3v3_djsgsr  =  -2
+.param nsigma_pmos3v3_dmu  =  -2
+.param nsigma_pmos3v3_drdsw  =  2
+.param nsigma_pmos3v3_dvarmaxrdsw  =  2
+.param nsigma_pmos3v3_dvarmaxu0  =  2
+.param nsigma_pmos3v3_varmaxvth00  =  0
+.param nsigma_pmos3v3_vth0  =  -2
+
+
+
+.lib "mos_bsim3_3V3.lib" mos3v3_PARAM
+.lib "mos_bsim3_3V3.lib" mos3v3_CORREL
+.lib "mos_bsim3_3V3.lib" mos3v3_MODEL
+ 
+.endl mos3v3_SSA
+
+
+.lib mos3v3_FSA
+
+.param nsigma_nmos3v3_dcjb  =  -2
+.param nsigma_nmos3v3_dcjgate  =  -2
+.param nsigma_nmos3v3_dcjsw  =  -2
+.param nsigma_nmos3v3_djsdbr  =  0
+.param nsigma_nmos3v3_djsdgr  =  0
+.param nsigma_nmos3v3_djsdsr  =  0
+.param nsigma_nmos3v3_djsgbr  =  0
+.param nsigma_nmos3v3_djsggr  =  0
+.param nsigma_nmos3v3_djsgsr  =  0
+.param nsigma_nmos3v3_dmu  =  0
+.param nsigma_nmos3v3_drdsw  =  0
+.param nsigma_nmos3v3_dvarmaxrdsw  =  2.67
+.param nsigma_nmos3v3_dvarmaxu0  =  2.67
+.param nsigma_nmos3v3_varmaxvth00  =  0
+.param nsigma_nmos3v3_vth0  =  -4
+
+.param nsigma_pmos3v3_dcjb  =  2
+.param nsigma_pmos3v3_dcjgate  =  2
+.param nsigma_pmos3v3_dcjsw  =  2
+.param nsigma_pmos3v3_djsdbr  =  0
+.param nsigma_pmos3v3_djsdgr  =  0
+.param nsigma_pmos3v3_djsdsr  =  0
+.param nsigma_pmos3v3_djsgbr  =  0
+.param nsigma_pmos3v3_djsggr  =  0
+.param nsigma_pmos3v3_djsgsr  =  0
+.param nsigma_pmos3v3_dmu  =  0
+.param nsigma_pmos3v3_drdsw  =  0
+.param nsigma_pmos3v3_dvarmaxrdsw  =  2.67
+.param nsigma_pmos3v3_dvarmaxu0  =  2.67
+.param nsigma_pmos3v3_varmaxvth00  =  0
+.param nsigma_pmos3v3_vth0  =  -4
+
+
+
+.lib "mos_bsim3_3V3.lib" mos3v3_PARAM
+.lib "mos_bsim3_3V3.lib" mos3v3_CORREL
+.lib "mos_bsim3_3V3.lib" mos3v3_MODEL
+ 
+.endl mos3v3_FSA
+
+
+.lib mos3v3_SFA
+
+.param nsigma_nmos3v3_dcjb  =  2
+.param nsigma_nmos3v3_dcjgate  =  2
+.param nsigma_nmos3v3_dcjsw  =  2
+.param nsigma_nmos3v3_djsdbr  =  0
+.param nsigma_nmos3v3_djsdgr  =  0
+.param nsigma_nmos3v3_djsdsr  =  0
+.param nsigma_nmos3v3_djsgbr  =  0
+.param nsigma_nmos3v3_djsggr  =  0
+.param nsigma_nmos3v3_djsgsr  =  0
+.param nsigma_nmos3v3_dmu  =  0
+.param nsigma_nmos3v3_drdsw  =  0
+.param nsigma_nmos3v3_dvarmaxrdsw  =  -2.67
+.param nsigma_nmos3v3_dvarmaxu0  =  -2.67
+.param nsigma_nmos3v3_varmaxvth00  =  0
+.param nsigma_nmos3v3_vth0  =  4
+
+.param nsigma_pmos3v3_dcjb  =  -2
+.param nsigma_pmos3v3_dcjgate  =  -2
+.param nsigma_pmos3v3_dcjsw  =  -2
+.param nsigma_pmos3v3_djsdbr  =  0
+.param nsigma_pmos3v3_djsdgr  =  0
+.param nsigma_pmos3v3_djsdsr  =  0
+.param nsigma_pmos3v3_djsgbr  =  0
+.param nsigma_pmos3v3_djsggr  =  0
+.param nsigma_pmos3v3_djsgsr  =  0
+.param nsigma_pmos3v3_dmu  =  0
+.param nsigma_pmos3v3_drdsw  =  0
+.param nsigma_pmos3v3_dvarmaxrdsw  =  -2.67
+.param nsigma_pmos3v3_dvarmaxu0  =  -2.67
+.param nsigma_pmos3v3_varmaxvth00  =  0
+.param nsigma_pmos3v3_vth0  =  4
+
+
+
+.lib "mos_bsim3_3V3.lib" mos3v3_PARAM
+.lib "mos_bsim3_3V3.lib" mos3v3_CORREL
+.lib "mos_bsim3_3V3.lib" mos3v3_MODEL
+ 
+.endl mos3v3_SFA
+
+.lib mos3v3_PARAM
+
+
+*----------------------------------------------
+*                   nmos3v3 
+*----------------------------------------------
+.param nmos3v3_vth0 = {0.53621+0.5*0.039*nsigma_nmos3v3_vth0}
+.param nmos3v3_dmu = {0.0+0.5*5e-2*nsigma_nmos3v3_dmu}
+.param nmos3v3_drdsw = {0.0+0.5*15e-2*nsigma_nmos3v3_drdsw}
+.param nmos3v3_dcjb = {0.0+0.5*10e-2*nsigma_nmos3v3_dcjb}
+.param nmos3v3_dcjgate = {0.0+0.5*20e-2*nsigma_nmos3v3_dcjgate}
+.param nmos3v3_dcjsw = {0.0+0.5*20e-2*nsigma_nmos3v3_dcjsw}
+.param nmos3v3_djsdbr = {0.0+0.5*1*nsigma_nmos3v3_djsdbr}
+.param nmos3v3_djsdgr = {0.0+0.5*1*nsigma_nmos3v3_djsdgr}
+.param nmos3v3_djsdsr = {0.0+0.5*1*nsigma_nmos3v3_djsdsr}
+.param nmos3v3_djsgbr = {0.0+0.5*1*nsigma_nmos3v3_djsgbr}
+.param nmos3v3_djsggr = {0.0+0.5*1*nsigma_nmos3v3_djsggr}
+.param nmos3v3_djsgsr = {0.0+0.5*1*nsigma_nmos3v3_djsgsr}
+.param nmos3v3_varmaxvth00 = {0.0+0.5*0.0*nsigma_nmos3v3_varmaxvth00}
+.param nmos3v3_dvarmaxu0 = {0.0+0.5*0.5*nsigma_nmos3v3_dvarmaxu0}
+.param nmos3v3_dvarmaxrdsw = {0.0+0.5*0.5*nsigma_nmos3v3_dvarmaxrdsw}
+
+
+*----------------------------------------------
+*                   pmos3v3 
+*----------------------------------------------
+.param pmos3v3_vth0 = {-0.5055+0.5*0.039*nsigma_pmos3v3_vth0}
+.param pmos3v3_dmu = {0.0+0.5*5e-2*nsigma_pmos3v3_dmu}
+.param pmos3v3_drdsw = {0.0+0.5*15e-2*nsigma_pmos3v3_drdsw}
+.param pmos3v3_dcjb = {0.0+0.5*10e-2*nsigma_pmos3v3_dcjb}
+.param pmos3v3_dcjgate = {0.0+0.5*20e-2*nsigma_pmos3v3_dcjgate}
+.param pmos3v3_dcjsw = {0.0+0.5*20e-2*nsigma_pmos3v3_dcjsw}
+.param pmos3v3_djsdbr = {0.0+0.5*1*nsigma_pmos3v3_djsdbr}
+.param pmos3v3_djsdgr = {0.0+0.5*1*nsigma_pmos3v3_djsdgr}
+.param pmos3v3_djsdsr = {0.0+0.5*1*nsigma_pmos3v3_djsdsr}
+.param pmos3v3_djsgbr = {0.0+0.5*1*nsigma_pmos3v3_djsgbr}
+.param pmos3v3_djsggr = {0.0+0.5*1*nsigma_pmos3v3_djsggr}
+.param pmos3v3_djsgsr = {0.0+0.5*1*nsigma_pmos3v3_djsgsr}
+.param pmos3v3_varmaxvth00 = {0.0+0.5*0.0*nsigma_pmos3v3_varmaxvth00}
+.param pmos3v3_dvarmaxu0 = {0.0+0.5*0.5*nsigma_pmos3v3_dvarmaxu0}
+.param pmos3v3_dvarmaxrdsw = {0.0+0.5*0.5*nsigma_pmos3v3_dvarmaxrdsw}
+
+
+.endl mos3v3_PARAM
+
+.lib mos3v3_stat
+
+*----------------------------------------------
+*                   nmos3v3 
+*----------------------------------------------
+.PARAM nmos3v3_vth0 = 0.53621 LOT/uniform={0.039}
+.PARAM nmos3v3_dmu = 0.0 LOT/uniform={5e-2}
+.PARAM nmos3v3_drdsw = 0.0 LOT/uniform={15e-2}
+.PARAM nmos3v3_dcjb = 0.0 LOT/uniform={10e-2}
+.PARAM nmos3v3_dcjgate = 0.0 LOT/uniform={20e-2}
+.PARAM nmos3v3_dcjsw = 0.0 LOT/uniform={20e-2}
+.PARAM nmos3v3_djsdbr = 0.0 LOT/uniform={1}
+.PARAM nmos3v3_djsdgr = 0.0 LOT/uniform={1}
+.PARAM nmos3v3_djsdsr = 0.0 LOT/uniform={1}
+.PARAM nmos3v3_djsgbr = 0.0 LOT/uniform={1}
+.PARAM nmos3v3_djsggr = 0.0 LOT/uniform={1}
+.PARAM nmos3v3_djsgsr = 0.0 LOT/uniform={1}
+.PARAM nmos3v3_varmaxvth00 = 0.0 LOT/uniform={0.0}
+.PARAM nmos3v3_dvarmaxu0 = 0.0 LOT/uniform={0.5}
+.PARAM nmos3v3_dvarmaxrdsw = 0.0 LOT/uniform={0.5}
+
+*----------------------------------------------
+*                   pmos3v3 
+*----------------------------------------------
+.PARAM pmos3v3_vth0 = -0.5055 LOT/uniform={0.039}
+.PARAM pmos3v3_dmu = 0.0 LOT/uniform={5e-2}
+.PARAM pmos3v3_drdsw = 0.0 LOT/uniform={15e-2}
+.PARAM pmos3v3_dcjb = 0.0 LOT/uniform={10e-2}
+.PARAM pmos3v3_dcjgate = 0.0 LOT/uniform={20e-2}
+.PARAM pmos3v3_dcjsw = 0.0 LOT/uniform={20e-2}
+.PARAM pmos3v3_djsdbr = 0.0 LOT/uniform={1}
+.PARAM pmos3v3_djsdgr = 0.0 LOT/uniform={1}
+.PARAM pmos3v3_djsdsr = 0.0 LOT/uniform={1}
+.PARAM pmos3v3_djsgbr = 0.0 LOT/uniform={1}
+.PARAM pmos3v3_djsggr = 0.0 LOT/uniform={1}
+.PARAM pmos3v3_djsgsr = 0.0 LOT/uniform={1}
+.PARAM pmos3v3_varmaxvth00 = 0.0 LOT/uniform={0.0}
+.PARAM pmos3v3_dvarmaxu0 = 0.0 LOT/uniform={0.5}
+.PARAM pmos3v3_dvarmaxrdsw = 0.0 LOT/uniform={0.5}
+
+
+.lib "mos_bsim3_3V3.lib" mos3v3_CORREL
+.lib "mos_bsim3_3V3.lib" mos3v3_MODEL
+
+.endl mos3v3_stat
+
+.lib mos3v3_CORREL
+
+*----------------------------------------------
+*                   nmos3v3 
+*----------------------------------------------
+.param nmos3v3_xl = go2_3v3_poly_cdvar
+.param nmos3v3_xw = go2_3v3_acti_cdvar
+.param nmos3v3_tox = 6.7182e-09+go2_3v3_dtoxn
+.param nmos3v3_dcfring = 1.7271e-10
+.param nmos3v3_nlx = 1.2233e-07
+.param nmos3v3_prwb = -0.21474
+.param nmos3v3_rshg = npoly_rsh
+.param nmos3v3_rconpo = npoly_rsc
+
+*----------------------------------------------
+*                   pmos3v3 
+*----------------------------------------------
+.param pmos3v3_xl = go2_3v3_poly_cdvar
+.param pmos3v3_xw = go2_3v3_acti_cdvar
+.param pmos3v3_tox = 6.7252e-09+go2_3v3_dtoxn
+.param pmos3v3_dcfring = 1.216e-12
+.param pmos3v3_nlx = 3.2437e-08
+.param pmos3v3_prwb = -0.47295
+.param pmos3v3_rshg = ppoly_rsh
+.param pmos3v3_rconpo = ppoly_rsc
+
+
+.endl mos3v3_CORREL
+.lib mos3v3_MODEL
+
+*----------------------------------------------------------------------
+* Family nmos3v3 Model EN3V3GP_BS3JU bsim3 typ mismatch
+* Maturity : Silicon_verified
+*----------------------------------------------------------------------
+.subckt EN3V3GP_BS3JU D G S B
++       param: w=0.3e-6 l=0.35e-6 nfing=1 ncrsd=1 mismatch=1 srcefirst=1
++       wfing={w/nfing+nmos3v3_xw}
++       fd={srcefirst*(nfing-2*trunc(nfing/2))+(1-srcefirst)*(2*trunc(1+nfing/2)-nfing)}
++       fs={2-fd}
++       ad={wfing*((nfing-fd)*(ncrsd-1)*(0.16e-6+0.18e-6)/4+nfing*(4.2e-07-nmos3v3_xl)/2+fd*(1.5e-07+nmos3v3_xw/2))}
++       as={wfing*((nfing-fs)*(ncrsd-1)*(0.16e-6+0.18e-6)/4+nfing*(4.2e-07-nmos3v3_xl)/2+fs*(1.5e-07+nmos3v3_xw/2))}
++       pd={(nfing-fd)/2*(ncrsd-1)*(0.16e-6+0.18e-6)+nfing*2*(4.2e-07-nmos3v3_xl)/2+fd*(wfing+2*1.5e-07+nmos3v3_xw)}
++       ps={(nfing-fs)/2*(ncrsd-1)*(0.16e-6+0.18e-6)+nfing*2*(4.2e-07-nmos3v3_xl)/2+fs*(wfing+2*1.5e-07+nmos3v3_xw)}
++       po2act=-1
++       number=1 nrd=0 nrs=0
++       ngcon=1
+
+
+*
+* invariant parameters:
+*----------------------
+.param conw    = 0.16e-6
+.param cons    = 0.18e-6
+.param coeact  = 0.07e-6
+.param conpo   = 0.13e-6
+
+.param u0_typ  = 366.281
+.param u0s     = 309.582
+.param lint    = 3.3774e-08
+.param lmin    = 0.35e-6
+.param dwu0    = -0.067029
+.param wint    = 1.7311e-08
+
+
+*  
+.param  cjbr   = 0.0010561
+.param  cjgr   = 2.0426e-10
+.param  cjsr   = 4.1602e-11
+.param  jsdbr  = 1.1009e-07
+.param  jsdgr  = 0
+.param  jsdsr  = 2.2436e-14
+.param  jsgbr  = 5.2833e-06
+.param  jsggr  = 0
+.param  jsgsr  = 4.1654e-11
+ 
+
+*
+* variant parameters:
+*--------------------
+.param xl      = nmos3v3_xl
+.param xw      = nmos3v3_xw
+.param tox     = nmos3v3_tox
+.param vth     = nmos3v3_vth0
+.param nlx     = nmos3v3_nlx
+.param drdsw   = nmos3v3_drdsw
+.param dmu     = nmos3v3_dmu
+
+
+.param dcjb    = nmos3v3_dcjb
+.param dcjgate = nmos3v3_dcjgate
+.param dcjsw   = nmos3v3_dcjsw
+.param djsdbr  = nmos3v3_djsdbr
+.param djsdgr  = nmos3v3_djsdgr
+.param djsdsr  = nmos3v3_djsdsr
+.param djsgbr  = nmos3v3_djsgbr
+.param djsggr  = nmos3v3_djsggr
+.param djsgsr  = nmos3v3_djsgsr
+.param prwb    = nmos3v3_prwb
+
+.param dcfring = nmos3v3_dcfring
+* effective length and width:
+*----------------------------
+.param we      = {(w/nfing+xw-2*wint)}
+.param le      = {l+xl-2.0*lint}
+* Equations for mismatch deviations:
+*-----------------------------------
+.PARAM dvth0_alpha = 5.91e-9
+.PARAM dvth0_beta  = 0.0
+.PARAM dvth0_fudge  = 1.25
+.PARAM dvth0_sig = {((dvth0_alpha/sqrt(W*L))+dvth0_beta)*dvth0_fudge/sqrt(2.0*number)}
+.PARAM dvth0_dev = 0.0 DEV/gauss = {dvth0_sig*MOS3V3_DEV*mismatch}
+.PARAM dbeta_alpha = 0.68e-8
+.PARAM dbeta_beta  = 0.0
+.PARAM dbeta_fudge  = 1.25
+.PARAM dbeta_sig = {((dbeta_alpha/sqrt(W*L))+dbeta_beta)*dbeta_fudge/sqrt(2.0*number)}
+.PARAM dbeta_dev = 0.0 DEV/gauss = {dbeta_sig*MOS3V3_DEV*mismatch}
+
+* Mobility model improvement:
+*----------------------------
+.param epsilon2 = 1e-18
+.param llimit = {9.38098e-07-xl} 
+.param wlimit = {1.439322e-06-xw} 
+
+.param dwu = dwu0
+
+.param mobility = {2.0/((1.0/u0_typ+1.0/u0s)+(llimit+xl
++ -2.0*lint-sqrt((llimit-l)*(llimit-l)+epsilon2))*(1.0/u0s-1.0/u0_typ)/le)
++ *(w/nfing-2.0*((wint-xw/2.0)*(1.0+2.0*(dwu))-(dwu)*wlimit
++ +(dwu)*0.5*(wlimit-w/nfing)+0.5*(dwu)*sqrt((wlimit-w/nfing)*(wlimit-w/nfing)+epsilon2)))/we}
+.param u0 = {mobility*(1.0+dbeta_dev)*(1+dmu)} 
+* Equations for Threshold voltage vth0 and body factor K1:
+*---------------------------------------------------------
+.param  eg0   =  {1.16-(7.02e-4*((273.15+27)^2)/(27+1381))}
+.param  ni    =  {1.45e10*(((273.15+27)/300.15)^1.5)*exp(21.5565981-eg0/(1.725e-4*(273.15+27)))}
+.param  phis  =  {1.725e-4*(273.15+27)*LOG(5.4509e+17/ni)}
+.param  k2    =  {0*(tox/6.7182e-09)}
+
+.param  k1    =  {0.89515-(0.53621-vth)/sqrt(phis)}
+.param  vth0  =  {vth+dvth0_dev} 
+
+.param  nch   =  {5.4509e+17*(6.7182e-09*6.7182e-09)/(tox*tox)*(k1*k1)/(0.89515*0.89515)}
+
+* Equations for access resistance:
+*---------------------------------
+
+.param  rdsw  =  {454.62*(1+drdsw)}
+
+
+.param vth0eff          = vth0
+.param u0eff            = u0
+
+.param rdsweff          = rdsw
+
+* Equations for fringing capacitance:
+*------------------------------------
+.param  cf    =  dcfring
+* Equations for overlap capacitance:
+*-----------------------------------
+.param  cgsl  =  {3.1032e-10*(6.7182e-09/tox)}
+.param  cgdl  =  {3.1032e-10*(6.7182e-09/tox)}
+
+* Equations for VT:
+*-----------------
+
+.param  w0    =  {9.9989e-11+(0-xw)}
+
+
+.param k3 = {-2.4905*(6.7182e-09/tox)}
+.param dvt0 = 5.1758
+
+
+.param  k3b   =  {0.29343*(6.7182e-09/tox)}
+.param  lk3   =  {0*((lmin+xl-(2*lint))*6.7182e-09/(lmin+-1.5e-08-(2*lint))/tox)}
+
+
+.param lketaexp = {valif((1.0e-6/le-1.0/494.2)/0.79041 > 34, 34, (1.0e-6/le-1.0/494.2)/0.79041)}
+.param lketa    = {-0.26892/(1.0+exp(lketaexp))} 
+
+
+
+
+M1 D G S B N3V3 w={w/nfing} l=l as={as/nfing} ad={ad/nfing} ps={ps/nfing} pd={pd/nfing}
++          m={number*nfing} nrd={nrd*nfing} nrs={nrs*nfing}
+
+
+
+.MODEL N3V3 nmos
++ level=53
++ version=3.2           nqsmod=0              xw=xw                 
++ xl=xl                 wmin=3e-07            wmax=1                
++ lmin=3.5e-07          lmax=1e-05            mobmod=1              
++ capmod=3              noimod=2              binunit=1             
++ js=0                  jsw=0                 lint=3.3774e-08       
++ ll=0                  lln=1                 lw=0                  
++ lwn=1                 lwl=0                 wint=1.7311e-08       
++ wl=0                  wln=1                 ww=0                  
++ wwn=1                 wwl=0                 tnom=27               
++ tox=tox               cj=0                  mj=0.33               
++ cjsw=0                mjsw=0.5              cjswg=0               
++ mjswg=0.5             cgso=1.5018e-12       cgdo=1.5018e-12       
++ cgbo=1e-12            xpart=0               dwg=-6.9956e-09       
++ dwb=2.0524e-09        nch=nch               ngate=2.1136e+20      
++ xj=5e-08              u0=u0eff              vth0=vth0eff          
++ k1=k1                 k2=k2                 k3=k3                 
++ lk3=lk3               k3b=k3b               w0=w0                 
++ nlx=nlx               dvt0=dvt0             dvt1=0.47599          
++ dvt2=0                dvt0w=0.044982        dvt1w=5.3e+06         
++ dvt2w=-0.032          ua=-3.9992e-10        ub=1.3538e-18         
++ uc=7.2616e-11         delta=0.010345        rdsw=rdsweff          
++ lrdsw=7.9206          prdsw=-11.456         prwg=-0.02118         
++ prwb=prwb             wr=1                  vsat=133210           
++ a0=1.3805             keta=0.0098674        lketa=lketa           
++ ags=0.22032           a1=-0.06              a2=0.665              
++ b0=0                  b1=0                  alpha0=3.7282e-06     
++ beta0=27.296          lbeta0=0.48429        voff=-0.13423         
++ nfactor=1             cdsc=0.0005           cdscb=0               
++ cdscd=0               cit=0                 eta0=3.5501e-07       
++ etab=0                dsub=1.9215           drout=0.22135         
++ pclm=2.3345           pdiblc1=0.016987      pdiblc2=0.0012934     
++ pdiblcb=0.50741       lpdiblcb=-0.33818     pscbe1=1e+15          
++ pscbe2=1e-18          pvag=0                ute=-1.356            
++ at=33000              ua1=2.0001e-09        ub1=-1.9909e-18       
++ uc1=-4.7796e-11       kt1=-0.32989          kt1l=-1.1817e-08      
++ kt2=-0.031181         prt=1.9937            cgsl=cgsl             
++ cgdl=cgdl             ckappa=1.3575         cf=cf                 
++ clc=1e-07             cle=0.6               dlc=5.9492e-08        
++ noff=1.6957           voffcv=-0.057759      lvoffcv=-0.015534     
++ alpha1=41.763         acde=0.4              moin=6.4566           
++ llc=0                 lwc=0                 lwlc=0                
++ wlc=0                 wwc=0                 wwlc=0                
++ elm=5                 ef=1                  em=5e+09              
++ noia=5e+20            noib=200000           noic=0
+*  
+* -- JUNCAP Electrical Parameters for S/D regions  (Simulator specific)
++ vr=0                  cjbr={cjbr*(1+dcjb)}  cjsr={cjsr*(1+dcjsw)} 
++ cjgr={cjgr*(1+dcjgate)}  jsdbr={jsdbr*10^djsdbr} 
++ jsdsr={jsdsr*10^djsdsr} jsdgr={jsdgr*10^djsdgr} 
++ jsgbr={jsgbr*10^djsgbr} jsgsr={jsgsr*10^djsgsr} 
++ jsggr={jsggr*10^djsggr}  vdbr=0.70603          vdsr=7.8797           
++ vdgr=0.84974          pb=0.34066            ps=0.16108            
++ pg=0.54338             nbj=0.97              nsj=0.93              
++ ngj=1
++ 
++ trdio9=27             diolev=9              dcaplev=0             
++ rlev=1                alev=3
+ 
+
+* + 
+.ends EN3V3GP_BS3JU
+
+
+*----------------------------------------------------------------------
+* Family nmos3v3 Model EN3V3GP_BS3JURG bsim3 typ mismatch
+* Maturity : Silicon_verified
+*----------------------------------------------------------------------
+.subckt EN3V3GP_BS3JURG D G S B
++       param: w=0.3e-6 l=0.35e-6 nfing=1 ncrsd=1 mismatch=1 srcefirst=1
++       wfing={w/nfing+nmos3v3_xw}
++       fd={srcefirst*(nfing-2*trunc(nfing/2))+(1-srcefirst)*(2*trunc(1+nfing/2)-nfing)}
++       fs={2-fd}
++       ad={wfing*((nfing-fd)*(ncrsd-1)*(0.16e-6+0.18e-6)/4+nfing*(4.2e-07-nmos3v3_xl)/2+fd*(1.5e-07+nmos3v3_xw/2))}
++       as={wfing*((nfing-fs)*(ncrsd-1)*(0.16e-6+0.18e-6)/4+nfing*(4.2e-07-nmos3v3_xl)/2+fs*(1.5e-07+nmos3v3_xw/2))}
++       pd={(nfing-fd)/2*(ncrsd-1)*(0.16e-6+0.18e-6)+nfing*2*(4.2e-07-nmos3v3_xl)/2+fd*(wfing+2*1.5e-07+nmos3v3_xw)}
++       ps={(nfing-fs)/2*(ncrsd-1)*(0.16e-6+0.18e-6)+nfing*2*(4.2e-07-nmos3v3_xl)/2+fs*(wfing+2*1.5e-07+nmos3v3_xw)}
++       po2act=-1
++       number=1 nrd=0 nrs=0
++       ngcon=1
+
+
+*
+* invariant parameters:
+*----------------------
+.param conw    = 0.16e-6
+.param cons    = 0.18e-6
+.param coeact  = 0.07e-6
+.param conpo   = 0.13e-6
+
+.param u0_typ  = 366.281
+.param u0s     = 309.582
+.param lint    = 3.3774e-08
+.param lmin    = 0.35e-6
+.param dwu0    = -0.067029
+.param wint    = 1.7311e-08
+
+.param coepo   = 0.07e-6
+.param ncrg    = 2
+
+
+*  
+.param  cjbr   = 0.0010561
+.param  cjgr   = 2.0426e-10
+.param  cjsr   = 4.1602e-11
+.param  jsdbr  = 1.1009e-07
+.param  jsdgr  = 0
+.param  jsdsr  = 2.2436e-14
+.param  jsgbr  = 5.2833e-06
+.param  jsggr  = 0
+.param  jsgsr  = 4.1654e-11
+ 
+
+*
+* variant parameters:
+*--------------------
+.param xl      = nmos3v3_xl
+.param xw      = nmos3v3_xw
+.param tox     = nmos3v3_tox
+.param vth     = nmos3v3_vth0
+.param nlx     = nmos3v3_nlx
+.param drdsw   = nmos3v3_drdsw
+.param dmu     = nmos3v3_dmu
+
+.param rshg    = nmos3v3_rshg
+.param rconpo  = nmos3v3_rconpo
+
+
+.param dcjb    = nmos3v3_dcjb
+.param dcjgate = nmos3v3_dcjgate
+.param dcjsw   = nmos3v3_dcjsw
+.param djsdbr  = nmos3v3_djsdbr
+.param djsdgr  = nmos3v3_djsdgr
+.param djsdsr  = nmos3v3_djsdsr
+.param djsgbr  = nmos3v3_djsgbr
+.param djsggr  = nmos3v3_djsggr
+.param djsgsr  = nmos3v3_djsgsr
+.param prwb    = nmos3v3_prwb
+
+.param dcfring = nmos3v3_dcfring
+* effective length and width:
+*----------------------------
+.param we      = {(w/nfing+xw-2*wint)}
+.param le      = {l+xl-2.0*lint}
+* Equations for mismatch deviations:
+*-----------------------------------
+.PARAM dvth0_alpha = 5.91e-9
+.PARAM dvth0_beta  = 0.0
+.PARAM dvth0_fudge  = 1.25
+.PARAM dvth0_sig = {((dvth0_alpha/sqrt(W*L))+dvth0_beta)*dvth0_fudge/sqrt(2.0*number)}
+.PARAM dvth0_dev = 0.0 DEV/gauss = {dvth0_sig*MOS3V3_DEV*mismatch}
+.PARAM dbeta_alpha = 0.68e-8
+.PARAM dbeta_beta  = 0.0
+.PARAM dbeta_fudge  = 1.25
+.PARAM dbeta_sig = {((dbeta_alpha/sqrt(W*L))+dbeta_beta)*dbeta_fudge/sqrt(2.0*number)}
+.PARAM dbeta_dev = 0.0 DEV/gauss = {dbeta_sig*MOS3V3_DEV*mismatch}
+
+* Mobility model improvement:
+*----------------------------
+.param epsilon2 = 1e-18
+.param llimit = {9.38098e-07-xl} 
+.param wlimit = {1.439322e-06-xw} 
+
+.param dwu = dwu0
+
+.param mobility = {2.0/((1.0/u0_typ+1.0/u0s)+(llimit+xl
++ -2.0*lint-sqrt((llimit-l)*(llimit-l)+epsilon2))*(1.0/u0s-1.0/u0_typ)/le)
++ *(w/nfing-2.0*((wint-xw/2.0)*(1.0+2.0*(dwu))-(dwu)*wlimit
++ +(dwu)*0.5*(wlimit-w/nfing)+0.5*(dwu)*sqrt((wlimit-w/nfing)*(wlimit-w/nfing)+epsilon2)))/we}
+.param u0 = {mobility*(1.0+dbeta_dev)*(1+dmu)} 
+* Equations for Threshold voltage vth0 and body factor K1:
+*---------------------------------------------------------
+.param  eg0   =  {1.16-(7.02e-4*((273.15+27)^2)/(27+1381))}
+.param  ni    =  {1.45e10*(((273.15+27)/300.15)^1.5)*exp(21.5565981-eg0/(1.725e-4*(273.15+27)))}
+.param  phis  =  {1.725e-4*(273.15+27)*LOG(5.4509e+17/ni)}
+.param  k2    =  {0*(tox/6.7182e-09)}
+
+.param  k1    =  {0.89515-(0.53621-vth)/sqrt(phis)}
+.param  vth0  =  {vth+dvth0_dev} 
+
+.param  nch   =  {5.4509e+17*(6.7182e-09*6.7182e-09)/(tox*tox)*(k1*k1)/(0.89515*0.89515)}
+
+* Equations for access resistance:
+*---------------------------------
+
+.param  rdsw  =  {454.62*(1+drdsw)}
+
+
+.param vth0eff          = vth0
+.param u0eff            = u0
+
+.param rdsweff          = rdsw
+
+* Equations for fringing capacitance:
+*------------------------------------
+.param  cf    =  dcfring
+* Equations for overlap capacitance:
+*-----------------------------------
+.param  cgsl  =  {3.1032e-10*(6.7182e-09/tox)}
+.param  cgdl  =  {3.1032e-10*(6.7182e-09/tox)}
+
+* Equations for VT:
+*-----------------
+
+.param  w0    =  {9.9989e-11+(0-xw)}
+
+
+.param k3 = {-2.4905*(6.7182e-09/tox)}
+.param dvt0 = 5.1758
+
+
+.param  k3b   =  {0.29343*(6.7182e-09/tox)}
+.param  lk3   =  {0*((lmin+xl-(2*lint))*6.7182e-09/(lmin+-1.5e-08-(2*lint))/tox)}
+
+
+.param lketaexp = {valif((1.0e-6/le-1.0/494.2)/0.79041 > 34, 34, (1.0e-6/le-1.0/494.2)/0.79041)}
+.param lketa    = {-0.26892/(1.0+exp(lketaexp))} 
+
+
+
+
+.param xgw    = {cons-coepo-coeact}
+.param xgl    = {-xl}
+.param lhead  = {nfing*l+(nfing-1)*(conw+2*conpo+(ncrsd-1)*(conw+cons))}
+.param nchead = {ncrg*(1+trunc(max(0,(lhead-conw-2*coepo))/(conw+cons)))}
+.param rgeltd = {rshg*(xgw+(w/nfing+xw)/(3*ngcon))/(ngcon*(l-xgl)*nfing)}
+.param rgcon  = {rconpo/(nchead*ngcon)}
+
+RG G Gi {(rgeltd+rgcon)/number}
+M1 D Gi S B N3V3RG w={w/nfing} l=l as={as/nfing} ad={ad/nfing} ps={ps/nfing} pd={pd/nfing}
++          m={number*nfing} nrd={nrd*nfing} nrs={nrs*nfing}
+
+
+
+.MODEL N3V3RG nmos
++ level=53
++ version=3.2           nqsmod=0              xw=xw                 
++ xl=xl                 wmin=3e-07            wmax=1                
++ lmin=3.5e-07          lmax=1e-05            mobmod=1              
++ capmod=3              noimod=2              binunit=1             
++ js=0                  jsw=0                 lint=3.3774e-08       
++ ll=0                  lln=1                 lw=0                  
++ lwn=1                 lwl=0                 wint=1.7311e-08       
++ wl=0                  wln=1                 ww=0                  
++ wwn=1                 wwl=0                 tnom=27               
++ tox=tox               cj=0                  mj=0.33               
++ cjsw=0                mjsw=0.5              cjswg=0               
++ mjswg=0.5             cgso=1.5018e-12       cgdo=1.5018e-12       
++ cgbo=1e-12            xpart=0               dwg=-6.9956e-09       
++ dwb=2.0524e-09        nch=nch               ngate=2.1136e+20      
++ xj=5e-08              u0=u0eff              vth0=vth0eff          
++ k1=k1                 k2=k2                 k3=k3                 
++ lk3=lk3               k3b=k3b               w0=w0                 
++ nlx=nlx               dvt0=dvt0             dvt1=0.47599          
++ dvt2=0                dvt0w=0.044982        dvt1w=5.3e+06         
++ dvt2w=-0.032          ua=-3.9992e-10        ub=1.3538e-18         
++ uc=7.2616e-11         delta=0.010345        rdsw=rdsweff          
++ lrdsw=7.9206          prdsw=-11.456         prwg=-0.02118         
++ prwb=prwb             wr=1                  vsat=133210           
++ a0=1.3805             keta=0.0098674        lketa=lketa           
++ ags=0.22032           a1=-0.06              a2=0.665              
++ b0=0                  b1=0                  alpha0=3.7282e-06     
++ beta0=27.296          lbeta0=0.48429        voff=-0.13423         
++ nfactor=1             cdsc=0.0005           cdscb=0               
++ cdscd=0               cit=0                 eta0=3.5501e-07       
++ etab=0                dsub=1.9215           drout=0.22135         
++ pclm=2.3345           pdiblc1=0.016987      pdiblc2=0.0012934     
++ pdiblcb=0.50741       lpdiblcb=-0.33818     pscbe1=1e+15          
++ pscbe2=1e-18          pvag=0                ute=-1.356            
++ at=33000              ua1=2.0001e-09        ub1=-1.9909e-18       
++ uc1=-4.7796e-11       kt1=-0.32989          kt1l=-1.1817e-08      
++ kt2=-0.031181         prt=1.9937            cgsl=cgsl             
++ cgdl=cgdl             ckappa=1.3575         cf=cf                 
++ clc=1e-07             cle=0.6               dlc=5.9492e-08        
++ noff=1.6957           voffcv=-0.057759      lvoffcv=-0.015534     
++ alpha1=41.763         acde=0.4              moin=6.4566           
++ llc=0                 lwc=0                 lwlc=0                
++ wlc=0                 wwc=0                 wwlc=0                
++ elm=5                 ef=1                  em=5e+09              
++ noia=5e+20            noib=200000           noic=0
+*  
+* -- JUNCAP Electrical Parameters for S/D regions  (Simulator specific)
++ vr=0                  cjbr={cjbr*(1+dcjb)}  cjsr={cjsr*(1+dcjsw)} 
++ cjgr={cjgr*(1+dcjgate)}  jsdbr={jsdbr*10^djsdbr} 
++ jsdsr={jsdsr*10^djsdsr} jsdgr={jsdgr*10^djsdgr} 
++ jsgbr={jsgbr*10^djsgbr} jsgsr={jsgsr*10^djsgsr} 
++ jsggr={jsggr*10^djsggr}  vdbr=0.70603          vdsr=7.8797           
++ vdgr=0.84974          pb=0.34066            ps=0.16108            
++ pg=0.54338             nbj=0.97              nsj=0.93              
++ ngj=1
++ 
++ trdio9=27             diolev=9              dcaplev=0             
++ rlev=1                alev=3
+ 
+
+* + 
+.ends EN3V3GP_BS3JURG
+
+
+*----------------------------------------------------------------------
+* Family nmos3v3 Model EN3V3GP_BS3NQSJU bsim3 typ mismatch
+* Maturity : Silicon_verified
+*----------------------------------------------------------------------
+.subckt EN3V3GP_BS3NQSJU D G S B
++       param: w=0.3e-6 l=0.35e-6 nfing=1 ncrsd=1 mismatch=1 srcefirst=1
++       wfing={w/nfing+nmos3v3_xw}
++       fd={srcefirst*(nfing-2*trunc(nfing/2))+(1-srcefirst)*(2*trunc(1+nfing/2)-nfing)}
++       fs={2-fd}
++       ad={wfing*((nfing-fd)*(ncrsd-1)*(0.16e-6+0.18e-6)/4+nfing*(4.2e-07-nmos3v3_xl)/2+fd*(1.5e-07+nmos3v3_xw/2))}
++       as={wfing*((nfing-fs)*(ncrsd-1)*(0.16e-6+0.18e-6)/4+nfing*(4.2e-07-nmos3v3_xl)/2+fs*(1.5e-07+nmos3v3_xw/2))}
++       pd={(nfing-fd)/2*(ncrsd-1)*(0.16e-6+0.18e-6)+nfing*2*(4.2e-07-nmos3v3_xl)/2+fd*(wfing+2*1.5e-07+nmos3v3_xw)}
++       ps={(nfing-fs)/2*(ncrsd-1)*(0.16e-6+0.18e-6)+nfing*2*(4.2e-07-nmos3v3_xl)/2+fs*(wfing+2*1.5e-07+nmos3v3_xw)}
++       po2act=-1
++       number=1 nrd=0 nrs=0
++       ngcon=1
+
+
+*
+* invariant parameters:
+*----------------------
+.param conw    = 0.16e-6
+.param cons    = 0.18e-6
+.param coeact  = 0.07e-6
+.param conpo   = 0.13e-6
+
+.param u0_typ  = 366.281
+.param u0s     = 309.582
+.param lint    = 3.3774e-08
+.param lmin    = 0.35e-6
+.param dwu0    = -0.067029
+.param wint    = 1.7311e-08
+
+
+*  
+.param  cjbr   = 0.0010561
+.param  cjgr   = 2.0426e-10
+.param  cjsr   = 4.1602e-11
+.param  jsdbr  = 1.1009e-07
+.param  jsdgr  = 0
+.param  jsdsr  = 2.2436e-14
+.param  jsgbr  = 5.2833e-06
+.param  jsggr  = 0
+.param  jsgsr  = 4.1654e-11
+ 
+
+*
+* variant parameters:
+*--------------------
+.param xl      = nmos3v3_xl
+.param xw      = nmos3v3_xw
+.param tox     = nmos3v3_tox
+.param vth     = nmos3v3_vth0
+.param nlx     = nmos3v3_nlx
+.param drdsw   = nmos3v3_drdsw
+.param dmu     = nmos3v3_dmu
+
+
+.param dcjb    = nmos3v3_dcjb
+.param dcjgate = nmos3v3_dcjgate
+.param dcjsw   = nmos3v3_dcjsw
+.param djsdbr  = nmos3v3_djsdbr
+.param djsdgr  = nmos3v3_djsdgr
+.param djsdsr  = nmos3v3_djsdsr
+.param djsgbr  = nmos3v3_djsgbr
+.param djsggr  = nmos3v3_djsggr
+.param djsgsr  = nmos3v3_djsgsr
+.param prwb    = nmos3v3_prwb
+
+.param dcfring = nmos3v3_dcfring
+* effective length and width:
+*----------------------------
+.param we      = {(w/nfing+xw-2*wint)}
+.param le      = {l+xl-2.0*lint}
+* Equations for mismatch deviations:
+*-----------------------------------
+.PARAM dvth0_alpha = 5.91e-9
+.PARAM dvth0_beta  = 0.0
+.PARAM dvth0_fudge  = 1.25
+.PARAM dvth0_sig = {((dvth0_alpha/sqrt(W*L))+dvth0_beta)*dvth0_fudge/sqrt(2.0*number)}
+.PARAM dvth0_dev = 0.0 DEV/gauss = {dvth0_sig*MOS3V3_DEV*mismatch}
+.PARAM dbeta_alpha = 0.68e-8
+.PARAM dbeta_beta  = 0.0
+.PARAM dbeta_fudge  = 1.25
+.PARAM dbeta_sig = {((dbeta_alpha/sqrt(W*L))+dbeta_beta)*dbeta_fudge/sqrt(2.0*number)}
+.PARAM dbeta_dev = 0.0 DEV/gauss = {dbeta_sig*MOS3V3_DEV*mismatch}
+
+* Mobility model improvement:
+*----------------------------
+.param epsilon2 = 1e-18
+.param llimit = {9.38098e-07-xl} 
+.param wlimit = {1.439322e-06-xw} 
+
+.param dwu = dwu0
+
+.param mobility = {2.0/((1.0/u0_typ+1.0/u0s)+(llimit+xl
++ -2.0*lint-sqrt((llimit-l)*(llimit-l)+epsilon2))*(1.0/u0s-1.0/u0_typ)/le)
++ *(w/nfing-2.0*((wint-xw/2.0)*(1.0+2.0*(dwu))-(dwu)*wlimit
++ +(dwu)*0.5*(wlimit-w/nfing)+0.5*(dwu)*sqrt((wlimit-w/nfing)*(wlimit-w/nfing)+epsilon2)))/we}
+.param u0 = {mobility*(1.0+dbeta_dev)*(1+dmu)} 
+* Equations for Threshold voltage vth0 and body factor K1:
+*---------------------------------------------------------
+.param  eg0   =  {1.16-(7.02e-4*((273.15+27)^2)/(27+1381))}
+.param  ni    =  {1.45e10*(((273.15+27)/300.15)^1.5)*exp(21.5565981-eg0/(1.725e-4*(273.15+27)))}
+.param  phis  =  {1.725e-4*(273.15+27)*LOG(5.4509e+17/ni)}
+.param  k2    =  {0*(tox/6.7182e-09)}
+
+.param  k1    =  {0.89515-(0.53621-vth)/sqrt(phis)}
+.param  vth0  =  {vth+dvth0_dev} 
+
+.param  nch   =  {5.4509e+17*(6.7182e-09*6.7182e-09)/(tox*tox)*(k1*k1)/(0.89515*0.89515)}
+
+* Equations for access resistance:
+*---------------------------------
+
+.param  rdsw  =  {454.62*(1+drdsw)}
+
+
+.param vth0eff          = vth0
+.param u0eff            = u0
+
+.param rdsweff          = rdsw
+
+* Equations for fringing capacitance:
+*------------------------------------
+.param  cf    =  dcfring
+* Equations for overlap capacitance:
+*-----------------------------------
+.param  cgsl  =  {3.1032e-10*(6.7182e-09/tox)}
+.param  cgdl  =  {3.1032e-10*(6.7182e-09/tox)}
+
+* Equations for VT:
+*-----------------
+
+.param  w0    =  {9.9989e-11+(0-xw)}
+
+
+.param k3 = {-2.4905*(6.7182e-09/tox)}
+.param dvt0 = 5.1758
+
+
+.param  k3b   =  {0.29343*(6.7182e-09/tox)}
+.param  lk3   =  {0*((lmin+xl-(2*lint))*6.7182e-09/(lmin+-1.5e-08-(2*lint))/tox)}
+
+
+.param lketaexp = {valif((1.0e-6/le-1.0/494.2)/0.79041 > 34, 34, (1.0e-6/le-1.0/494.2)/0.79041)}
+.param lketa    = {-0.26892/(1.0+exp(lketaexp))} 
+
+
+
+
+M1 D G S B N3V3NQS w={w/nfing} l=l as={as/nfing} ad={ad/nfing} ps={ps/nfing} pd={pd/nfing}
++          m={number*nfing} nrd={nrd*nfing} nrs={nrs*nfing}
+
+
+
+.MODEL N3V3NQS nmos
++ level=53
++ version=3.2           nqsmod=1              xw=xw                 
++ xl=xl                 wmin=3e-07            wmax=1                
++ lmin=3.5e-07          lmax=1e-05            mobmod=1              
++ capmod=3              noimod=2              binunit=1             
++ js=0                  jsw=0                 lint=3.3774e-08       
++ ll=0                  lln=1                 lw=0                  
++ lwn=1                 lwl=0                 wint=1.7311e-08       
++ wl=0                  wln=1                 ww=0                  
++ wwn=1                 wwl=0                 tnom=27               
++ tox=tox               cj=0                  mj=0.33               
++ cjsw=0                mjsw=0.5              cjswg=0               
++ mjswg=0.5             cgso=1.5018e-12       cgdo=1.5018e-12       
++ cgbo=1e-12            xpart=0               dwg=-6.9956e-09       
++ dwb=2.0524e-09        nch=nch               ngate=2.1136e+20      
++ xj=5e-08              u0=u0eff              vth0=vth0eff          
++ k1=k1                 k2=k2                 k3=k3                 
++ lk3=lk3               k3b=k3b               w0=w0                 
++ nlx=nlx               dvt0=dvt0             dvt1=0.47599          
++ dvt2=0                dvt0w=0.044982        dvt1w=5.3e+06         
++ dvt2w=-0.032          ua=-3.9992e-10        ub=1.3538e-18         
++ uc=7.2616e-11         delta=0.010345        rdsw=rdsweff          
++ lrdsw=7.9206          prdsw=-11.456         prwg=-0.02118         
++ prwb=prwb             wr=1                  vsat=133210           
++ a0=1.3805             keta=0.0098674        lketa=lketa           
++ ags=0.22032           a1=-0.06              a2=0.665              
++ b0=0                  b1=0                  alpha0=3.7282e-06     
++ beta0=27.296          lbeta0=0.48429        voff=-0.13423         
++ nfactor=1             cdsc=0.0005           cdscb=0               
++ cdscd=0               cit=0                 eta0=3.5501e-07       
++ etab=0                dsub=1.9215           drout=0.22135         
++ pclm=2.3345           pdiblc1=0.016987      pdiblc2=0.0012934     
++ pdiblcb=0.50741       lpdiblcb=-0.33818     pscbe1=1e+15          
++ pscbe2=1e-18          pvag=0                ute=-1.356            
++ at=33000              ua1=2.0001e-09        ub1=-1.9909e-18       
++ uc1=-4.7796e-11       kt1=-0.32989          kt1l=-1.1817e-08      
++ kt2=-0.031181         prt=1.9937            cgsl=cgsl             
++ cgdl=cgdl             ckappa=1.3575         cf=cf                 
++ clc=1e-07             cle=0.6               dlc=5.9492e-08        
++ noff=1.6957           voffcv=-0.057759      lvoffcv=-0.015534     
++ alpha1=41.763         acde=0.4              moin=6.4566           
++ llc=0                 lwc=0                 lwlc=0                
++ wlc=0                 wwc=0                 wwlc=0                
++ elm=5                 ef=1                  em=5e+09              
++ noia=5e+20            noib=200000           noic=0
+*  
+* -- JUNCAP Electrical Parameters for S/D regions  (Simulator specific)
++ vr=0                  cjbr={cjbr*(1+dcjb)}  cjsr={cjsr*(1+dcjsw)} 
++ cjgr={cjgr*(1+dcjgate)}  jsdbr={jsdbr*10^djsdbr} 
++ jsdsr={jsdsr*10^djsdsr} jsdgr={jsdgr*10^djsdgr} 
++ jsgbr={jsgbr*10^djsgbr} jsgsr={jsgsr*10^djsgsr} 
++ jsggr={jsggr*10^djsggr}  vdbr=0.70603          vdsr=7.8797           
++ vdgr=0.84974          pb=0.34066            ps=0.16108            
++ pg=0.54338             nbj=0.97              nsj=0.93              
++ ngj=1
++ 
++ trdio9=27             diolev=9              dcaplev=0             
++ rlev=1                alev=3
+ 
+
+* + 
+.ends EN3V3GP_BS3NQSJU
+
+
+*----------------------------------------------------------------------
+* Family nmos3v3 Model EN3V3GP_BS3NQSJURG bsim3 typ mismatch
+* Maturity : Silicon_verified
+*----------------------------------------------------------------------
+.subckt EN3V3GP_BS3NQSJURG D G S B
++       param: w=0.3e-6 l=0.35e-6 nfing=1 ncrsd=1 mismatch=1 srcefirst=1
++       wfing={w/nfing+nmos3v3_xw}
++       fd={srcefirst*(nfing-2*trunc(nfing/2))+(1-srcefirst)*(2*trunc(1+nfing/2)-nfing)}
++       fs={2-fd}
++       ad={wfing*((nfing-fd)*(ncrsd-1)*(0.16e-6+0.18e-6)/4+nfing*(4.2e-07-nmos3v3_xl)/2+fd*(1.5e-07+nmos3v3_xw/2))}
++       as={wfing*((nfing-fs)*(ncrsd-1)*(0.16e-6+0.18e-6)/4+nfing*(4.2e-07-nmos3v3_xl)/2+fs*(1.5e-07+nmos3v3_xw/2))}
++       pd={(nfing-fd)/2*(ncrsd-1)*(0.16e-6+0.18e-6)+nfing*2*(4.2e-07-nmos3v3_xl)/2+fd*(wfing+2*1.5e-07+nmos3v3_xw)}
++       ps={(nfing-fs)/2*(ncrsd-1)*(0.16e-6+0.18e-6)+nfing*2*(4.2e-07-nmos3v3_xl)/2+fs*(wfing+2*1.5e-07+nmos3v3_xw)}
++       po2act=-1
++       number=1 nrd=0 nrs=0
++       ngcon=1
+
+
+*
+* invariant parameters:
+*----------------------
+.param conw    = 0.16e-6
+.param cons    = 0.18e-6
+.param coeact  = 0.07e-6
+.param conpo   = 0.13e-6
+
+.param u0_typ  = 366.281
+.param u0s     = 309.582
+.param lint    = 3.3774e-08
+.param lmin    = 0.35e-6
+.param dwu0    = -0.067029
+.param wint    = 1.7311e-08
+
+.param coepo   = 0.07e-6
+.param ncrg    = 2
+
+
+*  
+.param  cjbr   = 0.0010561
+.param  cjgr   = 2.0426e-10
+.param  cjsr   = 4.1602e-11
+.param  jsdbr  = 1.1009e-07
+.param  jsdgr  = 0
+.param  jsdsr  = 2.2436e-14
+.param  jsgbr  = 5.2833e-06
+.param  jsggr  = 0
+.param  jsgsr  = 4.1654e-11
+ 
+
+*
+* variant parameters:
+*--------------------
+.param xl      = nmos3v3_xl
+.param xw      = nmos3v3_xw
+.param tox     = nmos3v3_tox
+.param vth     = nmos3v3_vth0
+.param nlx     = nmos3v3_nlx
+.param drdsw   = nmos3v3_drdsw
+.param dmu     = nmos3v3_dmu
+
+.param rshg    = nmos3v3_rshg
+.param rconpo  = nmos3v3_rconpo
+
+
+.param dcjb    = nmos3v3_dcjb
+.param dcjgate = nmos3v3_dcjgate
+.param dcjsw   = nmos3v3_dcjsw
+.param djsdbr  = nmos3v3_djsdbr
+.param djsdgr  = nmos3v3_djsdgr
+.param djsdsr  = nmos3v3_djsdsr
+.param djsgbr  = nmos3v3_djsgbr
+.param djsggr  = nmos3v3_djsggr
+.param djsgsr  = nmos3v3_djsgsr
+.param prwb    = nmos3v3_prwb
+
+.param dcfring = nmos3v3_dcfring
+* effective length and width:
+*----------------------------
+.param we      = {(w/nfing+xw-2*wint)}
+.param le      = {l+xl-2.0*lint}
+* Equations for mismatch deviations:
+*-----------------------------------
+.PARAM dvth0_alpha = 5.91e-9
+.PARAM dvth0_beta  = 0.0
+.PARAM dvth0_fudge  = 1.25
+.PARAM dvth0_sig = {((dvth0_alpha/sqrt(W*L))+dvth0_beta)*dvth0_fudge/sqrt(2.0*number)}
+.PARAM dvth0_dev = 0.0 DEV/gauss = {dvth0_sig*MOS3V3_DEV*mismatch}
+.PARAM dbeta_alpha = 0.68e-8
+.PARAM dbeta_beta  = 0.0
+.PARAM dbeta_fudge  = 1.25
+.PARAM dbeta_sig = {((dbeta_alpha/sqrt(W*L))+dbeta_beta)*dbeta_fudge/sqrt(2.0*number)}
+.PARAM dbeta_dev = 0.0 DEV/gauss = {dbeta_sig*MOS3V3_DEV*mismatch}
+
+* Mobility model improvement:
+*----------------------------
+.param epsilon2 = 1e-18
+.param llimit = {9.38098e-07-xl} 
+.param wlimit = {1.439322e-06-xw} 
+
+.param dwu = dwu0
+
+.param mobility = {2.0/((1.0/u0_typ+1.0/u0s)+(llimit+xl
++ -2.0*lint-sqrt((llimit-l)*(llimit-l)+epsilon2))*(1.0/u0s-1.0/u0_typ)/le)
++ *(w/nfing-2.0*((wint-xw/2.0)*(1.0+2.0*(dwu))-(dwu)*wlimit
++ +(dwu)*0.5*(wlimit-w/nfing)+0.5*(dwu)*sqrt((wlimit-w/nfing)*(wlimit-w/nfing)+epsilon2)))/we}
+.param u0 = {mobility*(1.0+dbeta_dev)*(1+dmu)} 
+* Equations for Threshold voltage vth0 and body factor K1:
+*---------------------------------------------------------
+.param  eg0   =  {1.16-(7.02e-4*((273.15+27)^2)/(27+1381))}
+.param  ni    =  {1.45e10*(((273.15+27)/300.15)^1.5)*exp(21.5565981-eg0/(1.725e-4*(273.15+27)))}
+.param  phis  =  {1.725e-4*(273.15+27)*LOG(5.4509e+17/ni)}
+.param  k2    =  {0*(tox/6.7182e-09)}
+
+.param  k1    =  {0.89515-(0.53621-vth)/sqrt(phis)}
+.param  vth0  =  {vth+dvth0_dev} 
+
+.param  nch   =  {5.4509e+17*(6.7182e-09*6.7182e-09)/(tox*tox)*(k1*k1)/(0.89515*0.89515)}
+
+* Equations for access resistance:
+*---------------------------------
+
+.param  rdsw  =  {454.62*(1+drdsw)}
+
+
+.param vth0eff          = vth0
+.param u0eff            = u0
+
+.param rdsweff          = rdsw
+
+* Equations for fringing capacitance:
+*------------------------------------
+.param  cf    =  dcfring
+* Equations for overlap capacitance:
+*-----------------------------------
+.param  cgsl  =  {3.1032e-10*(6.7182e-09/tox)}
+.param  cgdl  =  {3.1032e-10*(6.7182e-09/tox)}
+
+* Equations for VT:
+*-----------------
+
+.param  w0    =  {9.9989e-11+(0-xw)}
+
+
+.param k3 = {-2.4905*(6.7182e-09/tox)}
+.param dvt0 = 5.1758
+
+
+.param  k3b   =  {0.29343*(6.7182e-09/tox)}
+.param  lk3   =  {0*((lmin+xl-(2*lint))*6.7182e-09/(lmin+-1.5e-08-(2*lint))/tox)}
+
+
+.param lketaexp = {valif((1.0e-6/le-1.0/494.2)/0.79041 > 34, 34, (1.0e-6/le-1.0/494.2)/0.79041)}
+.param lketa    = {-0.26892/(1.0+exp(lketaexp))} 
+
+
+
+
+.param xgw    = {cons-coepo-coeact}
+.param xgl    = {-xl}
+.param lhead  = {nfing*l+(nfing-1)*(conw+2*conpo+(ncrsd-1)*(conw+cons))}
+.param nchead = {ncrg*(1+trunc(max(0,(lhead-conw-2*coepo))/(conw+cons)))}
+.param rgeltd = {rshg*(xgw+(w/nfing+xw)/(3*ngcon))/(ngcon*(l-xgl)*nfing)}
+.param rgcon  = {rconpo/(nchead*ngcon)}
+
+RG G Gi {(rgeltd+rgcon)/number}
+M1 D Gi S B N3V3NQSRG w={w/nfing} l=l as={as/nfing} ad={ad/nfing} ps={ps/nfing} pd={pd/nfing}
++          m={number*nfing} nrd={nrd*nfing} nrs={nrs*nfing}
+
+
+
+.MODEL N3V3NQSRG nmos
++ level=53
++ version=3.2           nqsmod=1              xw=xw                 
++ xl=xl                 wmin=3e-07            wmax=1                
++ lmin=3.5e-07          lmax=1e-05            mobmod=1              
++ capmod=3              noimod=2              binunit=1             
++ js=0                  jsw=0                 lint=3.3774e-08       
++ ll=0                  lln=1                 lw=0                  
++ lwn=1                 lwl=0                 wint=1.7311e-08       
++ wl=0                  wln=1                 ww=0                  
++ wwn=1                 wwl=0                 tnom=27               
++ tox=tox               cj=0                  mj=0.33               
++ cjsw=0                mjsw=0.5              cjswg=0               
++ mjswg=0.5             cgso=1.5018e-12       cgdo=1.5018e-12       
++ cgbo=1e-12            xpart=0               dwg=-6.9956e-09       
++ dwb=2.0524e-09        nch=nch               ngate=2.1136e+20      
++ xj=5e-08              u0=u0eff              vth0=vth0eff          
++ k1=k1                 k2=k2                 k3=k3                 
++ lk3=lk3               k3b=k3b               w0=w0                 
++ nlx=nlx               dvt0=dvt0             dvt1=0.47599          
++ dvt2=0                dvt0w=0.044982        dvt1w=5.3e+06         
++ dvt2w=-0.032          ua=-3.9992e-10        ub=1.3538e-18         
++ uc=7.2616e-11         delta=0.010345        rdsw=rdsweff          
++ lrdsw=7.9206          prdsw=-11.456         prwg=-0.02118         
++ prwb=prwb             wr=1                  vsat=133210           
++ a0=1.3805             keta=0.0098674        lketa=lketa           
++ ags=0.22032           a1=-0.06              a2=0.665              
++ b0=0                  b1=0                  alpha0=3.7282e-06     
++ beta0=27.296          lbeta0=0.48429        voff=-0.13423         
++ nfactor=1             cdsc=0.0005           cdscb=0               
++ cdscd=0               cit=0                 eta0=3.5501e-07       
++ etab=0                dsub=1.9215           drout=0.22135         
++ pclm=2.3345           pdiblc1=0.016987      pdiblc2=0.0012934     
++ pdiblcb=0.50741       lpdiblcb=-0.33818     pscbe1=1e+15          
++ pscbe2=1e-18          pvag=0                ute=-1.356            
++ at=33000              ua1=2.0001e-09        ub1=-1.9909e-18       
++ uc1=-4.7796e-11       kt1=-0.32989          kt1l=-1.1817e-08      
++ kt2=-0.031181         prt=1.9937            cgsl=cgsl             
++ cgdl=cgdl             ckappa=1.3575         cf=cf                 
++ clc=1e-07             cle=0.6               dlc=5.9492e-08        
++ noff=1.6957           voffcv=-0.057759      lvoffcv=-0.015534     
++ alpha1=41.763         acde=0.4              moin=6.4566           
++ llc=0                 lwc=0                 lwlc=0                
++ wlc=0                 wwc=0                 wwlc=0                
++ elm=5                 ef=1                  em=5e+09              
++ noia=5e+20            noib=200000           noic=0
+*  
+* -- JUNCAP Electrical Parameters for S/D regions  (Simulator specific)
++ vr=0                  cjbr={cjbr*(1+dcjb)}  cjsr={cjsr*(1+dcjsw)} 
++ cjgr={cjgr*(1+dcjgate)}  jsdbr={jsdbr*10^djsdbr} 
++ jsdsr={jsdsr*10^djsdsr} jsdgr={jsdgr*10^djsdgr} 
++ jsgbr={jsgbr*10^djsgbr} jsgsr={jsgsr*10^djsgsr} 
++ jsggr={jsggr*10^djsggr}  vdbr=0.70603          vdsr=7.8797           
++ vdgr=0.84974          pb=0.34066            ps=0.16108            
++ pg=0.54338             nbj=0.97              nsj=0.93              
++ ngj=1
++ 
++ trdio9=27             diolev=9              dcaplev=0             
++ rlev=1                alev=3
+ 
+
+* + 
+.ends EN3V3GP_BS3NQSJURG
+
+
+*----------------------------------------------------------------------
+* Family pmos3v3 Model EP3V3GP_BS3JU bsim3 typ mismatch
+* Maturity : Silicon_verified
+*----------------------------------------------------------------------
+.subckt EP3V3GP_BS3JU D G S B
++       param: w=0.3e-6 l=0.35e-6 nfing=1 ncrsd=1 mismatch=1 srcefirst=1
++       wfing={w/nfing+pmos3v3_xw}
++       fd={srcefirst*(nfing-2*trunc(nfing/2))+(1-srcefirst)*(2*trunc(1+nfing/2)-nfing)}
++       fs={2-fd}
++       ad={wfing*((nfing-fd)*(ncrsd-1)*(0.16e-6+0.18e-6)/4+nfing*(4.2e-07-pmos3v3_xl)/2+fd*(1.5e-07+pmos3v3_xw/2))}
++       as={wfing*((nfing-fs)*(ncrsd-1)*(0.16e-6+0.18e-6)/4+nfing*(4.2e-07-pmos3v3_xl)/2+fs*(1.5e-07+pmos3v3_xw/2))}
++       pd={(nfing-fd)/2*(ncrsd-1)*(0.16e-6+0.18e-6)+nfing*2*(4.2e-07-pmos3v3_xl)/2+fd*(wfing+2*1.5e-07+pmos3v3_xw)}
++       ps={(nfing-fs)/2*(ncrsd-1)*(0.16e-6+0.18e-6)+nfing*2*(4.2e-07-pmos3v3_xl)/2+fs*(wfing+2*1.5e-07+pmos3v3_xw)}
++       po2act=-1
++       number=1 nrd=0 nrs=0
++       ngcon=1
+
+
+*
+* invariant parameters:
+*----------------------
+.param conw    = 0.16e-6
+.param cons    = 0.18e-6
+.param coeact  = 0.07e-6
+.param conpo   = 0.13e-6
+
+.param u0_typ  = 121.44
+.param u0s     = 140.1
+.param lint    = 3.3032e-08
+.param lmin    = 0.35e-6
+.param dwu0    = -0.031413
+.param wint    = 1.0263e-08
+
+
+*  
+.param  cjbr   = 0.001071
+.param  cjgr   = 1.6943e-10
+.param  cjsr   = 5.636e-11
+.param  jsdbr  = 6.7438e-08
+.param  jsdgr  = 1e-16
+.param  jsdsr  = 1e-15
+.param  jsgbr  = 1.9906e-06
+.param  jsggr  = 2.9388e-11
+.param  jsgsr  = 5.1247e-11
+ 
+
+*
+* variant parameters:
+*--------------------
+.param xl      = pmos3v3_xl
+.param xw      = pmos3v3_xw
+.param tox     = pmos3v3_tox
+.param vth     = pmos3v3_vth0
+.param nlx     = pmos3v3_nlx
+.param drdsw   = pmos3v3_drdsw
+.param dmu     = pmos3v3_dmu
+
+
+.param dcjb    = pmos3v3_dcjb
+.param dcjgate = pmos3v3_dcjgate
+.param dcjsw   = pmos3v3_dcjsw
+.param djsdbr  = pmos3v3_djsdbr
+.param djsdgr  = pmos3v3_djsdgr
+.param djsdsr  = pmos3v3_djsdsr
+.param djsgbr  = pmos3v3_djsgbr
+.param djsggr  = pmos3v3_djsggr
+.param djsgsr  = pmos3v3_djsgsr
+.param prwb    = pmos3v3_prwb
+
+.param dcfring = pmos3v3_dcfring
+* effective length and width:
+*----------------------------
+.param we      = {(w/nfing+xw-2*wint)}
+.param le      = {l+xl-2.0*lint}
+* Equations for mismatch deviations:
+*-----------------------------------
+.PARAM dvth0_alpha = 4.78e-9
+.PARAM dvth0_beta  = 0.0
+.PARAM dvth0_fudge  = 1.25
+.PARAM dvth0_sig = {((dvth0_alpha/sqrt(W*L))+dvth0_beta)*dvth0_fudge/sqrt(2.0*number)}
+.PARAM dvth0_dev = 0.0 DEV/gauss = {dvth0_sig*MOS3V3_DEV*mismatch}
+.PARAM dbeta_alpha = 0.64e-8
+.PARAM dbeta_beta  = 0.0
+.PARAM dbeta_fudge  = 1.25
+.PARAM dbeta_sig = {((dbeta_alpha/sqrt(W*L))+dbeta_beta)*dbeta_fudge/sqrt(2.0*number)}
+.PARAM dbeta_dev = 0.0 DEV/gauss = {dbeta_sig*MOS3V3_DEV*mismatch}
+
+* Mobility model improvement:
+*----------------------------
+.param epsilon2 = 1e-18
+.param llimit = {6.97154e-07-xl} 
+.param wlimit = {1.833726e-06-xw} 
+
+.param dwu = dwu0
+
+.param mobility = {2.0/((1.0/u0_typ+1.0/u0s)+(llimit+xl
++ -2.0*lint-sqrt((llimit-l)*(llimit-l)+epsilon2))*(1.0/u0s-1.0/u0_typ)/le)
++ *(w/nfing-2.0*((wint-xw/2.0)*(1.0+2.0*(dwu))-(dwu)*wlimit
++ +(dwu)*0.5*(wlimit-w/nfing)+0.5*(dwu)*sqrt((wlimit-w/nfing)*(wlimit-w/nfing)+epsilon2)))/we}
+.param u0 = {mobility*(1.0+dbeta_dev)*(1+dmu)} 
+* Equations for Threshold voltage vth0 and body factor K1:
+*---------------------------------------------------------
+.param  eg0   =  {1.16-(7.02e-4*((273.15+27)^2)/(27+1381))}
+.param  ni    =  {1.45e10*(((273.15+27)/300.15)^1.5)*exp(21.5565981-eg0/(1.725e-4*(273.15+27)))}
+.param  phis  =  {1.725e-4*(273.15+27)*LOG(4.4087e+17/ni)}
+.param  k2    =  {0*(tox/6.7252e-09)}
+
+.param  k1    =  {0.74541+(-0.5055-vth)/sqrt(phis)}
+.param  vth0  =  {vth-dvth0_dev} 
+
+.param  nch   =  {4.4087e+17*(6.7252e-09*6.7252e-09)/(tox*tox)*(k1*k1)/(0.74541*0.74541)}
+
+* Equations for access resistance:
+*---------------------------------
+
+.param  rdsw  =  {775.21*(1+drdsw)}
+
+
+.param vth0eff          = vth0
+.param u0eff            = u0
+
+.param rdsweff          = rdsw
+
+* Equations for fringing capacitance:
+*------------------------------------
+.param  cf    =  dcfring
+* Equations for overlap capacitance:
+*-----------------------------------
+.param  cgsl  =  {2.3776e-10*(6.7252e-09/tox)}
+.param  cgdl  =  {2.3776e-10*(6.7252e-09/tox)}
+
+* Equations for VT:
+*-----------------
+
+.param  w0    =  {1.1134e-06+(0-xw)}
+
+
+.param k3 = {0*(6.7252e-09/tox)}
+.param dvt0 = 3.0715
+
+
+.param  k3b   =  {3.934*(6.7252e-09/tox)}
+.param  lk3   =  {0*((lmin+xl-(2*lint))*6.7252e-09/(lmin+-1.5e-08-(2*lint))/tox)}
+
+
+.param lketaexp = {valif((1.0e-6/le-1.0/0.23817)/0.9 > 34, 34, (1.0e-6/le-1.0/0.23817)/0.9)}
+.param lketa    = {-0.021549/(1.0+exp(lketaexp))} 
+
+
+
+
+M1 D G S B P3V3 w={w/nfing} l=l as={as/nfing} ad={ad/nfing} ps={ps/nfing} pd={pd/nfing}
++          m={number*nfing} nrd={nrd*nfing} nrs={nrs*nfing}
+
+
+
+.MODEL P3V3 pmos
++ level=53
++ version=3.2           nqsmod=0              xw=xw                 
++ xl=xl                 wmin=3e-07            wmax=1                
++ lmin=3.5e-07          lmax=1e-05            mobmod=1              
++ capmod=3              noimod=2              binunit=1             
++ js=0                  jsw=0                 lint=3.3032e-08       
++ ll=0                  lln=1                 lw=0                  
++ lwn=1                 lwl=0                 wint=1.0263e-08       
++ wl=0                  wln=1                 ww=0                  
++ wwn=1                 wwl=0                 tnom=27               
++ tox=tox               cj=0                  mj=0.33               
++ cjsw=0                mjsw=0.5              cjswg=0               
++ mjswg=0.5             cgso=1.9956e-10       cgdo=1.9956e-10       
++ cgbo=1e-12            xpart=0               dwg=-3.2987e-09       
++ dwb=-4.5845e-09       nch=nch               ngate=2.2276e+20      
++ xj=5e-08              u0=u0eff              vth0=vth0eff          
++ k1=k1                 k2=k2                 k3=k3                 
++ lk3=lk3               k3b=k3b               w0=w0                 
++ nlx=nlx               dvt0=dvt0             dvt1=0.57062          
++ dvt2=-0.066628        dvt0w=0               dvt1w=5.3e+06         
++ dvt2w=-0.032          ua=8.7283e-10         ub=1.6763e-18         
++ uc=-6.8306e-11        delta=0.0054542       rdsw=rdsweff          
++ lrdsw=0               prdsw=11.825          prwg=-5.457e-15       
++ prwb=prwb             wr=1                  vsat=161970           
++ a0=1.0534             keta=-0.0030956       lketa=lketa           
++ ags=0.18717           a1=0                  a2=0.2591             
++ b0=1.0124e-08         b1=1.3995e-08         alpha0=1.3884e-07     
++ beta0=32.297          lbeta0=-0.1489        voff=-0.14726         
++ nfactor=0.82019       cdsc=-0.003           cdscb=0               
++ cdscd=4.0095e-07      cit=0                 eta0=3.3329e-06       
++ etab=-0.0085076       dsub=0.56             drout=0.22207         
++ pclm=2.294            pdiblc1=0.022536      pdiblc2=0.00015005    
++ pdiblcb=0.040996      lpdiblcb=-0.041201    pscbe1=1e+15          
++ pscbe2=1e-18          pvag=0.0096975        ute=-1.305            
++ at=22691              ua1=7.853e-11         ub1=-2.328e-18        
++ uc1=-5.6e-11          kt1=-0.32435          kt1l=3.7936e-09       
++ kt2=-0.039366         prt=0.0019994         cgsl=cgsl             
++ cgdl=cgdl             ckappa=1.8105         cf=cf                 
++ clc=1e-07             cle=0.6               dlc=5.4074e-08        
++ noff=1.9415           voffcv=-0.080328      lvoffcv=-1.224e-05    
++ alpha1=10             acde=0.42517          moin=5.0399           
++ llc=0                 lwc=0                 lwlc=0                
++ wlc=0                 wwc=0                 wwlc=0                
++ elm=5                 ef=1                  em=501000             
++ noia=7.05e+18         noib=700000           noic=0
+*  
+* -- JUNCAP Electrical Parameters for S/D regions  (Simulator specific)
++ vr=0                  cjbr={cjbr*(1+dcjb)}  cjsr={cjsr*(1+dcjsw)} 
++ cjgr={cjgr*(1+dcjgate)}  jsdbr={jsdbr*10^djsdbr} 
++ jsdsr={jsdsr*10^djsdsr} jsdgr={jsdgr*10^djsdgr} 
++ jsgbr={jsgbr*10^djsgbr} jsgsr={jsgsr*10^djsgsr} 
++ jsggr={jsggr*10^djsggr}  vdbr=0.68686          vdsr=0.58744          
++ vdgr=0.99942          pb=0.32122            ps=0.15               
++ pg=0.49201             nbj=0.97              nsj=0.93              
++ ngj=1
++ 
++ trdio9=27             diolev=9              dcaplev=0             
++ rlev=1                alev=3
+ 
+
+* + 
+.ends EP3V3GP_BS3JU
+
+
+*----------------------------------------------------------------------
+* Family pmos3v3 Model EP3V3GP_BS3JURG bsim3 typ mismatch
+* Maturity : Silicon_verified
+*----------------------------------------------------------------------
+.subckt EP3V3GP_BS3JURG D G S B
++       param: w=0.3e-6 l=0.35e-6 nfing=1 ncrsd=1 mismatch=1 srcefirst=1
++       wfing={w/nfing+pmos3v3_xw}
++       fd={srcefirst*(nfing-2*trunc(nfing/2))+(1-srcefirst)*(2*trunc(1+nfing/2)-nfing)}
++       fs={2-fd}
++       ad={wfing*((nfing-fd)*(ncrsd-1)*(0.16e-6+0.18e-6)/4+nfing*(4.2e-07-pmos3v3_xl)/2+fd*(1.5e-07+pmos3v3_xw/2))}
++       as={wfing*((nfing-fs)*(ncrsd-1)*(0.16e-6+0.18e-6)/4+nfing*(4.2e-07-pmos3v3_xl)/2+fs*(1.5e-07+pmos3v3_xw/2))}
++       pd={(nfing-fd)/2*(ncrsd-1)*(0.16e-6+0.18e-6)+nfing*2*(4.2e-07-pmos3v3_xl)/2+fd*(wfing+2*1.5e-07+pmos3v3_xw)}
++       ps={(nfing-fs)/2*(ncrsd-1)*(0.16e-6+0.18e-6)+nfing*2*(4.2e-07-pmos3v3_xl)/2+fs*(wfing+2*1.5e-07+pmos3v3_xw)}
++       po2act=-1
++       number=1 nrd=0 nrs=0
++       ngcon=1
+
+
+*
+* invariant parameters:
+*----------------------
+.param conw    = 0.16e-6
+.param cons    = 0.18e-6
+.param coeact  = 0.07e-6
+.param conpo   = 0.13e-6
+
+.param u0_typ  = 121.44
+.param u0s     = 140.1
+.param lint    = 3.3032e-08
+.param lmin    = 0.35e-6
+.param dwu0    = -0.031413
+.param wint    = 1.0263e-08
+
+.param coepo   = 0.07e-6
+.param ncrg    = 2
+
+
+*  
+.param  cjbr   = 0.001071
+.param  cjgr   = 1.6943e-10
+.param  cjsr   = 5.636e-11
+.param  jsdbr  = 6.7438e-08
+.param  jsdgr  = 1e-16
+.param  jsdsr  = 1e-15
+.param  jsgbr  = 1.9906e-06
+.param  jsggr  = 2.9388e-11
+.param  jsgsr  = 5.1247e-11
+ 
+
+*
+* variant parameters:
+*--------------------
+.param xl      = pmos3v3_xl
+.param xw      = pmos3v3_xw
+.param tox     = pmos3v3_tox
+.param vth     = pmos3v3_vth0
+.param nlx     = pmos3v3_nlx
+.param drdsw   = pmos3v3_drdsw
+.param dmu     = pmos3v3_dmu
+
+.param rshg    = pmos3v3_rshg
+.param rconpo  = pmos3v3_rconpo
+
+
+.param dcjb    = pmos3v3_dcjb
+.param dcjgate = pmos3v3_dcjgate
+.param dcjsw   = pmos3v3_dcjsw
+.param djsdbr  = pmos3v3_djsdbr
+.param djsdgr  = pmos3v3_djsdgr
+.param djsdsr  = pmos3v3_djsdsr
+.param djsgbr  = pmos3v3_djsgbr
+.param djsggr  = pmos3v3_djsggr
+.param djsgsr  = pmos3v3_djsgsr
+.param prwb    = pmos3v3_prwb
+
+.param dcfring = pmos3v3_dcfring
+* effective length and width:
+*----------------------------
+.param we      = {(w/nfing+xw-2*wint)}
+.param le      = {l+xl-2.0*lint}
+* Equations for mismatch deviations:
+*-----------------------------------
+.PARAM dvth0_alpha = 4.78e-9
+.PARAM dvth0_beta  = 0.0
+.PARAM dvth0_fudge  = 1.25
+.PARAM dvth0_sig = {((dvth0_alpha/sqrt(W*L))+dvth0_beta)*dvth0_fudge/sqrt(2.0*number)}
+.PARAM dvth0_dev = 0.0 DEV/gauss = {dvth0_sig*MOS3V3_DEV*mismatch}
+.PARAM dbeta_alpha = 0.64e-8
+.PARAM dbeta_beta  = 0.0
+.PARAM dbeta_fudge  = 1.25
+.PARAM dbeta_sig = {((dbeta_alpha/sqrt(W*L))+dbeta_beta)*dbeta_fudge/sqrt(2.0*number)}
+.PARAM dbeta_dev = 0.0 DEV/gauss = {dbeta_sig*MOS3V3_DEV*mismatch}
+
+* Mobility model improvement:
+*----------------------------
+.param epsilon2 = 1e-18
+.param llimit = {6.97154e-07-xl} 
+.param wlimit = {1.833726e-06-xw} 
+
+.param dwu = dwu0
+
+.param mobility = {2.0/((1.0/u0_typ+1.0/u0s)+(llimit+xl
++ -2.0*lint-sqrt((llimit-l)*(llimit-l)+epsilon2))*(1.0/u0s-1.0/u0_typ)/le)
++ *(w/nfing-2.0*((wint-xw/2.0)*(1.0+2.0*(dwu))-(dwu)*wlimit
++ +(dwu)*0.5*(wlimit-w/nfing)+0.5*(dwu)*sqrt((wlimit-w/nfing)*(wlimit-w/nfing)+epsilon2)))/we}
+.param u0 = {mobility*(1.0+dbeta_dev)*(1+dmu)} 
+* Equations for Threshold voltage vth0 and body factor K1:
+*---------------------------------------------------------
+.param  eg0   =  {1.16-(7.02e-4*((273.15+27)^2)/(27+1381))}
+.param  ni    =  {1.45e10*(((273.15+27)/300.15)^1.5)*exp(21.5565981-eg0/(1.725e-4*(273.15+27)))}
+.param  phis  =  {1.725e-4*(273.15+27)*LOG(4.4087e+17/ni)}
+.param  k2    =  {0*(tox/6.7252e-09)}
+
+.param  k1    =  {0.74541+(-0.5055-vth)/sqrt(phis)}
+.param  vth0  =  {vth-dvth0_dev} 
+
+.param  nch   =  {4.4087e+17*(6.7252e-09*6.7252e-09)/(tox*tox)*(k1*k1)/(0.74541*0.74541)}
+
+* Equations for access resistance:
+*---------------------------------
+
+.param  rdsw  =  {775.21*(1+drdsw)}
+
+
+.param vth0eff          = vth0
+.param u0eff            = u0
+
+.param rdsweff          = rdsw
+
+* Equations for fringing capacitance:
+*------------------------------------
+.param  cf    =  dcfring
+* Equations for overlap capacitance:
+*-----------------------------------
+.param  cgsl  =  {2.3776e-10*(6.7252e-09/tox)}
+.param  cgdl  =  {2.3776e-10*(6.7252e-09/tox)}
+
+* Equations for VT:
+*-----------------
+
+.param  w0    =  {1.1134e-06+(0-xw)}
+
+
+.param k3 = {0*(6.7252e-09/tox)}
+.param dvt0 = 3.0715
+
+
+.param  k3b   =  {3.934*(6.7252e-09/tox)}
+.param  lk3   =  {0*((lmin+xl-(2*lint))*6.7252e-09/(lmin+-1.5e-08-(2*lint))/tox)}
+
+
+.param lketaexp = {valif((1.0e-6/le-1.0/0.23817)/0.9 > 34, 34, (1.0e-6/le-1.0/0.23817)/0.9)}
+.param lketa    = {-0.021549/(1.0+exp(lketaexp))} 
+
+
+
+
+.param xgw    = {cons-coepo-coeact}
+.param xgl    = {-xl}
+.param lhead  = {nfing*l+(nfing-1)*(conw+2*conpo+(ncrsd-1)*(conw+cons))}
+.param nchead = {ncrg*(1+trunc(max(0,(lhead-conw-2*coepo))/(conw+cons)))}
+.param rgeltd = {rshg*(xgw+(w/nfing+xw)/(3*ngcon))/(ngcon*(l-xgl)*nfing)}
+.param rgcon  = {rconpo/(nchead*ngcon)}
+
+RG G Gi {(rgeltd+rgcon)/number}
+M1 D Gi S B P3V3RG w={w/nfing} l=l as={as/nfing} ad={ad/nfing} ps={ps/nfing} pd={pd/nfing}
++          m={number*nfing} nrd={nrd*nfing} nrs={nrs*nfing}
+
+
+
+.MODEL P3V3RG pmos
++ level=53
++ version=3.2           nqsmod=0              xw=xw                 
++ xl=xl                 wmin=3e-07            wmax=1                
++ lmin=3.5e-07          lmax=1e-05            mobmod=1              
++ capmod=3              noimod=2              binunit=1             
++ js=0                  jsw=0                 lint=3.3032e-08       
++ ll=0                  lln=1                 lw=0                  
++ lwn=1                 lwl=0                 wint=1.0263e-08       
++ wl=0                  wln=1                 ww=0                  
++ wwn=1                 wwl=0                 tnom=27               
++ tox=tox               cj=0                  mj=0.33               
++ cjsw=0                mjsw=0.5              cjswg=0               
++ mjswg=0.5             cgso=1.9956e-10       cgdo=1.9956e-10       
++ cgbo=1e-12            xpart=0               dwg=-3.2987e-09       
++ dwb=-4.5845e-09       nch=nch               ngate=2.2276e+20      
++ xj=5e-08              u0=u0eff              vth0=vth0eff          
++ k1=k1                 k2=k2                 k3=k3                 
++ lk3=lk3               k3b=k3b               w0=w0                 
++ nlx=nlx               dvt0=dvt0             dvt1=0.57062          
++ dvt2=-0.066628        dvt0w=0               dvt1w=5.3e+06         
++ dvt2w=-0.032          ua=8.7283e-10         ub=1.6763e-18         
++ uc=-6.8306e-11        delta=0.0054542       rdsw=rdsweff          
++ lrdsw=0               prdsw=11.825          prwg=-5.457e-15       
++ prwb=prwb             wr=1                  vsat=161970           
++ a0=1.0534             keta=-0.0030956       lketa=lketa           
++ ags=0.18717           a1=0                  a2=0.2591             
++ b0=1.0124e-08         b1=1.3995e-08         alpha0=1.3884e-07     
++ beta0=32.297          lbeta0=-0.1489        voff=-0.14726         
++ nfactor=0.82019       cdsc=-0.003           cdscb=0               
++ cdscd=4.0095e-07      cit=0                 eta0=3.3329e-06       
++ etab=-0.0085076       dsub=0.56             drout=0.22207         
++ pclm=2.294            pdiblc1=0.022536      pdiblc2=0.00015005    
++ pdiblcb=0.040996      lpdiblcb=-0.041201    pscbe1=1e+15          
++ pscbe2=1e-18          pvag=0.0096975        ute=-1.305            
++ at=22691              ua1=7.853e-11         ub1=-2.328e-18        
++ uc1=-5.6e-11          kt1=-0.32435          kt1l=3.7936e-09       
++ kt2=-0.039366         prt=0.0019994         cgsl=cgsl             
++ cgdl=cgdl             ckappa=1.8105         cf=cf                 
++ clc=1e-07             cle=0.6               dlc=5.4074e-08        
++ noff=1.9415           voffcv=-0.080328      lvoffcv=-1.224e-05    
++ alpha1=10             acde=0.42517          moin=5.0399           
++ llc=0                 lwc=0                 lwlc=0                
++ wlc=0                 wwc=0                 wwlc=0                
++ elm=5                 ef=1                  em=501000             
++ noia=7.05e+18         noib=700000           noic=0
+*  
+* -- JUNCAP Electrical Parameters for S/D regions  (Simulator specific)
++ vr=0                  cjbr={cjbr*(1+dcjb)}  cjsr={cjsr*(1+dcjsw)} 
++ cjgr={cjgr*(1+dcjgate)}  jsdbr={jsdbr*10^djsdbr} 
++ jsdsr={jsdsr*10^djsdsr} jsdgr={jsdgr*10^djsdgr} 
++ jsgbr={jsgbr*10^djsgbr} jsgsr={jsgsr*10^djsgsr} 
++ jsggr={jsggr*10^djsggr}  vdbr=0.68686          vdsr=0.58744          
++ vdgr=0.99942          pb=0.32122            ps=0.15               
++ pg=0.49201             nbj=0.97              nsj=0.93              
++ ngj=1
++ 
++ trdio9=27             diolev=9              dcaplev=0             
++ rlev=1                alev=3
+ 
+
+* + 
+.ends EP3V3GP_BS3JURG
+
+
+*----------------------------------------------------------------------
+* Family pmos3v3 Model EP3V3GP_BS3NQSJU bsim3 typ mismatch
+* Maturity : Silicon_verified
+*----------------------------------------------------------------------
+.subckt EP3V3GP_BS3NQSJU D G S B
++       param: w=0.3e-6 l=0.35e-6 nfing=1 ncrsd=1 mismatch=1 srcefirst=1
++       wfing={w/nfing+pmos3v3_xw}
++       fd={srcefirst*(nfing-2*trunc(nfing/2))+(1-srcefirst)*(2*trunc(1+nfing/2)-nfing)}
++       fs={2-fd}
++       ad={wfing*((nfing-fd)*(ncrsd-1)*(0.16e-6+0.18e-6)/4+nfing*(4.2e-07-pmos3v3_xl)/2+fd*(1.5e-07+pmos3v3_xw/2))}
++       as={wfing*((nfing-fs)*(ncrsd-1)*(0.16e-6+0.18e-6)/4+nfing*(4.2e-07-pmos3v3_xl)/2+fs*(1.5e-07+pmos3v3_xw/2))}
++       pd={(nfing-fd)/2*(ncrsd-1)*(0.16e-6+0.18e-6)+nfing*2*(4.2e-07-pmos3v3_xl)/2+fd*(wfing+2*1.5e-07+pmos3v3_xw)}
++       ps={(nfing-fs)/2*(ncrsd-1)*(0.16e-6+0.18e-6)+nfing*2*(4.2e-07-pmos3v3_xl)/2+fs*(wfing+2*1.5e-07+pmos3v3_xw)}
++       po2act=-1
++       number=1 nrd=0 nrs=0
++       ngcon=1
+
+
+*
+* invariant parameters:
+*----------------------
+.param conw    = 0.16e-6
+.param cons    = 0.18e-6
+.param coeact  = 0.07e-6
+.param conpo   = 0.13e-6
+
+.param u0_typ  = 121.44
+.param u0s     = 140.1
+.param lint    = 3.3032e-08
+.param lmin    = 0.35e-6
+.param dwu0    = -0.031413
+.param wint    = 1.0263e-08
+
+
+*  
+.param  cjbr   = 0.001071
+.param  cjgr   = 1.6943e-10
+.param  cjsr   = 5.636e-11
+.param  jsdbr  = 6.7438e-08
+.param  jsdgr  = 1e-16
+.param  jsdsr  = 1e-15
+.param  jsgbr  = 1.9906e-06
+.param  jsggr  = 2.9388e-11
+.param  jsgsr  = 5.1247e-11
+ 
+
+*
+* variant parameters:
+*--------------------
+.param xl      = pmos3v3_xl
+.param xw      = pmos3v3_xw
+.param tox     = pmos3v3_tox
+.param vth     = pmos3v3_vth0
+.param nlx     = pmos3v3_nlx
+.param drdsw   = pmos3v3_drdsw
+.param dmu     = pmos3v3_dmu
+
+
+.param dcjb    = pmos3v3_dcjb
+.param dcjgate = pmos3v3_dcjgate
+.param dcjsw   = pmos3v3_dcjsw
+.param djsdbr  = pmos3v3_djsdbr
+.param djsdgr  = pmos3v3_djsdgr
+.param djsdsr  = pmos3v3_djsdsr
+.param djsgbr  = pmos3v3_djsgbr
+.param djsggr  = pmos3v3_djsggr
+.param djsgsr  = pmos3v3_djsgsr
+.param prwb    = pmos3v3_prwb
+
+.param dcfring = pmos3v3_dcfring
+* effective length and width:
+*----------------------------
+.param we      = {(w/nfing+xw-2*wint)}
+.param le      = {l+xl-2.0*lint}
+* Equations for mismatch deviations:
+*-----------------------------------
+.PARAM dvth0_alpha = 4.78e-9
+.PARAM dvth0_beta  = 0.0
+.PARAM dvth0_fudge  = 1.25
+.PARAM dvth0_sig = {((dvth0_alpha/sqrt(W*L))+dvth0_beta)*dvth0_fudge/sqrt(2.0*number)}
+.PARAM dvth0_dev = 0.0 DEV/gauss = {dvth0_sig*MOS3V3_DEV*mismatch}
+.PARAM dbeta_alpha = 0.64e-8
+.PARAM dbeta_beta  = 0.0
+.PARAM dbeta_fudge  = 1.25
+.PARAM dbeta_sig = {((dbeta_alpha/sqrt(W*L))+dbeta_beta)*dbeta_fudge/sqrt(2.0*number)}
+.PARAM dbeta_dev = 0.0 DEV/gauss = {dbeta_sig*MOS3V3_DEV*mismatch}
+
+* Mobility model improvement:
+*----------------------------
+.param epsilon2 = 1e-18
+.param llimit = {6.97154e-07-xl} 
+.param wlimit = {1.833726e-06-xw} 
+
+.param dwu = dwu0
+
+.param mobility = {2.0/((1.0/u0_typ+1.0/u0s)+(llimit+xl
++ -2.0*lint-sqrt((llimit-l)*(llimit-l)+epsilon2))*(1.0/u0s-1.0/u0_typ)/le)
++ *(w/nfing-2.0*((wint-xw/2.0)*(1.0+2.0*(dwu))-(dwu)*wlimit
++ +(dwu)*0.5*(wlimit-w/nfing)+0.5*(dwu)*sqrt((wlimit-w/nfing)*(wlimit-w/nfing)+epsilon2)))/we}
+.param u0 = {mobility*(1.0+dbeta_dev)*(1+dmu)} 
+* Equations for Threshold voltage vth0 and body factor K1:
+*---------------------------------------------------------
+.param  eg0   =  {1.16-(7.02e-4*((273.15+27)^2)/(27+1381))}
+.param  ni    =  {1.45e10*(((273.15+27)/300.15)^1.5)*exp(21.5565981-eg0/(1.725e-4*(273.15+27)))}
+.param  phis  =  {1.725e-4*(273.15+27)*LOG(4.4087e+17/ni)}
+.param  k2    =  {0*(tox/6.7252e-09)}
+
+.param  k1    =  {0.74541+(-0.5055-vth)/sqrt(phis)}
+.param  vth0  =  {vth-dvth0_dev} 
+
+.param  nch   =  {4.4087e+17*(6.7252e-09*6.7252e-09)/(tox*tox)*(k1*k1)/(0.74541*0.74541)}
+
+* Equations for access resistance:
+*---------------------------------
+
+.param  rdsw  =  {775.21*(1+drdsw)}
+
+
+.param vth0eff          = vth0
+.param u0eff            = u0
+
+.param rdsweff          = rdsw
+
+* Equations for fringing capacitance:
+*------------------------------------
+.param  cf    =  dcfring
+* Equations for overlap capacitance:
+*-----------------------------------
+.param  cgsl  =  {2.3776e-10*(6.7252e-09/tox)}
+.param  cgdl  =  {2.3776e-10*(6.7252e-09/tox)}
+
+* Equations for VT:
+*-----------------
+
+.param  w0    =  {1.1134e-06+(0-xw)}
+
+
+.param k3 = {0*(6.7252e-09/tox)}
+.param dvt0 = 3.0715
+
+
+.param  k3b   =  {3.934*(6.7252e-09/tox)}
+.param  lk3   =  {0*((lmin+xl-(2*lint))*6.7252e-09/(lmin+-1.5e-08-(2*lint))/tox)}
+
+
+.param lketaexp = {valif((1.0e-6/le-1.0/0.23817)/0.9 > 34, 34, (1.0e-6/le-1.0/0.23817)/0.9)}
+.param lketa    = {-0.021549/(1.0+exp(lketaexp))} 
+
+
+
+
+M1 D G S B P3V3NQS w={w/nfing} l=l as={as/nfing} ad={ad/nfing} ps={ps/nfing} pd={pd/nfing}
++          m={number*nfing} nrd={nrd*nfing} nrs={nrs*nfing}
+
+
+
+.MODEL P3V3NQS pmos
++ level=53
++ version=3.2           nqsmod=1              xw=xw                 
++ xl=xl                 wmin=3e-07            wmax=1                
++ lmin=3.5e-07          lmax=1e-05            mobmod=1              
++ capmod=3              noimod=2              binunit=1             
++ js=0                  jsw=0                 lint=3.3032e-08       
++ ll=0                  lln=1                 lw=0                  
++ lwn=1                 lwl=0                 wint=1.0263e-08       
++ wl=0                  wln=1                 ww=0                  
++ wwn=1                 wwl=0                 tnom=27               
++ tox=tox               cj=0                  mj=0.33               
++ cjsw=0                mjsw=0.5              cjswg=0               
++ mjswg=0.5             cgso=1.9956e-10       cgdo=1.9956e-10       
++ cgbo=1e-12            xpart=0               dwg=-3.2987e-09       
++ dwb=-4.5845e-09       nch=nch               ngate=2.2276e+20      
++ xj=5e-08              u0=u0eff              vth0=vth0eff          
++ k1=k1                 k2=k2                 k3=k3                 
++ lk3=lk3               k3b=k3b               w0=w0                 
++ nlx=nlx               dvt0=dvt0             dvt1=0.57062          
++ dvt2=-0.066628        dvt0w=0               dvt1w=5.3e+06         
++ dvt2w=-0.032          ua=8.7283e-10         ub=1.6763e-18         
++ uc=-6.8306e-11        delta=0.0054542       rdsw=rdsweff          
++ lrdsw=0               prdsw=11.825          prwg=-5.457e-15       
++ prwb=prwb             wr=1                  vsat=161970           
++ a0=1.0534             keta=-0.0030956       lketa=lketa           
++ ags=0.18717           a1=0                  a2=0.2591             
++ b0=1.0124e-08         b1=1.3995e-08         alpha0=1.3884e-07     
++ beta0=32.297          lbeta0=-0.1489        voff=-0.14726         
++ nfactor=0.82019       cdsc=-0.003           cdscb=0               
++ cdscd=4.0095e-07      cit=0                 eta0=3.3329e-06       
++ etab=-0.0085076       dsub=0.56             drout=0.22207         
++ pclm=2.294            pdiblc1=0.022536      pdiblc2=0.00015005    
++ pdiblcb=0.040996      lpdiblcb=-0.041201    pscbe1=1e+15          
++ pscbe2=1e-18          pvag=0.0096975        ute=-1.305            
++ at=22691              ua1=7.853e-11         ub1=-2.328e-18        
++ uc1=-5.6e-11          kt1=-0.32435          kt1l=3.7936e-09       
++ kt2=-0.039366         prt=0.0019994         cgsl=cgsl             
++ cgdl=cgdl             ckappa=1.8105         cf=cf                 
++ clc=1e-07             cle=0.6               dlc=5.4074e-08        
++ noff=1.9415           voffcv=-0.080328      lvoffcv=-1.224e-05    
++ alpha1=10             acde=0.42517          moin=5.0399           
++ llc=0                 lwc=0                 lwlc=0                
++ wlc=0                 wwc=0                 wwlc=0                
++ elm=5                 ef=1                  em=501000             
++ noia=7.05e+18         noib=700000           noic=0
+*  
+* -- JUNCAP Electrical Parameters for S/D regions  (Simulator specific)
++ vr=0                  cjbr={cjbr*(1+dcjb)}  cjsr={cjsr*(1+dcjsw)} 
++ cjgr={cjgr*(1+dcjgate)}  jsdbr={jsdbr*10^djsdbr} 
++ jsdsr={jsdsr*10^djsdsr} jsdgr={jsdgr*10^djsdgr} 
++ jsgbr={jsgbr*10^djsgbr} jsgsr={jsgsr*10^djsgsr} 
++ jsggr={jsggr*10^djsggr}  vdbr=0.68686          vdsr=0.58744          
++ vdgr=0.99942          pb=0.32122            ps=0.15               
++ pg=0.49201             nbj=0.97              nsj=0.93              
++ ngj=1
++ 
++ trdio9=27             diolev=9              dcaplev=0             
++ rlev=1                alev=3
+ 
+
+* + 
+.ends EP3V3GP_BS3NQSJU
+
+
+*----------------------------------------------------------------------
+* Family pmos3v3 Model EP3V3GP_BS3NQSJURG bsim3 typ mismatch
+* Maturity : Silicon_verified
+*----------------------------------------------------------------------
+.subckt EP3V3GP_BS3NQSJURG D G S B
++       param: w=0.3e-6 l=0.35e-6 nfing=1 ncrsd=1 mismatch=1 srcefirst=1
++       wfing={w/nfing+pmos3v3_xw}
++       fd={srcefirst*(nfing-2*trunc(nfing/2))+(1-srcefirst)*(2*trunc(1+nfing/2)-nfing)}
++       fs={2-fd}
++       ad={wfing*((nfing-fd)*(ncrsd-1)*(0.16e-6+0.18e-6)/4+nfing*(4.2e-07-pmos3v3_xl)/2+fd*(1.5e-07+pmos3v3_xw/2))}
++       as={wfing*((nfing-fs)*(ncrsd-1)*(0.16e-6+0.18e-6)/4+nfing*(4.2e-07-pmos3v3_xl)/2+fs*(1.5e-07+pmos3v3_xw/2))}
++       pd={(nfing-fd)/2*(ncrsd-1)*(0.16e-6+0.18e-6)+nfing*2*(4.2e-07-pmos3v3_xl)/2+fd*(wfing+2*1.5e-07+pmos3v3_xw)}
++       ps={(nfing-fs)/2*(ncrsd-1)*(0.16e-6+0.18e-6)+nfing*2*(4.2e-07-pmos3v3_xl)/2+fs*(wfing+2*1.5e-07+pmos3v3_xw)}
++       po2act=-1
++       number=1 nrd=0 nrs=0
++       ngcon=1
+
+
+*
+* invariant parameters:
+*----------------------
+.param conw    = 0.16e-6
+.param cons    = 0.18e-6
+.param coeact  = 0.07e-6
+.param conpo   = 0.13e-6
+
+.param u0_typ  = 121.44
+.param u0s     = 140.1
+.param lint    = 3.3032e-08
+.param lmin    = 0.35e-6
+.param dwu0    = -0.031413
+.param wint    = 1.0263e-08
+
+.param coepo   = 0.07e-6
+.param ncrg    = 2
+
+
+*  
+.param  cjbr   = 0.001071
+.param  cjgr   = 1.6943e-10
+.param  cjsr   = 5.636e-11
+.param  jsdbr  = 6.7438e-08
+.param  jsdgr  = 1e-16
+.param  jsdsr  = 1e-15
+.param  jsgbr  = 1.9906e-06
+.param  jsggr  = 2.9388e-11
+.param  jsgsr  = 5.1247e-11
+ 
+
+*
+* variant parameters:
+*--------------------
+.param xl      = pmos3v3_xl
+.param xw      = pmos3v3_xw
+.param tox     = pmos3v3_tox
+.param vth     = pmos3v3_vth0
+.param nlx     = pmos3v3_nlx
+.param drdsw   = pmos3v3_drdsw
+.param dmu     = pmos3v3_dmu
+
+.param rshg    = pmos3v3_rshg
+.param rconpo  = pmos3v3_rconpo
+
+
+.param dcjb    = pmos3v3_dcjb
+.param dcjgate = pmos3v3_dcjgate
+.param dcjsw   = pmos3v3_dcjsw
+.param djsdbr  = pmos3v3_djsdbr
+.param djsdgr  = pmos3v3_djsdgr
+.param djsdsr  = pmos3v3_djsdsr
+.param djsgbr  = pmos3v3_djsgbr
+.param djsggr  = pmos3v3_djsggr
+.param djsgsr  = pmos3v3_djsgsr
+.param prwb    = pmos3v3_prwb
+
+.param dcfring = pmos3v3_dcfring
+* effective length and width:
+*----------------------------
+.param we      = {(w/nfing+xw-2*wint)}
+.param le      = {l+xl-2.0*lint}
+* Equations for mismatch deviations:
+*-----------------------------------
+.PARAM dvth0_alpha = 4.78e-9
+.PARAM dvth0_beta  = 0.0
+.PARAM dvth0_fudge  = 1.25
+.PARAM dvth0_sig = {((dvth0_alpha/sqrt(W*L))+dvth0_beta)*dvth0_fudge/sqrt(2.0*number)}
+.PARAM dvth0_dev = 0.0 DEV/gauss = {dvth0_sig*MOS3V3_DEV*mismatch}
+.PARAM dbeta_alpha = 0.64e-8
+.PARAM dbeta_beta  = 0.0
+.PARAM dbeta_fudge  = 1.25
+.PARAM dbeta_sig = {((dbeta_alpha/sqrt(W*L))+dbeta_beta)*dbeta_fudge/sqrt(2.0*number)}
+.PARAM dbeta_dev = 0.0 DEV/gauss = {dbeta_sig*MOS3V3_DEV*mismatch}
+
+* Mobility model improvement:
+*----------------------------
+.param epsilon2 = 1e-18
+.param llimit = {6.97154e-07-xl} 
+.param wlimit = {1.833726e-06-xw} 
+
+.param dwu = dwu0
+
+.param mobility = {2.0/((1.0/u0_typ+1.0/u0s)+(llimit+xl
++ -2.0*lint-sqrt((llimit-l)*(llimit-l)+epsilon2))*(1.0/u0s-1.0/u0_typ)/le)
++ *(w/nfing-2.0*((wint-xw/2.0)*(1.0+2.0*(dwu))-(dwu)*wlimit
++ +(dwu)*0.5*(wlimit-w/nfing)+0.5*(dwu)*sqrt((wlimit-w/nfing)*(wlimit-w/nfing)+epsilon2)))/we}
+.param u0 = {mobility*(1.0+dbeta_dev)*(1+dmu)} 
+* Equations for Threshold voltage vth0 and body factor K1:
+*---------------------------------------------------------
+.param  eg0   =  {1.16-(7.02e-4*((273.15+27)^2)/(27+1381))}
+.param  ni    =  {1.45e10*(((273.15+27)/300.15)^1.5)*exp(21.5565981-eg0/(1.725e-4*(273.15+27)))}
+.param  phis  =  {1.725e-4*(273.15+27)*LOG(4.4087e+17/ni)}
+.param  k2    =  {0*(tox/6.7252e-09)}
+
+.param  k1    =  {0.74541+(-0.5055-vth)/sqrt(phis)}
+.param  vth0  =  {vth-dvth0_dev} 
+
+.param  nch   =  {4.4087e+17*(6.7252e-09*6.7252e-09)/(tox*tox)*(k1*k1)/(0.74541*0.74541)}
+
+* Equations for access resistance:
+*---------------------------------
+
+.param  rdsw  =  {775.21*(1+drdsw)}
+
+
+.param vth0eff          = vth0
+.param u0eff            = u0
+
+.param rdsweff          = rdsw
+
+* Equations for fringing capacitance:
+*------------------------------------
+.param  cf    =  dcfring
+* Equations for overlap capacitance:
+*-----------------------------------
+.param  cgsl  =  {2.3776e-10*(6.7252e-09/tox)}
+.param  cgdl  =  {2.3776e-10*(6.7252e-09/tox)}
+
+* Equations for VT:
+*-----------------
+
+.param  w0    =  {1.1134e-06+(0-xw)}
+
+
+.param k3 = {0*(6.7252e-09/tox)}
+.param dvt0 = 3.0715
+
+
+.param  k3b   =  {3.934*(6.7252e-09/tox)}
+.param  lk3   =  {0*((lmin+xl-(2*lint))*6.7252e-09/(lmin+-1.5e-08-(2*lint))/tox)}
+
+
+.param lketaexp = {valif((1.0e-6/le-1.0/0.23817)/0.9 > 34, 34, (1.0e-6/le-1.0/0.23817)/0.9)}
+.param lketa    = {-0.021549/(1.0+exp(lketaexp))} 
+
+
+
+
+.param xgw    = {cons-coepo-coeact}
+.param xgl    = {-xl}
+.param lhead  = {nfing*l+(nfing-1)*(conw+2*conpo+(ncrsd-1)*(conw+cons))}
+.param nchead = {ncrg*(1+trunc(max(0,(lhead-conw-2*coepo))/(conw+cons)))}
+.param rgeltd = {rshg*(xgw+(w/nfing+xw)/(3*ngcon))/(ngcon*(l-xgl)*nfing)}
+.param rgcon  = {rconpo/(nchead*ngcon)}
+
+RG G Gi {(rgeltd+rgcon)/number}
+M1 D Gi S B P3V3NQSRG w={w/nfing} l=l as={as/nfing} ad={ad/nfing} ps={ps/nfing} pd={pd/nfing}
++          m={number*nfing} nrd={nrd*nfing} nrs={nrs*nfing}
+
+
+
+.MODEL P3V3NQSRG pmos
++ level=53
++ version=3.2           nqsmod=1              xw=xw                 
++ xl=xl                 wmin=3e-07            wmax=1                
++ lmin=3.5e-07          lmax=1e-05            mobmod=1              
++ capmod=3              noimod=2              binunit=1             
++ js=0                  jsw=0                 lint=3.3032e-08       
++ ll=0                  lln=1                 lw=0                  
++ lwn=1                 lwl=0                 wint=1.0263e-08       
++ wl=0                  wln=1                 ww=0                  
++ wwn=1                 wwl=0                 tnom=27               
++ tox=tox               cj=0                  mj=0.33               
++ cjsw=0                mjsw=0.5              cjswg=0               
++ mjswg=0.5             cgso=1.9956e-10       cgdo=1.9956e-10       
++ cgbo=1e-12            xpart=0               dwg=-3.2987e-09       
++ dwb=-4.5845e-09       nch=nch               ngate=2.2276e+20      
++ xj=5e-08              u0=u0eff              vth0=vth0eff          
++ k1=k1                 k2=k2                 k3=k3                 
++ lk3=lk3               k3b=k3b               w0=w0                 
++ nlx=nlx               dvt0=dvt0             dvt1=0.57062          
++ dvt2=-0.066628        dvt0w=0               dvt1w=5.3e+06         
++ dvt2w=-0.032          ua=8.7283e-10         ub=1.6763e-18         
++ uc=-6.8306e-11        delta=0.0054542       rdsw=rdsweff          
++ lrdsw=0               prdsw=11.825          prwg=-5.457e-15       
++ prwb=prwb             wr=1                  vsat=161970           
++ a0=1.0534             keta=-0.0030956       lketa=lketa           
++ ags=0.18717           a1=0                  a2=0.2591             
++ b0=1.0124e-08         b1=1.3995e-08         alpha0=1.3884e-07     
++ beta0=32.297          lbeta0=-0.1489        voff=-0.14726         
++ nfactor=0.82019       cdsc=-0.003           cdscb=0               
++ cdscd=4.0095e-07      cit=0                 eta0=3.3329e-06       
++ etab=-0.0085076       dsub=0.56             drout=0.22207         
++ pclm=2.294            pdiblc1=0.022536      pdiblc2=0.00015005    
++ pdiblcb=0.040996      lpdiblcb=-0.041201    pscbe1=1e+15          
++ pscbe2=1e-18          pvag=0.0096975        ute=-1.305            
++ at=22691              ua1=7.853e-11         ub1=-2.328e-18        
++ uc1=-5.6e-11          kt1=-0.32435          kt1l=3.7936e-09       
++ kt2=-0.039366         prt=0.0019994         cgsl=cgsl             
++ cgdl=cgdl             ckappa=1.8105         cf=cf                 
++ clc=1e-07             cle=0.6               dlc=5.4074e-08        
++ noff=1.9415           voffcv=-0.080328      lvoffcv=-1.224e-05    
++ alpha1=10             acde=0.42517          moin=5.0399           
++ llc=0                 lwc=0                 lwlc=0                
++ wlc=0                 wwc=0                 wwlc=0                
++ elm=5                 ef=1                  em=501000             
++ noia=7.05e+18         noib=700000           noic=0
+*  
+* -- JUNCAP Electrical Parameters for S/D regions  (Simulator specific)
++ vr=0                  cjbr={cjbr*(1+dcjb)}  cjsr={cjsr*(1+dcjsw)} 
++ cjgr={cjgr*(1+dcjgate)}  jsdbr={jsdbr*10^djsdbr} 
++ jsdsr={jsdsr*10^djsdsr} jsdgr={jsdgr*10^djsdgr} 
++ jsgbr={jsgbr*10^djsgbr} jsgsr={jsgsr*10^djsgsr} 
++ jsggr={jsggr*10^djsggr}  vdbr=0.68686          vdsr=0.58744          
++ vdgr=0.99942          pb=0.32122            ps=0.15               
++ pg=0.49201             nbj=0.97              nsj=0.93              
++ ngj=1
++ 
++ trdio9=27             diolev=9              dcaplev=0             
++ rlev=1                alev=3
+ 
+
+* + 
+.ends EP3V3GP_BS3NQSJURG
+
+.endl mos3v3_MODEL
+

@@ -1,0 +1,142 @@
+
+
+*----------------------------------------------------------------------
+*                           Process Variations
+*----------------------------------------------------------------------
+* TEMPLATE   : statistic_eldoN.t,v 2.0 2002/04/03 15:02:24
+* PARAMETERS : statistic.dds,v 2.8 2002/06/04 11:44:06
+* TRANSLATOR : ddspp.tcl,v 1.47 2001/09/11 08:03:16
+* Translated by re11 on June 14, 2002
+* PACKAGE    : modelString.tcl,v 1.13 2002/04/10 07:19:16
+* PACKAGE    : statPackage.tcl,v 1.15 2001/11/26 16:05:19
+*----------------------------------------------------------------------
+* (C) Copyright STMicroelectronics
+*     Unauthorized Reproduction and Communication Strictly Prohibited.
+*----------------------------------------------------------------------
+
+.lib PRO_TT
+
+.param nsigma_go1_dcfring  =  0
+.param nsigma_go1_dtoxn  =  0
+.param nsigma_go1_ll_dtoxn  =  0
+
+
+.lib "common_go1.lib" PRO_PARAM
+.lib "common_go1.lib" PRO_CORREL
+.endl PRO_TT
+.lib PRO_FF
+
+.param nsigma_go1_dcfring  =  2
+.param nsigma_go1_dtoxn  =  -2
+.param nsigma_go1_ll_dtoxn  =  -2
+
+
+.lib "common_go1.lib" PRO_PARAM
+.lib "common_go1.lib" PRO_CORREL
+.endl PRO_FF
+.lib PRO_SS
+
+.param nsigma_go1_dcfring  =  -2
+.param nsigma_go1_dtoxn  =  2
+.param nsigma_go1_ll_dtoxn  =  2
+
+
+.lib "common_go1.lib" PRO_PARAM
+.lib "common_go1.lib" PRO_CORREL
+.endl PRO_SS
+.lib PRO_FFA
+
+.param nsigma_go1_dcfring  =  3
+.param nsigma_go1_dtoxn  =  -3
+.param nsigma_go1_ll_dtoxn  =  -3
+
+
+.lib "common_go1.lib" PRO_PARAM
+.lib "common_go1.lib" PRO_CORREL
+.endl PRO_FFA
+.lib PRO_SSA
+
+.param nsigma_go1_dcfring  =  -3
+.param nsigma_go1_dtoxn  =  3
+.param nsigma_go1_ll_dtoxn  =  3
+
+
+.lib "common_go1.lib" PRO_PARAM
+.lib "common_go1.lib" PRO_CORREL
+.endl PRO_SSA
+.lib PRO_FS
+
+.param nsigma_go1_dcfring  =  0
+.param nsigma_go1_dtoxn  =  0
+.param nsigma_go1_ll_dtoxn  =  0
+
+
+.lib "common_go1.lib" PRO_PARAM
+.lib "common_go1.lib" PRO_CORREL
+.endl PRO_FS
+.lib PRO_SF
+
+.param nsigma_go1_dcfring  =  0
+.param nsigma_go1_dtoxn  =  0
+.param nsigma_go1_ll_dtoxn  =  0
+
+
+.lib "common_go1.lib" PRO_PARAM
+.lib "common_go1.lib" PRO_CORREL
+.endl PRO_SF
+.lib PRO_FSA
+
+.param nsigma_go1_dcfring  =  0
+.param nsigma_go1_dtoxn  =  0
+.param nsigma_go1_ll_dtoxn  =  0
+
+
+.lib "common_go1.lib" PRO_PARAM
+.lib "common_go1.lib" PRO_CORREL
+.endl PRO_FSA
+.lib PRO_SFA
+
+.param nsigma_go1_dcfring  =  0
+.param nsigma_go1_dtoxn  =  0
+.param nsigma_go1_ll_dtoxn  =  0
+
+
+.lib "common_go1.lib" PRO_PARAM
+.lib "common_go1.lib" PRO_CORREL
+.endl PRO_SFA
+.lib PRO_PARAM
+
+
+*----------------------------------------------
+*                   common_go1 
+*----------------------------------------------
+.param go1_dtoxn = {0.0e-10+0.5*0.50e-10*nsigma_go1_dtoxn}
+.param go1_ll_dtoxn = {0.0e-10+0.5*0.66e-10*nsigma_go1_ll_dtoxn}
+.param go1_dcfring = {0.0+0.5*0.3e-10*nsigma_go1_dcfring}
+
+
+.endl PRO_PARAM
+.lib PRO_stat
+
+*----------------------------------------------
+*                   common_go1 
+*----------------------------------------------
+.PARAM go1_dtoxn = 0.0e-10 LOT/uniform={0.50e-10}
+.PARAM go1_ll_dtoxn = 0.0e-10 LOT/uniform={0.66e-10}
+.PARAM go1_dcfring = 0.0 LOT/uniform={0.3e-10}
+
+
+.lib "common_go1.lib" PRO_CORREL
+.endl PRO_stat
+.lib PRO_CORREL
+
+*----------------------------------------------
+*                   common_go1 
+*----------------------------------------------
+.PARAM go1_ll_toxn = {24.9e-10+go1_ll_dtoxn}
+.PARAM go1_ll_toxp = {23.5e-10+go1_ll_dtoxn}
+.PARAM go1_toxn = {23.5e-10+go1_dtoxn}
+.PARAM go1_toxp = {23.5e-10+go1_dtoxn}
+
+
+.endl PRO_CORREL

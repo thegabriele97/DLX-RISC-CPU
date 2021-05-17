@@ -1,0 +1,2038 @@
+
+
+.lib rpolys_typ
+
+*----------------------------------------------------------------------
+*                             RESISTOR
+*----------------------------------------------------------------------
+* TEMPLATE   : resistor_eldoN.t,v 2.0 2002/04/03 15:00:55
+* PARAMETERS : resistor.dds,v 1.29 2002/04/19 15:27:22
+* TRANSLATOR : ddspp.tcl,v 1.47 2001/09/11 08:03:16
+* Translated by re11 on June 14, 2002
+* ----------------------------------------------------------------------
+* (C) Copyright STMicroelectronics (2002)
+*     Unauthorized Reproduction and Communication Strictly Prohibited.
+* ----------------------------------------------------------------------
+* PACKAGE    : modelString.tcl,v 1.13 2002/04/10 07:19:16
+* PACKAGE    : statPackage.tcl,v 1.15 2001/11/26 16:05:19
+*----------------------------------------------------------------------
+
+
+.subckt RPO1SAM1
+*----------------------------------------------------------------------
+* Family rpolys Model RPO1SAM1 typ mismatch
+* No maturity information available
+*----------------------------------------------------------------------
++ PLUS MINUS B  
++ param: r=107.752 w=1e-6 nc={max(trunc((w+0.18e-6-2*0.07e-6)/(0.16e-6+0.18e-6)),1)} mismatch=1 number=1
+*----------------------------------------------------------------------
+
+*----------------------------------------------------------------------
+* Parameters of rpolys Model RPO1SA corner typ
+*----------------------------------------------------------------------
+.param rsc     = 15
+.param rsc_typ = 15
+.param rhs     = 0.0
+.param rhs_typ = 0.0
+.param rho     = 10
+.param rho_typ = 10
+.param rhi     = 0e-6
+.param rhi_typ = 0e-6
+.param rhu     = 0
+.param rhu_typ = 0
+.param lhu     = 0.0e-6
+.param dl      = 0.0e-6
+.param dl_typ  = 0.0e-6
+.param dw      = -23e-9
+.param dw_typ  = -23e-9
+.param lhs     = 0.22e-6
+.param tc1     = 2.9e-3
+.param tc2     = -3e-7
+.param wcon    = 0.16e-6
+.param cap     = 1.18e-4
+.param cep     = 0.07e-6
+.param cf0p    = 4.60e-11
+*----------------------------------------------------------------------
+* Equations 
+*----------------------------------------------------------------------
+.param rt_typ  = {rsc_typ/nc+(rhu_typ*(lhu+0.5*dl_typ)+rhs_typ*lhs+rhi_typ)/(w-dw_typ)}
+.param l       = {dl_typ+(r-2*rt_typ)*(w-dw_typ)/rho_typ}
+*----------------------------------------------------------------------
+.param rt      = {rsc/nc+(rhu*(lhu+0.5*dl)+rhs*lhs+rhi)/(w-dw)}
+.param rbody   = {rho*(l-dl)/(w-dw)}
+.param rval1   = {rbody+2*rt}
+.param lr      = {l+2*lhs+2*cep+2*lhu+2*wcon} 
+*----------------------------------------------------------------------
+* Mismatch variations
+*----------------------------------------------------------------------
+.param cp_alpha = 0.0e-8
+.param cp_beta  = 0.0
+.param cp_fudge = 1.0
+.param Amc      = 1.3e-8
+.param Bmc      = 0e-2
+.param mm_fudge = 1.0
+.param areaeff  = {l*w}
+.param c_mm     = 0 dev/gauss={(((cp_alpha/sqrt(areaeff))+cp_beta)*cp_fudge/sqrt(2.0*number))*RPOLYS_DEV*mismatch}
+.param r_mm     = 0 dev/gauss={(((Amc/sqrt(areaeff))+Bmc)*mm_fudge/sqrt(2.0*number))*RPOLYS_DEV*mismatch}
+
+.param ctotal   = {(cap*(w-dw)*lr+2*cf0p*(w-dw+lr))}
+.param ctotalmm = {ctotal*(1+c_mm)}
+.param rtotalmm = {rval1*(1+r_mm)}
+
+*----------------------------------------------------------------------
+* netlist
+*---------------------------------------------------------------------- 
+*
+Res  PLUS  MINUS {rtotalmm/number} tc=tc1,tc2
+C1   PLUS  B     {(ctotalmm*number/2)}
+C2   MINUS B     {(ctotalmm*number/2)}
+.ends RPO1SAM1
+
+.subckt RPO1SAM2
+*----------------------------------------------------------------------
+* Family rpolys Model RPO1SAM2 typ mismatch
+* No maturity information available
+*----------------------------------------------------------------------
++ PLUS MINUS B  
++ param: r=107.752 w=1e-6 nc={max(trunc((w+0.18e-6-2*0.07e-6)/(0.16e-6+0.18e-6)),1)} mismatch=1 number=1
+*----------------------------------------------------------------------
+
+*----------------------------------------------------------------------
+* Parameters of rpolys Model RPO1SA corner typ
+*----------------------------------------------------------------------
+.param rsc     = 15
+.param rsc_typ = 15
+.param rhs     = 0.0
+.param rhs_typ = 0.0
+.param rho     = 10
+.param rho_typ = 10
+.param rhi     = 0e-6
+.param rhi_typ = 0e-6
+.param rhu     = 0
+.param rhu_typ = 0
+.param lhu     = 0.0e-6
+.param dl      = 0.0e-6
+.param dl_typ  = 0.0e-6
+.param dw      = -23e-9
+.param dw_typ  = -23e-9
+.param lhs     = 0.22e-6
+.param tc1     = 2.9e-3
+.param tc2     = -3e-7
+.param wcon    = 0.16e-6
+.param cap     = 1.18e-4
+.param cf0p    = 4.60e-11
+.param cep     = 0.07e-6
+*----------------------------------------------------------------------
+* Equations 
+*----------------------------------------------------------------------
+.param rt_typ  = {rsc_typ/nc+(rhu_typ*(lhu+0.5*dl_typ)+rhs_typ*lhs+rhi_typ)/(w-dw_typ)}
+.param l       = {dl_typ+(r-2*rt_typ)*(w-dw_typ)/rho_typ}
+.param rt      = {rsc/nc+(rhu*(lhu+0.5*dl)+rhs*lhs+rhi)/(w-dw)}
+.param rbody   = {rho*(l-dl)/(w-dw)}
+.param rtotal  = {rbody+2*rt}
+.param rval1   = {rt+0.1*rbody}
+.param cval1   = {cap*(w-dw)*(lhs+cep+wcon+lhu+0.5*dl)+cf0p*(w-dw+(2*lhs+2*cep+2*wcon+2*lhu+dl))}
+.param lr      = {l+2*lhs+2*cep+2*lhu+2*wcon}
+.param ctotal  = {cap*(w-dw)*lr+2*cf0p*(w-dw+lr)}
+*----------------------------------------------------------------------
+
+*----------------------------------------------------------------------
+* Mismatch variations. Only one contribution to the main resistor
+* otherwise, the 6 resistors would be uncorrelated.r*r_mm=deltaR
+* Same methodology with the parasitic capacitors.
+*----------------------------------------------------------------------
+.param areaeff  = {l*w}
+.param cp_alpha = 0.0e-8
+.param cp_beta  = 0.0
+.param cp_fudge = 1.0
+.param Amc      = 1.3e-8
+.param Bmc      = 0e-2
+.param mm_fudge = 1.0
+.param c_mm     = 0 dev/gauss={(((cp_alpha/sqrt(areaeff))+cp_beta)*cp_fudge/sqrt(2.0*number))*RPOLYS_DEV*mismatch}
+.param r_mm     = 0 dev/gauss={(((Amc/sqrt(areaeff))+Bmc)*mm_fudge/sqrt(2.0*number))*RPOLYS_DEV*mismatch}
+
+
+*----------------------------------------------------------------------
+* netlist
+*---------------------------------------------------------------------- *
+Rri1 PLUS 8     {rval1/number}       tc=tc1,tc2
+Rri2 8    9     {(0.2*rbody/number)} tc=tc1,tc2
+Rri3 9    10    {(0.2*rbody/number)} tc=tc1,tc2
+Res  10   11    {(0.2*rbody/number)+(rtotal/number*r_mm)} tc=tc1,tc2
+Rri5 11   12    {(0.2*rbody/number)} tc=tc1,tc2
+Rri6 12   MINUS {rval1/number}       tc=tc1,tc2
+C1   B    PLUS  {cval1*number}
+C3   B    8     {(cap*0.125*(w-dw)*(l-dl)+cf0p*0.25*(l-dl))*number}
+C4   B    9     {(cap*0.250*(w-dw)*(l-dl)+cf0p*0.50*(l-dl))*number}
+C5   B    10    {(cap*0.250*(w-dw)*(l-dl)+cf0p*0.50*(l-dl))*number+(ctotal*number*c_mm)}
+C6   B    11    {(cap*0.250*(w-dw)*(l-dl)+cf0p*0.50*(l-dl))*number}
+C7   B    12    {(cap*0.125*(w-dw)*(l-dl)+cf0p*0.25*(l-dl))*number}
+C9   B    MINUS {cval1*number}
+.ends RPO1SAM2
+
+
+
+.endl rpolys_typ
+
+
+.lib rpolys_rmin
+
+*----------------------------------------------------------------------
+*                             RESISTOR
+*----------------------------------------------------------------------
+* TEMPLATE   : resistor_eldoN.t,v 2.0 2002/04/03 15:00:55
+* PARAMETERS : resistor.dds,v 1.29 2002/04/19 15:27:22
+* TRANSLATOR : ddspp.tcl,v 1.47 2001/09/11 08:03:16
+* Translated by re11 on June 14, 2002
+* ----------------------------------------------------------------------
+* (C) Copyright STMicroelectronics (2002)
+*     Unauthorized Reproduction and Communication Strictly Prohibited.
+* ----------------------------------------------------------------------
+* PACKAGE    : modelString.tcl,v 1.13 2002/04/10 07:19:16
+* PACKAGE    : statPackage.tcl,v 1.15 2001/11/26 16:05:19
+*----------------------------------------------------------------------
+
+
+.subckt RPO1SAM1
+*----------------------------------------------------------------------
+* Family rpolys Model RPO1SAM1 rmin mismatch
+* No maturity information available
+*----------------------------------------------------------------------
++ PLUS MINUS B  
++ param: r=107.752 w=1e-6 nc={max(trunc((w+0.18e-6-2*0.07e-6)/(0.16e-6+0.18e-6)),1)} mismatch=1 number=1
+*----------------------------------------------------------------------
+
+*----------------------------------------------------------------------
+* Parameters of rpolys Model RPO1SA corner rmin
+*----------------------------------------------------------------------
+.param rsc     = 15
+.param rsc_typ = 15
+.param rhs     = 0.0
+.param rhs_typ = 0.0
+.param rho     = 6
+.param rho_typ = 10
+.param rhi     = 0e-6
+.param rhi_typ = 0e-6
+.param rhu     = 0
+.param rhu_typ = 0
+.param lhu     = 0.0e-6
+.param dl      = 0.0e-6
+.param dl_typ  = 0.0e-6
+.param dw      = -35e-9
+.param dw_typ  = -23e-9
+.param lhs     = 0.22e-6
+.param tc1     = 2.9e-3
+.param tc2     = -3e-7
+.param wcon    = 0.16e-6
+.param cap     = 1.01e-4
+.param cep     = 0.07e-6
+.param cf0p    = 4.16e-11
+*----------------------------------------------------------------------
+* Equations 
+*----------------------------------------------------------------------
+.param rt_typ  = {rsc_typ/nc+(rhu_typ*(lhu+0.5*dl_typ)+rhs_typ*lhs+rhi_typ)/(w-dw_typ)}
+.param l       = {dl_typ+(r-2*rt_typ)*(w-dw_typ)/rho_typ}
+*----------------------------------------------------------------------
+.param rt      = {rsc/nc+(rhu*(lhu+0.5*dl)+rhs*lhs+rhi)/(w-dw)}
+.param rbody   = {rho*(l-dl)/(w-dw)}
+.param rval1   = {rbody+2*rt}
+.param lr      = {l+2*lhs+2*cep+2*lhu+2*wcon} 
+*----------------------------------------------------------------------
+* Mismatch variations
+*----------------------------------------------------------------------
+.param cp_alpha = 0.0e-8
+.param cp_beta  = 0.0
+.param cp_fudge = 1.0
+.param Amc      = 1.3e-8
+.param Bmc      = 0e-2
+.param mm_fudge = 1.0
+.param areaeff  = {l*w}
+.param c_mm     = 0 dev/gauss={(((cp_alpha/sqrt(areaeff))+cp_beta)*cp_fudge/sqrt(2.0*number))*RPOLYS_DEV*mismatch}
+.param r_mm     = 0 dev/gauss={(((Amc/sqrt(areaeff))+Bmc)*mm_fudge/sqrt(2.0*number))*RPOLYS_DEV*mismatch}
+
+.param ctotal   = {(cap*(w-dw)*lr+2*cf0p*(w-dw+lr))}
+.param ctotalmm = {ctotal*(1+c_mm)}
+.param rtotalmm = {rval1*(1+r_mm)}
+
+*----------------------------------------------------------------------
+* netlist
+*---------------------------------------------------------------------- 
+*
+Res  PLUS  MINUS {rtotalmm/number} tc=tc1,tc2
+C1   PLUS  B     {(ctotalmm*number/2)}
+C2   MINUS B     {(ctotalmm*number/2)}
+.ends RPO1SAM1
+
+.subckt RPO1SAM2
+*----------------------------------------------------------------------
+* Family rpolys Model RPO1SAM2 rmin mismatch
+* No maturity information available
+*----------------------------------------------------------------------
++ PLUS MINUS B  
++ param: r=107.752 w=1e-6 nc={max(trunc((w+0.18e-6-2*0.07e-6)/(0.16e-6+0.18e-6)),1)} mismatch=1 number=1
+*----------------------------------------------------------------------
+
+*----------------------------------------------------------------------
+* Parameters of rpolys Model RPO1SA corner rmin
+*----------------------------------------------------------------------
+.param rsc     = 15
+.param rsc_typ = 15
+.param rhs     = 0.0
+.param rhs_typ = 0.0
+.param rho     = 6
+.param rho_typ = 10
+.param rhi     = 0e-6
+.param rhi_typ = 0e-6
+.param rhu     = 0
+.param rhu_typ = 0
+.param lhu     = 0.0e-6
+.param dl      = 0.0e-6
+.param dl_typ  = 0.0e-6
+.param dw      = -35e-9
+.param dw_typ  = -23e-9
+.param lhs     = 0.22e-6
+.param tc1     = 2.9e-3
+.param tc2     = -3e-7
+.param wcon    = 0.16e-6
+.param cap     = 1.01e-4
+.param cf0p    = 4.16e-11
+.param cep     = 0.07e-6
+*----------------------------------------------------------------------
+* Equations 
+*----------------------------------------------------------------------
+.param rt_typ  = {rsc_typ/nc+(rhu_typ*(lhu+0.5*dl_typ)+rhs_typ*lhs+rhi_typ)/(w-dw_typ)}
+.param l       = {dl_typ+(r-2*rt_typ)*(w-dw_typ)/rho_typ}
+.param rt      = {rsc/nc+(rhu*(lhu+0.5*dl)+rhs*lhs+rhi)/(w-dw)}
+.param rbody   = {rho*(l-dl)/(w-dw)}
+.param rtotal  = {rbody+2*rt}
+.param rval1   = {rt+0.1*rbody}
+.param cval1   = {cap*(w-dw)*(lhs+cep+wcon+lhu+0.5*dl)+cf0p*(w-dw+(2*lhs+2*cep+2*wcon+2*lhu+dl))}
+.param lr      = {l+2*lhs+2*cep+2*lhu+2*wcon}
+.param ctotal  = {cap*(w-dw)*lr+2*cf0p*(w-dw+lr)}
+*----------------------------------------------------------------------
+
+*----------------------------------------------------------------------
+* Mismatch variations. Only one contribution to the main resistor
+* otherwise, the 6 resistors would be uncorrelated.r*r_mm=deltaR
+* Same methodology with the parasitic capacitors.
+*----------------------------------------------------------------------
+.param areaeff  = {l*w}
+.param cp_alpha = 0.0e-8
+.param cp_beta  = 0.0
+.param cp_fudge = 1.0
+.param Amc      = 1.3e-8
+.param Bmc      = 0e-2
+.param mm_fudge = 1.0
+.param c_mm     = 0 dev/gauss={(((cp_alpha/sqrt(areaeff))+cp_beta)*cp_fudge/sqrt(2.0*number))*RPOLYS_DEV*mismatch}
+.param r_mm     = 0 dev/gauss={(((Amc/sqrt(areaeff))+Bmc)*mm_fudge/sqrt(2.0*number))*RPOLYS_DEV*mismatch}
+
+
+*----------------------------------------------------------------------
+* netlist
+*---------------------------------------------------------------------- *
+Rri1 PLUS 8     {rval1/number}       tc=tc1,tc2
+Rri2 8    9     {(0.2*rbody/number)} tc=tc1,tc2
+Rri3 9    10    {(0.2*rbody/number)} tc=tc1,tc2
+Res  10   11    {(0.2*rbody/number)+(rtotal/number*r_mm)} tc=tc1,tc2
+Rri5 11   12    {(0.2*rbody/number)} tc=tc1,tc2
+Rri6 12   MINUS {rval1/number}       tc=tc1,tc2
+C1   B    PLUS  {cval1*number}
+C3   B    8     {(cap*0.125*(w-dw)*(l-dl)+cf0p*0.25*(l-dl))*number}
+C4   B    9     {(cap*0.250*(w-dw)*(l-dl)+cf0p*0.50*(l-dl))*number}
+C5   B    10    {(cap*0.250*(w-dw)*(l-dl)+cf0p*0.50*(l-dl))*number+(ctotal*number*c_mm)}
+C6   B    11    {(cap*0.250*(w-dw)*(l-dl)+cf0p*0.50*(l-dl))*number}
+C7   B    12    {(cap*0.125*(w-dw)*(l-dl)+cf0p*0.25*(l-dl))*number}
+C9   B    MINUS {cval1*number}
+.ends RPO1SAM2
+
+
+
+.endl rpolys_rmin
+
+
+.lib rpolys_rmax
+
+*----------------------------------------------------------------------
+*                             RESISTOR
+*----------------------------------------------------------------------
+* TEMPLATE   : resistor_eldoN.t,v 2.0 2002/04/03 15:00:55
+* PARAMETERS : resistor.dds,v 1.29 2002/04/19 15:27:22
+* TRANSLATOR : ddspp.tcl,v 1.47 2001/09/11 08:03:16
+* Translated by re11 on June 14, 2002
+* ----------------------------------------------------------------------
+* (C) Copyright STMicroelectronics (2002)
+*     Unauthorized Reproduction and Communication Strictly Prohibited.
+* ----------------------------------------------------------------------
+* PACKAGE    : modelString.tcl,v 1.13 2002/04/10 07:19:16
+* PACKAGE    : statPackage.tcl,v 1.15 2001/11/26 16:05:19
+*----------------------------------------------------------------------
+
+
+.subckt RPO1SAM1
+*----------------------------------------------------------------------
+* Family rpolys Model RPO1SAM1 rmax mismatch
+* No maturity information available
+*----------------------------------------------------------------------
++ PLUS MINUS B  
++ param: r=107.752 w=1e-6 nc={max(trunc((w+0.18e-6-2*0.07e-6)/(0.16e-6+0.18e-6)),1)} mismatch=1 number=1
+*----------------------------------------------------------------------
+
+*----------------------------------------------------------------------
+* Parameters of rpolys Model RPO1SA corner rmax
+*----------------------------------------------------------------------
+.param rsc     = 30.0
+.param rsc_typ = 15
+.param rhs     = 0.0
+.param rhs_typ = 0.0
+.param rho     = 14
+.param rho_typ = 10
+.param rhi     = 0e-6
+.param rhi_typ = 0e-6
+.param rhu     = 0
+.param rhu_typ = 0
+.param lhu     = 0.0e-6
+.param dl      = 0.0e-6
+.param dl_typ  = 0.0e-6
+.param dw      = -11e-9
+.param dw_typ  = -23e-9
+.param lhs     = 0.22e-6
+.param tc1     = 2.9e-3
+.param tc2     = -3e-7
+.param wcon    = 0.16e-6
+.param cap     = 1.39e-4
+.param cep     = 0.07e-6
+.param cf0p    = 5.09e-11
+*----------------------------------------------------------------------
+* Equations 
+*----------------------------------------------------------------------
+.param rt_typ  = {rsc_typ/nc+(rhu_typ*(lhu+0.5*dl_typ)+rhs_typ*lhs+rhi_typ)/(w-dw_typ)}
+.param l       = {dl_typ+(r-2*rt_typ)*(w-dw_typ)/rho_typ}
+*----------------------------------------------------------------------
+.param rt      = {rsc/nc+(rhu*(lhu+0.5*dl)+rhs*lhs+rhi)/(w-dw)}
+.param rbody   = {rho*(l-dl)/(w-dw)}
+.param rval1   = {rbody+2*rt}
+.param lr      = {l+2*lhs+2*cep+2*lhu+2*wcon} 
+*----------------------------------------------------------------------
+* Mismatch variations
+*----------------------------------------------------------------------
+.param cp_alpha = 0.0e-8
+.param cp_beta  = 0.0
+.param cp_fudge = 1.0
+.param Amc      = 1.3e-8
+.param Bmc      = 0e-2
+.param mm_fudge = 1.0
+.param areaeff  = {l*w}
+.param c_mm     = 0 dev/gauss={(((cp_alpha/sqrt(areaeff))+cp_beta)*cp_fudge/sqrt(2.0*number))*RPOLYS_DEV*mismatch}
+.param r_mm     = 0 dev/gauss={(((Amc/sqrt(areaeff))+Bmc)*mm_fudge/sqrt(2.0*number))*RPOLYS_DEV*mismatch}
+
+.param ctotal   = {(cap*(w-dw)*lr+2*cf0p*(w-dw+lr))}
+.param ctotalmm = {ctotal*(1+c_mm)}
+.param rtotalmm = {rval1*(1+r_mm)}
+
+*----------------------------------------------------------------------
+* netlist
+*---------------------------------------------------------------------- 
+*
+Res  PLUS  MINUS {rtotalmm/number} tc=tc1,tc2
+C1   PLUS  B     {(ctotalmm*number/2)}
+C2   MINUS B     {(ctotalmm*number/2)}
+.ends RPO1SAM1
+
+.subckt RPO1SAM2
+*----------------------------------------------------------------------
+* Family rpolys Model RPO1SAM2 rmax mismatch
+* No maturity information available
+*----------------------------------------------------------------------
++ PLUS MINUS B  
++ param: r=107.752 w=1e-6 nc={max(trunc((w+0.18e-6-2*0.07e-6)/(0.16e-6+0.18e-6)),1)} mismatch=1 number=1
+*----------------------------------------------------------------------
+
+*----------------------------------------------------------------------
+* Parameters of rpolys Model RPO1SA corner rmax
+*----------------------------------------------------------------------
+.param rsc     = 30.0
+.param rsc_typ = 15
+.param rhs     = 0.0
+.param rhs_typ = 0.0
+.param rho     = 14
+.param rho_typ = 10
+.param rhi     = 0e-6
+.param rhi_typ = 0e-6
+.param rhu     = 0
+.param rhu_typ = 0
+.param lhu     = 0.0e-6
+.param dl      = 0.0e-6
+.param dl_typ  = 0.0e-6
+.param dw      = -11e-9
+.param dw_typ  = -23e-9
+.param lhs     = 0.22e-6
+.param tc1     = 2.9e-3
+.param tc2     = -3e-7
+.param wcon    = 0.16e-6
+.param cap     = 1.39e-4
+.param cf0p    = 5.09e-11
+.param cep     = 0.07e-6
+*----------------------------------------------------------------------
+* Equations 
+*----------------------------------------------------------------------
+.param rt_typ  = {rsc_typ/nc+(rhu_typ*(lhu+0.5*dl_typ)+rhs_typ*lhs+rhi_typ)/(w-dw_typ)}
+.param l       = {dl_typ+(r-2*rt_typ)*(w-dw_typ)/rho_typ}
+.param rt      = {rsc/nc+(rhu*(lhu+0.5*dl)+rhs*lhs+rhi)/(w-dw)}
+.param rbody   = {rho*(l-dl)/(w-dw)}
+.param rtotal  = {rbody+2*rt}
+.param rval1   = {rt+0.1*rbody}
+.param cval1   = {cap*(w-dw)*(lhs+cep+wcon+lhu+0.5*dl)+cf0p*(w-dw+(2*lhs+2*cep+2*wcon+2*lhu+dl))}
+.param lr      = {l+2*lhs+2*cep+2*lhu+2*wcon}
+.param ctotal  = {cap*(w-dw)*lr+2*cf0p*(w-dw+lr)}
+*----------------------------------------------------------------------
+
+*----------------------------------------------------------------------
+* Mismatch variations. Only one contribution to the main resistor
+* otherwise, the 6 resistors would be uncorrelated.r*r_mm=deltaR
+* Same methodology with the parasitic capacitors.
+*----------------------------------------------------------------------
+.param areaeff  = {l*w}
+.param cp_alpha = 0.0e-8
+.param cp_beta  = 0.0
+.param cp_fudge = 1.0
+.param Amc      = 1.3e-8
+.param Bmc      = 0e-2
+.param mm_fudge = 1.0
+.param c_mm     = 0 dev/gauss={(((cp_alpha/sqrt(areaeff))+cp_beta)*cp_fudge/sqrt(2.0*number))*RPOLYS_DEV*mismatch}
+.param r_mm     = 0 dev/gauss={(((Amc/sqrt(areaeff))+Bmc)*mm_fudge/sqrt(2.0*number))*RPOLYS_DEV*mismatch}
+
+
+*----------------------------------------------------------------------
+* netlist
+*---------------------------------------------------------------------- *
+Rri1 PLUS 8     {rval1/number}       tc=tc1,tc2
+Rri2 8    9     {(0.2*rbody/number)} tc=tc1,tc2
+Rri3 9    10    {(0.2*rbody/number)} tc=tc1,tc2
+Res  10   11    {(0.2*rbody/number)+(rtotal/number*r_mm)} tc=tc1,tc2
+Rri5 11   12    {(0.2*rbody/number)} tc=tc1,tc2
+Rri6 12   MINUS {rval1/number}       tc=tc1,tc2
+C1   B    PLUS  {cval1*number}
+C3   B    8     {(cap*0.125*(w-dw)*(l-dl)+cf0p*0.25*(l-dl))*number}
+C4   B    9     {(cap*0.250*(w-dw)*(l-dl)+cf0p*0.50*(l-dl))*number}
+C5   B    10    {(cap*0.250*(w-dw)*(l-dl)+cf0p*0.50*(l-dl))*number+(ctotal*number*c_mm)}
+C6   B    11    {(cap*0.250*(w-dw)*(l-dl)+cf0p*0.50*(l-dl))*number}
+C7   B    12    {(cap*0.125*(w-dw)*(l-dl)+cf0p*0.25*(l-dl))*number}
+C9   B    MINUS {cval1*number}
+.ends RPO1SAM2
+
+
+
+.endl rpolys_rmax
+
+
+.lib rpolyp_typ
+
+*----------------------------------------------------------------------
+*                             RESISTOR
+*----------------------------------------------------------------------
+* TEMPLATE   : resistor_eldoN.t,v 2.0 2002/04/03 15:00:55
+* PARAMETERS : resistor.dds,v 1.29 2002/04/19 15:27:22
+* TRANSLATOR : ddspp.tcl,v 1.47 2001/09/11 08:03:16
+* Translated by re11 on June 14, 2002
+* ----------------------------------------------------------------------
+* (C) Copyright STMicroelectronics (2002)
+*     Unauthorized Reproduction and Communication Strictly Prohibited.
+* ----------------------------------------------------------------------
+* PACKAGE    : modelString.tcl,v 1.13 2002/04/10 07:19:16
+* PACKAGE    : statPackage.tcl,v 1.15 2001/11/26 16:05:19
+*----------------------------------------------------------------------
+
+
+.subckt RPO1PM1
+*----------------------------------------------------------------------
+* Family rpolyp Model RPO1PM1 typ mismatch
+* No maturity information available
+*----------------------------------------------------------------------
++ PLUS MINUS B  
++ param: r=1180.04 w=1e-6 nc={max(trunc((w+0.18e-6-2*0.07e-6)/(0.16e-6+0.18e-6)),1)} mismatch=1 number=1
+*----------------------------------------------------------------------
+
+*----------------------------------------------------------------------
+* Parameters of rpolyp Model RPO1P corner typ
+*----------------------------------------------------------------------
+.param rsc     = 15.0
+.param rsc_typ = 15.0
+.param rhs     = 10
+.param rhs_typ = 10
+.param rho     = 320.0
+.param rho_typ = 320.0
+.param rhi     = 80e-6
+.param rhi_typ = 80e-6
+.param rhu     = 0
+.param rhu_typ = 0
+.param lhu     = 0.0e-6
+.param dl      = 0.0e-6
+.param dl_typ  = 0.0e-6
+.param dw      = 39e-9
+.param dw_typ  = 39e-9
+.param lhs     = 0.22e-6
+.param tc1     = -1.08e-4
+.param tc2     = 7.5e-7
+.param wcon    = 0.16e-6
+.param cap     = 1.18e-4
+.param cep     = 0.07e-6
+.param cf0p    = 4.60e-11
+*----------------------------------------------------------------------
+* Equations 
+*----------------------------------------------------------------------
+.param rt_typ  = {rsc_typ/nc+(rhu_typ*(lhu+0.5*dl_typ)+rhs_typ*lhs+rhi_typ)/(w-dw_typ)}
+.param l       = {dl_typ+(r-2*rt_typ)*(w-dw_typ)/rho_typ}
+*----------------------------------------------------------------------
+.param rt      = {rsc/nc+(rhu*(lhu+0.5*dl)+rhs*lhs+rhi)/(w-dw)}
+.param rbody   = {rho*(l-dl)/(w-dw)}
+.param rval1   = {rbody+2*rt}
+.param lr      = {l+2*lhs+2*cep+2*lhu+2*wcon} 
+*----------------------------------------------------------------------
+* Mismatch variations
+*----------------------------------------------------------------------
+.param cp_alpha = 0.0e-8
+.param cp_beta  = 0.0
+.param cp_fudge = 1.0
+.param Amc      = 2e-8
+.param Bmc      = 0e-2
+.param mm_fudge = 1.0
+.param areaeff  = {l*w}
+.param c_mm     = 0 dev/gauss={(((cp_alpha/sqrt(areaeff))+cp_beta)*cp_fudge/sqrt(2.0*number))*RPOLYP_DEV*mismatch}
+.param r_mm     = 0 dev/gauss={(((Amc/sqrt(areaeff))+Bmc)*mm_fudge/sqrt(2.0*number))*RPOLYP_DEV*mismatch}
+
+.param ctotal   = {(cap*(w-dw)*lr+2*cf0p*(w-dw+lr))}
+.param ctotalmm = {ctotal*(1+c_mm)}
+.param rtotalmm = {rval1*(1+r_mm)}
+
+*----------------------------------------------------------------------
+* netlist
+*---------------------------------------------------------------------- 
+*
+Res  PLUS  MINUS {rtotalmm/number} tc=tc1,tc2
+C1   PLUS  B     {(ctotalmm*number/2)}
+C2   MINUS B     {(ctotalmm*number/2)}
+.ends RPO1PM1
+
+.subckt RPO1PM2
+*----------------------------------------------------------------------
+* Family rpolyp Model RPO1PM2 typ mismatch
+* No maturity information available
+*----------------------------------------------------------------------
++ PLUS MINUS B  
++ param: r=1180.04 w=1e-6 nc={max(trunc((w+0.18e-6-2*0.07e-6)/(0.16e-6+0.18e-6)),1)} mismatch=1 number=1
+*----------------------------------------------------------------------
+
+*----------------------------------------------------------------------
+* Parameters of rpolyp Model RPO1P corner typ
+*----------------------------------------------------------------------
+.param rsc     = 15.0
+.param rsc_typ = 15.0
+.param rhs     = 10
+.param rhs_typ = 10
+.param rho     = 320.0
+.param rho_typ = 320.0
+.param rhi     = 80e-6
+.param rhi_typ = 80e-6
+.param rhu     = 0
+.param rhu_typ = 0
+.param lhu     = 0.0e-6
+.param dl      = 0.0e-6
+.param dl_typ  = 0.0e-6
+.param dw      = 39e-9
+.param dw_typ  = 39e-9
+.param lhs     = 0.22e-6
+.param tc1     = -1.08e-4
+.param tc2     = 7.5e-7
+.param wcon    = 0.16e-6
+.param cap     = 1.18e-4
+.param cf0p    = 4.60e-11
+.param cep     = 0.07e-6
+*----------------------------------------------------------------------
+* Equations 
+*----------------------------------------------------------------------
+.param rt_typ  = {rsc_typ/nc+(rhu_typ*(lhu+0.5*dl_typ)+rhs_typ*lhs+rhi_typ)/(w-dw_typ)}
+.param l       = {dl_typ+(r-2*rt_typ)*(w-dw_typ)/rho_typ}
+.param rt      = {rsc/nc+(rhu*(lhu+0.5*dl)+rhs*lhs+rhi)/(w-dw)}
+.param rbody   = {rho*(l-dl)/(w-dw)}
+.param rtotal  = {rbody+2*rt}
+.param rval1   = {rt+0.1*rbody}
+.param cval1   = {cap*(w-dw)*(lhs+cep+wcon+lhu+0.5*dl)+cf0p*(w-dw+(2*lhs+2*cep+2*wcon+2*lhu+dl))}
+.param lr      = {l+2*lhs+2*cep+2*lhu+2*wcon}
+.param ctotal  = {cap*(w-dw)*lr+2*cf0p*(w-dw+lr)}
+*----------------------------------------------------------------------
+
+*----------------------------------------------------------------------
+* Mismatch variations. Only one contribution to the main resistor
+* otherwise, the 6 resistors would be uncorrelated.r*r_mm=deltaR
+* Same methodology with the parasitic capacitors.
+*----------------------------------------------------------------------
+.param areaeff  = {l*w}
+.param cp_alpha = 0.0e-8
+.param cp_beta  = 0.0
+.param cp_fudge = 1.0
+.param Amc      = 2e-8
+.param Bmc      = 0e-2
+.param mm_fudge = 1.0
+.param c_mm     = 0 dev/gauss={(((cp_alpha/sqrt(areaeff))+cp_beta)*cp_fudge/sqrt(2.0*number))*RPOLYP_DEV*mismatch}
+.param r_mm     = 0 dev/gauss={(((Amc/sqrt(areaeff))+Bmc)*mm_fudge/sqrt(2.0*number))*RPOLYP_DEV*mismatch}
+
+
+*----------------------------------------------------------------------
+* netlist
+*---------------------------------------------------------------------- *
+Rri1 PLUS 8     {rval1/number}       tc=tc1,tc2
+Rri2 8    9     {(0.2*rbody/number)} tc=tc1,tc2
+Rri3 9    10    {(0.2*rbody/number)} tc=tc1,tc2
+Res  10   11    {(0.2*rbody/number)+(rtotal/number*r_mm)} tc=tc1,tc2
+Rri5 11   12    {(0.2*rbody/number)} tc=tc1,tc2
+Rri6 12   MINUS {rval1/number}       tc=tc1,tc2
+C1   B    PLUS  {cval1*number}
+C3   B    8     {(cap*0.125*(w-dw)*(l-dl)+cf0p*0.25*(l-dl))*number}
+C4   B    9     {(cap*0.250*(w-dw)*(l-dl)+cf0p*0.50*(l-dl))*number}
+C5   B    10    {(cap*0.250*(w-dw)*(l-dl)+cf0p*0.50*(l-dl))*number+(ctotal*number*c_mm)}
+C6   B    11    {(cap*0.250*(w-dw)*(l-dl)+cf0p*0.50*(l-dl))*number}
+C7   B    12    {(cap*0.125*(w-dw)*(l-dl)+cf0p*0.25*(l-dl))*number}
+C9   B    MINUS {cval1*number}
+.ends RPO1PM2
+
+
+
+.endl rpolyp_typ
+
+
+.lib rpolyp_rmin
+
+*----------------------------------------------------------------------
+*                             RESISTOR
+*----------------------------------------------------------------------
+* TEMPLATE   : resistor_eldoN.t,v 2.0 2002/04/03 15:00:55
+* PARAMETERS : resistor.dds,v 1.29 2002/04/19 15:27:22
+* TRANSLATOR : ddspp.tcl,v 1.47 2001/09/11 08:03:16
+* Translated by re11 on June 14, 2002
+* ----------------------------------------------------------------------
+* (C) Copyright STMicroelectronics (2002)
+*     Unauthorized Reproduction and Communication Strictly Prohibited.
+* ----------------------------------------------------------------------
+* PACKAGE    : modelString.tcl,v 1.13 2002/04/10 07:19:16
+* PACKAGE    : statPackage.tcl,v 1.15 2001/11/26 16:05:19
+*----------------------------------------------------------------------
+
+
+.subckt RPO1PM1
+*----------------------------------------------------------------------
+* Family rpolyp Model RPO1PM1 rmin mismatch
+* No maturity information available
+*----------------------------------------------------------------------
++ PLUS MINUS B  
++ param: r=1180.04 w=1e-6 nc={max(trunc((w+0.18e-6-2*0.07e-6)/(0.16e-6+0.18e-6)),1)} mismatch=1 number=1
+*----------------------------------------------------------------------
+
+*----------------------------------------------------------------------
+* Parameters of rpolyp Model RPO1P corner rmin
+*----------------------------------------------------------------------
+.param rsc     = 15.0
+.param rsc_typ = 15.0
+.param rhs     = 6
+.param rhs_typ = 10
+.param rho     = 280.0
+.param rho_typ = 320.0
+.param rhi     = 40e-6
+.param rhi_typ = 80e-6
+.param rhu     = 0
+.param rhu_typ = 0
+.param lhu     = 0.0e-6
+.param dl      = 0.0e-6
+.param dl_typ  = 0.0e-6
+.param dw      = 27e-9
+.param dw_typ  = 39e-9
+.param lhs     = 0.22e-6
+.param tc1     = -1.08e-4
+.param tc2     = 7.5e-7
+.param wcon    = 0.16e-6
+.param cap     = 1.01e-4
+.param cep     = 0.07e-6
+.param cf0p    = 4.16e-11
+*----------------------------------------------------------------------
+* Equations 
+*----------------------------------------------------------------------
+.param rt_typ  = {rsc_typ/nc+(rhu_typ*(lhu+0.5*dl_typ)+rhs_typ*lhs+rhi_typ)/(w-dw_typ)}
+.param l       = {dl_typ+(r-2*rt_typ)*(w-dw_typ)/rho_typ}
+*----------------------------------------------------------------------
+.param rt      = {rsc/nc+(rhu*(lhu+0.5*dl)+rhs*lhs+rhi)/(w-dw)}
+.param rbody   = {rho*(l-dl)/(w-dw)}
+.param rval1   = {rbody+2*rt}
+.param lr      = {l+2*lhs+2*cep+2*lhu+2*wcon} 
+*----------------------------------------------------------------------
+* Mismatch variations
+*----------------------------------------------------------------------
+.param cp_alpha = 0.0e-8
+.param cp_beta  = 0.0
+.param cp_fudge = 1.0
+.param Amc      = 2e-8
+.param Bmc      = 0e-2
+.param mm_fudge = 1.0
+.param areaeff  = {l*w}
+.param c_mm     = 0 dev/gauss={(((cp_alpha/sqrt(areaeff))+cp_beta)*cp_fudge/sqrt(2.0*number))*RPOLYP_DEV*mismatch}
+.param r_mm     = 0 dev/gauss={(((Amc/sqrt(areaeff))+Bmc)*mm_fudge/sqrt(2.0*number))*RPOLYP_DEV*mismatch}
+
+.param ctotal   = {(cap*(w-dw)*lr+2*cf0p*(w-dw+lr))}
+.param ctotalmm = {ctotal*(1+c_mm)}
+.param rtotalmm = {rval1*(1+r_mm)}
+
+*----------------------------------------------------------------------
+* netlist
+*---------------------------------------------------------------------- 
+*
+Res  PLUS  MINUS {rtotalmm/number} tc=tc1,tc2
+C1   PLUS  B     {(ctotalmm*number/2)}
+C2   MINUS B     {(ctotalmm*number/2)}
+.ends RPO1PM1
+
+.subckt RPO1PM2
+*----------------------------------------------------------------------
+* Family rpolyp Model RPO1PM2 rmin mismatch
+* No maturity information available
+*----------------------------------------------------------------------
++ PLUS MINUS B  
++ param: r=1180.04 w=1e-6 nc={max(trunc((w+0.18e-6-2*0.07e-6)/(0.16e-6+0.18e-6)),1)} mismatch=1 number=1
+*----------------------------------------------------------------------
+
+*----------------------------------------------------------------------
+* Parameters of rpolyp Model RPO1P corner rmin
+*----------------------------------------------------------------------
+.param rsc     = 15.0
+.param rsc_typ = 15.0
+.param rhs     = 6
+.param rhs_typ = 10
+.param rho     = 280.0
+.param rho_typ = 320.0
+.param rhi     = 40e-6
+.param rhi_typ = 80e-6
+.param rhu     = 0
+.param rhu_typ = 0
+.param lhu     = 0.0e-6
+.param dl      = 0.0e-6
+.param dl_typ  = 0.0e-6
+.param dw      = 27e-9
+.param dw_typ  = 39e-9
+.param lhs     = 0.22e-6
+.param tc1     = -1.08e-4
+.param tc2     = 7.5e-7
+.param wcon    = 0.16e-6
+.param cap     = 1.01e-4
+.param cf0p    = 4.16e-11
+.param cep     = 0.07e-6
+*----------------------------------------------------------------------
+* Equations 
+*----------------------------------------------------------------------
+.param rt_typ  = {rsc_typ/nc+(rhu_typ*(lhu+0.5*dl_typ)+rhs_typ*lhs+rhi_typ)/(w-dw_typ)}
+.param l       = {dl_typ+(r-2*rt_typ)*(w-dw_typ)/rho_typ}
+.param rt      = {rsc/nc+(rhu*(lhu+0.5*dl)+rhs*lhs+rhi)/(w-dw)}
+.param rbody   = {rho*(l-dl)/(w-dw)}
+.param rtotal  = {rbody+2*rt}
+.param rval1   = {rt+0.1*rbody}
+.param cval1   = {cap*(w-dw)*(lhs+cep+wcon+lhu+0.5*dl)+cf0p*(w-dw+(2*lhs+2*cep+2*wcon+2*lhu+dl))}
+.param lr      = {l+2*lhs+2*cep+2*lhu+2*wcon}
+.param ctotal  = {cap*(w-dw)*lr+2*cf0p*(w-dw+lr)}
+*----------------------------------------------------------------------
+
+*----------------------------------------------------------------------
+* Mismatch variations. Only one contribution to the main resistor
+* otherwise, the 6 resistors would be uncorrelated.r*r_mm=deltaR
+* Same methodology with the parasitic capacitors.
+*----------------------------------------------------------------------
+.param areaeff  = {l*w}
+.param cp_alpha = 0.0e-8
+.param cp_beta  = 0.0
+.param cp_fudge = 1.0
+.param Amc      = 2e-8
+.param Bmc      = 0e-2
+.param mm_fudge = 1.0
+.param c_mm     = 0 dev/gauss={(((cp_alpha/sqrt(areaeff))+cp_beta)*cp_fudge/sqrt(2.0*number))*RPOLYP_DEV*mismatch}
+.param r_mm     = 0 dev/gauss={(((Amc/sqrt(areaeff))+Bmc)*mm_fudge/sqrt(2.0*number))*RPOLYP_DEV*mismatch}
+
+
+*----------------------------------------------------------------------
+* netlist
+*---------------------------------------------------------------------- *
+Rri1 PLUS 8     {rval1/number}       tc=tc1,tc2
+Rri2 8    9     {(0.2*rbody/number)} tc=tc1,tc2
+Rri3 9    10    {(0.2*rbody/number)} tc=tc1,tc2
+Res  10   11    {(0.2*rbody/number)+(rtotal/number*r_mm)} tc=tc1,tc2
+Rri5 11   12    {(0.2*rbody/number)} tc=tc1,tc2
+Rri6 12   MINUS {rval1/number}       tc=tc1,tc2
+C1   B    PLUS  {cval1*number}
+C3   B    8     {(cap*0.125*(w-dw)*(l-dl)+cf0p*0.25*(l-dl))*number}
+C4   B    9     {(cap*0.250*(w-dw)*(l-dl)+cf0p*0.50*(l-dl))*number}
+C5   B    10    {(cap*0.250*(w-dw)*(l-dl)+cf0p*0.50*(l-dl))*number+(ctotal*number*c_mm)}
+C6   B    11    {(cap*0.250*(w-dw)*(l-dl)+cf0p*0.50*(l-dl))*number}
+C7   B    12    {(cap*0.125*(w-dw)*(l-dl)+cf0p*0.25*(l-dl))*number}
+C9   B    MINUS {cval1*number}
+.ends RPO1PM2
+
+
+
+.endl rpolyp_rmin
+
+
+.lib rpolyp_rmax
+
+*----------------------------------------------------------------------
+*                             RESISTOR
+*----------------------------------------------------------------------
+* TEMPLATE   : resistor_eldoN.t,v 2.0 2002/04/03 15:00:55
+* PARAMETERS : resistor.dds,v 1.29 2002/04/19 15:27:22
+* TRANSLATOR : ddspp.tcl,v 1.47 2001/09/11 08:03:16
+* Translated by re11 on June 14, 2002
+* ----------------------------------------------------------------------
+* (C) Copyright STMicroelectronics (2002)
+*     Unauthorized Reproduction and Communication Strictly Prohibited.
+* ----------------------------------------------------------------------
+* PACKAGE    : modelString.tcl,v 1.13 2002/04/10 07:19:16
+* PACKAGE    : statPackage.tcl,v 1.15 2001/11/26 16:05:19
+*----------------------------------------------------------------------
+
+
+.subckt RPO1PM1
+*----------------------------------------------------------------------
+* Family rpolyp Model RPO1PM1 rmax mismatch
+* No maturity information available
+*----------------------------------------------------------------------
++ PLUS MINUS B  
++ param: r=1180.04 w=1e-6 nc={max(trunc((w+0.18e-6-2*0.07e-6)/(0.16e-6+0.18e-6)),1)} mismatch=1 number=1
+*----------------------------------------------------------------------
+
+*----------------------------------------------------------------------
+* Parameters of rpolyp Model RPO1P corner rmax
+*----------------------------------------------------------------------
+.param rsc     = 30.0
+.param rsc_typ = 15.0
+.param rhs     = 14
+.param rhs_typ = 10
+.param rho     = 360.0
+.param rho_typ = 320.0
+.param rhi     = 160e-6
+.param rhi_typ = 80e-6
+.param rhu     = 0
+.param rhu_typ = 0
+.param lhu     = 0.0e-6
+.param dl      = 0.0e-6
+.param dl_typ  = 0.0e-6
+.param dw      = 51e-9
+.param dw_typ  = 39e-9
+.param lhs     = 0.22e-6
+.param tc1     = -1.08e-4
+.param tc2     = 7.5e-7
+.param wcon    = 0.16e-6
+.param cap     = 1.39e-4
+.param cep     = 0.07e-6
+.param cf0p    = 5.09e-11
+*----------------------------------------------------------------------
+* Equations 
+*----------------------------------------------------------------------
+.param rt_typ  = {rsc_typ/nc+(rhu_typ*(lhu+0.5*dl_typ)+rhs_typ*lhs+rhi_typ)/(w-dw_typ)}
+.param l       = {dl_typ+(r-2*rt_typ)*(w-dw_typ)/rho_typ}
+*----------------------------------------------------------------------
+.param rt      = {rsc/nc+(rhu*(lhu+0.5*dl)+rhs*lhs+rhi)/(w-dw)}
+.param rbody   = {rho*(l-dl)/(w-dw)}
+.param rval1   = {rbody+2*rt}
+.param lr      = {l+2*lhs+2*cep+2*lhu+2*wcon} 
+*----------------------------------------------------------------------
+* Mismatch variations
+*----------------------------------------------------------------------
+.param cp_alpha = 0.0e-8
+.param cp_beta  = 0.0
+.param cp_fudge = 1.0
+.param Amc      = 2e-8
+.param Bmc      = 0e-2
+.param mm_fudge = 1.0
+.param areaeff  = {l*w}
+.param c_mm     = 0 dev/gauss={(((cp_alpha/sqrt(areaeff))+cp_beta)*cp_fudge/sqrt(2.0*number))*RPOLYP_DEV*mismatch}
+.param r_mm     = 0 dev/gauss={(((Amc/sqrt(areaeff))+Bmc)*mm_fudge/sqrt(2.0*number))*RPOLYP_DEV*mismatch}
+
+.param ctotal   = {(cap*(w-dw)*lr+2*cf0p*(w-dw+lr))}
+.param ctotalmm = {ctotal*(1+c_mm)}
+.param rtotalmm = {rval1*(1+r_mm)}
+
+*----------------------------------------------------------------------
+* netlist
+*---------------------------------------------------------------------- 
+*
+Res  PLUS  MINUS {rtotalmm/number} tc=tc1,tc2
+C1   PLUS  B     {(ctotalmm*number/2)}
+C2   MINUS B     {(ctotalmm*number/2)}
+.ends RPO1PM1
+
+.subckt RPO1PM2
+*----------------------------------------------------------------------
+* Family rpolyp Model RPO1PM2 rmax mismatch
+* No maturity information available
+*----------------------------------------------------------------------
++ PLUS MINUS B  
++ param: r=1180.04 w=1e-6 nc={max(trunc((w+0.18e-6-2*0.07e-6)/(0.16e-6+0.18e-6)),1)} mismatch=1 number=1
+*----------------------------------------------------------------------
+
+*----------------------------------------------------------------------
+* Parameters of rpolyp Model RPO1P corner rmax
+*----------------------------------------------------------------------
+.param rsc     = 30.0
+.param rsc_typ = 15.0
+.param rhs     = 14
+.param rhs_typ = 10
+.param rho     = 360.0
+.param rho_typ = 320.0
+.param rhi     = 160e-6
+.param rhi_typ = 80e-6
+.param rhu     = 0
+.param rhu_typ = 0
+.param lhu     = 0.0e-6
+.param dl      = 0.0e-6
+.param dl_typ  = 0.0e-6
+.param dw      = 51e-9
+.param dw_typ  = 39e-9
+.param lhs     = 0.22e-6
+.param tc1     = -1.08e-4
+.param tc2     = 7.5e-7
+.param wcon    = 0.16e-6
+.param cap     = 1.39e-4
+.param cf0p    = 5.09e-11
+.param cep     = 0.07e-6
+*----------------------------------------------------------------------
+* Equations 
+*----------------------------------------------------------------------
+.param rt_typ  = {rsc_typ/nc+(rhu_typ*(lhu+0.5*dl_typ)+rhs_typ*lhs+rhi_typ)/(w-dw_typ)}
+.param l       = {dl_typ+(r-2*rt_typ)*(w-dw_typ)/rho_typ}
+.param rt      = {rsc/nc+(rhu*(lhu+0.5*dl)+rhs*lhs+rhi)/(w-dw)}
+.param rbody   = {rho*(l-dl)/(w-dw)}
+.param rtotal  = {rbody+2*rt}
+.param rval1   = {rt+0.1*rbody}
+.param cval1   = {cap*(w-dw)*(lhs+cep+wcon+lhu+0.5*dl)+cf0p*(w-dw+(2*lhs+2*cep+2*wcon+2*lhu+dl))}
+.param lr      = {l+2*lhs+2*cep+2*lhu+2*wcon}
+.param ctotal  = {cap*(w-dw)*lr+2*cf0p*(w-dw+lr)}
+*----------------------------------------------------------------------
+
+*----------------------------------------------------------------------
+* Mismatch variations. Only one contribution to the main resistor
+* otherwise, the 6 resistors would be uncorrelated.r*r_mm=deltaR
+* Same methodology with the parasitic capacitors.
+*----------------------------------------------------------------------
+.param areaeff  = {l*w}
+.param cp_alpha = 0.0e-8
+.param cp_beta  = 0.0
+.param cp_fudge = 1.0
+.param Amc      = 2e-8
+.param Bmc      = 0e-2
+.param mm_fudge = 1.0
+.param c_mm     = 0 dev/gauss={(((cp_alpha/sqrt(areaeff))+cp_beta)*cp_fudge/sqrt(2.0*number))*RPOLYP_DEV*mismatch}
+.param r_mm     = 0 dev/gauss={(((Amc/sqrt(areaeff))+Bmc)*mm_fudge/sqrt(2.0*number))*RPOLYP_DEV*mismatch}
+
+
+*----------------------------------------------------------------------
+* netlist
+*---------------------------------------------------------------------- *
+Rri1 PLUS 8     {rval1/number}       tc=tc1,tc2
+Rri2 8    9     {(0.2*rbody/number)} tc=tc1,tc2
+Rri3 9    10    {(0.2*rbody/number)} tc=tc1,tc2
+Res  10   11    {(0.2*rbody/number)+(rtotal/number*r_mm)} tc=tc1,tc2
+Rri5 11   12    {(0.2*rbody/number)} tc=tc1,tc2
+Rri6 12   MINUS {rval1/number}       tc=tc1,tc2
+C1   B    PLUS  {cval1*number}
+C3   B    8     {(cap*0.125*(w-dw)*(l-dl)+cf0p*0.25*(l-dl))*number}
+C4   B    9     {(cap*0.250*(w-dw)*(l-dl)+cf0p*0.50*(l-dl))*number}
+C5   B    10    {(cap*0.250*(w-dw)*(l-dl)+cf0p*0.50*(l-dl))*number+(ctotal*number*c_mm)}
+C6   B    11    {(cap*0.250*(w-dw)*(l-dl)+cf0p*0.50*(l-dl))*number}
+C7   B    12    {(cap*0.125*(w-dw)*(l-dl)+cf0p*0.25*(l-dl))*number}
+C9   B    MINUS {cval1*number}
+.ends RPO1PM2
+
+
+
+.endl rpolyp_rmax
+
+
+.lib rpdiff_typ
+
+*----------------------------------------------------------------------
+*                             RESISTOR
+*----------------------------------------------------------------------
+* TEMPLATE   : resistor_eldoN.t,v 2.0 2002/04/03 15:00:55
+* PARAMETERS : resistor.dds,v 1.29 2002/04/19 15:27:22
+* TRANSLATOR : ddspp.tcl,v 1.47 2001/09/11 08:03:16
+* Translated by re11 on June 14, 2002
+* ----------------------------------------------------------------------
+* (C) Copyright STMicroelectronics (2002)
+*     Unauthorized Reproduction and Communication Strictly Prohibited.
+* ----------------------------------------------------------------------
+* PACKAGE    : modelString.tcl,v 1.13 2002/04/10 07:19:16
+* PACKAGE    : statPackage.tcl,v 1.15 2001/11/26 16:05:19
+*----------------------------------------------------------------------
+
+
+.subckt RPDIFFM1
+*----------------------------------------------------------------------
+* Family rpdiff Model RPDIFFM1 typ mismatch
+* No maturity information available
+*----------------------------------------------------------------------
++ PLUS MINUS B  
++ param: r=445.4 w=1e-6 nc={trunc((w-2*0+0.18e-6-2*0.07e-6)/(0.16e-6+0.18e-6))} mismatch=1 number=1
+*----------------------------------------------------------------------
+
+*----------------------------------------------------------------------
+* Parameters of rpdiff Model RPDIFF corner typ
+*----------------------------------------------------------------------
+.param rsc     = 15
+.param rsc_typ = 15
+.param rhs     = 10
+.param rhs_typ = 10
+.param rho     = 135.0
+.param rho_typ = 135.0
+.param rhi     = 13e-6
+.param rhi_typ = 13e-6
+.param rhu     = 0
+.param rhu_typ = 0
+.param lhu     = 0.0e-6
+.param dl      = 0.0e-6
+.param dl_typ  = 0.0e-6
+.param dw      = 0e-9
+.param dw_typ  = 0e-9
+.param lhs     = 0.22e-6
+.param tc1     = 1.51e-3
+.param tc2     = 6.73e-7
+.param wcon    = 0.16e-6
+.param danw    = 0 
+.param cea     = 0.07e-6
+.param rt_typ  = {rsc_typ/nc+(rhu_typ*(lhu+0.5*dl_typ)+rhs_typ*lhs+rhi_typ)/(w-dw_typ)} 
+.param l       = {dl_typ+(r-2*rt_typ)*(w-dw_typ)/rho_typ}
+*---------------------------------------------------------------------- 
+.param rt      = {rsc/nc+(rhu*(lhu+0.5*dl)+rhs*lhs+rhi)/(w-dw)}
+.param lr      = {l+2*lhs+2*cea+2*lhu+2*wcon} 
+.param rbody   = {rho*(l-dl)/(w-dw)} 
+.param rtotal  = {rbody+2*rt}
+
+*----------------------------------------------------------------------
+* Mismatch variations
+*----------------------------------------------------------------------
+.param areaeff  = {l*w}
+.param Amc      = 0.7e-8
+.param Bmc      = 0e-2
+.param mm_fudge = 1.0
+.param r_mm     = 0 dev/gauss = {(((Amc/sqrt(areaeff))+Bmc)*mm_fudge/sqrt(2.0*number))*RPDIFF_DEV*mismatch} 
+
+*----------------------------------------------------------------------
+* netlist
+*----------------------------------------------------------------------
+Res  PLUS MINUS {rtotal*(1.0+r_mm)/number} tc=tc1,tc2
+
+
+D1   PLUS    B DPPNW area={0.5*(w-dw)*lr*number} peri={(w-dw+lr)*number}
+D2   MINUS   B DPPNW area={0.5*(w-dw)*lr*number} peri={(w-dw+lr)*number}
+.ends RPDIFFM1
+
+.subckt RPDIFFM2
+*----------------------------------------------------------------------
+* Family rpdiff Model RPDIFFM2 typ mismatch
+* No maturity information available
+*----------------------------------------------------------------------
++ PLUS MINUS B  
++ param: r=445.4 w=1e-6 nc={trunc((w-2*0+0.18e-6-2*0.07e-6)/(0.16e-6+0.18e-6))} mismatch=1 number=1
+*----------------------------------------------------------------------
+
+*----------------------------------------------------------------------
+* Parameters of rpdiff Model RPDIFF corner typ
+*----------------------------------------------------------------------
+.param rsc     = 15
+.param rsc_typ = 15
+.param rhs     = 10
+.param rhs_typ = 10
+.param rho     = 135.0
+.param rho_typ = 135.0
+.param rhi     = 13e-6
+.param rhi_typ = 13e-6
+.param rhu     = 0
+.param rhu_typ = 0
+.param lhu     = 0.0e-6
+.param dl      = 0.0e-6
+.param dl_typ  = 0.0e-6
+.param dw      = 0e-9
+.param dw_typ  = 0e-9
+.param lhs     = 0.22e-6
+.param tc1     = 1.51e-3
+.param tc2     = 6.73e-7
+.param wcon    = 0.16e-6
+.param danw    = 0
+.param cea     = 0.07e-6 
+.param rt_typ  = {rsc_typ/nc+(rhu_typ*(lhu+0.5*dl_typ)+rhs_typ*lhs+rhi_typ)/(w-dw_typ)} 
+.param l       = {dl_typ+(r-2*rt_typ)*(w-dw_typ)/rho_typ}
+*---------------------------------------------------------------------- 
+.param rt      = {rsc/nc+(rhu*(lhu+0.5*dl)+rhs*lhs+rhi)/(w-dw)} 
+.param rbody   = {rho*(l-dl)/(w-dw)}
+.param rtotal  = {(rbody+2*rt)}
+.param lcalc   = {lhs+cea+wcon+lhu+0.5*dl}
+
+*----------------------------------------------------------------------
+* Mismatch variations. Only one contribution to 1 internal resistor
+* otherwise, the 6 resistors would be uncorrelated.r*r_mm=deltaR
+*----------------------------------------------------------------------
+.param areaeff  = {l*w}
+.param Amc      = 0.7e-8
+.param Bmc      = 0e-2
+.param mm_fudge = 1.0
+.param r_mm     = 0 dev/gauss={(((Amc/sqrt(areaeff))+Bmc)*mm_fudge/sqrt(2.0*number))*RPDIFF_DEV*mismatch}  
+
+*----------------------------------------------------------------------
+* netlist
+*----------------------------------------------------------------------
+Rri1 PLUS 8     {(rt+0.1*rbody)/number} tc=tc1,tc2
+Rri2 8    9     {(0.2*rbody/number)}    tc=tc1,tc2
+Rri3 9    10    {(0.2*rbody/number)}    tc=tc1,tc2
+Res  10   11    {(0.2*rbody/number)+(rtotal/number*r_mm)}    tc=tc1,tc2
+Rri5 11   12    {(0.2*rbody/number)}    tc=tc1,tc2
+Rri6 12   MINUS {(rt+0.1*rbody)/number} tc=tc1,tc2
+*
+
+Dd1 PLUS  B DPPNW area={(w-dw)*lcalc*number}        peri={(w-dw+2.0*lcalc)*number}
+Dd3 8     B DPPNW area={0.125*(w-dw)*(l-dl)*number} peri={0.25*(l-dl)*number}
+Dd4 9     B DPPNW area={0.250*(w-dw)*(l-dl)*number} peri={0.50*(l-dl)*number}
+Dd5 10    B DPPNW area={0.250*(w-dw)*(l-dl)*number} peri={0.50*(l-dl)*number}
+Dd6 11    B DPPNW area={0.250*(w-dw)*(l-dl)*number} peri={0.50*(l-dl)*number}
+Dd7 12    B DPPNW area={0.125*(w-dw)*(l-dl)*number} peri={0.25*(l-dl)*number}
+Dd9 MINUS B DPPNW area={(w-dw)*lcalc*number}        peri={(w-dw+2.0*lcalc)*number}
+.ends RPDIFFM2
+
+
+
+.endl rpdiff_typ
+
+
+.lib rpdiff_rmin
+
+*----------------------------------------------------------------------
+*                             RESISTOR
+*----------------------------------------------------------------------
+* TEMPLATE   : resistor_eldoN.t,v 2.0 2002/04/03 15:00:55
+* PARAMETERS : resistor.dds,v 1.29 2002/04/19 15:27:22
+* TRANSLATOR : ddspp.tcl,v 1.47 2001/09/11 08:03:16
+* Translated by re11 on June 14, 2002
+* ----------------------------------------------------------------------
+* (C) Copyright STMicroelectronics (2002)
+*     Unauthorized Reproduction and Communication Strictly Prohibited.
+* ----------------------------------------------------------------------
+* PACKAGE    : modelString.tcl,v 1.13 2002/04/10 07:19:16
+* PACKAGE    : statPackage.tcl,v 1.15 2001/11/26 16:05:19
+*----------------------------------------------------------------------
+
+
+.subckt RPDIFFM1
+*----------------------------------------------------------------------
+* Family rpdiff Model RPDIFFM1 rmin mismatch
+* No maturity information available
+*----------------------------------------------------------------------
++ PLUS MINUS B  
++ param: r=445.4 w=1e-6 nc={trunc((w-2*0+0.18e-6-2*0.07e-6)/(0.16e-6+0.18e-6))} mismatch=1 number=1
+*----------------------------------------------------------------------
+
+*----------------------------------------------------------------------
+* Parameters of rpdiff Model RPDIFF corner rmin
+*----------------------------------------------------------------------
+.param rsc     = 15
+.param rsc_typ = 15
+.param rhs     = 6
+.param rhs_typ = 10
+.param rho     = 105.0
+.param rho_typ = 135.0
+.param rhi     = 0e-6
+.param rhi_typ = 13e-6
+.param rhu     = 0
+.param rhu_typ = 0
+.param lhu     = 0.0e-6
+.param dl      = 0.0e-6
+.param dl_typ  = 0.0e-6
+.param dw      = -30e-9
+.param dw_typ  = 0e-9
+.param lhs     = 0.22e-6
+.param tc1     = 1.51e-3
+.param tc2     = 6.73e-7
+.param wcon    = 0.16e-6
+.param danw    = 0 
+.param cea     = 0.07e-6
+.param rt_typ  = {rsc_typ/nc+(rhu_typ*(lhu+0.5*dl_typ)+rhs_typ*lhs+rhi_typ)/(w-dw_typ)} 
+.param l       = {dl_typ+(r-2*rt_typ)*(w-dw_typ)/rho_typ}
+*---------------------------------------------------------------------- 
+.param rt      = {rsc/nc+(rhu*(lhu+0.5*dl)+rhs*lhs+rhi)/(w-dw)}
+.param lr      = {l+2*lhs+2*cea+2*lhu+2*wcon} 
+.param rbody   = {rho*(l-dl)/(w-dw)} 
+.param rtotal  = {rbody+2*rt}
+
+*----------------------------------------------------------------------
+* Mismatch variations
+*----------------------------------------------------------------------
+.param areaeff  = {l*w}
+.param Amc      = 0.7e-8
+.param Bmc      = 0e-2
+.param mm_fudge = 1.0
+.param r_mm     = 0 dev/gauss = {(((Amc/sqrt(areaeff))+Bmc)*mm_fudge/sqrt(2.0*number))*RPDIFF_DEV*mismatch} 
+
+*----------------------------------------------------------------------
+* netlist
+*----------------------------------------------------------------------
+Res  PLUS MINUS {rtotal*(1.0+r_mm)/number} tc=tc1,tc2
+
+
+D1   PLUS    B DPPNW area={0.5*(w-dw)*lr*number} peri={(w-dw+lr)*number}
+D2   MINUS   B DPPNW area={0.5*(w-dw)*lr*number} peri={(w-dw+lr)*number}
+.ends RPDIFFM1
+
+.subckt RPDIFFM2
+*----------------------------------------------------------------------
+* Family rpdiff Model RPDIFFM2 rmin mismatch
+* No maturity information available
+*----------------------------------------------------------------------
++ PLUS MINUS B  
++ param: r=445.4 w=1e-6 nc={trunc((w-2*0+0.18e-6-2*0.07e-6)/(0.16e-6+0.18e-6))} mismatch=1 number=1
+*----------------------------------------------------------------------
+
+*----------------------------------------------------------------------
+* Parameters of rpdiff Model RPDIFF corner rmin
+*----------------------------------------------------------------------
+.param rsc     = 15
+.param rsc_typ = 15
+.param rhs     = 6
+.param rhs_typ = 10
+.param rho     = 105.0
+.param rho_typ = 135.0
+.param rhi     = 0e-6
+.param rhi_typ = 13e-6
+.param rhu     = 0
+.param rhu_typ = 0
+.param lhu     = 0.0e-6
+.param dl      = 0.0e-6
+.param dl_typ  = 0.0e-6
+.param dw      = -30e-9
+.param dw_typ  = 0e-9
+.param lhs     = 0.22e-6
+.param tc1     = 1.51e-3
+.param tc2     = 6.73e-7
+.param wcon    = 0.16e-6
+.param danw    = 0
+.param cea     = 0.07e-6 
+.param rt_typ  = {rsc_typ/nc+(rhu_typ*(lhu+0.5*dl_typ)+rhs_typ*lhs+rhi_typ)/(w-dw_typ)} 
+.param l       = {dl_typ+(r-2*rt_typ)*(w-dw_typ)/rho_typ}
+*---------------------------------------------------------------------- 
+.param rt      = {rsc/nc+(rhu*(lhu+0.5*dl)+rhs*lhs+rhi)/(w-dw)} 
+.param rbody   = {rho*(l-dl)/(w-dw)}
+.param rtotal  = {(rbody+2*rt)}
+.param lcalc   = {lhs+cea+wcon+lhu+0.5*dl}
+
+*----------------------------------------------------------------------
+* Mismatch variations. Only one contribution to 1 internal resistor
+* otherwise, the 6 resistors would be uncorrelated.r*r_mm=deltaR
+*----------------------------------------------------------------------
+.param areaeff  = {l*w}
+.param Amc      = 0.7e-8
+.param Bmc      = 0e-2
+.param mm_fudge = 1.0
+.param r_mm     = 0 dev/gauss={(((Amc/sqrt(areaeff))+Bmc)*mm_fudge/sqrt(2.0*number))*RPDIFF_DEV*mismatch}  
+
+*----------------------------------------------------------------------
+* netlist
+*----------------------------------------------------------------------
+Rri1 PLUS 8     {(rt+0.1*rbody)/number} tc=tc1,tc2
+Rri2 8    9     {(0.2*rbody/number)}    tc=tc1,tc2
+Rri3 9    10    {(0.2*rbody/number)}    tc=tc1,tc2
+Res  10   11    {(0.2*rbody/number)+(rtotal/number*r_mm)}    tc=tc1,tc2
+Rri5 11   12    {(0.2*rbody/number)}    tc=tc1,tc2
+Rri6 12   MINUS {(rt+0.1*rbody)/number} tc=tc1,tc2
+*
+
+Dd1 PLUS  B DPPNW area={(w-dw)*lcalc*number}        peri={(w-dw+2.0*lcalc)*number}
+Dd3 8     B DPPNW area={0.125*(w-dw)*(l-dl)*number} peri={0.25*(l-dl)*number}
+Dd4 9     B DPPNW area={0.250*(w-dw)*(l-dl)*number} peri={0.50*(l-dl)*number}
+Dd5 10    B DPPNW area={0.250*(w-dw)*(l-dl)*number} peri={0.50*(l-dl)*number}
+Dd6 11    B DPPNW area={0.250*(w-dw)*(l-dl)*number} peri={0.50*(l-dl)*number}
+Dd7 12    B DPPNW area={0.125*(w-dw)*(l-dl)*number} peri={0.25*(l-dl)*number}
+Dd9 MINUS B DPPNW area={(w-dw)*lcalc*number}        peri={(w-dw+2.0*lcalc)*number}
+.ends RPDIFFM2
+
+
+
+.endl rpdiff_rmin
+
+
+.lib rpdiff_rmax
+
+*----------------------------------------------------------------------
+*                             RESISTOR
+*----------------------------------------------------------------------
+* TEMPLATE   : resistor_eldoN.t,v 2.0 2002/04/03 15:00:55
+* PARAMETERS : resistor.dds,v 1.29 2002/04/19 15:27:22
+* TRANSLATOR : ddspp.tcl,v 1.47 2001/09/11 08:03:16
+* Translated by re11 on June 14, 2002
+* ----------------------------------------------------------------------
+* (C) Copyright STMicroelectronics (2002)
+*     Unauthorized Reproduction and Communication Strictly Prohibited.
+* ----------------------------------------------------------------------
+* PACKAGE    : modelString.tcl,v 1.13 2002/04/10 07:19:16
+* PACKAGE    : statPackage.tcl,v 1.15 2001/11/26 16:05:19
+*----------------------------------------------------------------------
+
+
+.subckt RPDIFFM1
+*----------------------------------------------------------------------
+* Family rpdiff Model RPDIFFM1 rmax mismatch
+* No maturity information available
+*----------------------------------------------------------------------
++ PLUS MINUS B  
++ param: r=445.4 w=1e-6 nc={trunc((w-2*0+0.18e-6-2*0.07e-6)/(0.16e-6+0.18e-6))} mismatch=1 number=1
+*----------------------------------------------------------------------
+
+*----------------------------------------------------------------------
+* Parameters of rpdiff Model RPDIFF corner rmax
+*----------------------------------------------------------------------
+.param rsc     = 30.0
+.param rsc_typ = 15
+.param rhs     = 14
+.param rhs_typ = 10
+.param rho     = 165.0
+.param rho_typ = 135.0
+.param rhi     = 26e-6
+.param rhi_typ = 13e-6
+.param rhu     = 0
+.param rhu_typ = 0
+.param lhu     = 0.0e-6
+.param dl      = 0.0
+.param dl_typ  = 0.0e-6
+.param dw      = 30e-9
+.param dw_typ  = 0e-9
+.param lhs     = 0.22e-6
+.param tc1     = 1.51e-3
+.param tc2     = 6.73e-7
+.param wcon    = 0.16e-6
+.param danw    = 0 
+.param cea     = 0.07e-6
+.param rt_typ  = {rsc_typ/nc+(rhu_typ*(lhu+0.5*dl_typ)+rhs_typ*lhs+rhi_typ)/(w-dw_typ)} 
+.param l       = {dl_typ+(r-2*rt_typ)*(w-dw_typ)/rho_typ}
+*---------------------------------------------------------------------- 
+.param rt      = {rsc/nc+(rhu*(lhu+0.5*dl)+rhs*lhs+rhi)/(w-dw)}
+.param lr      = {l+2*lhs+2*cea+2*lhu+2*wcon} 
+.param rbody   = {rho*(l-dl)/(w-dw)} 
+.param rtotal  = {rbody+2*rt}
+
+*----------------------------------------------------------------------
+* Mismatch variations
+*----------------------------------------------------------------------
+.param areaeff  = {l*w}
+.param Amc      = 0.7e-8
+.param Bmc      = 0e-2
+.param mm_fudge = 1.0
+.param r_mm     = 0 dev/gauss = {(((Amc/sqrt(areaeff))+Bmc)*mm_fudge/sqrt(2.0*number))*RPDIFF_DEV*mismatch} 
+
+*----------------------------------------------------------------------
+* netlist
+*----------------------------------------------------------------------
+Res  PLUS MINUS {rtotal*(1.0+r_mm)/number} tc=tc1,tc2
+
+
+D1   PLUS    B DPPNW area={0.5*(w-dw)*lr*number} peri={(w-dw+lr)*number}
+D2   MINUS   B DPPNW area={0.5*(w-dw)*lr*number} peri={(w-dw+lr)*number}
+.ends RPDIFFM1
+
+.subckt RPDIFFM2
+*----------------------------------------------------------------------
+* Family rpdiff Model RPDIFFM2 rmax mismatch
+* No maturity information available
+*----------------------------------------------------------------------
++ PLUS MINUS B  
++ param: r=445.4 w=1e-6 nc={trunc((w-2*0+0.18e-6-2*0.07e-6)/(0.16e-6+0.18e-6))} mismatch=1 number=1
+*----------------------------------------------------------------------
+
+*----------------------------------------------------------------------
+* Parameters of rpdiff Model RPDIFF corner rmax
+*----------------------------------------------------------------------
+.param rsc     = 30.0
+.param rsc_typ = 15
+.param rhs     = 14
+.param rhs_typ = 10
+.param rho     = 165.0
+.param rho_typ = 135.0
+.param rhi     = 26e-6
+.param rhi_typ = 13e-6
+.param rhu     = 0
+.param rhu_typ = 0
+.param lhu     = 0.0e-6
+.param dl      = 0.0
+.param dl_typ  = 0.0e-6
+.param dw      = 30e-9
+.param dw_typ  = 0e-9
+.param lhs     = 0.22e-6
+.param tc1     = 1.51e-3
+.param tc2     = 6.73e-7
+.param wcon    = 0.16e-6
+.param danw    = 0
+.param cea     = 0.07e-6 
+.param rt_typ  = {rsc_typ/nc+(rhu_typ*(lhu+0.5*dl_typ)+rhs_typ*lhs+rhi_typ)/(w-dw_typ)} 
+.param l       = {dl_typ+(r-2*rt_typ)*(w-dw_typ)/rho_typ}
+*---------------------------------------------------------------------- 
+.param rt      = {rsc/nc+(rhu*(lhu+0.5*dl)+rhs*lhs+rhi)/(w-dw)} 
+.param rbody   = {rho*(l-dl)/(w-dw)}
+.param rtotal  = {(rbody+2*rt)}
+.param lcalc   = {lhs+cea+wcon+lhu+0.5*dl}
+
+*----------------------------------------------------------------------
+* Mismatch variations. Only one contribution to 1 internal resistor
+* otherwise, the 6 resistors would be uncorrelated.r*r_mm=deltaR
+*----------------------------------------------------------------------
+.param areaeff  = {l*w}
+.param Amc      = 0.7e-8
+.param Bmc      = 0e-2
+.param mm_fudge = 1.0
+.param r_mm     = 0 dev/gauss={(((Amc/sqrt(areaeff))+Bmc)*mm_fudge/sqrt(2.0*number))*RPDIFF_DEV*mismatch}  
+
+*----------------------------------------------------------------------
+* netlist
+*----------------------------------------------------------------------
+Rri1 PLUS 8     {(rt+0.1*rbody)/number} tc=tc1,tc2
+Rri2 8    9     {(0.2*rbody/number)}    tc=tc1,tc2
+Rri3 9    10    {(0.2*rbody/number)}    tc=tc1,tc2
+Res  10   11    {(0.2*rbody/number)+(rtotal/number*r_mm)}    tc=tc1,tc2
+Rri5 11   12    {(0.2*rbody/number)}    tc=tc1,tc2
+Rri6 12   MINUS {(rt+0.1*rbody)/number} tc=tc1,tc2
+*
+
+Dd1 PLUS  B DPPNW area={(w-dw)*lcalc*number}        peri={(w-dw+2.0*lcalc)*number}
+Dd3 8     B DPPNW area={0.125*(w-dw)*(l-dl)*number} peri={0.25*(l-dl)*number}
+Dd4 9     B DPPNW area={0.250*(w-dw)*(l-dl)*number} peri={0.50*(l-dl)*number}
+Dd5 10    B DPPNW area={0.250*(w-dw)*(l-dl)*number} peri={0.50*(l-dl)*number}
+Dd6 11    B DPPNW area={0.250*(w-dw)*(l-dl)*number} peri={0.50*(l-dl)*number}
+Dd7 12    B DPPNW area={0.125*(w-dw)*(l-dl)*number} peri={0.25*(l-dl)*number}
+Dd9 MINUS B DPPNW area={(w-dw)*lcalc*number}        peri={(w-dw+2.0*lcalc)*number}
+.ends RPDIFFM2
+
+
+
+.endl rpdiff_rmax
+
+
+.lib rpolyh_typ
+
+*----------------------------------------------------------------------
+*                             RESISTOR
+*----------------------------------------------------------------------
+* TEMPLATE   : resistor_eldoN.t,v 2.0 2002/04/03 15:00:55
+* PARAMETERS : resistor.dds,v 1.29 2002/04/19 15:27:22
+* TRANSLATOR : ddspp.tcl,v 1.47 2001/09/11 08:03:16
+* Translated by re11 on June 14, 2002
+* ----------------------------------------------------------------------
+* (C) Copyright STMicroelectronics (2002)
+*     Unauthorized Reproduction and Communication Strictly Prohibited.
+* ----------------------------------------------------------------------
+* PACKAGE    : modelString.tcl,v 1.13 2002/04/10 07:19:16
+* PACKAGE    : statPackage.tcl,v 1.15 2001/11/26 16:05:19
+*----------------------------------------------------------------------
+
+
+.subckt RPO1HM1
+*----------------------------------------------------------------------
+* Family rpolyh Model RPO1HM1 typ mismatch
+* No maturity information available
+*----------------------------------------------------------------------
++ PLUS MINUS B  
++ param: r=3488.07 w=1e-6 nc={max(trunc((w+0.18e-6-2*0.28e-6)/(0.16e-6+0.18e-6)),1)} mismatch=1 number=1
+*----------------------------------------------------------------------
+
+*----------------------------------------------------------------------
+* Parameters of rpolyh Model RPO1H corner typ
+*----------------------------------------------------------------------
+.param rsc     = 15
+.param rsc_typ = 15
+.param rhs     = 10
+.param rhs_typ = 10
+.param rho     = 1000
+.param rho_typ = 1000
+.param rhi     = 50e-6
+.param rhi_typ = 50e-6
+.param rhu     = 320
+.param rhu_typ = 320
+.param lhu     = 0.34e-6
+.param dl      = 0.0e-6
+.param dl_typ  = 0.0e-6
+.param dw      = 39e-9
+.param dw_typ  = 39e-9
+.param lhs     = 0.28e-6
+.param tc1     = -7.2e-4
+.param tc2     = 4e-6
+.param wcon    = 0.16e-6
+.param cap     = 1.18e-4
+.param cep     = 0.28e-6
+.param cf0p    = 4.60e-11
+*----------------------------------------------------------------------
+* Equations 
+*----------------------------------------------------------------------
+.param rt_typ  = {rsc_typ/nc+(rhu_typ*(lhu+0.5*dl_typ)+rhs_typ*lhs+rhi_typ)/(w-dw_typ)}
+.param l       = {dl_typ+(r-2*rt_typ)*(w-dw_typ)/rho_typ}
+*----------------------------------------------------------------------
+.param rt      = {rsc/nc+(rhu*(lhu+0.5*dl)+rhs*lhs+rhi)/(w-dw)}
+.param rbody   = {rho*(l-dl)/(w-dw)}
+.param rval1   = {rbody+2*rt}
+.param lr      = {l+2*lhs+2*cep+2*lhu+2*wcon} 
+*----------------------------------------------------------------------
+* Mismatch variations
+*----------------------------------------------------------------------
+.param cp_alpha = 0.0e-8
+.param cp_beta  = 0.0
+.param cp_fudge = 1.0
+.param Amc      = 2e-8
+.param Bmc      = 0e-2
+.param mm_fudge = 1.33
+.param areaeff  = {l*w}
+.param c_mm     = 0 dev/gauss={(((cp_alpha/sqrt(areaeff))+cp_beta)*cp_fudge/sqrt(2.0*number))*RPOLYH_DEV*mismatch}
+.param r_mm     = 0 dev/gauss={(((Amc/sqrt(areaeff))+Bmc)*mm_fudge/sqrt(2.0*number))*RPOLYH_DEV*mismatch}
+
+.param ctotal   = {(cap*(w-dw)*lr+2*cf0p*(w-dw+lr))}
+.param ctotalmm = {ctotal*(1+c_mm)}
+.param rtotalmm = {rval1*(1+r_mm)}
+
+*----------------------------------------------------------------------
+* netlist
+*---------------------------------------------------------------------- 
+*
+Res  PLUS  MINUS {rtotalmm/number} tc=tc1,tc2
+C1   PLUS  B     {(ctotalmm*number/2)}
+C2   MINUS B     {(ctotalmm*number/2)}
+.ends RPO1HM1
+
+.subckt RPO1HM2
+*----------------------------------------------------------------------
+* Family rpolyh Model RPO1HM2 typ mismatch
+* No maturity information available
+*----------------------------------------------------------------------
++ PLUS MINUS B  
++ param: r=3488.07 w=1e-6 nc={max(trunc((w+0.18e-6-2*0.28e-6)/(0.16e-6+0.18e-6)),1)} mismatch=1 number=1
+*----------------------------------------------------------------------
+
+*----------------------------------------------------------------------
+* Parameters of rpolyh Model RPO1H corner typ
+*----------------------------------------------------------------------
+.param rsc     = 15
+.param rsc_typ = 15
+.param rhs     = 10
+.param rhs_typ = 10
+.param rho     = 1000
+.param rho_typ = 1000
+.param rhi     = 50e-6
+.param rhi_typ = 50e-6
+.param rhu     = 320
+.param rhu_typ = 320
+.param lhu     = 0.34e-6
+.param dl      = 0.0e-6
+.param dl_typ  = 0.0e-6
+.param dw      = 39e-9
+.param dw_typ  = 39e-9
+.param lhs     = 0.28e-6
+.param tc1     = -7.2e-4
+.param tc2     = 4e-6
+.param wcon    = 0.16e-6
+.param cap     = 1.18e-4
+.param cf0p    = 4.60e-11
+.param cep     = 0.28e-6
+*----------------------------------------------------------------------
+* Equations 
+*----------------------------------------------------------------------
+.param rt_typ  = {rsc_typ/nc+(rhu_typ*(lhu+0.5*dl_typ)+rhs_typ*lhs+rhi_typ)/(w-dw_typ)}
+.param l       = {dl_typ+(r-2*rt_typ)*(w-dw_typ)/rho_typ}
+.param rt      = {rsc/nc+(rhu*(lhu+0.5*dl)+rhs*lhs+rhi)/(w-dw)}
+.param rbody   = {rho*(l-dl)/(w-dw)}
+.param rtotal  = {rbody+2*rt}
+.param rval1   = {rt+0.1*rbody}
+.param cval1   = {cap*(w-dw)*(lhs+cep+wcon+lhu+0.5*dl)+cf0p*(w-dw+(2*lhs+2*cep+2*wcon+2*lhu+dl))}
+.param lr      = {l+2*lhs+2*cep+2*lhu+2*wcon}
+.param ctotal  = {cap*(w-dw)*lr+2*cf0p*(w-dw+lr)}
+*----------------------------------------------------------------------
+
+*----------------------------------------------------------------------
+* Mismatch variations. Only one contribution to the main resistor
+* otherwise, the 6 resistors would be uncorrelated.r*r_mm=deltaR
+* Same methodology with the parasitic capacitors.
+*----------------------------------------------------------------------
+.param areaeff  = {l*w}
+.param cp_alpha = 0.0e-8
+.param cp_beta  = 0.0
+.param cp_fudge = 1.0
+.param Amc      = 2e-8
+.param Bmc      = 0e-2
+.param mm_fudge = 1.33
+.param c_mm     = 0 dev/gauss={(((cp_alpha/sqrt(areaeff))+cp_beta)*cp_fudge/sqrt(2.0*number))*RPOLYH_DEV*mismatch}
+.param r_mm     = 0 dev/gauss={(((Amc/sqrt(areaeff))+Bmc)*mm_fudge/sqrt(2.0*number))*RPOLYH_DEV*mismatch}
+
+
+*----------------------------------------------------------------------
+* netlist
+*---------------------------------------------------------------------- *
+Rri1 PLUS 8     {rval1/number}       tc=tc1,tc2
+Rri2 8    9     {(0.2*rbody/number)} tc=tc1,tc2
+Rri3 9    10    {(0.2*rbody/number)} tc=tc1,tc2
+Res  10   11    {(0.2*rbody/number)+(rtotal/number*r_mm)} tc=tc1,tc2
+Rri5 11   12    {(0.2*rbody/number)} tc=tc1,tc2
+Rri6 12   MINUS {rval1/number}       tc=tc1,tc2
+C1   B    PLUS  {cval1*number}
+C3   B    8     {(cap*0.125*(w-dw)*(l-dl)+cf0p*0.25*(l-dl))*number}
+C4   B    9     {(cap*0.250*(w-dw)*(l-dl)+cf0p*0.50*(l-dl))*number}
+C5   B    10    {(cap*0.250*(w-dw)*(l-dl)+cf0p*0.50*(l-dl))*number+(ctotal*number*c_mm)}
+C6   B    11    {(cap*0.250*(w-dw)*(l-dl)+cf0p*0.50*(l-dl))*number}
+C7   B    12    {(cap*0.125*(w-dw)*(l-dl)+cf0p*0.25*(l-dl))*number}
+C9   B    MINUS {cval1*number}
+.ends RPO1HM2
+
+
+
+.endl rpolyh_typ
+
+
+.lib rpolyh_rmin
+
+*----------------------------------------------------------------------
+*                             RESISTOR
+*----------------------------------------------------------------------
+* TEMPLATE   : resistor_eldoN.t,v 2.0 2002/04/03 15:00:55
+* PARAMETERS : resistor.dds,v 1.29 2002/04/19 15:27:22
+* TRANSLATOR : ddspp.tcl,v 1.47 2001/09/11 08:03:16
+* Translated by re11 on June 14, 2002
+* ----------------------------------------------------------------------
+* (C) Copyright STMicroelectronics (2002)
+*     Unauthorized Reproduction and Communication Strictly Prohibited.
+* ----------------------------------------------------------------------
+* PACKAGE    : modelString.tcl,v 1.13 2002/04/10 07:19:16
+* PACKAGE    : statPackage.tcl,v 1.15 2001/11/26 16:05:19
+*----------------------------------------------------------------------
+
+
+.subckt RPO1HM1
+*----------------------------------------------------------------------
+* Family rpolyh Model RPO1HM1 rmin mismatch
+* No maturity information available
+*----------------------------------------------------------------------
++ PLUS MINUS B  
++ param: r=3488.07 w=1e-6 nc={max(trunc((w+0.18e-6-2*0.28e-6)/(0.16e-6+0.18e-6)),1)} mismatch=1 number=1
+*----------------------------------------------------------------------
+
+*----------------------------------------------------------------------
+* Parameters of rpolyh Model RPO1H corner rmin
+*----------------------------------------------------------------------
+.param rsc     = 15
+.param rsc_typ = 15
+.param rhs     = 6
+.param rhs_typ = 10
+.param rho     = 800
+.param rho_typ = 1000
+.param rhi     = 0e-6
+.param rhi_typ = 50e-6
+.param rhu     = 280
+.param rhu_typ = 320
+.param lhu     = 0.34e-6
+.param dl      = 0.0e-6
+.param dl_typ  = 0.0e-6
+.param dw      = 27e-9
+.param dw_typ  = 39e-9
+.param lhs     = 0.28e-6
+.param tc1     = -7.2e-4
+.param tc2     = 4e-6
+.param wcon    = 0.16e-6
+.param cap     = 1.01e-4
+.param cep     = 0.28e-6
+.param cf0p    = 4.16e-11
+*----------------------------------------------------------------------
+* Equations 
+*----------------------------------------------------------------------
+.param rt_typ  = {rsc_typ/nc+(rhu_typ*(lhu+0.5*dl_typ)+rhs_typ*lhs+rhi_typ)/(w-dw_typ)}
+.param l       = {dl_typ+(r-2*rt_typ)*(w-dw_typ)/rho_typ}
+*----------------------------------------------------------------------
+.param rt      = {rsc/nc+(rhu*(lhu+0.5*dl)+rhs*lhs+rhi)/(w-dw)}
+.param rbody   = {rho*(l-dl)/(w-dw)}
+.param rval1   = {rbody+2*rt}
+.param lr      = {l+2*lhs+2*cep+2*lhu+2*wcon} 
+*----------------------------------------------------------------------
+* Mismatch variations
+*----------------------------------------------------------------------
+.param cp_alpha = 0.0e-8
+.param cp_beta  = 0.0
+.param cp_fudge = 1.0
+.param Amc      = 2e-8
+.param Bmc      = 0e-2
+.param mm_fudge = 1.33
+.param areaeff  = {l*w}
+.param c_mm     = 0 dev/gauss={(((cp_alpha/sqrt(areaeff))+cp_beta)*cp_fudge/sqrt(2.0*number))*RPOLYH_DEV*mismatch}
+.param r_mm     = 0 dev/gauss={(((Amc/sqrt(areaeff))+Bmc)*mm_fudge/sqrt(2.0*number))*RPOLYH_DEV*mismatch}
+
+.param ctotal   = {(cap*(w-dw)*lr+2*cf0p*(w-dw+lr))}
+.param ctotalmm = {ctotal*(1+c_mm)}
+.param rtotalmm = {rval1*(1+r_mm)}
+
+*----------------------------------------------------------------------
+* netlist
+*---------------------------------------------------------------------- 
+*
+Res  PLUS  MINUS {rtotalmm/number} tc=tc1,tc2
+C1   PLUS  B     {(ctotalmm*number/2)}
+C2   MINUS B     {(ctotalmm*number/2)}
+.ends RPO1HM1
+
+.subckt RPO1HM2
+*----------------------------------------------------------------------
+* Family rpolyh Model RPO1HM2 rmin mismatch
+* No maturity information available
+*----------------------------------------------------------------------
++ PLUS MINUS B  
++ param: r=3488.07 w=1e-6 nc={max(trunc((w+0.18e-6-2*0.28e-6)/(0.16e-6+0.18e-6)),1)} mismatch=1 number=1
+*----------------------------------------------------------------------
+
+*----------------------------------------------------------------------
+* Parameters of rpolyh Model RPO1H corner rmin
+*----------------------------------------------------------------------
+.param rsc     = 15
+.param rsc_typ = 15
+.param rhs     = 6
+.param rhs_typ = 10
+.param rho     = 800
+.param rho_typ = 1000
+.param rhi     = 0e-6
+.param rhi_typ = 50e-6
+.param rhu     = 280
+.param rhu_typ = 320
+.param lhu     = 0.34e-6
+.param dl      = 0.0e-6
+.param dl_typ  = 0.0e-6
+.param dw      = 27e-9
+.param dw_typ  = 39e-9
+.param lhs     = 0.28e-6
+.param tc1     = -7.2e-4
+.param tc2     = 4e-6
+.param wcon    = 0.16e-6
+.param cap     = 1.01e-4
+.param cf0p    = 4.16e-11
+.param cep     = 0.28e-6
+*----------------------------------------------------------------------
+* Equations 
+*----------------------------------------------------------------------
+.param rt_typ  = {rsc_typ/nc+(rhu_typ*(lhu+0.5*dl_typ)+rhs_typ*lhs+rhi_typ)/(w-dw_typ)}
+.param l       = {dl_typ+(r-2*rt_typ)*(w-dw_typ)/rho_typ}
+.param rt      = {rsc/nc+(rhu*(lhu+0.5*dl)+rhs*lhs+rhi)/(w-dw)}
+.param rbody   = {rho*(l-dl)/(w-dw)}
+.param rtotal  = {rbody+2*rt}
+.param rval1   = {rt+0.1*rbody}
+.param cval1   = {cap*(w-dw)*(lhs+cep+wcon+lhu+0.5*dl)+cf0p*(w-dw+(2*lhs+2*cep+2*wcon+2*lhu+dl))}
+.param lr      = {l+2*lhs+2*cep+2*lhu+2*wcon}
+.param ctotal  = {cap*(w-dw)*lr+2*cf0p*(w-dw+lr)}
+*----------------------------------------------------------------------
+
+*----------------------------------------------------------------------
+* Mismatch variations. Only one contribution to the main resistor
+* otherwise, the 6 resistors would be uncorrelated.r*r_mm=deltaR
+* Same methodology with the parasitic capacitors.
+*----------------------------------------------------------------------
+.param areaeff  = {l*w}
+.param cp_alpha = 0.0e-8
+.param cp_beta  = 0.0
+.param cp_fudge = 1.0
+.param Amc      = 2e-8
+.param Bmc      = 0e-2
+.param mm_fudge = 1.33
+.param c_mm     = 0 dev/gauss={(((cp_alpha/sqrt(areaeff))+cp_beta)*cp_fudge/sqrt(2.0*number))*RPOLYH_DEV*mismatch}
+.param r_mm     = 0 dev/gauss={(((Amc/sqrt(areaeff))+Bmc)*mm_fudge/sqrt(2.0*number))*RPOLYH_DEV*mismatch}
+
+
+*----------------------------------------------------------------------
+* netlist
+*---------------------------------------------------------------------- *
+Rri1 PLUS 8     {rval1/number}       tc=tc1,tc2
+Rri2 8    9     {(0.2*rbody/number)} tc=tc1,tc2
+Rri3 9    10    {(0.2*rbody/number)} tc=tc1,tc2
+Res  10   11    {(0.2*rbody/number)+(rtotal/number*r_mm)} tc=tc1,tc2
+Rri5 11   12    {(0.2*rbody/number)} tc=tc1,tc2
+Rri6 12   MINUS {rval1/number}       tc=tc1,tc2
+C1   B    PLUS  {cval1*number}
+C3   B    8     {(cap*0.125*(w-dw)*(l-dl)+cf0p*0.25*(l-dl))*number}
+C4   B    9     {(cap*0.250*(w-dw)*(l-dl)+cf0p*0.50*(l-dl))*number}
+C5   B    10    {(cap*0.250*(w-dw)*(l-dl)+cf0p*0.50*(l-dl))*number+(ctotal*number*c_mm)}
+C6   B    11    {(cap*0.250*(w-dw)*(l-dl)+cf0p*0.50*(l-dl))*number}
+C7   B    12    {(cap*0.125*(w-dw)*(l-dl)+cf0p*0.25*(l-dl))*number}
+C9   B    MINUS {cval1*number}
+.ends RPO1HM2
+
+
+
+.endl rpolyh_rmin
+
+
+.lib rpolyh_rmax
+
+*----------------------------------------------------------------------
+*                             RESISTOR
+*----------------------------------------------------------------------
+* TEMPLATE   : resistor_eldoN.t,v 2.0 2002/04/03 15:00:55
+* PARAMETERS : resistor.dds,v 1.29 2002/04/19 15:27:22
+* TRANSLATOR : ddspp.tcl,v 1.47 2001/09/11 08:03:16
+* Translated by re11 on June 14, 2002
+* ----------------------------------------------------------------------
+* (C) Copyright STMicroelectronics (2002)
+*     Unauthorized Reproduction and Communication Strictly Prohibited.
+* ----------------------------------------------------------------------
+* PACKAGE    : modelString.tcl,v 1.13 2002/04/10 07:19:16
+* PACKAGE    : statPackage.tcl,v 1.15 2001/11/26 16:05:19
+*----------------------------------------------------------------------
+
+
+.subckt RPO1HM1
+*----------------------------------------------------------------------
+* Family rpolyh Model RPO1HM1 rmax mismatch
+* No maturity information available
+*----------------------------------------------------------------------
++ PLUS MINUS B  
++ param: r=3488.07 w=1e-6 nc={max(trunc((w+0.18e-6-2*0.28e-6)/(0.16e-6+0.18e-6)),1)} mismatch=1 number=1
+*----------------------------------------------------------------------
+
+*----------------------------------------------------------------------
+* Parameters of rpolyh Model RPO1H corner rmax
+*----------------------------------------------------------------------
+.param rsc     = 30
+.param rsc_typ = 15
+.param rhs     = 14
+.param rhs_typ = 10
+.param rho     = 1200
+.param rho_typ = 1000
+.param rhi     = 100e-6
+.param rhi_typ = 50e-6
+.param rhu     = 360
+.param rhu_typ = 320
+.param lhu     = 0.34e-6
+.param dl      = 0.0e-6
+.param dl_typ  = 0.0e-6
+.param dw      = 51e-9
+.param dw_typ  = 39e-9
+.param lhs     = 0.28e-6
+.param tc1     = -7.2e-4
+.param tc2     = 4e-6
+.param wcon    = 0.16e-6
+.param cap     = 1.39e-4
+.param cep     = 0.28e-6
+.param cf0p    = 5.09e-11
+*----------------------------------------------------------------------
+* Equations 
+*----------------------------------------------------------------------
+.param rt_typ  = {rsc_typ/nc+(rhu_typ*(lhu+0.5*dl_typ)+rhs_typ*lhs+rhi_typ)/(w-dw_typ)}
+.param l       = {dl_typ+(r-2*rt_typ)*(w-dw_typ)/rho_typ}
+*----------------------------------------------------------------------
+.param rt      = {rsc/nc+(rhu*(lhu+0.5*dl)+rhs*lhs+rhi)/(w-dw)}
+.param rbody   = {rho*(l-dl)/(w-dw)}
+.param rval1   = {rbody+2*rt}
+.param lr      = {l+2*lhs+2*cep+2*lhu+2*wcon} 
+*----------------------------------------------------------------------
+* Mismatch variations
+*----------------------------------------------------------------------
+.param cp_alpha = 0.0e-8
+.param cp_beta  = 0.0
+.param cp_fudge = 1.0
+.param Amc      = 2e-8
+.param Bmc      = 0e-2
+.param mm_fudge = 1.33
+.param areaeff  = {l*w}
+.param c_mm     = 0 dev/gauss={(((cp_alpha/sqrt(areaeff))+cp_beta)*cp_fudge/sqrt(2.0*number))*RPOLYH_DEV*mismatch}
+.param r_mm     = 0 dev/gauss={(((Amc/sqrt(areaeff))+Bmc)*mm_fudge/sqrt(2.0*number))*RPOLYH_DEV*mismatch}
+
+.param ctotal   = {(cap*(w-dw)*lr+2*cf0p*(w-dw+lr))}
+.param ctotalmm = {ctotal*(1+c_mm)}
+.param rtotalmm = {rval1*(1+r_mm)}
+
+*----------------------------------------------------------------------
+* netlist
+*---------------------------------------------------------------------- 
+*
+Res  PLUS  MINUS {rtotalmm/number} tc=tc1,tc2
+C1   PLUS  B     {(ctotalmm*number/2)}
+C2   MINUS B     {(ctotalmm*number/2)}
+.ends RPO1HM1
+
+.subckt RPO1HM2
+*----------------------------------------------------------------------
+* Family rpolyh Model RPO1HM2 rmax mismatch
+* No maturity information available
+*----------------------------------------------------------------------
++ PLUS MINUS B  
++ param: r=3488.07 w=1e-6 nc={max(trunc((w+0.18e-6-2*0.28e-6)/(0.16e-6+0.18e-6)),1)} mismatch=1 number=1
+*----------------------------------------------------------------------
+
+*----------------------------------------------------------------------
+* Parameters of rpolyh Model RPO1H corner rmax
+*----------------------------------------------------------------------
+.param rsc     = 30
+.param rsc_typ = 15
+.param rhs     = 14
+.param rhs_typ = 10
+.param rho     = 1200
+.param rho_typ = 1000
+.param rhi     = 100e-6
+.param rhi_typ = 50e-6
+.param rhu     = 360
+.param rhu_typ = 320
+.param lhu     = 0.34e-6
+.param dl      = 0.0e-6
+.param dl_typ  = 0.0e-6
+.param dw      = 51e-9
+.param dw_typ  = 39e-9
+.param lhs     = 0.28e-6
+.param tc1     = -7.2e-4
+.param tc2     = 4e-6
+.param wcon    = 0.16e-6
+.param cap     = 1.39e-4
+.param cf0p    = 5.09e-11
+.param cep     = 0.28e-6
+*----------------------------------------------------------------------
+* Equations 
+*----------------------------------------------------------------------
+.param rt_typ  = {rsc_typ/nc+(rhu_typ*(lhu+0.5*dl_typ)+rhs_typ*lhs+rhi_typ)/(w-dw_typ)}
+.param l       = {dl_typ+(r-2*rt_typ)*(w-dw_typ)/rho_typ}
+.param rt      = {rsc/nc+(rhu*(lhu+0.5*dl)+rhs*lhs+rhi)/(w-dw)}
+.param rbody   = {rho*(l-dl)/(w-dw)}
+.param rtotal  = {rbody+2*rt}
+.param rval1   = {rt+0.1*rbody}
+.param cval1   = {cap*(w-dw)*(lhs+cep+wcon+lhu+0.5*dl)+cf0p*(w-dw+(2*lhs+2*cep+2*wcon+2*lhu+dl))}
+.param lr      = {l+2*lhs+2*cep+2*lhu+2*wcon}
+.param ctotal  = {cap*(w-dw)*lr+2*cf0p*(w-dw+lr)}
+*----------------------------------------------------------------------
+
+*----------------------------------------------------------------------
+* Mismatch variations. Only one contribution to the main resistor
+* otherwise, the 6 resistors would be uncorrelated.r*r_mm=deltaR
+* Same methodology with the parasitic capacitors.
+*----------------------------------------------------------------------
+.param areaeff  = {l*w}
+.param cp_alpha = 0.0e-8
+.param cp_beta  = 0.0
+.param cp_fudge = 1.0
+.param Amc      = 2e-8
+.param Bmc      = 0e-2
+.param mm_fudge = 1.33
+.param c_mm     = 0 dev/gauss={(((cp_alpha/sqrt(areaeff))+cp_beta)*cp_fudge/sqrt(2.0*number))*RPOLYH_DEV*mismatch}
+.param r_mm     = 0 dev/gauss={(((Amc/sqrt(areaeff))+Bmc)*mm_fudge/sqrt(2.0*number))*RPOLYH_DEV*mismatch}
+
+
+*----------------------------------------------------------------------
+* netlist
+*---------------------------------------------------------------------- *
+Rri1 PLUS 8     {rval1/number}       tc=tc1,tc2
+Rri2 8    9     {(0.2*rbody/number)} tc=tc1,tc2
+Rri3 9    10    {(0.2*rbody/number)} tc=tc1,tc2
+Res  10   11    {(0.2*rbody/number)+(rtotal/number*r_mm)} tc=tc1,tc2
+Rri5 11   12    {(0.2*rbody/number)} tc=tc1,tc2
+Rri6 12   MINUS {rval1/number}       tc=tc1,tc2
+C1   B    PLUS  {cval1*number}
+C3   B    8     {(cap*0.125*(w-dw)*(l-dl)+cf0p*0.25*(l-dl))*number}
+C4   B    9     {(cap*0.250*(w-dw)*(l-dl)+cf0p*0.50*(l-dl))*number}
+C5   B    10    {(cap*0.250*(w-dw)*(l-dl)+cf0p*0.50*(l-dl))*number+(ctotal*number*c_mm)}
+C6   B    11    {(cap*0.250*(w-dw)*(l-dl)+cf0p*0.50*(l-dl))*number}
+C7   B    12    {(cap*0.125*(w-dw)*(l-dl)+cf0p*0.25*(l-dl))*number}
+C9   B    MINUS {cval1*number}
+.ends RPO1HM2
+
+
+
+.endl rpolyh_rmax
+

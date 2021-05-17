@@ -1,0 +1,10 @@
+RNAND       =  6.7226E-11   targ=  2.2283E-09     trig=  2.1611E-09
+  FNAND       =  6.8511E-11   targ=  1.2069E-09     trig=  1.1384E-09
+  NANDDELAY   =  2.0524E-11   targ=  1.1835E-09     trig=  1.1630E-09
+  NANDDELAY2  =  3.7948E-11   targ=  2.2009E-09     trig=  2.1630E-09
+  MAXIGNDF    =  7.6530E-05     at=  1.1907E-09  from=  1.0000E-09     to=  2.0000E-09
+  MAXIVDDR    = -7.0006E-05     at=  2.2001E-09  from=  2.0000E-09     to=  3.0000E-09
+  MAXIGNDR    =  4.5879E-05     at=  2.1791E-09  from=  2.0000E-09     to=  3.0000E-09
+  MAXIVDDF    = -4.7912E-05     at=  1.1717E-09  from=  1.0000E-09     to=  2.0000E-09
+  MAXILOADF   = -1.2603E-07     at=  1.1937E-09  from=  1.0000E-09     to=  2.0000E-09
+  MAXILOADR   =  1.1510E-07     at=  2.2076E-09  from=  2.0000E-09     to=  3.0000E-09

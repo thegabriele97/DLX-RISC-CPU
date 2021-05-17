@@ -1,0 +1,3027 @@
+
+
+*----------------------------------------------------------------------
+*                           Process Variations
+*----------------------------------------------------------------------
+* TEMPLATE   : statistic_eldoN.t,v 2.0 2002/04/03 15:02:24
+* PARAMETERS : statistic.dds,v 2.8 2002/06/04 11:44:06
+* TRANSLATOR : ddspp.tcl,v 1.47 2001/09/11 08:03:16
+* Translated by re11 on June 14, 2002
+* PACKAGE    : modelString.tcl,v 1.13 2002/04/10 07:19:16
+* PACKAGE    : statPackage.tcl,v 1.15 2001/11/26 16:05:19
+*----------------------------------------------------------------------
+* (C) Copyright STMicroelectronics
+*     Unauthorized Reproduction and Communication Strictly Prohibited.
+*----------------------------------------------------------------------
+
+
+*----------------------------------------------------------------------
+*                            MOSFET HIGH SPEED
+*----------------------------------------------------------------------
+* (C) Copyright STMicroelectronics
+*     Unauthorized Reproduction and Communication Strictly Prohibited.
+* TEMPLATE   : mos_bsim3_LL_eldoN.t,v 1.2 2000/12/06 15:39:59
+* PARAMETERS : mos_bsim3_LL.dds,v 2.7 2002/06/14 12:59:50
+* TRANSLATOR : ddspp.tcl,v 1.48 2002/06/19 09:12:40
+* Translated by re11 on June 19, 2002
+*----------------------------------------------------------------------
+
+
+.lib mosll_TT
+
+.param nsigma_nmosll_dcjb  =  0
+.param nsigma_nmosll_dcjgate  =  0
+.param nsigma_nmosll_dcjsw  =  0
+.param nsigma_nmosll_djsdbr  =  0
+.param nsigma_nmosll_djsdgr  =  0
+.param nsigma_nmosll_djsdsr  =  0
+.param nsigma_nmosll_djsgbr  =  0
+.param nsigma_nmosll_djsggr  =  0
+.param nsigma_nmosll_djsgsr  =  0
+.param nsigma_nmosll_dmu  =  0
+.param nsigma_nmosll_drdsw  =  0
+.param nsigma_nmosll_dvarmaxrdsw  =  0
+.param nsigma_nmosll_dvarmaxu0  =  0
+.param nsigma_nmosll_rbvdl  =  0
+.param nsigma_nmosll_rbvdr  =  0
+.param nsigma_nmosll_rbvgl  =  0
+.param nsigma_nmosll_rbvgr  =  0
+.param nsigma_nmosll_rbvsl  =  0
+.param nsigma_nmosll_rbvsr  =  0
+.param nsigma_nmosll_varmaxvth00  =  0
+.param nsigma_nmosll_vth0  =  0
+
+.param nsigma_pmosll_dcjb  =  0
+.param nsigma_pmosll_dcjgate  =  0
+.param nsigma_pmosll_dcjsw  =  0
+.param nsigma_pmosll_djsdbr  =  0
+.param nsigma_pmosll_djsdgr  =  0
+.param nsigma_pmosll_djsdsr  =  0
+.param nsigma_pmosll_djsgbr  =  0
+.param nsigma_pmosll_djsggr  =  0
+.param nsigma_pmosll_djsgsr  =  0
+.param nsigma_pmosll_dmu  =  0
+.param nsigma_pmosll_drdsw  =  0
+.param nsigma_pmosll_dvarmaxrdsw  =  0
+.param nsigma_pmosll_dvarmaxu0  =  0
+.param nsigma_pmosll_rbvdl  =  0
+.param nsigma_pmosll_rbvdr  =  0
+.param nsigma_pmosll_rbvgl  =  0
+.param nsigma_pmosll_rbvgr  =  0
+.param nsigma_pmosll_rbvsl  =  0
+.param nsigma_pmosll_rbvsr  =  0
+.param nsigma_pmosll_varmaxvth00  =  0
+.param nsigma_pmosll_vth0  =  0
+
+
+
+.lib "mos_bsim3_LL.lib" mosll_PARAM
+.lib "mos_bsim3_LL.lib" mosll_CORREL
+.lib "mos_bsim3_LL.lib" mosll_MODEL
+ 
+.endl mosll_TT
+
+
+.lib mosll_FF
+
+.param nsigma_nmosll_dcjb  =  -2
+.param nsigma_nmosll_dcjgate  =  -2
+.param nsigma_nmosll_dcjsw  =  -2
+.param nsigma_nmosll_djsdbr  =  2
+.param nsigma_nmosll_djsdgr  =  2
+.param nsigma_nmosll_djsdsr  =  2
+.param nsigma_nmosll_djsgbr  =  2
+.param nsigma_nmosll_djsggr  =  2
+.param nsigma_nmosll_djsgsr  =  2
+.param nsigma_nmosll_dmu  =  2
+.param nsigma_nmosll_drdsw  =  -2
+.param nsigma_nmosll_dvarmaxrdsw  =  0
+.param nsigma_nmosll_dvarmaxu0  =  2
+.param nsigma_nmosll_rbvdl  =  0
+.param nsigma_nmosll_rbvdr  =  0
+.param nsigma_nmosll_rbvgl  =  0
+.param nsigma_nmosll_rbvgr  =  0
+.param nsigma_nmosll_rbvsl  =  0
+.param nsigma_nmosll_rbvsr  =  0
+.param nsigma_nmosll_varmaxvth00  =  0
+.param nsigma_nmosll_vth0  =  -2
+
+.param nsigma_pmosll_dcjb  =  -2
+.param nsigma_pmosll_dcjgate  =  -2
+.param nsigma_pmosll_dcjsw  =  -2
+.param nsigma_pmosll_djsdbr  =  2
+.param nsigma_pmosll_djsdgr  =  2
+.param nsigma_pmosll_djsdsr  =  2
+.param nsigma_pmosll_djsgbr  =  2
+.param nsigma_pmosll_djsggr  =  2
+.param nsigma_pmosll_djsgsr  =  2
+.param nsigma_pmosll_dmu  =  2
+.param nsigma_pmosll_drdsw  =  -2
+.param nsigma_pmosll_dvarmaxrdsw  =  0
+.param nsigma_pmosll_dvarmaxu0  =  -2
+.param nsigma_pmosll_rbvdl  =  0
+.param nsigma_pmosll_rbvdr  =  0
+.param nsigma_pmosll_rbvgl  =  0
+.param nsigma_pmosll_rbvgr  =  0
+.param nsigma_pmosll_rbvsl  =  0
+.param nsigma_pmosll_rbvsr  =  0
+.param nsigma_pmosll_varmaxvth00  =  0
+.param nsigma_pmosll_vth0  =  2
+
+
+
+.lib "mos_bsim3_LL.lib" mosll_PARAM
+.lib "mos_bsim3_LL.lib" mosll_CORREL
+.lib "mos_bsim3_LL.lib" mosll_MODEL
+ 
+.endl mosll_FF
+
+
+.lib mosll_SS
+
+.param nsigma_nmosll_dcjb  =  2
+.param nsigma_nmosll_dcjgate  =  2
+.param nsigma_nmosll_dcjsw  =  2
+.param nsigma_nmosll_djsdbr  =  -2
+.param nsigma_nmosll_djsdgr  =  -2
+.param nsigma_nmosll_djsdsr  =  -2
+.param nsigma_nmosll_djsgbr  =  -2
+.param nsigma_nmosll_djsggr  =  -2
+.param nsigma_nmosll_djsgsr  =  -2
+.param nsigma_nmosll_dmu  =  -2
+.param nsigma_nmosll_drdsw  =  2
+.param nsigma_nmosll_dvarmaxrdsw  =  0
+.param nsigma_nmosll_dvarmaxu0  =  -2
+.param nsigma_nmosll_rbvdl  =  2
+.param nsigma_nmosll_rbvdr  =  2
+.param nsigma_nmosll_rbvgl  =  2
+.param nsigma_nmosll_rbvgr  =  2
+.param nsigma_nmosll_rbvsl  =  2
+.param nsigma_nmosll_rbvsr  =  2
+.param nsigma_nmosll_varmaxvth00  =  0
+.param nsigma_nmosll_vth0  =  2
+
+.param nsigma_pmosll_dcjb  =  2
+.param nsigma_pmosll_dcjgate  =  2
+.param nsigma_pmosll_dcjsw  =  2
+.param nsigma_pmosll_djsdbr  =  -2
+.param nsigma_pmosll_djsdgr  =  -2
+.param nsigma_pmosll_djsdsr  =  -2
+.param nsigma_pmosll_djsgbr  =  -2
+.param nsigma_pmosll_djsggr  =  -2
+.param nsigma_pmosll_djsgsr  =  -2
+.param nsigma_pmosll_dmu  =  -2
+.param nsigma_pmosll_drdsw  =  2
+.param nsigma_pmosll_dvarmaxrdsw  =  0
+.param nsigma_pmosll_dvarmaxu0  =  2
+.param nsigma_pmosll_rbvdl  =  2
+.param nsigma_pmosll_rbvdr  =  2
+.param nsigma_pmosll_rbvgl  =  2
+.param nsigma_pmosll_rbvgr  =  2
+.param nsigma_pmosll_rbvsl  =  2
+.param nsigma_pmosll_rbvsr  =  2
+.param nsigma_pmosll_varmaxvth00  =  0
+.param nsigma_pmosll_vth0  =  -2
+
+
+
+.lib "mos_bsim3_LL.lib" mosll_PARAM
+.lib "mos_bsim3_LL.lib" mosll_CORREL
+.lib "mos_bsim3_LL.lib" mosll_MODEL
+ 
+.endl mosll_SS
+
+
+.lib mosll_FFA
+
+.param nsigma_nmosll_dcjb  =  -2
+.param nsigma_nmosll_dcjgate  =  -2
+.param nsigma_nmosll_dcjsw  =  -2
+.param nsigma_nmosll_djsdbr  =  2
+.param nsigma_nmosll_djsdgr  =  2
+.param nsigma_nmosll_djsdsr  =  2
+.param nsigma_nmosll_djsgbr  =  2
+.param nsigma_nmosll_djsggr  =  2
+.param nsigma_nmosll_djsgsr  =  2
+.param nsigma_nmosll_dmu  =  3
+.param nsigma_nmosll_drdsw  =  -3
+.param nsigma_nmosll_dvarmaxrdsw  =  0
+.param nsigma_nmosll_dvarmaxu0  =  3
+.param nsigma_nmosll_rbvdl  =  0
+.param nsigma_nmosll_rbvdr  =  0
+.param nsigma_nmosll_rbvgl  =  0
+.param nsigma_nmosll_rbvgr  =  0
+.param nsigma_nmosll_rbvsl  =  0
+.param nsigma_nmosll_rbvsr  =  0
+.param nsigma_nmosll_varmaxvth00  =  0
+.param nsigma_nmosll_vth0  =  -3
+
+.param nsigma_pmosll_dcjb  =  -2
+.param nsigma_pmosll_dcjgate  =  -2
+.param nsigma_pmosll_dcjsw  =  -2
+.param nsigma_pmosll_djsdbr  =  2
+.param nsigma_pmosll_djsdgr  =  2
+.param nsigma_pmosll_djsdsr  =  2
+.param nsigma_pmosll_djsgbr  =  2
+.param nsigma_pmosll_djsggr  =  2
+.param nsigma_pmosll_djsgsr  =  2
+.param nsigma_pmosll_dmu  =  3
+.param nsigma_pmosll_drdsw  =  -3
+.param nsigma_pmosll_dvarmaxrdsw  =  0
+.param nsigma_pmosll_dvarmaxu0  =  -3
+.param nsigma_pmosll_rbvdl  =  0
+.param nsigma_pmosll_rbvdr  =  0
+.param nsigma_pmosll_rbvgl  =  0
+.param nsigma_pmosll_rbvgr  =  0
+.param nsigma_pmosll_rbvsl  =  0
+.param nsigma_pmosll_rbvsr  =  0
+.param nsigma_pmosll_varmaxvth00  =  0
+.param nsigma_pmosll_vth0  =  3
+
+
+
+.lib "mos_bsim3_LL.lib" mosll_PARAM
+.lib "mos_bsim3_LL.lib" mosll_CORREL
+.lib "mos_bsim3_LL.lib" mosll_MODEL
+ 
+.endl mosll_FFA
+
+
+.lib mosll_SSA
+
+.param nsigma_nmosll_dcjb  =  2
+.param nsigma_nmosll_dcjgate  =  2
+.param nsigma_nmosll_dcjsw  =  2
+.param nsigma_nmosll_djsdbr  =  -2
+.param nsigma_nmosll_djsdgr  =  -2
+.param nsigma_nmosll_djsdsr  =  -2
+.param nsigma_nmosll_djsgbr  =  -2
+.param nsigma_nmosll_djsggr  =  -2
+.param nsigma_nmosll_djsgsr  =  -2
+.param nsigma_nmosll_dmu  =  -3
+.param nsigma_nmosll_drdsw  =  3
+.param nsigma_nmosll_dvarmaxrdsw  =  0
+.param nsigma_nmosll_dvarmaxu0  =  -3
+.param nsigma_nmosll_rbvdl  =  2
+.param nsigma_nmosll_rbvdr  =  2
+.param nsigma_nmosll_rbvgl  =  2
+.param nsigma_nmosll_rbvgr  =  2
+.param nsigma_nmosll_rbvsl  =  2
+.param nsigma_nmosll_rbvsr  =  2
+.param nsigma_nmosll_varmaxvth00  =  0
+.param nsigma_nmosll_vth0  =  3
+
+.param nsigma_pmosll_dcjb  =  2
+.param nsigma_pmosll_dcjgate  =  2
+.param nsigma_pmosll_dcjsw  =  2
+.param nsigma_pmosll_djsdbr  =  -2
+.param nsigma_pmosll_djsdgr  =  -2
+.param nsigma_pmosll_djsdsr  =  -2
+.param nsigma_pmosll_djsgbr  =  -2
+.param nsigma_pmosll_djsggr  =  -2
+.param nsigma_pmosll_djsgsr  =  -2
+.param nsigma_pmosll_dmu  =  -3
+.param nsigma_pmosll_drdsw  =  3
+.param nsigma_pmosll_dvarmaxrdsw  =  0
+.param nsigma_pmosll_dvarmaxu0  =  3
+.param nsigma_pmosll_rbvdl  =  2
+.param nsigma_pmosll_rbvdr  =  2
+.param nsigma_pmosll_rbvgl  =  2
+.param nsigma_pmosll_rbvgr  =  2
+.param nsigma_pmosll_rbvsl  =  2
+.param nsigma_pmosll_rbvsr  =  2
+.param nsigma_pmosll_varmaxvth00  =  0
+.param nsigma_pmosll_vth0  =  -3
+
+
+
+.lib "mos_bsim3_LL.lib" mosll_PARAM
+.lib "mos_bsim3_LL.lib" mosll_CORREL
+.lib "mos_bsim3_LL.lib" mosll_MODEL
+ 
+.endl mosll_SSA
+
+
+.lib mosll_FS
+
+.param nsigma_nmosll_dcjb  =  -2
+.param nsigma_nmosll_dcjgate  =  -2
+.param nsigma_nmosll_dcjsw  =  -2
+.param nsigma_nmosll_djsdbr  =  0
+.param nsigma_nmosll_djsdgr  =  0
+.param nsigma_nmosll_djsdsr  =  0
+.param nsigma_nmosll_djsgbr  =  0
+.param nsigma_nmosll_djsggr  =  0
+.param nsigma_nmosll_djsgsr  =  0
+.param nsigma_nmosll_dmu  =  0
+.param nsigma_nmosll_drdsw  =  0
+.param nsigma_nmosll_dvarmaxrdsw  =  0
+.param nsigma_nmosll_dvarmaxu0  =  3
+.param nsigma_nmosll_rbvdl  =  0
+.param nsigma_nmosll_rbvdr  =  0
+.param nsigma_nmosll_rbvgl  =  0
+.param nsigma_nmosll_rbvgr  =  0
+.param nsigma_nmosll_rbvsl  =  0
+.param nsigma_nmosll_rbvsr  =  0
+.param nsigma_nmosll_varmaxvth00  =  0
+.param nsigma_nmosll_vth0  =  -4
+
+.param nsigma_pmosll_dcjb  =  2
+.param nsigma_pmosll_dcjgate  =  2
+.param nsigma_pmosll_dcjsw  =  2
+.param nsigma_pmosll_djsdbr  =  0
+.param nsigma_pmosll_djsdgr  =  0
+.param nsigma_pmosll_djsdsr  =  0
+.param nsigma_pmosll_djsgbr  =  0
+.param nsigma_pmosll_djsggr  =  0
+.param nsigma_pmosll_djsgsr  =  0
+.param nsigma_pmosll_dmu  =  0
+.param nsigma_pmosll_drdsw  =  0
+.param nsigma_pmosll_dvarmaxrdsw  =  0
+.param nsigma_pmosll_dvarmaxu0  =  3
+.param nsigma_pmosll_rbvdl  =  0
+.param nsigma_pmosll_rbvdr  =  0
+.param nsigma_pmosll_rbvgl  =  0
+.param nsigma_pmosll_rbvgr  =  0
+.param nsigma_pmosll_rbvsl  =  0
+.param nsigma_pmosll_rbvsr  =  0
+.param nsigma_pmosll_varmaxvth00  =  0
+.param nsigma_pmosll_vth0  =  -4
+
+
+
+.lib "mos_bsim3_LL.lib" mosll_PARAM
+.lib "mos_bsim3_LL.lib" mosll_CORREL
+.lib "mos_bsim3_LL.lib" mosll_MODEL
+ 
+.endl mosll_FS
+
+
+.lib mosll_SF
+
+.param nsigma_nmosll_dcjb  =  2
+.param nsigma_nmosll_dcjgate  =  2
+.param nsigma_nmosll_dcjsw  =  2
+.param nsigma_nmosll_djsdbr  =  0
+.param nsigma_nmosll_djsdgr  =  0
+.param nsigma_nmosll_djsdsr  =  0
+.param nsigma_nmosll_djsgbr  =  0
+.param nsigma_nmosll_djsggr  =  0
+.param nsigma_nmosll_djsgsr  =  0
+.param nsigma_nmosll_dmu  =  0
+.param nsigma_nmosll_drdsw  =  0
+.param nsigma_nmosll_dvarmaxrdsw  =  0
+.param nsigma_nmosll_dvarmaxu0  =  -3
+.param nsigma_nmosll_rbvdl  =  0
+.param nsigma_nmosll_rbvdr  =  0
+.param nsigma_nmosll_rbvgl  =  0
+.param nsigma_nmosll_rbvgr  =  0
+.param nsigma_nmosll_rbvsl  =  0
+.param nsigma_nmosll_rbvsr  =  0
+.param nsigma_nmosll_varmaxvth00  =  0
+.param nsigma_nmosll_vth0  =  4
+
+.param nsigma_pmosll_dcjb  =  -2
+.param nsigma_pmosll_dcjgate  =  -2
+.param nsigma_pmosll_dcjsw  =  -2
+.param nsigma_pmosll_djsdbr  =  0
+.param nsigma_pmosll_djsdgr  =  0
+.param nsigma_pmosll_djsdsr  =  0
+.param nsigma_pmosll_djsgbr  =  0
+.param nsigma_pmosll_djsggr  =  0
+.param nsigma_pmosll_djsgsr  =  0
+.param nsigma_pmosll_dmu  =  0
+.param nsigma_pmosll_drdsw  =  0
+.param nsigma_pmosll_dvarmaxrdsw  =  0
+.param nsigma_pmosll_dvarmaxu0  =  -3
+.param nsigma_pmosll_rbvdl  =  0
+.param nsigma_pmosll_rbvdr  =  0
+.param nsigma_pmosll_rbvgl  =  0
+.param nsigma_pmosll_rbvgr  =  0
+.param nsigma_pmosll_rbvsl  =  0
+.param nsigma_pmosll_rbvsr  =  0
+.param nsigma_pmosll_varmaxvth00  =  0
+.param nsigma_pmosll_vth0  =  4
+
+
+
+.lib "mos_bsim3_LL.lib" mosll_PARAM
+.lib "mos_bsim3_LL.lib" mosll_CORREL
+.lib "mos_bsim3_LL.lib" mosll_MODEL
+ 
+.endl mosll_SF
+
+
+.lib mosll_FSA
+
+.param nsigma_nmosll_dcjb  =  -2
+.param nsigma_nmosll_dcjgate  =  -2
+.param nsigma_nmosll_dcjsw  =  -2
+.param nsigma_nmosll_djsdbr  =  0
+.param nsigma_nmosll_djsdgr  =  0
+.param nsigma_nmosll_djsdsr  =  0
+.param nsigma_nmosll_djsgbr  =  0
+.param nsigma_nmosll_djsggr  =  0
+.param nsigma_nmosll_djsgsr  =  0
+.param nsigma_nmosll_dmu  =  0
+.param nsigma_nmosll_drdsw  =  0
+.param nsigma_nmosll_dvarmaxrdsw  =  0
+.param nsigma_nmosll_dvarmaxu0  =  4
+.param nsigma_nmosll_rbvdl  =  0
+.param nsigma_nmosll_rbvdr  =  0
+.param nsigma_nmosll_rbvgl  =  0
+.param nsigma_nmosll_rbvgr  =  0
+.param nsigma_nmosll_rbvsl  =  0
+.param nsigma_nmosll_rbvsr  =  0
+.param nsigma_nmosll_varmaxvth00  =  0
+.param nsigma_nmosll_vth0  =  -6
+
+.param nsigma_pmosll_dcjb  =  2
+.param nsigma_pmosll_dcjgate  =  2
+.param nsigma_pmosll_dcjsw  =  2
+.param nsigma_pmosll_djsdbr  =  0
+.param nsigma_pmosll_djsdgr  =  0
+.param nsigma_pmosll_djsdsr  =  0
+.param nsigma_pmosll_djsgbr  =  0
+.param nsigma_pmosll_djsggr  =  0
+.param nsigma_pmosll_djsgsr  =  0
+.param nsigma_pmosll_dmu  =  0
+.param nsigma_pmosll_drdsw  =  0
+.param nsigma_pmosll_dvarmaxrdsw  =  0
+.param nsigma_pmosll_dvarmaxu0  =  4
+.param nsigma_pmosll_rbvdl  =  0
+.param nsigma_pmosll_rbvdr  =  0
+.param nsigma_pmosll_rbvgl  =  0
+.param nsigma_pmosll_rbvgr  =  0
+.param nsigma_pmosll_rbvsl  =  0
+.param nsigma_pmosll_rbvsr  =  0
+.param nsigma_pmosll_varmaxvth00  =  0
+.param nsigma_pmosll_vth0  =  -6
+
+
+
+.lib "mos_bsim3_LL.lib" mosll_PARAM
+.lib "mos_bsim3_LL.lib" mosll_CORREL
+.lib "mos_bsim3_LL.lib" mosll_MODEL
+ 
+.endl mosll_FSA
+
+
+.lib mosll_SFA
+
+.param nsigma_nmosll_dcjb  =  2
+.param nsigma_nmosll_dcjgate  =  2
+.param nsigma_nmosll_dcjsw  =  2
+.param nsigma_nmosll_djsdbr  =  0
+.param nsigma_nmosll_djsdgr  =  0
+.param nsigma_nmosll_djsdsr  =  0
+.param nsigma_nmosll_djsgbr  =  0
+.param nsigma_nmosll_djsggr  =  0
+.param nsigma_nmosll_djsgsr  =  0
+.param nsigma_nmosll_dmu  =  0
+.param nsigma_nmosll_drdsw  =  0
+.param nsigma_nmosll_dvarmaxrdsw  =  0
+.param nsigma_nmosll_dvarmaxu0  =  -4
+.param nsigma_nmosll_rbvdl  =  0
+.param nsigma_nmosll_rbvdr  =  0
+.param nsigma_nmosll_rbvgl  =  0
+.param nsigma_nmosll_rbvgr  =  0
+.param nsigma_nmosll_rbvsl  =  0
+.param nsigma_nmosll_rbvsr  =  0
+.param nsigma_nmosll_varmaxvth00  =  0
+.param nsigma_nmosll_vth0  =  6
+
+.param nsigma_pmosll_dcjb  =  -2
+.param nsigma_pmosll_dcjgate  =  -2
+.param nsigma_pmosll_dcjsw  =  -2
+.param nsigma_pmosll_djsdbr  =  0
+.param nsigma_pmosll_djsdgr  =  0
+.param nsigma_pmosll_djsdsr  =  0
+.param nsigma_pmosll_djsgbr  =  0
+.param nsigma_pmosll_djsggr  =  0
+.param nsigma_pmosll_djsgsr  =  0
+.param nsigma_pmosll_dmu  =  0
+.param nsigma_pmosll_drdsw  =  0
+.param nsigma_pmosll_dvarmaxrdsw  =  0
+.param nsigma_pmosll_dvarmaxu0  =  -4
+.param nsigma_pmosll_rbvdl  =  0
+.param nsigma_pmosll_rbvdr  =  0
+.param nsigma_pmosll_rbvgl  =  0
+.param nsigma_pmosll_rbvgr  =  0
+.param nsigma_pmosll_rbvsl  =  0
+.param nsigma_pmosll_rbvsr  =  0
+.param nsigma_pmosll_varmaxvth00  =  0
+.param nsigma_pmosll_vth0  =  6
+
+
+
+.lib "mos_bsim3_LL.lib" mosll_PARAM
+.lib "mos_bsim3_LL.lib" mosll_CORREL
+.lib "mos_bsim3_LL.lib" mosll_MODEL
+ 
+.endl mosll_SFA
+
+.lib mosll_PARAM
+
+
+*----------------------------------------------
+*                   nmosll 
+*----------------------------------------------
+.param nmosll_vth0 = {0.241+0.5*0.015*nsigma_nmosll_vth0}
+.param nmosll_dmu = {0.0+0.5*5e-2*nsigma_nmosll_dmu}
+.param nmosll_drdsw = {0.0+0.5*5e-2*nsigma_nmosll_drdsw}
+.param nmosll_dcjb = {0.0+0.5*10e-2*nsigma_nmosll_dcjb}
+.param nmosll_dcjgate = {0.0+0.5*20e-2*nsigma_nmosll_dcjgate}
+.param nmosll_dcjsw = {0.0+0.5*20e-2*nsigma_nmosll_dcjsw}
+.param nmosll_djsdbr = {0.0+0.5*1*nsigma_nmosll_djsdbr}
+.param nmosll_djsdgr = {0.0+0.5*1*nsigma_nmosll_djsdgr}
+.param nmosll_djsdsr = {0.0+0.5*1*nsigma_nmosll_djsdsr}
+.param nmosll_djsgbr = {0.0+0.5*1*nsigma_nmosll_djsgbr}
+.param nmosll_djsggr = {0.0+0.5*1*nsigma_nmosll_djsggr}
+.param nmosll_djsgsr = {0.0+0.5*1*nsigma_nmosll_djsgsr}
+.param nmosll_varmaxvth00 = {0.0+0.5*0.0*nsigma_nmosll_varmaxvth00}
+.param nmosll_dvarmaxu0 = {0.0+0.5*0.33*nsigma_nmosll_dvarmaxu0}
+.param nmosll_dvarmaxrdsw = {0.0+0.5*0.0*nsigma_nmosll_dvarmaxrdsw}
+.param nmosll_rbvdr = {1364+0.5*409.2*nsigma_nmosll_rbvdr}
+.param nmosll_rbvdl = {5544+0.5*1663.2*nsigma_nmosll_rbvdl}
+.param nmosll_rbvsr = {1364+0.5*409.2*nsigma_nmosll_rbvsr}
+.param nmosll_rbvsl = {5544+0.5*1663.2*nsigma_nmosll_rbvsl}
+.param nmosll_rbvgr = {3304+0.5*991.2*nsigma_nmosll_rbvgr}
+.param nmosll_rbvgl = {2576+0.5*772.8*nsigma_nmosll_rbvgl}
+
+
+*----------------------------------------------
+*                   pmosll 
+*----------------------------------------------
+.param pmosll_vth0 = {-0.343+0.5*0.015*nsigma_pmosll_vth0}
+.param pmosll_dmu = {0.0+0.5*5e-2*nsigma_pmosll_dmu}
+.param pmosll_drdsw = {0.0+0.5*5e-2*nsigma_pmosll_drdsw}
+.param pmosll_dcjb = {0.0+0.5*10e-2*nsigma_pmosll_dcjb}
+.param pmosll_dcjgate = {0.0+0.5*20e-2*nsigma_pmosll_dcjgate}
+.param pmosll_dcjsw = {0.0+0.5*20e-2*nsigma_pmosll_dcjsw}
+.param pmosll_djsdbr = {0.0+0.5*1*nsigma_pmosll_djsdbr}
+.param pmosll_djsdgr = {0.0+0.5*1*nsigma_pmosll_djsdgr}
+.param pmosll_djsdsr = {0.0+0.5*1*nsigma_pmosll_djsdsr}
+.param pmosll_djsgbr = {0.0+0.5*1*nsigma_pmosll_djsgbr}
+.param pmosll_djsggr = {0.0+0.5*1*nsigma_pmosll_djsggr}
+.param pmosll_djsgsr = {0.0+0.5*1*nsigma_pmosll_djsgsr}
+.param pmosll_varmaxvth00 = {0.0+0.5*0.0*nsigma_pmosll_varmaxvth00}
+.param pmosll_dvarmaxu0 = {0.0+0.5*0.33*nsigma_pmosll_dvarmaxu0}
+.param pmosll_dvarmaxrdsw = {0.0+0.5*0.0*nsigma_pmosll_dvarmaxrdsw}
+.param pmosll_rbvdr = {216+0.5*64.8*nsigma_pmosll_rbvdr}
+.param pmosll_rbvdl = {2916+0.5*874.8*nsigma_pmosll_rbvdl}
+.param pmosll_rbvsr = {216+0.5*64.8*nsigma_pmosll_rbvsr}
+.param pmosll_rbvsl = {2916+0.5*874.8*nsigma_pmosll_rbvsl}
+.param pmosll_rbvgr = {864+0.5*259.2*nsigma_pmosll_rbvgr}
+.param pmosll_rbvgl = {1360+0.5*408*nsigma_pmosll_rbvgl}
+
+
+.endl mosll_PARAM
+
+.lib mosll_stat
+
+*----------------------------------------------
+*                   nmosll 
+*----------------------------------------------
+.PARAM nmosll_vth0 = 0.241 LOT/uniform={0.015}
+.PARAM nmosll_dmu = 0.0 LOT/uniform={5e-2}
+.PARAM nmosll_drdsw = 0.0 LOT/uniform={5e-2}
+.PARAM nmosll_dcjb = 0.0 LOT/uniform={10e-2}
+.PARAM nmosll_dcjgate = 0.0 LOT/uniform={20e-2}
+.PARAM nmosll_dcjsw = 0.0 LOT/uniform={20e-2}
+.PARAM nmosll_djsdbr = 0.0 LOT/uniform={1}
+.PARAM nmosll_djsdgr = 0.0 LOT/uniform={1}
+.PARAM nmosll_djsdsr = 0.0 LOT/uniform={1}
+.PARAM nmosll_djsgbr = 0.0 LOT/uniform={1}
+.PARAM nmosll_djsggr = 0.0 LOT/uniform={1}
+.PARAM nmosll_djsgsr = 0.0 LOT/uniform={1}
+.PARAM nmosll_varmaxvth00 = 0.0 LOT/uniform={0.0}
+.PARAM nmosll_dvarmaxu0 = 0.0 LOT/uniform={0.33}
+.PARAM nmosll_dvarmaxrdsw = 0.0 LOT/uniform={0.0}
+.PARAM nmosll_rbvdr = 1364 LOT/uniform={409.2}
+.PARAM nmosll_rbvdl = 5544 LOT/uniform={1663.2}
+.PARAM nmosll_rbvsr = 1364 LOT/uniform={409.2}
+.PARAM nmosll_rbvsl = 5544 LOT/uniform={1663.2}
+.PARAM nmosll_rbvgr = 3304 LOT/uniform={991.2}
+.PARAM nmosll_rbvgl = 2576 LOT/uniform={772.8}
+
+*----------------------------------------------
+*                   pmosll 
+*----------------------------------------------
+.PARAM pmosll_vth0 = -0.343 LOT/uniform={0.015}
+.PARAM pmosll_dmu = 0.0 LOT/uniform={5e-2}
+.PARAM pmosll_drdsw = 0.0 LOT/uniform={5e-2}
+.PARAM pmosll_dcjb = 0.0 LOT/uniform={10e-2}
+.PARAM pmosll_dcjgate = 0.0 LOT/uniform={20e-2}
+.PARAM pmosll_dcjsw = 0.0 LOT/uniform={20e-2}
+.PARAM pmosll_djsdbr = 0.0 LOT/uniform={1}
+.PARAM pmosll_djsdgr = 0.0 LOT/uniform={1}
+.PARAM pmosll_djsdsr = 0.0 LOT/uniform={1}
+.PARAM pmosll_djsgbr = 0.0 LOT/uniform={1}
+.PARAM pmosll_djsggr = 0.0 LOT/uniform={1}
+.PARAM pmosll_djsgsr = 0.0 LOT/uniform={1}
+.PARAM pmosll_varmaxvth00 = 0.0 LOT/uniform={0.0}
+.PARAM pmosll_dvarmaxu0 = 0.0 LOT/uniform={0.33}
+.PARAM pmosll_dvarmaxrdsw = 0.0 LOT/uniform={0.0}
+.PARAM pmosll_rbvdr = 216 LOT/uniform={64.8}
+.PARAM pmosll_rbvdl = 2916 LOT/uniform={874.8}
+.PARAM pmosll_rbvsr = 216 LOT/uniform={64.8}
+.PARAM pmosll_rbvsl = 2916 LOT/uniform={874.8}
+.PARAM pmosll_rbvgr = 864 LOT/uniform={259.2}
+.PARAM pmosll_rbvgl = 1360 LOT/uniform={408}
+
+
+.lib "mos_bsim3_LL.lib" mosll_CORREL
+.lib "mos_bsim3_LL.lib" mosll_MODEL
+
+.endl mosll_stat
+
+.lib mosll_CORREL
+
+*----------------------------------------------
+*                   nmosll 
+*----------------------------------------------
+.param nmosll_xl = poly_cdvar+5e-9
+.param nmosll_xw = active_cdvar
+.param nmosll_tox = go1_ll_toxn
+.param nmosll_dcfring = go1_dcfring+9.5e-11
+.param nmosll_nlx = 1.37e-8
+.param nmosll_prwb = -0.23
+.param nmosll_rshg = npoly_rsh
+.param nmosll_rconpo = npoly_rsc
+
+*----------------------------------------------
+*                   pmosll 
+*----------------------------------------------
+.param pmosll_xl = poly_cdvar+5e-9
+.param pmosll_xw = active_cdvar
+.param pmosll_tox = go1_ll_toxp
+.param pmosll_dcfring = go1_dcfring+9.5e-11
+.param pmosll_nlx = 3.0899e-08
+.param pmosll_prwb = -0.78722
+.param pmosll_rshg = ppoly_rsh
+.param pmosll_rconpo = ppoly_rsc
+
+
+.endl mosll_CORREL
+.lib mosll_MODEL
+
+*----------------------------------------------------------------------
+* Family nmosll Model ENLLGP_BS3JU bsim3 typ mismatch
+* Maturity : Silicon_verified
+*----------------------------------------------------------------------
+.subckt ENLLGP_BS3JU D G S B
++       param: w=0.15e-6 l=0.13e-6 nfing=1 ncrsd=1 mismatch=1 srcefirst=1
++       wfing={w/nfing+nmosll_xw}
++       fd={srcefirst*(nfing-2*trunc(nfing/2))+(1-srcefirst)*(2*trunc(1+nfing/2)-nfing)}
++       fs={2-fd}
++       ad={wfing*((nfing-fd)*(ncrsd-1)*(0.16e-6+0.18e-6)/4+nfing*(3.8e-07-nmosll_xl)/2+fd*(1.5e-07+nmosll_xw/2))}
++       as={wfing*((nfing-fs)*(ncrsd-1)*(0.16e-6+0.18e-6)/4+nfing*(3.8e-07-nmosll_xl)/2+fs*(1.5e-07+nmosll_xw/2))}
++       pd={(nfing-fd)/2*(ncrsd-1)*(0.16e-6+0.18e-6)+nfing*2*(3.8e-07-nmosll_xl)/2+fd*(wfing+2*1.5e-07+nmosll_xw)}
++       ps={(nfing-fs)/2*(ncrsd-1)*(0.16e-6+0.18e-6)+nfing*2*(3.8e-07-nmosll_xl)/2+fs*(wfing+2*1.5e-07+nmosll_xw)}
++       po2act=-1
++       number=1 nrd=0 nrs=0
++       ngcon=1
+
+
+*
+* invariant parameters:
+*----------------------
+.param conw    = 0.16e-6
+.param cons    = 0.18e-6
+.param coeact  = 0.07e-6
+.param conpo   = 0.11e-6
+
+.param u0_typ  = 274.93
+.param u0s     = 207.82
+.param lint    = 2.1939e-08
+.param lmin    = 0.13e-6
+.param dwu0    = -0.060406
+.param wint    = -9.9707e-10
+
+
+*  
+.param  cjbr   = 0.00085803
+.param  cjgr   = 2.921e-10
+.param  cjsr   = 6.7342e-11
+.param  jsdbr  = 1.3181e-07
+.param  jsdgr  = 0
+.param  jsdsr  = 2.2436e-14
+.param  jsgbr  = 9e-06
+.param  jsggr  = 4.1751e-11
+.param  jsgsr  = 3.1654e-11
+ 
+
+*
+* variant parameters:
+*--------------------
+.param xl      = nmosll_xl
+.param xw      = nmosll_xw
+.param tox     = nmosll_tox
+.param vth     = nmosll_vth0
+.param nlx     = nmosll_nlx
+.param drdsw   = nmosll_drdsw
+.param dmu     = nmosll_dmu
+
+
+.param dcjb    = nmosll_dcjb
+.param dcjgate = nmosll_dcjgate
+.param dcjsw   = nmosll_dcjsw
+.param djsdbr  = nmosll_djsdbr
+.param djsdgr  = nmosll_djsdgr
+.param djsdsr  = nmosll_djsdsr
+.param djsgbr  = nmosll_djsgbr
+.param djsggr  = nmosll_djsggr
+.param djsgsr  = nmosll_djsgsr
+.param prwb    = nmosll_prwb
+
+.param dcfring = nmosll_dcfring
+* effective length and width:
+*----------------------------
+.param we      = {(w/nfing+xw-2*wint)}
+.param le      = {l+xl-2.0*lint}
+* Equations for mismatch deviations:
+*-----------------------------------
+.PARAM dvth0_alpha = valif((w>0.0)&&(w<0.6e-6)&&(l>0.0)&&(l<0.24e-6),4.49e-9,valif((w>0.6e-6)&&(l>0.0)&&(l<0.24e-6),5.34e-9,valif((w>0.0)&&(w<0.6e-6)&&(l>0.24e-6),3.44e-9,3.76e-9)))
+.PARAM dvth0_beta  = valif((w>0.0)&&(w<0.6e-6)&&(l>0.0)&&(l<0.24e-6),0.0,valif((w>0.6e-6)&&(l>0.0)&&(l<0.24e-6),0.0,valif((w>0.0)&&(w<0.6e-6)&&(l>0.24e-6),0.0,0.0)))
+.PARAM dvth0_fudge  = valif((w>0.0)&&(w<0.6e-6)&&(l>0.0)&&(l<0.24e-6),1.25,valif((w>0.6e-6)&&(l>0.0)&&(l<0.24e-6),1.25,valif((w>0.0)&&(w<0.6e-6)&&(l>0.24e-6),1.25,1.25)))
+.PARAM dvth0_sig = {((dvth0_alpha/sqrt(W*L))+dvth0_beta)*dvth0_fudge/sqrt(2.0*number)}
+.PARAM dvth0_dev = 0.0 DEV/gauss = {dvth0_sig*MOSLL_DEV*mismatch}
+.PARAM dbeta_alpha = valif((w>0.0)&&(w<0.6e-6)&&(l>0.0)&&(l<0.24e-6),1.16e-8,valif((w>0.6e-6)&&(l>0.0)&&(l<0.24e-6),1.52e-8,valif((w>0.0)&&(w<0.6e-6)&&(l>0.24e-6),0.94e-8,1.03e-8)))
+.PARAM dbeta_beta  = valif((w>0.0)&&(w<0.6e-6)&&(l>0.0)&&(l<0.24e-6),0.0,valif((w>0.6e-6)&&(l>0.0)&&(l<0.24e-6),0.0,valif((w>0.0)&&(w<0.6e-6)&&(l>0.24e-6),0.0,0.0)))
+.PARAM dbeta_fudge  = valif((w>0.0)&&(w<0.6e-6)&&(l>0.0)&&(l<0.24e-6),1.25,valif((w>0.6e-6)&&(l>0.0)&&(l<0.24e-6),1.25,valif((w>0.0)&&(w<0.6e-6)&&(l>0.24e-6),1.25,1.25)))
+.PARAM dbeta_sig = {((dbeta_alpha/sqrt(W*L))+dbeta_beta)*dbeta_fudge/sqrt(2.0*number)}
+.PARAM dbeta_dev = 0.0 DEV/gauss = {dbeta_sig*MOSLL_DEV*mismatch}
+
+* Mobility model improvement:
+*----------------------------
+.param epsilon2 = 1e-18
+.param llimit = {2.80388e-07-xl} 
+.param wlimit = {2.79770586e-06-xw} 
+
+.param dwu = dwu0
+
+.param mobility = {2.0/((1.0/u0_typ+1.0/u0s)+(llimit+xl
++ -2.0*lint-sqrt((llimit-l)*(llimit-l)+epsilon2))*(1.0/u0s-1.0/u0_typ)/le)
++ *(w/nfing-2.0*((wint-xw/2.0)*(1.0+2.0*(dwu))-(dwu)*wlimit
++ +(dwu)*0.5*(wlimit-w/nfing)+0.5*(dwu)*sqrt((wlimit-w/nfing)*(wlimit-w/nfing)+epsilon2)))/we}
+.param u0 = {mobility*(1.0+dbeta_dev)*(1+dmu)} 
+* Equations for Threshold voltage vth0 and body factor K1:
+*---------------------------------------------------------
+.param  eg0   =  {1.16-(7.02e-4*((273.15+27)^2)/(27+1381))}
+.param  ni    =  {1.45e10*(((273.15+27)/300.15)^1.5)*exp(21.5565981-eg0/(1.725e-4*(273.15+27)))}
+.param  phis  =  {1.725e-4*(273.15+27)*LOG(1.08e+18/ni)}
+.param  k2    =  {0*(tox/2.49e-09)}
+
+.param  k1    =  {0.42986-(0.2406-vth)/sqrt(phis)}
+.param  vth0  =  {vth+dvth0_dev} 
+
+.param  nch   =  {1.08e+18*(2.49e-09*2.49e-09)/(tox*tox)*(k1*k1)/(0.42986*0.42986)}
+
+* Equations for access resistance:
+*---------------------------------
+
+.param  rdsw  =  {131.73*(1+drdsw)}
+
+
+.param vth0eff          = vth0
+.param u0eff            = u0
+
+.param rdsweff          = rdsw
+
+* Equations for fringing capacitance:
+*------------------------------------
+.param  cf    =  dcfring
+* Equations for overlap capacitance:
+*-----------------------------------
+.param  cgsl  =  {1.0057e-10*(2.49e-09/tox)}
+.param  cgdl  =  {1.0057e-10*(2.49e-09/tox)}
+
+* Equations for VT:
+*-----------------
+
+.param  w0    =  {2.6738e-08+(0-xw)}
+
+
+.param T0 = {0.51203*le/1.30e-8}
+.param T1 = {exp(T0)}
+.param vth_sce = valif((T0<34.0),(0.43)*T1/(((T1-1.0)*(T1-1.0))+(2.0*T1*1.7139e-15)),(0.43)/5.8346e14) 
+.param n_subvt = { 1.0 + ((0.40523+((0.045954)/le*1.0e-6))*5.0e-3*2.49e-09/3.4531e-11)}
+.param vth_rsce = {-n_subvt*0.02586*log(le/(le+8.0944e-06))}
+.param tmp2 = {2.49e-09*0.9/(we+w0)}
+.param k3 = {((-6.0878*tmp2)*(2.49e-09/tox) + vth_rsce - vth_sce)/tmp2}
+.param dvt0 = 0.0
+
+
+.param  k3b   =  {1.0709*(2.49e-09/tox)}
+.param  lk3   =  {0.2*((lmin+xl-(2*lint))*2.49e-09/(lmin+-1.5e-08-(2*lint))/tox)}
+
+
+.param lketaexp = {valif((1.0e-6/le-1.0/0.98023)/0.0054637 > 34, 34, (1.0e-6/le-1.0/0.98023)/0.0054637)}
+.param lketa    = {0.025/(1.0+exp(lketaexp))} 
+
+
+
+
+M1 D G S B NCH w={w/nfing} l=l as={as/nfing} ad={ad/nfing} ps={ps/nfing} pd={pd/nfing}
++          m={number*nfing} nrd={nrd*nfing} nrs={nrs*nfing}
+
+
+
+.MODEL NCH nmos
++ level=53
++ version=3.2           nqsmod=0              xw=xw                 
++ xl=xl                 wmin=1.5e-07          wmax=1                
++ lmin=1.3e-07          lmax=1e-05            mobmod=2              
++ capmod=3              noimod=2              binunit=1             
++ js=0                  jsw=0                 lint=2.1939e-08       
++ ll=0                  lln=1                 lw=0                  
++ lwn=1                 lwl=0                 wint=-9.9707e-10      
++ wl=0                  wln=1                 ww=0                  
++ wwn=1                 wwl=0                 tnom=27               
++ tox=tox               cj=0                  mj=0.33               
++ cjsw=0                mjsw=0.5              cjswg=0               
++ mjswg=0.5             cgso=3.0713e-10       cgdo=3.0713e-10       
++ cgbo=1e-14            xpart=0               dwg=0                 
++ dwb=0                 nch=nch               ngate=2.3702e+20      
++ xj=1e-07              u0=u0eff              vth0=vth0eff          
++ k1=k1                 k2=k2                 lk2=-0.0040345        
++ k3=k3                 lk3=lk3               k3b=k3b               
++ w0=w0                 nlx=nlx               dvt0=dvt0             
++ dvt1=0.51203          dvt2=0                dvt0w=0               
++ dvt1w=5e+06           dvt2w=0               ua=-5.842e-10         
++ ub=1.8214e-18         uc=-1.7437e-10        delta=0.018114        
++ rdsw=rdsweff          prwg=0                prwb=prwb             
++ wr=1                  vsat=110000           a0=2.4111             
++ keta=-0.0066061       lketa=lketa           ags=0.76127           
++ a1=0                  a2=0.91307            b0=0                  
++ b1=0                  alpha0=0              beta0=11.306          
++ lbeta0=-0.159         voff=-0.09345         lvoff=-0.0046832      
++ nfactor=0.40523       lnfactor=0.045954     cdsc=0                
++ cdscb=-0.00012548     cdscd=-0.0010321      cit=0                 
++ eta0=0.40549          etab=-0.44131         dsub=1.2509           
++ drout=0.2             pclm=1.6093           lpclm=-0.051879       
++ pdiblc1=0.01559       pdiblc2=0.013746      pdiblcb=0.4           
++ pscbe1=1e+15          pscbe2=1e-18          pvag=0.38394          
++ ute=-1.738            at=30000              ua1=3.46e-10          
++ ub1=-1.69e-18         uc1=4.5772e-12        kt1=-0.2226           
++ kt1l=1.75e-09         kt2=-0.025513         prt=0                 
++ cgsl=cgsl             cgdl=cgdl             ckappa=7.5715         
++ cf=cf                 clc=1e-07             cle=0.6               
++ dlc=3.38e-08          noff=1.8691           voffcv=-0.040497      
++ alpha1=0.025257       acde=0.5              moin=5                
++ llc=0                 lwc=0                 lwlc=0                
++ wlc=0                 wwc=0                 wwlc=0                
++ elm=5                 ef=1                  em=5e+09              
++ noia=5e+20            noib=200000           noic=0
+*  
+* -- JUNCAP Electrical Parameters for S/D regions  (Simulator specific)
++ vr=0                  cjbr={cjbr*(1+dcjb)}  cjsr={cjsr*(1+dcjsw)} 
++ cjgr={cjgr*(1+dcjgate)}  jsdbr={jsdbr*10^djsdbr} 
++ jsdsr={jsdsr*10^djsdsr} jsdgr={jsdgr*10^djsdgr} 
++ jsgbr={jsgbr*10^djsgbr} jsgsr={jsgsr*10^djsgsr} 
++ jsggr={jsggr*10^djsggr}  vdbr=0.52286          vdsr=0.42697          
++ vdgr=1                pb=0.20582            ps=0.44445            
++ pg=0.6358              nbj=0.97              nsj=0.93              
++ ngj=1
++ 
++ trdio9=27             diolev=9              dcaplev=0             
++ rlev=1                alev=3
+ 
+
+* + 
+.ends ENLLGP_BS3JU
+
+
+*----------------------------------------------------------------------
+* Family nmosll Model ENLLGP_BS3JULEAK bsim3 typ mismatch
+* Maturity : Silicon_verified
+*----------------------------------------------------------------------
+.subckt ENLLGP_BS3JULEAK D G S B
++       param: w=0.15e-6 l=0.13e-6 nfing=1 ncrsd=1 mismatch=1 srcefirst=1
++       wfing={w/nfing+nmosll_xw}
++       fd={srcefirst*(nfing-2*trunc(nfing/2))+(1-srcefirst)*(2*trunc(1+nfing/2)-nfing)}
++       fs={2-fd}
++       ad={wfing*((nfing-fd)*(ncrsd-1)*(0.16e-6+0.18e-6)/4+nfing*(3.8e-07-nmosll_xl)/2+fd*(1.5e-07+nmosll_xw/2))}
++       as={wfing*((nfing-fs)*(ncrsd-1)*(0.16e-6+0.18e-6)/4+nfing*(3.8e-07-nmosll_xl)/2+fs*(1.5e-07+nmosll_xw/2))}
++       pd={(nfing-fd)/2*(ncrsd-1)*(0.16e-6+0.18e-6)+nfing*2*(3.8e-07-nmosll_xl)/2+fd*(wfing+2*1.5e-07+nmosll_xw)}
++       ps={(nfing-fs)/2*(ncrsd-1)*(0.16e-6+0.18e-6)+nfing*2*(3.8e-07-nmosll_xl)/2+fs*(wfing+2*1.5e-07+nmosll_xw)}
++       po2act=-1
++       number=1 nrd=0 nrs=0
++       ngcon=1
+
+
+*
+* invariant parameters:
+*----------------------
+.param conw    = 0.16e-6
+.param cons    = 0.18e-6
+.param coeact  = 0.07e-6
+.param conpo   = 0.11e-6
+
+.param u0_typ  = 274.93
+.param u0s     = 207.82
+.param lint    = 2.1939e-08
+.param lmin    = 0.13e-6
+.param dwu0    = -0.060406
+.param wint    = -9.9707e-10
+
+
+*  
+.param  cjbr   = 0.00085803
+.param  cjgr   = 2.921e-10
+.param  cjsr   = 6.7342e-11
+.param  jsdbr  = 1.3181e-07
+.param  jsdgr  = 0
+.param  jsdsr  = 2.2436e-14
+.param  jsgbr  = 9e-06
+.param  jsggr  = 4.1751e-11
+.param  jsgsr  = 3.1654e-11
+ 
+
+*
+* variant parameters:
+*--------------------
+.param xl      = nmosll_xl
+.param xw      = nmosll_xw
+.param tox     = nmosll_tox
+.param vth     = nmosll_vth0
+.param nlx     = nmosll_nlx
+.param drdsw   = nmosll_drdsw
+.param dmu     = nmosll_dmu
+
+
+.param dcjb    = nmosll_dcjb
+.param dcjgate = nmosll_dcjgate
+.param dcjsw   = nmosll_dcjsw
+.param djsdbr  = nmosll_djsdbr
+.param djsdgr  = nmosll_djsdgr
+.param djsdsr  = nmosll_djsdsr
+.param djsgbr  = nmosll_djsgbr
+.param djsggr  = nmosll_djsggr
+.param djsgsr  = nmosll_djsgsr
+.param prwb    = nmosll_prwb
+
+.param dcfring = nmosll_dcfring
+* effective length and width:
+*----------------------------
+.param we      = {(w/nfing+xw-2*wint)}
+.param le      = {l+xl-2.0*lint}
+* Equations for mismatch deviations:
+*-----------------------------------
+.PARAM dvth0_alpha = valif((w>0.0)&&(w<0.6e-6)&&(l>0.0)&&(l<0.24e-6),4.49e-9,valif((w>0.6e-6)&&(l>0.0)&&(l<0.24e-6),5.34e-9,valif((w>0.0)&&(w<0.6e-6)&&(l>0.24e-6),3.44e-9,3.76e-9)))
+.PARAM dvth0_beta  = valif((w>0.0)&&(w<0.6e-6)&&(l>0.0)&&(l<0.24e-6),0.0,valif((w>0.6e-6)&&(l>0.0)&&(l<0.24e-6),0.0,valif((w>0.0)&&(w<0.6e-6)&&(l>0.24e-6),0.0,0.0)))
+.PARAM dvth0_fudge  = valif((w>0.0)&&(w<0.6e-6)&&(l>0.0)&&(l<0.24e-6),1.25,valif((w>0.6e-6)&&(l>0.0)&&(l<0.24e-6),1.25,valif((w>0.0)&&(w<0.6e-6)&&(l>0.24e-6),1.25,1.25)))
+.PARAM dvth0_sig = {((dvth0_alpha/sqrt(W*L))+dvth0_beta)*dvth0_fudge/sqrt(2.0*number)}
+.PARAM dvth0_dev = 0.0 DEV/gauss = {dvth0_sig*MOSLL_DEV*mismatch}
+.PARAM dbeta_alpha = valif((w>0.0)&&(w<0.6e-6)&&(l>0.0)&&(l<0.24e-6),1.16e-8,valif((w>0.6e-6)&&(l>0.0)&&(l<0.24e-6),1.52e-8,valif((w>0.0)&&(w<0.6e-6)&&(l>0.24e-6),0.94e-8,1.03e-8)))
+.PARAM dbeta_beta  = valif((w>0.0)&&(w<0.6e-6)&&(l>0.0)&&(l<0.24e-6),0.0,valif((w>0.6e-6)&&(l>0.0)&&(l<0.24e-6),0.0,valif((w>0.0)&&(w<0.6e-6)&&(l>0.24e-6),0.0,0.0)))
+.PARAM dbeta_fudge  = valif((w>0.0)&&(w<0.6e-6)&&(l>0.0)&&(l<0.24e-6),1.25,valif((w>0.6e-6)&&(l>0.0)&&(l<0.24e-6),1.25,valif((w>0.0)&&(w<0.6e-6)&&(l>0.24e-6),1.25,1.25)))
+.PARAM dbeta_sig = {((dbeta_alpha/sqrt(W*L))+dbeta_beta)*dbeta_fudge/sqrt(2.0*number)}
+.PARAM dbeta_dev = 0.0 DEV/gauss = {dbeta_sig*MOSLL_DEV*mismatch}
+
+* Mobility model improvement:
+*----------------------------
+.param epsilon2 = 1e-18
+.param llimit = {2.80388e-07-xl} 
+.param wlimit = {2.79770586e-06-xw} 
+
+.param dwu = dwu0
+
+.param mobility = {2.0/((1.0/u0_typ+1.0/u0s)+(llimit+xl
++ -2.0*lint-sqrt((llimit-l)*(llimit-l)+epsilon2))*(1.0/u0s-1.0/u0_typ)/le)
++ *(w/nfing-2.0*((wint-xw/2.0)*(1.0+2.0*(dwu))-(dwu)*wlimit
++ +(dwu)*0.5*(wlimit-w/nfing)+0.5*(dwu)*sqrt((wlimit-w/nfing)*(wlimit-w/nfing)+epsilon2)))/we}
+.param u0 = {mobility*(1.0+dbeta_dev)*(1+dmu)} 
+* Equations for Threshold voltage vth0 and body factor K1:
+*---------------------------------------------------------
+.param  eg0   =  {1.16-(7.02e-4*((273.15+27)^2)/(27+1381))}
+.param  ni    =  {1.45e10*(((273.15+27)/300.15)^1.5)*exp(21.5565981-eg0/(1.725e-4*(273.15+27)))}
+.param  phis  =  {1.725e-4*(273.15+27)*LOG(1.08e+18/ni)}
+.param  k2    =  {0*(tox/2.49e-09)}
+
+.param  k1    =  {0.42986-(0.2406-vth)/sqrt(phis)}
+.param  vth0  =  {vth+dvth0_dev} 
+
+.param  nch   =  {1.08e+18*(2.49e-09*2.49e-09)/(tox*tox)*(k1*k1)/(0.42986*0.42986)}
+
+* Equations for access resistance:
+*---------------------------------
+
+.param  rdsw  =  {131.73*(1+drdsw)}
+
+
+.param vth0eff          = vth0
+.param u0eff            = u0
+
+.param rdsweff          = rdsw
+
+* Equations for fringing capacitance:
+*------------------------------------
+.param  cf    =  dcfring
+* Equations for overlap capacitance:
+*-----------------------------------
+.param  cgsl  =  {1.0057e-10*(2.49e-09/tox)}
+.param  cgdl  =  {1.0057e-10*(2.49e-09/tox)}
+
+* Equations for VT:
+*-----------------
+
+.param  w0    =  {2.6738e-08+(0-xw)}
+
+
+.param T0 = {0.51203*le/1.30e-8}
+.param T1 = {exp(T0)}
+.param vth_sce = valif((T0<34.0),(0.43)*T1/(((T1-1.0)*(T1-1.0))+(2.0*T1*1.7139e-15)),(0.43)/5.8346e14) 
+.param n_subvt = { 1.0 + ((0.40523+((0.045954)/le*1.0e-6))*5.0e-3*2.49e-09/3.4531e-11)}
+.param vth_rsce = {-n_subvt*0.02586*log(le/(le+8.0944e-06))}
+.param tmp2 = {2.49e-09*0.9/(we+w0)}
+.param k3 = {((-6.0878*tmp2)*(2.49e-09/tox) + vth_rsce - vth_sce)/tmp2}
+.param dvt0 = 0.0
+
+
+.param  k3b   =  {1.0709*(2.49e-09/tox)}
+.param  lk3   =  {0.2*((lmin+xl-(2*lint))*2.49e-09/(lmin+-1.5e-08-(2*lint))/tox)}
+
+
+.param lketaexp = {valif((1.0e-6/le-1.0/0.98023)/0.0054637 > 34, 34, (1.0e-6/le-1.0/0.98023)/0.0054637)}
+.param lketa    = {0.025/(1.0+exp(lketaexp))} 
+
+
+
+* Equations for Igate:
+*--------------------
+
+
+.param wpoly     = {number*(w+xw)}
+.param lpoly     = {l+xl}
+.param dvd    = -0.015
+.param toxratio = {exp(32.4*log(2.49e-09/tox))}
+.param bb     = {(0)*log(lpoly)*log(lpoly)+(-8.74e+07)*log(lpoly)+(-2.18e+09)}
+.param vara1  = {toxratio*((0)*lpoly*lpoly+(6.66e-17)*lpoly+(8.31e-24))}
+.param bbn    = {(0)*log(lpoly)*log(lpoly)+(0)*log(lpoly)+(-3.17e+08)}
+.param vara1n = {toxratio*((0)*lpoly*lpoly+(0)*lpoly+(6.45e-24))}
+	
+gigd g d1 value={(vara1*wpoly*(abs(v(g,d1))+v(g,d1))/2.0*v(g,d1)*exp(-bb*tox*log(1e-18+abs(v(g,d1))))/(tox*tox)+1e-18*v(g,d1))
++ + (vara1n*wpoly*(abs(v(g,d1))-v(g,d1))/2.0*v(g,d1)*exp(-bbn*tox*log(1e-18+abs(v(g,d1))))/(tox*tox)+1e-18*v(g,d1))}
+
+eigd d1 d value={dvd*(abs(v(d,s))+v(d,s))/2.0}
+
+gigs g s1 value={ (vara1*wpoly*(abs(v(g,s1))+v(g,s1))/2.0*v(g,s1)*exp(-bb*tox*log(1e-18+abs(v(g,s1))))/(tox*tox)+1e-18*v(g,s1))
++ + (vara1n*wpoly*(abs(v(g,s1))-v(g,s1))/2.0*v(g,s1)*exp(-bbn*tox*log(1e-18+abs(v(g,s1))))/(tox*tox)+1e-18*v(g,s1))}
+
+eigs s1 s value={dvd*(abs(v(s,d))+v(s,d))/2.0}
+
+
+
+
+* Equations for GIDL:
+*--------------------
+
+
+
+
+M1 D G S B NCHLEAK w={w/nfing} l=l as={as/nfing} ad={ad/nfing} ps={ps/nfing} pd={pd/nfing}
++          m={number*nfing} nrd={nrd*nfing} nrs={nrs*nfing}
+
+
+
+.MODEL NCHLEAK nmos
++ level=53
++ version=3.2           nqsmod=0              xw=xw                 
++ xl=xl                 wmin=1.5e-07          wmax=1                
++ lmin=1.3e-07          lmax=1e-05            mobmod=2              
++ capmod=3              noimod=2              binunit=1             
++ js=0                  jsw=0                 lint=2.1939e-08       
++ ll=0                  lln=1                 lw=0                  
++ lwn=1                 lwl=0                 wint=-9.9707e-10      
++ wl=0                  wln=1                 ww=0                  
++ wwn=1                 wwl=0                 tnom=27               
++ tox=tox               cj=0                  mj=0.33               
++ cjsw=0                mjsw=0.5              cjswg=0               
++ mjswg=0.5             cgso=3.0713e-10       cgdo=3.0713e-10       
++ cgbo=1e-14            xpart=0               dwg=0                 
++ dwb=0                 nch=nch               ngate=2.3702e+20      
++ xj=1e-07              u0=u0eff              vth0=vth0eff          
++ k1=k1                 k2=k2                 lk2=-0.0040345        
++ k3=k3                 lk3=lk3               k3b=k3b               
++ w0=w0                 nlx=nlx               dvt0=dvt0             
++ dvt1=0.51203          dvt2=0                dvt0w=0               
++ dvt1w=5e+06           dvt2w=0               ua=-5.842e-10         
++ ub=1.8214e-18         uc=-1.7437e-10        delta=0.018114        
++ rdsw=rdsweff          prwg=0                prwb=prwb             
++ wr=1                  vsat=110000           a0=2.4111             
++ keta=-0.0066061       lketa=lketa           ags=0.76127           
++ a1=0                  a2=0.91307            b0=0                  
++ b1=0                  alpha0=0              beta0=11.306          
++ lbeta0=-0.159         voff=-0.09345         lvoff=-0.0046832      
++ nfactor=0.40523       lnfactor=0.045954     cdsc=0                
++ cdscb=-0.00012548     cdscd=-0.0010321      cit=0                 
++ eta0=0.40549          etab=-0.44131         dsub=1.2509           
++ drout=0.2             pclm=1.6093           lpclm=-0.051879       
++ pdiblc1=0.01559       pdiblc2=0.013746      pdiblcb=0.4           
++ pscbe1=1e+15          pscbe2=1e-18          pvag=0.38394          
++ ute=-1.738            at=30000              ua1=3.46e-10          
++ ub1=-1.69e-18         uc1=4.5772e-12        kt1=-0.2226           
++ kt1l=1.75e-09         kt2=-0.025513         prt=0                 
++ cgsl=cgsl             cgdl=cgdl             ckappa=7.5715         
++ cf=cf                 clc=1e-07             cle=0.6               
++ dlc=3.38e-08          noff=1.8691           voffcv=-0.040497      
++ alpha1=0.025257       acde=0.5              moin=5                
++ llc=0                 lwc=0                 lwlc=0                
++ wlc=0                 wwc=0                 wwlc=0                
++ elm=5                 ef=1                  em=5e+09              
++ noia=5e+20            noib=200000           noic=0
+*  
+* -- JUNCAP Electrical Parameters for S/D regions  (Simulator specific)
++ vr=0                  cjbr={cjbr*(1+dcjb)}  cjsr={cjsr*(1+dcjsw)} 
++ cjgr={cjgr*(1+dcjgate)}  jsdbr={jsdbr*10^djsdbr} 
++ jsdsr={jsdsr*10^djsdsr} jsdgr={jsdgr*10^djsdgr} 
++ jsgbr={jsgbr*10^djsgbr} jsgsr={jsgsr*10^djsgsr} 
++ jsggr={jsggr*10^djsggr}  vdbr=0.52286          vdsr=0.42697          
++ vdgr=1                pb=0.20582            ps=0.44445            
++ pg=0.6358              nbj=0.97              nsj=0.93              
++ ngj=1
++ 
++ trdio9=27             diolev=9              dcaplev=0             
++ rlev=1                alev=3
+ 
+
+* + 
+.ends ENLLGP_BS3JULEAK
+
+
+*----------------------------------------------------------------------
+* Family nmosll Model ENLLGP_BS3JURG bsim3 typ mismatch
+* Maturity : Silicon_verified
+*----------------------------------------------------------------------
+.subckt ENLLGP_BS3JURG D G S B
++       param: w=0.15e-6 l=0.13e-6 nfing=1 ncrsd=1 mismatch=1 srcefirst=1
++       wfing={w/nfing+nmosll_xw}
++       fd={srcefirst*(nfing-2*trunc(nfing/2))+(1-srcefirst)*(2*trunc(1+nfing/2)-nfing)}
++       fs={2-fd}
++       ad={wfing*((nfing-fd)*(ncrsd-1)*(0.16e-6+0.18e-6)/4+nfing*(3.8e-07-nmosll_xl)/2+fd*(1.5e-07+nmosll_xw/2))}
++       as={wfing*((nfing-fs)*(ncrsd-1)*(0.16e-6+0.18e-6)/4+nfing*(3.8e-07-nmosll_xl)/2+fs*(1.5e-07+nmosll_xw/2))}
++       pd={(nfing-fd)/2*(ncrsd-1)*(0.16e-6+0.18e-6)+nfing*2*(3.8e-07-nmosll_xl)/2+fd*(wfing+2*1.5e-07+nmosll_xw)}
++       ps={(nfing-fs)/2*(ncrsd-1)*(0.16e-6+0.18e-6)+nfing*2*(3.8e-07-nmosll_xl)/2+fs*(wfing+2*1.5e-07+nmosll_xw)}
++       po2act=-1
++       number=1 nrd=0 nrs=0
++       ngcon=1
+
+
+*
+* invariant parameters:
+*----------------------
+.param conw    = 0.16e-6
+.param cons    = 0.18e-6
+.param coeact  = 0.07e-6
+.param conpo   = 0.11e-6
+
+.param u0_typ  = 274.93
+.param u0s     = 207.82
+.param lint    = 2.1939e-08
+.param lmin    = 0.13e-6
+.param dwu0    = -0.060406
+.param wint    = -9.9707e-10
+
+.param coepo   = 0.07e-6
+.param ncrg    = 2
+
+
+*  
+.param  cjbr   = 0.00085803
+.param  cjgr   = 2.921e-10
+.param  cjsr   = 6.7342e-11
+.param  jsdbr  = 1.3181e-07
+.param  jsdgr  = 0
+.param  jsdsr  = 2.2436e-14
+.param  jsgbr  = 9e-06
+.param  jsggr  = 4.1751e-11
+.param  jsgsr  = 3.1654e-11
+ 
+
+*
+* variant parameters:
+*--------------------
+.param xl      = nmosll_xl
+.param xw      = nmosll_xw
+.param tox     = nmosll_tox
+.param vth     = nmosll_vth0
+.param nlx     = nmosll_nlx
+.param drdsw   = nmosll_drdsw
+.param dmu     = nmosll_dmu
+
+.param rshg    = nmosll_rshg
+.param rconpo  = nmosll_rconpo
+
+
+.param dcjb    = nmosll_dcjb
+.param dcjgate = nmosll_dcjgate
+.param dcjsw   = nmosll_dcjsw
+.param djsdbr  = nmosll_djsdbr
+.param djsdgr  = nmosll_djsdgr
+.param djsdsr  = nmosll_djsdsr
+.param djsgbr  = nmosll_djsgbr
+.param djsggr  = nmosll_djsggr
+.param djsgsr  = nmosll_djsgsr
+.param prwb    = nmosll_prwb
+
+.param dcfring = nmosll_dcfring
+* effective length and width:
+*----------------------------
+.param we      = {(w/nfing+xw-2*wint)}
+.param le      = {l+xl-2.0*lint}
+* Equations for mismatch deviations:
+*-----------------------------------
+.PARAM dvth0_alpha = valif((w>0.0)&&(w<0.6e-6)&&(l>0.0)&&(l<0.24e-6),4.49e-9,valif((w>0.6e-6)&&(l>0.0)&&(l<0.24e-6),5.34e-9,valif((w>0.0)&&(w<0.6e-6)&&(l>0.24e-6),3.44e-9,3.76e-9)))
+.PARAM dvth0_beta  = valif((w>0.0)&&(w<0.6e-6)&&(l>0.0)&&(l<0.24e-6),0.0,valif((w>0.6e-6)&&(l>0.0)&&(l<0.24e-6),0.0,valif((w>0.0)&&(w<0.6e-6)&&(l>0.24e-6),0.0,0.0)))
+.PARAM dvth0_fudge  = valif((w>0.0)&&(w<0.6e-6)&&(l>0.0)&&(l<0.24e-6),1.25,valif((w>0.6e-6)&&(l>0.0)&&(l<0.24e-6),1.25,valif((w>0.0)&&(w<0.6e-6)&&(l>0.24e-6),1.25,1.25)))
+.PARAM dvth0_sig = {((dvth0_alpha/sqrt(W*L))+dvth0_beta)*dvth0_fudge/sqrt(2.0*number)}
+.PARAM dvth0_dev = 0.0 DEV/gauss = {dvth0_sig*MOSLL_DEV*mismatch}
+.PARAM dbeta_alpha = valif((w>0.0)&&(w<0.6e-6)&&(l>0.0)&&(l<0.24e-6),1.16e-8,valif((w>0.6e-6)&&(l>0.0)&&(l<0.24e-6),1.52e-8,valif((w>0.0)&&(w<0.6e-6)&&(l>0.24e-6),0.94e-8,1.03e-8)))
+.PARAM dbeta_beta  = valif((w>0.0)&&(w<0.6e-6)&&(l>0.0)&&(l<0.24e-6),0.0,valif((w>0.6e-6)&&(l>0.0)&&(l<0.24e-6),0.0,valif((w>0.0)&&(w<0.6e-6)&&(l>0.24e-6),0.0,0.0)))
+.PARAM dbeta_fudge  = valif((w>0.0)&&(w<0.6e-6)&&(l>0.0)&&(l<0.24e-6),1.25,valif((w>0.6e-6)&&(l>0.0)&&(l<0.24e-6),1.25,valif((w>0.0)&&(w<0.6e-6)&&(l>0.24e-6),1.25,1.25)))
+.PARAM dbeta_sig = {((dbeta_alpha/sqrt(W*L))+dbeta_beta)*dbeta_fudge/sqrt(2.0*number)}
+.PARAM dbeta_dev = 0.0 DEV/gauss = {dbeta_sig*MOSLL_DEV*mismatch}
+
+* Mobility model improvement:
+*----------------------------
+.param epsilon2 = 1e-18
+.param llimit = {2.80388e-07-xl} 
+.param wlimit = {2.79770586e-06-xw} 
+
+.param dwu = dwu0
+
+.param mobility = {2.0/((1.0/u0_typ+1.0/u0s)+(llimit+xl
++ -2.0*lint-sqrt((llimit-l)*(llimit-l)+epsilon2))*(1.0/u0s-1.0/u0_typ)/le)
++ *(w/nfing-2.0*((wint-xw/2.0)*(1.0+2.0*(dwu))-(dwu)*wlimit
++ +(dwu)*0.5*(wlimit-w/nfing)+0.5*(dwu)*sqrt((wlimit-w/nfing)*(wlimit-w/nfing)+epsilon2)))/we}
+.param u0 = {mobility*(1.0+dbeta_dev)*(1+dmu)} 
+* Equations for Threshold voltage vth0 and body factor K1:
+*---------------------------------------------------------
+.param  eg0   =  {1.16-(7.02e-4*((273.15+27)^2)/(27+1381))}
+.param  ni    =  {1.45e10*(((273.15+27)/300.15)^1.5)*exp(21.5565981-eg0/(1.725e-4*(273.15+27)))}
+.param  phis  =  {1.725e-4*(273.15+27)*LOG(1.08e+18/ni)}
+.param  k2    =  {0*(tox/2.49e-09)}
+
+.param  k1    =  {0.42986-(0.2406-vth)/sqrt(phis)}
+.param  vth0  =  {vth+dvth0_dev} 
+
+.param  nch   =  {1.08e+18*(2.49e-09*2.49e-09)/(tox*tox)*(k1*k1)/(0.42986*0.42986)}
+
+* Equations for access resistance:
+*---------------------------------
+
+.param  rdsw  =  {131.73*(1+drdsw)}
+
+
+.param vth0eff          = vth0
+.param u0eff            = u0
+
+.param rdsweff          = rdsw
+
+* Equations for fringing capacitance:
+*------------------------------------
+.param  cf    =  dcfring
+* Equations for overlap capacitance:
+*-----------------------------------
+.param  cgsl  =  {1.0057e-10*(2.49e-09/tox)}
+.param  cgdl  =  {1.0057e-10*(2.49e-09/tox)}
+
+* Equations for VT:
+*-----------------
+
+.param  w0    =  {2.6738e-08+(0-xw)}
+
+
+.param T0 = {0.51203*le/1.30e-8}
+.param T1 = {exp(T0)}
+.param vth_sce = valif((T0<34.0),(0.43)*T1/(((T1-1.0)*(T1-1.0))+(2.0*T1*1.7139e-15)),(0.43)/5.8346e14) 
+.param n_subvt = { 1.0 + ((0.40523+((0.045954)/le*1.0e-6))*5.0e-3*2.49e-09/3.4531e-11)}
+.param vth_rsce = {-n_subvt*0.02586*log(le/(le+8.0944e-06))}
+.param tmp2 = {2.49e-09*0.9/(we+w0)}
+.param k3 = {((-6.0878*tmp2)*(2.49e-09/tox) + vth_rsce - vth_sce)/tmp2}
+.param dvt0 = 0.0
+
+
+.param  k3b   =  {1.0709*(2.49e-09/tox)}
+.param  lk3   =  {0.2*((lmin+xl-(2*lint))*2.49e-09/(lmin+-1.5e-08-(2*lint))/tox)}
+
+
+.param lketaexp = {valif((1.0e-6/le-1.0/0.98023)/0.0054637 > 34, 34, (1.0e-6/le-1.0/0.98023)/0.0054637)}
+.param lketa    = {0.025/(1.0+exp(lketaexp))} 
+
+
+
+
+.param xgw    = {cons-coepo-coeact}
+.param xgl    = {-xl}
+.param lhead  = {nfing*l+(nfing-1)*(conw+2*conpo+(ncrsd-1)*(conw+cons))}
+.param nchead = {ncrg*(1+trunc(max(0,(lhead-conw-2*coepo))/(conw+cons)))}
+.param rgeltd = {rshg*(xgw+(w/nfing+xw)/(3*ngcon))/(ngcon*(l-xgl)*nfing)}
+.param rgcon  = {rconpo/(nchead*ngcon)}
+
+RG G Gi {(rgeltd+rgcon)/number}
+M1 D Gi S B NCHRG w={w/nfing} l=l as={as/nfing} ad={ad/nfing} ps={ps/nfing} pd={pd/nfing}
++          m={number*nfing} nrd={nrd*nfing} nrs={nrs*nfing}
+
+
+
+.MODEL NCHRG nmos
++ level=53
++ version=3.2           nqsmod=0              xw=xw                 
++ xl=xl                 wmin=1.5e-07          wmax=1                
++ lmin=1.3e-07          lmax=1e-05            mobmod=2              
++ capmod=3              noimod=2              binunit=1             
++ js=0                  jsw=0                 lint=2.1939e-08       
++ ll=0                  lln=1                 lw=0                  
++ lwn=1                 lwl=0                 wint=-9.9707e-10      
++ wl=0                  wln=1                 ww=0                  
++ wwn=1                 wwl=0                 tnom=27               
++ tox=tox               cj=0                  mj=0.33               
++ cjsw=0                mjsw=0.5              cjswg=0               
++ mjswg=0.5             cgso=3.0713e-10       cgdo=3.0713e-10       
++ cgbo=1e-14            xpart=0               dwg=0                 
++ dwb=0                 nch=nch               ngate=2.3702e+20      
++ xj=1e-07              u0=u0eff              vth0=vth0eff          
++ k1=k1                 k2=k2                 lk2=-0.0040345        
++ k3=k3                 lk3=lk3               k3b=k3b               
++ w0=w0                 nlx=nlx               dvt0=dvt0             
++ dvt1=0.51203          dvt2=0                dvt0w=0               
++ dvt1w=5e+06           dvt2w=0               ua=-5.842e-10         
++ ub=1.8214e-18         uc=-1.7437e-10        delta=0.018114        
++ rdsw=rdsweff          prwg=0                prwb=prwb             
++ wr=1                  vsat=110000           a0=2.4111             
++ keta=-0.0066061       lketa=lketa           ags=0.76127           
++ a1=0                  a2=0.91307            b0=0                  
++ b1=0                  alpha0=0              beta0=11.306          
++ lbeta0=-0.159         voff=-0.09345         lvoff=-0.0046832      
++ nfactor=0.40523       lnfactor=0.045954     cdsc=0                
++ cdscb=-0.00012548     cdscd=-0.0010321      cit=0                 
++ eta0=0.40549          etab=-0.44131         dsub=1.2509           
++ drout=0.2             pclm=1.6093           lpclm=-0.051879       
++ pdiblc1=0.01559       pdiblc2=0.013746      pdiblcb=0.4           
++ pscbe1=1e+15          pscbe2=1e-18          pvag=0.38394          
++ ute=-1.738            at=30000              ua1=3.46e-10          
++ ub1=-1.69e-18         uc1=4.5772e-12        kt1=-0.2226           
++ kt1l=1.75e-09         kt2=-0.025513         prt=0                 
++ cgsl=cgsl             cgdl=cgdl             ckappa=7.5715         
++ cf=cf                 clc=1e-07             cle=0.6               
++ dlc=3.38e-08          noff=1.8691           voffcv=-0.040497      
++ alpha1=0.025257       acde=0.5              moin=5                
++ llc=0                 lwc=0                 lwlc=0                
++ wlc=0                 wwc=0                 wwlc=0                
++ elm=5                 ef=1                  em=5e+09              
++ noia=5e+20            noib=200000           noic=0
+*  
+* -- JUNCAP Electrical Parameters for S/D regions  (Simulator specific)
++ vr=0                  cjbr={cjbr*(1+dcjb)}  cjsr={cjsr*(1+dcjsw)} 
++ cjgr={cjgr*(1+dcjgate)}  jsdbr={jsdbr*10^djsdbr} 
++ jsdsr={jsdsr*10^djsdsr} jsdgr={jsdgr*10^djsdgr} 
++ jsgbr={jsgbr*10^djsgbr} jsgsr={jsgsr*10^djsgsr} 
++ jsggr={jsggr*10^djsggr}  vdbr=0.52286          vdsr=0.42697          
++ vdgr=1                pb=0.20582            ps=0.44445            
++ pg=0.6358              nbj=0.97              nsj=0.93              
++ ngj=1
++ 
++ trdio9=27             diolev=9              dcaplev=0             
++ rlev=1                alev=3
+ 
+
+* + 
+.ends ENLLGP_BS3JURG
+
+
+*----------------------------------------------------------------------
+* Family nmosll Model ENLLGP_BS3NQSJU bsim3 typ mismatch
+* Maturity : Silicon_verified
+*----------------------------------------------------------------------
+.subckt ENLLGP_BS3NQSJU D G S B
++       param: w=0.15e-6 l=0.13e-6 nfing=1 ncrsd=1 mismatch=1 srcefirst=1
++       wfing={w/nfing+nmosll_xw}
++       fd={srcefirst*(nfing-2*trunc(nfing/2))+(1-srcefirst)*(2*trunc(1+nfing/2)-nfing)}
++       fs={2-fd}
++       ad={wfing*((nfing-fd)*(ncrsd-1)*(0.16e-6+0.18e-6)/4+nfing*(3.8e-07-nmosll_xl)/2+fd*(1.5e-07+nmosll_xw/2))}
++       as={wfing*((nfing-fs)*(ncrsd-1)*(0.16e-6+0.18e-6)/4+nfing*(3.8e-07-nmosll_xl)/2+fs*(1.5e-07+nmosll_xw/2))}
++       pd={(nfing-fd)/2*(ncrsd-1)*(0.16e-6+0.18e-6)+nfing*2*(3.8e-07-nmosll_xl)/2+fd*(wfing+2*1.5e-07+nmosll_xw)}
++       ps={(nfing-fs)/2*(ncrsd-1)*(0.16e-6+0.18e-6)+nfing*2*(3.8e-07-nmosll_xl)/2+fs*(wfing+2*1.5e-07+nmosll_xw)}
++       po2act=-1
++       number=1 nrd=0 nrs=0
++       ngcon=1
+
+
+*
+* invariant parameters:
+*----------------------
+.param conw    = 0.16e-6
+.param cons    = 0.18e-6
+.param coeact  = 0.07e-6
+.param conpo   = 0.11e-6
+
+.param u0_typ  = 274.93
+.param u0s     = 207.82
+.param lint    = 2.1939e-08
+.param lmin    = 0.13e-6
+.param dwu0    = -0.060406
+.param wint    = -9.9707e-10
+
+
+*  
+.param  cjbr   = 0.00085803
+.param  cjgr   = 2.921e-10
+.param  cjsr   = 6.7342e-11
+.param  jsdbr  = 1.3181e-07
+.param  jsdgr  = 0
+.param  jsdsr  = 2.2436e-14
+.param  jsgbr  = 9e-06
+.param  jsggr  = 4.1751e-11
+.param  jsgsr  = 3.1654e-11
+ 
+
+*
+* variant parameters:
+*--------------------
+.param xl      = nmosll_xl
+.param xw      = nmosll_xw
+.param tox     = nmosll_tox
+.param vth     = nmosll_vth0
+.param nlx     = nmosll_nlx
+.param drdsw   = nmosll_drdsw
+.param dmu     = nmosll_dmu
+
+
+.param dcjb    = nmosll_dcjb
+.param dcjgate = nmosll_dcjgate
+.param dcjsw   = nmosll_dcjsw
+.param djsdbr  = nmosll_djsdbr
+.param djsdgr  = nmosll_djsdgr
+.param djsdsr  = nmosll_djsdsr
+.param djsgbr  = nmosll_djsgbr
+.param djsggr  = nmosll_djsggr
+.param djsgsr  = nmosll_djsgsr
+.param prwb    = nmosll_prwb
+
+.param dcfring = nmosll_dcfring
+* effective length and width:
+*----------------------------
+.param we      = {(w/nfing+xw-2*wint)}
+.param le      = {l+xl-2.0*lint}
+* Equations for mismatch deviations:
+*-----------------------------------
+.PARAM dvth0_alpha = valif((w>0.0)&&(w<0.6e-6)&&(l>0.0)&&(l<0.24e-6),4.49e-9,valif((w>0.6e-6)&&(l>0.0)&&(l<0.24e-6),5.34e-9,valif((w>0.0)&&(w<0.6e-6)&&(l>0.24e-6),3.44e-9,3.76e-9)))
+.PARAM dvth0_beta  = valif((w>0.0)&&(w<0.6e-6)&&(l>0.0)&&(l<0.24e-6),0.0,valif((w>0.6e-6)&&(l>0.0)&&(l<0.24e-6),0.0,valif((w>0.0)&&(w<0.6e-6)&&(l>0.24e-6),0.0,0.0)))
+.PARAM dvth0_fudge  = valif((w>0.0)&&(w<0.6e-6)&&(l>0.0)&&(l<0.24e-6),1.25,valif((w>0.6e-6)&&(l>0.0)&&(l<0.24e-6),1.25,valif((w>0.0)&&(w<0.6e-6)&&(l>0.24e-6),1.25,1.25)))
+.PARAM dvth0_sig = {((dvth0_alpha/sqrt(W*L))+dvth0_beta)*dvth0_fudge/sqrt(2.0*number)}
+.PARAM dvth0_dev = 0.0 DEV/gauss = {dvth0_sig*MOSLL_DEV*mismatch}
+.PARAM dbeta_alpha = valif((w>0.0)&&(w<0.6e-6)&&(l>0.0)&&(l<0.24e-6),1.16e-8,valif((w>0.6e-6)&&(l>0.0)&&(l<0.24e-6),1.52e-8,valif((w>0.0)&&(w<0.6e-6)&&(l>0.24e-6),0.94e-8,1.03e-8)))
+.PARAM dbeta_beta  = valif((w>0.0)&&(w<0.6e-6)&&(l>0.0)&&(l<0.24e-6),0.0,valif((w>0.6e-6)&&(l>0.0)&&(l<0.24e-6),0.0,valif((w>0.0)&&(w<0.6e-6)&&(l>0.24e-6),0.0,0.0)))
+.PARAM dbeta_fudge  = valif((w>0.0)&&(w<0.6e-6)&&(l>0.0)&&(l<0.24e-6),1.25,valif((w>0.6e-6)&&(l>0.0)&&(l<0.24e-6),1.25,valif((w>0.0)&&(w<0.6e-6)&&(l>0.24e-6),1.25,1.25)))
+.PARAM dbeta_sig = {((dbeta_alpha/sqrt(W*L))+dbeta_beta)*dbeta_fudge/sqrt(2.0*number)}
+.PARAM dbeta_dev = 0.0 DEV/gauss = {dbeta_sig*MOSLL_DEV*mismatch}
+
+* Mobility model improvement:
+*----------------------------
+.param epsilon2 = 1e-18
+.param llimit = {2.80388e-07-xl} 
+.param wlimit = {2.79770586e-06-xw} 
+
+.param dwu = dwu0
+
+.param mobility = {2.0/((1.0/u0_typ+1.0/u0s)+(llimit+xl
++ -2.0*lint-sqrt((llimit-l)*(llimit-l)+epsilon2))*(1.0/u0s-1.0/u0_typ)/le)
++ *(w/nfing-2.0*((wint-xw/2.0)*(1.0+2.0*(dwu))-(dwu)*wlimit
++ +(dwu)*0.5*(wlimit-w/nfing)+0.5*(dwu)*sqrt((wlimit-w/nfing)*(wlimit-w/nfing)+epsilon2)))/we}
+.param u0 = {mobility*(1.0+dbeta_dev)*(1+dmu)} 
+* Equations for Threshold voltage vth0 and body factor K1:
+*---------------------------------------------------------
+.param  eg0   =  {1.16-(7.02e-4*((273.15+27)^2)/(27+1381))}
+.param  ni    =  {1.45e10*(((273.15+27)/300.15)^1.5)*exp(21.5565981-eg0/(1.725e-4*(273.15+27)))}
+.param  phis  =  {1.725e-4*(273.15+27)*LOG(1.08e+18/ni)}
+.param  k2    =  {0*(tox/2.49e-09)}
+
+.param  k1    =  {0.42986-(0.2406-vth)/sqrt(phis)}
+.param  vth0  =  {vth+dvth0_dev} 
+
+.param  nch   =  {1.08e+18*(2.49e-09*2.49e-09)/(tox*tox)*(k1*k1)/(0.42986*0.42986)}
+
+* Equations for access resistance:
+*---------------------------------
+
+.param  rdsw  =  {131.73*(1+drdsw)}
+
+
+.param vth0eff          = vth0
+.param u0eff            = u0
+
+.param rdsweff          = rdsw
+
+* Equations for fringing capacitance:
+*------------------------------------
+.param  cf    =  dcfring
+* Equations for overlap capacitance:
+*-----------------------------------
+.param  cgsl  =  {1.0057e-10*(2.49e-09/tox)}
+.param  cgdl  =  {1.0057e-10*(2.49e-09/tox)}
+
+* Equations for VT:
+*-----------------
+
+.param  w0    =  {2.6738e-08+(0-xw)}
+
+
+.param T0 = {0.51203*le/1.30e-8}
+.param T1 = {exp(T0)}
+.param vth_sce = valif((T0<34.0),(0.43)*T1/(((T1-1.0)*(T1-1.0))+(2.0*T1*1.7139e-15)),(0.43)/5.8346e14) 
+.param n_subvt = { 1.0 + ((0.40523+((0.045954)/le*1.0e-6))*5.0e-3*2.49e-09/3.4531e-11)}
+.param vth_rsce = {-n_subvt*0.02586*log(le/(le+8.0944e-06))}
+.param tmp2 = {2.49e-09*0.9/(we+w0)}
+.param k3 = {((-6.0878*tmp2)*(2.49e-09/tox) + vth_rsce - vth_sce)/tmp2}
+.param dvt0 = 0.0
+
+
+.param  k3b   =  {1.0709*(2.49e-09/tox)}
+.param  lk3   =  {0.2*((lmin+xl-(2*lint))*2.49e-09/(lmin+-1.5e-08-(2*lint))/tox)}
+
+
+.param lketaexp = {valif((1.0e-6/le-1.0/0.98023)/0.0054637 > 34, 34, (1.0e-6/le-1.0/0.98023)/0.0054637)}
+.param lketa    = {0.025/(1.0+exp(lketaexp))} 
+
+
+
+
+M1 D G S B NCHNQS w={w/nfing} l=l as={as/nfing} ad={ad/nfing} ps={ps/nfing} pd={pd/nfing}
++          m={number*nfing} nrd={nrd*nfing} nrs={nrs*nfing}
+
+
+
+.MODEL NCHNQS nmos
++ level=53
++ version=3.2           nqsmod=1              xw=xw                 
++ xl=xl                 wmin=1.5e-07          wmax=1                
++ lmin=1.3e-07          lmax=1e-05            mobmod=2              
++ capmod=3              noimod=2              binunit=1             
++ js=0                  jsw=0                 lint=2.1939e-08       
++ ll=0                  lln=1                 lw=0                  
++ lwn=1                 lwl=0                 wint=-9.9707e-10      
++ wl=0                  wln=1                 ww=0                  
++ wwn=1                 wwl=0                 tnom=27               
++ tox=tox               cj=0                  mj=0.33               
++ cjsw=0                mjsw=0.5              cjswg=0               
++ mjswg=0.5             cgso=3.0713e-10       cgdo=3.0713e-10       
++ cgbo=1e-14            xpart=0               dwg=0                 
++ dwb=0                 nch=nch               ngate=2.3702e+20      
++ xj=1e-07              u0=u0eff              vth0=vth0eff          
++ k1=k1                 k2=k2                 lk2=-0.0040345        
++ k3=k3                 lk3=lk3               k3b=k3b               
++ w0=w0                 nlx=nlx               dvt0=dvt0             
++ dvt1=0.51203          dvt2=0                dvt0w=0               
++ dvt1w=5e+06           dvt2w=0               ua=-5.842e-10         
++ ub=1.8214e-18         uc=-1.7437e-10        delta=0.018114        
++ rdsw=rdsweff          prwg=0                prwb=prwb             
++ wr=1                  vsat=110000           a0=2.4111             
++ keta=-0.0066061       lketa=lketa           ags=0.76127           
++ a1=0                  a2=0.91307            b0=0                  
++ b1=0                  alpha0=0              beta0=11.306          
++ lbeta0=-0.159         voff=-0.09345         lvoff=-0.0046832      
++ nfactor=0.40523       lnfactor=0.045954     cdsc=0                
++ cdscb=-0.00012548     cdscd=-0.0010321      cit=0                 
++ eta0=0.40549          etab=-0.44131         dsub=1.2509           
++ drout=0.2             pclm=1.6093           lpclm=-0.051879       
++ pdiblc1=0.01559       pdiblc2=0.013746      pdiblcb=0.4           
++ pscbe1=1e+15          pscbe2=1e-18          pvag=0.38394          
++ ute=-1.738            at=30000              ua1=3.46e-10          
++ ub1=-1.69e-18         uc1=4.5772e-12        kt1=-0.2226           
++ kt1l=1.75e-09         kt2=-0.025513         prt=0                 
++ cgsl=cgsl             cgdl=cgdl             ckappa=7.5715         
++ cf=cf                 clc=1e-07             cle=0.6               
++ dlc=3.38e-08          noff=1.8691           voffcv=-0.040497      
++ alpha1=0.025257       acde=0.5              moin=5                
++ llc=0                 lwc=0                 lwlc=0                
++ wlc=0                 wwc=0                 wwlc=0                
++ elm=5                 ef=1                  em=5e+09              
++ noia=5e+20            noib=200000           noic=0
+*  
+* -- JUNCAP Electrical Parameters for S/D regions  (Simulator specific)
++ vr=0                  cjbr={cjbr*(1+dcjb)}  cjsr={cjsr*(1+dcjsw)} 
++ cjgr={cjgr*(1+dcjgate)}  jsdbr={jsdbr*10^djsdbr} 
++ jsdsr={jsdsr*10^djsdsr} jsdgr={jsdgr*10^djsdgr} 
++ jsgbr={jsgbr*10^djsgbr} jsgsr={jsgsr*10^djsgsr} 
++ jsggr={jsggr*10^djsggr}  vdbr=0.52286          vdsr=0.42697          
++ vdgr=1                pb=0.20582            ps=0.44445            
++ pg=0.6358              nbj=0.97              nsj=0.93              
++ ngj=1
++ 
++ trdio9=27             diolev=9              dcaplev=0             
++ rlev=1                alev=3
+ 
+
+* + 
+.ends ENLLGP_BS3NQSJU
+
+
+*----------------------------------------------------------------------
+* Family nmosll Model ENLLGP_BS3NQSJURG bsim3 typ mismatch
+* Maturity : Silicon_verified
+*----------------------------------------------------------------------
+.subckt ENLLGP_BS3NQSJURG D G S B
++       param: w=0.15e-6 l=0.13e-6 nfing=1 ncrsd=1 mismatch=1 srcefirst=1
++       wfing={w/nfing+nmosll_xw}
++       fd={srcefirst*(nfing-2*trunc(nfing/2))+(1-srcefirst)*(2*trunc(1+nfing/2)-nfing)}
++       fs={2-fd}
++       ad={wfing*((nfing-fd)*(ncrsd-1)*(0.16e-6+0.18e-6)/4+nfing*(3.8e-07-nmosll_xl)/2+fd*(1.5e-07+nmosll_xw/2))}
++       as={wfing*((nfing-fs)*(ncrsd-1)*(0.16e-6+0.18e-6)/4+nfing*(3.8e-07-nmosll_xl)/2+fs*(1.5e-07+nmosll_xw/2))}
++       pd={(nfing-fd)/2*(ncrsd-1)*(0.16e-6+0.18e-6)+nfing*2*(3.8e-07-nmosll_xl)/2+fd*(wfing+2*1.5e-07+nmosll_xw)}
++       ps={(nfing-fs)/2*(ncrsd-1)*(0.16e-6+0.18e-6)+nfing*2*(3.8e-07-nmosll_xl)/2+fs*(wfing+2*1.5e-07+nmosll_xw)}
++       po2act=-1
++       number=1 nrd=0 nrs=0
++       ngcon=1
+
+
+*
+* invariant parameters:
+*----------------------
+.param conw    = 0.16e-6
+.param cons    = 0.18e-6
+.param coeact  = 0.07e-6
+.param conpo   = 0.11e-6
+
+.param u0_typ  = 274.93
+.param u0s     = 207.82
+.param lint    = 2.1939e-08
+.param lmin    = 0.13e-6
+.param dwu0    = -0.060406
+.param wint    = -9.9707e-10
+
+.param coepo   = 0.07e-6
+.param ncrg    = 2
+
+
+*  
+.param  cjbr   = 0.00085803
+.param  cjgr   = 2.921e-10
+.param  cjsr   = 6.7342e-11
+.param  jsdbr  = 1.3181e-07
+.param  jsdgr  = 0
+.param  jsdsr  = 2.2436e-14
+.param  jsgbr  = 9e-06
+.param  jsggr  = 4.1751e-11
+.param  jsgsr  = 3.1654e-11
+ 
+
+*
+* variant parameters:
+*--------------------
+.param xl      = nmosll_xl
+.param xw      = nmosll_xw
+.param tox     = nmosll_tox
+.param vth     = nmosll_vth0
+.param nlx     = nmosll_nlx
+.param drdsw   = nmosll_drdsw
+.param dmu     = nmosll_dmu
+
+.param rshg    = nmosll_rshg
+.param rconpo  = nmosll_rconpo
+
+
+.param dcjb    = nmosll_dcjb
+.param dcjgate = nmosll_dcjgate
+.param dcjsw   = nmosll_dcjsw
+.param djsdbr  = nmosll_djsdbr
+.param djsdgr  = nmosll_djsdgr
+.param djsdsr  = nmosll_djsdsr
+.param djsgbr  = nmosll_djsgbr
+.param djsggr  = nmosll_djsggr
+.param djsgsr  = nmosll_djsgsr
+.param prwb    = nmosll_prwb
+
+.param dcfring = nmosll_dcfring
+* effective length and width:
+*----------------------------
+.param we      = {(w/nfing+xw-2*wint)}
+.param le      = {l+xl-2.0*lint}
+* Equations for mismatch deviations:
+*-----------------------------------
+.PARAM dvth0_alpha = valif((w>0.0)&&(w<0.6e-6)&&(l>0.0)&&(l<0.24e-6),4.49e-9,valif((w>0.6e-6)&&(l>0.0)&&(l<0.24e-6),5.34e-9,valif((w>0.0)&&(w<0.6e-6)&&(l>0.24e-6),3.44e-9,3.76e-9)))
+.PARAM dvth0_beta  = valif((w>0.0)&&(w<0.6e-6)&&(l>0.0)&&(l<0.24e-6),0.0,valif((w>0.6e-6)&&(l>0.0)&&(l<0.24e-6),0.0,valif((w>0.0)&&(w<0.6e-6)&&(l>0.24e-6),0.0,0.0)))
+.PARAM dvth0_fudge  = valif((w>0.0)&&(w<0.6e-6)&&(l>0.0)&&(l<0.24e-6),1.25,valif((w>0.6e-6)&&(l>0.0)&&(l<0.24e-6),1.25,valif((w>0.0)&&(w<0.6e-6)&&(l>0.24e-6),1.25,1.25)))
+.PARAM dvth0_sig = {((dvth0_alpha/sqrt(W*L))+dvth0_beta)*dvth0_fudge/sqrt(2.0*number)}
+.PARAM dvth0_dev = 0.0 DEV/gauss = {dvth0_sig*MOSLL_DEV*mismatch}
+.PARAM dbeta_alpha = valif((w>0.0)&&(w<0.6e-6)&&(l>0.0)&&(l<0.24e-6),1.16e-8,valif((w>0.6e-6)&&(l>0.0)&&(l<0.24e-6),1.52e-8,valif((w>0.0)&&(w<0.6e-6)&&(l>0.24e-6),0.94e-8,1.03e-8)))
+.PARAM dbeta_beta  = valif((w>0.0)&&(w<0.6e-6)&&(l>0.0)&&(l<0.24e-6),0.0,valif((w>0.6e-6)&&(l>0.0)&&(l<0.24e-6),0.0,valif((w>0.0)&&(w<0.6e-6)&&(l>0.24e-6),0.0,0.0)))
+.PARAM dbeta_fudge  = valif((w>0.0)&&(w<0.6e-6)&&(l>0.0)&&(l<0.24e-6),1.25,valif((w>0.6e-6)&&(l>0.0)&&(l<0.24e-6),1.25,valif((w>0.0)&&(w<0.6e-6)&&(l>0.24e-6),1.25,1.25)))
+.PARAM dbeta_sig = {((dbeta_alpha/sqrt(W*L))+dbeta_beta)*dbeta_fudge/sqrt(2.0*number)}
+.PARAM dbeta_dev = 0.0 DEV/gauss = {dbeta_sig*MOSLL_DEV*mismatch}
+
+* Mobility model improvement:
+*----------------------------
+.param epsilon2 = 1e-18
+.param llimit = {2.80388e-07-xl} 
+.param wlimit = {2.79770586e-06-xw} 
+
+.param dwu = dwu0
+
+.param mobility = {2.0/((1.0/u0_typ+1.0/u0s)+(llimit+xl
++ -2.0*lint-sqrt((llimit-l)*(llimit-l)+epsilon2))*(1.0/u0s-1.0/u0_typ)/le)
++ *(w/nfing-2.0*((wint-xw/2.0)*(1.0+2.0*(dwu))-(dwu)*wlimit
++ +(dwu)*0.5*(wlimit-w/nfing)+0.5*(dwu)*sqrt((wlimit-w/nfing)*(wlimit-w/nfing)+epsilon2)))/we}
+.param u0 = {mobility*(1.0+dbeta_dev)*(1+dmu)} 
+* Equations for Threshold voltage vth0 and body factor K1:
+*---------------------------------------------------------
+.param  eg0   =  {1.16-(7.02e-4*((273.15+27)^2)/(27+1381))}
+.param  ni    =  {1.45e10*(((273.15+27)/300.15)^1.5)*exp(21.5565981-eg0/(1.725e-4*(273.15+27)))}
+.param  phis  =  {1.725e-4*(273.15+27)*LOG(1.08e+18/ni)}
+.param  k2    =  {0*(tox/2.49e-09)}
+
+.param  k1    =  {0.42986-(0.2406-vth)/sqrt(phis)}
+.param  vth0  =  {vth+dvth0_dev} 
+
+.param  nch   =  {1.08e+18*(2.49e-09*2.49e-09)/(tox*tox)*(k1*k1)/(0.42986*0.42986)}
+
+* Equations for access resistance:
+*---------------------------------
+
+.param  rdsw  =  {131.73*(1+drdsw)}
+
+
+.param vth0eff          = vth0
+.param u0eff            = u0
+
+.param rdsweff          = rdsw
+
+* Equations for fringing capacitance:
+*------------------------------------
+.param  cf    =  dcfring
+* Equations for overlap capacitance:
+*-----------------------------------
+.param  cgsl  =  {1.0057e-10*(2.49e-09/tox)}
+.param  cgdl  =  {1.0057e-10*(2.49e-09/tox)}
+
+* Equations for VT:
+*-----------------
+
+.param  w0    =  {2.6738e-08+(0-xw)}
+
+
+.param T0 = {0.51203*le/1.30e-8}
+.param T1 = {exp(T0)}
+.param vth_sce = valif((T0<34.0),(0.43)*T1/(((T1-1.0)*(T1-1.0))+(2.0*T1*1.7139e-15)),(0.43)/5.8346e14) 
+.param n_subvt = { 1.0 + ((0.40523+((0.045954)/le*1.0e-6))*5.0e-3*2.49e-09/3.4531e-11)}
+.param vth_rsce = {-n_subvt*0.02586*log(le/(le+8.0944e-06))}
+.param tmp2 = {2.49e-09*0.9/(we+w0)}
+.param k3 = {((-6.0878*tmp2)*(2.49e-09/tox) + vth_rsce - vth_sce)/tmp2}
+.param dvt0 = 0.0
+
+
+.param  k3b   =  {1.0709*(2.49e-09/tox)}
+.param  lk3   =  {0.2*((lmin+xl-(2*lint))*2.49e-09/(lmin+-1.5e-08-(2*lint))/tox)}
+
+
+.param lketaexp = {valif((1.0e-6/le-1.0/0.98023)/0.0054637 > 34, 34, (1.0e-6/le-1.0/0.98023)/0.0054637)}
+.param lketa    = {0.025/(1.0+exp(lketaexp))} 
+
+
+
+
+.param xgw    = {cons-coepo-coeact}
+.param xgl    = {-xl}
+.param lhead  = {nfing*l+(nfing-1)*(conw+2*conpo+(ncrsd-1)*(conw+cons))}
+.param nchead = {ncrg*(1+trunc(max(0,(lhead-conw-2*coepo))/(conw+cons)))}
+.param rgeltd = {rshg*(xgw+(w/nfing+xw)/(3*ngcon))/(ngcon*(l-xgl)*nfing)}
+.param rgcon  = {rconpo/(nchead*ngcon)}
+
+RG G Gi {(rgeltd+rgcon)/number}
+M1 D Gi S B NCHNQSRG w={w/nfing} l=l as={as/nfing} ad={ad/nfing} ps={ps/nfing} pd={pd/nfing}
++          m={number*nfing} nrd={nrd*nfing} nrs={nrs*nfing}
+
+
+
+.MODEL NCHNQSRG nmos
++ level=53
++ version=3.2           nqsmod=1              xw=xw                 
++ xl=xl                 wmin=1.5e-07          wmax=1                
++ lmin=1.3e-07          lmax=1e-05            mobmod=2              
++ capmod=3              noimod=2              binunit=1             
++ js=0                  jsw=0                 lint=2.1939e-08       
++ ll=0                  lln=1                 lw=0                  
++ lwn=1                 lwl=0                 wint=-9.9707e-10      
++ wl=0                  wln=1                 ww=0                  
++ wwn=1                 wwl=0                 tnom=27               
++ tox=tox               cj=0                  mj=0.33               
++ cjsw=0                mjsw=0.5              cjswg=0               
++ mjswg=0.5             cgso=3.0713e-10       cgdo=3.0713e-10       
++ cgbo=1e-14            xpart=0               dwg=0                 
++ dwb=0                 nch=nch               ngate=2.3702e+20      
++ xj=1e-07              u0=u0eff              vth0=vth0eff          
++ k1=k1                 k2=k2                 lk2=-0.0040345        
++ k3=k3                 lk3=lk3               k3b=k3b               
++ w0=w0                 nlx=nlx               dvt0=dvt0             
++ dvt1=0.51203          dvt2=0                dvt0w=0               
++ dvt1w=5e+06           dvt2w=0               ua=-5.842e-10         
++ ub=1.8214e-18         uc=-1.7437e-10        delta=0.018114        
++ rdsw=rdsweff          prwg=0                prwb=prwb             
++ wr=1                  vsat=110000           a0=2.4111             
++ keta=-0.0066061       lketa=lketa           ags=0.76127           
++ a1=0                  a2=0.91307            b0=0                  
++ b1=0                  alpha0=0              beta0=11.306          
++ lbeta0=-0.159         voff=-0.09345         lvoff=-0.0046832      
++ nfactor=0.40523       lnfactor=0.045954     cdsc=0                
++ cdscb=-0.00012548     cdscd=-0.0010321      cit=0                 
++ eta0=0.40549          etab=-0.44131         dsub=1.2509           
++ drout=0.2             pclm=1.6093           lpclm=-0.051879       
++ pdiblc1=0.01559       pdiblc2=0.013746      pdiblcb=0.4           
++ pscbe1=1e+15          pscbe2=1e-18          pvag=0.38394          
++ ute=-1.738            at=30000              ua1=3.46e-10          
++ ub1=-1.69e-18         uc1=4.5772e-12        kt1=-0.2226           
++ kt1l=1.75e-09         kt2=-0.025513         prt=0                 
++ cgsl=cgsl             cgdl=cgdl             ckappa=7.5715         
++ cf=cf                 clc=1e-07             cle=0.6               
++ dlc=3.38e-08          noff=1.8691           voffcv=-0.040497      
++ alpha1=0.025257       acde=0.5              moin=5                
++ llc=0                 lwc=0                 lwlc=0                
++ wlc=0                 wwc=0                 wwlc=0                
++ elm=5                 ef=1                  em=5e+09              
++ noia=5e+20            noib=200000           noic=0
+*  
+* -- JUNCAP Electrical Parameters for S/D regions  (Simulator specific)
++ vr=0                  cjbr={cjbr*(1+dcjb)}  cjsr={cjsr*(1+dcjsw)} 
++ cjgr={cjgr*(1+dcjgate)}  jsdbr={jsdbr*10^djsdbr} 
++ jsdsr={jsdsr*10^djsdsr} jsdgr={jsdgr*10^djsdgr} 
++ jsgbr={jsgbr*10^djsgbr} jsgsr={jsgsr*10^djsgsr} 
++ jsggr={jsggr*10^djsggr}  vdbr=0.52286          vdsr=0.42697          
++ vdgr=1                pb=0.20582            ps=0.44445            
++ pg=0.6358              nbj=0.97              nsj=0.93              
++ ngj=1
++ 
++ trdio9=27             diolev=9              dcaplev=0             
++ rlev=1                alev=3
+ 
+
+* + 
+.ends ENLLGP_BS3NQSJURG
+
+
+*----------------------------------------------------------------------
+* Family pmosll Model EPLLGP_BS3JU bsim3 typ mismatch
+* Maturity : Silicon_verified
+*----------------------------------------------------------------------
+.subckt EPLLGP_BS3JU D G S B
++       param: w=0.15e-6 l=0.13e-6 nfing=1 ncrsd=1 mismatch=1 srcefirst=1
++       wfing={w/nfing+pmosll_xw}
++       fd={srcefirst*(nfing-2*trunc(nfing/2))+(1-srcefirst)*(2*trunc(1+nfing/2)-nfing)}
++       fs={2-fd}
++       ad={wfing*((nfing-fd)*(ncrsd-1)*(0.16e-6+0.18e-6)/4+nfing*(3.8e-07-pmosll_xl)/2+fd*(1.5e-07+pmosll_xw/2))}
++       as={wfing*((nfing-fs)*(ncrsd-1)*(0.16e-6+0.18e-6)/4+nfing*(3.8e-07-pmosll_xl)/2+fs*(1.5e-07+pmosll_xw/2))}
++       pd={(nfing-fd)/2*(ncrsd-1)*(0.16e-6+0.18e-6)+nfing*2*(3.8e-07-pmosll_xl)/2+fd*(wfing+2*1.5e-07+pmosll_xw)}
++       ps={(nfing-fs)/2*(ncrsd-1)*(0.16e-6+0.18e-6)+nfing*2*(3.8e-07-pmosll_xl)/2+fs*(wfing+2*1.5e-07+pmosll_xw)}
++       po2act=-1
++       number=1 nrd=0 nrs=0
++       ngcon=1
+
+
+*
+* invariant parameters:
+*----------------------
+.param conw    = 0.16e-6
+.param cons    = 0.18e-6
+.param coeact  = 0.07e-6
+.param conpo   = 0.11e-6
+
+.param u0_typ  = 61.453
+.param u0s     = 61.453
+.param lint    = 1.7425e-08
+.param lmin    = 0.13e-6
+.param dwu0    = -0.032279
+.param wint    = -1.8412e-09
+
+
+*  
+.param  cjbr   = 0.00090721
+.param  cjgr   = 2.9337e-10
+.param  cjsr   = 3.9129e-11
+.param  jsdbr  = 8.5932e-08
+.param  jsdgr  = 0
+.param  jsdsr  = 5.2166e-15
+.param  jsgbr  = 1.6294e-06
+.param  jsggr  = 2.8654e-11
+.param  jsgsr  = 3.2153e-11
+ 
+
+*
+* variant parameters:
+*--------------------
+.param xl      = pmosll_xl
+.param xw      = pmosll_xw
+.param tox     = pmosll_tox
+.param vth     = pmosll_vth0
+.param nlx     = pmosll_nlx
+.param drdsw   = pmosll_drdsw
+.param dmu     = pmosll_dmu
+
+
+.param dcjb    = pmosll_dcjb
+.param dcjgate = pmosll_dcjgate
+.param dcjsw   = pmosll_dcjsw
+.param djsdbr  = pmosll_djsdbr
+.param djsdgr  = pmosll_djsdgr
+.param djsdsr  = pmosll_djsdsr
+.param djsgbr  = pmosll_djsgbr
+.param djsggr  = pmosll_djsggr
+.param djsgsr  = pmosll_djsgsr
+.param prwb    = pmosll_prwb
+
+.param dcfring = pmosll_dcfring
+* effective length and width:
+*----------------------------
+.param we      = {(w/nfing+xw-2*wint)}
+.param le      = {l+xl-2.0*lint}
+* Equations for mismatch deviations:
+*-----------------------------------
+.PARAM dvth0_alpha = valif((w>0.0)&&(w<0.6e-6)&&(l>0.0)&&(l<0.24e-6),3.59e-9,valif((w>0.6e-6)&&(l>0.0)&&(l<0.24e-6),4.53e-9,valif((w>0.0)&&(w<0.6e-6)&&(l>0.24e-6),2.67e-9,2.84e-9)))
+.PARAM dvth0_beta  = valif((w>0.0)&&(w<0.6e-6)&&(l>0.0)&&(l<0.24e-6),0.0,valif((w>0.6e-6)&&(l>0.0)&&(l<0.24e-6),0.0,valif((w>0.0)&&(w<0.6e-6)&&(l>0.24e-6),0.0,0.0)))
+.PARAM dvth0_fudge  = valif((w>0.0)&&(w<0.6e-6)&&(l>0.0)&&(l<0.24e-6),1.25,valif((w>0.6e-6)&&(l>0.0)&&(l<0.24e-6),1.25,valif((w>0.0)&&(w<0.6e-6)&&(l>0.24e-6),1.25,1.25)))
+.PARAM dvth0_sig = {((dvth0_alpha/sqrt(W*L))+dvth0_beta)*dvth0_fudge/sqrt(2.0*number)}
+.PARAM dvth0_dev = 0.0 DEV/gauss = {dvth0_sig*MOSLL_DEV*mismatch}
+.PARAM dbeta_alpha = valif((w>0.0)&&(w<0.6e-6)&&(l>0.0)&&(l<0.24e-6),1.22e-8,valif((w>0.6e-6)&&(l>0.0)&&(l<0.24e-6),1.51e-8,valif((w>0.0)&&(w<0.6e-6)&&(l>0.24e-6),1.07e-8,1.20e-8)))
+.PARAM dbeta_beta  = valif((w>0.0)&&(w<0.6e-6)&&(l>0.0)&&(l<0.24e-6),0.0,valif((w>0.6e-6)&&(l>0.0)&&(l<0.24e-6),0.0,valif((w>0.0)&&(w<0.6e-6)&&(l>0.24e-6),0.0,0.0)))
+.PARAM dbeta_fudge  = valif((w>0.0)&&(w<0.6e-6)&&(l>0.0)&&(l<0.24e-6),1.25,valif((w>0.6e-6)&&(l>0.0)&&(l<0.24e-6),1.25,valif((w>0.0)&&(w<0.6e-6)&&(l>0.24e-6),1.25,1.25)))
+.PARAM dbeta_sig = {((dbeta_alpha/sqrt(W*L))+dbeta_beta)*dbeta_fudge/sqrt(2.0*number)}
+.PARAM dbeta_dev = 0.0 DEV/gauss = {dbeta_sig*MOSLL_DEV*mismatch}
+
+* Mobility model improvement:
+*----------------------------
+.param epsilon2 = 1e-18
+.param llimit = {1000000.0-xl} 
+.param wlimit = {1.8857176e-06-xw} 
+
+.param dwu = {dwu0+(-2)*0.5e6*(abs(le-1.28e-07)-(le-1.28e-07))} 
+
+.param mobility = {2.0/((1.0/u0_typ+1.0/u0s)+(llimit+xl
++ -2.0*lint-sqrt((llimit-l)*(llimit-l)+epsilon2))*(1.0/u0s-1.0/u0_typ)/le)
++ *(w/nfing-2.0*((wint-xw/2.0)*(1.0+2.0*(dwu))-(dwu)*wlimit
++ +(dwu)*0.5*(wlimit-w/nfing)+0.5*(dwu)*sqrt((wlimit-w/nfing)*(wlimit-w/nfing)+epsilon2)))/we}
+.param u0 = {mobility*(1.0+dbeta_dev)*(1+dmu)} 
+* Equations for Threshold voltage vth0 and body factor K1:
+*---------------------------------------------------------
+.param  eg0   =  {1.16-(7.02e-4*((273.15+27)^2)/(27+1381))}
+.param  ni    =  {1.45e10*(((273.15+27)/300.15)^1.5)*exp(21.5565981-eg0/(1.725e-4*(273.15+27)))}
+.param  phis  =  {1.725e-4*(273.15+27)*LOG(1.5598e+18/ni)}
+.param  k2    =  {0*(tox/2.35e-09)}
+
+.param  k1    =  {0.48935+(-0.343-vth)/sqrt(phis)}
+.param  vth0  =  {vth-dvth0_dev} 
+
+.param  nch   =  {1.5598e+18*(2.35e-09*2.35e-09)/(tox*tox)*(k1*k1)/(0.48935*0.48935)}
+
+* Equations for access resistance:
+*---------------------------------
+
+.param  rdsw  =  {314.96*(1+drdsw)}
+
+
+.param vth0eff          = vth0
+.param u0eff            = u0
+
+.param rdsweff          = rdsw
+
+* Equations for fringing capacitance:
+*------------------------------------
+.param  cf    =  dcfring
+* Equations for overlap capacitance:
+*-----------------------------------
+.param  cgsl  =  {2.4766e-10*(2.35e-09/tox)}
+.param  cgdl  =  {2.4766e-10*(2.35e-09/tox)}
+
+* Equations for VT:
+*-----------------
+
+.param  w0    =  {3.2451e-05+(0-xw)}
+
+
+.param k3 = {-206.51*(2.35e-09/tox)}
+.param dvt0 = 1.15
+
+
+.param  k3b   =  {884.66*(2.35e-09/tox)}
+.param  lk3   =  {0*((lmin+xl-(2*lint))*2.35e-09/(lmin+-1.5e-08-(2*lint))/tox)}
+
+
+.param lketaexp = {valif((1.0e-6/le-1.0/0.10665)/0.00034353 > 34, 34, (1.0e-6/le-1.0/0.10665)/0.00034353)}
+.param lketa    = {-0.019385/(1.0+exp(lketaexp))} 
+
+
+
+
+M1 D G S B PCH w={w/nfing} l=l as={as/nfing} ad={ad/nfing} ps={ps/nfing} pd={pd/nfing}
++          m={number*nfing} nrd={nrd*nfing} nrs={nrs*nfing}
+
+
+
+.MODEL PCH pmos
++ level=53
++ version=3.2           nqsmod=0              xw=xw                 
++ xl=xl                 wmin=1.5e-07          wmax=1                
++ lmin=1.3e-07          lmax=1e-05            mobmod=1              
++ capmod=3              noimod=2              binunit=1             
++ js=0                  jsw=0                 lint=1.7425e-08       
++ ll=0                  lln=1                 lw=0                  
++ lwn=1                 lwl=0                 wint=-1.8412e-09      
++ wl=0                  wln=1                 ww=0                  
++ wwn=1                 wwl=0                 tnom=27               
++ tox=tox               cj=0                  mj=0.33               
++ cjsw=0                mjsw=0.5              cjswg=0               
++ mjswg=0.5             cgso=7.8103e-11       cgdo=7.8103e-11       
++ cgbo=1e-12            xpart=0               dwg=-1.5e-08          
++ dwb=-1e-08            nch=nch               ngate=1.5e+20         
++ xj=1e-07              u0=u0eff              vth0=vth0eff          
++ k1=k1                 k2=k2                 k3=k3                 
++ lk3=lk3               k3b=k3b               w0=w0                 
++ nlx=nlx               dvt0=dvt0             dvt1=0.48598          
++ dvt2=0.056403         dvt0w=0               dvt1w=5.3e+06         
++ dvt2w=-0.032          ua=-6.7041e-10        ub=1.6607e-18         
++ uc=-1.2397e-10        delta=0.0089901       rdsw=rdsweff          
++ lrdsw=0               wrdsw=0               prwg=0                
++ prwb=prwb             wr=1                  vsat=208650           
++ a0=1.5276             keta=-0.047           lketa=lketa           
++ ags=0.90831           lags=0.25             a1=0.088264           
++ a2=0.10032            b0=1.4584e-06         b1=8.9633e-06         
++ alpha0=0              beta0=30              voff=-0.10095         
++ lvoff=-0.0022237      nfactor=0.48931       cdsc=0.0033969        
++ cdscb=-1.9882e-06     cdscd=0               cit=0                 
++ eta0=0.07143          etab=-0.048492        dsub=0.56             
++ drout=0.56            pclm=1.6877           pdiblc1=1e-07         
++ pdiblc2=0.001         lpdiblc2=0.0017301    pdiblcb=0             
++ pscbe1=1e+15          pscbe2=1e-18          pvag=0                
++ ute=-1.166            at=86000              ua1=-2.28e-10         
++ ub1=0                 uc1=2.5e-10           kt1=-0.217            
++ kt1l=0                kt2=-0.052            prt=51.846            
++ cgsl=cgsl             cgdl=cgdl             ckappa=1.9153         
++ cf=cf                 clc=1e-07             cle=0.6               
++ dlc=2.65e-08          noff=2.1501           voffcv=-0.049345      
++ alpha1=0              acde=0.5              moin=5                
++ llc=0                 lwc=0                 lwlc=0                
++ wlc=0                 wwc=0                 wwlc=0                
++ elm=5                 ef=1                  em=501000             
++ noia=7.05e+18         noib=700000           noic=0
+*  
+* -- JUNCAP Electrical Parameters for S/D regions  (Simulator specific)
++ vr=0                  cjbr={cjbr*(1+dcjb)}  cjsr={cjsr*(1+dcjsw)} 
++ cjgr={cjgr*(1+dcjgate)}  jsdbr={jsdbr*10^djsdbr} 
++ jsdsr={jsdsr*10^djsdsr} jsdgr={jsdgr*10^djsdgr} 
++ jsgbr={jsgbr*10^djsgbr} jsgsr={jsgsr*10^djsgsr} 
++ jsggr={jsggr*10^djsggr}  vdbr=0.62226          vdsr=1.2279           
++ vdgr=1.5037           pb=0.28121            ps=0.15               
++ pg=0.87916             nbj=0.97              nsj=0.93              
++ ngj=1
++ 
++ trdio9=27             diolev=9              dcaplev=0             
++ rlev=1                alev=3
+ 
+
+* + 
+.ends EPLLGP_BS3JU
+
+
+*----------------------------------------------------------------------
+* Family pmosll Model EPLLGP_BS3JULEAK bsim3 typ mismatch
+* Maturity : Silicon_verified
+*----------------------------------------------------------------------
+.subckt EPLLGP_BS3JULEAK D G S B
++       param: w=0.15e-6 l=0.13e-6 nfing=1 ncrsd=1 mismatch=1 srcefirst=1
++       wfing={w/nfing+pmosll_xw}
++       fd={srcefirst*(nfing-2*trunc(nfing/2))+(1-srcefirst)*(2*trunc(1+nfing/2)-nfing)}
++       fs={2-fd}
++       ad={wfing*((nfing-fd)*(ncrsd-1)*(0.16e-6+0.18e-6)/4+nfing*(3.8e-07-pmosll_xl)/2+fd*(1.5e-07+pmosll_xw/2))}
++       as={wfing*((nfing-fs)*(ncrsd-1)*(0.16e-6+0.18e-6)/4+nfing*(3.8e-07-pmosll_xl)/2+fs*(1.5e-07+pmosll_xw/2))}
++       pd={(nfing-fd)/2*(ncrsd-1)*(0.16e-6+0.18e-6)+nfing*2*(3.8e-07-pmosll_xl)/2+fd*(wfing+2*1.5e-07+pmosll_xw)}
++       ps={(nfing-fs)/2*(ncrsd-1)*(0.16e-6+0.18e-6)+nfing*2*(3.8e-07-pmosll_xl)/2+fs*(wfing+2*1.5e-07+pmosll_xw)}
++       po2act=-1
++       number=1 nrd=0 nrs=0
++       ngcon=1
+
+
+*
+* invariant parameters:
+*----------------------
+.param conw    = 0.16e-6
+.param cons    = 0.18e-6
+.param coeact  = 0.07e-6
+.param conpo   = 0.11e-6
+
+.param u0_typ  = 61.453
+.param u0s     = 61.453
+.param lint    = 1.7425e-08
+.param lmin    = 0.13e-6
+.param dwu0    = -0.032279
+.param wint    = -1.8412e-09
+
+
+*  
+.param  cjbr   = 0.00090721
+.param  cjgr   = 2.9337e-10
+.param  cjsr   = 3.9129e-11
+.param  jsdbr  = 8.5932e-08
+.param  jsdgr  = 0
+.param  jsdsr  = 5.2166e-15
+.param  jsgbr  = 1.6294e-06
+.param  jsggr  = 2.8654e-11
+.param  jsgsr  = 3.2153e-11
+ 
+
+*
+* variant parameters:
+*--------------------
+.param xl      = pmosll_xl
+.param xw      = pmosll_xw
+.param tox     = pmosll_tox
+.param vth     = pmosll_vth0
+.param nlx     = pmosll_nlx
+.param drdsw   = pmosll_drdsw
+.param dmu     = pmosll_dmu
+
+
+.param dcjb    = pmosll_dcjb
+.param dcjgate = pmosll_dcjgate
+.param dcjsw   = pmosll_dcjsw
+.param djsdbr  = pmosll_djsdbr
+.param djsdgr  = pmosll_djsdgr
+.param djsdsr  = pmosll_djsdsr
+.param djsgbr  = pmosll_djsgbr
+.param djsggr  = pmosll_djsggr
+.param djsgsr  = pmosll_djsgsr
+.param prwb    = pmosll_prwb
+
+.param dcfring = pmosll_dcfring
+* effective length and width:
+*----------------------------
+.param we      = {(w/nfing+xw-2*wint)}
+.param le      = {l+xl-2.0*lint}
+* Equations for mismatch deviations:
+*-----------------------------------
+.PARAM dvth0_alpha = valif((w>0.0)&&(w<0.6e-6)&&(l>0.0)&&(l<0.24e-6),3.59e-9,valif((w>0.6e-6)&&(l>0.0)&&(l<0.24e-6),4.53e-9,valif((w>0.0)&&(w<0.6e-6)&&(l>0.24e-6),2.67e-9,2.84e-9)))
+.PARAM dvth0_beta  = valif((w>0.0)&&(w<0.6e-6)&&(l>0.0)&&(l<0.24e-6),0.0,valif((w>0.6e-6)&&(l>0.0)&&(l<0.24e-6),0.0,valif((w>0.0)&&(w<0.6e-6)&&(l>0.24e-6),0.0,0.0)))
+.PARAM dvth0_fudge  = valif((w>0.0)&&(w<0.6e-6)&&(l>0.0)&&(l<0.24e-6),1.25,valif((w>0.6e-6)&&(l>0.0)&&(l<0.24e-6),1.25,valif((w>0.0)&&(w<0.6e-6)&&(l>0.24e-6),1.25,1.25)))
+.PARAM dvth0_sig = {((dvth0_alpha/sqrt(W*L))+dvth0_beta)*dvth0_fudge/sqrt(2.0*number)}
+.PARAM dvth0_dev = 0.0 DEV/gauss = {dvth0_sig*MOSLL_DEV*mismatch}
+.PARAM dbeta_alpha = valif((w>0.0)&&(w<0.6e-6)&&(l>0.0)&&(l<0.24e-6),1.22e-8,valif((w>0.6e-6)&&(l>0.0)&&(l<0.24e-6),1.51e-8,valif((w>0.0)&&(w<0.6e-6)&&(l>0.24e-6),1.07e-8,1.20e-8)))
+.PARAM dbeta_beta  = valif((w>0.0)&&(w<0.6e-6)&&(l>0.0)&&(l<0.24e-6),0.0,valif((w>0.6e-6)&&(l>0.0)&&(l<0.24e-6),0.0,valif((w>0.0)&&(w<0.6e-6)&&(l>0.24e-6),0.0,0.0)))
+.PARAM dbeta_fudge  = valif((w>0.0)&&(w<0.6e-6)&&(l>0.0)&&(l<0.24e-6),1.25,valif((w>0.6e-6)&&(l>0.0)&&(l<0.24e-6),1.25,valif((w>0.0)&&(w<0.6e-6)&&(l>0.24e-6),1.25,1.25)))
+.PARAM dbeta_sig = {((dbeta_alpha/sqrt(W*L))+dbeta_beta)*dbeta_fudge/sqrt(2.0*number)}
+.PARAM dbeta_dev = 0.0 DEV/gauss = {dbeta_sig*MOSLL_DEV*mismatch}
+
+* Mobility model improvement:
+*----------------------------
+.param epsilon2 = 1e-18
+.param llimit = {1000000.0-xl} 
+.param wlimit = {1.8857176e-06-xw} 
+
+.param dwu = {dwu0+(-2)*0.5e6*(abs(le-1.28e-07)-(le-1.28e-07))} 
+
+.param mobility = {2.0/((1.0/u0_typ+1.0/u0s)+(llimit+xl
++ -2.0*lint-sqrt((llimit-l)*(llimit-l)+epsilon2))*(1.0/u0s-1.0/u0_typ)/le)
++ *(w/nfing-2.0*((wint-xw/2.0)*(1.0+2.0*(dwu))-(dwu)*wlimit
++ +(dwu)*0.5*(wlimit-w/nfing)+0.5*(dwu)*sqrt((wlimit-w/nfing)*(wlimit-w/nfing)+epsilon2)))/we}
+.param u0 = {mobility*(1.0+dbeta_dev)*(1+dmu)} 
+* Equations for Threshold voltage vth0 and body factor K1:
+*---------------------------------------------------------
+.param  eg0   =  {1.16-(7.02e-4*((273.15+27)^2)/(27+1381))}
+.param  ni    =  {1.45e10*(((273.15+27)/300.15)^1.5)*exp(21.5565981-eg0/(1.725e-4*(273.15+27)))}
+.param  phis  =  {1.725e-4*(273.15+27)*LOG(1.5598e+18/ni)}
+.param  k2    =  {0*(tox/2.35e-09)}
+
+.param  k1    =  {0.48935+(-0.343-vth)/sqrt(phis)}
+.param  vth0  =  {vth-dvth0_dev} 
+
+.param  nch   =  {1.5598e+18*(2.35e-09*2.35e-09)/(tox*tox)*(k1*k1)/(0.48935*0.48935)}
+
+* Equations for access resistance:
+*---------------------------------
+
+.param  rdsw  =  {314.96*(1+drdsw)}
+
+
+.param vth0eff          = vth0
+.param u0eff            = u0
+
+.param rdsweff          = rdsw
+
+* Equations for fringing capacitance:
+*------------------------------------
+.param  cf    =  dcfring
+* Equations for overlap capacitance:
+*-----------------------------------
+.param  cgsl  =  {2.4766e-10*(2.35e-09/tox)}
+.param  cgdl  =  {2.4766e-10*(2.35e-09/tox)}
+
+* Equations for VT:
+*-----------------
+
+.param  w0    =  {3.2451e-05+(0-xw)}
+
+
+.param k3 = {-206.51*(2.35e-09/tox)}
+.param dvt0 = 1.15
+
+
+.param  k3b   =  {884.66*(2.35e-09/tox)}
+.param  lk3   =  {0*((lmin+xl-(2*lint))*2.35e-09/(lmin+-1.5e-08-(2*lint))/tox)}
+
+
+.param lketaexp = {valif((1.0e-6/le-1.0/0.10665)/0.00034353 > 34, 34, (1.0e-6/le-1.0/0.10665)/0.00034353)}
+.param lketa    = {-0.019385/(1.0+exp(lketaexp))} 
+
+
+
+* Equations for Igate:
+*--------------------
+
+
+.param wpoly     = {number*(w+xw)}
+.param lpoly     = {l+xl}
+.param dvd    = -0.015
+.param toxratio = {exp(38.5*log(2.35e-09/tox))}
+.param bb     = {(0)*log(lpoly)*log(lpoly)+(-3.68e+07)*log(lpoly)+(-1.45e+09)}
+.param vara1  = {toxratio*((0)*lpoly*lpoly+(1.7e-17)*lpoly+(4.34e-25))}
+.param bbn    = {(0)*log(lpoly)*log(lpoly)+(-1.73e+07)*log(lpoly)+(-3.44e+08)}
+.param vara1n = {toxratio*((0)*lpoly*lpoly+(1.84e-25)*lpoly+(9.15e-25))}
+
+gidg d1 g value={(vara1*wpoly*(abs(v(d1,g))+v(d1,g))/2.0*v(d1,g)*exp(-bb*tox*log(1e-18+abs(v(d1,g))))/(tox*tox)+1e-18*v(d1,g))
++ + (vara1n*wpoly*(abs(v(d1,g))-v(d1,g))/2.0*v(d1,g)*exp(-bbn*tox*log(1e-18+abs(v(d1,g))))/(tox*tox)+1e-18*v(d1,g))}
+
+eigd d1 d value={-dvd*(abs(v(d,s))-v(d,s))/2.0}
+
+gisg s1 g value={(vara1*wpoly*(abs(v(s1,g))+v(s1,g))/2.0*v(s1,g)*exp(-bb*tox*log(1e-18+abs(v(s1,g))))/(tox*tox)+1e-18*v(s1,g))
++ + (vara1n*wpoly*(abs(v(s1,g))-v(s1,g))/2.0*v(s1,g)*exp(-bbn*tox*log(1e-18+abs(v(s1,g))))/(tox*tox)+1e-18*v(s1,g))}
+
+eigs s1 s value={-dvd*(abs(v(s,d))-v(s,d))/2.0}
+
+
+
+
+* Equations for GIDL:
+*--------------------
+
+
+
+
+M1 D G S B PCHLEAK w={w/nfing} l=l as={as/nfing} ad={ad/nfing} ps={ps/nfing} pd={pd/nfing}
++          m={number*nfing} nrd={nrd*nfing} nrs={nrs*nfing}
+
+
+
+.MODEL PCHLEAK pmos
++ level=53
++ version=3.2           nqsmod=0              xw=xw                 
++ xl=xl                 wmin=1.5e-07          wmax=1                
++ lmin=1.3e-07          lmax=1e-05            mobmod=1              
++ capmod=3              noimod=2              binunit=1             
++ js=0                  jsw=0                 lint=1.7425e-08       
++ ll=0                  lln=1                 lw=0                  
++ lwn=1                 lwl=0                 wint=-1.8412e-09      
++ wl=0                  wln=1                 ww=0                  
++ wwn=1                 wwl=0                 tnom=27               
++ tox=tox               cj=0                  mj=0.33               
++ cjsw=0                mjsw=0.5              cjswg=0               
++ mjswg=0.5             cgso=7.8103e-11       cgdo=7.8103e-11       
++ cgbo=1e-12            xpart=0               dwg=-1.5e-08          
++ dwb=-1e-08            nch=nch               ngate=1.5e+20         
++ xj=1e-07              u0=u0eff              vth0=vth0eff          
++ k1=k1                 k2=k2                 k3=k3                 
++ lk3=lk3               k3b=k3b               w0=w0                 
++ nlx=nlx               dvt0=dvt0             dvt1=0.48598          
++ dvt2=0.056403         dvt0w=0               dvt1w=5.3e+06         
++ dvt2w=-0.032          ua=-6.7041e-10        ub=1.6607e-18         
++ uc=-1.2397e-10        delta=0.0089901       rdsw=rdsweff          
++ lrdsw=0               wrdsw=0               prwg=0                
++ prwb=prwb             wr=1                  vsat=208650           
++ a0=1.5276             keta=-0.047           lketa=lketa           
++ ags=0.90831           lags=0.25             a1=0.088264           
++ a2=0.10032            b0=1.4584e-06         b1=8.9633e-06         
++ alpha0=0              beta0=30              voff=-0.10095         
++ lvoff=-0.0022237      nfactor=0.48931       cdsc=0.0033969        
++ cdscb=-1.9882e-06     cdscd=0               cit=0                 
++ eta0=0.07143          etab=-0.048492        dsub=0.56             
++ drout=0.56            pclm=1.6877           pdiblc1=1e-07         
++ pdiblc2=0.001         lpdiblc2=0.0017301    pdiblcb=0             
++ pscbe1=1e+15          pscbe2=1e-18          pvag=0                
++ ute=-1.166            at=86000              ua1=-2.28e-10         
++ ub1=0                 uc1=2.5e-10           kt1=-0.217            
++ kt1l=0                kt2=-0.052            prt=51.846            
++ cgsl=cgsl             cgdl=cgdl             ckappa=1.9153         
++ cf=cf                 clc=1e-07             cle=0.6               
++ dlc=2.65e-08          noff=2.1501           voffcv=-0.049345      
++ alpha1=0              acde=0.5              moin=5                
++ llc=0                 lwc=0                 lwlc=0                
++ wlc=0                 wwc=0                 wwlc=0                
++ elm=5                 ef=1                  em=501000             
++ noia=7.05e+18         noib=700000           noic=0
+*  
+* -- JUNCAP Electrical Parameters for S/D regions  (Simulator specific)
++ vr=0                  cjbr={cjbr*(1+dcjb)}  cjsr={cjsr*(1+dcjsw)} 
++ cjgr={cjgr*(1+dcjgate)}  jsdbr={jsdbr*10^djsdbr} 
++ jsdsr={jsdsr*10^djsdsr} jsdgr={jsdgr*10^djsdgr} 
++ jsgbr={jsgbr*10^djsgbr} jsgsr={jsgsr*10^djsgsr} 
++ jsggr={jsggr*10^djsggr}  vdbr=0.62226          vdsr=1.2279           
++ vdgr=1.5037           pb=0.28121            ps=0.15               
++ pg=0.87916             nbj=0.97              nsj=0.93              
++ ngj=1
++ 
++ trdio9=27             diolev=9              dcaplev=0             
++ rlev=1                alev=3
+ 
+
+* + 
+.ends EPLLGP_BS3JULEAK
+
+
+*----------------------------------------------------------------------
+* Family pmosll Model EPLLGP_BS3JURG bsim3 typ mismatch
+* Maturity : Silicon_verified
+*----------------------------------------------------------------------
+.subckt EPLLGP_BS3JURG D G S B
++       param: w=0.15e-6 l=0.13e-6 nfing=1 ncrsd=1 mismatch=1 srcefirst=1
++       wfing={w/nfing+pmosll_xw}
++       fd={srcefirst*(nfing-2*trunc(nfing/2))+(1-srcefirst)*(2*trunc(1+nfing/2)-nfing)}
++       fs={2-fd}
++       ad={wfing*((nfing-fd)*(ncrsd-1)*(0.16e-6+0.18e-6)/4+nfing*(3.8e-07-pmosll_xl)/2+fd*(1.5e-07+pmosll_xw/2))}
++       as={wfing*((nfing-fs)*(ncrsd-1)*(0.16e-6+0.18e-6)/4+nfing*(3.8e-07-pmosll_xl)/2+fs*(1.5e-07+pmosll_xw/2))}
++       pd={(nfing-fd)/2*(ncrsd-1)*(0.16e-6+0.18e-6)+nfing*2*(3.8e-07-pmosll_xl)/2+fd*(wfing+2*1.5e-07+pmosll_xw)}
++       ps={(nfing-fs)/2*(ncrsd-1)*(0.16e-6+0.18e-6)+nfing*2*(3.8e-07-pmosll_xl)/2+fs*(wfing+2*1.5e-07+pmosll_xw)}
++       po2act=-1
++       number=1 nrd=0 nrs=0
++       ngcon=1
+
+
+*
+* invariant parameters:
+*----------------------
+.param conw    = 0.16e-6
+.param cons    = 0.18e-6
+.param coeact  = 0.07e-6
+.param conpo   = 0.11e-6
+
+.param u0_typ  = 61.453
+.param u0s     = 61.453
+.param lint    = 1.7425e-08
+.param lmin    = 0.13e-6
+.param dwu0    = -0.032279
+.param wint    = -1.8412e-09
+
+.param coepo   = 0.07e-6
+.param ncrg    = 2
+
+
+*  
+.param  cjbr   = 0.00090721
+.param  cjgr   = 2.9337e-10
+.param  cjsr   = 3.9129e-11
+.param  jsdbr  = 8.5932e-08
+.param  jsdgr  = 0
+.param  jsdsr  = 5.2166e-15
+.param  jsgbr  = 1.6294e-06
+.param  jsggr  = 2.8654e-11
+.param  jsgsr  = 3.2153e-11
+ 
+
+*
+* variant parameters:
+*--------------------
+.param xl      = pmosll_xl
+.param xw      = pmosll_xw
+.param tox     = pmosll_tox
+.param vth     = pmosll_vth0
+.param nlx     = pmosll_nlx
+.param drdsw   = pmosll_drdsw
+.param dmu     = pmosll_dmu
+
+.param rshg    = pmosll_rshg
+.param rconpo  = pmosll_rconpo
+
+
+.param dcjb    = pmosll_dcjb
+.param dcjgate = pmosll_dcjgate
+.param dcjsw   = pmosll_dcjsw
+.param djsdbr  = pmosll_djsdbr
+.param djsdgr  = pmosll_djsdgr
+.param djsdsr  = pmosll_djsdsr
+.param djsgbr  = pmosll_djsgbr
+.param djsggr  = pmosll_djsggr
+.param djsgsr  = pmosll_djsgsr
+.param prwb    = pmosll_prwb
+
+.param dcfring = pmosll_dcfring
+* effective length and width:
+*----------------------------
+.param we      = {(w/nfing+xw-2*wint)}
+.param le      = {l+xl-2.0*lint}
+* Equations for mismatch deviations:
+*-----------------------------------
+.PARAM dvth0_alpha = valif((w>0.0)&&(w<0.6e-6)&&(l>0.0)&&(l<0.24e-6),3.59e-9,valif((w>0.6e-6)&&(l>0.0)&&(l<0.24e-6),4.53e-9,valif((w>0.0)&&(w<0.6e-6)&&(l>0.24e-6),2.67e-9,2.84e-9)))
+.PARAM dvth0_beta  = valif((w>0.0)&&(w<0.6e-6)&&(l>0.0)&&(l<0.24e-6),0.0,valif((w>0.6e-6)&&(l>0.0)&&(l<0.24e-6),0.0,valif((w>0.0)&&(w<0.6e-6)&&(l>0.24e-6),0.0,0.0)))
+.PARAM dvth0_fudge  = valif((w>0.0)&&(w<0.6e-6)&&(l>0.0)&&(l<0.24e-6),1.25,valif((w>0.6e-6)&&(l>0.0)&&(l<0.24e-6),1.25,valif((w>0.0)&&(w<0.6e-6)&&(l>0.24e-6),1.25,1.25)))
+.PARAM dvth0_sig = {((dvth0_alpha/sqrt(W*L))+dvth0_beta)*dvth0_fudge/sqrt(2.0*number)}
+.PARAM dvth0_dev = 0.0 DEV/gauss = {dvth0_sig*MOSLL_DEV*mismatch}
+.PARAM dbeta_alpha = valif((w>0.0)&&(w<0.6e-6)&&(l>0.0)&&(l<0.24e-6),1.22e-8,valif((w>0.6e-6)&&(l>0.0)&&(l<0.24e-6),1.51e-8,valif((w>0.0)&&(w<0.6e-6)&&(l>0.24e-6),1.07e-8,1.20e-8)))
+.PARAM dbeta_beta  = valif((w>0.0)&&(w<0.6e-6)&&(l>0.0)&&(l<0.24e-6),0.0,valif((w>0.6e-6)&&(l>0.0)&&(l<0.24e-6),0.0,valif((w>0.0)&&(w<0.6e-6)&&(l>0.24e-6),0.0,0.0)))
+.PARAM dbeta_fudge  = valif((w>0.0)&&(w<0.6e-6)&&(l>0.0)&&(l<0.24e-6),1.25,valif((w>0.6e-6)&&(l>0.0)&&(l<0.24e-6),1.25,valif((w>0.0)&&(w<0.6e-6)&&(l>0.24e-6),1.25,1.25)))
+.PARAM dbeta_sig = {((dbeta_alpha/sqrt(W*L))+dbeta_beta)*dbeta_fudge/sqrt(2.0*number)}
+.PARAM dbeta_dev = 0.0 DEV/gauss = {dbeta_sig*MOSLL_DEV*mismatch}
+
+* Mobility model improvement:
+*----------------------------
+.param epsilon2 = 1e-18
+.param llimit = {1000000.0-xl} 
+.param wlimit = {1.8857176e-06-xw} 
+
+.param dwu = {dwu0+(-2)*0.5e6*(abs(le-1.28e-07)-(le-1.28e-07))} 
+
+.param mobility = {2.0/((1.0/u0_typ+1.0/u0s)+(llimit+xl
++ -2.0*lint-sqrt((llimit-l)*(llimit-l)+epsilon2))*(1.0/u0s-1.0/u0_typ)/le)
++ *(w/nfing-2.0*((wint-xw/2.0)*(1.0+2.0*(dwu))-(dwu)*wlimit
++ +(dwu)*0.5*(wlimit-w/nfing)+0.5*(dwu)*sqrt((wlimit-w/nfing)*(wlimit-w/nfing)+epsilon2)))/we}
+.param u0 = {mobility*(1.0+dbeta_dev)*(1+dmu)} 
+* Equations for Threshold voltage vth0 and body factor K1:
+*---------------------------------------------------------
+.param  eg0   =  {1.16-(7.02e-4*((273.15+27)^2)/(27+1381))}
+.param  ni    =  {1.45e10*(((273.15+27)/300.15)^1.5)*exp(21.5565981-eg0/(1.725e-4*(273.15+27)))}
+.param  phis  =  {1.725e-4*(273.15+27)*LOG(1.5598e+18/ni)}
+.param  k2    =  {0*(tox/2.35e-09)}
+
+.param  k1    =  {0.48935+(-0.343-vth)/sqrt(phis)}
+.param  vth0  =  {vth-dvth0_dev} 
+
+.param  nch   =  {1.5598e+18*(2.35e-09*2.35e-09)/(tox*tox)*(k1*k1)/(0.48935*0.48935)}
+
+* Equations for access resistance:
+*---------------------------------
+
+.param  rdsw  =  {314.96*(1+drdsw)}
+
+
+.param vth0eff          = vth0
+.param u0eff            = u0
+
+.param rdsweff          = rdsw
+
+* Equations for fringing capacitance:
+*------------------------------------
+.param  cf    =  dcfring
+* Equations for overlap capacitance:
+*-----------------------------------
+.param  cgsl  =  {2.4766e-10*(2.35e-09/tox)}
+.param  cgdl  =  {2.4766e-10*(2.35e-09/tox)}
+
+* Equations for VT:
+*-----------------
+
+.param  w0    =  {3.2451e-05+(0-xw)}
+
+
+.param k3 = {-206.51*(2.35e-09/tox)}
+.param dvt0 = 1.15
+
+
+.param  k3b   =  {884.66*(2.35e-09/tox)}
+.param  lk3   =  {0*((lmin+xl-(2*lint))*2.35e-09/(lmin+-1.5e-08-(2*lint))/tox)}
+
+
+.param lketaexp = {valif((1.0e-6/le-1.0/0.10665)/0.00034353 > 34, 34, (1.0e-6/le-1.0/0.10665)/0.00034353)}
+.param lketa    = {-0.019385/(1.0+exp(lketaexp))} 
+
+
+
+
+.param xgw    = {cons-coepo-coeact}
+.param xgl    = {-xl}
+.param lhead  = {nfing*l+(nfing-1)*(conw+2*conpo+(ncrsd-1)*(conw+cons))}
+.param nchead = {ncrg*(1+trunc(max(0,(lhead-conw-2*coepo))/(conw+cons)))}
+.param rgeltd = {rshg*(xgw+(w/nfing+xw)/(3*ngcon))/(ngcon*(l-xgl)*nfing)}
+.param rgcon  = {rconpo/(nchead*ngcon)}
+
+RG G Gi {(rgeltd+rgcon)/number}
+M1 D Gi S B PCHRG w={w/nfing} l=l as={as/nfing} ad={ad/nfing} ps={ps/nfing} pd={pd/nfing}
++          m={number*nfing} nrd={nrd*nfing} nrs={nrs*nfing}
+
+
+
+.MODEL PCHRG pmos
++ level=53
++ version=3.2           nqsmod=0              xw=xw                 
++ xl=xl                 wmin=1.5e-07          wmax=1                
++ lmin=1.3e-07          lmax=1e-05            mobmod=1              
++ capmod=3              noimod=2              binunit=1             
++ js=0                  jsw=0                 lint=1.7425e-08       
++ ll=0                  lln=1                 lw=0                  
++ lwn=1                 lwl=0                 wint=-1.8412e-09      
++ wl=0                  wln=1                 ww=0                  
++ wwn=1                 wwl=0                 tnom=27               
++ tox=tox               cj=0                  mj=0.33               
++ cjsw=0                mjsw=0.5              cjswg=0               
++ mjswg=0.5             cgso=7.8103e-11       cgdo=7.8103e-11       
++ cgbo=1e-12            xpart=0               dwg=-1.5e-08          
++ dwb=-1e-08            nch=nch               ngate=1.5e+20         
++ xj=1e-07              u0=u0eff              vth0=vth0eff          
++ k1=k1                 k2=k2                 k3=k3                 
++ lk3=lk3               k3b=k3b               w0=w0                 
++ nlx=nlx               dvt0=dvt0             dvt1=0.48598          
++ dvt2=0.056403         dvt0w=0               dvt1w=5.3e+06         
++ dvt2w=-0.032          ua=-6.7041e-10        ub=1.6607e-18         
++ uc=-1.2397e-10        delta=0.0089901       rdsw=rdsweff          
++ lrdsw=0               wrdsw=0               prwg=0                
++ prwb=prwb             wr=1                  vsat=208650           
++ a0=1.5276             keta=-0.047           lketa=lketa           
++ ags=0.90831           lags=0.25             a1=0.088264           
++ a2=0.10032            b0=1.4584e-06         b1=8.9633e-06         
++ alpha0=0              beta0=30              voff=-0.10095         
++ lvoff=-0.0022237      nfactor=0.48931       cdsc=0.0033969        
++ cdscb=-1.9882e-06     cdscd=0               cit=0                 
++ eta0=0.07143          etab=-0.048492        dsub=0.56             
++ drout=0.56            pclm=1.6877           pdiblc1=1e-07         
++ pdiblc2=0.001         lpdiblc2=0.0017301    pdiblcb=0             
++ pscbe1=1e+15          pscbe2=1e-18          pvag=0                
++ ute=-1.166            at=86000              ua1=-2.28e-10         
++ ub1=0                 uc1=2.5e-10           kt1=-0.217            
++ kt1l=0                kt2=-0.052            prt=51.846            
++ cgsl=cgsl             cgdl=cgdl             ckappa=1.9153         
++ cf=cf                 clc=1e-07             cle=0.6               
++ dlc=2.65e-08          noff=2.1501           voffcv=-0.049345      
++ alpha1=0              acde=0.5              moin=5                
++ llc=0                 lwc=0                 lwlc=0                
++ wlc=0                 wwc=0                 wwlc=0                
++ elm=5                 ef=1                  em=501000             
++ noia=7.05e+18         noib=700000           noic=0
+*  
+* -- JUNCAP Electrical Parameters for S/D regions  (Simulator specific)
++ vr=0                  cjbr={cjbr*(1+dcjb)}  cjsr={cjsr*(1+dcjsw)} 
++ cjgr={cjgr*(1+dcjgate)}  jsdbr={jsdbr*10^djsdbr} 
++ jsdsr={jsdsr*10^djsdsr} jsdgr={jsdgr*10^djsdgr} 
++ jsgbr={jsgbr*10^djsgbr} jsgsr={jsgsr*10^djsgsr} 
++ jsggr={jsggr*10^djsggr}  vdbr=0.62226          vdsr=1.2279           
++ vdgr=1.5037           pb=0.28121            ps=0.15               
++ pg=0.87916             nbj=0.97              nsj=0.93              
++ ngj=1
++ 
++ trdio9=27             diolev=9              dcaplev=0             
++ rlev=1                alev=3
+ 
+
+* + 
+.ends EPLLGP_BS3JURG
+
+
+*----------------------------------------------------------------------
+* Family pmosll Model EPLLGP_BS3NQSJU bsim3 typ mismatch
+* Maturity : Silicon_verified
+*----------------------------------------------------------------------
+.subckt EPLLGP_BS3NQSJU D G S B
++       param: w=0.15e-6 l=0.13e-6 nfing=1 ncrsd=1 mismatch=1 srcefirst=1
++       wfing={w/nfing+pmosll_xw}
++       fd={srcefirst*(nfing-2*trunc(nfing/2))+(1-srcefirst)*(2*trunc(1+nfing/2)-nfing)}
++       fs={2-fd}
++       ad={wfing*((nfing-fd)*(ncrsd-1)*(0.16e-6+0.18e-6)/4+nfing*(3.8e-07-pmosll_xl)/2+fd*(1.5e-07+pmosll_xw/2))}
++       as={wfing*((nfing-fs)*(ncrsd-1)*(0.16e-6+0.18e-6)/4+nfing*(3.8e-07-pmosll_xl)/2+fs*(1.5e-07+pmosll_xw/2))}
++       pd={(nfing-fd)/2*(ncrsd-1)*(0.16e-6+0.18e-6)+nfing*2*(3.8e-07-pmosll_xl)/2+fd*(wfing+2*1.5e-07+pmosll_xw)}
++       ps={(nfing-fs)/2*(ncrsd-1)*(0.16e-6+0.18e-6)+nfing*2*(3.8e-07-pmosll_xl)/2+fs*(wfing+2*1.5e-07+pmosll_xw)}
++       po2act=-1
++       number=1 nrd=0 nrs=0
++       ngcon=1
+
+
+*
+* invariant parameters:
+*----------------------
+.param conw    = 0.16e-6
+.param cons    = 0.18e-6
+.param coeact  = 0.07e-6
+.param conpo   = 0.11e-6
+
+.param u0_typ  = 61.453
+.param u0s     = 61.453
+.param lint    = 1.7425e-08
+.param lmin    = 0.13e-6
+.param dwu0    = -0.032279
+.param wint    = -1.8412e-09
+
+
+*  
+.param  cjbr   = 0.00090721
+.param  cjgr   = 2.9337e-10
+.param  cjsr   = 3.9129e-11
+.param  jsdbr  = 8.5932e-08
+.param  jsdgr  = 0
+.param  jsdsr  = 5.2166e-15
+.param  jsgbr  = 1.6294e-06
+.param  jsggr  = 2.8654e-11
+.param  jsgsr  = 3.2153e-11
+ 
+
+*
+* variant parameters:
+*--------------------
+.param xl      = pmosll_xl
+.param xw      = pmosll_xw
+.param tox     = pmosll_tox
+.param vth     = pmosll_vth0
+.param nlx     = pmosll_nlx
+.param drdsw   = pmosll_drdsw
+.param dmu     = pmosll_dmu
+
+
+.param dcjb    = pmosll_dcjb
+.param dcjgate = pmosll_dcjgate
+.param dcjsw   = pmosll_dcjsw
+.param djsdbr  = pmosll_djsdbr
+.param djsdgr  = pmosll_djsdgr
+.param djsdsr  = pmosll_djsdsr
+.param djsgbr  = pmosll_djsgbr
+.param djsggr  = pmosll_djsggr
+.param djsgsr  = pmosll_djsgsr
+.param prwb    = pmosll_prwb
+
+.param dcfring = pmosll_dcfring
+* effective length and width:
+*----------------------------
+.param we      = {(w/nfing+xw-2*wint)}
+.param le      = {l+xl-2.0*lint}
+* Equations for mismatch deviations:
+*-----------------------------------
+.PARAM dvth0_alpha = valif((w>0.0)&&(w<0.6e-6)&&(l>0.0)&&(l<0.24e-6),3.59e-9,valif((w>0.6e-6)&&(l>0.0)&&(l<0.24e-6),4.53e-9,valif((w>0.0)&&(w<0.6e-6)&&(l>0.24e-6),2.67e-9,2.84e-9)))
+.PARAM dvth0_beta  = valif((w>0.0)&&(w<0.6e-6)&&(l>0.0)&&(l<0.24e-6),0.0,valif((w>0.6e-6)&&(l>0.0)&&(l<0.24e-6),0.0,valif((w>0.0)&&(w<0.6e-6)&&(l>0.24e-6),0.0,0.0)))
+.PARAM dvth0_fudge  = valif((w>0.0)&&(w<0.6e-6)&&(l>0.0)&&(l<0.24e-6),1.25,valif((w>0.6e-6)&&(l>0.0)&&(l<0.24e-6),1.25,valif((w>0.0)&&(w<0.6e-6)&&(l>0.24e-6),1.25,1.25)))
+.PARAM dvth0_sig = {((dvth0_alpha/sqrt(W*L))+dvth0_beta)*dvth0_fudge/sqrt(2.0*number)}
+.PARAM dvth0_dev = 0.0 DEV/gauss = {dvth0_sig*MOSLL_DEV*mismatch}
+.PARAM dbeta_alpha = valif((w>0.0)&&(w<0.6e-6)&&(l>0.0)&&(l<0.24e-6),1.22e-8,valif((w>0.6e-6)&&(l>0.0)&&(l<0.24e-6),1.51e-8,valif((w>0.0)&&(w<0.6e-6)&&(l>0.24e-6),1.07e-8,1.20e-8)))
+.PARAM dbeta_beta  = valif((w>0.0)&&(w<0.6e-6)&&(l>0.0)&&(l<0.24e-6),0.0,valif((w>0.6e-6)&&(l>0.0)&&(l<0.24e-6),0.0,valif((w>0.0)&&(w<0.6e-6)&&(l>0.24e-6),0.0,0.0)))
+.PARAM dbeta_fudge  = valif((w>0.0)&&(w<0.6e-6)&&(l>0.0)&&(l<0.24e-6),1.25,valif((w>0.6e-6)&&(l>0.0)&&(l<0.24e-6),1.25,valif((w>0.0)&&(w<0.6e-6)&&(l>0.24e-6),1.25,1.25)))
+.PARAM dbeta_sig = {((dbeta_alpha/sqrt(W*L))+dbeta_beta)*dbeta_fudge/sqrt(2.0*number)}
+.PARAM dbeta_dev = 0.0 DEV/gauss = {dbeta_sig*MOSLL_DEV*mismatch}
+
+* Mobility model improvement:
+*----------------------------
+.param epsilon2 = 1e-18
+.param llimit = {1000000.0-xl} 
+.param wlimit = {1.8857176e-06-xw} 
+
+.param dwu = {dwu0+(-2)*0.5e6*(abs(le-1.28e-07)-(le-1.28e-07))} 
+
+.param mobility = {2.0/((1.0/u0_typ+1.0/u0s)+(llimit+xl
++ -2.0*lint-sqrt((llimit-l)*(llimit-l)+epsilon2))*(1.0/u0s-1.0/u0_typ)/le)
++ *(w/nfing-2.0*((wint-xw/2.0)*(1.0+2.0*(dwu))-(dwu)*wlimit
++ +(dwu)*0.5*(wlimit-w/nfing)+0.5*(dwu)*sqrt((wlimit-w/nfing)*(wlimit-w/nfing)+epsilon2)))/we}
+.param u0 = {mobility*(1.0+dbeta_dev)*(1+dmu)} 
+* Equations for Threshold voltage vth0 and body factor K1:
+*---------------------------------------------------------
+.param  eg0   =  {1.16-(7.02e-4*((273.15+27)^2)/(27+1381))}
+.param  ni    =  {1.45e10*(((273.15+27)/300.15)^1.5)*exp(21.5565981-eg0/(1.725e-4*(273.15+27)))}
+.param  phis  =  {1.725e-4*(273.15+27)*LOG(1.5598e+18/ni)}
+.param  k2    =  {0*(tox/2.35e-09)}
+
+.param  k1    =  {0.48935+(-0.343-vth)/sqrt(phis)}
+.param  vth0  =  {vth-dvth0_dev} 
+
+.param  nch   =  {1.5598e+18*(2.35e-09*2.35e-09)/(tox*tox)*(k1*k1)/(0.48935*0.48935)}
+
+* Equations for access resistance:
+*---------------------------------
+
+.param  rdsw  =  {314.96*(1+drdsw)}
+
+
+.param vth0eff          = vth0
+.param u0eff            = u0
+
+.param rdsweff          = rdsw
+
+* Equations for fringing capacitance:
+*------------------------------------
+.param  cf    =  dcfring
+* Equations for overlap capacitance:
+*-----------------------------------
+.param  cgsl  =  {2.4766e-10*(2.35e-09/tox)}
+.param  cgdl  =  {2.4766e-10*(2.35e-09/tox)}
+
+* Equations for VT:
+*-----------------
+
+.param  w0    =  {3.2451e-05+(0-xw)}
+
+
+.param k3 = {-206.51*(2.35e-09/tox)}
+.param dvt0 = 1.15
+
+
+.param  k3b   =  {884.66*(2.35e-09/tox)}
+.param  lk3   =  {0*((lmin+xl-(2*lint))*2.35e-09/(lmin+-1.5e-08-(2*lint))/tox)}
+
+
+.param lketaexp = {valif((1.0e-6/le-1.0/0.10665)/0.00034353 > 34, 34, (1.0e-6/le-1.0/0.10665)/0.00034353)}
+.param lketa    = {-0.019385/(1.0+exp(lketaexp))} 
+
+
+
+
+M1 D G S B PCHNQS w={w/nfing} l=l as={as/nfing} ad={ad/nfing} ps={ps/nfing} pd={pd/nfing}
++          m={number*nfing} nrd={nrd*nfing} nrs={nrs*nfing}
+
+
+
+.MODEL PCHNQS pmos
++ level=53
++ version=3.2           nqsmod=1              xw=xw                 
++ xl=xl                 wmin=1.5e-07          wmax=1                
++ lmin=1.3e-07          lmax=1e-05            mobmod=1              
++ capmod=3              noimod=2              binunit=1             
++ js=0                  jsw=0                 lint=1.7425e-08       
++ ll=0                  lln=1                 lw=0                  
++ lwn=1                 lwl=0                 wint=-1.8412e-09      
++ wl=0                  wln=1                 ww=0                  
++ wwn=1                 wwl=0                 tnom=27               
++ tox=tox               cj=0                  mj=0.33               
++ cjsw=0                mjsw=0.5              cjswg=0               
++ mjswg=0.5             cgso=7.8103e-11       cgdo=7.8103e-11       
++ cgbo=1e-12            xpart=0               dwg=-1.5e-08          
++ dwb=-1e-08            nch=nch               ngate=1.5e+20         
++ xj=1e-07              u0=u0eff              vth0=vth0eff          
++ k1=k1                 k2=k2                 k3=k3                 
++ lk3=lk3               k3b=k3b               w0=w0                 
++ nlx=nlx               dvt0=dvt0             dvt1=0.48598          
++ dvt2=0.056403         dvt0w=0               dvt1w=5.3e+06         
++ dvt2w=-0.032          ua=-6.7041e-10        ub=1.6607e-18         
++ uc=-1.2397e-10        delta=0.0089901       rdsw=rdsweff          
++ lrdsw=0               wrdsw=0               prwg=0                
++ prwb=prwb             wr=1                  vsat=208650           
++ a0=1.5276             keta=-0.047           lketa=lketa           
++ ags=0.90831           lags=0.25             a1=0.088264           
++ a2=0.10032            b0=1.4584e-06         b1=8.9633e-06         
++ alpha0=0              beta0=30              voff=-0.10095         
++ lvoff=-0.0022237      nfactor=0.48931       cdsc=0.0033969        
++ cdscb=-1.9882e-06     cdscd=0               cit=0                 
++ eta0=0.07143          etab=-0.048492        dsub=0.56             
++ drout=0.56            pclm=1.6877           pdiblc1=1e-07         
++ pdiblc2=0.001         lpdiblc2=0.0017301    pdiblcb=0             
++ pscbe1=1e+15          pscbe2=1e-18          pvag=0                
++ ute=-1.166            at=86000              ua1=-2.28e-10         
++ ub1=0                 uc1=2.5e-10           kt1=-0.217            
++ kt1l=0                kt2=-0.052            prt=51.846            
++ cgsl=cgsl             cgdl=cgdl             ckappa=1.9153         
++ cf=cf                 clc=1e-07             cle=0.6               
++ dlc=2.65e-08          noff=2.1501           voffcv=-0.049345      
++ alpha1=0              acde=0.5              moin=5                
++ llc=0                 lwc=0                 lwlc=0                
++ wlc=0                 wwc=0                 wwlc=0                
++ elm=5                 ef=1                  em=501000             
++ noia=7.05e+18         noib=700000           noic=0
+*  
+* -- JUNCAP Electrical Parameters for S/D regions  (Simulator specific)
++ vr=0                  cjbr={cjbr*(1+dcjb)}  cjsr={cjsr*(1+dcjsw)} 
++ cjgr={cjgr*(1+dcjgate)}  jsdbr={jsdbr*10^djsdbr} 
++ jsdsr={jsdsr*10^djsdsr} jsdgr={jsdgr*10^djsdgr} 
++ jsgbr={jsgbr*10^djsgbr} jsgsr={jsgsr*10^djsgsr} 
++ jsggr={jsggr*10^djsggr}  vdbr=0.62226          vdsr=1.2279           
++ vdgr=1.5037           pb=0.28121            ps=0.15               
++ pg=0.87916             nbj=0.97              nsj=0.93              
++ ngj=1
++ 
++ trdio9=27             diolev=9              dcaplev=0             
++ rlev=1                alev=3
+ 
+
+* + 
+.ends EPLLGP_BS3NQSJU
+
+
+*----------------------------------------------------------------------
+* Family pmosll Model EPLLGP_BS3NQSJURG bsim3 typ mismatch
+* Maturity : Silicon_verified
+*----------------------------------------------------------------------
+.subckt EPLLGP_BS3NQSJURG D G S B
++       param: w=0.15e-6 l=0.13e-6 nfing=1 ncrsd=1 mismatch=1 srcefirst=1
++       wfing={w/nfing+pmosll_xw}
++       fd={srcefirst*(nfing-2*trunc(nfing/2))+(1-srcefirst)*(2*trunc(1+nfing/2)-nfing)}
++       fs={2-fd}
++       ad={wfing*((nfing-fd)*(ncrsd-1)*(0.16e-6+0.18e-6)/4+nfing*(3.8e-07-pmosll_xl)/2+fd*(1.5e-07+pmosll_xw/2))}
++       as={wfing*((nfing-fs)*(ncrsd-1)*(0.16e-6+0.18e-6)/4+nfing*(3.8e-07-pmosll_xl)/2+fs*(1.5e-07+pmosll_xw/2))}
++       pd={(nfing-fd)/2*(ncrsd-1)*(0.16e-6+0.18e-6)+nfing*2*(3.8e-07-pmosll_xl)/2+fd*(wfing+2*1.5e-07+pmosll_xw)}
++       ps={(nfing-fs)/2*(ncrsd-1)*(0.16e-6+0.18e-6)+nfing*2*(3.8e-07-pmosll_xl)/2+fs*(wfing+2*1.5e-07+pmosll_xw)}
++       po2act=-1
++       number=1 nrd=0 nrs=0
++       ngcon=1
+
+
+*
+* invariant parameters:
+*----------------------
+.param conw    = 0.16e-6
+.param cons    = 0.18e-6
+.param coeact  = 0.07e-6
+.param conpo   = 0.11e-6
+
+.param u0_typ  = 61.453
+.param u0s     = 61.453
+.param lint    = 1.7425e-08
+.param lmin    = 0.13e-6
+.param dwu0    = -0.032279
+.param wint    = -1.8412e-09
+
+.param coepo   = 0.07e-6
+.param ncrg    = 2
+
+
+*  
+.param  cjbr   = 0.00090721
+.param  cjgr   = 2.9337e-10
+.param  cjsr   = 3.9129e-11
+.param  jsdbr  = 8.5932e-08
+.param  jsdgr  = 0
+.param  jsdsr  = 5.2166e-15
+.param  jsgbr  = 1.6294e-06
+.param  jsggr  = 2.8654e-11
+.param  jsgsr  = 3.2153e-11
+ 
+
+*
+* variant parameters:
+*--------------------
+.param xl      = pmosll_xl
+.param xw      = pmosll_xw
+.param tox     = pmosll_tox
+.param vth     = pmosll_vth0
+.param nlx     = pmosll_nlx
+.param drdsw   = pmosll_drdsw
+.param dmu     = pmosll_dmu
+
+.param rshg    = pmosll_rshg
+.param rconpo  = pmosll_rconpo
+
+
+.param dcjb    = pmosll_dcjb
+.param dcjgate = pmosll_dcjgate
+.param dcjsw   = pmosll_dcjsw
+.param djsdbr  = pmosll_djsdbr
+.param djsdgr  = pmosll_djsdgr
+.param djsdsr  = pmosll_djsdsr
+.param djsgbr  = pmosll_djsgbr
+.param djsggr  = pmosll_djsggr
+.param djsgsr  = pmosll_djsgsr
+.param prwb    = pmosll_prwb
+
+.param dcfring = pmosll_dcfring
+* effective length and width:
+*----------------------------
+.param we      = {(w/nfing+xw-2*wint)}
+.param le      = {l+xl-2.0*lint}
+* Equations for mismatch deviations:
+*-----------------------------------
+.PARAM dvth0_alpha = valif((w>0.0)&&(w<0.6e-6)&&(l>0.0)&&(l<0.24e-6),3.59e-9,valif((w>0.6e-6)&&(l>0.0)&&(l<0.24e-6),4.53e-9,valif((w>0.0)&&(w<0.6e-6)&&(l>0.24e-6),2.67e-9,2.84e-9)))
+.PARAM dvth0_beta  = valif((w>0.0)&&(w<0.6e-6)&&(l>0.0)&&(l<0.24e-6),0.0,valif((w>0.6e-6)&&(l>0.0)&&(l<0.24e-6),0.0,valif((w>0.0)&&(w<0.6e-6)&&(l>0.24e-6),0.0,0.0)))
+.PARAM dvth0_fudge  = valif((w>0.0)&&(w<0.6e-6)&&(l>0.0)&&(l<0.24e-6),1.25,valif((w>0.6e-6)&&(l>0.0)&&(l<0.24e-6),1.25,valif((w>0.0)&&(w<0.6e-6)&&(l>0.24e-6),1.25,1.25)))
+.PARAM dvth0_sig = {((dvth0_alpha/sqrt(W*L))+dvth0_beta)*dvth0_fudge/sqrt(2.0*number)}
+.PARAM dvth0_dev = 0.0 DEV/gauss = {dvth0_sig*MOSLL_DEV*mismatch}
+.PARAM dbeta_alpha = valif((w>0.0)&&(w<0.6e-6)&&(l>0.0)&&(l<0.24e-6),1.22e-8,valif((w>0.6e-6)&&(l>0.0)&&(l<0.24e-6),1.51e-8,valif((w>0.0)&&(w<0.6e-6)&&(l>0.24e-6),1.07e-8,1.20e-8)))
+.PARAM dbeta_beta  = valif((w>0.0)&&(w<0.6e-6)&&(l>0.0)&&(l<0.24e-6),0.0,valif((w>0.6e-6)&&(l>0.0)&&(l<0.24e-6),0.0,valif((w>0.0)&&(w<0.6e-6)&&(l>0.24e-6),0.0,0.0)))
+.PARAM dbeta_fudge  = valif((w>0.0)&&(w<0.6e-6)&&(l>0.0)&&(l<0.24e-6),1.25,valif((w>0.6e-6)&&(l>0.0)&&(l<0.24e-6),1.25,valif((w>0.0)&&(w<0.6e-6)&&(l>0.24e-6),1.25,1.25)))
+.PARAM dbeta_sig = {((dbeta_alpha/sqrt(W*L))+dbeta_beta)*dbeta_fudge/sqrt(2.0*number)}
+.PARAM dbeta_dev = 0.0 DEV/gauss = {dbeta_sig*MOSLL_DEV*mismatch}
+
+* Mobility model improvement:
+*----------------------------
+.param epsilon2 = 1e-18
+.param llimit = {1000000.0-xl} 
+.param wlimit = {1.8857176e-06-xw} 
+
+.param dwu = {dwu0+(-2)*0.5e6*(abs(le-1.28e-07)-(le-1.28e-07))} 
+
+.param mobility = {2.0/((1.0/u0_typ+1.0/u0s)+(llimit+xl
++ -2.0*lint-sqrt((llimit-l)*(llimit-l)+epsilon2))*(1.0/u0s-1.0/u0_typ)/le)
++ *(w/nfing-2.0*((wint-xw/2.0)*(1.0+2.0*(dwu))-(dwu)*wlimit
++ +(dwu)*0.5*(wlimit-w/nfing)+0.5*(dwu)*sqrt((wlimit-w/nfing)*(wlimit-w/nfing)+epsilon2)))/we}
+.param u0 = {mobility*(1.0+dbeta_dev)*(1+dmu)} 
+* Equations for Threshold voltage vth0 and body factor K1:
+*---------------------------------------------------------
+.param  eg0   =  {1.16-(7.02e-4*((273.15+27)^2)/(27+1381))}
+.param  ni    =  {1.45e10*(((273.15+27)/300.15)^1.5)*exp(21.5565981-eg0/(1.725e-4*(273.15+27)))}
+.param  phis  =  {1.725e-4*(273.15+27)*LOG(1.5598e+18/ni)}
+.param  k2    =  {0*(tox/2.35e-09)}
+
+.param  k1    =  {0.48935+(-0.343-vth)/sqrt(phis)}
+.param  vth0  =  {vth-dvth0_dev} 
+
+.param  nch   =  {1.5598e+18*(2.35e-09*2.35e-09)/(tox*tox)*(k1*k1)/(0.48935*0.48935)}
+
+* Equations for access resistance:
+*---------------------------------
+
+.param  rdsw  =  {314.96*(1+drdsw)}
+
+
+.param vth0eff          = vth0
+.param u0eff            = u0
+
+.param rdsweff          = rdsw
+
+* Equations for fringing capacitance:
+*------------------------------------
+.param  cf    =  dcfring
+* Equations for overlap capacitance:
+*-----------------------------------
+.param  cgsl  =  {2.4766e-10*(2.35e-09/tox)}
+.param  cgdl  =  {2.4766e-10*(2.35e-09/tox)}
+
+* Equations for VT:
+*-----------------
+
+.param  w0    =  {3.2451e-05+(0-xw)}
+
+
+.param k3 = {-206.51*(2.35e-09/tox)}
+.param dvt0 = 1.15
+
+
+.param  k3b   =  {884.66*(2.35e-09/tox)}
+.param  lk3   =  {0*((lmin+xl-(2*lint))*2.35e-09/(lmin+-1.5e-08-(2*lint))/tox)}
+
+
+.param lketaexp = {valif((1.0e-6/le-1.0/0.10665)/0.00034353 > 34, 34, (1.0e-6/le-1.0/0.10665)/0.00034353)}
+.param lketa    = {-0.019385/(1.0+exp(lketaexp))} 
+
+
+
+
+.param xgw    = {cons-coepo-coeact}
+.param xgl    = {-xl}
+.param lhead  = {nfing*l+(nfing-1)*(conw+2*conpo+(ncrsd-1)*(conw+cons))}
+.param nchead = {ncrg*(1+trunc(max(0,(lhead-conw-2*coepo))/(conw+cons)))}
+.param rgeltd = {rshg*(xgw+(w/nfing+xw)/(3*ngcon))/(ngcon*(l-xgl)*nfing)}
+.param rgcon  = {rconpo/(nchead*ngcon)}
+
+RG G Gi {(rgeltd+rgcon)/number}
+M1 D Gi S B PCHNQSRG w={w/nfing} l=l as={as/nfing} ad={ad/nfing} ps={ps/nfing} pd={pd/nfing}
++          m={number*nfing} nrd={nrd*nfing} nrs={nrs*nfing}
+
+
+
+.MODEL PCHNQSRG pmos
++ level=53
++ version=3.2           nqsmod=1              xw=xw                 
++ xl=xl                 wmin=1.5e-07          wmax=1                
++ lmin=1.3e-07          lmax=1e-05            mobmod=1              
++ capmod=3              noimod=2              binunit=1             
++ js=0                  jsw=0                 lint=1.7425e-08       
++ ll=0                  lln=1                 lw=0                  
++ lwn=1                 lwl=0                 wint=-1.8412e-09      
++ wl=0                  wln=1                 ww=0                  
++ wwn=1                 wwl=0                 tnom=27               
++ tox=tox               cj=0                  mj=0.33               
++ cjsw=0                mjsw=0.5              cjswg=0               
++ mjswg=0.5             cgso=7.8103e-11       cgdo=7.8103e-11       
++ cgbo=1e-12            xpart=0               dwg=-1.5e-08          
++ dwb=-1e-08            nch=nch               ngate=1.5e+20         
++ xj=1e-07              u0=u0eff              vth0=vth0eff          
++ k1=k1                 k2=k2                 k3=k3                 
++ lk3=lk3               k3b=k3b               w0=w0                 
++ nlx=nlx               dvt0=dvt0             dvt1=0.48598          
++ dvt2=0.056403         dvt0w=0               dvt1w=5.3e+06         
++ dvt2w=-0.032          ua=-6.7041e-10        ub=1.6607e-18         
++ uc=-1.2397e-10        delta=0.0089901       rdsw=rdsweff          
++ lrdsw=0               wrdsw=0               prwg=0                
++ prwb=prwb             wr=1                  vsat=208650           
++ a0=1.5276             keta=-0.047           lketa=lketa           
++ ags=0.90831           lags=0.25             a1=0.088264           
++ a2=0.10032            b0=1.4584e-06         b1=8.9633e-06         
++ alpha0=0              beta0=30              voff=-0.10095         
++ lvoff=-0.0022237      nfactor=0.48931       cdsc=0.0033969        
++ cdscb=-1.9882e-06     cdscd=0               cit=0                 
++ eta0=0.07143          etab=-0.048492        dsub=0.56             
++ drout=0.56            pclm=1.6877           pdiblc1=1e-07         
++ pdiblc2=0.001         lpdiblc2=0.0017301    pdiblcb=0             
++ pscbe1=1e+15          pscbe2=1e-18          pvag=0                
++ ute=-1.166            at=86000              ua1=-2.28e-10         
++ ub1=0                 uc1=2.5e-10           kt1=-0.217            
++ kt1l=0                kt2=-0.052            prt=51.846            
++ cgsl=cgsl             cgdl=cgdl             ckappa=1.9153         
++ cf=cf                 clc=1e-07             cle=0.6               
++ dlc=2.65e-08          noff=2.1501           voffcv=-0.049345      
++ alpha1=0              acde=0.5              moin=5                
++ llc=0                 lwc=0                 lwlc=0                
++ wlc=0                 wwc=0                 wwlc=0                
++ elm=5                 ef=1                  em=501000             
++ noia=7.05e+18         noib=700000           noic=0
+*  
+* -- JUNCAP Electrical Parameters for S/D regions  (Simulator specific)
++ vr=0                  cjbr={cjbr*(1+dcjb)}  cjsr={cjsr*(1+dcjsw)} 
++ cjgr={cjgr*(1+dcjgate)}  jsdbr={jsdbr*10^djsdbr} 
++ jsdsr={jsdsr*10^djsdsr} jsdgr={jsdgr*10^djsdgr} 
++ jsgbr={jsgbr*10^djsgbr} jsgsr={jsgsr*10^djsgsr} 
++ jsggr={jsggr*10^djsggr}  vdbr=0.62226          vdsr=1.2279           
++ vdgr=1.5037           pb=0.28121            ps=0.15               
++ pg=0.87916             nbj=0.97              nsj=0.93              
++ ngj=1
++ 
++ trdio9=27             diolev=9              dcaplev=0             
++ rlev=1                alev=3
+ 
+
+* + 
+.ends EPLLGP_BS3NQSJURG
+
+.endl mosll_MODEL
+

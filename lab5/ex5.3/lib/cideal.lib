@@ -1,0 +1,841 @@
+
+
+.lib cnat_typ
+
+*----------------------------------------------------------------------
+*                         IDEAL CAPACITOR
+*----------------------------------------------------------------------
+* TEMPLATE   : cideal_eldoN.t,v 1.1 2002/04/03 14:44:41
+* PARAMETERS : cideal.dds,v 1.1 2002/03/27 13:39:41
+* TRANSLATOR : ddspp.tcl,v 1.47 2001/09/11 08:03:16
+* Translated by re11 on June 14, 2002
+* ----------------------------------------------------------------------
+* (C) Copyright STMicroelectronics (2002)
+*     Unauthorized Reproduction and Communication Strictly Prohibited.
+* ----------------------------------------------------------------------
+*----------------------------------------------------------------------
+
+
+.subckt CNATM1_CWBLK PLUS MINUS B  param: c=0.0 w=0.0 l=0 mismatch=1
+*----------------------------------------------------------------------
+* Family cnat Model CNATM1_CWBLK typ
+* Maturity : tentative
+*----------------------------------------------------------------------
+
+.param ca=8.656478459e-05 cap=4.206235955e-05 cf0=2.90159044e-11 cf0p=4.354358653e-11
+.param dw=0.0 dl=0.0 dw_typ=0.0 dl_typ=0.0
+.param cf0_typ=2.90159044e-11 ca_typ=8.656478459e-05
+.param we={w-(0.0)}
+.param lc = {0.0+(c-2*cf0_typ*we)/(ca_typ*we+2*cf0_typ)}
+Cc PLUS MINUS {ca*(w+dw)*(lc+dl)+2.0*cf0*(w+lc+dw+dl)}
+Cp MINUS B {cap*(w+dw)*(lc+dl)+2.0*cf0p*(w+lc+dw+dl)}
+.ends CNATM1_CWBLK
+
+.subckt CNATM1_CWNOB PLUS MINUS B  param: c=0.0 w=0.0 l=0 mismatch=1
+*----------------------------------------------------------------------
+* Family cnat Model CNATM1_CWNOB typ
+* Maturity : tentative
+*----------------------------------------------------------------------
+
+.param ca=8.656478459e-05 cap=4.206235955e-05 cf0=2.90159044e-11 cf0p=4.354358653e-11
+.param dw=0.0 dl=0.0 dw_typ=0.0 dl_typ=0.0
+.param cf0_typ=2.90159044e-11 ca_typ=8.656478459e-05
+.param we={w-(0.0)}
+.param lc = {0.0+(c-2*cf0_typ*we)/(ca_typ*we+2*cf0_typ)}
+Cc PLUS MINUS {ca*(w+dw)*(lc+dl)+2.0*cf0*(w+lc+dw+dl)}
+.ends CNATM1_CWNOB
+
+.subckt CNATM2_CWBLK PLUS MINUS B  param: c=0.0 w=0.0 l=0 mismatch=1
+*----------------------------------------------------------------------
+* Family cnat Model CNATM2_CWBLK typ
+* Maturity : tentative
+*----------------------------------------------------------------------
+
+.param ca=8.656478459e-05 cap=2.1732081e-05 cf0=2.782339876e-11 cf0p=3.717051454e-11
+.param dw=0.0 dl=0.0 dw_typ=0.0 dl_typ=0.0
+.param cf0_typ=2.782339876e-11 ca_typ=8.656478459e-05
+.param we={w-(0.0)}
+.param lc = {0.0+(c-2*cf0_typ*we)/(ca_typ*we+2*cf0_typ)}
+Cc PLUS MINUS {ca*(w+dw)*(lc+dl)+2.0*cf0*(w+lc+dw+dl)}
+Cp MINUS B {cap*(w+dw)*(lc+dl)+2.0*cf0p*(w+lc+dw+dl)}
+.ends CNATM2_CWBLK
+
+.subckt CNATM2_CWNOB PLUS MINUS B  param: c=0.0 w=0.0 l=0 mismatch=1
+*----------------------------------------------------------------------
+* Family cnat Model CNATM2_CWNOB typ
+* Maturity : tentative
+*----------------------------------------------------------------------
+
+.param ca=8.656478459e-05 cap=2.1732081e-05 cf0=2.782339876e-11 cf0p=3.717051454e-11
+.param dw=0.0 dl=0.0 dw_typ=0.0 dl_typ=0.0
+.param cf0_typ=2.782339876e-11 ca_typ=8.656478459e-05
+.param we={w-(0.0)}
+.param lc = {0.0+(c-2*cf0_typ*we)/(ca_typ*we+2*cf0_typ)}
+Cc PLUS MINUS {ca*(w+dw)*(lc+dl)+2.0*cf0*(w+lc+dw+dl)}
+.ends CNATM2_CWNOB
+
+.subckt CNATM3_CWBLK PLUS MINUS B  param: c=0.0 w=0.0 l=0 mismatch=1
+*----------------------------------------------------------------------
+* Family cnat Model CNATM3_CWBLK typ
+* Maturity : tentative
+*----------------------------------------------------------------------
+
+.param ca=8.656478459e-05 cap=1.465080869e-05 cf0=2.782339876e-11 cf0p=3.614589716e-11
+.param dw=0.0 dl=0.0 dw_typ=0.0 dl_typ=0.0
+.param cf0_typ=2.782339876e-11 ca_typ=8.656478459e-05
+.param we={w-(0.0)}
+.param lc = {0.0+(c-2*cf0_typ*we)/(ca_typ*we+2*cf0_typ)}
+Cc PLUS MINUS {ca*(w+dw)*(lc+dl)+2.0*cf0*(w+lc+dw+dl)}
+Cp MINUS B {cap*(w+dw)*(lc+dl)+2.0*cf0p*(w+lc+dw+dl)}
+.ends CNATM3_CWBLK
+
+.subckt CNATM3_CWNOB PLUS MINUS B  param: c=0.0 w=0.0 l=0 mismatch=1
+*----------------------------------------------------------------------
+* Family cnat Model CNATM3_CWNOB typ
+* Maturity : tentative
+*----------------------------------------------------------------------
+
+.param ca=8.656478459e-05 cap=1.465080869e-05 cf0=2.782339876e-11 cf0p=3.614589716e-11
+.param dw=0.0 dl=0.0 dw_typ=0.0 dl_typ=0.0
+.param cf0_typ=2.782339876e-11 ca_typ=8.656478459e-05
+.param we={w-(0.0)}
+.param lc = {0.0+(c-2*cf0_typ*we)/(ca_typ*we+2*cf0_typ)}
+Cc PLUS MINUS {ca*(w+dw)*(lc+dl)+2.0*cf0*(w+lc+dw+dl)}
+.ends CNATM3_CWNOB
+
+.subckt CNATM4_CWBLK PLUS MINUS B  param: c=0.0 w=0.0 l=0 mismatch=1
+*----------------------------------------------------------------------
+* Family cnat Model CNATM4_CWBLK typ
+* Maturity : tentative
+*----------------------------------------------------------------------
+
+.param ca=8.656478459e-05 cap=1.105017378e-05 cf0=2.782339876e-11 cf0p=3.559025079e-11
+.param dw=0.0 dl=0.0 dw_typ=0.0 dl_typ=0.0
+.param cf0_typ=2.782339876e-11 ca_typ=8.656478459e-05
+.param we={w-(0.0)}
+.param lc = {0.0+(c-2*cf0_typ*we)/(ca_typ*we+2*cf0_typ)}
+Cc PLUS MINUS {ca*(w+dw)*(lc+dl)+2.0*cf0*(w+lc+dw+dl)}
+Cp MINUS B {cap*(w+dw)*(lc+dl)+2.0*cf0p*(w+lc+dw+dl)}
+.ends CNATM4_CWBLK
+
+.subckt CNATM4_CWNOB PLUS MINUS B  param: c=0.0 w=0.0 l=0 mismatch=1
+*----------------------------------------------------------------------
+* Family cnat Model CNATM4_CWNOB typ
+* Maturity : tentative
+*----------------------------------------------------------------------
+
+.param ca=8.656478459e-05 cap=1.105017378e-05 cf0=2.782339876e-11 cf0p=3.559025079e-11
+.param dw=0.0 dl=0.0 dw_typ=0.0 dl_typ=0.0
+.param cf0_typ=2.782339876e-11 ca_typ=8.656478459e-05
+.param we={w-(0.0)}
+.param lc = {0.0+(c-2*cf0_typ*we)/(ca_typ*we+2*cf0_typ)}
+Cc PLUS MINUS {ca*(w+dw)*(lc+dl)+2.0*cf0*(w+lc+dw+dl)}
+.ends CNATM4_CWNOB
+
+.subckt CNATM5_CWBLK PLUS MINUS B  param: c=0.0 w=0.0 l=0 mismatch=1
+*----------------------------------------------------------------------
+* Family cnat Model CNATM5_CWBLK typ
+* Maturity : tentative
+*----------------------------------------------------------------------
+
+.param ca=5.984436494e-05 cap=8.870201482e-06 cf0=2.782339876e-11 cf0p=3.524173791e-11
+.param dw=0.0 dl=0.0 dw_typ=0.0 dl_typ=0.0
+.param cf0_typ=2.782339876e-11 ca_typ=5.984436494e-05
+.param we={w-(0.0)}
+.param lc = {0.0+(c-2*cf0_typ*we)/(ca_typ*we+2*cf0_typ)}
+Cc PLUS MINUS {ca*(w+dw)*(lc+dl)+2.0*cf0*(w+lc+dw+dl)}
+Cp MINUS B {cap*(w+dw)*(lc+dl)+2.0*cf0p*(w+lc+dw+dl)}
+.ends CNATM5_CWBLK
+
+.subckt CNATM5_CWNOB PLUS MINUS B  param: c=0.0 w=0.0 l=0 mismatch=1
+*----------------------------------------------------------------------
+* Family cnat Model CNATM5_CWNOB typ
+* Maturity : tentative
+*----------------------------------------------------------------------
+
+.param ca=5.984436494e-05 cap=8.870201482e-06 cf0=2.782339876e-11 cf0p=3.524173791e-11
+.param dw=0.0 dl=0.0 dw_typ=0.0 dl_typ=0.0
+.param cf0_typ=2.782339876e-11 ca_typ=5.984436494e-05
+.param we={w-(0.0)}
+.param lc = {0.0+(c-2*cf0_typ*we)/(ca_typ*we+2*cf0_typ)}
+Cc PLUS MINUS {ca*(w+dw)*(lc+dl)+2.0*cf0*(w+lc+dw+dl)}
+.ends CNATM5_CWNOB
+
+.subckt CNATM1_WLBLK PLUS MINUS B  param: w=0.0 l=0.0 c=0 mismatch=1
+*----------------------------------------------------------------------
+* Family cnat Model CNATM1_WLBLK typ
+* Maturity : tentative
+*----------------------------------------------------------------------
+
+.param ca=8.656478459e-05 cap=4.206235955e-05 cf0=2.90159044e-11 cf0p=4.354358653e-11
+.param dw=0.0 dl=0.0
+Cc PLUS MINUS {ca*(w+dw)*(l+dl)+2.0*cf0*(w+l+dw+dl)}
+Cp MINUS B {cap*(w+dw)*(l+dl)+2.0*cf0p*(w+l+dw+dl)}
+.ends CNATM1_WLBLK
+
+.subckt CNATM1_WLNOB PLUS MINUS B  param: w=0.0 l=0.0 c=0 mismatch=1
+*----------------------------------------------------------------------
+* Family cnat Model CNATM1_WLNOB typ
+* Maturity : tentative
+*----------------------------------------------------------------------
+
+.param ca=8.656478459e-05  cf0=2.90159044e-11
+.param dw=0.0 dl=0.0
+Cc PLUS MINUS {ca*(w+dw)*(l+dl)+2.0*cf0*(w+l+dw+dl)}
+.ends CNATM1_WLNOB
+
+.subckt CNATM2_WLBLK PLUS MINUS B  param: w=0.0 l=0.0 c=0 mismatch=1
+*----------------------------------------------------------------------
+* Family cnat Model CNATM2_WLBLK typ
+* Maturity : tentative
+*----------------------------------------------------------------------
+
+.param ca=8.656478459e-05 cap=2.1732081e-05 cf0=2.782339876e-11 cf0p=3.717051454e-11
+.param dw=0.0 dl=0.0
+Cc PLUS MINUS {ca*(w+dw)*(l+dl)+2.0*cf0*(w+l+dw+dl)}
+Cp MINUS B {cap*(w+dw)*(l+dl)+2.0*cf0p*(w+l+dw+dl)}
+.ends CNATM2_WLBLK
+
+.subckt CNATM2_WLNOB PLUS MINUS B  param: w=0.0 l=0.0 c=0 mismatch=1
+*----------------------------------------------------------------------
+* Family cnat Model CNATM2_WLNOB typ
+* Maturity : tentative
+*----------------------------------------------------------------------
+
+.param ca=8.656478459e-05  cf0=2.782339876e-11
+.param dw=0.0 dl=0.0
+Cc PLUS MINUS {ca*(w+dw)*(l+dl)+2.0*cf0*(w+l+dw+dl)}
+.ends CNATM2_WLNOB
+
+.subckt CNATM3_WLBLK PLUS MINUS B  param: w=0.0 l=0.0 c=0 mismatch=1
+*----------------------------------------------------------------------
+* Family cnat Model CNATM3_WLBLK typ
+* Maturity : tentative
+*----------------------------------------------------------------------
+
+.param ca=8.656478459e-05 cap=1.465080869e-05 cf0=2.782339876e-11 cf0p=3.614589716e-11
+.param dw=0.0 dl=0.0
+Cc PLUS MINUS {ca*(w+dw)*(l+dl)+2.0*cf0*(w+l+dw+dl)}
+Cp MINUS B {cap*(w+dw)*(l+dl)+2.0*cf0p*(w+l+dw+dl)}
+.ends CNATM3_WLBLK
+
+.subckt CNATM3_WLNOB PLUS MINUS B  param: w=0.0 l=0.0 c=0 mismatch=1
+*----------------------------------------------------------------------
+* Family cnat Model CNATM3_WLNOB typ
+* Maturity : tentative
+*----------------------------------------------------------------------
+
+.param ca=8.656478459e-05  cf0=2.782339876e-11
+.param dw=0.0 dl=0.0
+Cc PLUS MINUS {ca*(w+dw)*(l+dl)+2.0*cf0*(w+l+dw+dl)}
+.ends CNATM3_WLNOB
+
+.subckt CNATM4_WLBLK PLUS MINUS B  param: w=0.0 l=0.0 c=0 mismatch=1
+*----------------------------------------------------------------------
+* Family cnat Model CNATM4_WLBLK typ
+* Maturity : tentative
+*----------------------------------------------------------------------
+
+.param ca=8.656478459e-05 cap=1.105017378e-05 cf0=2.782339876e-11 cf0p=3.559025079e-11
+.param dw=0.0 dl=0.0
+Cc PLUS MINUS {ca*(w+dw)*(l+dl)+2.0*cf0*(w+l+dw+dl)}
+Cp MINUS B {cap*(w+dw)*(l+dl)+2.0*cf0p*(w+l+dw+dl)}
+.ends CNATM4_WLBLK
+
+.subckt CNATM4_WLNOB PLUS MINUS B  param: w=0.0 l=0.0 c=0 mismatch=1
+*----------------------------------------------------------------------
+* Family cnat Model CNATM4_WLNOB typ
+* Maturity : tentative
+*----------------------------------------------------------------------
+
+.param ca=8.656478459e-05  cf0=2.782339876e-11
+.param dw=0.0 dl=0.0
+Cc PLUS MINUS {ca*(w+dw)*(l+dl)+2.0*cf0*(w+l+dw+dl)}
+.ends CNATM4_WLNOB
+
+.subckt CNATM5_WLBLK PLUS MINUS B  param: w=0.0 l=0.0 c=0 mismatch=1
+*----------------------------------------------------------------------
+* Family cnat Model CNATM5_WLBLK typ
+* Maturity : tentative
+*----------------------------------------------------------------------
+
+.param ca=5.984436494e-05 cap=8.870201482e-06 cf0=2.782339876e-11 cf0p=3.524173791e-11
+.param dw=0.0 dl=0.0
+Cc PLUS MINUS {ca*(w+dw)*(l+dl)+2.0*cf0*(w+l+dw+dl)}
+Cp MINUS B {cap*(w+dw)*(l+dl)+2.0*cf0p*(w+l+dw+dl)}
+.ends CNATM5_WLBLK
+
+.subckt CNATM5_WLNOB PLUS MINUS B  param: w=0.0 l=0.0 c=0 mismatch=1
+*----------------------------------------------------------------------
+* Family cnat Model CNATM5_WLNOB typ
+* Maturity : tentative
+*----------------------------------------------------------------------
+
+.param ca=5.984436494e-05  cf0=2.782339876e-11
+.param dw=0.0 dl=0.0
+Cc PLUS MINUS {ca*(w+dw)*(l+dl)+2.0*cf0*(w+l+dw+dl)}
+.ends CNATM5_WLNOB
+
+
+.endl cnat_typ
+
+
+.lib cnat_cmin
+
+*----------------------------------------------------------------------
+*                         IDEAL CAPACITOR
+*----------------------------------------------------------------------
+* TEMPLATE   : cideal_eldoN.t,v 1.1 2002/04/03 14:44:41
+* PARAMETERS : cideal.dds,v 1.1 2002/03/27 13:39:41
+* TRANSLATOR : ddspp.tcl,v 1.47 2001/09/11 08:03:16
+* Translated by re11 on June 14, 2002
+* ----------------------------------------------------------------------
+* (C) Copyright STMicroelectronics (2002)
+*     Unauthorized Reproduction and Communication Strictly Prohibited.
+* ----------------------------------------------------------------------
+*----------------------------------------------------------------------
+
+
+.subckt CNATM1_CWBLK PLUS MINUS B  param: c=0.0 w=0.0 l=0 mismatch=1
+*----------------------------------------------------------------------
+* Family cnat Model CNATM1_CWBLK cmin
+* Maturity : tentative
+*----------------------------------------------------------------------
+
+.param ca=7.401214521e-05 cap=3.597854954e-05 cf0=2.729063441e-11 cf0p=4.124492623e-11
+.param dw=-20e-9 dl=-20e-9 dw_typ=0.0 dl_typ=0.0
+.param cf0_typ=2.90159044e-11 ca_typ=8.656478459e-05
+.param we={w-(0.0)}
+.param lc = {0.0+(c-2*cf0_typ*we)/(ca_typ*we+2*cf0_typ)}
+Cc PLUS MINUS {ca*(w+dw)*(lc+dl)+2.0*cf0*(w+lc+dw+dl)}
+Cp MINUS B {cap*(w+dw)*(lc+dl)+2.0*cf0p*(w+lc+dw+dl)}
+.ends CNATM1_CWBLK
+
+.subckt CNATM1_CWNOB PLUS MINUS B  param: c=0.0 w=0.0 l=0 mismatch=1
+*----------------------------------------------------------------------
+* Family cnat Model CNATM1_CWNOB cmin
+* Maturity : tentative
+*----------------------------------------------------------------------
+
+.param ca=7.401214521e-05 cap=3.597854954e-05 cf0=2.729063441e-11 cf0p=4.124492623e-11
+.param dw=-20e-9 dl=-20e-9 dw_typ=0.0 dl_typ=0.0
+.param cf0_typ=2.90159044e-11 ca_typ=8.656478459e-05
+.param we={w-(0.0)}
+.param lc = {0.0+(c-2*cf0_typ*we)/(ca_typ*we+2*cf0_typ)}
+Cc PLUS MINUS {ca*(w+dw)*(lc+dl)+2.0*cf0*(w+lc+dw+dl)}
+.ends CNATM1_CWNOB
+
+.subckt CNATM2_CWBLK PLUS MINUS B  param: c=0.0 w=0.0 l=0 mismatch=1
+*----------------------------------------------------------------------
+* Family cnat Model CNATM2_CWBLK cmin
+* Maturity : tentative
+*----------------------------------------------------------------------
+
+.param ca=7.401214521e-05 cap=1.83525607e-05 cf0=2.616903451e-11 cf0p=3.497304203e-11
+.param dw=-20e-9 dl=-20e-9 dw_typ=0.0 dl_typ=0.0
+.param cf0_typ=2.782339876e-11 ca_typ=8.656478459e-05
+.param we={w-(0.0)}
+.param lc = {0.0+(c-2*cf0_typ*we)/(ca_typ*we+2*cf0_typ)}
+Cc PLUS MINUS {ca*(w+dw)*(lc+dl)+2.0*cf0*(w+lc+dw+dl)}
+Cp MINUS B {cap*(w+dw)*(lc+dl)+2.0*cf0p*(w+lc+dw+dl)}
+.ends CNATM2_CWBLK
+
+.subckt CNATM2_CWNOB PLUS MINUS B  param: c=0.0 w=0.0 l=0 mismatch=1
+*----------------------------------------------------------------------
+* Family cnat Model CNATM2_CWNOB cmin
+* Maturity : tentative
+*----------------------------------------------------------------------
+
+.param ca=7.401214521e-05 cap=1.83525607e-05 cf0=2.616903451e-11 cf0p=3.497304203e-11
+.param dw=-20e-9 dl=-20e-9 dw_typ=0.0 dl_typ=0.0
+.param cf0_typ=2.782339876e-11 ca_typ=8.656478459e-05
+.param we={w-(0.0)}
+.param lc = {0.0+(c-2*cf0_typ*we)/(ca_typ*we+2*cf0_typ)}
+Cc PLUS MINUS {ca*(w+dw)*(lc+dl)+2.0*cf0*(w+lc+dw+dl)}
+.ends CNATM2_CWNOB
+
+.subckt CNATM3_CWBLK PLUS MINUS B  param: c=0.0 w=0.0 l=0 mismatch=1
+*----------------------------------------------------------------------
+* Family cnat Model CNATM3_CWBLK cmin
+* Maturity : tentative
+*----------------------------------------------------------------------
+
+.param ca=7.401214521e-05 cap=1.231795915e-05 cf0=2.616903451e-11 cf0p=3.399565554e-11
+.param dw=-20e-9 dl=-20e-9 dw_typ=0.0 dl_typ=0.0
+.param cf0_typ=2.782339876e-11 ca_typ=8.656478459e-05
+.param we={w-(0.0)}
+.param lc = {0.0+(c-2*cf0_typ*we)/(ca_typ*we+2*cf0_typ)}
+Cc PLUS MINUS {ca*(w+dw)*(lc+dl)+2.0*cf0*(w+lc+dw+dl)}
+Cp MINUS B {cap*(w+dw)*(lc+dl)+2.0*cf0p*(w+lc+dw+dl)}
+.ends CNATM3_CWBLK
+
+.subckt CNATM3_CWNOB PLUS MINUS B  param: c=0.0 w=0.0 l=0 mismatch=1
+*----------------------------------------------------------------------
+* Family cnat Model CNATM3_CWNOB cmin
+* Maturity : tentative
+*----------------------------------------------------------------------
+
+.param ca=7.401214521e-05 cap=1.231795915e-05 cf0=2.616903451e-11 cf0p=3.399565554e-11
+.param dw=-20e-9 dl=-20e-9 dw_typ=0.0 dl_typ=0.0
+.param cf0_typ=2.782339876e-11 ca_typ=8.656478459e-05
+.param we={w-(0.0)}
+.param lc = {0.0+(c-2*cf0_typ*we)/(ca_typ*we+2*cf0_typ)}
+Cc PLUS MINUS {ca*(w+dw)*(lc+dl)+2.0*cf0*(w+lc+dw+dl)}
+.ends CNATM3_CWNOB
+
+.subckt CNATM4_CWBLK PLUS MINUS B  param: c=0.0 w=0.0 l=0 mismatch=1
+*----------------------------------------------------------------------
+* Family cnat Model CNATM4_CWBLK cmin
+* Maturity : tentative
+*----------------------------------------------------------------------
+
+.param ca=7.401214521e-05 cap=9.269881044e-06 cf0=2.616903451e-11 cf0p=3.34664074e-11
+.param dw=-20e-9 dl=-20e-9 dw_typ=0.0 dl_typ=0.0
+.param cf0_typ=2.782339876e-11 ca_typ=8.656478459e-05
+.param we={w-(0.0)}
+.param lc = {0.0+(c-2*cf0_typ*we)/(ca_typ*we+2*cf0_typ)}
+Cc PLUS MINUS {ca*(w+dw)*(lc+dl)+2.0*cf0*(w+lc+dw+dl)}
+Cp MINUS B {cap*(w+dw)*(lc+dl)+2.0*cf0p*(w+lc+dw+dl)}
+.ends CNATM4_CWBLK
+
+.subckt CNATM4_CWNOB PLUS MINUS B  param: c=0.0 w=0.0 l=0 mismatch=1
+*----------------------------------------------------------------------
+* Family cnat Model CNATM4_CWNOB cmin
+* Maturity : tentative
+*----------------------------------------------------------------------
+
+.param ca=7.401214521e-05 cap=9.269881044e-06 cf0=2.616903451e-11 cf0p=3.34664074e-11
+.param dw=-20e-9 dl=-20e-9 dw_typ=0.0 dl_typ=0.0
+.param cf0_typ=2.782339876e-11 ca_typ=8.656478459e-05
+.param we={w-(0.0)}
+.param lc = {0.0+(c-2*cf0_typ*we)/(ca_typ*we+2*cf0_typ)}
+Cc PLUS MINUS {ca*(w+dw)*(lc+dl)+2.0*cf0*(w+lc+dw+dl)}
+.ends CNATM4_CWNOB
+
+.subckt CNATM5_CWBLK PLUS MINUS B  param: c=0.0 w=0.0 l=0 mismatch=1
+*----------------------------------------------------------------------
+* Family cnat Model CNATM5_CWBLK cmin
+* Maturity : tentative
+*----------------------------------------------------------------------
+
+.param ca=5.103994284e-05 cap=7.431064633e-06 cf0=2.616903451e-11 cf0p=3.313480434e-11
+.param dw=-20e-9 dl=-20e-9 dw_typ=0.0 dl_typ=0.0
+.param cf0_typ=2.782339876e-11 ca_typ=5.984436494e-05
+.param we={w-(0.0)}
+.param lc = {0.0+(c-2*cf0_typ*we)/(ca_typ*we+2*cf0_typ)}
+Cc PLUS MINUS {ca*(w+dw)*(lc+dl)+2.0*cf0*(w+lc+dw+dl)}
+Cp MINUS B {cap*(w+dw)*(lc+dl)+2.0*cf0p*(w+lc+dw+dl)}
+.ends CNATM5_CWBLK
+
+.subckt CNATM5_CWNOB PLUS MINUS B  param: c=0.0 w=0.0 l=0 mismatch=1
+*----------------------------------------------------------------------
+* Family cnat Model CNATM5_CWNOB cmin
+* Maturity : tentative
+*----------------------------------------------------------------------
+
+.param ca=5.103994284e-05 cap=7.431064633e-06 cf0=2.616903451e-11 cf0p=3.313480434e-11
+.param dw=-20e-9 dl=-20e-9 dw_typ=0.0 dl_typ=0.0
+.param cf0_typ=2.782339876e-11 ca_typ=5.984436494e-05
+.param we={w-(0.0)}
+.param lc = {0.0+(c-2*cf0_typ*we)/(ca_typ*we+2*cf0_typ)}
+Cc PLUS MINUS {ca*(w+dw)*(lc+dl)+2.0*cf0*(w+lc+dw+dl)}
+.ends CNATM5_CWNOB
+
+.subckt CNATM1_WLBLK PLUS MINUS B  param: w=0.0 l=0.0 c=0 mismatch=1
+*----------------------------------------------------------------------
+* Family cnat Model CNATM1_WLBLK cmin
+* Maturity : tentative
+*----------------------------------------------------------------------
+
+.param ca=7.401214521e-05 cap=3.597854954e-05 cf0=2.729063441e-11 cf0p=4.124492623e-11
+.param dw=-20e-9 dl=-20e-9
+Cc PLUS MINUS {ca*(w+dw)*(l+dl)+2.0*cf0*(w+l+dw+dl)}
+Cp MINUS B {cap*(w+dw)*(l+dl)+2.0*cf0p*(w+l+dw+dl)}
+.ends CNATM1_WLBLK
+
+.subckt CNATM1_WLNOB PLUS MINUS B  param: w=0.0 l=0.0 c=0 mismatch=1
+*----------------------------------------------------------------------
+* Family cnat Model CNATM1_WLNOB cmin
+* Maturity : tentative
+*----------------------------------------------------------------------
+
+.param ca=7.401214521e-05  cf0=2.729063441e-11
+.param dw=-20e-9 dl=-20e-9
+Cc PLUS MINUS {ca*(w+dw)*(l+dl)+2.0*cf0*(w+l+dw+dl)}
+.ends CNATM1_WLNOB
+
+.subckt CNATM2_WLBLK PLUS MINUS B  param: w=0.0 l=0.0 c=0 mismatch=1
+*----------------------------------------------------------------------
+* Family cnat Model CNATM2_WLBLK cmin
+* Maturity : tentative
+*----------------------------------------------------------------------
+
+.param ca=7.401214521e-05 cap=1.83525607e-05 cf0=2.616903451e-11 cf0p=3.497304203e-11
+.param dw=-20e-9 dl=-20e-9
+Cc PLUS MINUS {ca*(w+dw)*(l+dl)+2.0*cf0*(w+l+dw+dl)}
+Cp MINUS B {cap*(w+dw)*(l+dl)+2.0*cf0p*(w+l+dw+dl)}
+.ends CNATM2_WLBLK
+
+.subckt CNATM2_WLNOB PLUS MINUS B  param: w=0.0 l=0.0 c=0 mismatch=1
+*----------------------------------------------------------------------
+* Family cnat Model CNATM2_WLNOB cmin
+* Maturity : tentative
+*----------------------------------------------------------------------
+
+.param ca=7.401214521e-05  cf0=2.616903451e-11
+.param dw=-20e-9 dl=-20e-9
+Cc PLUS MINUS {ca*(w+dw)*(l+dl)+2.0*cf0*(w+l+dw+dl)}
+.ends CNATM2_WLNOB
+
+.subckt CNATM3_WLBLK PLUS MINUS B  param: w=0.0 l=0.0 c=0 mismatch=1
+*----------------------------------------------------------------------
+* Family cnat Model CNATM3_WLBLK cmin
+* Maturity : tentative
+*----------------------------------------------------------------------
+
+.param ca=7.401214521e-05 cap=1.231795915e-05 cf0=2.616903451e-11 cf0p=3.399565554e-11
+.param dw=-20e-9 dl=-20e-9
+Cc PLUS MINUS {ca*(w+dw)*(l+dl)+2.0*cf0*(w+l+dw+dl)}
+Cp MINUS B {cap*(w+dw)*(l+dl)+2.0*cf0p*(w+l+dw+dl)}
+.ends CNATM3_WLBLK
+
+.subckt CNATM3_WLNOB PLUS MINUS B  param: w=0.0 l=0.0 c=0 mismatch=1
+*----------------------------------------------------------------------
+* Family cnat Model CNATM3_WLNOB cmin
+* Maturity : tentative
+*----------------------------------------------------------------------
+
+.param ca=7.401214521e-05  cf0=2.616903451e-11
+.param dw=-20e-9 dl=-20e-9
+Cc PLUS MINUS {ca*(w+dw)*(l+dl)+2.0*cf0*(w+l+dw+dl)}
+.ends CNATM3_WLNOB
+
+.subckt CNATM4_WLBLK PLUS MINUS B  param: w=0.0 l=0.0 c=0 mismatch=1
+*----------------------------------------------------------------------
+* Family cnat Model CNATM4_WLBLK cmin
+* Maturity : tentative
+*----------------------------------------------------------------------
+
+.param ca=7.401214521e-05 cap=9.269881044e-06 cf0=2.616903451e-11 cf0p=3.34664074e-11
+.param dw=-20e-9 dl=-20e-9
+Cc PLUS MINUS {ca*(w+dw)*(l+dl)+2.0*cf0*(w+l+dw+dl)}
+Cp MINUS B {cap*(w+dw)*(l+dl)+2.0*cf0p*(w+l+dw+dl)}
+.ends CNATM4_WLBLK
+
+.subckt CNATM4_WLNOB PLUS MINUS B  param: w=0.0 l=0.0 c=0 mismatch=1
+*----------------------------------------------------------------------
+* Family cnat Model CNATM4_WLNOB cmin
+* Maturity : tentative
+*----------------------------------------------------------------------
+
+.param ca=7.401214521e-05  cf0=2.616903451e-11
+.param dw=-20e-9 dl=-20e-9
+Cc PLUS MINUS {ca*(w+dw)*(l+dl)+2.0*cf0*(w+l+dw+dl)}
+.ends CNATM4_WLNOB
+
+.subckt CNATM5_WLBLK PLUS MINUS B  param: w=0.0 l=0.0 c=0 mismatch=1
+*----------------------------------------------------------------------
+* Family cnat Model CNATM5_WLBLK cmin
+* Maturity : tentative
+*----------------------------------------------------------------------
+
+.param ca=5.103994284e-05 cap=7.431064633e-06 cf0=2.616903451e-11 cf0p=3.313480434e-11
+.param dw=-20e-9 dl=-20e-9
+Cc PLUS MINUS {ca*(w+dw)*(l+dl)+2.0*cf0*(w+l+dw+dl)}
+Cp MINUS B {cap*(w+dw)*(l+dl)+2.0*cf0p*(w+l+dw+dl)}
+.ends CNATM5_WLBLK
+
+.subckt CNATM5_WLNOB PLUS MINUS B  param: w=0.0 l=0.0 c=0 mismatch=1
+*----------------------------------------------------------------------
+* Family cnat Model CNATM5_WLNOB cmin
+* Maturity : tentative
+*----------------------------------------------------------------------
+
+.param ca=5.103994284e-05  cf0=2.616903451e-11
+.param dw=-20e-9 dl=-20e-9
+Cc PLUS MINUS {ca*(w+dw)*(l+dl)+2.0*cf0*(w+l+dw+dl)}
+.ends CNATM5_WLNOB
+
+
+.endl cnat_cmin
+
+
+.lib cnat_cmax
+
+*----------------------------------------------------------------------
+*                         IDEAL CAPACITOR
+*----------------------------------------------------------------------
+* TEMPLATE   : cideal_eldoN.t,v 1.1 2002/04/03 14:44:41
+* PARAMETERS : cideal.dds,v 1.1 2002/03/27 13:39:41
+* TRANSLATOR : ddspp.tcl,v 1.47 2001/09/11 08:03:16
+* Translated by re11 on June 14, 2002
+* ----------------------------------------------------------------------
+* (C) Copyright STMicroelectronics (2002)
+*     Unauthorized Reproduction and Communication Strictly Prohibited.
+* ----------------------------------------------------------------------
+*----------------------------------------------------------------------
+
+
+.subckt CNATM1_CWBLK PLUS MINUS B  param: c=0.0 w=0.0 l=0 mismatch=1
+*----------------------------------------------------------------------
+* Family cnat Model CNATM1_CWBLK cmax
+* Maturity : tentative
+*----------------------------------------------------------------------
+
+.param ca=0.0001019011585 cap=4.960861423e-05 cf0=3.074117439e-11 cf0p=4.583583304e-11
+.param dw=+20e-9 dl=+20e-9 dw_typ=0.0 dl_typ=0.0
+.param cf0_typ=2.90159044e-11 ca_typ=8.656478459e-05
+.param we={w-(0.0)}
+.param lc = {0.0+(c-2*cf0_typ*we)/(ca_typ*we+2*cf0_typ)}
+Cc PLUS MINUS {ca*(w+dw)*(lc+dl)+2.0*cf0*(w+lc+dw+dl)}
+Cp MINUS B {cap*(w+dw)*(lc+dl)+2.0*cf0p*(w+lc+dw+dl)}
+.ends CNATM1_CWBLK
+
+.subckt CNATM1_CWNOB PLUS MINUS B  param: c=0.0 w=0.0 l=0 mismatch=1
+*----------------------------------------------------------------------
+* Family cnat Model CNATM1_CWNOB cmax
+* Maturity : tentative
+*----------------------------------------------------------------------
+
+.param ca=0.0001019011585 cap=4.960861423e-05 cf0=3.074117439e-11 cf0p=4.583583304e-11
+.param dw=+20e-9 dl=+20e-9 dw_typ=0.0 dl_typ=0.0
+.param cf0_typ=2.90159044e-11 ca_typ=8.656478459e-05
+.param we={w-(0.0)}
+.param lc = {0.0+(c-2*cf0_typ*we)/(ca_typ*we+2*cf0_typ)}
+Cc PLUS MINUS {ca*(w+dw)*(lc+dl)+2.0*cf0*(w+lc+dw+dl)}
+.ends CNATM1_CWNOB
+
+.subckt CNATM2_CWBLK PLUS MINUS B  param: c=0.0 w=0.0 l=0 mismatch=1
+*----------------------------------------------------------------------
+* Family cnat Model CNATM2_CWBLK cmax
+* Maturity : tentative
+*----------------------------------------------------------------------
+
+.param ca=0.0001019011585 cap=2.60106457e-05 cf0=2.947776301e-11 cf0p=3.940831454e-11
+.param dw=+20e-9 dl=+20e-9 dw_typ=0.0 dl_typ=0.0
+.param cf0_typ=2.782339876e-11 ca_typ=8.656478459e-05
+.param we={w-(0.0)}
+.param lc = {0.0+(c-2*cf0_typ*we)/(ca_typ*we+2*cf0_typ)}
+Cc PLUS MINUS {ca*(w+dw)*(lc+dl)+2.0*cf0*(w+lc+dw+dl)}
+Cp MINUS B {cap*(w+dw)*(lc+dl)+2.0*cf0p*(w+lc+dw+dl)}
+.ends CNATM2_CWBLK
+
+.subckt CNATM2_CWNOB PLUS MINUS B  param: c=0.0 w=0.0 l=0 mismatch=1
+*----------------------------------------------------------------------
+* Family cnat Model CNATM2_CWNOB cmax
+* Maturity : tentative
+*----------------------------------------------------------------------
+
+.param ca=0.0001019011585 cap=2.60106457e-05 cf0=2.947776301e-11 cf0p=3.940831454e-11
+.param dw=+20e-9 dl=+20e-9 dw_typ=0.0 dl_typ=0.0
+.param cf0_typ=2.782339876e-11 ca_typ=8.656478459e-05
+.param we={w-(0.0)}
+.param lc = {0.0+(c-2*cf0_typ*we)/(ca_typ*we+2*cf0_typ)}
+Cc PLUS MINUS {ca*(w+dw)*(lc+dl)+2.0*cf0*(w+lc+dw+dl)}
+.ends CNATM2_CWNOB
+
+.subckt CNATM3_CWBLK PLUS MINUS B  param: c=0.0 w=0.0 l=0 mismatch=1
+*----------------------------------------------------------------------
+* Family cnat Model CNATM3_CWBLK cmax
+* Maturity : tentative
+*----------------------------------------------------------------------
+
+.param ca=0.0001019011585 cap=1.762617568e-05 cf0=2.947776301e-11 cf0p=3.832676978e-11
+.param dw=+20e-9 dl=+20e-9 dw_typ=0.0 dl_typ=0.0
+.param cf0_typ=2.782339876e-11 ca_typ=8.656478459e-05
+.param we={w-(0.0)}
+.param lc = {0.0+(c-2*cf0_typ*we)/(ca_typ*we+2*cf0_typ)}
+Cc PLUS MINUS {ca*(w+dw)*(lc+dl)+2.0*cf0*(w+lc+dw+dl)}
+Cp MINUS B {cap*(w+dw)*(lc+dl)+2.0*cf0p*(w+lc+dw+dl)}
+.ends CNATM3_CWBLK
+
+.subckt CNATM3_CWNOB PLUS MINUS B  param: c=0.0 w=0.0 l=0 mismatch=1
+*----------------------------------------------------------------------
+* Family cnat Model CNATM3_CWNOB cmax
+* Maturity : tentative
+*----------------------------------------------------------------------
+
+.param ca=0.0001019011585 cap=1.762617568e-05 cf0=2.947776301e-11 cf0p=3.832676978e-11
+.param dw=+20e-9 dl=+20e-9 dw_typ=0.0 dl_typ=0.0
+.param cf0_typ=2.782339876e-11 ca_typ=8.656478459e-05
+.param we={w-(0.0)}
+.param lc = {0.0+(c-2*cf0_typ*we)/(ca_typ*we+2*cf0_typ)}
+Cc PLUS MINUS {ca*(w+dw)*(lc+dl)+2.0*cf0*(w+lc+dw+dl)}
+.ends CNATM3_CWNOB
+
+.subckt CNATM4_CWBLK PLUS MINUS B  param: c=0.0 w=0.0 l=0 mismatch=1
+*----------------------------------------------------------------------
+* Family cnat Model CNATM4_CWBLK cmax
+* Maturity : tentative
+*----------------------------------------------------------------------
+
+.param ca=0.0001019011585 cap=1.332945684e-05 cf0=2.947776301e-11 cf0p=3.773976986e-11
+.param dw=+20e-9 dl=+20e-9 dw_typ=0.0 dl_typ=0.0
+.param cf0_typ=2.782339876e-11 ca_typ=8.656478459e-05
+.param we={w-(0.0)}
+.param lc = {0.0+(c-2*cf0_typ*we)/(ca_typ*we+2*cf0_typ)}
+Cc PLUS MINUS {ca*(w+dw)*(lc+dl)+2.0*cf0*(w+lc+dw+dl)}
+Cp MINUS B {cap*(w+dw)*(lc+dl)+2.0*cf0p*(w+lc+dw+dl)}
+.ends CNATM4_CWBLK
+
+.subckt CNATM4_CWNOB PLUS MINUS B  param: c=0.0 w=0.0 l=0 mismatch=1
+*----------------------------------------------------------------------
+* Family cnat Model CNATM4_CWNOB cmax
+* Maturity : tentative
+*----------------------------------------------------------------------
+
+.param ca=0.0001019011585 cap=1.332945684e-05 cf0=2.947776301e-11 cf0p=3.773976986e-11
+.param dw=+20e-9 dl=+20e-9 dw_typ=0.0 dl_typ=0.0
+.param cf0_typ=2.782339876e-11 ca_typ=8.656478459e-05
+.param we={w-(0.0)}
+.param lc = {0.0+(c-2*cf0_typ*we)/(ca_typ*we+2*cf0_typ)}
+Cc PLUS MINUS {ca*(w+dw)*(lc+dl)+2.0*cf0*(w+lc+dw+dl)}
+.ends CNATM4_CWNOB
+
+.subckt CNATM5_CWBLK PLUS MINUS B  param: c=0.0 w=0.0 l=0 mismatch=1
+*----------------------------------------------------------------------
+* Family cnat Model CNATM5_CWBLK cmax
+* Maturity : tentative
+*----------------------------------------------------------------------
+
+.param ca=7.045081814e-05 cap=1.071698574e-05 cf0=2.947776301e-11 cf0p=3.737131512e-11
+.param dw=+20e-9 dl=+20e-9 dw_typ=0.0 dl_typ=0.0
+.param cf0_typ=2.782339876e-11 ca_typ=5.984436494e-05
+.param we={w-(0.0)}
+.param lc = {0.0+(c-2*cf0_typ*we)/(ca_typ*we+2*cf0_typ)}
+Cc PLUS MINUS {ca*(w+dw)*(lc+dl)+2.0*cf0*(w+lc+dw+dl)}
+Cp MINUS B {cap*(w+dw)*(lc+dl)+2.0*cf0p*(w+lc+dw+dl)}
+.ends CNATM5_CWBLK
+
+.subckt CNATM5_CWNOB PLUS MINUS B  param: c=0.0 w=0.0 l=0 mismatch=1
+*----------------------------------------------------------------------
+* Family cnat Model CNATM5_CWNOB cmax
+* Maturity : tentative
+*----------------------------------------------------------------------
+
+.param ca=7.045081814e-05 cap=1.071698574e-05 cf0=2.947776301e-11 cf0p=3.737131512e-11
+.param dw=+20e-9 dl=+20e-9 dw_typ=0.0 dl_typ=0.0
+.param cf0_typ=2.782339876e-11 ca_typ=5.984436494e-05
+.param we={w-(0.0)}
+.param lc = {0.0+(c-2*cf0_typ*we)/(ca_typ*we+2*cf0_typ)}
+Cc PLUS MINUS {ca*(w+dw)*(lc+dl)+2.0*cf0*(w+lc+dw+dl)}
+.ends CNATM5_CWNOB
+
+.subckt CNATM1_WLBLK PLUS MINUS B  param: w=0.0 l=0.0 c=0 mismatch=1
+*----------------------------------------------------------------------
+* Family cnat Model CNATM1_WLBLK cmax
+* Maturity : tentative
+*----------------------------------------------------------------------
+
+.param ca=0.0001019011585 cap=4.960861423e-05 cf0=3.074117439e-11 cf0p=4.583583304e-11
+.param dw=+20e-9 dl=+20e-9
+Cc PLUS MINUS {ca*(w+dw)*(l+dl)+2.0*cf0*(w+l+dw+dl)}
+Cp MINUS B {cap*(w+dw)*(l+dl)+2.0*cf0p*(w+l+dw+dl)}
+.ends CNATM1_WLBLK
+
+.subckt CNATM1_WLNOB PLUS MINUS B  param: w=0.0 l=0.0 c=0 mismatch=1
+*----------------------------------------------------------------------
+* Family cnat Model CNATM1_WLNOB cmax
+* Maturity : tentative
+*----------------------------------------------------------------------
+
+.param ca=0.0001019011585  cf0=3.074117439e-11
+.param dw=+20e-9 dl=+20e-9
+Cc PLUS MINUS {ca*(w+dw)*(l+dl)+2.0*cf0*(w+l+dw+dl)}
+.ends CNATM1_WLNOB
+
+.subckt CNATM2_WLBLK PLUS MINUS B  param: w=0.0 l=0.0 c=0 mismatch=1
+*----------------------------------------------------------------------
+* Family cnat Model CNATM2_WLBLK cmax
+* Maturity : tentative
+*----------------------------------------------------------------------
+
+.param ca=0.0001019011585 cap=2.60106457e-05 cf0=2.947776301e-11 cf0p=3.940831454e-11
+.param dw=+20e-9 dl=+20e-9
+Cc PLUS MINUS {ca*(w+dw)*(l+dl)+2.0*cf0*(w+l+dw+dl)}
+Cp MINUS B {cap*(w+dw)*(l+dl)+2.0*cf0p*(w+l+dw+dl)}
+.ends CNATM2_WLBLK
+
+.subckt CNATM2_WLNOB PLUS MINUS B  param: w=0.0 l=0.0 c=0 mismatch=1
+*----------------------------------------------------------------------
+* Family cnat Model CNATM2_WLNOB cmax
+* Maturity : tentative
+*----------------------------------------------------------------------
+
+.param ca=0.0001019011585  cf0=2.947776301e-11
+.param dw=+20e-9 dl=+20e-9
+Cc PLUS MINUS {ca*(w+dw)*(l+dl)+2.0*cf0*(w+l+dw+dl)}
+.ends CNATM2_WLNOB
+
+.subckt CNATM3_WLBLK PLUS MINUS B  param: w=0.0 l=0.0 c=0 mismatch=1
+*----------------------------------------------------------------------
+* Family cnat Model CNATM3_WLBLK cmax
+* Maturity : tentative
+*----------------------------------------------------------------------
+
+.param ca=0.0001019011585 cap=1.762617568e-05 cf0=2.947776301e-11 cf0p=3.832676978e-11
+.param dw=+20e-9 dl=+20e-9
+Cc PLUS MINUS {ca*(w+dw)*(l+dl)+2.0*cf0*(w+l+dw+dl)}
+Cp MINUS B {cap*(w+dw)*(l+dl)+2.0*cf0p*(w+l+dw+dl)}
+.ends CNATM3_WLBLK
+
+.subckt CNATM3_WLNOB PLUS MINUS B  param: w=0.0 l=0.0 c=0 mismatch=1
+*----------------------------------------------------------------------
+* Family cnat Model CNATM3_WLNOB cmax
+* Maturity : tentative
+*----------------------------------------------------------------------
+
+.param ca=0.0001019011585  cf0=2.947776301e-11
+.param dw=+20e-9 dl=+20e-9
+Cc PLUS MINUS {ca*(w+dw)*(l+dl)+2.0*cf0*(w+l+dw+dl)}
+.ends CNATM3_WLNOB
+
+.subckt CNATM4_WLBLK PLUS MINUS B  param: w=0.0 l=0.0 c=0 mismatch=1
+*----------------------------------------------------------------------
+* Family cnat Model CNATM4_WLBLK cmax
+* Maturity : tentative
+*----------------------------------------------------------------------
+
+.param ca=0.0001019011585 cap=1.332945684e-05 cf0=2.947776301e-11 cf0p=3.773976986e-11
+.param dw=+20e-9 dl=+20e-9
+Cc PLUS MINUS {ca*(w+dw)*(l+dl)+2.0*cf0*(w+l+dw+dl)}
+Cp MINUS B {cap*(w+dw)*(l+dl)+2.0*cf0p*(w+l+dw+dl)}
+.ends CNATM4_WLBLK
+
+.subckt CNATM4_WLNOB PLUS MINUS B  param: w=0.0 l=0.0 c=0 mismatch=1
+*----------------------------------------------------------------------
+* Family cnat Model CNATM4_WLNOB cmax
+* Maturity : tentative
+*----------------------------------------------------------------------
+
+.param ca=0.0001019011585  cf0=2.947776301e-11
+.param dw=+20e-9 dl=+20e-9
+Cc PLUS MINUS {ca*(w+dw)*(l+dl)+2.0*cf0*(w+l+dw+dl)}
+.ends CNATM4_WLNOB
+
+.subckt CNATM5_WLBLK PLUS MINUS B  param: w=0.0 l=0.0 c=0 mismatch=1
+*----------------------------------------------------------------------
+* Family cnat Model CNATM5_WLBLK cmax
+* Maturity : tentative
+*----------------------------------------------------------------------
+
+.param ca=7.045081814e-05 cap=1.071698574e-05 cf0=2.947776301e-11 cf0p=3.737131512e-11
+.param dw=+20e-9 dl=+20e-9
+Cc PLUS MINUS {ca*(w+dw)*(l+dl)+2.0*cf0*(w+l+dw+dl)}
+Cp MINUS B {cap*(w+dw)*(l+dl)+2.0*cf0p*(w+l+dw+dl)}
+.ends CNATM5_WLBLK
+
+.subckt CNATM5_WLNOB PLUS MINUS B  param: w=0.0 l=0.0 c=0 mismatch=1
+*----------------------------------------------------------------------
+* Family cnat Model CNATM5_WLNOB cmax
+* Maturity : tentative
+*----------------------------------------------------------------------
+
+.param ca=7.045081814e-05  cf0=2.947776301e-11
+.param dw=+20e-9 dl=+20e-9
+Cc PLUS MINUS {ca*(w+dw)*(l+dl)+2.0*cf0*(w+l+dw+dl)}
+.ends CNATM5_WLNOB
+
+
+.endl cnat_cmax
+
