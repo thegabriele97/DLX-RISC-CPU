@@ -51,3 +51,9 @@
 - Chiedere come prendere RA ed INP1 nonostante arrivino dallo stesso mux ed entrino nella stessa parte della ALU
 - Chiedere come gestire SUBI1, perchè farebbe Inp1 - RA
 
+
+## Domande LAB 05
+- Cosa sono MN, M, CPI, CPN, CK, SN, D, Q? (es 5.2)
+- Hold time non rispettatto, il segnale cambia prima del clock (es 5.2 hold time violation check)
+- Percentage variation between HS and LL for the X1 and the X8 cases. All measures?
+- 
