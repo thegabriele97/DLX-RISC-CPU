@@ -56,4 +56,4 @@
 - Cosa sono MN, M, CPI, CPN, CK, SN, D, Q? (es 5.2)
 - Hold time non rispettatto, il segnale cambia prima del clock (es 5.2 hold time violation check)
 - Percentage variation between HS and LL for the X1 and the X8 cases. All measures?
-- 
+- Com'è la struttura della delivery? Dato che non abbiamo iù sim/syn
