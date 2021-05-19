@@ -1,0 +1,30 @@
+
+
+.lib cdram_typ
+
+*----------------------------------------------------------------------
+*                         CAPACITOR DRAM
+*----------------------------------------------------------------------
+* TEMPLATE   : capacitor_DRAM_eldoN.t,v 1.1 2002/04/04 14:55:27
+* PARAMETERS : capacitor_DRAM.dds,v 2.2 2002/04/04 06:51:12
+* TRANSLATOR : ddspp.tcl,v 1.47 2001/09/11 08:03:16
+* Translated by re11 on June 14, 2002
+* ----------------------------------------------------------------------
+* (C) Copyright STMicroelectronics (2002)
+*     Unauthorized Reproduction and Communication Strictly Prohibited.
+* ----------------------------------------------------------------------
+*----------------------------------------------------------------------
+
+
+.subckt CDRAM PLUS MINUS
++  param: c=30e-15 area=0.225e-12 peri=2e-6 number=1 mismatch=1
+*----------------------------------------------------------------------
+* Family cdram Model CDRAM -- typ
+* Maturity : No maturity
+*----------------------------------------------------------------------
+Cc   PLUS MINUS c
+.ends CDRAM
+
+
+.endl cdram_typ
+

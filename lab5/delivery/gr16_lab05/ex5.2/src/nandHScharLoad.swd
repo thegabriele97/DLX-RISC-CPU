@@ -1,0 +1,34 @@
+//###########################################################
+//# ELDO 2008.1 Production(64 bits) - Saved Window File
+//# Released Mon Jun 30 08:52:46 GMT 2008
+//#
+//# Note: This is an auto-generated file.
+//#
+//# Any edits that you make may cause the restore of
+//# this window to fail - EDIT AT YOUR OWN RISK
+//###########################################################
+
+
+// ===== Open new window =====
+OPEn WIndow -POSition 0 0 -MAXimized
+
+// ===== Create row #1 =====
+ADD WAveform  <nandHScharLoad/TRAN>I(VDUMMY_C) 
+
+// ===== Set axis zero levels  =====
+SET AXis Properties -Axis Y1 -Row 1 -zerolevel on
+
+// ===== Create row #2 =====
+ADD WAveform  <nandHScharLoad/TRAN>I(VDUMMY_GND) 
+
+// ===== Set axis zero levels  =====
+SET AXis Properties -Axis Y1 -Row 2 -zerolevel on
+
+// ===== Create row #3 =====
+ADD WAveform  <nandHScharLoad/TRAN>I(VDUMMY_VDD) 
+
+// ===== Set axis zero levels  =====
+SET AXis Properties -Axis Y1 -Row 3 -zerolevel on
+
+// ===== Format rows =====
+SET ROw Height -All -MAX

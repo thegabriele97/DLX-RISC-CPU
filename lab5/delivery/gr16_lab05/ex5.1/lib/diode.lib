@@ -1,0 +1,619 @@
+
+
+.lib diode_typ
+
+*----------------------------------------------------------------------
+*                             DIODE
+*----------------------------------------------------------------------
+* TEMPLATE   : diode_eldoN.t,v 2.0 2002/04/03 14:51:37
+* PARAMETERS : diode.dds,v 1.21 2002/06/14 12:54:03
+* TRANSLATOR : ddspp.tcl,v 1.47 2001/09/11 08:03:16
+* Translated by re11 on June 14, 2002
+* ----------------------------------------------------------------------
+* (C) Copyright STMicroelectronics (2002)
+*     Unauthorized Reproduction and Communication Strictly Prohibited.
+* ----------------------------------------------------------------------
+*----------------------------------------------------------------------
+
+
+*----------------------------------------------------------------------
+* Family diode Model DNPPS juncap typ
+* Maturity : Silicon_verified
+*----------------------------------------------------------------------
+.model DNPPSD
++ d is=1.3181e-07         isw=2.2436e-14        n=0.97                
++ isrh=9e-06             cjo=0.00085803        cso=6.7342e-11        
++ vj=0.52286             m=0.20582             ms=0.44445            
++ tmeas=27
+
+.model DNPPSJU
++ d level=8 diolev=9 tr=27                 tnom=27               
++ vr=0                  cjbr=0.00085803       cjsr=6.7342e-11       
++ cjgr=2.921e-10         jsdbr=1.3181e-07      jsdsr=2.2436e-14      
++ jsdgr=0               jsgbr=9e-06           jsgsr=3.1654e-11      
++ jsggr=4.1751e-11       vdbr=0.52286          vdsr=0.42697          
++ vdgr=1                pb=0.20582            ps=0.44445            
++ pg=0.6358              nbj=0.97              nsj=0.93              
++ ngj=1
+
+* next model is for alias
+.model DNPPS
++ d level=8 diolev=9 tr=27                 tnom=27               
++ vr=0                  cjbr=0.00085803       cjsr=6.7342e-11       
++ cjgr=2.921e-10         jsdbr=1.3181e-07      jsdsr=2.2436e-14      
++ jsdgr=0               jsgbr=9e-06           jsgsr=3.1654e-11      
++ jsggr=4.1751e-11       vdbr=0.52286          vdsr=0.42697          
++ vdgr=1                pb=0.20582            ps=0.44445            
++ pg=0.6358              nbj=0.97              nsj=0.93              
++ ngj=1
+
+*----------------------------------------------------------------------
+* Family diode Model DPPNW juncap typ
+* Maturity : Silicon_verified
+*----------------------------------------------------------------------
+.model DPPNWD
++ d is=8.5932e-08         isw=5.2166e-15        n=0.97                
++ isrh=1.6294e-06        cjo=0.00090721        cso=3.9129e-11        
++ vj=0.62226             m=0.28121             ms=0.15               
++ tmeas=27
+
+.model DPPNWJU
++ d level=8 diolev=9 tr=27                 tnom=27               
++ vr=0                  cjbr=0.00090721       cjsr=3.9129e-11       
++ cjgr=2.9337e-10        jsdbr=8.5932e-08      jsdsr=5.2166e-15      
++ jsdgr=0               jsgbr=1.6294e-06      jsgsr=3.2153e-11      
++ jsggr=2.8654e-11       vdbr=0.62226          vdsr=1.2279           
++ vdgr=1.5037           pb=0.28121            ps=0.15               
++ pg=0.87916             nbj=0.97              nsj=0.93              
++ ngj=1
+
+* next model is for alias
+.model DPPNW
++ d level=8 diolev=9 tr=27                 tnom=27               
++ vr=0                  cjbr=0.00090721       cjsr=3.9129e-11       
++ cjgr=2.9337e-10        jsdbr=8.5932e-08      jsdsr=5.2166e-15      
++ jsdgr=0               jsgbr=1.6294e-06      jsgsr=3.2153e-11      
++ jsggr=2.8654e-11       vdbr=0.62226          vdsr=1.2279           
++ vdgr=1.5037           pb=0.28121            ps=0.15               
++ pg=0.87916             nbj=0.97              nsj=0.93              
++ ngj=1
+
+*----------------------------------------------------------------------
+* Family diode Model DNWPS juncap typ
+* Maturity : Silicon_verified
+*----------------------------------------------------------------------
+.model DNWPSD
++ d is=1.0352e-06         isw=4.9346e-13        n=1                   
++ isrh=3.3413e-06        cjo=0.00010137        cso=5.7286e-10        
++ vj=0.5238              m=0.40069             ms=0.30596            
++ tmeas=27
+
+.model DNWPSJU
++ d level=8 diolev=9 tr=27                 tnom=27               
++ vr=0                  cjbr=0.00010137       cjsr=5.7286e-10       
++ cjgr=0                 jsdbr=1.0352e-06      jsdsr=4.9346e-13      
++ jsdgr=0               jsgbr=3.3413e-06      jsgsr=1.4244e-11      
++ jsggr=0                vdbr=0.5238           vdsr=0.6392           
++ vdgr=0.6              pb=0.40069            ps=0.30596            
++ pg=0.33                nbj=1                 nsj=1                 
++ ngj=1
+
+* next model is for alias
+.model DNWPS
++ d level=8 diolev=9 tr=27                 tnom=27               
++ vr=0                  cjbr=0.00010137       cjsr=5.7286e-10       
++ cjgr=0                 jsdbr=1.0352e-06      jsdsr=4.9346e-13      
++ jsdgr=0               jsgbr=3.3413e-06      jsgsr=1.4244e-11      
++ jsggr=0                vdbr=0.5238           vdsr=0.6392           
++ vdgr=0.6              pb=0.40069            ps=0.30596            
++ pg=0.33                nbj=1                 nsj=1                 
++ ngj=1
+
+*----------------------------------------------------------------------
+* Family diode Model DPWNISO juncap typ
+* Maturity : Silicon_verified
+*----------------------------------------------------------------------
+.model DPWNISOD
++ d is=1.0938e-06         isw=7.9288e-13        n=1                   
++ isrh=1.8916e-06        cjo=0.00069281        cso=4.2583e-10        
++ vj=0.68223             m=0.31703             ms=0.22789            
++ tmeas=27
+
+.model DPWNISOJU
++ d level=8 diolev=9 tr=27                 tnom=27               
++ vr=0                  cjbr=0.00069281       cjsr=4.2583e-10       
++ cjgr=0                 jsdbr=1.0938e-06      jsdsr=7.9288e-13      
++ jsdgr=0               jsgbr=1.8916e-06      jsgsr=1.781e-11       
++ jsggr=0                vdbr=0.68223          vdsr=0.63628          
++ vdgr=0.6              pb=0.31703            ps=0.22789            
++ pg=0.33                nbj=1                 nsj=1                 
++ ngj=1
+
+* next model is for alias
+.model DPWNISO
++ d level=8 diolev=9 tr=27                 tnom=27               
++ vr=0                  cjbr=0.00069281       cjsr=4.2583e-10       
++ cjgr=0                 jsdbr=1.0938e-06      jsdsr=7.9288e-13      
++ jsdgr=0               jsgbr=1.8916e-06      jsgsr=1.781e-11       
++ jsggr=0                vdbr=0.68223          vdsr=0.63628          
++ vdgr=0.6              pb=0.31703            ps=0.22789            
++ pg=0.33                nbj=1                 nsj=1                 
++ ngj=1
+
+*----------------------------------------------------------------------
+* Family diode Model DNPPS3V3 juncap typ
+* Maturity : Silicon_verified
+*----------------------------------------------------------------------
+.model DNPPS3V3D
++ d is=1.1009e-07         isw=2.2436e-14        n=0.97                
++ isrh=5.2833e-06        cjo=0.0010561         cso=4.1602e-11        
++ vj=0.70603             m=0.34066             ms=0.16108            
++ tmeas=27
+
+.model DNPPS3V3JU
++ d level=8 diolev=9 tr=27                 tnom=27               
++ vr=0                  cjbr=0.0010561        cjsr=4.1602e-11       
++ cjgr=2.0426e-10        jsdbr=1.1009e-07      jsdsr=2.2436e-14      
++ jsdgr=0               jsgbr=5.2833e-06      jsgsr=4.1654e-11      
++ jsggr=0                vdbr=0.70603          vdsr=7.8797           
++ vdgr=0.84974          pb=0.34066            ps=0.16108            
++ pg=0.54338             nbj=0.97              nsj=0.93              
++ ngj=1
+
+* next model is for alias
+.model DNPPS3V3
++ d level=8 diolev=9 tr=27                 tnom=27               
++ vr=0                  cjbr=0.0010561        cjsr=4.1602e-11       
++ cjgr=2.0426e-10        jsdbr=1.1009e-07      jsdsr=2.2436e-14      
++ jsdgr=0               jsgbr=5.2833e-06      jsgsr=4.1654e-11      
++ jsggr=0                vdbr=0.70603          vdsr=7.8797           
++ vdgr=0.84974          pb=0.34066            ps=0.16108            
++ pg=0.54338             nbj=0.97              nsj=0.93              
++ ngj=1
+
+*----------------------------------------------------------------------
+* Family diode Model DPPNW3V3 juncap typ
+* Maturity : Silicon_verified
+*----------------------------------------------------------------------
+.model DPPNW3V3D
++ d is=6.7438e-08         isw=1e-15             n=0.97                
++ isrh=1.9906e-06        cjo=0.001071          cso=5.636e-11         
++ vj=0.68686             m=0.32122             ms=0.15               
++ tmeas=27
+
+.model DPPNW3V3JU
++ d level=8 diolev=9 tr=27                 tnom=27               
++ vr=0                  cjbr=0.001071         cjsr=5.636e-11        
++ cjgr=1.6943e-10        jsdbr=6.7438e-08      jsdsr=1e-15           
++ jsdgr=1e-16           jsgbr=1.9906e-06      jsgsr=5.1247e-11      
++ jsggr=2.9388e-11       vdbr=0.68686          vdsr=0.58744          
++ vdgr=0.99942          pb=0.32122            ps=0.15               
++ pg=0.49201             nbj=0.97              nsj=0.93              
++ ngj=1
+
+* next model is for alias
+.model DPPNW3V3
++ d level=8 diolev=9 tr=27                 tnom=27               
++ vr=0                  cjbr=0.001071         cjsr=5.636e-11        
++ cjgr=1.6943e-10        jsdbr=6.7438e-08      jsdsr=1e-15           
++ jsdgr=1e-16           jsgbr=1.9906e-06      jsgsr=5.1247e-11      
++ jsggr=2.9388e-11       vdbr=0.68686          vdsr=0.58744          
++ vdgr=0.99942          pb=0.32122            ps=0.15               
++ pg=0.49201             nbj=0.97              nsj=0.93              
++ ngj=1
+
+
+.endl diode_typ
+
+
+.lib diode_fast
+
+*----------------------------------------------------------------------
+*                             DIODE
+*----------------------------------------------------------------------
+* TEMPLATE   : diode_eldoN.t,v 2.0 2002/04/03 14:51:37
+* PARAMETERS : diode.dds,v 1.21 2002/06/14 12:54:03
+* TRANSLATOR : ddspp.tcl,v 1.47 2001/09/11 08:03:16
+* Translated by re11 on June 14, 2002
+* ----------------------------------------------------------------------
+* (C) Copyright STMicroelectronics (2002)
+*     Unauthorized Reproduction and Communication Strictly Prohibited.
+* ----------------------------------------------------------------------
+*----------------------------------------------------------------------
+
+
+*----------------------------------------------------------------------
+* Family diode Model DNPPS juncap fast
+* Maturity : Silicon_verified
+*----------------------------------------------------------------------
+.model DNPPSD
++ d is=1.3181e-06         isw=2.2436e-13        n=0.97                
++ isrh=9e-05             cjo=0.000772227       cso=5.38736e-11       
++ vj=0.52286             m=0.20582             ms=0.44445            
++ tmeas=27
+
+.model DNPPSJU
++ d level=8 diolev=9 tr=27                 tnom=27               
++ vr=0                  cjbr=0.000772227      cjsr=5.38736e-11      
++ cjgr=2.3368e-10        jsdbr=1.3181e-06      jsdsr=2.2436e-13      
++ jsdgr=0               jsgbr=9e-05           jsgsr=3.1654e-10      
++ jsggr=4.1751e-10       vdbr=0.52286          vdsr=0.42697          
++ vdgr=1                pb=0.20582            ps=0.44445            
++ pg=0.6358              nbj=0.97              nsj=0.93              
++ ngj=1
+
+* next model is for alias
+.model DNPPS
++ d level=8 diolev=9 tr=27                 tnom=27               
++ vr=0                  cjbr=0.000772227      cjsr=5.38736e-11      
++ cjgr=2.3368e-10        jsdbr=1.3181e-06      jsdsr=2.2436e-13      
++ jsdgr=0               jsgbr=9e-05           jsgsr=3.1654e-10      
++ jsggr=4.1751e-10       vdbr=0.52286          vdsr=0.42697          
++ vdgr=1                pb=0.20582            ps=0.44445            
++ pg=0.6358              nbj=0.97              nsj=0.93              
++ ngj=1
+
+*----------------------------------------------------------------------
+* Family diode Model DPPNW juncap fast
+* Maturity : Silicon_verified
+*----------------------------------------------------------------------
+.model DPPNWD
++ d is=8.5932e-07         isw=5.2166e-14        n=0.97                
++ isrh=1.6294e-05        cjo=0.000816489       cso=3.13032e-11       
++ vj=0.62226             m=0.28121             ms=0.15               
++ tmeas=27
+
+.model DPPNWJU
++ d level=8 diolev=9 tr=27                 tnom=27               
++ vr=0                  cjbr=0.000816489      cjsr=3.13032e-11      
++ cjgr=2.34696e-10       jsdbr=8.5932e-07      jsdsr=5.2166e-14      
++ jsdgr=0               jsgbr=1.6294e-05      jsgsr=3.2153e-10      
++ jsggr=2.8654e-10       vdbr=0.62226          vdsr=1.2279           
++ vdgr=1.5037           pb=0.28121            ps=0.15               
++ pg=0.87916             nbj=0.97              nsj=0.93              
++ ngj=1
+
+* next model is for alias
+.model DPPNW
++ d level=8 diolev=9 tr=27                 tnom=27               
++ vr=0                  cjbr=0.000816489      cjsr=3.13032e-11      
++ cjgr=2.34696e-10       jsdbr=8.5932e-07      jsdsr=5.2166e-14      
++ jsdgr=0               jsgbr=1.6294e-05      jsgsr=3.2153e-10      
++ jsggr=2.8654e-10       vdbr=0.62226          vdsr=1.2279           
++ vdgr=1.5037           pb=0.28121            ps=0.15               
++ pg=0.87916             nbj=0.97              nsj=0.93              
++ ngj=1
+
+*----------------------------------------------------------------------
+* Family diode Model DNWPS juncap fast
+* Maturity : Silicon_verified
+*----------------------------------------------------------------------
+.model DNWPSD
++ d is=1.0352e-05         isw=4.9346e-12        n=1                   
++ isrh=3.3413e-05        cjo=9.1233e-05        cso=4.58288e-10       
++ vj=0.5238              m=0.40069             ms=0.30596            
++ tmeas=27
+
+.model DNWPSJU
++ d level=8 diolev=9 tr=27                 tnom=27               
++ vr=0                  cjbr=9.1233e-05       cjsr=4.58288e-10      
++ cjgr=0                 jsdbr=1.0352e-05      jsdsr=4.9346e-12      
++ jsdgr=0               jsgbr=3.3413e-05      jsgsr=1.4244e-10      
++ jsggr=0                vdbr=0.5238           vdsr=0.6392           
++ vdgr=0.6              pb=0.40069            ps=0.30596            
++ pg=0.33                nbj=1                 nsj=1                 
++ ngj=1
+
+* next model is for alias
+.model DNWPS
++ d level=8 diolev=9 tr=27                 tnom=27               
++ vr=0                  cjbr=9.1233e-05       cjsr=4.58288e-10      
++ cjgr=0                 jsdbr=1.0352e-05      jsdsr=4.9346e-12      
++ jsdgr=0               jsgbr=3.3413e-05      jsgsr=1.4244e-10      
++ jsggr=0                vdbr=0.5238           vdsr=0.6392           
++ vdgr=0.6              pb=0.40069            ps=0.30596            
++ pg=0.33                nbj=1                 nsj=1                 
++ ngj=1
+
+*----------------------------------------------------------------------
+* Family diode Model DPWNISO juncap fast
+* Maturity : Silicon_verified
+*----------------------------------------------------------------------
+.model DPWNISOD
++ d is=1.0938e-05         isw=7.9288e-12        n=1                   
++ isrh=1.8916e-05        cjo=0.000623529       cso=3.40664e-10       
++ vj=0.68223             m=0.31703             ms=0.22789            
++ tmeas=27
+
+.model DPWNISOJU
++ d level=8 diolev=9 tr=27                 tnom=27               
++ vr=0                  cjbr=0.000623529      cjsr=3.40664e-10      
++ cjgr=0                 jsdbr=1.0938e-05      jsdsr=7.9288e-12      
++ jsdgr=0               jsgbr=1.8916e-05      jsgsr=1.781e-10       
++ jsggr=0                vdbr=0.68223          vdsr=0.63628          
++ vdgr=0.6              pb=0.31703            ps=0.22789            
++ pg=0.33                nbj=1                 nsj=1                 
++ ngj=1
+
+* next model is for alias
+.model DPWNISO
++ d level=8 diolev=9 tr=27                 tnom=27               
++ vr=0                  cjbr=0.000623529      cjsr=3.40664e-10      
++ cjgr=0                 jsdbr=1.0938e-05      jsdsr=7.9288e-12      
++ jsdgr=0               jsgbr=1.8916e-05      jsgsr=1.781e-10       
++ jsggr=0                vdbr=0.68223          vdsr=0.63628          
++ vdgr=0.6              pb=0.31703            ps=0.22789            
++ pg=0.33                nbj=1                 nsj=1                 
++ ngj=1
+
+*----------------------------------------------------------------------
+* Family diode Model DNPPS3V3 juncap fast
+* Maturity : Silicon_verified
+*----------------------------------------------------------------------
+.model DNPPS3V3D
++ d is=1.1009e-06         isw=2.2436e-13        n=0.97                
++ isrh=5.2833e-05        cjo=0.00095049        cso=3.32816e-11       
++ vj=0.70603             m=0.34066             ms=0.16108            
++ tmeas=27
+
+.model DNPPS3V3JU
++ d level=8 diolev=9 tr=27                 tnom=27               
++ vr=0                  cjbr=0.00095049       cjsr=3.32816e-11      
++ cjgr=1.63408e-10       jsdbr=1.1009e-06      jsdsr=2.2436e-13      
++ jsdgr=0               jsgbr=5.2833e-05      jsgsr=4.1654e-10      
++ jsggr=0                vdbr=0.70603          vdsr=7.8797           
++ vdgr=0.84974          pb=0.34066            ps=0.16108            
++ pg=0.54338             nbj=0.97              nsj=0.93              
++ ngj=1
+
+* next model is for alias
+.model DNPPS3V3
++ d level=8 diolev=9 tr=27                 tnom=27               
++ vr=0                  cjbr=0.00095049       cjsr=3.32816e-11      
++ cjgr=1.63408e-10       jsdbr=1.1009e-06      jsdsr=2.2436e-13      
++ jsdgr=0               jsgbr=5.2833e-05      jsgsr=4.1654e-10      
++ jsggr=0                vdbr=0.70603          vdsr=7.8797           
++ vdgr=0.84974          pb=0.34066            ps=0.16108            
++ pg=0.54338             nbj=0.97              nsj=0.93              
++ ngj=1
+
+*----------------------------------------------------------------------
+* Family diode Model DPPNW3V3 juncap fast
+* Maturity : Silicon_verified
+*----------------------------------------------------------------------
+.model DPPNW3V3D
++ d is=6.7438e-07         isw=1e-14             n=0.97                
++ isrh=1.9906e-05        cjo=0.0009639         cso=4.5088e-11        
++ vj=0.68686             m=0.32122             ms=0.15               
++ tmeas=27
+
+.model DPPNW3V3JU
++ d level=8 diolev=9 tr=27                 tnom=27               
++ vr=0                  cjbr=0.0009639        cjsr=4.5088e-11       
++ cjgr=1.35544e-10       jsdbr=6.7438e-07      jsdsr=1e-14           
++ jsdgr=1e-15           jsgbr=1.9906e-05      jsgsr=5.1247e-10      
++ jsggr=2.9388e-10       vdbr=0.68686          vdsr=0.58744          
++ vdgr=0.99942          pb=0.32122            ps=0.15               
++ pg=0.49201             nbj=0.97              nsj=0.93              
++ ngj=1
+
+* next model is for alias
+.model DPPNW3V3
++ d level=8 diolev=9 tr=27                 tnom=27               
++ vr=0                  cjbr=0.0009639        cjsr=4.5088e-11       
++ cjgr=1.35544e-10       jsdbr=6.7438e-07      jsdsr=1e-14           
++ jsdgr=1e-15           jsgbr=1.9906e-05      jsgsr=5.1247e-10      
++ jsggr=2.9388e-10       vdbr=0.68686          vdsr=0.58744          
++ vdgr=0.99942          pb=0.32122            ps=0.15               
++ pg=0.49201             nbj=0.97              nsj=0.93              
++ ngj=1
+
+
+.endl diode_fast
+
+
+.lib diode_slow
+
+*----------------------------------------------------------------------
+*                             DIODE
+*----------------------------------------------------------------------
+* TEMPLATE   : diode_eldoN.t,v 2.0 2002/04/03 14:51:37
+* PARAMETERS : diode.dds,v 1.21 2002/06/14 12:54:03
+* TRANSLATOR : ddspp.tcl,v 1.47 2001/09/11 08:03:16
+* Translated by re11 on June 14, 2002
+* ----------------------------------------------------------------------
+* (C) Copyright STMicroelectronics (2002)
+*     Unauthorized Reproduction and Communication Strictly Prohibited.
+* ----------------------------------------------------------------------
+*----------------------------------------------------------------------
+
+
+*----------------------------------------------------------------------
+* Family diode Model DNPPS juncap slow
+* Maturity : Silicon_verified
+*----------------------------------------------------------------------
+.model DNPPSD
++ d is=1.3181e-08         isw=2.2436e-15        n=0.97                
++ isrh=9e-07             cjo=0.000943833       cso=8.08104e-11       
++ vj=0.52286             m=0.20582             ms=0.44445            
++ tmeas=27
+
+.model DNPPSJU
++ d level=8 diolev=9 tr=27                 tnom=27               
++ vr=0                  cjbr=0.000943833      cjsr=8.08104e-11      
++ cjgr=3.5052e-10        jsdbr=1.3181e-08      jsdsr=2.2436e-15      
++ jsdgr=0               jsgbr=9e-07           jsgsr=3.1654e-12      
++ jsggr=4.1751e-12       vdbr=0.52286          vdsr=0.42697          
++ vdgr=1                pb=0.20582            ps=0.44445            
++ pg=0.6358              nbj=0.97              nsj=0.93              
++ ngj=1
+
+* next model is for alias
+.model DNPPS
++ d level=8 diolev=9 tr=27                 tnom=27               
++ vr=0                  cjbr=0.000943833      cjsr=8.08104e-11      
++ cjgr=3.5052e-10        jsdbr=1.3181e-08      jsdsr=2.2436e-15      
++ jsdgr=0               jsgbr=9e-07           jsgsr=3.1654e-12      
++ jsggr=4.1751e-12       vdbr=0.52286          vdsr=0.42697          
++ vdgr=1                pb=0.20582            ps=0.44445            
++ pg=0.6358              nbj=0.97              nsj=0.93              
++ ngj=1
+
+*----------------------------------------------------------------------
+* Family diode Model DPPNW juncap slow
+* Maturity : Silicon_verified
+*----------------------------------------------------------------------
+.model DPPNWD
++ d is=8.5932e-09         isw=5.2166e-16        n=0.97                
++ isrh=1.6294e-07        cjo=0.000997931       cso=4.69548e-11       
++ vj=0.62226             m=0.28121             ms=0.15               
++ tmeas=27
+
+.model DPPNWJU
++ d level=8 diolev=9 tr=27                 tnom=27               
++ vr=0                  cjbr=0.000997931      cjsr=4.69548e-11      
++ cjgr=3.52044e-10       jsdbr=8.5932e-09      jsdsr=5.2166e-16      
++ jsdgr=0               jsgbr=1.6294e-07      jsgsr=3.2153e-12      
++ jsggr=2.8654e-12       vdbr=0.62226          vdsr=1.2279           
++ vdgr=1.5037           pb=0.28121            ps=0.15               
++ pg=0.87916             nbj=0.97              nsj=0.93              
++ ngj=1
+
+* next model is for alias
+.model DPPNW
++ d level=8 diolev=9 tr=27                 tnom=27               
++ vr=0                  cjbr=0.000997931      cjsr=4.69548e-11      
++ cjgr=3.52044e-10       jsdbr=8.5932e-09      jsdsr=5.2166e-16      
++ jsdgr=0               jsgbr=1.6294e-07      jsgsr=3.2153e-12      
++ jsggr=2.8654e-12       vdbr=0.62226          vdsr=1.2279           
++ vdgr=1.5037           pb=0.28121            ps=0.15               
++ pg=0.87916             nbj=0.97              nsj=0.93              
++ ngj=1
+
+*----------------------------------------------------------------------
+* Family diode Model DNWPS juncap slow
+* Maturity : Silicon_verified
+*----------------------------------------------------------------------
+.model DNWPSD
++ d is=1.0352e-07         isw=4.9346e-14        n=1                   
++ isrh=3.3413e-07        cjo=0.000111507       cso=6.87432e-10       
++ vj=0.5238              m=0.40069             ms=0.30596            
++ tmeas=27
+
+.model DNWPSJU
++ d level=8 diolev=9 tr=27                 tnom=27               
++ vr=0                  cjbr=0.000111507      cjsr=6.87432e-10      
++ cjgr=0                 jsdbr=1.0352e-07      jsdsr=4.9346e-14      
++ jsdgr=0               jsgbr=3.3413e-07      jsgsr=1.4244e-12      
++ jsggr=0                vdbr=0.5238           vdsr=0.6392           
++ vdgr=0.6              pb=0.40069            ps=0.30596            
++ pg=0.33                nbj=1                 nsj=1                 
++ ngj=1
+
+* next model is for alias
+.model DNWPS
++ d level=8 diolev=9 tr=27                 tnom=27               
++ vr=0                  cjbr=0.000111507      cjsr=6.87432e-10      
++ cjgr=0                 jsdbr=1.0352e-07      jsdsr=4.9346e-14      
++ jsdgr=0               jsgbr=3.3413e-07      jsgsr=1.4244e-12      
++ jsggr=0                vdbr=0.5238           vdsr=0.6392           
++ vdgr=0.6              pb=0.40069            ps=0.30596            
++ pg=0.33                nbj=1                 nsj=1                 
++ ngj=1
+
+*----------------------------------------------------------------------
+* Family diode Model DPWNISO juncap slow
+* Maturity : Silicon_verified
+*----------------------------------------------------------------------
+.model DPWNISOD
++ d is=1.0938e-07         isw=7.9288e-14        n=1                   
++ isrh=1.8916e-07        cjo=0.000762091       cso=5.10996e-10       
++ vj=0.68223             m=0.31703             ms=0.22789            
++ tmeas=27
+
+.model DPWNISOJU
++ d level=8 diolev=9 tr=27                 tnom=27               
++ vr=0                  cjbr=0.000762091      cjsr=5.10996e-10      
++ cjgr=0                 jsdbr=1.0938e-07      jsdsr=7.9288e-14      
++ jsdgr=0               jsgbr=1.8916e-07      jsgsr=1.781e-12       
++ jsggr=0                vdbr=0.68223          vdsr=0.63628          
++ vdgr=0.6              pb=0.31703            ps=0.22789            
++ pg=0.33                nbj=1                 nsj=1                 
++ ngj=1
+
+* next model is for alias
+.model DPWNISO
++ d level=8 diolev=9 tr=27                 tnom=27               
++ vr=0                  cjbr=0.000762091      cjsr=5.10996e-10      
++ cjgr=0                 jsdbr=1.0938e-07      jsdsr=7.9288e-14      
++ jsdgr=0               jsgbr=1.8916e-07      jsgsr=1.781e-12       
++ jsggr=0                vdbr=0.68223          vdsr=0.63628          
++ vdgr=0.6              pb=0.31703            ps=0.22789            
++ pg=0.33                nbj=1                 nsj=1                 
++ ngj=1
+
+*----------------------------------------------------------------------
+* Family diode Model DNPPS3V3 juncap slow
+* Maturity : Silicon_verified
+*----------------------------------------------------------------------
+.model DNPPS3V3D
++ d is=1.1009e-08         isw=2.2436e-15        n=0.97                
++ isrh=5.2833e-07        cjo=0.00116171        cso=4.99224e-11       
++ vj=0.70603             m=0.34066             ms=0.16108            
++ tmeas=27
+
+.model DNPPS3V3JU
++ d level=8 diolev=9 tr=27                 tnom=27               
++ vr=0                  cjbr=0.00116171       cjsr=4.99224e-11      
++ cjgr=2.45112e-10       jsdbr=1.1009e-08      jsdsr=2.2436e-15      
++ jsdgr=0               jsgbr=5.2833e-07      jsgsr=4.1654e-12      
++ jsggr=0                vdbr=0.70603          vdsr=7.8797           
++ vdgr=0.84974          pb=0.34066            ps=0.16108            
++ pg=0.54338             nbj=0.97              nsj=0.93              
++ ngj=1
+
+* next model is for alias
+.model DNPPS3V3
++ d level=8 diolev=9 tr=27                 tnom=27               
++ vr=0                  cjbr=0.00116171       cjsr=4.99224e-11      
++ cjgr=2.45112e-10       jsdbr=1.1009e-08      jsdsr=2.2436e-15      
++ jsdgr=0               jsgbr=5.2833e-07      jsgsr=4.1654e-12      
++ jsggr=0                vdbr=0.70603          vdsr=7.8797           
++ vdgr=0.84974          pb=0.34066            ps=0.16108            
++ pg=0.54338             nbj=0.97              nsj=0.93              
++ ngj=1
+
+*----------------------------------------------------------------------
+* Family diode Model DPPNW3V3 juncap slow
+* Maturity : Silicon_verified
+*----------------------------------------------------------------------
+.model DPPNW3V3D
++ d is=6.7438e-09         isw=1e-16             n=0.97                
++ isrh=1.9906e-07        cjo=0.0011781         cso=6.7632e-11        
++ vj=0.68686             m=0.32122             ms=0.15               
++ tmeas=27
+
+.model DPPNW3V3JU
++ d level=8 diolev=9 tr=27                 tnom=27               
++ vr=0                  cjbr=0.0011781        cjsr=6.7632e-11       
++ cjgr=2.03316e-10       jsdbr=6.7438e-09      jsdsr=1e-16           
++ jsdgr=1e-17           jsgbr=1.9906e-07      jsgsr=5.1247e-12      
++ jsggr=2.9388e-12       vdbr=0.68686          vdsr=0.58744          
++ vdgr=0.99942          pb=0.32122            ps=0.15               
++ pg=0.49201             nbj=0.97              nsj=0.93              
++ ngj=1
+
+* next model is for alias
+.model DPPNW3V3
++ d level=8 diolev=9 tr=27                 tnom=27               
++ vr=0                  cjbr=0.0011781        cjsr=6.7632e-11       
++ cjgr=2.03316e-10       jsdbr=6.7438e-09      jsdsr=1e-16           
++ jsdgr=1e-17           jsgbr=1.9906e-07      jsgsr=5.1247e-12      
++ jsggr=2.9388e-12       vdbr=0.68686          vdsr=0.58744          
++ vdgr=0.99942          pb=0.32122            ps=0.15               
++ pg=0.49201             nbj=0.97              nsj=0.93              
++ ngj=1
+
+
+.endl diode_slow
+

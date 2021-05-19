@@ -1,0 +1,17 @@
+RNAND       =  6.7226E-11   targ=  2.2283E-09     trig=  2.1611E-09
+FNAND       =  6.8511E-11   targ=  1.2069E-09     trig=  1.1384E-09
+NANDDELAY   =  2.0524E-11   targ=  1.1835E-09     trig=  1.1630E-09
+NANDDELAY2  =  3.7948E-11   targ=  2.2009E-09     trig=  2.1630E-09
+MAXIGNDF    =  7.6530E-05     at=  1.1907E-09  from=  1.0000E-09     to=  2.0000E-09
+MAXIVDDR    = -7.0006E-05     at=  2.2001E-09  from=  2.0000E-09     to=  3.0000E-09
+MAXIGNDR    =  4.5879E-05     at=  2.1791E-09  from=  2.0000E-09     to=  3.0000E-09
+MAXIVDDF    = -4.7912E-05     at=  1.1717E-09  from=  1.0000E-09     to=  2.0000E-09
+MAXILOADF   = -1.2603E-07     at=  1.1937E-09  from=  1.0000E-09     to=  2.0000E-09
+MAXILOADR   =  1.1510E-07     at=  2.2076E-09  from=  2.0000E-09     to=  3.0000E-09
+
+
+When we have that the output switches from 1 to 0, the load capacitance must be discharged. The current stored into the load capacitance goes towards the ground. For this reason, the larger the capacitance, the larger the current seen in the ground. At the same point, circa at 1.2ns we have also some contribution from the Vdd, this current is due to the fact that the PMOS connected to the B input is switching, from ON to OFF, and also because the voltage at the output is decreasing; this causes a difference of potential that causes the electrons to move. In fact, the larger the load connected at the output, the slower the switching time, the large the switching power.
+
+When B changes again from 0 to 1, we have the opposite situation: the load capacitance must be charged, as the intrinsic capacitances seen at the output.
+
+

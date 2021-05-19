@@ -1,0 +1,424 @@
+# Model Management Library File 
+# Created by re11
+# Created on Fri Jun 21 16:50:37 MET DST 2002
+
+library $loc(MGC_DESIGN_KIT)/common_poly.lib
+
+   devicefamily common_poly
+
+      corner TT = common_poly_TT
+      description {Corner TT for common_poly common_poly devices}
+
+      corner SSA = common_poly_SSA
+      description {Corner SSA for common_poly common_poly devices}
+
+      corner SS = common_poly_SS
+      description {Corner SS for common_poly common_poly devices}
+
+      corner SFA = common_poly_SFA
+      description {Corner SFA for common_poly common_poly devices}
+
+      corner SF = common_poly_SF
+      description {Corner SF for common_poly common_poly devices}
+
+      corner FSA = common_poly_FSA
+      description {Corner FSA for common_poly common_poly devices}
+
+      corner FS = common_poly_FS
+      description {Corner FS for common_poly common_poly devices}
+
+      corner FFA = common_poly_FFA
+      description {Corner FFA for common_poly common_poly devices}
+
+      corner FF = common_poly_FF
+      description {Corner FF for common_poly common_poly devices}
+
+      corner stat = common_poly_stat stat
+      description {Corner stat for common_poly common_poly devices}
+
+   enddf common_poly
+
+endl $loc(MGC_DESIGN_KIT)/common_poly.lib
+
+library $loc(MGC_DESIGN_KIT)/common_active.lib
+
+   devicefamily common_active
+
+      corner TT = common_active_TT
+      description {Corner TT for common_active common_active devices}
+
+      corner SSA = common_active_SSA
+      description {Corner SSA for common_active common_active devices}
+
+      corner SS = common_active_SS
+      description {Corner SS for common_active common_active devices}
+
+      corner SFA = common_active_SFA
+      description {Corner SFA for common_active common_active devices}
+
+      corner SF = common_active_SF
+      description {Corner SF for common_active common_active devices}
+
+      corner FSA = common_active_FSA
+      description {Corner FSA for common_active common_active devices}
+
+      corner FS = common_active_FS
+      description {Corner FS for common_active common_active devices}
+
+      corner FFA = common_active_FFA
+      description {Corner FFA for common_active common_active devices}
+
+      corner FF = common_active_FF
+      description {Corner FF for common_active common_active devices}
+
+      corner stat = common_active_stat stat
+      description {Corner stat for common_active common_active devices}
+
+   enddf common_active
+
+endl $loc(MGC_DESIGN_KIT)/common_active.lib
+
+library $loc(MGC_DESIGN_KIT)/common_go1.lib
+
+   devicefamily common_go1
+
+      corner TT = common_go1_TT
+      description {Corner TT for common_go1 common_go1 devices}
+
+      corner SSA = common_go1_SSA
+      description {Corner SSA for common_go1 common_go1 devices}
+
+      corner SS = common_go1_SS
+      description {Corner SS for common_go1 common_go1 devices}
+
+      corner SFA = common_go1_SFA
+      description {Corner SFA for common_go1 common_go1 devices}
+
+      corner SF = common_go1_SF
+      description {Corner SF for common_go1 common_go1 devices}
+
+      corner FSA = common_go1_FSA
+      description {Corner FSA for common_go1 common_go1 devices}
+
+      corner FS = common_go1_FS
+      description {Corner FS for common_go1 common_go1 devices}
+
+      corner FFA = common_go1_FFA
+      description {Corner FFA for common_go1 common_go1 devices}
+
+      corner FF = common_go1_FF
+      description {Corner FF for common_go1 common_go1 devices}
+
+      corner stat = common_go1_stat stat
+      description {Corner stat for common_go1 common_go1 devices}
+
+   enddf common_go1
+
+endl $loc(MGC_DESIGN_KIT)/common_go1.lib
+
+library $loc(MGC_DESIGN_KIT)/common_go2.lib
+
+   devicefamily common_go2
+
+      corner TT = common_go2_TT
+      description {Corner TT for common_go2 common_go2 devices}
+
+      corner SSA = common_go2_SSA
+      description {Corner SSA for common_go2 common_go2 devices}
+
+      corner SFA = common_go2_SFA
+      description {Corner SFA for common_go2 common_go2 devices}
+
+      corner FSA = common_go2_FSA
+      description {Corner FSA for common_go2 common_go2 devices}
+
+      corner FFA = common_go2_FFA
+      description {Corner FFA for common_go2 common_go2 devices}
+
+      corner stat = common_go2_stat stat
+      description {Corner stat for common_go2 common_go2 devices}
+
+   enddf common_go2
+
+endl $loc(MGC_DESIGN_KIT)/common_go2.lib
+
+library $loc(MGC_DESIGN_KIT)/mos_bsim3_HS.lib
+
+   devicefamily moshs DEVFlag=moshs_DEV
+
+      corner TT = moshs_TT
+      description {Corner TT for moshs mos_bsim3_HS devices}
+
+      corner SSA = moshs_SSA
+      description {Corner SSA for moshs mos_bsim3_HS devices}
+
+      corner SS = moshs_SS
+      description {Corner SS for moshs mos_bsim3_HS devices}
+
+      corner SFA = moshs_SFA
+      description {Corner SFA for moshs mos_bsim3_HS devices}
+
+      corner SF = moshs_SF
+      description {Corner SF for moshs mos_bsim3_HS devices}
+
+      corner FSA = moshs_FSA
+      description {Corner FSA for moshs mos_bsim3_HS devices}
+
+      corner FS = moshs_FS
+      description {Corner FS for moshs mos_bsim3_HS devices}
+
+      corner FFA = moshs_FFA
+      description {Corner FFA for moshs mos_bsim3_HS devices}
+
+      corner FF = moshs_FF
+      description {Corner FF for moshs mos_bsim3_HS devices}
+
+      corner stat = moshs_stat stat
+      description {Corner stat for moshs mos_bsim3_HS devices}
+
+   enddf moshs
+
+endl $loc(MGC_DESIGN_KIT)/mos_bsim3_HS.lib
+
+library $loc(MGC_DESIGN_KIT)/mos_bsim3_LL.lib
+
+   devicefamily mosll DEVFlag=mosll_DEV
+
+      corner TT = mosll_TT
+      description {Corner TT for mosll mos_bsim3_LL devices}
+
+      corner SSA = mosll_SSA
+      description {Corner SSA for mosll mos_bsim3_LL devices}
+
+      corner SS = mosll_SS
+      description {Corner SS for mosll mos_bsim3_LL devices}
+
+      corner SFA = mosll_SFA
+      description {Corner SFA for mosll mos_bsim3_LL devices}
+
+      corner SF = mosll_SF
+      description {Corner SF for mosll mos_bsim3_LL devices}
+
+      corner FSA = mosll_FSA
+      description {Corner FSA for mosll mos_bsim3_LL devices}
+
+      corner FS = mosll_FS
+      description {Corner FS for mosll mos_bsim3_LL devices}
+
+      corner FFA = mosll_FFA
+      description {Corner FFA for mosll mos_bsim3_LL devices}
+
+      corner FF = mosll_FF
+      description {Corner FF for mosll mos_bsim3_LL devices}
+
+      corner stat = mosll_stat stat
+      description {Corner stat for mosll mos_bsim3_LL devices}
+
+   enddf mosll
+
+endl $loc(MGC_DESIGN_KIT)/mos_bsim3_LL.lib
+
+library $loc(MGC_DESIGN_KIT)/mos_bsim3_3V3.lib
+
+   devicefamily mos3v3 DEVFlag=mos3v3_DEV
+
+      corner TT = mos3v3_TT
+      description {Corner TT for mos3v3 mos_bsim3_3V3 devices}
+
+      corner SSA = mos3v3_SSA
+      description {Corner SSA for mos3v3 mos_bsim3_3V3 devices}
+
+      corner SFA = mos3v3_SFA
+      description {Corner SFA for mos3v3 mos_bsim3_3V3 devices}
+
+      corner FSA = mos3v3_FSA
+      description {Corner FSA for mos3v3 mos_bsim3_3V3 devices}
+
+      corner FFA = mos3v3_FFA
+      description {Corner FFA for mos3v3 mos_bsim3_3V3 devices}
+
+      corner stat = mos3v3_stat stat
+      description {Corner stat for mos3v3 mos_bsim3_3V3 devices}
+
+   enddf mos3v3
+
+endl $loc(MGC_DESIGN_KIT)/mos_bsim3_3V3.lib
+
+library $loc(MGC_DESIGN_KIT)/diode.lib
+
+   devicefamily diode
+
+      corner typ = diode_typ
+      description {Corner typ for diode diode devices}
+
+      corner slow = diode_slow
+      description {Corner slow for diode diode devices}
+
+      corner fast = diode_fast
+      description {Corner fast for diode diode devices}
+
+   enddf diode
+
+endl $loc(MGC_DESIGN_KIT)/diode.lib
+
+library $loc(MGC_DESIGN_KIT)/resistor.lib
+
+   devicefamily rpolys
+
+      corner typ = rpolys_typ
+      description {Corner typ for rpolys resistor devices}
+
+      corner rmin = rpolys_rmin
+      description {Corner rmin for rpolys resistor devices}
+
+      corner rmax = rpolys_rmax
+      description {Corner rmax for rpolys resistor devices}
+
+   enddf rpolys
+
+   devicefamily rpolyp
+
+      corner typ = rpolyp_typ
+      description {Corner typ for rpolyp resistor devices}
+
+      corner rmin = rpolyp_rmin
+      description {Corner rmin for rpolyp resistor devices}
+
+      corner rmax = rpolyp_rmax
+      description {Corner rmax for rpolyp resistor devices}
+
+   enddf rpolyp
+
+   devicefamily rpdiff
+
+      corner typ = rpdiff_typ
+      description {Corner typ for rpdiff resistor devices}
+
+      corner rmin = rpdiff_rmin
+      description {Corner rmin for rpdiff resistor devices}
+
+      corner rmax = rpdiff_rmax
+      description {Corner rmax for rpdiff resistor devices}
+
+   enddf rpdiff
+
+   devicefamily rpolyh
+
+      corner typ = rpolyh_typ
+      description {Corner typ for rpolyh resistor devices}
+
+      corner rmin = rpolyh_rmin
+      description {Corner rmin for rpolyh resistor devices}
+
+      corner rmax = rpolyh_rmax
+      description {Corner rmax for rpolyh resistor devices}
+
+   enddf rpolyh
+
+endl $loc(MGC_DESIGN_KIT)/resistor.lib
+
+library $loc(MGC_DESIGN_KIT)/cideal.lib
+
+   devicefamily cnat
+
+      corner typ = cnat_typ
+      description {Corner typ for cnat cideal devices}
+
+      corner cmin = cnat_cmin
+      description {Corner cmin for cnat cideal devices}
+
+      corner cmax = cnat_cmax
+      description {Corner cmax for cnat cideal devices}
+
+   enddf cnat
+
+endl $loc(MGC_DESIGN_KIT)/cideal.lib
+
+library $loc(MGC_DESIGN_KIT)/cpolywell.lib
+
+   devicefamily cdonwpo3v3
+
+      corner typ = cdonwpo3v3_typ
+      description {Corner typ for cdonwpo3v3 cpolywell devices}
+
+      corner cmin = cdonwpo3v3_cmin
+      description {Corner cmin for cdonwpo3v3 cpolywell devices}
+
+      corner cmax = cdonwpo3v3_cmax
+      description {Corner cmax for cdonwpo3v3 cpolywell devices}
+
+   enddf cdonwpo3v3
+
+   devicefamily cdopwpo3v3
+
+      corner typ = cdopwpo3v3_typ
+      description {Corner typ for cdopwpo3v3 cpolywell devices}
+
+      corner cmin = cdopwpo3v3_cmin
+      description {Corner cmin for cdopwpo3v3 cpolywell devices}
+
+      corner cmax = cdopwpo3v3_cmax
+      description {Corner cmax for cdopwpo3v3 cpolywell devices}
+
+   enddf cdopwpo3v3
+
+endl $loc(MGC_DESIGN_KIT)/cpolywell.lib
+
+library $loc(MGC_DESIGN_KIT)/capacitor.lib
+
+   devicefamily cmom
+
+      corner typ = cmom_typ
+      description {Corner typ for cmom capacitor devices}
+
+   enddf cmom
+
+   devicefamily cmimhk
+
+      corner typ = cmimhk_typ
+      description {Corner typ for cmimhk capacitor devices}
+
+   enddf cmimhk
+
+endl $loc(MGC_DESIGN_KIT)/capacitor.lib
+
+library $loc(MGC_DESIGN_KIT)/capacitor_DRAM.lib
+
+   devicefamily cdram
+
+      corner typ = cdram_typ
+      description {Corner typ for cdram capacitor_DRAM devices}
+
+   enddf cdram
+
+endl $loc(MGC_DESIGN_KIT)/capacitor_DRAM.lib
+
+library $loc(MGC_DESIGN_KIT)/bipolar.lib
+
+   devicefamily pnpvs11
+
+      corner typ = pnpvs11_typ
+      description {Corner typ for pnpvs11 bipolar devices}
+
+      corner bmin = pnpvs11_bmin
+      description {Corner bmin for pnpvs11 bipolar devices}
+
+      corner bmax = pnpvs11_bmax
+      description {Corner bmax for pnpvs11 bipolar devices}
+
+   enddf pnpvs11
+
+   devicefamily npnvs11
+
+      corner typ = npnvs11_typ
+      description {Corner typ for npnvs11 bipolar devices}
+
+      corner bmin = npnvs11_bmin
+      description {Corner bmin for npnvs11 bipolar devices}
+
+      corner bmax = npnvs11_bmax
+      description {Corner bmax for npnvs11 bipolar devices}
+
+   enddf npnvs11
+
+endl $loc(MGC_DESIGN_KIT)/bipolar.lib

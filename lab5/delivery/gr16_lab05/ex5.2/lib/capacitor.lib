@@ -1,0 +1,277 @@
+
+
+.lib cmom_typ
+
+*----------------------------------------------------------------------
+*                             CAPACITOR
+*----------------------------------------------------------------------
+* TEMPLATE   : capacitor_eldoN.t,v 2.1 2002/04/25 14:39:16
+* PARAMETERS : capacitor.dds,v 1.39 2002/04/25 14:37:50
+* TRANSLATOR : ddspp.tcl,v 1.47 2001/09/11 08:03:16
+* Translated by re11 on June 14, 2002
+* ----------------------------------------------------------------------
+* (C) Copyright STMicroelectronics (2002)
+*     Unauthorized Reproduction and Communication Strictly Prohibited.
+* ----------------------------------------------------------------------
+*----------------------------------------------------------------------
+
+
+.subckt CMOMM1M5M1 PLUS MINUS B
++  param: c=17.58e-15 number=1 mismatch=1
+*----------------------------------------------------------------------
+* Family cmom Model CMOMM1M5M1 typ
+* Maturity : Tentative
+*----------------------------------------------------------------------
+.param climit     = 1.12e-3
+.param gamma      = 63e-17
+.param wf         = 0.2e-6
+.param space	  = 0.21e-6
+.param lfbus      = 1e-6
+.param wbus       = 1e-6
+.param area       = {(c-gamma)/climit}
+.param lbus       = {sqrt(area)}
+.param pitch      = {(space+wf)}
+.param nf         = {trunc((lbus+space)/(pitch))}
+.param lbus2      = {pitch*nf-space} 
+.param lf_eff     = {area/lbus2}		
+*----------------------------------------------------------------------
+*Parameters exposed to global variations
+.param cap        = 9.53e-5
+.param cf0p       = 0
+*----------------------------------------------------------------------
+.param cval1      = {(climit+gamma/area)*area}
+.param nfp        = valif(trunc(nf/2) == nf/2, nf/2, trunc(nf/2+1))
+.param nfm        = trunc(nf/2)
+.param cvalp      = {((lbus2*wbus)+(lf_eff+lfbus)*wf*nfp)*cap}
+.param cvalm      = {((lbus2*wbus)+(lf_eff+lfbus)*wf*nfm)*cap}
+*----------------------------------------------------------------------
+Cc   PLUS MINUS {cval1*number}
+Ccpp B  MINUS {cvalp*number}
+Ccpm B	PLUS {cvalm*number}
+.ends CMOMM1M5M1
+
+.subckt CMOMM1M5M2 PLUS MINUS B
++  param: c=17.58e-15 number=1  mismatch=1
+*----------------------------------------------------------------------
+* Family cmom Model CMOMM1M5M2 typ
+* Maturity : Tentative
+*----------------------------------------------------------------------
+.param climit     = 1.12e-3
+.param gamma      = 63e-17
+.param wvia       = 0.19e-6
+.param spacevia   = 0.22e-6
+.param cem        = 0.01e-6
+.param wf         = 0.2e-6
+.param space	  = 0.21e-6
+.param area       = {(c-gamma)/climit}
+.param lbus       = {sqrt(area)}
+.param pitch      = {(space+wf)}
+.param nf         = {trunc((lbus+space)/pitch)}
+* lbus2 quasi equal to lf_eff  (Lf_eff*lfbus2=Area)
+.param lbus2      = {pitch*nf-space} 
+.param lf_eff     = {area/lbus2}	
+*----------------------------------------------------------------------
+*Parameters exposed to global variations
+.param cap        = 9.53e-5
+.param cf0p       = 0
+.param dl1        = 0.0e-6
+.param dw1        = 0.0e-6  
+.param lfbus      = 1e-6
+.param wbus       = 1e-6
+*----------------------------------------------------------------------
+.param c0         = {(climit+gamma/area)*area}
+.param nfp        = valif(trunc(nf/2) == nf/2, nf/2, trunc(nf/2+1))
+.param nfm        = trunc(nf/2)
+.param ncvia      = 2
+.param nrvia      = trunc((lbus2+spacevia-2*cem)/(wvia+spacevia))
+.param nvia       = {ncvia*nrvia}
+.param rviaeq     = {0.25/nvia}
+.param rseq       = 12.5e-3
+.param rvalp      = {(rviaeq+((rseq/3)*(lf_eff+lfbus-dl1)/(wf-dw1))/nfp)}
+.param rvalm      = {(rviaeq+((rseq/3)*(lf_eff+lfbus-dl1)/(wf-dw1))/nfm)}
+.param cvalp      = {((lbus2*wbus)+(lf_eff+lfbus)*wf*nfp)*cap}
+.param cvalm      = {((lbus2*wbus)+(lf_eff+lfbus)*wf*nfm)*cap}
+Cc 4 5 {c0*number}
+*----------------------------------------------------------------------
+Rrp PLUS  4 {rvalp/number}
+Rrm MINUS 5 {rvalm/number}
+Ccpp  B     5 {cvalp*number}
+Ccpm  B     4 {cvalm*number}
+.ends CMOMM1M5M2
+
+
+.endl cmom_typ
+
+
+.lib cmimhk_typ
+
+*----------------------------------------------------------------------
+*                             CAPACITOR
+*----------------------------------------------------------------------
+* TEMPLATE   : capacitor_eldoN.t,v 2.1 2002/04/25 14:39:16
+* PARAMETERS : capacitor.dds,v 1.39 2002/04/25 14:37:50
+* TRANSLATOR : ddspp.tcl,v 1.47 2001/09/11 08:03:16
+* Translated by re11 on June 14, 2002
+* ----------------------------------------------------------------------
+* (C) Copyright STMicroelectronics (2002)
+*     Unauthorized Reproduction and Communication Strictly Prohibited.
+* ----------------------------------------------------------------------
+*----------------------------------------------------------------------
+
+
+.subckt CHKMM6M1 PLUS MINUS B
++  param: c=2.6502e-14 w=3.5e-6 nviatop=1
++  nviabot=1 number=1 mismatch=1
+*----------------------------------------------------------------------
+* Family cmimhk Model CHKMM6M1 typ
+* Maturity : Tentative
+*----------------------------------------------------------------------
+.param dw1_typ = 0.0e-6
+.param dl1_typ = 0.0e-6
+.param cf0_typ = 1.43e-10
+.param ca_typ  = 2.0e-3
+.param cor     = 0
+.param we      = {w-dw1_typ}
+.param l       = {dl1_typ+(c-2*cf0_typ*(we-1.172*cor)
++                 +2*cor*cor*ca_typ)/(ca_typ*we+2*cf0_typ)}
+*----------------------------------------------------------------------
+*Parameters exposed to global variations
+.param  ca =2.0e-3   cf0=1.43e-10  cap=6.07e-6  cf0p=3.63e-11
++       dl1=0.0e-6  dw1=0.0e-6  dl2=0.0e-6  dw2 =0.0e-6
+*----------------------------------------------------------------------
+.param cval1   = {(2*cf0*(w-dw1+l-dl1-1.172*cor)
++                +ca*((w-dw1)*(l-dl1)-2*cor*cor))*number}
+.param mem     = 0.5e-6
+.param l2      = {l+2*mem}
+.param w2      = {w+2*mem}
+.param cval2   = {(cap*(w2-dw2)*(l2-dl2)+cf0p*2*(w2-dw2+l2-dl2))*number}
+*----------------------------------------------------------------------
+Cc   PLUS MINUS cval1
+Ccp  B    MINUS cval2
+.ends CHKMM6M1
+
+.subckt CHKMM6M2 PLUS MINUS B
++  param: c=2.6502e-14  w=3.5e-6  nviatop=1
++  nviabot=1  number=1  mismatch=1
+*----------------------------------------------------------------------
+* Family cmimhk Model CHKMM6M2 typ
+* Maturity : Tentative
+*----------------------------------------------------------------------
+.param dw1_typ   = 0.0e-6
+.param dl1_typ   = 0.0e-6
+.param cf0_typ   = 1.43e-10
+.param ca_typ    = 2.0e-3
+.param cor       = 0
+.param we        = {w-dw1_typ}
+.param l         = {dl1_typ+(c-2*cf0_typ*(we-1.172*cor)
++                 +2*cor*cor*ca_typ)/(ca_typ*we+2*cf0_typ)}
+*----------------------------------------------------------------------
+*Parameters exposed to global variations
+.param ca=2.0e-3    cf0=1.43e-10  cap=6.07e-6  cf0p=3.63e-11
++      dl1=0.0e-6  dw1=0.0e-6  dl2=0.0e-6  dw2=0.0e-6
++      rs1=210e-3  rs2=210e-3  rviatop=0.2 rviabot=0.2
+*----------------------------------------------------------------------
+.param c0        = {(2*cf0*(w-dw1+l-dl1-1.172*cor)
++                  +ca*((w-dw1)*(l-dl1)-2*cor*cor))*number}
+
+.param dcdv1     = -50e-6
+.param dcdv2     = 20e-6
+Cc 4 5 poly {c0} {c0*dcdv1} {c0*dcdv2}
+.param mem       = 0.5e-6
+.param l2        = {l+2*mem}
+.param w2        = {w+2*mem}
+*----------------------------------------------------------------------
+.param rviatopeq = valif(nviatop > 0,(rviatop/(nviatop+1e-6)),0.0)
+.param rviaboteq = valif(nviabot > 0,(rviabot/(nviabot+1e-6)),0.0)
+.param rval1     = {(rs1*(l-dl1)/(3.0*(w-dw1))+rviatopeq)/number}
+.param rval2     = {(rs2*(l2-dl2)/(3.0*(w2-dw2))+rviaboteq)/number}
+.param cval2     = {(cap*(w2-dw2)*(l2-dl2)+cf0p*2*(w2-dw2+l2-dl2))*number}
+*----------------------------------------------------------------------
+Rr14 PLUS  4 rval1
+Rr25 MINUS 5 rval2
+Ccp  B     5 cval2
+.ends CHKMM6M2
+
+.subckt CHKMM6M3 PLUS MINUS B
++  param: c=2.6502e-14  w=3.5e-6  nviatop=1
++  nviabot=1  number=1  mismatch=1
+*----------------------------------------------------------------------
+* Family cmimhk Model CHKMM6M3 typ
+* Maturity : Tentative
+*----------------------------------------------------------------------
+.param dw1_typ   = 0.0e-6
+.param dl1_typ   = 0.0e-6
+.param cf0_typ   = 1.43e-10
+.param ca_typ    = 2.0e-3
+.param cor       = 0
+.param we        = {w-dw1_typ}
+.param l         = {dl1_typ+(c-2*cf0_typ*(we-1.172*cor)
++                 +2*cor*cor*ca_typ)/(ca_typ*we+2*cf0_typ)}
+*----------------------------------------------------------------------
+*Parameters exposed to global variations
+.param ca=2.0e-3    cf0=1.43e-10  cap=6.07e-6  cf0p=3.63e-11
++      dl1=0.0e-6  dw1=0.0e-6  dl2=0.0e-6  dw2=0.0e-6
++      rs1=210e-3  rs2=210e-3  rviatop=0.2 rviabot=0.2
+*----------------------------------------------------------------------
+.param c0        = {(2*cf0*(w-dw1+l-dl1-1.172*cor)
++                  +ca*((w-dw1)*(l-dl1)-2*cor*cor))*number}
+
+.param dcdv1     = -50e-6
+.param dcdv2     = 20e-6
+Cc 6 7 poly {c0} {c0*dcdv1} {c0*dcdv2}
+.param mem       = 0.5e-6
+.param l2        = {l+2*mem}
+.param w2        = {w+2*mem}
+*----------------------------------------------------------------------
+.param lbcst_typ = 0.301261
+.param lbl_typ   = 0.722438e6
+.param lbw_typ   = -0.353135e6
+.param lbl2_typ  = 0.001667e12
+.param lbw2_typ  = 0.007561e12
+.param lblw_typ  = -0.011546e12
+.param lbw3_typ  = -3.643e13
+.param lblw2_typ = 5.023e13
+.param ltcst_typ = 0.142748
+.param ltl_typ   = 0.757670e6
+.param ltw_typ   = -0.390349e6
+.param ltl2_typ  = 0.001719e12
+.param ltw2_typ  = 0.008456e12
+.param ltlw_typ  = -0.012601e12
+.param ltw3_typ  = -4.093e13
+.param ltlw2_typ = 5.567e13
+.param mcst_typ  = 0.055722
+.param ml_typ    = -0.712770e6
+.param mw_typ    = 0.337005e6
+.param ml2_typ   = -0.001684e12
+.param mw2_typ   = -0.007329e12
+.param mlw_typ   = 0.011419e12
+.param mw3_typ   = 3.546e13
+.param mlw2_typ  = -4.960e13
+*----------------------------------------------------------------------
+.param rviatopeq = valif(nviatop > 0,(rviatop/(nviatop+1e-6)),0.0)
+.param rviaboteq = valif(nviabot > 0,(rviabot/(nviabot+1e-6)),0.0)
+.param rval1     = {(rs1*(l-dl1)/(3.0*(w-dw1))+rviatopeq)/number}
+.param rval2     = {(rs2*(l2-dl2)/(3.0*(w2-dw2))+rviaboteq)/number}
+.param cval2     = {(cap*(w2-dw2)*(l2-dl2)+cf0p*2*(w2-dw2+l2-dl2))*number}
+.param lval2     = {abs((lbcst_typ+lbl_typ*l2+lbw_typ*w2+lbl2_typ*l2^2
++                   +lbw2_typ*w2^2+lblw_typ*l2*w2+lbw3_typ*w2^3
++                   +lblw2_typ*l2*w2^2)*1e-12)}
+.param lval1     = {abs((ltcst_typ+ltl_typ*l+ltw_typ*w+ltl2_typ*l^2
++                   +ltw2_typ*w^2+ltlw_typ*l*w+ltw3_typ*w^3
++                   +ltlw2_typ*l*w^2)*1e-12)}
+.param mval      = {(mcst_typ+ml_typ*l+mw_typ*w+ml2_typ*l^2
++                   +mw2_typ*w^2+mlw_typ*l*w+mw3_typ*w^3
++                   +mlw2_typ*l*w^2)*1e-12}
+.param kval      = {-mval/((lval1*lval2)^0.5)}
+*----------------------------------------------------------------------
+*Kl  Ll46  Ll57  kval 
+Rr14 PLUS  4 rval1
+Ll46 4     6 lval1
+Rr25 MINUS 5 rval2
+Ll57 5     7 lval2
+Ccp  B     7 cval2
+.ends CHKMM6M3
+
+
+.endl cmimhk_typ
+

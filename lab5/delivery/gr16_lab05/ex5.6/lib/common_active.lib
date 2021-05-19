@@ -1,0 +1,138 @@
+
+
+*----------------------------------------------------------------------
+*                           Process Variations
+*----------------------------------------------------------------------
+* TEMPLATE   : statistic_eldoN.t,v 2.0 2002/04/03 15:02:24
+* PARAMETERS : statistic.dds,v 2.8 2002/06/04 11:44:06
+* TRANSLATOR : ddspp.tcl,v 1.47 2001/09/11 08:03:16
+* Translated by re11 on June 14, 2002
+* PACKAGE    : modelString.tcl,v 1.13 2002/04/10 07:19:16
+* PACKAGE    : statPackage.tcl,v 1.15 2001/11/26 16:05:19
+*----------------------------------------------------------------------
+* (C) Copyright STMicroelectronics
+*     Unauthorized Reproduction and Communication Strictly Prohibited.
+*----------------------------------------------------------------------
+
+.lib PRO_TT
+
+.param nsigma_active_cdvar  =  0
+.param nsigma_go2_2v5_acti_cdvar  =  0
+.param nsigma_go2_3v3_acti_cdvar  =  0
+
+
+.lib "common_active.lib" PRO_PARAM
+.lib "common_active.lib" PRO_CORREL
+.endl PRO_TT
+.lib PRO_FF
+
+.param nsigma_active_cdvar  =  2
+.param nsigma_go2_2v5_acti_cdvar  =  2
+.param nsigma_go2_3v3_acti_cdvar  =  2
+
+
+.lib "common_active.lib" PRO_PARAM
+.lib "common_active.lib" PRO_CORREL
+.endl PRO_FF
+.lib PRO_SS
+
+.param nsigma_active_cdvar  =  -2
+.param nsigma_go2_2v5_acti_cdvar  =  -2
+.param nsigma_go2_3v3_acti_cdvar  =  -2
+
+
+.lib "common_active.lib" PRO_PARAM
+.lib "common_active.lib" PRO_CORREL
+.endl PRO_SS
+.lib PRO_FFA
+
+.param nsigma_active_cdvar  =  3
+.param nsigma_go2_2v5_acti_cdvar  =  2
+.param nsigma_go2_3v3_acti_cdvar  =  2
+
+
+.lib "common_active.lib" PRO_PARAM
+.lib "common_active.lib" PRO_CORREL
+.endl PRO_FFA
+.lib PRO_SSA
+
+.param nsigma_active_cdvar  =  -3
+.param nsigma_go2_2v5_acti_cdvar  =  -2
+.param nsigma_go2_3v3_acti_cdvar  =  -2
+
+
+.lib "common_active.lib" PRO_PARAM
+.lib "common_active.lib" PRO_CORREL
+.endl PRO_SSA
+.lib PRO_FS
+
+.param nsigma_active_cdvar  =  0
+.param nsigma_go2_2v5_acti_cdvar  =  0
+.param nsigma_go2_3v3_acti_cdvar  =  0
+
+
+.lib "common_active.lib" PRO_PARAM
+.lib "common_active.lib" PRO_CORREL
+.endl PRO_FS
+.lib PRO_SF
+
+.param nsigma_active_cdvar  =  0
+.param nsigma_go2_2v5_acti_cdvar  =  0
+.param nsigma_go2_3v3_acti_cdvar  =  0
+
+
+.lib "common_active.lib" PRO_PARAM
+.lib "common_active.lib" PRO_CORREL
+.endl PRO_SF
+.lib PRO_FSA
+
+.param nsigma_active_cdvar  =  0
+.param nsigma_go2_2v5_acti_cdvar  =  0
+.param nsigma_go2_3v3_acti_cdvar  =  0
+
+
+.lib "common_active.lib" PRO_PARAM
+.lib "common_active.lib" PRO_CORREL
+.endl PRO_FSA
+.lib PRO_SFA
+
+.param nsigma_active_cdvar  =  0
+.param nsigma_go2_2v5_acti_cdvar  =  0
+.param nsigma_go2_3v3_acti_cdvar  =  0
+
+
+.lib "common_active.lib" PRO_PARAM
+.lib "common_active.lib" PRO_CORREL
+.endl PRO_SFA
+.lib PRO_PARAM
+
+
+*----------------------------------------------
+*                   common_active 
+*----------------------------------------------
+.param active_cdvar = {0.0+0.5*20.00e-9*nsigma_active_cdvar}
+.param go2_3v3_acti_cdvar = {0+0.5*3.6e-8*nsigma_go2_3v3_acti_cdvar}
+.param go2_2v5_acti_cdvar = {0+0.5*3.6e-8*nsigma_go2_2v5_acti_cdvar}
+
+
+.endl PRO_PARAM
+.lib PRO_stat
+
+*----------------------------------------------
+*                   common_active 
+*----------------------------------------------
+.PARAM active_cdvar = 0.0 LOT/uniform={20.00e-9}
+.PARAM go2_3v3_acti_cdvar = 0 LOT/uniform={3.6e-8}
+.PARAM go2_2v5_acti_cdvar = 0 LOT/uniform={3.6e-8}
+
+
+.lib "common_active.lib" PRO_CORREL
+.endl PRO_stat
+.lib PRO_CORREL
+
+*----------------------------------------------
+*                   common_active 
+*----------------------------------------------
+
+
+.endl PRO_CORREL

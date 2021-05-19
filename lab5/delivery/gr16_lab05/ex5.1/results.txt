@@ -1,0 +1,14 @@
+nandHS.chi
+
+RNAND        =  8.9303E-11   targ=  2.1595E-09     trig=  2.0702E-09
+FNAND        =  7.4319E-11   targ=  1.1390E-09     trig=  1.0647E-09
+NANDDELAYHL  =  4.8993E-11   targ=  1.0990E-09     trig=  1.0500E-09
+NANDDELAYLH  =  5.6490E-11   targ=  2.1065E-09     trig=  2.0500E-09
+
+
+Our
+
+TPHL = 4.9E-11
+TPLH = 5.7E-11
+TRISE = 8.9E-11
+TFALL = 7.4E-11

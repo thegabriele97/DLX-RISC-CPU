@@ -1,0 +1,182 @@
+
+
+*----------------------------------------------------------------------
+*                           Process Variations
+*----------------------------------------------------------------------
+* TEMPLATE   : statistic_eldoN.t,v 2.0 2002/04/03 15:02:24
+* PARAMETERS : statistic.dds,v 2.8 2002/06/04 11:44:06
+* TRANSLATOR : ddspp.tcl,v 1.47 2001/09/11 08:03:16
+* Translated by re11 on June 14, 2002
+* PACKAGE    : modelString.tcl,v 1.13 2002/04/10 07:19:16
+* PACKAGE    : statPackage.tcl,v 1.15 2001/11/26 16:05:19
+*----------------------------------------------------------------------
+* (C) Copyright STMicroelectronics
+*     Unauthorized Reproduction and Communication Strictly Prohibited.
+*----------------------------------------------------------------------
+
+.lib PRO_TT
+
+.param nsigma_go2_2v5_poly_cdvar  =  0
+.param nsigma_go2_3v3_poly_cdvar  =  0
+.param nsigma_npoly_rsc  =  0
+.param nsigma_npoly_rsh  =  0
+.param nsigma_poly_cdvar  =  0
+.param nsigma_ppoly_rsc  =  0
+.param nsigma_ppoly_rsh  =  0
+
+
+.lib "common_poly.lib" PRO_PARAM
+.lib "common_poly.lib" PRO_CORREL
+.endl PRO_TT
+.lib PRO_FF
+
+.param nsigma_go2_2v5_poly_cdvar  =  -2
+.param nsigma_go2_3v3_poly_cdvar  =  -2
+.param nsigma_npoly_rsc  =  0
+.param nsigma_npoly_rsh  =  -2
+.param nsigma_poly_cdvar  =  -2
+.param nsigma_ppoly_rsc  =  0
+.param nsigma_ppoly_rsh  =  -2
+
+
+.lib "common_poly.lib" PRO_PARAM
+.lib "common_poly.lib" PRO_CORREL
+.endl PRO_FF
+.lib PRO_SS
+
+.param nsigma_go2_2v5_poly_cdvar  =  2
+.param nsigma_go2_3v3_poly_cdvar  =  2
+.param nsigma_npoly_rsc  =  2
+.param nsigma_npoly_rsh  =  2
+.param nsigma_poly_cdvar  =  2
+.param nsigma_ppoly_rsc  =  2
+.param nsigma_ppoly_rsh  =  2
+
+
+.lib "common_poly.lib" PRO_PARAM
+.lib "common_poly.lib" PRO_CORREL
+.endl PRO_SS
+.lib PRO_FFA
+
+.param nsigma_go2_2v5_poly_cdvar  =  -2
+.param nsigma_go2_3v3_poly_cdvar  =  -2
+.param nsigma_npoly_rsc  =  0
+.param nsigma_npoly_rsh  =  -2
+.param nsigma_poly_cdvar  =  -3
+.param nsigma_ppoly_rsc  =  0
+.param nsigma_ppoly_rsh  =  -2
+
+
+.lib "common_poly.lib" PRO_PARAM
+.lib "common_poly.lib" PRO_CORREL
+.endl PRO_FFA
+.lib PRO_SSA
+
+.param nsigma_go2_2v5_poly_cdvar  =  2
+.param nsigma_go2_3v3_poly_cdvar  =  2
+.param nsigma_npoly_rsc  =  2
+.param nsigma_npoly_rsh  =  2
+.param nsigma_poly_cdvar  =  3
+.param nsigma_ppoly_rsc  =  2
+.param nsigma_ppoly_rsh  =  2
+
+
+.lib "common_poly.lib" PRO_PARAM
+.lib "common_poly.lib" PRO_CORREL
+.endl PRO_SSA
+.lib PRO_FS
+
+.param nsigma_go2_2v5_poly_cdvar  =  0
+.param nsigma_go2_3v3_poly_cdvar  =  0
+.param nsigma_npoly_rsc  =  0
+.param nsigma_npoly_rsh  =  0
+.param nsigma_poly_cdvar  =  0
+.param nsigma_ppoly_rsc  =  0
+.param nsigma_ppoly_rsh  =  0
+
+
+.lib "common_poly.lib" PRO_PARAM
+.lib "common_poly.lib" PRO_CORREL
+.endl PRO_FS
+.lib PRO_SF
+
+.param nsigma_go2_2v5_poly_cdvar  =  0
+.param nsigma_go2_3v3_poly_cdvar  =  0
+.param nsigma_npoly_rsc  =  0
+.param nsigma_npoly_rsh  =  0
+.param nsigma_poly_cdvar  =  0
+.param nsigma_ppoly_rsc  =  0
+.param nsigma_ppoly_rsh  =  0
+
+
+.lib "common_poly.lib" PRO_PARAM
+.lib "common_poly.lib" PRO_CORREL
+.endl PRO_SF
+.lib PRO_FSA
+
+.param nsigma_go2_2v5_poly_cdvar  =  0
+.param nsigma_go2_3v3_poly_cdvar  =  0
+.param nsigma_npoly_rsc  =  0
+.param nsigma_npoly_rsh  =  0
+.param nsigma_poly_cdvar  =  0
+.param nsigma_ppoly_rsc  =  0
+.param nsigma_ppoly_rsh  =  0
+
+
+.lib "common_poly.lib" PRO_PARAM
+.lib "common_poly.lib" PRO_CORREL
+.endl PRO_FSA
+.lib PRO_SFA
+
+.param nsigma_go2_2v5_poly_cdvar  =  0
+.param nsigma_go2_3v3_poly_cdvar  =  0
+.param nsigma_npoly_rsc  =  0
+.param nsigma_npoly_rsh  =  0
+.param nsigma_poly_cdvar  =  0
+.param nsigma_ppoly_rsc  =  0
+.param nsigma_ppoly_rsh  =  0
+
+
+.lib "common_poly.lib" PRO_PARAM
+.lib "common_poly.lib" PRO_CORREL
+.endl PRO_SFA
+.lib PRO_PARAM
+
+
+*----------------------------------------------
+*                   common_poly 
+*----------------------------------------------
+.param poly_cdvar = {-20e-9+0.5*8.0e-9*nsigma_poly_cdvar}
+.param go2_3v3_poly_cdvar = {-15e-9+0.5*1.8e-8*nsigma_go2_3v3_poly_cdvar}
+.param go2_2v5_poly_cdvar = {-4e-8+0.5*1.8e-8*nsigma_go2_2v5_poly_cdvar}
+.param npoly_rsh = {10+0.5*4*nsigma_npoly_rsh}
+.param ppoly_rsh = {10+0.5*4*nsigma_ppoly_rsh}
+.param npoly_rsc = {15+0.5*15*nsigma_npoly_rsc}
+.param ppoly_rsc = {15+0.5*15*nsigma_ppoly_rsc}
+
+
+.endl PRO_PARAM
+.lib PRO_stat
+
+*----------------------------------------------
+*                   common_poly 
+*----------------------------------------------
+.PARAM poly_cdvar = -20e-9 LOT/uniform={8.0e-9}
+.PARAM go2_3v3_poly_cdvar = -15e-9 LOT/uniform={1.8e-8}
+.PARAM go2_2v5_poly_cdvar = -4e-8 LOT/uniform={1.8e-8}
+.PARAM npoly_rsh = 10 LOT/uniform={4}
+.PARAM ppoly_rsh = 10 LOT/uniform={4}
+.PARAM npoly_rsc = 15 LOT/uniform={15}
+.PARAM ppoly_rsc = 15 LOT/uniform={15}
+
+
+.lib "common_poly.lib" PRO_CORREL
+.endl PRO_stat
+.lib PRO_CORREL
+
+*----------------------------------------------
+*                   common_poly 
+*----------------------------------------------
+
+
+.endl PRO_CORREL

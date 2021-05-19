@@ -1,0 +1,283 @@
+
+
+.lib pnpvs11_typ
+
+*----------------------------------------------------------------------
+*                             BIPOLAR
+*----------------------------------------------------------------------
+* TEMPLATE   : bipolar_eldoN.t,v 2.0 2002/04/03 14:42:05
+* PARAMETERS : bipolar.dds,v 1.6 2002/04/17 11:11:06
+* TRANSLATOR : ddspp.tcl,v 1.47 2001/09/11 08:03:16
+* Translated by re11 on June 14, 2002
+* ----------------------------------------------------------------------
+* (C) Copyright STMicroelectronics (2002)
+*     Unauthorized Reproduction and Communication Strictly Prohibited.
+* ----------------------------------------------------------------------
+*----------------------------------------------------------------------
+
+
+*----------------------------------------------------------------------
+* Family pnpvs11 Model PNPBG25UM1 st_compact typ
+* Maturity : tentative
+*----------------------------------------------------------------------
+.subckt PNPBG25UM1 C B E S
++ param: area=1
+
+.param ikf={0.0011509*((TEMPER+273.15)/(27+273.15))^(0)} 
+
+.param vrp={1*((TEMPER+273.15)/(27+273.15))^(2)} 
+Q1 C B E S PNPBG25U1_int area=area
+.model PNPBG25U1_int pnp tmeas=27              eg=1.17               
++ xti=3.2052            xtb=1.5308            is=3.3722e-18         
++ bf=3.77               nf=1                  br=0.0023679          
++ ise=2.5515e-15        ne=2                  vaf=377.57            
++ var=11.755            ikr=0.001             enp=1                 
++ rp=0.01               rw=1.0259             vjj=0.8               
++ rb=94.325             rbm=4.4931            re=20.605             
++ rc=0.5                cje=1.8874e-14        vje=0.7               
++ mje=0.329             cjc=1.9116e-14        vjc=0.504             
++ mjc=0.232             xjbc=0.22             tf=3.46154e-10        
++ trb1=0.002            tre1=0.002            trc1=0.007            
++ ikf=ikf vrp=vrp
+.ends PNPBG25UM1
+
+
+.endl pnpvs11_typ
+
+
+.lib pnpvs11_bmin
+
+*----------------------------------------------------------------------
+*                             BIPOLAR
+*----------------------------------------------------------------------
+* TEMPLATE   : bipolar_eldoN.t,v 2.0 2002/04/03 14:42:05
+* PARAMETERS : bipolar.dds,v 1.6 2002/04/17 11:11:06
+* TRANSLATOR : ddspp.tcl,v 1.47 2001/09/11 08:03:16
+* Translated by re11 on June 14, 2002
+* ----------------------------------------------------------------------
+* (C) Copyright STMicroelectronics (2002)
+*     Unauthorized Reproduction and Communication Strictly Prohibited.
+* ----------------------------------------------------------------------
+*----------------------------------------------------------------------
+
+
+*----------------------------------------------------------------------
+* Family pnpvs11 Model PNPBG25UM1 st_compact bmin
+* Maturity : tentative
+*----------------------------------------------------------------------
+.subckt PNPBG25UM1 C B E S
++ param: area=1
+
+.param ikf={0.00287725*((TEMPER+273.15)/(27+273.15))^(0)} 
+
+.param vrp={1*((TEMPER+273.15)/(27+273.15))^(2)} 
+Q1 C B E S PNPBG25U1_int area=area
+.model PNPBG25U1_int pnp tmeas=27              eg=1.17               
++ xti=3.2052            xtb=1.5308            is=1.34888e-18        
++ bf=1.508              nf=1                  br=0.00094716         
++ ise=2.5515e-15        ne=2                  vaf=1096.74           
++ var=29.3875           ikr=0.001             enp=1                 
++ rp=0.01               rw=1.0259             vjj=0.8               
++ rb=39.6171            rbm=3.68434           re=20.605             
++ rc=0.5                cje=2.98424e-14       vje=0.7               
++ mje=0.329             cjc=1.64524e-14       vjc=0.504             
++ mjc=0.232             xjbc=0.22             tf=3.46154e-10        
++ trb1=0.002            tre1=0.002            trc1=0.007            
++ ikf=ikf vrp=vrp
+.ends PNPBG25UM1
+
+
+.endl pnpvs11_bmin
+
+
+.lib pnpvs11_bmax
+
+*----------------------------------------------------------------------
+*                             BIPOLAR
+*----------------------------------------------------------------------
+* TEMPLATE   : bipolar_eldoN.t,v 2.0 2002/04/03 14:42:05
+* PARAMETERS : bipolar.dds,v 1.6 2002/04/17 11:11:06
+* TRANSLATOR : ddspp.tcl,v 1.47 2001/09/11 08:03:16
+* Translated by re11 on June 14, 2002
+* ----------------------------------------------------------------------
+* (C) Copyright STMicroelectronics (2002)
+*     Unauthorized Reproduction and Communication Strictly Prohibited.
+* ----------------------------------------------------------------------
+*----------------------------------------------------------------------
+
+
+*----------------------------------------------------------------------
+* Family pnpvs11 Model PNPBG25UM1 st_compact bmax
+* Maturity : tentative
+*----------------------------------------------------------------------
+.subckt PNPBG25UM1 C B E S
++ param: area=1
+
+.param ikf={0.000719313*((TEMPER+273.15)/(27+273.15))^(0)} 
+
+.param vrp={1*((TEMPER+273.15)/(27+273.15))^(2)} 
+Q1 C B E S PNPBG25U1_int area=area
+.model PNPBG25U1_int pnp tmeas=27              eg=1.17               
++ xti=3.2052            xtb=1.5308            is=5.39552e-18        
++ bf=6.032              nf=1                  br=0.00378864         
++ ise=2.5515e-15        ne=2                  vaf=190.254           
++ var=7.34688           ikr=0.001             enp=1                 
++ rp=0.01               rw=1.0259             vjj=0.8               
++ rb=149.033            rbm=5.30186           re=20.605             
++ rc=0.5                cje=1.49212e-14       vje=0.7               
++ mje=0.329             cjc=2.37105e-14       vjc=0.504             
++ mjc=0.232             xjbc=0.22             tf=3.46154e-10        
++ trb1=0.002            tre1=0.002            trc1=0.007            
++ ikf=ikf vrp=vrp
+.ends PNPBG25UM1
+
+
+.endl pnpvs11_bmax
+
+
+.lib npnvs11_typ
+
+*----------------------------------------------------------------------
+*                             BIPOLAR
+*----------------------------------------------------------------------
+* TEMPLATE   : bipolar_eldoN.t,v 2.0 2002/04/03 14:42:05
+* PARAMETERS : bipolar.dds,v 1.6 2002/04/17 11:11:06
+* TRANSLATOR : ddspp.tcl,v 1.47 2001/09/11 08:03:16
+* Translated by re11 on June 14, 2002
+* ----------------------------------------------------------------------
+* (C) Copyright STMicroelectronics (2002)
+*     Unauthorized Reproduction and Communication Strictly Prohibited.
+* ----------------------------------------------------------------------
+*----------------------------------------------------------------------
+
+
+*----------------------------------------------------------------------
+* Family npnvs11 Model NPNBG2X5UM1 st_compact typ
+* Maturity : tentative
+*----------------------------------------------------------------------
+.subckt NPNBG2X5UM1 C B E S
++ param: area=1
+
+.param ikf={0.047863*((TEMPER+273.15)/(27+273.15))^(0)} 
+
+.param vrp={4*((TEMPER+273.15)/(27+273.15))^(2)} 
+Q1 C B E S NPNBG2X5U1_int area=area
+.model NPNBG2X5U1_int npn tmeas=27              eg=1.17               
++ xti=3                 xtb=1.1823            is=2.874e-18          
++ bf=1.75               nf=0.99918            br=0.5941             
++ nr=0.99904            nbf=1.016             ise=3.9811e-16        
++ ne=1.72               isc=4.7863e-18        nc=1.051              
++ vaf=59.898            var=28.204            ikr=0.00057544        
++ enp=1                 rp=0.01               rw=0.01               
++ vjj=0.8               bvc=8.6786            mf=4.0917             
++ bve=5.7649            mr=3.2457             rb=61.698             
++ rbm=2                 re=12.885             rc=20                 
++ cje=8.92135e-15       vje=0.892             mje=0.426             
++ cjc=2.67809e-14       vjc=0.579             mjc=0.299             
++ xjbc=0.184822         cjs=4.48456e-14       vjs=0.579             
++ mjs=0.288             tf=1.20192e-10        trb1=0                
++ trb2=0                tre1=-0.0021794       tre2=8.1151e-06       
++ trc1=0.007            ikf=ikf vrp=vrp
+.ends NPNBG2X5UM1
+
+
+.endl npnvs11_typ
+
+
+.lib npnvs11_bmin
+
+*----------------------------------------------------------------------
+*                             BIPOLAR
+*----------------------------------------------------------------------
+* TEMPLATE   : bipolar_eldoN.t,v 2.0 2002/04/03 14:42:05
+* PARAMETERS : bipolar.dds,v 1.6 2002/04/17 11:11:06
+* TRANSLATOR : ddspp.tcl,v 1.47 2001/09/11 08:03:16
+* Translated by re11 on June 14, 2002
+* ----------------------------------------------------------------------
+* (C) Copyright STMicroelectronics (2002)
+*     Unauthorized Reproduction and Communication Strictly Prohibited.
+* ----------------------------------------------------------------------
+*----------------------------------------------------------------------
+
+
+*----------------------------------------------------------------------
+* Family npnvs11 Model NPNBG2X5UM1 st_compact bmin
+* Maturity : tentative
+*----------------------------------------------------------------------
+.subckt NPNBG2X5UM1 C B E S
++ param: area=1
+
+.param ikf={0.119657*((TEMPER+273.15)/(27+273.15))^(0)} 
+
+.param vrp={4*((TEMPER+273.15)/(27+273.15))^(2)} 
+Q1 C B E S NPNBG2X5U1_int area=area
+.model NPNBG2X5U1_int npn tmeas=27              eg=1.17               
++ xti=3                 xtb=1.1823            is=1.1496e-18         
++ bf=0.7                nf=0.99918            br=0.23764            
++ nr=0.99904            nbf=1.016             ise=3.9811e-16        
++ ne=1.72               isc=4.7863e-18        nc=1.051              
++ vaf=177.181           var=70.51             ikr=0.00057544        
++ enp=1                 rp=0.01               rw=0.01               
++ vjj=0.8               bvc=8.6786            mf=4.0917             
++ bve=5.7649            mr=3.2457             rb=25.0792            
++ rbm=1.2               re=12.885             rc=20                 
++ cje=1.41059e-14       vje=0.892             mje=0.426             
++ cjc=2.2634e-14        vjc=0.579             mjc=0.299             
++ xjbc=0.184822         cjs=4.48456e-14       vjs=0.579             
++ mjs=0.288             tf=1.20192e-10        trb1=0                
++ trb2=0                tre1=-0.0021794       tre2=8.1151e-06       
++ trc1=0.007            ikf=ikf vrp=vrp
+.ends NPNBG2X5UM1
+
+
+.endl npnvs11_bmin
+
+
+.lib npnvs11_bmax
+
+*----------------------------------------------------------------------
+*                             BIPOLAR
+*----------------------------------------------------------------------
+* TEMPLATE   : bipolar_eldoN.t,v 2.0 2002/04/03 14:42:05
+* PARAMETERS : bipolar.dds,v 1.6 2002/04/17 11:11:06
+* TRANSLATOR : ddspp.tcl,v 1.47 2001/09/11 08:03:16
+* Translated by re11 on June 14, 2002
+* ----------------------------------------------------------------------
+* (C) Copyright STMicroelectronics (2002)
+*     Unauthorized Reproduction and Communication Strictly Prohibited.
+* ----------------------------------------------------------------------
+*----------------------------------------------------------------------
+
+
+*----------------------------------------------------------------------
+* Family npnvs11 Model NPNBG2X5UM1 st_compact bmax
+* Maturity : tentative
+*----------------------------------------------------------------------
+.subckt NPNBG2X5UM1 C B E S
++ param: area=1
+
+.param ikf={0.0299144*((TEMPER+273.15)/(27+273.15))^(0)} 
+
+.param vrp={4*((TEMPER+273.15)/(27+273.15))^(2)} 
+Q1 C B E S NPNBG2X5U1_int area=area
+.model NPNBG2X5U1_int npn tmeas=27              eg=1.17               
++ xti=3                 xtb=1.1823            is=4.5984e-18         
++ bf=2.8                nf=0.99918            br=0.95056            
++ nr=0.99904            nbf=1.016             ise=3.9811e-16        
++ ne=1.72               isc=4.7863e-18        nc=1.051              
++ vaf=28.998            var=17.6275           ikr=0.00057544        
++ enp=1                 rp=0.01               rw=0.01               
++ vjj=0.8               bvc=8.6786            mf=4.0917             
++ bve=5.7649            mr=3.2457             rb=98.3168            
++ rbm=2.8               re=12.885             rc=20                 
++ cje=7.05295e-15       vje=0.892             mje=0.426             
++ cjc=3.4574e-14        vjc=0.579             mjc=0.299             
++ xjbc=0.184822         cjs=4.48456e-14       vjs=0.579             
++ mjs=0.288             tf=1.20192e-10        trb1=0                
++ trb2=0                tre1=-0.0021794       tre2=8.1151e-06       
++ trc1=0.007            ikf=ikf vrp=vrp
+.ends NPNBG2X5UM1
+
+
+.endl npnvs11_bmax
+

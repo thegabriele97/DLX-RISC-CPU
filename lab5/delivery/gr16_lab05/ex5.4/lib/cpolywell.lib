@@ -1,0 +1,1567 @@
+
+
+.lib cdonwpo3v3_typ
+
+*-------------------------------------------------------------------------------
+*                          Poly / Well Capacitors
+*-------------------------------------------------------------------------------
+* TEMPLATE   : cpolywell_eldoN.t,v 1.2 2002/05/27 15:28:14
+* PARAMETERS : cpolywell.dds,v 1.2 2002/03/27 14:53:03
+* TRANSLATOR : ddspp.tcl,v 1.47 2001/09/11 08:03:16
+* Translated by re11 on June 14, 2002
+* ----------------------------------------------------------------------
+* (C) Copyright STMicroelectronics (2002)
+*     Unauthorized Reproduction and Communication Strictly Prohibited.
+* ----------------------------------------------------------------------
+*-------------------------------------------------------------------------------
+
+
+.subckt CDONWPO3V3M1 PLUS MINUS B
++ param: c=2.340e-15 w=0.64e-6 nc1=2 nc2=2.0*trunc((w-2*0.07e-6+0.18e-6)/(0.18e-6+0.16e-6)) number=1 mismatch=1
+*-------------------------------------------------------------------------------
+* Family cdonwpo3v3 Model CDONWPO3V3M1 typ
+* Maturity : Preliminary
+*-------------------------------------------------------------------------------
+*
+*-------------------------------------------------------------------------------
+* Parameters of cdonwpo3v3 Model CDONWPO3V3 corner typ
+*-------------------------------------------------------------------------------
+* Geometrical parameters
+.param dl          = 2.0e-08
+.param dw          = 0
+.param endcap      = 0.18e-6
+.param wcon        = 0.16e-6
+.param scon        = 0.18e-6
+.param cep         = 0.07e-6
+.param cea         = 0.07e-6
+.param dcoa        = 0.14e-6
+.param dcop        = 0.15e-6
+* Electrical parameters
+.param sub         = -1
+.param tref        = 27
+.param tox         = 7.09842e-09
+.param vfb         = -0.172828
+.param nsub        = 1.56586e+17
+.param mexp        = 0.308061
+.param sl1         = 0.271139
+.param sl2         = 0.105304
+.param vsm         = 0.1
+.param eps         = 0.0001
+.param tox_sti     = 3e-07
+.param cp          = 3.0e-10 
+* Typical parameter values for length computation
+.param dl_typ      = 2.0e-08
+.param dw_typ      = 0
+.param tox_typ     = 7.09842e-09
+.param tox_sti_typ = 3e-07
+.param cp_typ      = 3.0e-10
+*
+*-------------------------------------------------------------------------------
+* Computing intrinsic capa geometry
+*-------------------------------------------------------------------------------
+* Universal constants
+.param epsi_ox   = {3.9 * 8.85418e-12}
+.param epsi_si   = {11.9 * 8.85418e-12}
+.param q         = 1.60219e-19   ! (Coulomb)
+.param kb        = 1.3806226e-23 ! (J.s)
+* Length computation
+.param we        = {w-dw_typ}
+
+.param danw      = 0.3e-6
+.param dwnw      = 2.4e-07
+.param dwnw_typ  = 2.4e-07
+.param wolape    = {endcap+danw-dwnw_typ/2.0+dw_typ-dl_typ/2.0}
+.param l         = {dl_typ+(c-2.0*cp_typ*we)/(epsi_ox*(we/tox_typ+wolape/tox_sti_typ))}
+* Area and perimeter computations
+.param wolapw    = {endcap+danw-dwnw/2.0+dw-dl/2.0}
+.param wolapb    = {max(cep+wcon+dcoa-dl/2.0-(danw-dwnw/2.0),0)}
+.param lnw       = {l+2.0*(dcop+wcon+cea+danw)}
+.param wnw       = {w+2.0*danw}
+.param areanw    = {(wnw-dwnw)*(lnw-dwnw)}
+.param perinw    = {2.0*(wnw-dwnw+lnw-dwnw)}
+
+.param area      = {(w-dw)*(l-dl)}
+.param peri      = {2.0*(w-dw)}
+*
+*-------------------------------------------------------------------------------
+* Computing intrinsic capa between Poly & Well
+*-------------------------------------------------------------------------------
+* Intermediate computations using BSIM3 equations for eg, ni, phi
+.param tempk     = {temper+273.15}
+.param trefk     = {tref+273.15}
+.param eg        = {1.16-7.02e-4*(tempk^2)/(tempk+1108)} ! (eV)
+.param egr       = {1.16-7.02e-4*(trefk^2)/(trefk+1108)} ! (eV)
+.param vtemp     = {(kb*tempk)/q}
+.param vtempr    = {(kb*trefk)/q}
+.param ni        = {1.45e10*((tempk/300.15)^1.5)*exp(21.556981-eg/(2*vtemp))}
+.param nir       = {1.45e10*((trefk/300.15)^1.5)*exp(21.556981-egr/(2*vtempr))}
+.param phi       = {vtemp*log(nsub/ni)}
+.param phir      = {vtempr*log(nsub/nir)}
+.param vfbt      = {vfb+(phi-phir)}
+.param cox       = {epsi_ox/tox}
+.param coxsti    = {epsi_ox/tox_sti}
+.param cmax      = {cox*area}
+.param ld        = {sqrt(epsi_si*vtemp/(q*nsub*1e6))}
+.param cfbs      = {epsi_si*area/ld}
+.param cfb       = {cmax*cfbs/(cmax+cfbs)}
+.param vnorm     = {q*nsub*1e6*epsi_si/(2.0*cox^2)}
+*
+*-------------------------------------------------------------------------------
+* Computing parasitic capacitances
+*-------------------------------------------------------------------------------
+.param cperi     = {cp*peri} 
+.param capaw     = {coxsti*wolapw*(l-dl)}
+.param capab     = {coxsti*wolapb*(l-dl)}
+*-------------------------------------------------------------------------------
+* Netlist
+*-------------------------------------------------------------------------------
+Erat  rat  0 	  value={(sub*v(PLUS,MINUS)+vfbt)/vsm}
+Eexp  ex   0 	  value={0.5*((-sub*v(PLUS,MINUS)-vfbt)*sl2+sqrt((sl2^2)*(-sub*v(PLUS,MINUS)-vfbt)^2 + eps^2))}
+EVacc acc  0 	  value={cmax/(1.0+(exp(-(-sub*v(PLUS,MINUS)-vfbt)/(sl1+v(ex))))*(cmax-cfb)/cfb)}
+EVdep dep  0 	  value={cfb/(1.0+(valif(v(rat)>20,v(rat),log(1.0+exp(v(rat)))))*vsm/vnorm)^mexp}
+
+Cc    PLUS MINUS  value={(v(dep)/(1.0+exp(-v(rat)))+v(acc)/(1.0+exp(v(rat))))*number}
+Cpw   PLUS MINUS  {(cperi+capaw)*number}
+
+Cpb   PLUS B      {capab*number}
+Dnw   B    MINUS  DNWPS area={areanw*number} peri={perinw*number}
+
+C1    rat  0      1e-15
+C2    ex   0      1e-15
+C3    acc  0      1e-15
+C4    dep  0      1e-15
+
+.ends CDONWPO3V3M1
+
+.subckt CDONWPO3V3U PLUS MINUS B
++ param: c=2.340e-15
+c1 PLUS MINUS c
+.ends CDONWPO3V3U
+
+.subckt CDONWPO3V3M2 PLUS MINUS B
++ param: c=2.340e-15 w=0.64e-6 nc1=2 nc2=2.0*trunc((w-2*0.07e-6+0.18e-6)/(0.18e-6+0.16e-6)) number=1 mismatch=1
+*-------------------------------------------------------------------------------
+* Family cdonwpo3v3 Model CDONWPO3V3M2 typ
+* Maturity : Preliminary
+*-------------------------------------------------------------------------------
+*
+*-------------------------------------------------------------------------------
+* Parameters of cdonwpo3v3 Model CDONWPO3V3 corner typ
+*-------------------------------------------------------------------------------
+* Geometrical parameters
+.param dl          = 2.0e-08
+.param dw          = 0
+.param endcap      = 0.18e-6
+.param wcon        = 0.16e-6
+.param scon        = 0.18e-6
+.param cep         = 0.07e-6
+.param cea         = 0.07e-6
+.param dcoa        = 0.14e-6
+.param dcop        = 0.15e-6
+* Electrical parameters
+.param sub         = -1
+.param tref        = 27
+.param tox         = 7.09842e-09
+.param vfb         = -0.172828
+.param nsub        = 1.56586e+17
+.param mexp        = 0.308061
+.param sl1         = 0.271139
+.param sl2         = 0.105304
+.param vsm         = 0.1
+.param eps         = 0.0001
+.param tox_sti     = 3e-07
+.param cp          = 3.0e-10 
+* Typical parameter values for length computation
+.param dl_typ      = 2.0e-08
+.param dw_typ      = 0
+.param tox_typ     = 7.09842e-09
+.param tox_sti_typ = 3e-07
+.param cp_typ      = 3.0e-10
+*
+*-------------------------------------------------------------------------------
+* Computing intrinsic capa geometry
+*-------------------------------------------------------------------------------
+* Universal constants
+.param epsi_ox   = {3.9 * 8.85418e-12}
+.param epsi_si   = {11.9 * 8.85418e-12}
+.param q         = 1.60219e-19   ! (Coulomb)
+.param kb        = 1.3806226e-23 ! (J.s)
+* Length computation
+.param we        = {w-dw_typ}
+
+.param danw      = 0.3e-6
+.param dwnw      = 2.4e-07
+.param dwnw_typ  = 2.4e-07
+.param wolape    = {endcap+danw-dwnw_typ/2.0+dw_typ-dl_typ/2.0}
+.param l         = {dl_typ+(c-2.0*cp_typ*we)/(epsi_ox*(we/tox_typ+wolape/tox_sti_typ))}
+* Area and perimeter computations
+.param wolapw    = {endcap+danw-dwnw/2.0+dw-dl/2.0}
+.param wolapb    = {max(cep+wcon+dcoa-dl/2.0-(danw-dwnw/2.0),0)}
+.param lnw       = {l+2.0*(dcop+wcon+cea+danw)}
+.param wnw       = {w+2.0*danw}
+.param areanw    = {(wnw-dwnw)*(lnw-dwnw)}
+.param perinw    = {2.0*(wnw-dwnw+lnw-dwnw)}
+
+.param area      = {(w-dw)*(l-dl)}
+.param peri      = {2.0*(w-dw)}
+*
+*-------------------------------------------------------------------------------
+* Computing intrinsic capa between Poly & Well
+*-------------------------------------------------------------------------------
+* Intermediate computations using BSIM3 equations for eg, ni, phi
+.param tempk     = {temper+273.15}
+.param trefk     = {tref+273.15}
+.param eg        = {1.16-7.02e-4*(tempk^2)/(tempk+1108)} ! (eV)
+.param egr       = {1.16-7.02e-4*(trefk^2)/(trefk+1108)} ! (eV)
+.param vtemp     = {(kb*tempk)/q}
+.param vtempr    = {(kb*trefk)/q}
+.param ni        = {1.45e10*((tempk/300.15)^1.5)*exp(21.556981-eg/(2*vtemp))}
+.param nir       = {1.45e10*((trefk/300.15)^1.5)*exp(21.556981-egr/(2*vtempr))}
+.param phi       = {vtemp*log(nsub/ni)}
+.param phir      = {vtempr*log(nsub/nir)}
+.param vfbt      = {vfb+(phi-phir)}
+.param cox       = {epsi_ox/tox}
+.param coxsti    = {epsi_ox/tox_sti}
+.param cmax      = {cox*area}
+.param ld        = {sqrt(epsi_si*vtemp/(q*nsub*1e6))}
+.param cfbs      = {epsi_si*area/ld}
+.param cfb       = {cmax*cfbs/(cmax+cfbs)}
+.param vnorm     = {q*nsub*1e6*epsi_si/(2.0*cox^2)}
+*
+*-------------------------------------------------------------------------------
+* Computing parasitic capacitances
+*-------------------------------------------------------------------------------
+.param cperi     = {cp*peri} 
+.param capaw     = {coxsti*wolapw*(l-dl)}
+.param capab     = {coxsti*wolapb*(l-dl)}
+*-------------------------------------------------------------------------------
+* Computing parasitic resistances of Poly & Well
+*-------------------------------------------------------------------------------
+.param rs1       = 10
+.param rs2       = 500
+.param rhs       = 10
+.param rsc1      = 15
+.param rsc2      = 15
+.param rval1     = {rs1*(dcoa+dw/2.0+(w-dw)/3.0)/(l-dl)+rsc1/nc1}
+.param rval2     = {(rhs*(dcop+dl/2.0)/2.0+rs2*(l-dl)/12.0)/(w-dw)+rsc2/nc2}
+*-------------------------------------------------------------------------------
+* Netlist
+*-------------------------------------------------------------------------------
+Erat  rat  0      value={(sub*v(1,2)+vfbt)/vsm}
+Eexp  ex   0      value={0.5*((-sub*v(1,2)-vfbt)*sl2+sqrt((sl2^2)*(-sub*v(1,2)-vfbt)^2 + eps^2))}
+Evacc acc  0      value={cmax/(1.0+(exp(-(-sub*v(1,2)-vfbt)/(sl1+v(ex))))*(cmax-cfb)/cfb)}
+Evdep dep  0      value={cfb/(1.0+(valif(v(rat)>20,v(rat),log(1.0+exp(v(rat)))))*vsm/vnorm)^mexp}
+
+Cc    1    2      value={(v(dep)/(1.0+exp(-v(rat)))+v(acc)/(1.0+exp(v(rat))))*number}
+Cpw   1    2      {(cperi+capaw)*number}
+
+Cpb   PLUS B      {capab*number}
+Dnw   B    2      DNWPS area={areanw*number} peri={perinw*number}
+
+Rs1   PLUS 1      {rval1/number}
+Rs2   2    MINUS  {rval2/number}
+
+C1    rat  0      1e-15
+C2    ex   0      1e-15
+C3    acc  0      1e-15
+C4    dep  0      1e-15
+
+.ends CDONWPO3V3M2
+
+
+.endl cdonwpo3v3_typ
+
+
+.lib cdonwpo3v3_cmin
+
+*-------------------------------------------------------------------------------
+*                          Poly / Well Capacitors
+*-------------------------------------------------------------------------------
+* TEMPLATE   : cpolywell_eldoN.t,v 1.2 2002/05/27 15:28:14
+* PARAMETERS : cpolywell.dds,v 1.2 2002/03/27 14:53:03
+* TRANSLATOR : ddspp.tcl,v 1.47 2001/09/11 08:03:16
+* Translated by re11 on June 14, 2002
+* ----------------------------------------------------------------------
+* (C) Copyright STMicroelectronics (2002)
+*     Unauthorized Reproduction and Communication Strictly Prohibited.
+* ----------------------------------------------------------------------
+*-------------------------------------------------------------------------------
+
+
+.subckt CDONWPO3V3M1 PLUS MINUS B
++ param: c=2.340e-15 w=0.64e-6 nc1=2 nc2=2.0*trunc((w-2*0.07e-6+0.18e-6)/(0.18e-6+0.16e-6)) number=1 mismatch=1
+*-------------------------------------------------------------------------------
+* Family cdonwpo3v3 Model CDONWPO3V3M1 cmin
+* Maturity : Preliminary
+*-------------------------------------------------------------------------------
+*
+*-------------------------------------------------------------------------------
+* Parameters of cdonwpo3v3 Model CDONWPO3V3 corner cmin
+*-------------------------------------------------------------------------------
+* Geometrical parameters
+.param dl          = 3.8e-08
+.param dw          = 3.6e-08
+.param endcap      = 0.18e-6
+.param wcon        = 0.16e-6
+.param scon        = 0.18e-6
+.param cep         = 0.07e-6
+.param cea         = 0.07e-6
+.param dcoa        = 0.14e-6
+.param dcop        = 0.15e-6
+* Electrical parameters
+.param sub         = -1
+.param tref        = 27
+.param tox         = 7.32342e-09
+.param vfb         = -0.154898
+.param nsub        = 7.8293e+16
+.param mexp        = 0.308061
+.param sl1         = 0.271139
+.param sl2         = 0.105304
+.param vsm         = 0.1
+.param eps         = 0.0001
+.param tox_sti     = 3e-07
+.param cp          = 3.0e-10 
+* Typical parameter values for length computation
+.param dl_typ      = 2.0e-08
+.param dw_typ      = 0
+.param tox_typ     = 7.09842e-09
+.param tox_sti_typ = 3e-07
+.param cp_typ      = 3.0e-10
+*
+*-------------------------------------------------------------------------------
+* Computing intrinsic capa geometry
+*-------------------------------------------------------------------------------
+* Universal constants
+.param epsi_ox   = {3.9 * 8.85418e-12}
+.param epsi_si   = {11.9 * 8.85418e-12}
+.param q         = 1.60219e-19   ! (Coulomb)
+.param kb        = 1.3806226e-23 ! (J.s)
+* Length computation
+.param we        = {w-dw_typ}
+
+.param danw      = 0.3e-6
+.param dwnw      = 2.9e-07
+.param dwnw_typ  = 2.4e-07
+.param wolape    = {endcap+danw-dwnw_typ/2.0+dw_typ-dl_typ/2.0}
+.param l         = {dl_typ+(c-2.0*cp_typ*we)/(epsi_ox*(we/tox_typ+wolape/tox_sti_typ))}
+* Area and perimeter computations
+.param wolapw    = {endcap+danw-dwnw/2.0+dw-dl/2.0}
+.param wolapb    = {max(cep+wcon+dcoa-dl/2.0-(danw-dwnw/2.0),0)}
+.param lnw       = {l+2.0*(dcop+wcon+cea+danw)}
+.param wnw       = {w+2.0*danw}
+.param areanw    = {(wnw-dwnw)*(lnw-dwnw)}
+.param perinw    = {2.0*(wnw-dwnw+lnw-dwnw)}
+
+.param area      = {(w-dw)*(l-dl)}
+.param peri      = {2.0*(w-dw)}
+*
+*-------------------------------------------------------------------------------
+* Computing intrinsic capa between Poly & Well
+*-------------------------------------------------------------------------------
+* Intermediate computations using BSIM3 equations for eg, ni, phi
+.param tempk     = {temper+273.15}
+.param trefk     = {tref+273.15}
+.param eg        = {1.16-7.02e-4*(tempk^2)/(tempk+1108)} ! (eV)
+.param egr       = {1.16-7.02e-4*(trefk^2)/(trefk+1108)} ! (eV)
+.param vtemp     = {(kb*tempk)/q}
+.param vtempr    = {(kb*trefk)/q}
+.param ni        = {1.45e10*((tempk/300.15)^1.5)*exp(21.556981-eg/(2*vtemp))}
+.param nir       = {1.45e10*((trefk/300.15)^1.5)*exp(21.556981-egr/(2*vtempr))}
+.param phi       = {vtemp*log(nsub/ni)}
+.param phir      = {vtempr*log(nsub/nir)}
+.param vfbt      = {vfb+(phi-phir)}
+.param cox       = {epsi_ox/tox}
+.param coxsti    = {epsi_ox/tox_sti}
+.param cmax      = {cox*area}
+.param ld        = {sqrt(epsi_si*vtemp/(q*nsub*1e6))}
+.param cfbs      = {epsi_si*area/ld}
+.param cfb       = {cmax*cfbs/(cmax+cfbs)}
+.param vnorm     = {q*nsub*1e6*epsi_si/(2.0*cox^2)}
+*
+*-------------------------------------------------------------------------------
+* Computing parasitic capacitances
+*-------------------------------------------------------------------------------
+.param cperi     = {cp*peri} 
+.param capaw     = {coxsti*wolapw*(l-dl)}
+.param capab     = {coxsti*wolapb*(l-dl)}
+*-------------------------------------------------------------------------------
+* Netlist
+*-------------------------------------------------------------------------------
+Erat  rat  0 	  value={(sub*v(PLUS,MINUS)+vfbt)/vsm}
+Eexp  ex   0 	  value={0.5*((-sub*v(PLUS,MINUS)-vfbt)*sl2+sqrt((sl2^2)*(-sub*v(PLUS,MINUS)-vfbt)^2 + eps^2))}
+EVacc acc  0 	  value={cmax/(1.0+(exp(-(-sub*v(PLUS,MINUS)-vfbt)/(sl1+v(ex))))*(cmax-cfb)/cfb)}
+EVdep dep  0 	  value={cfb/(1.0+(valif(v(rat)>20,v(rat),log(1.0+exp(v(rat)))))*vsm/vnorm)^mexp}
+
+Cc    PLUS MINUS  value={(v(dep)/(1.0+exp(-v(rat)))+v(acc)/(1.0+exp(v(rat))))*number}
+Cpw   PLUS MINUS  {(cperi+capaw)*number}
+
+Cpb   PLUS B      {capab*number}
+Dnw   B    MINUS  DNWPS area={areanw*number} peri={perinw*number}
+
+C1    rat  0      1e-15
+C2    ex   0      1e-15
+C3    acc  0      1e-15
+C4    dep  0      1e-15
+
+.ends CDONWPO3V3M1
+
+.subckt CDONWPO3V3U PLUS MINUS B
++ param: c=2.340e-15
+c1 PLUS MINUS c
+.ends CDONWPO3V3U
+
+.subckt CDONWPO3V3M2 PLUS MINUS B
++ param: c=2.340e-15 w=0.64e-6 nc1=2 nc2=2.0*trunc((w-2*0.07e-6+0.18e-6)/(0.18e-6+0.16e-6)) number=1 mismatch=1
+*-------------------------------------------------------------------------------
+* Family cdonwpo3v3 Model CDONWPO3V3M2 cmin
+* Maturity : Preliminary
+*-------------------------------------------------------------------------------
+*
+*-------------------------------------------------------------------------------
+* Parameters of cdonwpo3v3 Model CDONWPO3V3 corner cmin
+*-------------------------------------------------------------------------------
+* Geometrical parameters
+.param dl          = 3.8e-08
+.param dw          = 3.6e-08
+.param endcap      = 0.18e-6
+.param wcon        = 0.16e-6
+.param scon        = 0.18e-6
+.param cep         = 0.07e-6
+.param cea         = 0.07e-6
+.param dcoa        = 0.14e-6
+.param dcop        = 0.15e-6
+* Electrical parameters
+.param sub         = -1
+.param tref        = 27
+.param tox         = 7.32342e-09
+.param vfb         = -0.154898
+.param nsub        = 7.8293e+16
+.param mexp        = 0.308061
+.param sl1         = 0.271139
+.param sl2         = 0.105304
+.param vsm         = 0.1
+.param eps         = 0.0001
+.param tox_sti     = 3e-07
+.param cp          = 3.0e-10 
+* Typical parameter values for length computation
+.param dl_typ      = 2.0e-08
+.param dw_typ      = 0
+.param tox_typ     = 7.09842e-09
+.param tox_sti_typ = 3e-07
+.param cp_typ      = 3.0e-10
+*
+*-------------------------------------------------------------------------------
+* Computing intrinsic capa geometry
+*-------------------------------------------------------------------------------
+* Universal constants
+.param epsi_ox   = {3.9 * 8.85418e-12}
+.param epsi_si   = {11.9 * 8.85418e-12}
+.param q         = 1.60219e-19   ! (Coulomb)
+.param kb        = 1.3806226e-23 ! (J.s)
+* Length computation
+.param we        = {w-dw_typ}
+
+.param danw      = 0.3e-6
+.param dwnw      = 2.9e-07
+.param dwnw_typ  = 2.4e-07
+.param wolape    = {endcap+danw-dwnw_typ/2.0+dw_typ-dl_typ/2.0}
+.param l         = {dl_typ+(c-2.0*cp_typ*we)/(epsi_ox*(we/tox_typ+wolape/tox_sti_typ))}
+* Area and perimeter computations
+.param wolapw    = {endcap+danw-dwnw/2.0+dw-dl/2.0}
+.param wolapb    = {max(cep+wcon+dcoa-dl/2.0-(danw-dwnw/2.0),0)}
+.param lnw       = {l+2.0*(dcop+wcon+cea+danw)}
+.param wnw       = {w+2.0*danw}
+.param areanw    = {(wnw-dwnw)*(lnw-dwnw)}
+.param perinw    = {2.0*(wnw-dwnw+lnw-dwnw)}
+
+.param area      = {(w-dw)*(l-dl)}
+.param peri      = {2.0*(w-dw)}
+*
+*-------------------------------------------------------------------------------
+* Computing intrinsic capa between Poly & Well
+*-------------------------------------------------------------------------------
+* Intermediate computations using BSIM3 equations for eg, ni, phi
+.param tempk     = {temper+273.15}
+.param trefk     = {tref+273.15}
+.param eg        = {1.16-7.02e-4*(tempk^2)/(tempk+1108)} ! (eV)
+.param egr       = {1.16-7.02e-4*(trefk^2)/(trefk+1108)} ! (eV)
+.param vtemp     = {(kb*tempk)/q}
+.param vtempr    = {(kb*trefk)/q}
+.param ni        = {1.45e10*((tempk/300.15)^1.5)*exp(21.556981-eg/(2*vtemp))}
+.param nir       = {1.45e10*((trefk/300.15)^1.5)*exp(21.556981-egr/(2*vtempr))}
+.param phi       = {vtemp*log(nsub/ni)}
+.param phir      = {vtempr*log(nsub/nir)}
+.param vfbt      = {vfb+(phi-phir)}
+.param cox       = {epsi_ox/tox}
+.param coxsti    = {epsi_ox/tox_sti}
+.param cmax      = {cox*area}
+.param ld        = {sqrt(epsi_si*vtemp/(q*nsub*1e6))}
+.param cfbs      = {epsi_si*area/ld}
+.param cfb       = {cmax*cfbs/(cmax+cfbs)}
+.param vnorm     = {q*nsub*1e6*epsi_si/(2.0*cox^2)}
+*
+*-------------------------------------------------------------------------------
+* Computing parasitic capacitances
+*-------------------------------------------------------------------------------
+.param cperi     = {cp*peri} 
+.param capaw     = {coxsti*wolapw*(l-dl)}
+.param capab     = {coxsti*wolapb*(l-dl)}
+*-------------------------------------------------------------------------------
+* Computing parasitic resistances of Poly & Well
+*-------------------------------------------------------------------------------
+.param rs1       = 6
+.param rs2       = 250
+.param rhs       = 6
+.param rsc1      = 15
+.param rsc2      = 15
+.param rval1     = {rs1*(dcoa+dw/2.0+(w-dw)/3.0)/(l-dl)+rsc1/nc1}
+.param rval2     = {(rhs*(dcop+dl/2.0)/2.0+rs2*(l-dl)/12.0)/(w-dw)+rsc2/nc2}
+*-------------------------------------------------------------------------------
+* Netlist
+*-------------------------------------------------------------------------------
+Erat  rat  0      value={(sub*v(1,2)+vfbt)/vsm}
+Eexp  ex   0      value={0.5*((-sub*v(1,2)-vfbt)*sl2+sqrt((sl2^2)*(-sub*v(1,2)-vfbt)^2 + eps^2))}
+Evacc acc  0      value={cmax/(1.0+(exp(-(-sub*v(1,2)-vfbt)/(sl1+v(ex))))*(cmax-cfb)/cfb)}
+Evdep dep  0      value={cfb/(1.0+(valif(v(rat)>20,v(rat),log(1.0+exp(v(rat)))))*vsm/vnorm)^mexp}
+
+Cc    1    2      value={(v(dep)/(1.0+exp(-v(rat)))+v(acc)/(1.0+exp(v(rat))))*number}
+Cpw   1    2      {(cperi+capaw)*number}
+
+Cpb   PLUS B      {capab*number}
+Dnw   B    2      DNWPS area={areanw*number} peri={perinw*number}
+
+Rs1   PLUS 1      {rval1/number}
+Rs2   2    MINUS  {rval2/number}
+
+C1    rat  0      1e-15
+C2    ex   0      1e-15
+C3    acc  0      1e-15
+C4    dep  0      1e-15
+
+.ends CDONWPO3V3M2
+
+
+.endl cdonwpo3v3_cmin
+
+
+.lib cdonwpo3v3_cmax
+
+*-------------------------------------------------------------------------------
+*                          Poly / Well Capacitors
+*-------------------------------------------------------------------------------
+* TEMPLATE   : cpolywell_eldoN.t,v 1.2 2002/05/27 15:28:14
+* PARAMETERS : cpolywell.dds,v 1.2 2002/03/27 14:53:03
+* TRANSLATOR : ddspp.tcl,v 1.47 2001/09/11 08:03:16
+* Translated by re11 on June 14, 2002
+* ----------------------------------------------------------------------
+* (C) Copyright STMicroelectronics (2002)
+*     Unauthorized Reproduction and Communication Strictly Prohibited.
+* ----------------------------------------------------------------------
+*-------------------------------------------------------------------------------
+
+
+.subckt CDONWPO3V3M1 PLUS MINUS B
++ param: c=2.340e-15 w=0.64e-6 nc1=2 nc2=2.0*trunc((w-2*0.07e-6+0.18e-6)/(0.18e-6+0.16e-6)) number=1 mismatch=1
+*-------------------------------------------------------------------------------
+* Family cdonwpo3v3 Model CDONWPO3V3M1 cmax
+* Maturity : Preliminary
+*-------------------------------------------------------------------------------
+*
+*-------------------------------------------------------------------------------
+* Parameters of cdonwpo3v3 Model CDONWPO3V3 corner cmax
+*-------------------------------------------------------------------------------
+* Geometrical parameters
+.param dl          = 0.2e-08
+.param dw          = -3.6e-08
+.param endcap      = 0.18e-6
+.param wcon        = 0.16e-6
+.param scon        = 0.18e-6
+.param cep         = 0.07e-6
+.param cea         = 0.07e-6
+.param dcoa        = 0.14e-6
+.param dcop        = 0.15e-6
+* Electrical parameters
+.param sub         = -1
+.param tref        = 27
+.param tox         = 6.87342e-09
+.param vfb         = -0.190758
+.param nsub        = 3.13172e+17
+.param mexp        = 0.308061
+.param sl1         = 0.271139
+.param sl2         = 0.105304
+.param vsm         = 0.1
+.param eps         = 0.0001
+.param tox_sti     = 3e-07
+.param cp          = 3.0e-10 
+* Typical parameter values for length computation
+.param dl_typ      = 2.0e-08
+.param dw_typ      = 0
+.param tox_typ     = 7.09842e-09
+.param tox_sti_typ = 3e-07
+.param cp_typ      = 3.0e-10
+*
+*-------------------------------------------------------------------------------
+* Computing intrinsic capa geometry
+*-------------------------------------------------------------------------------
+* Universal constants
+.param epsi_ox   = {3.9 * 8.85418e-12}
+.param epsi_si   = {11.9 * 8.85418e-12}
+.param q         = 1.60219e-19   ! (Coulomb)
+.param kb        = 1.3806226e-23 ! (J.s)
+* Length computation
+.param we        = {w-dw_typ}
+
+.param danw      = 0.3e-6
+.param dwnw      = 1.9e-07
+.param dwnw_typ  = 2.4e-07
+.param wolape    = {endcap+danw-dwnw_typ/2.0+dw_typ-dl_typ/2.0}
+.param l         = {dl_typ+(c-2.0*cp_typ*we)/(epsi_ox*(we/tox_typ+wolape/tox_sti_typ))}
+* Area and perimeter computations
+.param wolapw    = {endcap+danw-dwnw/2.0+dw-dl/2.0}
+.param wolapb    = {max(cep+wcon+dcoa-dl/2.0-(danw-dwnw/2.0),0)}
+.param lnw       = {l+2.0*(dcop+wcon+cea+danw)}
+.param wnw       = {w+2.0*danw}
+.param areanw    = {(wnw-dwnw)*(lnw-dwnw)}
+.param perinw    = {2.0*(wnw-dwnw+lnw-dwnw)}
+
+.param area      = {(w-dw)*(l-dl)}
+.param peri      = {2.0*(w-dw)}
+*
+*-------------------------------------------------------------------------------
+* Computing intrinsic capa between Poly & Well
+*-------------------------------------------------------------------------------
+* Intermediate computations using BSIM3 equations for eg, ni, phi
+.param tempk     = {temper+273.15}
+.param trefk     = {tref+273.15}
+.param eg        = {1.16-7.02e-4*(tempk^2)/(tempk+1108)} ! (eV)
+.param egr       = {1.16-7.02e-4*(trefk^2)/(trefk+1108)} ! (eV)
+.param vtemp     = {(kb*tempk)/q}
+.param vtempr    = {(kb*trefk)/q}
+.param ni        = {1.45e10*((tempk/300.15)^1.5)*exp(21.556981-eg/(2*vtemp))}
+.param nir       = {1.45e10*((trefk/300.15)^1.5)*exp(21.556981-egr/(2*vtempr))}
+.param phi       = {vtemp*log(nsub/ni)}
+.param phir      = {vtempr*log(nsub/nir)}
+.param vfbt      = {vfb+(phi-phir)}
+.param cox       = {epsi_ox/tox}
+.param coxsti    = {epsi_ox/tox_sti}
+.param cmax      = {cox*area}
+.param ld        = {sqrt(epsi_si*vtemp/(q*nsub*1e6))}
+.param cfbs      = {epsi_si*area/ld}
+.param cfb       = {cmax*cfbs/(cmax+cfbs)}
+.param vnorm     = {q*nsub*1e6*epsi_si/(2.0*cox^2)}
+*
+*-------------------------------------------------------------------------------
+* Computing parasitic capacitances
+*-------------------------------------------------------------------------------
+.param cperi     = {cp*peri} 
+.param capaw     = {coxsti*wolapw*(l-dl)}
+.param capab     = {coxsti*wolapb*(l-dl)}
+*-------------------------------------------------------------------------------
+* Netlist
+*-------------------------------------------------------------------------------
+Erat  rat  0 	  value={(sub*v(PLUS,MINUS)+vfbt)/vsm}
+Eexp  ex   0 	  value={0.5*((-sub*v(PLUS,MINUS)-vfbt)*sl2+sqrt((sl2^2)*(-sub*v(PLUS,MINUS)-vfbt)^2 + eps^2))}
+EVacc acc  0 	  value={cmax/(1.0+(exp(-(-sub*v(PLUS,MINUS)-vfbt)/(sl1+v(ex))))*(cmax-cfb)/cfb)}
+EVdep dep  0 	  value={cfb/(1.0+(valif(v(rat)>20,v(rat),log(1.0+exp(v(rat)))))*vsm/vnorm)^mexp}
+
+Cc    PLUS MINUS  value={(v(dep)/(1.0+exp(-v(rat)))+v(acc)/(1.0+exp(v(rat))))*number}
+Cpw   PLUS MINUS  {(cperi+capaw)*number}
+
+Cpb   PLUS B      {capab*number}
+Dnw   B    MINUS  DNWPS area={areanw*number} peri={perinw*number}
+
+C1    rat  0      1e-15
+C2    ex   0      1e-15
+C3    acc  0      1e-15
+C4    dep  0      1e-15
+
+.ends CDONWPO3V3M1
+
+.subckt CDONWPO3V3U PLUS MINUS B
++ param: c=2.340e-15
+c1 PLUS MINUS c
+.ends CDONWPO3V3U
+
+.subckt CDONWPO3V3M2 PLUS MINUS B
++ param: c=2.340e-15 w=0.64e-6 nc1=2 nc2=2.0*trunc((w-2*0.07e-6+0.18e-6)/(0.18e-6+0.16e-6)) number=1 mismatch=1
+*-------------------------------------------------------------------------------
+* Family cdonwpo3v3 Model CDONWPO3V3M2 cmax
+* Maturity : Preliminary
+*-------------------------------------------------------------------------------
+*
+*-------------------------------------------------------------------------------
+* Parameters of cdonwpo3v3 Model CDONWPO3V3 corner cmax
+*-------------------------------------------------------------------------------
+* Geometrical parameters
+.param dl          = 0.2e-08
+.param dw          = -3.6e-08
+.param endcap      = 0.18e-6
+.param wcon        = 0.16e-6
+.param scon        = 0.18e-6
+.param cep         = 0.07e-6
+.param cea         = 0.07e-6
+.param dcoa        = 0.14e-6
+.param dcop        = 0.15e-6
+* Electrical parameters
+.param sub         = -1
+.param tref        = 27
+.param tox         = 6.87342e-09
+.param vfb         = -0.190758
+.param nsub        = 3.13172e+17
+.param mexp        = 0.308061
+.param sl1         = 0.271139
+.param sl2         = 0.105304
+.param vsm         = 0.1
+.param eps         = 0.0001
+.param tox_sti     = 3e-07
+.param cp          = 3.0e-10 
+* Typical parameter values for length computation
+.param dl_typ      = 2.0e-08
+.param dw_typ      = 0
+.param tox_typ     = 7.09842e-09
+.param tox_sti_typ = 3e-07
+.param cp_typ      = 3.0e-10
+*
+*-------------------------------------------------------------------------------
+* Computing intrinsic capa geometry
+*-------------------------------------------------------------------------------
+* Universal constants
+.param epsi_ox   = {3.9 * 8.85418e-12}
+.param epsi_si   = {11.9 * 8.85418e-12}
+.param q         = 1.60219e-19   ! (Coulomb)
+.param kb        = 1.3806226e-23 ! (J.s)
+* Length computation
+.param we        = {w-dw_typ}
+
+.param danw      = 0.3e-6
+.param dwnw      = 1.9e-07
+.param dwnw_typ  = 2.4e-07
+.param wolape    = {endcap+danw-dwnw_typ/2.0+dw_typ-dl_typ/2.0}
+.param l         = {dl_typ+(c-2.0*cp_typ*we)/(epsi_ox*(we/tox_typ+wolape/tox_sti_typ))}
+* Area and perimeter computations
+.param wolapw    = {endcap+danw-dwnw/2.0+dw-dl/2.0}
+.param wolapb    = {max(cep+wcon+dcoa-dl/2.0-(danw-dwnw/2.0),0)}
+.param lnw       = {l+2.0*(dcop+wcon+cea+danw)}
+.param wnw       = {w+2.0*danw}
+.param areanw    = {(wnw-dwnw)*(lnw-dwnw)}
+.param perinw    = {2.0*(wnw-dwnw+lnw-dwnw)}
+
+.param area      = {(w-dw)*(l-dl)}
+.param peri      = {2.0*(w-dw)}
+*
+*-------------------------------------------------------------------------------
+* Computing intrinsic capa between Poly & Well
+*-------------------------------------------------------------------------------
+* Intermediate computations using BSIM3 equations for eg, ni, phi
+.param tempk     = {temper+273.15}
+.param trefk     = {tref+273.15}
+.param eg        = {1.16-7.02e-4*(tempk^2)/(tempk+1108)} ! (eV)
+.param egr       = {1.16-7.02e-4*(trefk^2)/(trefk+1108)} ! (eV)
+.param vtemp     = {(kb*tempk)/q}
+.param vtempr    = {(kb*trefk)/q}
+.param ni        = {1.45e10*((tempk/300.15)^1.5)*exp(21.556981-eg/(2*vtemp))}
+.param nir       = {1.45e10*((trefk/300.15)^1.5)*exp(21.556981-egr/(2*vtempr))}
+.param phi       = {vtemp*log(nsub/ni)}
+.param phir      = {vtempr*log(nsub/nir)}
+.param vfbt      = {vfb+(phi-phir)}
+.param cox       = {epsi_ox/tox}
+.param coxsti    = {epsi_ox/tox_sti}
+.param cmax      = {cox*area}
+.param ld        = {sqrt(epsi_si*vtemp/(q*nsub*1e6))}
+.param cfbs      = {epsi_si*area/ld}
+.param cfb       = {cmax*cfbs/(cmax+cfbs)}
+.param vnorm     = {q*nsub*1e6*epsi_si/(2.0*cox^2)}
+*
+*-------------------------------------------------------------------------------
+* Computing parasitic capacitances
+*-------------------------------------------------------------------------------
+.param cperi     = {cp*peri} 
+.param capaw     = {coxsti*wolapw*(l-dl)}
+.param capab     = {coxsti*wolapb*(l-dl)}
+*-------------------------------------------------------------------------------
+* Computing parasitic resistances of Poly & Well
+*-------------------------------------------------------------------------------
+.param rs1       = 14
+.param rs2       = 650
+.param rhs       = 14
+.param rsc1      = 30
+.param rsc2      = 30
+.param rval1     = {rs1*(dcoa+dw/2.0+(w-dw)/3.0)/(l-dl)+rsc1/nc1}
+.param rval2     = {(rhs*(dcop+dl/2.0)/2.0+rs2*(l-dl)/12.0)/(w-dw)+rsc2/nc2}
+*-------------------------------------------------------------------------------
+* Netlist
+*-------------------------------------------------------------------------------
+Erat  rat  0      value={(sub*v(1,2)+vfbt)/vsm}
+Eexp  ex   0      value={0.5*((-sub*v(1,2)-vfbt)*sl2+sqrt((sl2^2)*(-sub*v(1,2)-vfbt)^2 + eps^2))}
+Evacc acc  0      value={cmax/(1.0+(exp(-(-sub*v(1,2)-vfbt)/(sl1+v(ex))))*(cmax-cfb)/cfb)}
+Evdep dep  0      value={cfb/(1.0+(valif(v(rat)>20,v(rat),log(1.0+exp(v(rat)))))*vsm/vnorm)^mexp}
+
+Cc    1    2      value={(v(dep)/(1.0+exp(-v(rat)))+v(acc)/(1.0+exp(v(rat))))*number}
+Cpw   1    2      {(cperi+capaw)*number}
+
+Cpb   PLUS B      {capab*number}
+Dnw   B    2      DNWPS area={areanw*number} peri={perinw*number}
+
+Rs1   PLUS 1      {rval1/number}
+Rs2   2    MINUS  {rval2/number}
+
+C1    rat  0      1e-15
+C2    ex   0      1e-15
+C3    acc  0      1e-15
+C4    dep  0      1e-15
+
+.ends CDONWPO3V3M2
+
+
+.endl cdonwpo3v3_cmax
+
+
+.lib cdopwpo3v3_typ
+
+*-------------------------------------------------------------------------------
+*                          Poly / Well Capacitors
+*-------------------------------------------------------------------------------
+* TEMPLATE   : cpolywell_eldoN.t,v 1.2 2002/05/27 15:28:14
+* PARAMETERS : cpolywell.dds,v 1.2 2002/03/27 14:53:03
+* TRANSLATOR : ddspp.tcl,v 1.47 2001/09/11 08:03:16
+* Translated by re11 on June 14, 2002
+* ----------------------------------------------------------------------
+* (C) Copyright STMicroelectronics (2002)
+*     Unauthorized Reproduction and Communication Strictly Prohibited.
+* ----------------------------------------------------------------------
+*-------------------------------------------------------------------------------
+
+
+.subckt CDOPWPO3V3M1 PLUS MINUS
++ param: c=2.390e-15 w=0.64e-6 nc1=2 nc2=2.0*trunc((w-2*0.07e-6+0.18e-6)/(0.18e-6+0.16e-6)) number=1 mismatch=1
+*-------------------------------------------------------------------------------
+* Family cdopwpo3v3 Model CDOPWPO3V3M1 typ
+* Maturity : Preliminary
+*-------------------------------------------------------------------------------
+*
+*-------------------------------------------------------------------------------
+* Parameters of cdopwpo3v3 Model CDOPWPO3V3 corner typ
+*-------------------------------------------------------------------------------
+* Geometrical parameters
+.param dl          = 2.0e-08
+.param dw          = 0
+.param endcap      = 0.18e-6
+.param wcon        = 0.16e-6
+.param scon        = 0.18e-6
+.param cep         = 0.07e-6
+.param cea         = 0.07e-6
+.param dcoa        = 0.14e-6
+.param dcop        = 0.15e-6
+* Electrical parameters
+.param sub         = 1
+.param tref        = 27
+.param tox         = 6.96359e-09
+.param vfb         = 0.0701806
+.param nsub        = 3.70202e+17
+.param mexp        = 0.360888
+.param sl1         = 0.335
+.param sl2         = 0.143606
+.param vsm         = 0.1
+.param eps         = 0.0001
+.param tox_sti     = 3e-07
+.param cp          = 3.0e-10 
+* Typical parameter values for length computation
+.param dl_typ      = 2.0e-08
+.param dw_typ      = 0
+.param tox_typ     = 6.96359e-09
+.param tox_sti_typ = 3e-07
+.param cp_typ      = 3.0e-10
+*
+*-------------------------------------------------------------------------------
+* Computing intrinsic capa geometry
+*-------------------------------------------------------------------------------
+* Universal constants
+.param epsi_ox   = {3.9 * 8.85418e-12}
+.param epsi_si   = {11.9 * 8.85418e-12}
+.param q         = 1.60219e-19   ! (Coulomb)
+.param kb        = 1.3806226e-23 ! (J.s)
+* Length computation
+.param we        = {w-dw_typ}
+
+.param wolape    = {cep+wcon+dcoa+endcap+dw_typ-dl_typ}
+.param l         = {dl_typ+(c-2.0*cp_typ*we)/(epsi_ox*(we/tox_typ+wolape/tox_sti_typ))}
+* Area and perimeter computations
+.param wolapw    = {cep+wcon+dcoa+endcap+dw-dl}
+
+.param area      = {(w-dw)*(l-dl)}
+.param peri      = {2.0*(w-dw)}
+*
+*-------------------------------------------------------------------------------
+* Computing intrinsic capa between Poly & Well
+*-------------------------------------------------------------------------------
+* Intermediate computations using BSIM3 equations for eg, ni, phi
+.param tempk     = {temper+273.15}
+.param trefk     = {tref+273.15}
+.param eg        = {1.16-7.02e-4*(tempk^2)/(tempk+1108)} ! (eV)
+.param egr       = {1.16-7.02e-4*(trefk^2)/(trefk+1108)} ! (eV)
+.param vtemp     = {(kb*tempk)/q}
+.param vtempr    = {(kb*trefk)/q}
+.param ni        = {1.45e10*((tempk/300.15)^1.5)*exp(21.556981-eg/(2*vtemp))}
+.param nir       = {1.45e10*((trefk/300.15)^1.5)*exp(21.556981-egr/(2*vtempr))}
+.param phi       = {vtemp*log(nsub/ni)}
+.param phir      = {vtempr*log(nsub/nir)}
+.param vfbt      = {vfb+(phi-phir)}
+.param cox       = {epsi_ox/tox}
+.param coxsti    = {epsi_ox/tox_sti}
+.param cmax      = {cox*area}
+.param ld        = {sqrt(epsi_si*vtemp/(q*nsub*1e6))}
+.param cfbs      = {epsi_si*area/ld}
+.param cfb       = {cmax*cfbs/(cmax+cfbs)}
+.param vnorm     = {q*nsub*1e6*epsi_si/(2.0*cox^2)}
+*
+*-------------------------------------------------------------------------------
+* Computing parasitic capacitances
+*-------------------------------------------------------------------------------
+.param cperi     = {cp*peri} 
+.param capaw     = {coxsti*wolapw*(l-dl)}
+
+*-------------------------------------------------------------------------------
+* Netlist
+*-------------------------------------------------------------------------------
+Erat  rat  0 	  value={(sub*v(PLUS,MINUS)+vfbt)/vsm}
+Eexp  ex   0 	  value={0.5*((-sub*v(PLUS,MINUS)-vfbt)*sl2+sqrt((sl2^2)*(-sub*v(PLUS,MINUS)-vfbt)^2 + eps^2))}
+EVacc acc  0 	  value={cmax/(1.0+(exp(-(-sub*v(PLUS,MINUS)-vfbt)/(sl1+v(ex))))*(cmax-cfb)/cfb)}
+EVdep dep  0 	  value={cfb/(1.0+(valif(v(rat)>20,v(rat),log(1.0+exp(v(rat)))))*vsm/vnorm)^mexp}
+
+Cc    PLUS MINUS  value={(v(dep)/(1.0+exp(-v(rat)))+v(acc)/(1.0+exp(v(rat))))*number}
+Cpw   PLUS MINUS  {(cperi+capaw)*number}
+
+C1    rat  0      1e-15
+C2    ex   0      1e-15
+C3    acc  0      1e-15
+C4    dep  0      1e-15
+
+.ends CDOPWPO3V3M1
+
+.subckt CDOPWPO3V3U PLUS MINUS
++ param: c=2.390e-15
+c1 PLUS MINUS c
+.ends CDOPWPO3V3U
+
+.subckt CDOPWPO3V3M2 PLUS MINUS
++ param: c=2.390e-15 w=0.64e-6 nc1=2 nc2=2.0*trunc((w-2*0.07e-6+0.18e-6)/(0.18e-6+0.16e-6)) number=1 mismatch=1
+*-------------------------------------------------------------------------------
+* Family cdopwpo3v3 Model CDOPWPO3V3M2 typ
+* Maturity : Preliminary
+*-------------------------------------------------------------------------------
+*
+*-------------------------------------------------------------------------------
+* Parameters of cdopwpo3v3 Model CDOPWPO3V3 corner typ
+*-------------------------------------------------------------------------------
+* Geometrical parameters
+.param dl          = 2.0e-08
+.param dw          = 0
+.param endcap      = 0.18e-6
+.param wcon        = 0.16e-6
+.param scon        = 0.18e-6
+.param cep         = 0.07e-6
+.param cea         = 0.07e-6
+.param dcoa        = 0.14e-6
+.param dcop        = 0.15e-6
+* Electrical parameters
+.param sub         = 1
+.param tref        = 27
+.param tox         = 6.96359e-09
+.param vfb         = 0.0701806
+.param nsub        = 3.70202e+17
+.param mexp        = 0.360888
+.param sl1         = 0.335
+.param sl2         = 0.143606
+.param vsm         = 0.1
+.param eps         = 0.0001
+.param tox_sti     = 3e-07
+.param cp          = 3.0e-10 
+* Typical parameter values for length computation
+.param dl_typ      = 2.0e-08
+.param dw_typ      = 0
+.param tox_typ     = 6.96359e-09
+.param tox_sti_typ = 3e-07
+.param cp_typ      = 3.0e-10
+*
+*-------------------------------------------------------------------------------
+* Computing intrinsic capa geometry
+*-------------------------------------------------------------------------------
+* Universal constants
+.param epsi_ox   = {3.9 * 8.85418e-12}
+.param epsi_si   = {11.9 * 8.85418e-12}
+.param q         = 1.60219e-19   ! (Coulomb)
+.param kb        = 1.3806226e-23 ! (J.s)
+* Length computation
+.param we        = {w-dw_typ}
+
+.param wolape    = {cep+wcon+dcoa+endcap+dw_typ-dl_typ}
+.param l         = {dl_typ+(c-2.0*cp_typ*we)/(epsi_ox*(we/tox_typ+wolape/tox_sti_typ))}
+* Area and perimeter computations
+.param wolapw    = {cep+wcon+dcoa+endcap+dw-dl}
+
+.param area      = {(w-dw)*(l-dl)}
+.param peri      = {2.0*(w-dw)}
+*
+*-------------------------------------------------------------------------------
+* Computing intrinsic capa between Poly & Well
+*-------------------------------------------------------------------------------
+* Intermediate computations using BSIM3 equations for eg, ni, phi
+.param tempk     = {temper+273.15}
+.param trefk     = {tref+273.15}
+.param eg        = {1.16-7.02e-4*(tempk^2)/(tempk+1108)} ! (eV)
+.param egr       = {1.16-7.02e-4*(trefk^2)/(trefk+1108)} ! (eV)
+.param vtemp     = {(kb*tempk)/q}
+.param vtempr    = {(kb*trefk)/q}
+.param ni        = {1.45e10*((tempk/300.15)^1.5)*exp(21.556981-eg/(2*vtemp))}
+.param nir       = {1.45e10*((trefk/300.15)^1.5)*exp(21.556981-egr/(2*vtempr))}
+.param phi       = {vtemp*log(nsub/ni)}
+.param phir      = {vtempr*log(nsub/nir)}
+.param vfbt      = {vfb+(phi-phir)}
+.param cox       = {epsi_ox/tox}
+.param coxsti    = {epsi_ox/tox_sti}
+.param cmax      = {cox*area}
+.param ld        = {sqrt(epsi_si*vtemp/(q*nsub*1e6))}
+.param cfbs      = {epsi_si*area/ld}
+.param cfb       = {cmax*cfbs/(cmax+cfbs)}
+.param vnorm     = {q*nsub*1e6*epsi_si/(2.0*cox^2)}
+*
+*-------------------------------------------------------------------------------
+* Computing parasitic capacitances
+*-------------------------------------------------------------------------------
+.param cperi     = {cp*peri} 
+.param capaw     = {coxsti*wolapw*(l-dl)}
+
+*-------------------------------------------------------------------------------
+* Computing parasitic resistances of Poly & Well
+*-------------------------------------------------------------------------------
+.param rs1       = 10
+.param rs2       = 1000
+.param rhs       = 10
+.param rsc1      = 15
+.param rsc2      = 15
+.param rval1     = {rs1*(dcoa+dw/2.0+(w-dw)/3.0)/(l-dl)+rsc1/nc1}
+.param rval2     = {(rhs*(dcop+dl/2.0)/2.0+rs2*(l-dl)/12.0)/(w-dw)+rsc2/nc2}
+*-------------------------------------------------------------------------------
+* Netlist
+*-------------------------------------------------------------------------------
+Erat  rat  0      value={(sub*v(1,2)+vfbt)/vsm}
+Eexp  ex   0      value={0.5*((-sub*v(1,2)-vfbt)*sl2+sqrt((sl2^2)*(-sub*v(1,2)-vfbt)^2 + eps^2))}
+Evacc acc  0      value={cmax/(1.0+(exp(-(-sub*v(1,2)-vfbt)/(sl1+v(ex))))*(cmax-cfb)/cfb)}
+Evdep dep  0      value={cfb/(1.0+(valif(v(rat)>20,v(rat),log(1.0+exp(v(rat)))))*vsm/vnorm)^mexp}
+
+Cc    1    2      value={(v(dep)/(1.0+exp(-v(rat)))+v(acc)/(1.0+exp(v(rat))))*number}
+Cpw   1    2      {(cperi+capaw)*number}
+
+Rs1   PLUS 1      {rval1/number}
+Rs2   2    MINUS  {rval2/number}
+
+C1    rat  0      1e-15
+C2    ex   0      1e-15
+C3    acc  0      1e-15
+C4    dep  0      1e-15
+
+.ends CDOPWPO3V3M2
+
+
+.endl cdopwpo3v3_typ
+
+
+.lib cdopwpo3v3_cmin
+
+*-------------------------------------------------------------------------------
+*                          Poly / Well Capacitors
+*-------------------------------------------------------------------------------
+* TEMPLATE   : cpolywell_eldoN.t,v 1.2 2002/05/27 15:28:14
+* PARAMETERS : cpolywell.dds,v 1.2 2002/03/27 14:53:03
+* TRANSLATOR : ddspp.tcl,v 1.47 2001/09/11 08:03:16
+* Translated by re11 on June 14, 2002
+* ----------------------------------------------------------------------
+* (C) Copyright STMicroelectronics (2002)
+*     Unauthorized Reproduction and Communication Strictly Prohibited.
+* ----------------------------------------------------------------------
+*-------------------------------------------------------------------------------
+
+
+.subckt CDOPWPO3V3M1 PLUS MINUS
++ param: c=2.390e-15 w=0.64e-6 nc1=2 nc2=2.0*trunc((w-2*0.07e-6+0.18e-6)/(0.18e-6+0.16e-6)) number=1 mismatch=1
+*-------------------------------------------------------------------------------
+* Family cdopwpo3v3 Model CDOPWPO3V3M1 cmin
+* Maturity : Preliminary
+*-------------------------------------------------------------------------------
+*
+*-------------------------------------------------------------------------------
+* Parameters of cdopwpo3v3 Model CDOPWPO3V3 corner cmin
+*-------------------------------------------------------------------------------
+* Geometrical parameters
+.param dl          = 3.8e-08
+.param dw          = 3.6e-08
+.param endcap      = 0.18e-6
+.param wcon        = 0.16e-6
+.param scon        = 0.18e-6
+.param cep         = 0.07e-6
+.param cea         = 0.07e-6
+.param dcoa        = 0.14e-6
+.param dcop        = 0.15e-6
+* Electrical parameters
+.param sub         = 1
+.param tref        = 27
+.param tox         = 7.18859e-09
+.param vfb         = 0.0881106
+.param nsub        = 1.85101e+17
+.param mexp        = 0.360888
+.param sl1         = 0.335
+.param sl2         = 0.143606
+.param vsm         = 0.1
+.param eps         = 0.0001
+.param tox_sti     = 3e-07
+.param cp          = 3.0e-10 
+* Typical parameter values for length computation
+.param dl_typ      = 2.0e-08
+.param dw_typ      = 0
+.param tox_typ     = 6.96359e-09
+.param tox_sti_typ = 3e-07
+.param cp_typ      = 3.0e-10
+*
+*-------------------------------------------------------------------------------
+* Computing intrinsic capa geometry
+*-------------------------------------------------------------------------------
+* Universal constants
+.param epsi_ox   = {3.9 * 8.85418e-12}
+.param epsi_si   = {11.9 * 8.85418e-12}
+.param q         = 1.60219e-19   ! (Coulomb)
+.param kb        = 1.3806226e-23 ! (J.s)
+* Length computation
+.param we        = {w-dw_typ}
+
+.param wolape    = {cep+wcon+dcoa+endcap+dw_typ-dl_typ}
+.param l         = {dl_typ+(c-2.0*cp_typ*we)/(epsi_ox*(we/tox_typ+wolape/tox_sti_typ))}
+* Area and perimeter computations
+.param wolapw    = {cep+wcon+dcoa+endcap+dw-dl}
+
+.param area      = {(w-dw)*(l-dl)}
+.param peri      = {2.0*(w-dw)}
+*
+*-------------------------------------------------------------------------------
+* Computing intrinsic capa between Poly & Well
+*-------------------------------------------------------------------------------
+* Intermediate computations using BSIM3 equations for eg, ni, phi
+.param tempk     = {temper+273.15}
+.param trefk     = {tref+273.15}
+.param eg        = {1.16-7.02e-4*(tempk^2)/(tempk+1108)} ! (eV)
+.param egr       = {1.16-7.02e-4*(trefk^2)/(trefk+1108)} ! (eV)
+.param vtemp     = {(kb*tempk)/q}
+.param vtempr    = {(kb*trefk)/q}
+.param ni        = {1.45e10*((tempk/300.15)^1.5)*exp(21.556981-eg/(2*vtemp))}
+.param nir       = {1.45e10*((trefk/300.15)^1.5)*exp(21.556981-egr/(2*vtempr))}
+.param phi       = {vtemp*log(nsub/ni)}
+.param phir      = {vtempr*log(nsub/nir)}
+.param vfbt      = {vfb+(phi-phir)}
+.param cox       = {epsi_ox/tox}
+.param coxsti    = {epsi_ox/tox_sti}
+.param cmax      = {cox*area}
+.param ld        = {sqrt(epsi_si*vtemp/(q*nsub*1e6))}
+.param cfbs      = {epsi_si*area/ld}
+.param cfb       = {cmax*cfbs/(cmax+cfbs)}
+.param vnorm     = {q*nsub*1e6*epsi_si/(2.0*cox^2)}
+*
+*-------------------------------------------------------------------------------
+* Computing parasitic capacitances
+*-------------------------------------------------------------------------------
+.param cperi     = {cp*peri} 
+.param capaw     = {coxsti*wolapw*(l-dl)}
+
+*-------------------------------------------------------------------------------
+* Netlist
+*-------------------------------------------------------------------------------
+Erat  rat  0 	  value={(sub*v(PLUS,MINUS)+vfbt)/vsm}
+Eexp  ex   0 	  value={0.5*((-sub*v(PLUS,MINUS)-vfbt)*sl2+sqrt((sl2^2)*(-sub*v(PLUS,MINUS)-vfbt)^2 + eps^2))}
+EVacc acc  0 	  value={cmax/(1.0+(exp(-(-sub*v(PLUS,MINUS)-vfbt)/(sl1+v(ex))))*(cmax-cfb)/cfb)}
+EVdep dep  0 	  value={cfb/(1.0+(valif(v(rat)>20,v(rat),log(1.0+exp(v(rat)))))*vsm/vnorm)^mexp}
+
+Cc    PLUS MINUS  value={(v(dep)/(1.0+exp(-v(rat)))+v(acc)/(1.0+exp(v(rat))))*number}
+Cpw   PLUS MINUS  {(cperi+capaw)*number}
+
+C1    rat  0      1e-15
+C2    ex   0      1e-15
+C3    acc  0      1e-15
+C4    dep  0      1e-15
+
+.ends CDOPWPO3V3M1
+
+.subckt CDOPWPO3V3U PLUS MINUS
++ param: c=2.390e-15
+c1 PLUS MINUS c
+.ends CDOPWPO3V3U
+
+.subckt CDOPWPO3V3M2 PLUS MINUS
++ param: c=2.390e-15 w=0.64e-6 nc1=2 nc2=2.0*trunc((w-2*0.07e-6+0.18e-6)/(0.18e-6+0.16e-6)) number=1 mismatch=1
+*-------------------------------------------------------------------------------
+* Family cdopwpo3v3 Model CDOPWPO3V3M2 cmin
+* Maturity : Preliminary
+*-------------------------------------------------------------------------------
+*
+*-------------------------------------------------------------------------------
+* Parameters of cdopwpo3v3 Model CDOPWPO3V3 corner cmin
+*-------------------------------------------------------------------------------
+* Geometrical parameters
+.param dl          = 3.8e-08
+.param dw          = 3.6e-08
+.param endcap      = 0.18e-6
+.param wcon        = 0.16e-6
+.param scon        = 0.18e-6
+.param cep         = 0.07e-6
+.param cea         = 0.07e-6
+.param dcoa        = 0.14e-6
+.param dcop        = 0.15e-6
+* Electrical parameters
+.param sub         = 1
+.param tref        = 27
+.param tox         = 7.18859e-09
+.param vfb         = 0.0881106
+.param nsub        = 1.85101e+17
+.param mexp        = 0.360888
+.param sl1         = 0.335
+.param sl2         = 0.143606
+.param vsm         = 0.1
+.param eps         = 0.0001
+.param tox_sti     = 3e-07
+.param cp          = 3.0e-10 
+* Typical parameter values for length computation
+.param dl_typ      = 2.0e-08
+.param dw_typ      = 0
+.param tox_typ     = 6.96359e-09
+.param tox_sti_typ = 3e-07
+.param cp_typ      = 3.0e-10
+*
+*-------------------------------------------------------------------------------
+* Computing intrinsic capa geometry
+*-------------------------------------------------------------------------------
+* Universal constants
+.param epsi_ox   = {3.9 * 8.85418e-12}
+.param epsi_si   = {11.9 * 8.85418e-12}
+.param q         = 1.60219e-19   ! (Coulomb)
+.param kb        = 1.3806226e-23 ! (J.s)
+* Length computation
+.param we        = {w-dw_typ}
+
+.param wolape    = {cep+wcon+dcoa+endcap+dw_typ-dl_typ}
+.param l         = {dl_typ+(c-2.0*cp_typ*we)/(epsi_ox*(we/tox_typ+wolape/tox_sti_typ))}
+* Area and perimeter computations
+.param wolapw    = {cep+wcon+dcoa+endcap+dw-dl}
+
+.param area      = {(w-dw)*(l-dl)}
+.param peri      = {2.0*(w-dw)}
+*
+*-------------------------------------------------------------------------------
+* Computing intrinsic capa between Poly & Well
+*-------------------------------------------------------------------------------
+* Intermediate computations using BSIM3 equations for eg, ni, phi
+.param tempk     = {temper+273.15}
+.param trefk     = {tref+273.15}
+.param eg        = {1.16-7.02e-4*(tempk^2)/(tempk+1108)} ! (eV)
+.param egr       = {1.16-7.02e-4*(trefk^2)/(trefk+1108)} ! (eV)
+.param vtemp     = {(kb*tempk)/q}
+.param vtempr    = {(kb*trefk)/q}
+.param ni        = {1.45e10*((tempk/300.15)^1.5)*exp(21.556981-eg/(2*vtemp))}
+.param nir       = {1.45e10*((trefk/300.15)^1.5)*exp(21.556981-egr/(2*vtempr))}
+.param phi       = {vtemp*log(nsub/ni)}
+.param phir      = {vtempr*log(nsub/nir)}
+.param vfbt      = {vfb+(phi-phir)}
+.param cox       = {epsi_ox/tox}
+.param coxsti    = {epsi_ox/tox_sti}
+.param cmax      = {cox*area}
+.param ld        = {sqrt(epsi_si*vtemp/(q*nsub*1e6))}
+.param cfbs      = {epsi_si*area/ld}
+.param cfb       = {cmax*cfbs/(cmax+cfbs)}
+.param vnorm     = {q*nsub*1e6*epsi_si/(2.0*cox^2)}
+*
+*-------------------------------------------------------------------------------
+* Computing parasitic capacitances
+*-------------------------------------------------------------------------------
+.param cperi     = {cp*peri} 
+.param capaw     = {coxsti*wolapw*(l-dl)}
+
+*-------------------------------------------------------------------------------
+* Computing parasitic resistances of Poly & Well
+*-------------------------------------------------------------------------------
+.param rs1       = 6
+.param rs2       = 850
+.param rhs       = 6
+.param rsc1      = 15
+.param rsc2      = 15
+.param rval1     = {rs1*(dcoa+dw/2.0+(w-dw)/3.0)/(l-dl)+rsc1/nc1}
+.param rval2     = {(rhs*(dcop+dl/2.0)/2.0+rs2*(l-dl)/12.0)/(w-dw)+rsc2/nc2}
+*-------------------------------------------------------------------------------
+* Netlist
+*-------------------------------------------------------------------------------
+Erat  rat  0      value={(sub*v(1,2)+vfbt)/vsm}
+Eexp  ex   0      value={0.5*((-sub*v(1,2)-vfbt)*sl2+sqrt((sl2^2)*(-sub*v(1,2)-vfbt)^2 + eps^2))}
+Evacc acc  0      value={cmax/(1.0+(exp(-(-sub*v(1,2)-vfbt)/(sl1+v(ex))))*(cmax-cfb)/cfb)}
+Evdep dep  0      value={cfb/(1.0+(valif(v(rat)>20,v(rat),log(1.0+exp(v(rat)))))*vsm/vnorm)^mexp}
+
+Cc    1    2      value={(v(dep)/(1.0+exp(-v(rat)))+v(acc)/(1.0+exp(v(rat))))*number}
+Cpw   1    2      {(cperi+capaw)*number}
+
+Rs1   PLUS 1      {rval1/number}
+Rs2   2    MINUS  {rval2/number}
+
+C1    rat  0      1e-15
+C2    ex   0      1e-15
+C3    acc  0      1e-15
+C4    dep  0      1e-15
+
+.ends CDOPWPO3V3M2
+
+
+.endl cdopwpo3v3_cmin
+
+
+.lib cdopwpo3v3_cmax
+
+*-------------------------------------------------------------------------------
+*                          Poly / Well Capacitors
+*-------------------------------------------------------------------------------
+* TEMPLATE   : cpolywell_eldoN.t,v 1.2 2002/05/27 15:28:14
+* PARAMETERS : cpolywell.dds,v 1.2 2002/03/27 14:53:03
+* TRANSLATOR : ddspp.tcl,v 1.47 2001/09/11 08:03:16
+* Translated by re11 on June 14, 2002
+* ----------------------------------------------------------------------
+* (C) Copyright STMicroelectronics (2002)
+*     Unauthorized Reproduction and Communication Strictly Prohibited.
+* ----------------------------------------------------------------------
+*-------------------------------------------------------------------------------
+
+
+.subckt CDOPWPO3V3M1 PLUS MINUS
++ param: c=2.390e-15 w=0.64e-6 nc1=2 nc2=2.0*trunc((w-2*0.07e-6+0.18e-6)/(0.18e-6+0.16e-6)) number=1 mismatch=1
+*-------------------------------------------------------------------------------
+* Family cdopwpo3v3 Model CDOPWPO3V3M1 cmax
+* Maturity : Preliminary
+*-------------------------------------------------------------------------------
+*
+*-------------------------------------------------------------------------------
+* Parameters of cdopwpo3v3 Model CDOPWPO3V3 corner cmax
+*-------------------------------------------------------------------------------
+* Geometrical parameters
+.param dl          = 0.2e-08
+.param dw          = -3.6e-08
+.param endcap      = 0.18e-6
+.param wcon        = 0.16e-6
+.param scon        = 0.18e-6
+.param cep         = 0.07e-6
+.param cea         = 0.07e-6
+.param dcoa        = 0.14e-6
+.param dcop        = 0.15e-6
+* Electrical parameters
+.param sub         = 1
+.param tref        = 27
+.param tox         = 6.73859e-09
+.param vfb         = 0.0522506
+.param nsub        = 7.40404e+17
+.param mexp        = 0.360888
+.param sl1         = 0.335
+.param sl2         = 0.143606
+.param vsm         = 0.1
+.param eps         = 0.0001
+.param tox_sti     = 3e-07
+.param cp          = 3.0e-10 
+* Typical parameter values for length computation
+.param dl_typ      = 2.0e-08
+.param dw_typ      = 0
+.param tox_typ     = 6.96359e-09
+.param tox_sti_typ = 3e-07
+.param cp_typ      = 3.0e-10
+*
+*-------------------------------------------------------------------------------
+* Computing intrinsic capa geometry
+*-------------------------------------------------------------------------------
+* Universal constants
+.param epsi_ox   = {3.9 * 8.85418e-12}
+.param epsi_si   = {11.9 * 8.85418e-12}
+.param q         = 1.60219e-19   ! (Coulomb)
+.param kb        = 1.3806226e-23 ! (J.s)
+* Length computation
+.param we        = {w-dw_typ}
+
+.param wolape    = {cep+wcon+dcoa+endcap+dw_typ-dl_typ}
+.param l         = {dl_typ+(c-2.0*cp_typ*we)/(epsi_ox*(we/tox_typ+wolape/tox_sti_typ))}
+* Area and perimeter computations
+.param wolapw    = {cep+wcon+dcoa+endcap+dw-dl}
+
+.param area      = {(w-dw)*(l-dl)}
+.param peri      = {2.0*(w-dw)}
+*
+*-------------------------------------------------------------------------------
+* Computing intrinsic capa between Poly & Well
+*-------------------------------------------------------------------------------
+* Intermediate computations using BSIM3 equations for eg, ni, phi
+.param tempk     = {temper+273.15}
+.param trefk     = {tref+273.15}
+.param eg        = {1.16-7.02e-4*(tempk^2)/(tempk+1108)} ! (eV)
+.param egr       = {1.16-7.02e-4*(trefk^2)/(trefk+1108)} ! (eV)
+.param vtemp     = {(kb*tempk)/q}
+.param vtempr    = {(kb*trefk)/q}
+.param ni        = {1.45e10*((tempk/300.15)^1.5)*exp(21.556981-eg/(2*vtemp))}
+.param nir       = {1.45e10*((trefk/300.15)^1.5)*exp(21.556981-egr/(2*vtempr))}
+.param phi       = {vtemp*log(nsub/ni)}
+.param phir      = {vtempr*log(nsub/nir)}
+.param vfbt      = {vfb+(phi-phir)}
+.param cox       = {epsi_ox/tox}
+.param coxsti    = {epsi_ox/tox_sti}
+.param cmax      = {cox*area}
+.param ld        = {sqrt(epsi_si*vtemp/(q*nsub*1e6))}
+.param cfbs      = {epsi_si*area/ld}
+.param cfb       = {cmax*cfbs/(cmax+cfbs)}
+.param vnorm     = {q*nsub*1e6*epsi_si/(2.0*cox^2)}
+*
+*-------------------------------------------------------------------------------
+* Computing parasitic capacitances
+*-------------------------------------------------------------------------------
+.param cperi     = {cp*peri} 
+.param capaw     = {coxsti*wolapw*(l-dl)}
+
+*-------------------------------------------------------------------------------
+* Netlist
+*-------------------------------------------------------------------------------
+Erat  rat  0 	  value={(sub*v(PLUS,MINUS)+vfbt)/vsm}
+Eexp  ex   0 	  value={0.5*((-sub*v(PLUS,MINUS)-vfbt)*sl2+sqrt((sl2^2)*(-sub*v(PLUS,MINUS)-vfbt)^2 + eps^2))}
+EVacc acc  0 	  value={cmax/(1.0+(exp(-(-sub*v(PLUS,MINUS)-vfbt)/(sl1+v(ex))))*(cmax-cfb)/cfb)}
+EVdep dep  0 	  value={cfb/(1.0+(valif(v(rat)>20,v(rat),log(1.0+exp(v(rat)))))*vsm/vnorm)^mexp}
+
+Cc    PLUS MINUS  value={(v(dep)/(1.0+exp(-v(rat)))+v(acc)/(1.0+exp(v(rat))))*number}
+Cpw   PLUS MINUS  {(cperi+capaw)*number}
+
+C1    rat  0      1e-15
+C2    ex   0      1e-15
+C3    acc  0      1e-15
+C4    dep  0      1e-15
+
+.ends CDOPWPO3V3M1
+
+.subckt CDOPWPO3V3U PLUS MINUS
++ param: c=2.390e-15
+c1 PLUS MINUS c
+.ends CDOPWPO3V3U
+
+.subckt CDOPWPO3V3M2 PLUS MINUS
++ param: c=2.390e-15 w=0.64e-6 nc1=2 nc2=2.0*trunc((w-2*0.07e-6+0.18e-6)/(0.18e-6+0.16e-6)) number=1 mismatch=1
+*-------------------------------------------------------------------------------
+* Family cdopwpo3v3 Model CDOPWPO3V3M2 cmax
+* Maturity : Preliminary
+*-------------------------------------------------------------------------------
+*
+*-------------------------------------------------------------------------------
+* Parameters of cdopwpo3v3 Model CDOPWPO3V3 corner cmax
+*-------------------------------------------------------------------------------
+* Geometrical parameters
+.param dl          = 0.2e-08
+.param dw          = -3.6e-08
+.param endcap      = 0.18e-6
+.param wcon        = 0.16e-6
+.param scon        = 0.18e-6
+.param cep         = 0.07e-6
+.param cea         = 0.07e-6
+.param dcoa        = 0.14e-6
+.param dcop        = 0.15e-6
+* Electrical parameters
+.param sub         = 1
+.param tref        = 27
+.param tox         = 6.73859e-09
+.param vfb         = 0.0522506
+.param nsub        = 7.40404e+17
+.param mexp        = 0.360888
+.param sl1         = 0.335
+.param sl2         = 0.143606
+.param vsm         = 0.1
+.param eps         = 0.0001
+.param tox_sti     = 3e-07
+.param cp          = 3.0e-10 
+* Typical parameter values for length computation
+.param dl_typ      = 2.0e-08
+.param dw_typ      = 0
+.param tox_typ     = 6.96359e-09
+.param tox_sti_typ = 3e-07
+.param cp_typ      = 3.0e-10
+*
+*-------------------------------------------------------------------------------
+* Computing intrinsic capa geometry
+*-------------------------------------------------------------------------------
+* Universal constants
+.param epsi_ox   = {3.9 * 8.85418e-12}
+.param epsi_si   = {11.9 * 8.85418e-12}
+.param q         = 1.60219e-19   ! (Coulomb)
+.param kb        = 1.3806226e-23 ! (J.s)
+* Length computation
+.param we        = {w-dw_typ}
+
+.param wolape    = {cep+wcon+dcoa+endcap+dw_typ-dl_typ}
+.param l         = {dl_typ+(c-2.0*cp_typ*we)/(epsi_ox*(we/tox_typ+wolape/tox_sti_typ))}
+* Area and perimeter computations
+.param wolapw    = {cep+wcon+dcoa+endcap+dw-dl}
+
+.param area      = {(w-dw)*(l-dl)}
+.param peri      = {2.0*(w-dw)}
+*
+*-------------------------------------------------------------------------------
+* Computing intrinsic capa between Poly & Well
+*-------------------------------------------------------------------------------
+* Intermediate computations using BSIM3 equations for eg, ni, phi
+.param tempk     = {temper+273.15}
+.param trefk     = {tref+273.15}
+.param eg        = {1.16-7.02e-4*(tempk^2)/(tempk+1108)} ! (eV)
+.param egr       = {1.16-7.02e-4*(trefk^2)/(trefk+1108)} ! (eV)
+.param vtemp     = {(kb*tempk)/q}
+.param vtempr    = {(kb*trefk)/q}
+.param ni        = {1.45e10*((tempk/300.15)^1.5)*exp(21.556981-eg/(2*vtemp))}
+.param nir       = {1.45e10*((trefk/300.15)^1.5)*exp(21.556981-egr/(2*vtempr))}
+.param phi       = {vtemp*log(nsub/ni)}
+.param phir      = {vtempr*log(nsub/nir)}
+.param vfbt      = {vfb+(phi-phir)}
+.param cox       = {epsi_ox/tox}
+.param coxsti    = {epsi_ox/tox_sti}
+.param cmax      = {cox*area}
+.param ld        = {sqrt(epsi_si*vtemp/(q*nsub*1e6))}
+.param cfbs      = {epsi_si*area/ld}
+.param cfb       = {cmax*cfbs/(cmax+cfbs)}
+.param vnorm     = {q*nsub*1e6*epsi_si/(2.0*cox^2)}
+*
+*-------------------------------------------------------------------------------
+* Computing parasitic capacitances
+*-------------------------------------------------------------------------------
+.param cperi     = {cp*peri} 
+.param capaw     = {coxsti*wolapw*(l-dl)}
+
+*-------------------------------------------------------------------------------
+* Computing parasitic resistances of Poly & Well
+*-------------------------------------------------------------------------------
+.param rs1       = 14
+.param rs2       = 1450
+.param rhs       = 14
+.param rsc1      = 30
+.param rsc2      = 30
+.param rval1     = {rs1*(dcoa+dw/2.0+(w-dw)/3.0)/(l-dl)+rsc1/nc1}
+.param rval2     = {(rhs*(dcop+dl/2.0)/2.0+rs2*(l-dl)/12.0)/(w-dw)+rsc2/nc2}
+*-------------------------------------------------------------------------------
+* Netlist
+*-------------------------------------------------------------------------------
+Erat  rat  0      value={(sub*v(1,2)+vfbt)/vsm}
+Eexp  ex   0      value={0.5*((-sub*v(1,2)-vfbt)*sl2+sqrt((sl2^2)*(-sub*v(1,2)-vfbt)^2 + eps^2))}
+Evacc acc  0      value={cmax/(1.0+(exp(-(-sub*v(1,2)-vfbt)/(sl1+v(ex))))*(cmax-cfb)/cfb)}
+Evdep dep  0      value={cfb/(1.0+(valif(v(rat)>20,v(rat),log(1.0+exp(v(rat)))))*vsm/vnorm)^mexp}
+
+Cc    1    2      value={(v(dep)/(1.0+exp(-v(rat)))+v(acc)/(1.0+exp(v(rat))))*number}
+Cpw   1    2      {(cperi+capaw)*number}
+
+Rs1   PLUS 1      {rval1/number}
+Rs2   2    MINUS  {rval2/number}
+
+C1    rat  0      1e-15
+C2    ex   0      1e-15
+C3    acc  0      1e-15
+C4    dep  0      1e-15
+
+.ends CDOPWPO3V3M2
+
+
+.endl cdopwpo3v3_cmax
+
