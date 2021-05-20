@@ -1,0 +1,63 @@
+nand1 bigger C
+
+RNAND       =  6.7604E-11   targ=  2.2288E-09     trig=  2.1612E-09
+FNAND       =  6.8830E-11   targ=  1.2074E-09     trig=  1.1385E-09
+NANDDELAY   =  2.0851E-11   targ=  1.1839E-09     trig=  1.1630E-09
+NANDDELAY2  =  3.8286E-11   targ=  2.2013E-09     trig=  2.1630E-09
+MAXIGNDF    =  7.7056E-05     at=  1.1909E-09  from=  1.0000E-09     to=  2.0000E-09
+MAXIVDDR    = -7.0423E-05     at=  2.2003E-09  from=  2.0000E-09     to=  3.0000E-09
+MAXIGNDR    =  4.5692E-05     at=  2.1783E-09  from=  2.0000E-09     to=  3.0000E-09
+MAXIVDDF    = -4.7680E-05     at=  1.1709E-09  from=  1.0000E-09     to=  2.0000E-09
+MAXILOADF   = -1.2504E-06     at=  1.1939E-09  from=  1.0000E-09     to=  2.0000E-09
+MAXILOADR   =  1.1429E-06     at=  2.2076E-09  from=  2.0000E-09     to=  3.0000E-09
+
+nand1 smaller C
+
+RNAND       =  3.6391E-10   targ=  2.5936E-09     trig=  2.2297E-09
+FNAND       =  2.9652E-10   targ=  1.5081E-09     trig=  1.2116E-09
+NANDDELAY   =  1.8016E-10   targ=  1.3432E-09     trig=  1.1630E-09
+NANDDELAY2  =  2.0900E-10   targ=  2.3720E-09     trig=  2.1630E-09
+MAXIGNDF    =  2.4077E-04     at=  1.3260E-09  from=  1.0000E-09     to=  2.0000E-09
+MAXIVDDR    = -2.0919E-04     at=  2.3260E-09  from=  2.0000E-09     to=  3.0000E-09
+MAXIGNDR    =  1.2571E-05     at=  2.1949E-09  from=  2.0000E-09     to=  3.0000E-09
+MAXIVDDF    = -1.1039E-05     at=  1.1944E-09  from=  1.0000E-09     to=  2.0000E-09
+MAXILOADF   = -2.3042E-04     at=  1.3271E-09  from=  1.0000E-09     to=  2.0000E-09
+MAXILOADR   =  1.9972E-04     at=  2.3271E-09  from=  2.0000E-09     to=  3.0000E-09
+
+
+nand8 bigger C
+
+RNAND       =  6.2179E-11   targ=  2.2197E-09     trig=  2.1575E-09
+FNAND       =  6.3836E-11   targ=  1.2016E-09     trig=  1.1377E-09
+NANDDELAY   =  1.7455E-11   targ=  1.1805E-09     trig=  1.1630E-09
+NANDDELAY2  =  3.1347E-11   targ=  2.1943E-09     trig=  2.1630E-09
+MAXIGNDF    =  6.3732E-04     at=  1.1876E-09  from=  1.0000E-09     to=  2.0000E-09
+MAXIVDDR    = -5.5277E-04     at=  2.1926E-09  from=  2.0000E-09     to=  3.0000E-09
+MAXIGNDR    =  3.7896E-04     at=  2.1736E-09  from=  2.0000E-09     to=  3.0000E-09
+MAXIVDDF    = -4.1041E-04     at=  1.1716E-09  from=  1.0000E-09     to=  2.0000E-09
+MAXILOADF   = -1.4246E-06     at=  1.1896E-09  from=  1.0000E-09     to=  2.0000E-09
+MAXILOADR   =  1.2887E-06     at=  2.1997E-09  from=  2.0000E-09     to=  3.0000E-09
+
+
+nand8 smaller C
+
+RNAND       =  1.0546E-10   targ=  2.2769E-09     trig=  2.1714E-09
+FNAND       =  1.0084E-10   targ=  1.2545E-09     trig=  1.1536E-09
+NANDDELAY   =  5.2118E-11   targ=  1.2151E-09     trig=  1.1630E-09
+NANDDELAY2  =  6.6819E-11   targ=  2.2298E-09     trig=  2.1630E-09
+MAXIGNDF    =  1.0164E-03     at=  1.2275E-09  from=  1.0000E-09     to=  2.0000E-09
+MAXIVDDR    = -8.8259E-04     at=  2.2342E-09  from=  2.0000E-09     to=  3.0000E-09
+MAXIGNDR    =  2.7682E-04     at=  2.1777E-09  from=  2.0000E-09     to=  3.0000E-09
+MAXIVDDF    = -2.7304E-04     at=  1.1760E-09  from=  1.0000E-09     to=  2.0000E-09
+MAXILOADF   = -7.2917E-04     at=  1.2295E-09  from=  1.0000E-09     to=  2.0000E-09
+MAXILOADR   =  6.5614E-04     at=  2.2363E-09  from=  2.0000E-09     to=  3.0000E-09
+
+
+
+Explanation
+
+In nand8, the cell is able to manage a bigger capacitance at the output. For this reason, the charging/discharging time is lower on the nand8 cell with respect to the nand1. 
+
+For this reason both rising and falling time are lower. 
+
+Because the value of the capacitance is the same for both nand, the power consumption can be approximated to the same value. 
