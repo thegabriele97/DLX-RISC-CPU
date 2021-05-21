@@ -1,7 +1,7 @@
-Setup LH: The signal data_in changes right before the edge of the clock and so we violate the setup time. This happens because, during the evaluation phase, we are not able to fully charge the capacitance and so the output remains 0. 
+Setup LH: The signal data_in changes right before the edge of the clock and so we violate the setup time. This happens because, during the evaluation phase, we are not able to fully charge the capacitance and so the output remains 0 with some oscillation during the clock edges.
 
-Setup HL: The signal data_in changes right before the edge of the clock and so we violate the setup time. For this reason we are not able to sample the input value correctly and so the output value is not stable. 
+Setup HL: The signal data_in changes right before the edge of the clock and so we violate the setup time. This happens because, during the evaluation phase, we are not able to fully discharge the capacitance and so the output remains at 1 with some oscillation during the clock edges.
 
-Hold HLH: confrontare con gabri
+Hold HLH: 
 
-Hold LHL: confrontare con gabri
+Hold LHL: 
