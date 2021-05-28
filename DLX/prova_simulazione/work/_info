@@ -1,0 +1,233 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 d/home/ms21.16/gabri-ms-lab/ms-lab/DLX/prova_simulazione
+T_opt
+!s110 1622194297
+VHnTMQf3bL`j4clY9o];_<3
+04 6 4 work tb_dlx test 1
+=3-000ae431a4f1-60b0b879-69415-7ef0
+o-quiet -auto_acc_if_foreign -work work
+tCvgOpt 0
+n@_opt
+OL;O;10.7c;67
+Ccfg_tb
+etb_dlx
+aTEST
+Z1 DPx4 work 7 mytypes 0 22 `BjBJ=[=Y02UAWI5@DAlk3
+Z2 DEx4 work 3 dlx 0 22 A=BL9FmZSSkcdBYZJ0SST3
+DAx4 work 6 tb_dlx 4 test 22 RPIe8C]`8KR6m]a<5M`AC2
+Z3 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
+Z4 DPx4 ieee 14 std_logic_1164 0 22 cVAk:aDinOX8^VGI1ekP<3
+Z5 DEx4 work 6 tb_dlx 0 22 0`Ta?IIRzh`WES5dFomje3
+Z6 w1622191300
+R0
+Z7 8/home/ms21.16/gabri-ms-lab/ms-lab/DLX/prova_simulazione/TB_DLX.vhd
+Z8 F/home/ms21.16/gabri-ms-lab/ms-lab/DLX/prova_simulazione/TB_DLX.vhd
+l0
+L48
+VWm@PT6mFWSJ_l=n?nmal]1
+!s100 oh@;PfM5DUPQ4f?e[[AhO3
+Z9 OL;C;10.7c;67
+32
+Z10 !s110 1622193674
+!i10b 0
+Z11 !s108 1622193674.000000
+Z12 !s90 -reportprogress|300|-work|work|/home/ms21.16/gabri-ms-lab/ms-lab/DLX/prova_simulazione/000-globals.vhd|/home/ms21.16/gabri-ms-lab/ms-lab/DLX/prova_simulazione/a-DLX.vhd|/home/ms21.16/gabri-ms-lab/ms-lab/DLX/prova_simulazione/a.a-CU_HW.vhd|/home/ms21.16/gabri-ms-lab/ms-lab/DLX/prova_simulazione/a.c-IRAM.vhd|/home/ms21.16/gabri-ms-lab/ms-lab/DLX/prova_simulazione/TB_DLX.vhd|
+Z13 !s107 /home/ms21.16/gabri-ms-lab/ms-lab/DLX/prova_simulazione/TB_DLX.vhd|/home/ms21.16/gabri-ms-lab/ms-lab/DLX/prova_simulazione/a.c-IRAM.vhd|/home/ms21.16/gabri-ms-lab/ms-lab/DLX/prova_simulazione/a.a-CU_HW.vhd|/home/ms21.16/gabri-ms-lab/ms-lab/DLX/prova_simulazione/a-DLX.vhd|/home/ms21.16/gabri-ms-lab/ms-lab/DLX/prova_simulazione/000-globals.vhd|
+!i113 0
+Z14 o-work work
+Z15 tExplicit 1 CvgOpt 0
+Edlx
+Z16 w1622191286
+R1
+R3
+R4
+R0
+Z17 8/home/ms21.16/gabri-ms-lab/ms-lab/DLX/prova_simulazione/a-DLX.vhd
+Z18 F/home/ms21.16/gabri-ms-lab/ms-lab/DLX/prova_simulazione/a-DLX.vhd
+l0
+L5
+VA=BL9FmZSSkcdBYZJ0SST3
+!s100 H_MV_d_a7d@W;X>1nGa`K3
+R9
+32
+R10
+!i10b 1
+R11
+R12
+R13
+!i113 0
+R14
+R15
+Adlx_rtl
+R1
+R3
+R4
+R2
+l120
+L23
+VP;Ekj9=<CiRCXdlVMkFm42
+!s100 Q9h:=7dbYUZSbLfJll[A^0
+R9
+32
+R10
+!i10b 1
+R11
+R12
+R13
+!i113 0
+R14
+R15
+Edlx_cu
+Z19 w1622194261
+R1
+Z20 DPx4 ieee 15 std_logic_arith 0 22 [G314=:2zXJ`VORJe1J@Z1
+Z21 DPx4 ieee 18 std_logic_unsigned 0 22 ;eZjO2D4ZDz<]0>8AL<ne1
+R3
+R4
+R0
+Z22 8a.a-CU_HW.vhd
+Z23 Fa.a-CU_HW.vhd
+l0
+L9
+VjB`0hT2M_T^K:NVz9U`o10
+!s100 TW6ODbMfz`El<?1SQc8G`1
+R9
+32
+Z24 !s110 1622194284
+!i10b 1
+Z25 !s108 1622194284.000000
+Z26 !s90 -reportprogress|300|a.a-CU_HW.vhd|
+Z27 !s107 a.a-CU_HW.vhd|
+!i113 0
+R15
+Adlx_cu_hw
+R1
+R20
+R21
+R3
+R4
+DEx4 work 6 dlx_cu 0 22 jB`0hT2M_T^K:NVz9U`o10
+l86
+L53
+VzAcXBD>fjdRYe]Re_0?z@0
+!s100 L2Y8f^GI?9DNYUj^CUUT03
+R9
+32
+R24
+!i10b 1
+R25
+R26
+R27
+!i113 0
+R15
+Eiram
+Z28 w1622193601
+Z29 DPx4 ieee 16 std_logic_textio 0 22 V5TSK`;aJKC<l]CEg1>mz1
+R20
+R3
+R4
+R0
+Z30 8/home/ms21.16/gabri-ms-lab/ms-lab/DLX/prova_simulazione/a.c-IRAM.vhd
+Z31 F/home/ms21.16/gabri-ms-lab/ms-lab/DLX/prova_simulazione/a.c-IRAM.vhd
+l0
+L11
+VP=6f>F`M_a[G`RL:2H[L;0
+!s100 lCk^O12_GA:9f080R9PQ?1
+R9
+32
+R10
+!i10b 1
+R11
+R12
+R13
+!i113 0
+R14
+R15
+Airam_bhe
+R29
+R20
+R3
+R4
+DEx4 work 4 iram 0 22 P=6f>F`M_a[G`RL:2H[L;0
+l37
+L23
+V5zLIdQkjbFoU^VGh1B<Gc2
+!s100 Ijf3`1UJaH1`Ug`>blN0U2
+R9
+32
+R10
+!i10b 1
+R11
+R12
+R13
+!i113 0
+R14
+R15
+Pmytypes
+R3
+R4
+w1622191318
+R0
+8/home/ms21.16/gabri-ms-lab/ms-lab/DLX/prova_simulazione/000-globals.vhd
+F/home/ms21.16/gabri-ms-lab/ms-lab/DLX/prova_simulazione/000-globals.vhd
+l0
+L4
+V`BjBJ=[=Y02UAWI5@DAlk3
+!s100 @W1QjGV8e>?cU<0`MXHGV2
+R9
+32
+R10
+!i10b 1
+R11
+R12
+R13
+!i113 0
+R14
+R15
+Etb_dlx
+R6
+R3
+R4
+R0
+R7
+R8
+l0
+L6
+V0`Ta?IIRzh`WES5dFomje3
+!s100 gzjjc^PHhe5<_b@dD2[RY2
+R9
+32
+R10
+!i10b 1
+R11
+R12
+R13
+!i113 0
+R14
+R15
+Atest
+R3
+R4
+R5
+l27
+L9
+VRPIe8C]`8KR6m]a<5M`AC2
+!s100 He]23ZJ`Ye5Z_6639A99^2
+R9
+32
+R10
+!i10b 1
+R11
+R12
+R13
+!i113 0
+R14
+R15

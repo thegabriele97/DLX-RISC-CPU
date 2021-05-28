@@ -1,0 +1,51 @@
+/home/ms21.16/gabri-ms-lab/ms-lab/DLX/prova_simulazione/TB_DLX.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/ms21.16/gabri-ms-lab/ms-lab/DLX/prova_simulazione/TB_DLX.vhd
+QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity tb_dlx
+-- Compiling architecture TEST of tb_dlx
+-- Compiling configuration CFG_TB
+-- Loading entity tb_dlx
+-- Loading architecture TEST of tb_dlx
+-- Loading package myTypes
+-- Loading entity DLX
+
+} {} {}} /home/ms21.16/gabri-ms-lab/ms-lab/DLX/prova_simulazione/000-globals.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/ms21.16/gabri-ms-lab/ms-lab/DLX/prova_simulazione/000-globals.vhd
+QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling package myTypes
+
+} {} {}} /home/ms21.16/gabri-ms-lab/ms-lab/DLX/prova_simulazione/a-DLX.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/ms21.16/gabri-ms-lab/ms-lab/DLX/prova_simulazione/a-DLX.vhd
+QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package myTypes
+-- Compiling entity DLX
+-- Compiling architecture dlx_rtl of DLX
+
+} {} {}} /home/ms21.16/gabri-ms-lab/ms-lab/DLX/prova_simulazione/a.a-CU_HW.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/ms21.16/gabri-ms-lab/ms-lab/DLX/prova_simulazione/a.a-CU_HW.vhd
+QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package STD_LOGIC_UNSIGNED
+-- Loading package myTypes
+-- Compiling entity dlx_cu
+-- Compiling architecture dlx_cu_hw of dlx_cu
+
+} {} {}} /home/ms21.16/gabri-ms-lab/ms-lab/DLX/prova_simulazione/a.c-IRAM.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/ms21.16/gabri-ms-lab/ms-lab/DLX/prova_simulazione/a.c-IRAM.vhd
+QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package std_logic_textio
+-- Compiling entity IRAM
+-- Compiling architecture IRam_Bhe of IRAM
+
+} {} {}}
