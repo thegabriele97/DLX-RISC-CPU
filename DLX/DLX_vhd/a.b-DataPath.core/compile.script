@@ -1,0 +1,4 @@
+
+source ./a.b-DataPath.core/a.b.a-windowedRF.core/compile.script
+
+vcom ./a.b-DataPath.core/a.b.a-windowedRF.vhd

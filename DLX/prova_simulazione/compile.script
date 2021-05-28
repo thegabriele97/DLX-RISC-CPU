@@ -1,1 +1,0 @@
-vcom -reportprogress 300 -work work /home/ms21.16/gabri-ms-lab/ms-lab/DLX/prova_simulazione/000-globals.vhd /home/ms21.16/gabri-ms-lab/ms-lab/DLX/prova_simulazione/a-DLX.vhd /home/ms21.16/gabri-ms-lab/ms-lab/DLX/prova_simulazione/a.a-CU_HW.vhd /home/ms21.16/gabri-ms-lab/ms-lab/DLX/prova_simulazione/a.c-IRAM.vhd /home/ms21.16/gabri-ms-lab/ms-lab/DLX/prova_simulazione/TB_DLX.vhd

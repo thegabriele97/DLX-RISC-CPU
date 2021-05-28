@@ -1,0 +1,13 @@
+
+vcom 000-globals.vhd 
+
+
+source a.b-DataPath.core/compile.script
+
+
+vcom a.a-CU_HW.vhd 
+vcom a.c-IRAM.vhd 
+
+vcom a-DLX.vhd 
+
+vcom test_bench/TB_DLX.vhd

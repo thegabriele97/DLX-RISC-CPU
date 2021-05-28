@@ -1,0 +1,13 @@
+
+vcom ./a.b-DataPath.core/a.b.a-windowedRF.core/a.b.a.m-utils.vhd
+vcom ./a.b-DataPath.core/a.b.a-windowedRF.core/a.b.a.h-nwin_calc.vhd
+vcom ./a.b-DataPath.core/a.b.a-windowedRF.core/a.b.a.f-in_loc_selblock.vhd
+vcom ./a.b-DataPath.core/a.b.a-windowedRF.core/a.b.a.a-addr_encoder.vhd
+vcom ./a.b-DataPath.core/a.b.a-windowedRF.core/a.b.a.b-address_generator.vhd
+vcom ./a.b-DataPath.core/a.b.a-windowedRF.core/a.b.a.g-mux.vhd
+vcom ./a.b-DataPath.core/a.b.a-windowedRF.core/a.b.a.d-decoder.vhd
+vcom ./a.b-DataPath.core/a.b.a-windowedRF.core/a.b.a.c-connection_mtx.vhd
+vcom ./a.b-DataPath.core/a.b.a-windowedRF.core/a.b.a.i-reg_generic.vhd
+vcom ./a.b-DataPath.core/a.b.a-windowedRF.core/a.b.a.l-select_block.vhd
+vcom ./a.b-DataPath.core/a.b.a-windowedRF.core/a.b.a.e-equal_check.vhd
+

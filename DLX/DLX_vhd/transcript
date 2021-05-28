@@ -1,0 +1,222 @@
+# //  Questa Sim-64
+# //  Version 10.7c linux_x86_64 Aug 17 2018
+# //
+# //  Copyright 1991-2018 Mentor Graphics Corporation
+# //  All Rights Reserved.
+# //
+# //  QuestaSim and its associated documentation contain trade
+# //  secrets and commercial or financial information that are the property of
+# //  Mentor Graphics Corporation and are privileged, confidential,
+# //  and exempt from disclosure under the Freedom of Information Act,
+# //  5 U.S.C. Section 552. Furthermore, this information
+# //  is prohibited from disclosure under the Trade Secrets Act,
+# //  18 U.S.C. Section 1905.
+# //
+# Loading project progetto2
+source compile.script
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 12:13:25 on May 28,2021
+# vcom -reportprogress 300 000-globals.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling package myTypes
+# End time: 12:13:25 on May 28,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 12:13:25 on May 28,2021
+# vcom -reportprogress 300 ./a.b-DataPath.core/a.b.a-windowedRF.core/a.b.a.m-utils.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Compiling package utils
+# -- Compiling package body utils
+# -- Loading package utils
+# End time: 12:13:25 on May 28,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 12:13:25 on May 28,2021
+# vcom -reportprogress 300 ./a.b-DataPath.core/a.b.a-windowedRF.core/a.b.a.h-nwin_calc.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Loading package utils
+# -- Compiling entity nwin_calc
+# -- Compiling architecture struct of nwin_calc
+# End time: 12:13:25 on May 28,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 12:13:25 on May 28,2021
+# vcom -reportprogress 300 ./a.b-DataPath.core/a.b.a-windowedRF.core/a.b.a.f-in_loc_selblock.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity in_loc_selblock
+# -- Compiling architecture behav of in_loc_selblock
+# End time: 12:13:26 on May 28,2021, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 12:13:26 on May 28,2021
+# vcom -reportprogress 300 ./a.b-DataPath.core/a.b.a-windowedRF.core/a.b.a.a-addr_encoder.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Loading package utils
+# -- Compiling entity addr_encoder
+# -- Compiling architecture behav of addr_encoder
+# End time: 12:13:26 on May 28,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 12:13:26 on May 28,2021
+# vcom -reportprogress 300 ./a.b-DataPath.core/a.b.a-windowedRF.core/a.b.a.b-address_generator.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Loading package utils
+# -- Compiling entity address_generator
+# -- Compiling architecture struct of address_generator
+# End time: 12:13:26 on May 28,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 12:13:26 on May 28,2021
+# vcom -reportprogress 300 ./a.b-DataPath.core/a.b.a-windowedRF.core/a.b.a.g-mux.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Loading package utils
+# -- Compiling entity mux
+# -- Compiling architecture behav of mux
+# End time: 12:13:26 on May 28,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 12:13:26 on May 28,2021
+# vcom -reportprogress 300 ./a.b-DataPath.core/a.b.a-windowedRF.core/a.b.a.d-decoder.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity decoder
+# -- Compiling architecture Behavioural of decoder
+# End time: 12:13:27 on May 28,2021, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 12:13:27 on May 28,2021
+# vcom -reportprogress 300 ./a.b-DataPath.core/a.b.a-windowedRF.core/a.b.a.c-connection_mtx.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity connection_mtx
+# -- Compiling architecture struct of connection_mtx
+# End time: 12:13:27 on May 28,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 12:13:27 on May 28,2021
+# vcom -reportprogress 300 ./a.b-DataPath.core/a.b.a-windowedRF.core/a.b.a.i-reg_generic.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity reg_generic
+# -- Compiling architecture Behavioural of reg_generic
+# End time: 12:13:27 on May 28,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 12:13:27 on May 28,2021
+# vcom -reportprogress 300 ./a.b-DataPath.core/a.b.a-windowedRF.core/a.b.a.l-select_block.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity select_block
+# -- Compiling architecture behav of select_block
+# End time: 12:13:27 on May 28,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 12:13:27 on May 28,2021
+# vcom -reportprogress 300 ./a.b-DataPath.core/a.b.a-windowedRF.core/a.b.a.e-equal_check.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Loading package utils
+# -- Compiling entity equal_check
+# -- Compiling architecture behav of equal_check
+# End time: 12:13:27 on May 28,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 12:13:27 on May 28,2021
+# vcom -reportprogress 300 ./a.b-DataPath.core/a.b.a-windowedRF.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package MATH_REAL
+# -- Loading package utils
+# -- Compiling entity windowing_rf
+# -- Compiling architecture mix of windowing_rf
+# End time: 12:13:27 on May 28,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 12:13:27 on May 28,2021
+# vcom -reportprogress 300 a.a-CU_HW.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package std_logic_arith
+# -- Loading package STD_LOGIC_UNSIGNED
+# -- Loading package myTypes
+# -- Compiling entity dlx_cu
+# -- Compiling architecture dlx_cu_hw of dlx_cu
+# End time: 12:13:28 on May 28,2021, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 12:13:28 on May 28,2021
+# vcom -reportprogress 300 a.c-IRAM.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package std_logic_arith
+# -- Loading package std_logic_textio
+# -- Compiling entity IRAM
+# -- Compiling architecture IRam_Bhe of IRAM
+# End time: 12:13:28 on May 28,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 12:13:28 on May 28,2021
+# vcom -reportprogress 300 a-DLX.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package myTypes
+# -- Compiling entity DLX
+# -- Compiling architecture dlx_rtl of DLX
+# End time: 12:13:28 on May 28,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim-64 vcom 10.7c Compiler 2018.08 Aug 17 2018
+# Start time: 12:13:28 on May 28,2021
+# vcom -reportprogress 300 test_bench/TB_DLX.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity tb_dlx
+# -- Compiling architecture TEST of tb_dlx
+# -- Compiling configuration CFG_TB
+# -- Loading entity tb_dlx
+# -- Loading architecture TEST of tb_dlx
+# -- Loading package myTypes
+# -- Loading entity DLX
+# End time: 12:13:28 on May 28,2021, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
