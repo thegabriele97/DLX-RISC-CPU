@@ -1,0 +1,67 @@
+Information: Building the design 'carry_select_block' instantiated from design 'sum_generator_NBIT_PER_BLOCK4_NBLOCKS8' with
+	the parameters "NBIT_PER_BLOCK=4". (HDL-193)
+Warning:  ./carry_select_block.vhd:44: Physical types are not supported. Presto ignores it. (ELAB-918)
+Warning:  ./carry_select_block.vhd:44: Physical types are not supported. Presto ignores it. (ELAB-918)
+Error:  ./carry_select_block.vhd:44: Expressions with physical value types are not supported for synthesis. (ELAB-926)
+*** Presto compilation terminated with 1 errors. ***
+Warning: Unable to resolve reference 'carry_select_block' in 'sum_generator_NBIT_PER_BLOCK4_NBLOCKS8'. (LINK-5)
+Loading db file '/home/mariagrazia.graziano/do/libnangate/NangateOpenCellLibrary_typical_ecsm.db'
+Information: Updating design information... (UID-85)
+Information: Propagating switching activity (low effort zero delay simulation). (PWR-6)
+Warning: There is no defined clock in the design. (PWR-80)
+Warning: Design has unannotated primary inputs. (PWR-414)
+Warning: Design has unannotated black box outputs. (PWR-428)
+ 
+****************************************
+Report : power
+        -analysis_effort low
+Design : P4_ADDER_NBIT32
+Version: F-2011.09-SP3
+Date   : Mon May 31 10:52:58 2021
+****************************************
+
+
+Library(s) Used:
+
+    NangateOpenCellLibrary (File: /home/mariagrazia.graziano/do/libnangate/NangateOpenCellLibrary_typical_ecsm.db)
+
+
+Operating Conditions: typical   Library: NangateOpenCellLibrary
+Wire Load Model Mode: top
+
+Design        Wire Load Model            Library
+------------------------------------------------
+P4_ADDER_NBIT32        5K_hvratio_1_4    NangateOpenCellLibrary
+
+
+Global Operating Voltage = 1.1  
+Power-specific unit information :
+    Voltage Units = 1V
+    Capacitance Units = 1.000000ff
+    Time Units = 1ns
+    Dynamic Power Units = 1uW    (derived from V,C,T units)
+    Leakage Power Units = 1nW
+
+
+  Cell Internal Power  =  52.6644 uW   (61%)
+  Net Switching Power  =  33.3442 uW   (39%)
+                         ---------
+Total Dynamic Power    =  86.0086 uW  (100%)
+
+Cell Leakage Power     =   3.9753 uW
+
+Information: report_power power group summary does not include estimated clock tree power. (PWR-789)
+
+                 Internal         Switching           Leakage            Total
+Power Group      Power            Power               Power              Power   (   %    )  Attrs
+--------------------------------------------------------------------------------------------------
+io_pad             0.0000            0.0000            0.0000            0.0000  (   0.00%)
+memory             0.0000            0.0000            0.0000            0.0000  (   0.00%)
+black_box          0.0000            0.0000            0.0000            0.0000  (   0.00%)
+clock_network      0.0000            0.0000            0.0000            0.0000  (   0.00%)
+register           0.0000            0.0000            0.0000            0.0000  (   0.00%)
+sequential         0.0000            0.0000            0.0000            0.0000  (   0.00%)
+combinational     52.6644           33.3442        3.9753e+03           89.9839  ( 100.00%)
+--------------------------------------------------------------------------------------------------
+Total             52.6644 uW        33.3442 uW     3.9753e+03 nW        89.9839 uW
+1

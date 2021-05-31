@@ -1,0 +1,71 @@
+Warning: Design 'P4_ADDER_NBIT32' has '1' unresolved references. For more detailed information, use the "link" command. (UID-341)
+ 
+****************************************
+Report : timing
+        -path full
+        -delay max
+        -max_paths 1
+Design : P4_ADDER_NBIT32
+Version: F-2011.09-SP3
+Date   : Mon May 31 10:52:58 2021
+****************************************
+
+Operating Conditions: typical   Library: NangateOpenCellLibrary
+Wire Load Model Mode: top
+
+  Startpoint: A[7] (input port)
+  Endpoint: Cout (output port)
+  Path Group: default
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  P4_ADDER_NBIT32    5K_hvratio_1_4        NangateOpenCellLibrary
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  input external delay                                    0.00       0.00 f
+  A[7] (in)                                               0.00       0.00 f
+  CARRYGEN/A[7] (CARRY_GENERATOR_NBIT32_NBIT_PER_BLOCK4)
+                                                          0.00       0.00 f
+  CARRYGEN/PGNet/a[7] (prop_gen_generic_NBIT32)           0.00       0.00 f
+  CARRYGEN/PGNet/pg_network_i_7/a (prop_gen_25)           0.00       0.00 f
+  CARRYGEN/PGNet/pg_network_i_7/U2/Z (XOR2_X1)            0.08       0.08 f
+  CARRYGEN/PGNet/pg_network_i_7/p (prop_gen_25)           0.00       0.08 f
+  CARRYGEN/PGNet/p[7] (prop_gen_generic_NBIT32)           0.00       0.08 f
+  CARRYGEN/PGi_1_8/p[1] (PG_25)                           0.00       0.08 f
+  CARRYGEN/PGi_1_8/U3/ZN (AOI21_X1)                       0.05       0.13 r
+  CARRYGEN/PGi_1_8/U1/ZN (INV_X1)                         0.03       0.15 f
+  CARRYGEN/PGi_1_8/go (PG_25)                             0.00       0.15 f
+  CARRYGEN/PGi_2_8/g[1] (PG_12)                           0.00       0.15 f
+  CARRYGEN/PGi_2_8/U3/ZN (AOI21_X1)                       0.05       0.21 r
+  CARRYGEN/PGi_2_8/U2/ZN (INV_X1)                         0.03       0.23 f
+  CARRYGEN/PGi_2_8/go (PG_12)                             0.00       0.23 f
+  CARRYGEN/GGi_3_8/g[1] (GG_7)                            0.00       0.23 f
+  CARRYGEN/GGi_3_8/U2/ZN (AOI21_X1)                       0.05       0.29 r
+  CARRYGEN/GGi_3_8/U1/ZN (INV_X1)                         0.03       0.32 f
+  CARRYGEN/GGi_3_8/go (GG_7)                              0.00       0.32 f
+  CARRYGEN/GGi_4_16/g[0] (GG_5)                           0.00       0.32 f
+  CARRYGEN/GGi_4_16/U1/ZN (AOI21_X1)                      0.05       0.37 r
+  CARRYGEN/GGi_4_16/U2/ZN (INV_X1)                        0.04       0.41 f
+  CARRYGEN/GGi_4_16/go (GG_5)                             0.00       0.41 f
+  CARRYGEN/GGi_5_32/g[0] (GG_1)                           0.00       0.41 f
+  CARRYGEN/GGi_5_32/U1/ZN (AOI21_X1)                      0.06       0.47 r
+  CARRYGEN/GGi_5_32/U2/ZN (INV_X1)                        0.02       0.49 f
+  CARRYGEN/GGi_5_32/go (GG_1)                             0.00       0.49 f
+  CARRYGEN/Co[7] (CARRY_GENERATOR_NBIT32_NBIT_PER_BLOCK4)
+                                                          0.00       0.49 f
+  Cout (out)                                              0.00       0.49 f
+  data arrival time                                                  0.49
+
+  max_delay                                               0.50       0.50
+  output external delay                                   0.00       0.50
+  data required time                                                 0.50
+  --------------------------------------------------------------------------
+  data required time                                                 0.50
+  data arrival time                                                 -0.49
+  --------------------------------------------------------------------------
+  slack (MET)                                                        0.01
+
+
+1

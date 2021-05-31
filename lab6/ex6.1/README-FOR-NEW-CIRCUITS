@@ -1,0 +1,11 @@
+
+
+In order to work with a new circuit:
+
+- use as synopsys configuration file the .synopsys_dc.setup file you find in
+  this directory
+- adapt the sum-t.scr (used for the SUM circuit of the first exercise)
+to your circuit, especially don't miss the set_wire_load_model directive
+and the verilog and SDC file generation instruction
+
+  

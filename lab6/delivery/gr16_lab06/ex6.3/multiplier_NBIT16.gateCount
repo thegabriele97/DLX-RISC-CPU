@@ -1,0 +1,14 @@
+Gate area 0.7980 um^2
+Level 0 Module multiplier_NBIT16                        Gates=      3593 Cells=    1788 Area=    2867.2 um^2
+Level 1 Module ADDERi_0                                 Gates=265        Cells=134      Area=     212.0 um^2
+Level 1 Module ADDERi_1                                 Gates=322        Cells=198      Area=     257.2 um^2
+Level 2 Module ADDERi_1/sub_20                          Gates=161        Cells=114      Area=     128.7 um^2
+Level 2 Module ADDERi_1/add_20                          Gates=113        Cells=43       Area=      90.7 um^2
+Level 1 Module ADDERi_2                                 Gates=328        Cells=171      Area=     262.0 um^2
+Level 1 Module ADDERi_3                                 Gates=336        Cells=149      Area=     268.4 um^2
+Level 1 Module ADDERi_4                                 Gates=356        Cells=151      Area=     284.6 um^2
+Level 1 Module ADDERi_5                                 Gates=379        Cells=150      Area=     303.0 um^2
+Level 1 Module MUXi_6                                   Gates=103        Cells=64       Area=      82.5 um^2
+Level 1 Module ADDERi_6                                 Gates=406        Cells=163      Area=     324.3 um^2
+Level 1 Module MUXi_7                                   Gates=110        Cells=68       Area=      87.8 um^2
+Level 1 Module ADDERi_7                                 Gates=463        Cells=219      Area=     369.7 um^2

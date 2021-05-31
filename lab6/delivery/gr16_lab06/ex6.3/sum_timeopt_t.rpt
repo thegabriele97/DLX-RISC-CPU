@@ -1,0 +1,152 @@
+ 
+****************************************
+Report : timing
+        -path full
+        -delay max
+        -max_paths 1
+Design : multiplier_NBIT16
+Version: F-2011.09-SP3
+Date   : Mon May 31 12:07:18 2021
+****************************************
+
+Operating Conditions: typical   Library: NangateOpenCellLibrary
+Wire Load Model Mode: top
+
+  Startpoint: B[0] (input port)
+  Endpoint: Y[31] (output port)
+  Path Group: default
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  multiplier_NBIT16  5K_hvratio_1_4        NangateOpenCellLibrary
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  input external delay                                    0.00       0.00 f
+  B[0] (in)                                               0.00       0.00 f
+  ENCi_0/b[1] (encoder_0)                                 0.00       0.00 f
+  ENCi_0/U4/ZN (XNOR2_X1)                                 0.05       0.05 f
+  ENCi_0/U5/ZN (NOR2_X1)                                  0.06       0.11 r
+  ENCi_0/vp[1] (encoder_0)                                0.00       0.11 r
+  MUXi_0/S[1] (mux_NBIT17)                                0.00       0.11 r
+  MUXi_0/U4/ZN (INV_X1)                                   0.04       0.15 f
+  MUXi_0/U5/ZN (INV_X1)                                   0.09       0.23 r
+  MUXi_0/U31/ZN (AOI222_X1)                               0.06       0.29 f
+  MUXi_0/U29/ZN (INV_X1)                                  0.05       0.34 r
+  MUXi_0/Y[1] (mux_NBIT17)                                0.00       0.34 r
+  ADDERi_0/B[1] (adder_NBIT17)                            0.00       0.34 r
+  ADDERi_0/sub_20/B[1] (adder_NBIT17_DW01_sub_0)          0.00       0.34 r
+  ADDERi_0/sub_20/U65/ZN (OAI22_X1)                       0.05       0.39 f
+  ADDERi_0/sub_20/U81/ZN (NAND2_X1)                       0.04       0.43 r
+  ADDERi_0/sub_20/U68/ZN (OAI21_X1)                       0.05       0.47 f
+  ADDERi_0/sub_20/U69/ZN (NOR2_X1)                        0.05       0.53 r
+  ADDERi_0/sub_20/U66/ZN (OAI22_X1)                       0.05       0.57 f
+  ADDERi_0/sub_20/U79/ZN (INV_X1)                         0.04       0.61 r
+  ADDERi_0/sub_20/U41/ZN (AOI21_X1)                       0.03       0.64 f
+  ADDERi_0/sub_20/U34/ZN (NOR2_X1)                        0.05       0.69 r
+  ADDERi_0/sub_20/U6/Z (BUF_X1)                           0.04       0.73 r
+  ADDERi_0/sub_20/U72/ZN (XNOR2_X1)                       0.06       0.79 r
+  ADDERi_0/sub_20/DIFF[5] (adder_NBIT17_DW01_sub_0)       0.00       0.79 r
+  ADDERi_0/U10/ZN (AOI22_X1)                              0.03       0.82 f
+  ADDERi_0/U32/ZN (INV_X1)                                0.05       0.87 r
+  ADDERi_0/S[5] (adder_NBIT17)                            0.00       0.87 r
+  ADDERi_1/A[5] (adder_NBIT19)                            0.00       0.87 r
+  ADDERi_1/sub_20/A[5] (adder_NBIT19_DW01_sub_0)          0.00       0.87 r
+  ADDERi_1/sub_20/U102/ZN (INV_X1)                        0.03       0.91 f
+  ADDERi_1/sub_20/U45/Z (XOR2_X1)                         0.07       0.98 f
+  ADDERi_1/sub_20/U44/Z (XOR2_X1)                         0.07       1.05 f
+  ADDERi_1/sub_20/DIFF[5] (adder_NBIT19_DW01_sub_0)       0.00       1.05 f
+  ADDERi_1/U29/ZN (AOI22_X1)                              0.05       1.11 r
+  ADDERi_1/U28/ZN (INV_X1)                                0.04       1.14 f
+  ADDERi_1/S[5] (adder_NBIT19)                            0.00       1.14 f
+  ADDERi_2/A[5] (adder_NBIT21)                            0.00       1.14 f
+  ADDERi_2/add_20/A[5] (adder_NBIT21_DW01_add_0)          0.00       1.14 f
+  ADDERi_2/add_20/U1_5/CO (FA_X1)                         0.11       1.26 f
+  ADDERi_2/add_20/U1_6/CO (FA_X1)                         0.10       1.35 f
+  ADDERi_2/add_20/U1_7/CO (FA_X1)                         0.10       1.45 f
+  ADDERi_2/add_20/U1_8/S (FA_X1)                          0.14       1.58 r
+  ADDERi_2/add_20/SUM[8] (adder_NBIT21_DW01_add_0)        0.00       1.58 r
+  ADDERi_2/U17/ZN (AOI22_X1)                              0.03       1.61 f
+  ADDERi_2/U16/ZN (INV_X1)                                0.05       1.67 r
+  ADDERi_2/S[8] (adder_NBIT21)                            0.00       1.67 r
+  ADDERi_3/A[8] (adder_NBIT23)                            0.00       1.67 r
+  ADDERi_3/sub_20/A[8] (adder_NBIT23_DW01_sub_0)          0.00       1.67 r
+  ADDERi_3/sub_20/U2_8/S (FA_X1)                          0.13       1.79 f
+  ADDERi_3/sub_20/DIFF[8] (adder_NBIT23_DW01_sub_0)       0.00       1.79 f
+  ADDERi_3/U10/ZN (AOI22_X1)                              0.06       1.85 r
+  ADDERi_3/U9/ZN (INV_X1)                                 0.04       1.89 f
+  ADDERi_3/S[8] (adder_NBIT23)                            0.00       1.89 f
+  ADDERi_4/A[8] (adder_NBIT25)                            0.00       1.89 f
+  ADDERi_4/sub_20/A[8] (adder_NBIT25_DW01_sub_0)          0.00       1.89 f
+  ADDERi_4/sub_20/U2_8/CO (FA_X1)                         0.11       2.00 f
+  ADDERi_4/sub_20/U2_9/CO (FA_X1)                         0.10       2.10 f
+  ADDERi_4/sub_20/U2_10/CO (FA_X1)                        0.10       2.19 f
+  ADDERi_4/sub_20/U2_11/CO (FA_X1)                        0.10       2.29 f
+  ADDERi_4/sub_20/U2_12/CO (FA_X1)                        0.10       2.39 f
+  ADDERi_4/sub_20/U2_13/CO (FA_X1)                        0.11       2.49 f
+  ADDERi_4/sub_20/U2_14/S (FA_X1)                         0.14       2.63 r
+  ADDERi_4/sub_20/DIFF[14] (adder_NBIT25_DW01_sub_0)      0.00       2.63 r
+  ADDERi_4/U24/ZN (AOI22_X1)                              0.03       2.67 f
+  ADDERi_4/U23/ZN (INV_X1)                                0.05       2.71 r
+  ADDERi_4/S[14] (adder_NBIT25)                           0.00       2.71 r
+  ADDERi_5/A[14] (adder_NBIT27)                           0.00       2.71 r
+  ADDERi_5/sub_20/A[14] (adder_NBIT27_DW01_sub_0)         0.00       2.71 r
+  ADDERi_5/sub_20/U2_14/S (FA_X1)                         0.13       2.84 f
+  ADDERi_5/sub_20/DIFF[14] (adder_NBIT27_DW01_sub_0)      0.00       2.84 f
+  ADDERi_5/U25/ZN (AOI22_X1)                              0.06       2.90 r
+  ADDERi_5/U24/ZN (INV_X1)                                0.04       2.94 f
+  ADDERi_5/S[14] (adder_NBIT27)                           0.00       2.94 f
+  ADDERi_6/A[14] (adder_NBIT29)                           0.00       2.94 f
+  ADDERi_6/sub_20/A[14] (adder_NBIT29_DW01_sub_0)         0.00       2.94 f
+  ADDERi_6/sub_20/U2_14/CO (FA_X1)                        0.11       3.05 f
+  ADDERi_6/sub_20/U2_15/CO (FA_X1)                        0.10       3.14 f
+  ADDERi_6/sub_20/U2_16/CO (FA_X1)                        0.10       3.24 f
+  ADDERi_6/sub_20/U2_17/CO (FA_X1)                        0.10       3.33 f
+  ADDERi_6/sub_20/U2_18/CO (FA_X1)                        0.10       3.43 f
+  ADDERi_6/sub_20/U2_19/CO (FA_X1)                        0.10       3.52 f
+  ADDERi_6/sub_20/U2_20/CO (FA_X1)                        0.10       3.62 f
+  ADDERi_6/sub_20/U2_21/CO (FA_X1)                        0.10       3.71 f
+  ADDERi_6/sub_20/U2_22/CO (FA_X1)                        0.10       3.81 f
+  ADDERi_6/sub_20/U2_23/CO (FA_X1)                        0.11       3.92 f
+  ADDERi_6/sub_20/U2_24/CO (FA_X1)                        0.10       4.02 f
+  ADDERi_6/sub_20/U2_25/S (FA_X1)                         0.11       4.13 f
+  ADDERi_6/sub_20/DIFF[25] (adder_NBIT29_DW01_sub_0)      0.00       4.13 f
+  ADDERi_6/U74/ZN (AOI22_X1)                              0.06       4.19 r
+  ADDERi_6/U75/ZN (INV_X1)                                0.03       4.22 f
+  ADDERi_6/S[25] (adder_NBIT29)                           0.00       4.22 f
+  ADDERi_7/A[25] (adder_NBIT31)                           0.00       4.22 f
+  ADDERi_7/add_20/A[25] (adder_NBIT31_DW01_add_0)         0.00       4.22 f
+  ADDERi_7/add_20/U43/ZN (OR2_X1)                         0.06       4.27 f
+  ADDERi_7/add_20/U44/ZN (AOI22_X1)                       0.06       4.33 r
+  ADDERi_7/add_20/U50/ZN (INV_X1)                         0.03       4.36 f
+  ADDERi_7/add_20/U47/ZN (OR2_X1)                         0.06       4.41 f
+  ADDERi_7/add_20/U46/ZN (AOI22_X1)                       0.06       4.47 r
+  ADDERi_7/add_20/U12/ZN (INV_X1)                         0.03       4.50 f
+  ADDERi_7/add_20/U40/ZN (OR2_X1)                         0.06       4.56 f
+  ADDERi_7/add_20/U41/ZN (AOI22_X1)                       0.06       4.61 r
+  ADDERi_7/add_20/U49/ZN (INV_X1)                         0.04       4.65 f
+  ADDERi_7/add_20/U45/ZN (OAI21_X1)                       0.05       4.70 r
+  ADDERi_7/add_20/U48/ZN (OAI21_X1)                       0.04       4.74 f
+  ADDERi_7/add_20/U17/ZN (NAND2_X1)                       0.04       4.78 r
+  ADDERi_7/add_20/U19/ZN (NAND3_X1)                       0.04       4.82 f
+  ADDERi_7/add_20/U39/ZN (AOI22_X1)                       0.05       4.87 r
+  ADDERi_7/add_20/U20/ZN (XNOR2_X1)                       0.06       4.93 r
+  ADDERi_7/add_20/SUM[31] (adder_NBIT31_DW01_add_0)       0.00       4.93 r
+  ADDERi_7/U83/ZN (AOI22_X1)                              0.03       4.97 f
+  ADDERi_7/U82/ZN (INV_X1)                                0.03       4.99 r
+  ADDERi_7/S[31] (adder_NBIT31)                           0.00       4.99 r
+  Y[31] (out)                                             0.00       5.00 r
+  data arrival time                                                  5.00
+
+  max_delay                                               5.00       5.00
+  output external delay                                   0.00       5.00
+  data required time                                                 5.00
+  --------------------------------------------------------------------------
+  data required time                                                 5.00
+  data arrival time                                                 -5.00
+  --------------------------------------------------------------------------
+  slack (MET)                                                        0.00
+
+
+1
