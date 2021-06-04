@@ -1,0 +1,9 @@
+# exclude everything
+work
+vsim.wlf
+transcript
+
+# exception to the rule
+#work/.gitkeep
+
+ 

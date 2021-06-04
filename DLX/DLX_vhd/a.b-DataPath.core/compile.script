@@ -1,4 +1,8 @@
 
-source ./a.b-DataPath.core/a.b.a-windowedRF.core/compile.script
+# source ./a.b-DataPath.core/a.b.a-windowedRF.core/compile.script
+source ./a.b-DataPath.core/a.b.d-ALU.core/compile.script
 
-vcom ./a.b-DataPath.core/a.b.a-windowedRF.vhd
+# vcom ./a.b-DataPath.core/a.b.a-windowedRF.vhd
+# vcom ./a.b-DataPath.core/a.b.b-mux2to1.vhd
+# vcom ./a.b-DataPath.core/a.b.c-reg_generic.vhd
+vcom ./a.b-DataPath.core/a.b.d-ALU.vhd
