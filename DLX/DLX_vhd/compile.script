@@ -1,9 +1,9 @@
 
 vcom 000-globals.vhd 
 
-
 source a.b-DataPath.core/compile.script
 
+vcom a.b-DataPath.vhd 
 
 # vcom a.a-CU_HW.vhd 
 # vcom a.c-IRAM.vhd 

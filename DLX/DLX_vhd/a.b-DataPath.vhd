@@ -1,5 +1,6 @@
 library ieee;
 use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
 use work.myTypes.all;
 
 entity DP is
@@ -9,7 +10,7 @@ entity DP is
         N_BIT_ADDR_RF       : integer := 5;     -- address bit number
         N_OPSEL             : integer := 2;     -- number of bit needed for the ALU operations
         N_BIT_MEM_ADDR      : integer := 10;    -- number of bit needed for the address of the Data Memory
-        N_BIT_RnF_MEM_ADDR   : integer := 10     -- number of bit needed for the address of the memory used to PUSH/POP data from the register file. We call this memory, RF memory
+        N_BIT_RF_MEM_ADDR   : integer := 10     -- number of bit needed for the address of the memory used to PUSH/POP data from the register file. We call this memory, RF memory
     );
 
     port (
@@ -44,6 +45,8 @@ entity DP is
         RF_BUS_TOMEM:  out std_logic_vector(N_BIT_DATA - 1 downto 0); -- Data bus from the datapath to the RF memory
         RF_BUS_FROMEM: in std_logic_vector(N_BIT_DATA - 1 downto 0); -- Data bus from the RF memory to the datapath
         RF_MEM_ADDR:   out std_logic_vector(N_BIT_RF_MEM_ADDR-1 downto 0); -- Address of the RF memory
+        RF_MEM_RM: out std_logic;
+        RF_MEM_WM: out std_logic; -- TODO: comments here
         
         -- Used to manage the procedure call
         CALL:       in std_logic;
@@ -188,10 +191,10 @@ architecture structural of DP is
     
     end component;
 
-    entity wRF_CU is
+    component wRF_CU is
     
         generic (
-            MEM_SIZ: integer := 1024;
+            N_BIT_MEM_ADDR: integer := 10;
             MEM_DATAWIDTH: integer := 32
         );
     
@@ -202,11 +205,15 @@ architecture structural of DP is
             FILL:   in std_logic;
     
             FROMEM:  in std_logic_vector(MEM_DATAWIDTH-1 downto 0);
-            TOMEM:   out std_logic_vector(MEM_DATAWIDTH-1 downto 0)
+            TOMEM:   out std_logic_vector(MEM_DATAWIDTH-1 downto 0);
+            MEMADDR: out std_logic_vector(N_BIT_MEM_ADDR-1 downto 0);
+    
+            RM: out std_logic;
+            WM: out std_logic
     
         );
     
-    end entity;
+    end component;
 
 
     --
@@ -225,7 +232,7 @@ architecture structural of DP is
     signal i_PIPLIN_B: std_logic_vector(N_BIT_DATA-1 downto 0); -- output of the register B that goes into MUX_IN1_B
     signal i_PIPLIN_IN1: std_logic_vector(N_BIT_DATA-1 downto 0); -- output of the register IN1 that goes into MUX_IN1_A
     signal i_PIPLIN_IN2: std_logic_vector(N_BIT_DATA-1 downto 0); -- output of the register IN2 that goes into MUX_IN1_B
-    signal i_PIPLIN_WRB1: std_logic_vector(N_BIT_DATA-1 downto 0);
+    signal i_PIPLIN_WRB1: std_logic_vector(N_BIT_ADDR_RF-1 downto 0);
     
     
     --
@@ -244,7 +251,7 @@ architecture structural of DP is
     -- PIPELINE STAGE 3
     --
     signal i_MUX_STAGE3_REG_OUT: std_logic_vector(N_BIT_DATA-1 downto 0);
-    
+    signal i_REG_DATAOUT: std_logic_vector(N_BIT_DATA-1 downto 0);
 
 begin
 
@@ -296,7 +303,7 @@ begin
     SPILL <= i_RFSPILL;
     
     WRF_CUhw: wRF_CU generic map(
-        MEM_SIZ => 2**N_BIT_RF_MEM_ADDR,
+        N_BIT_MEM_ADDR => N_BIT_RF_MEM_ADDR,
         MEM_DATAWIDTH => N_BIT_DATA
     ) port map(
         CLK => Clk,
@@ -304,7 +311,10 @@ begin
         FILL => i_RFFILL, 
         SPILL => i_RFSPILL,
         TOMEM => RF_BUS_TOMEM,
-        FROMEM => RF_BUS_FROMEM
+        FROMEM => RF_BUS_FROMEM,
+        MEMADDR => RF_MEM_ADDR,
+        RM => RF_MEM_RM,
+        WM => RF_MEM_WM
     );
 
     -- 
@@ -413,7 +423,7 @@ begin
     -- 
     -- REGISTER ALU_OUT --
     --
-    DATAMEM_ADDR <= i_REG_ALU_OUT_ADDRESS_DATAMEM;
+    DATAMEM_ADDR <= i_REG_ALU_OUT_ADDRESS_DATAMEM(DATAMEM_ADDR'range);
 
     REG_ALU_OUT: reg_generic generic map(
         N => N_BIT_DATA,
@@ -469,7 +479,7 @@ begin
         RSTVAL => 0
     ) port map(
         D => i_MUX_STAGE3_REG_OUT,   
-        Q => DATA_OUT,                  -- TODO: Check if correct
+        Q => i_REG_DATAOUT,                  -- TODO: Check if correct
         Clk => Clk,       
         Rst => Rst,     
         Enable => EN3
@@ -493,7 +503,7 @@ begin
     -- 
     -- WRB 2 --
     --
-    WRB1: reg_generic generic map(
+    WRB2: reg_generic generic map(
         N => N_BIT_ADDR_RF,
         RSTVAL => 0
     ) port map(
