@@ -38,7 +38,14 @@ entity ALU is
         -- ....
 
         Y:      out std_logic_vector(N_BIT_DATA-1 downto 0);
-        Cout:   out std_logic
+        
+        COUT:   out std_logic;
+        
+        A_LE_B: out std_logic;
+        A_LT_B: out std_logic;
+        A_GT_B: out std_logic;
+        A_GE_B: out std_logic;
+        A_EQ_B: out std_logic	
 
     );
 
@@ -95,15 +102,30 @@ architecture structural of ALU is
         );
     end component;
 
+    component comparator is
+        generic (NBIT: integer := 16);
+        
+        Port (
+            S:		in	std_logic_vector(NBIT-1 downto 0);
+            Cout:	in	std_logic;
+            a_le_b: out std_logic;
+            a_l_b: 	out std_logic;
+            a_g_b: 	out std_logic;
+            a_ge_b: out std_logic;
+            a_e_b: 	out std_logic	
+        );
+    
+    end component; 
+
     
     signal i_Q_EXTENDED: std_logic_vector((2**N_OPSEL)*N_BIT_DATA-1 downto 0);
 
     signal i_ADDER_OUT: std_logic_vector(N_BIT_DATA-1 downto 0);
+    signal i_ADDER_COUT: std_logic;
     signal i_MULTIPLIER_OUT: std_logic_vector(2*N_BIT_DATA-1 downto 0);
     signal i_BWISE_OUT: std_logic_vector(N_BIT_DATA-1 downto 0);
 
 begin
-
 
     -- 
     -- OPERATION MULTIPLEXER
@@ -125,6 +147,8 @@ begin
     --  ADDER
     --
 
+    Cout <= i_ADDER_COUT;
+
     ADDER: P4_ADDER generic map(
         NBIT => N_BIT_DATA
     ) port map(
@@ -132,8 +156,26 @@ begin
         B => INB,
         SUB_SUMN => OP(2),
         S => i_ADDER_OUT,
-        Cout => Cout
+        Cout => i_ADDER_COUT
     );
+
+    
+    --
+    --  COMPARATOR
+    --
+
+    CMP: comparator generic map(
+        NBIT => N_BIT_DATA
+    ) port map(
+        S => i_ADDER_OUT,
+        Cout => i_ADDER_COUT,
+        a_le_b => A_LE_B,
+        a_l_b => A_LT_B,
+        a_g_b => A_GT_B,
+        a_ge_b => A_GE_B,
+        a_e_b => A_EQ_B
+    );
+
 
     --
     --  MULTIPLIER
