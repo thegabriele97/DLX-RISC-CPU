@@ -165,6 +165,18 @@ architecture mix of windowing_rf is
         );
     end component;
 
+    component latch_generic is
+        generic (
+            NBIT: integer := 8
+        );
+        port (
+            EN:     in std_logic;
+            RST:    in std_logic;
+            D:      in std_logic_vector(NBIT-1 downto 0);
+            Q:      out std_logic_vector(NBIT-1 downto 0)
+        );
+    end component;
+
     type word_array_t is array(0 to F-1) of std_logic_vector(NBIT_DATA-1 downto 0);
     type sel_1bit_t is array(0 to F-1) of std_logic_vector(0 downto 0);
 
@@ -267,15 +279,13 @@ begin
             Y => internal_out1
         );
 
-    RDPORT0_OUTREG: reg_generic generic map(N => NBIT_DATA, RSTVAL => 0)
+    RDPORT0_OUTLATCH: latch_generic generic map(NBIT => NBIT_DATA)
         port map(
-            Clk => CLK,
-            Rst => RESET,
-            Enable => int_RD1,
+            RST => RESET,
+            EN => int_RD1,
             D => internal_out1,
             Q => OUT1
         );
-
 
 
     RDPORT1: mux generic map(N => NBIT_DATA, M => f_log2(M + 3*N))
@@ -285,11 +295,10 @@ begin
             Y => internal_out2
         );
 
-    RDPORT1_OUTREG: reg_generic generic map(N => NBIT_DATA, RSTVAL => 0)
+    RDPORT1_OUTLATCH: latch_generic generic map(NBIT => NBIT_DATA)
         port map(
-            Clk => CLK,
-            Rst => RESET,
-            Enable => int_RD2,
+            RST => RESET,
+            EN => int_RD2,
             D => internal_out2,
             Q => OUT2
         );

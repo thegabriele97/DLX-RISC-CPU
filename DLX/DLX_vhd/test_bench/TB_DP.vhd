@@ -85,7 +85,10 @@ architecture test of tb_dp is
     end component;
 
     type mem_t is array(0 to 2**10-1) of std_logic_vector(32-1 downto 0);
-    
+    type codemem_t is array(0 to 10) of std_logic_vector(9+ALU_ADD'length-1 downto 0);
+    type imm_t is array(codemem_t'range) of std_logic_vector(31 downto 0);
+    type rws_t is array(codemem_t'range) of std_logic_vector(4 downto 0);
+
     signal CLK: std_logic := '0';
     signal RST: std_logic;
     signal EN1, EN2, EN3, RF1, RF2, WF, CALL, RET, SPILL, FILL, S3, S2, S1, A_EQ_B, A_GE_B, A_GT_B, A_LT_B, A_LE_B, ALU_COUT, RF_MEM_RM, RF_MEM_WM: std_logic;
@@ -96,6 +99,91 @@ architecture test of tb_dp is
 
     signal DATAMEM: mem_t := (others => (others => '1'));
     signal RFMEM: mem_t := (others => (others => '1'));
+
+    signal codemem: codemem_t := (
+        -- RF1, RF2, EN1, S1, S2, >ALUOP<, EN2, S3, WF, EN3
+        "10101" & ALU_ADD & "1010", -- ADDI R2, R0, 0x3F
+        "00000" & ALU_ADD & "0000", -- NOP
+        "00000" & ALU_ADD & "0000", -- NOP
+        "00000" & ALU_ADD & "0000", -- NOP
+        "11100" & ALU_ADD & "1010", -- ADD R4, R2, R2
+        "00000" & ALU_ADD & "0000", -- NOP
+        "00000" & ALU_ADD & "0000", -- NOP
+        "00000" & ALU_ADD & "0000", -- NOP
+        "10101" & ALU_AND & "1010", -- ANDI R5, R4, 0xF0
+        "00000" & ALU_ADD & "0000", -- NOP
+        "00000" & ALU_ADD & "0000"  -- NOP
+    );
+
+    signal imm1: imm_t := (
+        x"00000000",
+        x"00000000",
+        x"00000000",
+        x"00000000",
+        x"00000000",
+        x"00000000",
+        x"00000000",
+        x"00000000",
+        x"00000000",
+        x"00000000",
+        x"00000000"
+    );
+
+    signal imm2: imm_t := (
+        x"0000003F",
+        x"00000000",
+        x"00000000",
+        x"00000000",
+        x"00000000",
+        x"00000000",
+        x"00000000",
+        x"00000000",
+        x"000000F0",
+        x"00000000",
+        x"00000000"
+    );
+
+    signal drs1: rws_t := (
+        "00000",  
+        "00000",  
+        "00000",  
+        "00000",  
+        "00010",  
+        "00000",  
+        "00000",  
+        "00000",  
+        "00100",  
+        "00000",  
+        "00000" 
+    );
+
+    signal drs2: rws_t := (
+        "00000",  
+        "00000",  
+        "00000",  
+        "00000",  
+        "00010",  
+        "00000",  
+        "00000",  
+        "00000",  
+        "00000",  
+        "00000",  
+        "00000"  
+    );
+
+    signal dws: rws_t := (
+        "00010",  
+        "00000",  
+        "00000",  
+        "00000",  
+        "00100",  
+        "00000",  
+        "00000",  
+        "00000",  
+        "00101",  
+        "00000",  
+        "00000"
+    );
 
 begin
 
@@ -143,19 +231,19 @@ begin
         S3 => S3
     );
 
-    -- process
-    -- begin
+    process
+    begin
 
-    --     wait for 0.5 ns;
-    --     clk <= not clk;
-        
-    -- end process;
+        wait for 0.5 ns;
+        clk <= not clk;
+     
+    end process;
 
     process
     begin
 
-        -- MOV R2, 0x3F
-
+        wait until clk = '0';
+        
         EN1 <= '0';
         EN2 <= '0';
         EN3 <= '0';
@@ -173,69 +261,165 @@ begin
         S2 <= '0';
         S3 <= '0';
         ALU_OP <= ALU_ADD;
-    
 
-
-        clk <= '0';
-
+        wait until clk = '0';
+        
         Rst <= '1';
-        wait for 0.5 ns;
-        CLK <= '1';
-        wait for 1 ns;
-
-        clk <= '0';
+        
+        wait until clk = '1';
+        wait until clk = '0';
 
         Rst <= '0';
-        wait for 0.5 ns;
-        CLK <= '1';
-        wait for 1 ns;
-
-
-        clk <= '0';
-
-        RF1 <= '0';
-        RS1 <= "00000";
-
-        RF2 <= '0';
-        RS2 <= "00000";
-
-        WS1 <= "00010";
-
-        INP1 <= x"0000003F";
-        INP2 <= x"00000000";
         
-        EN1 <= '1';
+        wait until clk = '1';
         
-        wait for 1 ns;
-
-        clk <= '1';
-        wait for 1 ns;
-
-        clk <= '0';
-
-        S1 <= '1';
-        S2 <= '1';
-
-        ALU_OP <= ALU_ADD;
-
-        EN2 <= '1';
         
-        wait for 1 ns;
+        for i in codemem'range loop
 
-        clk <= '1';
-        wait for 1 ns;
+            wait until Clk = '0';
 
-        clk <= '0';
 
-        EN3 <= '0';
+            RF1 <= codemem(i)(codemem(i)'length-1);
+            RF2 <= codemem(i)(codemem(i)'length-2);
+            EN1 <= codemem(i)(codemem(i)'length-3);
+            INP1 <= imm1(i);
+            INP2 <= imm2(i);
+            RS1 <= drs1(i);
+            RS2 <= drs2(i);
+            WS1 <= dws(i);
+
+            if (i > 0) then
+                S1 <= codemem(i-1)(codemem(i-1)'length-4);
+                S2 <= codemem(i-1)(codemem(i-1)'length-5);
+                ALU_OP <= codemem(i-1)(codemem(i-1)'length-6 downto codemem(i-1)'length-6-ALU_ADD'length+1);
+                EN2 <= codemem(i-1)(codemem(i-1)'length-11);
+            end if;
+            
+            if (i > 1) then
+                S3 <= codemem(i-2)(codemem(i-2)'length-12);
+                WF <= codemem(i-2)(codemem(i-2)'length-13);
+                EN3 <= codemem(i-2)(codemem(i-2)'length-14);
+            end if;
+
+
+            wait until Clk = '1';
+
+        end loop;
+
         
-        S3 <= '0';
-        WF <= '1';
+        -- clk <= '0';
+        
+        -- Rst <= '1';
+        -- wait for 0.5 ns;
+        -- CLK <= '1';
+        -- wait for 1 ns;
+        
+        -- clk <= '0';
+        
+        -- Rst <= '0';
+        -- wait for 0.5 ns;
+        -- CLK <= '1';
+        -- wait for 1 ns;
+        
+        
+        -- -- ADDI R2, R2, 0x3F
+        -- clk <= '0';
 
-        wait for 1 ns;
+        -- RF1 <= '0';
+        -- RS1 <= "00000";
 
-        clk <= '1';
-        wait for 1 ns;
+        -- RF2 <= '0';
+        -- RS2 <= "00000";
+
+        -- WS1 <= "00010";
+
+        -- INP1 <= x"0000003F";
+        -- INP2 <= x"00000000";
+        
+        -- EN1 <= '1';
+        
+        -- wait for 1 ns;
+
+        -- clk <= '1';
+        -- wait for 1 ns;
+
+        -- clk <= '0';
+
+        -- S1 <= '1';
+        -- S2 <= '1';
+
+        -- ALU_OP <= ALU_ADD;
+
+        -- EN2 <= '1';
+        
+        -- wait for 1 ns;
+
+        -- clk <= '1';
+        -- wait for 1 ns;
+
+        -- clk <= '0';
+
+        -- EN3 <= '0';
+        
+        -- S3 <= '0';
+        -- WF <= '1';
+
+        -- wait for 1 ns;
+
+        -- clk <= '1';
+        -- wait for 1 ns;
+
+
+        -- -- ADD R4, R2, R2
+        -- clk <= '0';
+
+        
+        -- RF1 <= '1';
+        -- RS1 <= "00010"; -- R2
+
+        -- RF2 <= '1';
+        -- RS2 <= "00010"; -- R2
+
+        -- WS1 <= "00100"; -- R4
+
+        -- INP1 <= x"00000000";
+        -- INP2 <= x"00000000";
+        
+        -- EN1 <= '1';
+
+        -- wait for 1 ns;
+
+        -- clk <= '1';
+        -- wait for 1 ns;
+
+        -- clk <= '0';
+
+        -- S1 <= '0';
+        -- S2 <= '0';
+
+        -- ALU_OP <= ALU_ADD;
+
+        -- EN2 <= '1';
+        
+        -- wait for 1 ns;
+
+        -- clk <= '1';
+        -- wait for 1 ns;
+
+
+        -- clk <= '0';
+
+        -- EN3 <= '0';
+        
+        -- S3 <= '0';
+        -- WF <= '1';
+
+        -- wait for 1 ns;
+
+        -- clk <= '1';
+        -- wait for 1 ns;
+
+        -- wait;
 
 
     end process;
