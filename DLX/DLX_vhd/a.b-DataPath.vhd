@@ -278,7 +278,7 @@ begin
     ) port map(
         CLK => Clk,
         RESET => Rst,
-        ENABLE => EN1,
+        ENABLE => '1',
         RD1 => RF1,
         RD2 => RF2,
         WR => i_WF,
