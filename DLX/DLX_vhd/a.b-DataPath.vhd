@@ -75,7 +75,11 @@ entity DP is
         A_EQ_B: out std_logic;      -- A equal B
 
         -- Mux selector for stage 3 of the pipeline
-        S3: in std_logic -- Selector for mux of stage 3
+        S3: in std_logic; -- Selector for mux of stage 3
+
+
+        ADD_WB: out std_logic_vector(N_BIT_ADDR_RF-1 downto 0)      -- Adress that goes into the hazard table that tells that we can execute the other operation
+
     );
 end entity;
 
@@ -268,6 +272,7 @@ begin
     -- This is used not to avoid writing on the register R0. When we initialize the register file, 
     -- the whole content in 0. After that we cannot touch anymore R0 that will be fixed to 0
     i_WF <= WF when (TO_INTEGER(unsigned(i_RF_WS)) /= 0) else '0';
+    ADD_WB <= i_RF_WS;
 
     RF: windowing_rf generic map( 
         NBIT_DATA => N_BIT_DATA, 

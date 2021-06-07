@@ -40,14 +40,16 @@ begin  -- IRam_Bhe
     variable index : integer := 0;
     variable tmp_data_u : std_logic_vector(I_SIZE-1 downto 0);
   begin  -- process FILL_MEM_P
-    if (Rst = '0') then
-      file_open(mem_fp,"test.asm.mem",READ_MODE);
+    if (Rst = '1') then
+      file_open(mem_fp,"rtype.asm.mem",READ_MODE);
       while (not endfile(mem_fp)) loop
         readline(mem_fp,file_line);
         hread(file_line,tmp_data_u);
         IRAM_mem(index) <= conv_integer(unsigned(tmp_data_u));       
         index := index + 1;
       end loop;
+
+      file_close(mem_fp);
     end if;
   end process FILL_MEM_P;
 
