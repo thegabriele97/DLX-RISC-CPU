@@ -18,17 +18,17 @@ end comparator;
 
 architecture behavioural of comparator is
 
-	component P4ADDER is
+	component P4_ADDER is
 		generic (
 			NBIT :		integer := 16
 		);
 		
 		port (
-			A :		    in	std_logic_vector(NBIT-1 downto 0);
-			B :		    in	std_logic_vector(NBIT-1 downto 0);
-			SUB_SUMN :	in	std_logic;
-			S :		    out	std_logic_vector(NBIT-1 downto 0);
-			Cout :	    out	std_logic
+			A:		    in	std_logic_vector(NBIT-1 downto 0);
+			B:		    in	std_logic_vector(NBIT-1 downto 0);
+			SUB_SUMN:	in	std_logic;
+			S:		    out	std_logic_vector(NBIT-1 downto 0);
+			Cout:	    out	std_logic
 		);
 	end component;
 
@@ -52,14 +52,14 @@ begin
 	a_ge_b <= Cout;
 	a_e_b <= zn;
 
-	ADDER: P4ADDER generic map(
+	ADDER: P4_ADDER generic map(
 		NBIT => NBIT
 	) port map(
 		A => A,	  
 		B => B,	  
-		SUB_SUMN => 1, 	-- set to 0 because we always need to do the SUB, neve SUM
+		SUB_SUMN => '1', 	-- set to 0 because we always need to do the SUB, neve SUM
 		S => S, 		  
 		Cout => Cout	  
-	)
+	);
 
 end behavioural;

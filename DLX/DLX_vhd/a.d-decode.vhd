@@ -8,7 +8,7 @@ entity decode is
         N_BIT_ADDR_RF:  integer := 5;
         N_BIT_DATA:     integer := 32;            
         OPCODE_SIZE:    integer := 6;  -- Operation Code Size
-        PC_SIZE      : integer := 32
+        PC_SIZE:        integer := 32
     );
     port (
         CLK:        in std_logic;
@@ -69,19 +69,20 @@ architecture structural of decode is
         );
     end component;
 
-    component P4ADDER is
-        generic (
-            NBIT :		integer := 16
-        );
+    
+    -- component P4_ADDER is
+    --     generic (
+    --         NBIT :		integer := 16
+    --     );
         
-        port (
-            A :		    in	std_logic_vector(NBIT-1 downto 0);
-            B :		    in	std_logic_vector(NBIT-1 downto 0);
-            SUB_SUMN :	in	std_logic;
-            S :		    out	std_logic_vector(NBIT-1 downto 0);
-            Cout :	    out	std_logic
-        );
-    end component;
+    --     port (
+    --         A:		    in	std_logic_vector(NBIT-1 downto 0);
+    --         B:		    in	std_logic_vector(NBIT-1 downto 0);
+    --         SUB_SUMN:	in	std_logic;
+    --         S:		    out	std_logic_vector(NBIT-1 downto 0);
+    --         Cout:	    out	std_logic
+    --     );
+    -- end component;
     
 
 
@@ -191,6 +192,6 @@ begin
         a_g_b => a_g_b,
         a_ge_b => a_ge_b,
         a_e_b => a_e_b 
-    )
+    );
 
 end architecture structural;

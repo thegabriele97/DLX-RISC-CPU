@@ -39,13 +39,7 @@ entity ALU is
 
         Y:      out std_logic_vector(N_BIT_DATA-1 downto 0);
         
-        COUT:   out std_logic;
-        
-        A_LE_B: out std_logic;
-        A_LT_B: out std_logic;
-        A_GT_B: out std_logic;
-        A_GE_B: out std_logic;
-        A_EQ_B: out std_logic	
+        COUT:   out std_logic
 
     );
 
@@ -101,22 +95,6 @@ architecture structural of ALU is
             Y:      OUT std_logic_vector(N-1 downto 0)
         );
     end component;
-
-    component comparator is
-        generic (NBIT: integer := 16);
-        
-        Port (
-            S:		in	std_logic_vector(NBIT-1 downto 0);
-            Cout:	in	std_logic;
-            a_le_b: out std_logic;
-            a_l_b: 	out std_logic;
-            a_g_b: 	out std_logic;
-            a_ge_b: out std_logic;
-            a_e_b: 	out std_logic	
-        );
-    
-    end component; 
-
     
     signal i_Q_EXTENDED: std_logic_vector((2**N_OPSEL)*N_BIT_DATA-1 downto 0);
 
@@ -158,24 +136,6 @@ begin
         S => i_ADDER_OUT,
         Cout => i_ADDER_COUT
     );
-
-    
-    --
-    --  COMPARATOR
-    --
-
-    CMP: comparator generic map(
-        NBIT => N_BIT_DATA
-    ) port map(
-        S => i_ADDER_OUT,
-        Cout => i_ADDER_COUT,
-        a_le_b => A_LE_B,
-        a_l_b => A_LT_B,
-        a_g_b => A_GT_B,
-        a_ge_b => A_GE_B,
-        a_e_b => A_EQ_B
-    );
-
 
     --
     --  MULTIPLIER
