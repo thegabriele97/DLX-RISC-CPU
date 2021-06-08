@@ -14,14 +14,23 @@ entity decode is
         CLK:        in std_logic;
         RST:        in std_logic;
         INSTR:      in std_logic_vector(N_BIT_INSTR - 1 downto 0);      -- Instruction
-        ADD_WB:     in std_logic_vector(N_BIT_ADDR_RF-1 downto 0);      -- 
+        ADD_WB:     in std_logic_vector(N_BIT_ADDR_RF-1 downto 0);      -- Address for the write back
         CPC:        in std_logic_vector(PC_SIZE-1 downto 0);
+        RD1:        in std_logic_vector(N_BIT_DATA-1 downto 0);         -- Data coming from the read port 1 of the Data Path
+        RD2:        in std_logic_vector(N_BIT_DATA-1 downto 0);         -- Data coming from the read port 2 of the Data Path
         HAZARD_SIG: out std_logic;
         ADD_RS1:    out std_logic_vector(N_BIT_ADDR_RF-1 downto 0);     -- Address 1 that goes in the register file
         ADD_RS2:    out std_logic_vector(N_BIT_ADDR_RF-1 downto 0);     -- Address 2 that goes in the register file
         ADD_WS1:    out std_logic_vector(N_BIT_ADDR_RF-1 downto 0);     -- Address for the write back that goes in the register file
         IMM:        out std_logic_vector(N_BIT_DATA-1 downto 0);
-        NPC:        out std_logic_vector(PC_SIZE-1 downto 0)
+        NPC:        out std_logic_vector(PC_SIZE-1 downto 0);
+
+        -- Signal that goes to the control unit
+        a_le_b: out std_logic;
+        a_l_b: 	out std_logic;
+        a_g_b: 	out std_logic;
+        a_ge_b: out std_logic;
+        a_e_b: 	out std_logic
     );
 end entity;
 
@@ -45,6 +54,37 @@ architecture structural of decode is
             BUSY:       out std_logic
         );
     end component;
+
+
+    component comparator is
+        generic (NBIT: integer := 16);
+        port (
+            A:		in	std_logic_vector(NBIT-1 downto 0);
+            B:		in	std_logic_vector(NBIT-1 downto 0);
+            a_le_b: out std_logic;
+            a_l_b: 	out std_logic;
+            a_g_b: 	out std_logic;
+            a_ge_b: out std_logic;
+            a_e_b: 	out std_logic	
+        );
+    end component;
+
+    component P4ADDER is
+        generic (
+            NBIT :		integer := 16
+        );
+        
+        port (
+            A :		    in	std_logic_vector(NBIT-1 downto 0);
+            B :		    in	std_logic_vector(NBIT-1 downto 0);
+            SUB_SUMN :	in	std_logic;
+            S :		    out	std_logic_vector(NBIT-1 downto 0);
+            Cout :	    out	std_logic
+        );
+    end component;
+    
+
+
     
     signal op_code: std_logic_vector(OPCODE_SIZE-1 downto 0);
     
@@ -140,4 +180,17 @@ begin
         BUSY => HAZARD_SIG
     );
     
+
+    Cmp: comparator generic map(
+        NBIT => N_BIT_DATA
+    ) port map(
+        A => RD1,
+        B => RD2,	
+        a_le_b => a_le_b,
+        a_l_b => a_l_b,
+        a_g_b => a_g_b,
+        a_ge_b => a_ge_b,
+        a_e_b => a_e_b 
+    )
+
 end architecture structural;
