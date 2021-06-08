@@ -89,18 +89,21 @@ architecture dlx_rtl of DLX is
 			N_BIT_INSTR:    integer := 32;
 			N_BIT_ADDR_RF:  integer := 5;
 			N_BIT_DATA:     integer := 32;            
-			OPCODE_SIZE:    integer := 6  -- Operation Code Size
+			OPCODE_SIZE:    integer := 6;  -- Operation Code Size
+			PC_SIZE      : integer := 32
 		);
 		port (
 			CLK:        in std_logic;
 			RST:        in std_logic;
 			INSTR:      in std_logic_vector(N_BIT_INSTR - 1 downto 0);      -- Instruction
 			ADD_WB:     in std_logic_vector(N_BIT_ADDR_RF-1 downto 0);      -- 
+			CPC:        in std_logic_vector(PC_SIZE-1 downto 0);
 			HAZARD_SIG: out std_logic;
 			ADD_RS1:    out std_logic_vector(N_BIT_ADDR_RF-1 downto 0);     -- Address 1 that goes in the register file
 			ADD_RS2:    out std_logic_vector(N_BIT_ADDR_RF-1 downto 0);     -- Address 2 that goes in the register file
 			ADD_WS1:    out std_logic_vector(N_BIT_ADDR_RF-1 downto 0);     -- Address for the write back that goes in the register file
-			IMM:       out std_logic_vector(N_BIT_DATA-1 downto 0) 
+			IMM:       	out std_logic_vector(N_BIT_DATA-1 downto 0);
+			NPC:        out std_logic_vector(PC_SIZE-1 downto 0)
 		);
 	end component;
 
@@ -270,7 +273,7 @@ begin  -- DLX
     -- outputs: IR_IN_i
     IR_P: process (Clk, Rst)
     begin  -- process IR_P
-		if Rst = '1' then                 -- asynchronous reset (active high)
+		if Rst = '1' then
 			IR <= (others => '0');
 		elsif rising_edge(Clk) then  -- rising clock edge
 			if (i_IR_LATCH_EN = '1') then
@@ -286,13 +289,11 @@ begin  -- DLX
     -- outputs: IRam_Addr
     PC_P: process (Clk, Rst)
     begin  -- process PC_P
-		if Rst = '1' then                 -- asynchronous reset (active high)
+		if Rst = '1' then
 			PC <= (others => '0');
-			PC_BUS <= (others => '0'); -- TODO: temporary
 		elsif rising_edge(Clk) then  -- rising clock edge
 			if (i_PC_LATCH_EN = '1') then
 				PC <= PC_BUS;
-				PC_BUS <= std_logic_vector(unsigned(PC_BUS) + 1); -- TODO: temporary
 			end if;
 		end if;
     end process PC_P;
@@ -331,17 +332,20 @@ begin  -- DLX
 		N_BIT_INSTR => IR_SIZE,
 		N_BIT_ADDR_RF => N_BIT_ADDR_RF,
 		N_BIT_DATA => IR_SIZE,  
-		OPCODE_SIZE => OPCODE_SIZE
+		OPCODE_SIZE => OPCODE_SIZE,
+		PC_SIZE => PC_SIZE
 	) port map (
         CLK => Clk,       
         RST => Rst,        
         INSTR => IR,      
-        ADD_WB => i_ADD_WB,     
+        ADD_WB => i_ADD_WB,
+		CPC => PC,
         HAZARD_SIG => i_HAZARD_SIG_CU, 
         ADD_RS1 => i_ADD_RS1,    
         ADD_RS2 => i_ADD_RS2,    
         ADD_WS1 => i_ADD_WS1,    
-        IMM => i_IMM     
+        IMM => i_IMM,
+		NPC => PC_BUS
 	);
 
 

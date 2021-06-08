@@ -11,7 +11,8 @@ use ieee.std_logic_textio.all;
 entity IRAM is
   generic (
     RAM_DEPTH : integer := 48;
-    I_SIZE : integer := 32);
+    I_SIZE : integer := 32
+  );
   port (
     Rst  : in  std_logic;
     Addr : in  std_logic_vector(I_SIZE - 1 downto 0);
@@ -28,7 +29,11 @@ architecture IRam_Bhe of IRAM is
 
 begin  -- IRam_Bhe
 
-  Dout <= conv_std_logic_vector(IRAM_mem(conv_integer(unsigned(Addr))),I_SIZE);
+  Dout <= conv_std_logic_vector(IRAM_mem(conv_integer(unsigned("00" & Addr(Addr'length-1 downto 2)))),I_SIZE);
+  -- Dout <= std_logic_vector(TO_UNSIGNED(IRAM_mem(TO_INTEGER(unsigned(Addr + 0))), I_SIZE/4)) & 
+  -- std_logic_vector(TO_UNSIGNED(IRAM_mem(TO_INTEGER(unsigned(Addr + 1))), I_SIZE/4)) & 
+  -- std_logic_vector(TO_UNSIGNED(IRAM_mem(TO_INTEGER(unsigned(Addr + 2))), I_SIZE/4)) & 
+  -- std_logic_vector(TO_UNSIGNED(IRAM_mem(TO_INTEGER(unsigned(Addr + 3))), I_SIZE/4));
 
   -- purpose: This process is in charge of filling the Instruction RAM with the firmware
   -- type   : combinational
@@ -41,7 +46,7 @@ begin  -- IRam_Bhe
     variable tmp_data_u : std_logic_vector(I_SIZE-1 downto 0);
   begin  -- process FILL_MEM_P
     if (Rst = '1') then
-      file_open(mem_fp,"rtype.asm.mem",READ_MODE);
+      file_open(mem_fp,"test_bench/mems/test.asm.mem",READ_MODE);
       while (not endfile(mem_fp)) loop
         readline(mem_fp,file_line);
         hread(file_line,tmp_data_u);
