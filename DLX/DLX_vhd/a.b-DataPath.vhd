@@ -34,6 +34,8 @@ entity DP is
         RS1 :   in std_logic_vector(N_BIT_ADDR_RF-1 downto 0);      -- address PORT 1 of the register file
         RS2 :   in std_logic_vector(N_BIT_ADDR_RF-1 downto 0);      -- address PORT 2 of the register file
         WS1 :   in std_logic_vector(N_BIT_ADDR_RF-1 downto 0);      -- Address used for the write back
+        RD1 :   out std_logic_vector(N_BIT_DATA-1 downto 0);
+        RD2 :   out std_logic_vector(N_BIT_DATA-1 downto 0);        -- RD1 & RD2 towards the DECODE unit
 
         -- Our RF has two reading port and one writing port
 
@@ -64,19 +66,12 @@ entity DP is
         S2: in std_logic; -- Selector for bottom mux, called mux B
         
 
-
         -- ALU 
         ALU_OP: in std_logic_vector(N_OPSEL + 3 - 1 downto 0); -- Control signal for the ALU in order to decide the operation
         ALU_COUT: out std_logic;    -- Carry out of the operation made by the ALU
-        A_LE_B: out std_logic;      -- A less equal B 
-        A_LT_B: out std_logic;      -- A less than B
-        A_GT_B: out std_logic;      -- A greater that B
-        A_GE_B: out std_logic;      -- A greater equal B
-        A_EQ_B: out std_logic;      -- A equal B
 
         -- Mux selector for stage 3 of the pipeline
         S3: in std_logic; -- Selector for mux of stage 3
-
 
         ADD_WB: out std_logic_vector(N_BIT_ADDR_RF-1 downto 0)      -- Adress that goes into the hazard table that tells that we can execute the other operation
 
@@ -183,14 +178,7 @@ architecture structural of DP is
     
             Y:      out std_logic_vector(N_BIT_DATA-1 downto 0);
             
-            COUT:   out std_logic;
-            
-            A_LE_B: out std_logic;
-            A_LT_B: out std_logic;
-            A_GT_B: out std_logic;
-            A_GE_B: out std_logic;
-            A_EQ_B: out std_logic	
-    
+            COUT:   out std_logic    
         );
     
     end component;
@@ -273,6 +261,8 @@ begin
     -- the whole content in 0. After that we cannot touch anymore R0 that will be fixed to 0
     i_WF <= WF when (TO_INTEGER(unsigned(i_RF_WS)) /= 0) else '0';
     ADD_WB <= i_RF_WS;
+    RD1 <= i_RF_DATA_O1;
+    RD2 <= i_RF_DATA_O2;
 
     RF: windowing_rf generic map( 
         NBIT_DATA => N_BIT_DATA, 
@@ -416,12 +406,7 @@ begin
         INB => i_ALU_IN_B,
         OP => ALU_OP,
         Y => i_ALU_OUT,
-        COUT => ALU_COUT,
-        A_LE_B => A_LE_B,
-        A_LT_B => A_LT_B,
-        A_GT_B => A_GT_B,
-        A_GE_B => A_GE_B,
-        A_EQ_B => A_EQ_B
+        COUT => ALU_COUT
     );
 
 

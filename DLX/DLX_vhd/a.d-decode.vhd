@@ -18,7 +18,7 @@ entity decode is
         CPC:        in std_logic_vector(PC_SIZE-1 downto 0);            -- Current program counter
         RD1:        in std_logic_vector(N_BIT_DATA-1 downto 0);         -- Data coming from the read port 1 of the Data Path
         RD2:        in std_logic_vector(N_BIT_DATA-1 downto 0);         -- Data coming from the read port 2 of the Data Path
-        JUMP_EN:     in std_logic;
+        JUMP_EN:    in std_logic;
         HAZARD_SIG: out std_logic;
         ADD_RS1:    out std_logic_vector(N_BIT_ADDR_RF-1 downto 0);     -- Address 1 that goes in the register file
         ADD_RS2:    out std_logic_vector(N_BIT_ADDR_RF-1 downto 0);     -- Address 2 that goes in the register file
@@ -97,6 +97,7 @@ architecture structural of decode is
     end component;
 
 
+    constant i_CONSTANT_PC_ADD: std_logic_vector(PC_SIZE-1 downto 0) := std_logic_vector(to_unsigned(4, PC_SIZE));
 
 
     signal op_code: std_logic_vector(OPCODE_SIZE-1 downto 0);
@@ -110,8 +111,6 @@ architecture structural of decode is
 
     signal i_PC_OFFSET: std_logic_vector(PC_SIZE-1 downto 0); -- with sign ext -- TO THE ADDER NPC
     signal i_OFFSET_ADDER: std_logic_vector(PC_SIZE-1 downto 0); -- mux output, '4' or the passed immediate
-    signal i_CONSTANT_PC_ADD: std_logic_vector(PC_SIZE-1 downto 0);
-
 
 begin
 
@@ -206,8 +205,6 @@ begin
         a_ge_b => a_ge_b,
         a_e_b => a_e_b
     );
-
-    i_CONSTANT_PC_ADD <=  std_logic_vector(to_unsigned(4, i_CONSTANT_PC_ADD'length));   -- 4 constant value
 
     MUX: mux2_1 generic map(
         NBIT => PC_SIZE

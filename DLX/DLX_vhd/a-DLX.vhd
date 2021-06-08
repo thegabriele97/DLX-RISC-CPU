@@ -29,11 +29,11 @@ architecture dlx_rtl of DLX is
  -- Components Declaration
  --------------------------------------------------------------------
   
-  --Instruction Ram
-    component IRAM
---     generic (
---       RAM_DEPTH : integer;
---       I_SIZE    : integer);
+  	--Instruction Ram
+	component IRAM
+		--     generic (
+		--       RAM_DEPTH : integer;
+		--       I_SIZE    : integer);
 	    port (
 		    Rst  : in  std_logic;
 		    Addr : in  std_logic_vector(PC_SIZE - 1 downto 0);
@@ -43,7 +43,7 @@ architecture dlx_rtl of DLX is
 
   -- Data Ram (MISSING!You must include it in your final project!)
   
-  -- Control Unit
+  	-- Control Unit
     component dlx_cu
         generic (
             MICROCODE_MEM_SIZE :     integer := 10;  -- Microcode Memory Size
@@ -96,14 +96,25 @@ architecture dlx_rtl of DLX is
 			CLK:        in std_logic;
 			RST:        in std_logic;
 			INSTR:      in std_logic_vector(N_BIT_INSTR - 1 downto 0);      -- Instruction
-			ADD_WB:     in std_logic_vector(N_BIT_ADDR_RF-1 downto 0);      -- 
-			CPC:        in std_logic_vector(PC_SIZE-1 downto 0);
+			ADD_WB:     in std_logic_vector(N_BIT_ADDR_RF-1 downto 0);      -- Address for the write back
+			CPC:        in std_logic_vector(PC_SIZE-1 downto 0);            -- Current program counter
+			RD1:        in std_logic_vector(N_BIT_DATA-1 downto 0);         -- Data coming from the read port 1 of the Data Path
+			RD2:        in std_logic_vector(N_BIT_DATA-1 downto 0);         -- Data coming from the read port 2 of the Data Path
+			JUMP_EN:    in std_logic;
 			HAZARD_SIG: out std_logic;
 			ADD_RS1:    out std_logic_vector(N_BIT_ADDR_RF-1 downto 0);     -- Address 1 that goes in the register file
 			ADD_RS2:    out std_logic_vector(N_BIT_ADDR_RF-1 downto 0);     -- Address 2 that goes in the register file
 			ADD_WS1:    out std_logic_vector(N_BIT_ADDR_RF-1 downto 0);     -- Address for the write back that goes in the register file
-			IMM:       	out std_logic_vector(N_BIT_DATA-1 downto 0);
-			NPC:        out std_logic_vector(PC_SIZE-1 downto 0)
+			IMM:        out std_logic_vector(N_BIT_DATA-1 downto 0);
+			NPC:        out std_logic_vector(PC_SIZE-1 downto 0);           -- Next program counter
+			PC_OVF:     out std_logic;                                      -- Signal for PC overflow
+	
+			-- Signal that goes to the control unit
+			a_le_b: out std_logic;
+			a_l_b: 	out std_logic;
+			a_g_b: 	out std_logic;
+			a_ge_b: out std_logic;
+			a_e_b: 	out std_logic
 		);
 	end component;
 
@@ -117,31 +128,36 @@ architecture dlx_rtl of DLX is
 			N_BIT_RF_MEM_ADDR   : integer := 10     -- number of bit needed for the address of the memory used to PUSH/POP data from the register file. We call this memory, RF memory
 		);
 
-  		port (
+		port (
+        
 			Clk :   in std_logic;     -- CLock
 			Rst :   in std_logic;     -- Reset: Active-Low
+	
+	
 			EN1 :  in std_logic;     -- Enable stage 1 of the pipeline
 			EN2 :  in std_logic;     -- Enable stage 2 of the pipeline
 			EN3 :  in std_logic;     -- Enable stage 3 of the pipeline
-
+	
 			-- Bus to DATA MEMORY
 			DATAMEM_BUS_TOMEM:  out std_logic_vector(N_BIT_DATA - 1 downto 0); -- Data bus from the datapath to the data memory
 			DATAMEM_BUS_FROMEM: in std_logic_vector(N_BIT_DATA - 1 downto 0); -- Data bus from the data memory to the datapath
 			DATAMEM_ADDR:       out std_logic_vector(N_BIT_MEM_ADDR-1 downto 0); -- Address of the data memory
-
+	
 			--
 			--          REGISTER FILE
 			--
 			RS1 :   in std_logic_vector(N_BIT_ADDR_RF-1 downto 0);      -- address PORT 1 of the register file
 			RS2 :   in std_logic_vector(N_BIT_ADDR_RF-1 downto 0);      -- address PORT 2 of the register file
 			WS1 :   in std_logic_vector(N_BIT_ADDR_RF-1 downto 0);      -- Address used for the write back
-
+			RD1 :   out std_logic_vector(N_BIT_DATA-1 downto 0);
+			RD2 :   out std_logic_vector(N_BIT_DATA-1 downto 0);        -- RD1 & RD2 towards the DECODE unit
+	
 			-- Our RF has two reading port and one writing port
-
+	
 			RF1 :   in std_logic;     -- Read enable port 1 of the register file
 			RF2 :   in std_logic;     -- Read enable port 2 of the register file 
 			WF  :   in std_logic;     -- Write enable of the register file
-
+		
 			-- RF PROC MEMORY
 			RF_BUS_TOMEM:  out std_logic_vector(N_BIT_DATA - 1 downto 0); -- Data bus from the datapath to the RF memory
 			RF_BUS_FROMEM: in std_logic_vector(N_BIT_DATA - 1 downto 0); -- Data bus from the RF memory to the datapath
@@ -154,7 +170,7 @@ architecture dlx_rtl of DLX is
 			RET:        in std_logic;
 			FILL:       out std_logic;
 			SPILL:      out std_logic;
-
+	
 			-- Immediate value for the datapath 
 			
 			INP1:   in std_logic_vector(N_BIT_DATA - 1 downto 0); -- immediate 1
@@ -164,19 +180,16 @@ architecture dlx_rtl of DLX is
 			S1: in std_logic; -- Selector for top mux, called mux A
 			S2: in std_logic; -- Selector for bottom mux, called mux B
 			
+	
 			-- ALU 
 			ALU_OP: in std_logic_vector(N_OPSEL + 3 - 1 downto 0); -- Control signal for the ALU in order to decide the operation
 			ALU_COUT: out std_logic;    -- Carry out of the operation made by the ALU
-			A_LE_B: out std_logic;      -- A less equal B 
-			A_LT_B: out std_logic;      -- A less than B
-			A_GT_B: out std_logic;      -- A greater that B
-			A_GE_B: out std_logic;      -- A greater equal B
-			A_EQ_B: out std_logic;      -- A equal B
-
+	
 			-- Mux selector for stage 3 of the pipeline
 			S3: in std_logic; -- Selector for mux of stage 3
-
+	
 			ADD_WB: out std_logic_vector(N_BIT_ADDR_RF-1 downto 0)      -- Adress that goes into the hazard table that tells that we can execute the other operation
+	
 		);
     end component;
 
@@ -207,8 +220,10 @@ architecture dlx_rtl of DLX is
 	signal i_ADD_WS1: std_logic_vector(N_BIT_ADDR_RF-1 downto 0);
 	signal i_IMM: std_logic_vector(IR_SIZE - 1 downto 0);
 
-	
-	-- Control Unit Bus signals
+	-- -- Control Unit
+	signal i_PC_OVF: std_logic;
+
+	-- -- Control Unit Bus signals
 	signal i_HAZARD_SIG_CU: std_logic;
 	signal i_ALU_OP: std_logic_vector(ALU_ADD'length-1 downto 0);
 	signal i_ALU_COUT: std_logic;
@@ -225,12 +240,17 @@ architecture dlx_rtl of DLX is
 	signal i_RF2: std_logic;
 	signal i_WF: std_logic;
 
-	-- -- ALU Status Signals
-    signal i_A_EQ_B: std_logic;
-    signal i_A_GE_B: std_logic; 
-    signal i_A_GT_B: std_logic;
-    signal i_A_LT_B: std_logic; 
-    signal i_A_LE_B: std_logic;
+	-- -- JUMP / BRANCH Control Signals
+	signal i_JUMP_EN: std_logic;
+	signal i_A_EQ_B: std_logic;
+	signal i_A_GE_B: std_logic; 
+	signal i_A_GT_B: std_logic;
+	signal i_A_LT_B: std_logic; 
+	signal i_A_LE_B: std_logic;
+
+	-- -- RF Data Signals
+	signal i_RD1: std_logic_vector(IR_SIZE-1 downto 0);
+	signal i_RD2: std_logic_vector(IR_SIZE-1 downto 0);
 
     -- -- Multiplexer selector
     signal i_S1: std_logic; 
@@ -337,15 +357,24 @@ begin  -- DLX
 	) port map (
         CLK => Clk,       
         RST => Rst,        
-        INSTR => IR,      
+        INSTR => IR,
         ADD_WB => i_ADD_WB,
 		CPC => PC,
+		RD1 => i_RD1,
+		RD2 => i_RD2,
+		JUMP_EN => i_JUMP_EN,
         HAZARD_SIG => i_HAZARD_SIG_CU, 
         ADD_RS1 => i_ADD_RS1,    
         ADD_RS2 => i_ADD_RS2,    
         ADD_WS1 => i_ADD_WS1,    
         IMM => i_IMM,
-		NPC => PC_BUS
+		NPC => PC_BUS,
+		PC_OVF => i_PC_OVF,
+		a_le_b => i_A_LE_B,
+		a_l_b => i_A_LT_B,
+		a_g_b => i_A_GT_B,
+		a_ge_b => i_A_GE_B,
+		a_e_b => i_A_EQ_B
 	);
 
 
@@ -367,6 +396,8 @@ begin  -- DLX
         RS1 => i_ADD_RS1,
         RS2 => i_ADD_RS2,
         WS1 => i_ADD_WS1,
+		RD1 => i_RD1,
+		RD2 => i_RD2,
         RF1 => i_RF1,
         RF2 => i_RF2,
         WF => i_WF,
@@ -385,11 +416,6 @@ begin  -- DLX
         S2 => i_S2,
         ALU_OP => i_ALU_OP,
         ALU_COUT => i_ALU_COUT,
-        A_LE_B => i_A_LE_B,
-        A_LT_B => i_A_LT_B,
-        A_GT_B => i_A_GT_B,
-        A_GE_B => i_A_GE_B,
-        A_EQ_B => i_A_EQ_B,
         S3 => i_S3,
         ADD_WB => i_ADD_WB
     );
