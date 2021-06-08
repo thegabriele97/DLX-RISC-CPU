@@ -68,7 +68,7 @@ begin
     begin
 
         JUMP_EN <= '0';
-        CPC <= (others => '0');
+        CPC <= x"00000007";
         wait until CLK = '0';
         ADD_WB <= (others => '0');
         RST <= '1';
@@ -112,7 +112,7 @@ begin
         -- JTYPE
         JUMP_EN <= '1';
 
-        INSTR <= x"00653025";
+        INSTR <= x"08000007";
         wait for 1 ns;
 
         wait;
