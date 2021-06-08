@@ -4,11 +4,10 @@ vcom 000-globals.vhd
 source a.b-DataPath.core/compile.script
 source a.d-decode.core/compile.script
 
+vcom a.a-CU_HW.vhd 
 vcom a.b-DataPath.vhd 
 vcom a.c-IRAM.vhd 
 vcom a.d-decode.vhd
-
-# vcom a.a-CU_HW.vhd 
 
 
 vcom a-DLX.vhd 

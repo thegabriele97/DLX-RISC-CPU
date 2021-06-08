@@ -14,6 +14,7 @@ package myTypes is
 	-- ALU GLOBALS
 	--
 
+	-- Exlicit Encoding for ALU OPERATION
 	subtype alu_op_sig_t is std_logic_vector(ALU_OPSEL+3-1 downto 0);
 
 	constant ALU_ADD: 	alu_op_sig_t := "00000";
