@@ -6,7 +6,7 @@ entity decode is
     generic (
         N_BIT_INSTR:    integer := 32;
         N_BIT_ADDR_RF:  integer := 5;
-        N_BIT_DATA:     integer := 32;            
+        N_BIT_DATA:     integer := 32;
         OPCODE_SIZE:    integer := 6;  -- Operation Code Size
         PC_SIZE:        integer := 32
     );
@@ -15,15 +15,17 @@ entity decode is
         RST:        in std_logic;
         INSTR:      in std_logic_vector(N_BIT_INSTR - 1 downto 0);      -- Instruction
         ADD_WB:     in std_logic_vector(N_BIT_ADDR_RF-1 downto 0);      -- Address for the write back
-        CPC:        in std_logic_vector(PC_SIZE-1 downto 0);
+        CPC:        in std_logic_vector(PC_SIZE-1 downto 0);            -- Current program counter
         RD1:        in std_logic_vector(N_BIT_DATA-1 downto 0);         -- Data coming from the read port 1 of the Data Path
         RD2:        in std_logic_vector(N_BIT_DATA-1 downto 0);         -- Data coming from the read port 2 of the Data Path
+        JUMP_EN:     in std_logic;
         HAZARD_SIG: out std_logic;
         ADD_RS1:    out std_logic_vector(N_BIT_ADDR_RF-1 downto 0);     -- Address 1 that goes in the register file
         ADD_RS2:    out std_logic_vector(N_BIT_ADDR_RF-1 downto 0);     -- Address 2 that goes in the register file
         ADD_WS1:    out std_logic_vector(N_BIT_ADDR_RF-1 downto 0);     -- Address for the write back that goes in the register file
         IMM:        out std_logic_vector(N_BIT_DATA-1 downto 0);
-        NPC:        out std_logic_vector(PC_SIZE-1 downto 0);
+        NPC:        out std_logic_vector(PC_SIZE-1 downto 0);           -- Next program counter
+        PC_OVF:     out std_logic;                                      -- Signal for PC overflow
 
         -- Signal that goes to the control unit
         a_le_b: out std_logic;
@@ -47,7 +49,7 @@ architecture structural of decode is
             WR2:        in std_logic;       -- Enable write 2 signal
             ADD_WR1:    in std_logic_vector(N_REGS_LOG-1 downto 0);     -- Address wirte 1 signal
             ADD_WR2:    in std_logic_vector(N_REGS_LOG-1 downto 0);     -- Address wirte 2 signal
-            
+
             ADD_CHECK1:  in std_logic_vector(N_REGS_LOG-1 downto 0);     -- Address reader 2 signal
             ADD_CHECK2:  in std_logic_vector(N_REGS_LOG-1 downto 0);     -- Address reader 2 signal
 
@@ -65,30 +67,40 @@ architecture structural of decode is
             a_l_b: 	out std_logic;
             a_g_b: 	out std_logic;
             a_ge_b: out std_logic;
-            a_e_b: 	out std_logic	
+            a_e_b: 	out std_logic
         );
     end component;
 
-    
-    -- component P4_ADDER is
-    --     generic (
-    --         NBIT :		integer := 16
-    --     );
-        
-    --     port (
-    --         A:		    in	std_logic_vector(NBIT-1 downto 0);
-    --         B:		    in	std_logic_vector(NBIT-1 downto 0);
-    --         SUB_SUMN:	in	std_logic;
-    --         S:		    out	std_logic_vector(NBIT-1 downto 0);
-    --         Cout:	    out	std_logic
-    --     );
-    -- end component;
-    
+    component mux2_1 is
+        generic (NBIT: integer:= 32);
+    	  port (
+            a:	in	std_logic_vector(NBIT - 1 downto 0);
+            b:	in	std_logic_vector(NBIT - 1 downto 0);
+            s: 	in	std_logic;
+            y:	out	std_logic_vector(NBIT - 1 downto 0)
+        );
+    end component;
 
 
-    
+    component P4_ADDER is
+        generic (
+            NBIT :		integer := 16
+        );
+
+        port (
+            A:		    in	std_logic_vector(NBIT-1 downto 0);
+            B:		    in	std_logic_vector(NBIT-1 downto 0);
+            SUB_SUMN:	in	std_logic;
+            S:		    out	std_logic_vector(NBIT-1 downto 0);
+            Cout:	    out	std_logic
+        );
+    end component;
+
+
+
+
     signal op_code: std_logic_vector(OPCODE_SIZE-1 downto 0);
-    
+
     signal i_RS1: std_logic_vector(N_BIT_ADDR_RF-1 downto 0);
     signal i_RS2: std_logic_vector(N_BIT_ADDR_RF-1 downto 0);
     signal i_WS1: std_logic_vector(N_BIT_ADDR_RF-1 downto 0);
@@ -97,6 +109,9 @@ architecture structural of decode is
     signal i_WR2: std_logic;
 
     signal i_PC_OFFSET: std_logic_vector(PC_SIZE-1 downto 0); -- with sign ext -- TO THE ADDER NPC
+    signal i_OFFSET_ADDER: std_logic_vector(PC_SIZE-1 downto 0); -- mux output, '4' or the passed immediate
+    signal i_CONSTANT_PC_ADD: std_logic_vector(PC_SIZE-1 downto 0);
+
 
 begin
 
@@ -104,12 +119,9 @@ begin
     ADD_RS2 <= i_RS2;
     ADD_WS1 <= i_WS1;
 
-    NPC <= std_logic_vector(unsigned(CPC) + unsigned(i_PC_OFFSET)) when (op_code = "000010" or op_code = "000011")
-        else std_logic_vector(unsigned(CPC) + 4); -- TODO: temporary, substitute with the adder
-
 
     op_code <= INSTR(N_BIT_INSTR-1 downto N_BIT_INSTR-OPCODE_SIZE);
-    
+
     process(INSTR)
     begin
 
@@ -125,11 +137,11 @@ begin
         i_WR2 <= '1';
 
         if (op_code = "000000") then -- R_TYPE
-        
+
             i_RS1 <= INSTR(N_BIT_INSTR-OPCODE_SIZE-1 downto N_BIT_INSTR-OPCODE_SIZE-N_BIT_ADDR_RF);
             i_RS2 <= INSTR(N_BIT_INSTR-OPCODE_SIZE-N_BIT_ADDR_RF-1 downto N_BIT_INSTR-OPCODE_SIZE-2*N_BIT_ADDR_RF);
             i_WS1 <= INSTR(N_BIT_INSTR-OPCODE_SIZE-2*N_BIT_ADDR_RF-1 downto N_BIT_INSTR-OPCODE_SIZE-3*N_BIT_ADDR_RF);     -- RD field
-        
+
             IMM <= (others => '0');
 
         elsif (op_code = "000010") then -- J_TYPE: J
@@ -142,9 +154,10 @@ begin
 
             IMM <= (others => '0'); -- The new PC is computed by the DECODE, the EXEC stage won't be executed
 
+
         elsif (op_code = "000011") then -- J_TYPE: JAL
 
-            -- JAL so we have to execute ADDI R31, R0, PC 
+            -- JAL so we have to execute ADDI R31, R0, PC
             i_RS1 <= (others => '0'); -- R0
             i_RS2 <= (others => '0');
             i_WS1 <= "11111"; -- R31
@@ -154,14 +167,14 @@ begin
             IMM <= CPC;
 
         else -- I_TYPE
-        
+
             i_RS1 <= INSTR(N_BIT_INSTR-OPCODE_SIZE-1 downto N_BIT_INSTR-OPCODE_SIZE-N_BIT_ADDR_RF);
             i_RS2 <= (OTHERS => '0');
             i_WS1 <= INSTR(N_BIT_INSTR-OPCODE_SIZE-N_BIT_ADDR_RF-1 downto N_BIT_INSTR-OPCODE_SIZE-2*N_BIT_ADDR_RF);
 
             IMM <= (others => INSTR(N_BIT_INSTR-OPCODE_SIZE-2*N_BIT_ADDR_RF-1));
             IMM(N_BIT_INSTR-OPCODE_SIZE-2*N_BIT_ADDR_RF-1 downto 0) <= INSTR(N_BIT_INSTR-OPCODE_SIZE-2*N_BIT_ADDR_RF-1 downto 0);
-        
+
         end if;
 
     end process;
@@ -180,18 +193,39 @@ begin
         ADD_CHECK2 => i_RS2,
         BUSY => HAZARD_SIG
     );
-    
+
 
     Cmp: comparator generic map(
         NBIT => N_BIT_DATA
     ) port map(
         A => RD1,
-        B => RD2,	
+        B => RD2,
         a_le_b => a_le_b,
         a_l_b => a_l_b,
         a_g_b => a_g_b,
         a_ge_b => a_ge_b,
-        a_e_b => a_e_b 
+        a_e_b => a_e_b
+    );
+
+    i_CONSTANT_PC_ADD <=  std_logic_vector(to_unsigned(4, i_CONSTANT_PC_ADD'length));   -- 4 constant value
+
+    MUX: mux2_1 generic map(
+        NBIT => PC_SIZE
+    ) port map(
+        a => i_PC_OFFSET,
+        b => i_CONSTANT_PC_ADD,
+        s => JUMP_EN,
+        y => i_OFFSET_ADDER
+    );
+
+    ADDER: P4_ADDER generic map(
+        NBIT => PC_SIZE
+    ) port map(
+        A => CPC,
+        B => i_OFFSET_ADDER,
+        SUB_SUMN => '0',
+        S => NPC,
+        Cout =>	PC_OVF
     );
 
 end architecture structural;
