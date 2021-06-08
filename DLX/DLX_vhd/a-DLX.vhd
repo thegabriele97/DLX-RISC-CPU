@@ -45,43 +45,47 @@ architecture dlx_rtl of DLX is
   
   -- Control Unit
     component dlx_cu
-        generic (
-            MICROCODE_MEM_SIZE :     integer := 10;  -- Microcode Memory Size
-            FUNC_SIZE          :     integer := 11;  -- Func Field Size for R-Type Ops
-            OP_CODE_SIZE       :     integer := 6;  -- Op Code Size
-            --ALU_OPC_SIZE       :     integer := 6;  -- ALU Op Code Word Size
-            IR_SIZE            :     integer := 32;  -- Instruction Register Size    
-            CW_SIZE            :     integer := 15
-        );  -- Control Word Size
-        port (
-            Clk                : in  std_logic;  -- Clock
-            Rst                : in  std_logic;  -- Reset:Active-Low
-            -- Instruction Register
-            IR_IN              : in  std_logic_vector(IR_SIZE - 1 downto 0);
-            -- IF Control Signal
-            IR_LATCH_EN        : out std_logic;  -- Instruction Register Latch Enable
-            NPC_LATCH_EN       : out std_logic;
-            -- ID Control Signals
-            RegA_LATCH_EN      : out std_logic;  -- Register A Latch Enable
-            RegB_LATCH_EN      : out std_logic;  -- Register B Latch Enable
-            RegIMM_LATCH_EN    : out std_logic;  -- Immediate Register Latch Enable
-            -- EX Control Signals
-            MUXA_SEL           : out std_logic;  -- MUX-A Sel
-            MUXB_SEL           : out std_logic;  -- MUX-B Sel
-            ALU_OUTREG_EN      : out std_logic;  -- ALU Output Register Enable
-            EQ_COND            : out std_logic;  -- Branch if (not) Equal to Zero
-            -- ALU Operation Code
-            ALU_OPCODE         : out aluOp; -- choose between implicit or exlicit coding, like std_logic_vector(ALU_OPC_SIZE -1 downto 0);
-            -- MEM Control Signals
-            DRAM_WE            : out std_logic;  -- Data RAM Write Enable
-            LMD_LATCH_EN       : out std_logic;  -- LMD Register Latch Enable
-            JUMP_EN            : out std_logic;  -- JUMP Enable Signal for PC input MUX
-            PC_LATCH_EN        : out std_logic;  -- Program Counte Latch Enable
-            -- WB Control signals
-            WB_MUX_SEL         : out std_logic;  -- Write Back MUX Sel
-            RF_WE              : out std_logic
-        );  -- Register File Write Enable
+		generic (
+			FUNC_SIZE          	: integer := 11; -- Func Field Size for R-Type Ops
+			OP_CODE_SIZE       	: integer := 6; -- Op Code Size
+			IR_SIZE 			: integer := 32 -- Instruction Register Size    
+		);
+		port (
+			Clk : in std_logic; -- Clock
+			Rst : in std_logic; -- Reset:Active-Low
 
+			-- Instruction Register
+			IR_IN : in std_logic_vector(IR_SIZE - 1 downto 0);
+
+			HAZARD_SIG: in std_logic; 	-- Data Hazard signal from ID
+
+			-- IF Control Signals
+			PIPLIN_IF_EN  	: out std_logic; -- Instruction Register Latch Enable
+			PC_EN 			: out std_logic;
+
+			-- ID Control Signals
+			PIPLIN_ID_EN : out std_logic;	-- ID Pipeline Stage Enable
+			JUMP_EN      : out std_logic; 	-- JUMP Enable Signal for PC input MUX
+			GT_CHECK     : in std_logic; 	-- Conditional branch status (= '1' means branch taken)
+			GE_CHECK     : in std_logic; 	-- Conditional branch status (= '1' means branch taken)
+			LT_CHECK     : in std_logic; 	-- Conditional branch status (= '1' means branch taken)
+			LE_CHECK     : in std_logic; 	-- Conditional branch status (= '1' means branch taken)
+
+			-- EX Control Signals
+			PIPLIN_EX_EN 	: out std_logic; 	-- ALU Output Register Enable
+			MUXA_SEL      	: out std_logic; 	-- MUX-A Sel
+			MUXB_SEL      	: out std_logic; 	-- MUX-B Sel
+			ALU_OPCODE 	  	: out alu_op_sig_t; -- ALU OP to execute
+
+			-- MEM Control Signals
+			DRAM_WE      	: out std_logic; 	-- Data RAM Write Enable
+			DRAM_RE      	: out std_logic; 	-- Data RAM Read Enable
+			PIPLIN_MEM_EN   : out std_logic; 	-- LMD Register Latch Enable
+
+			-- WB Control signals
+			WB_MUX_SEL 		: out std_logic; 	-- Write Back MUX Sel
+			PIPLIN_WB_EN    : out std_logic 	-- Register File Write Enable
+		);
     end component;
   
 	component decode is
@@ -225,8 +229,9 @@ architecture dlx_rtl of DLX is
 	signal i_RF2: std_logic;
 	signal i_WF: std_logic;
 
-	-- -- ALU Status Signals
-    signal i_A_EQ_B: std_logic;
+	-- -- JUMP / BRANCH Control Signals
+    signal i_JUMP_EN: std_logic;
+	signal i_A_EQ_B: std_logic;
     signal i_A_GE_B: std_logic; 
     signal i_A_GT_B: std_logic;
     signal i_A_LT_B: std_logic; 
@@ -238,13 +243,18 @@ architecture dlx_rtl of DLX is
     signal i_S3: std_logic;
 
 	-- -- Data Memory Bus Signals
+    signal i_DATAMEM_ADDR: std_logic_vector(RAM_DEPTH - 1 downto 0);
     signal i_DATAMEM_BUS_FROMEM: std_logic_vector(IR_SIZE - 1 downto 0);
     signal i_DATAMEM_BUS_TOMEM: std_logic_vector(IR_SIZE - 1 downto 0);
+    
+	signal i_DATAMEM_RM: std_logic;
+	signal i_DATAMEM_WM: std_logic;
+	
+	signal i_RF_MEM_ADDR: std_logic_vector(RAM_DEPTH - 1 downto 0);
     signal i_RF_BUS_FROMEM: std_logic_vector(IR_SIZE - 1 downto 0);
     signal i_RF_BUS_TOMEM: std_logic_vector(IR_SIZE - 1 downto 0); 
-    signal i_DATAMEM_ADDR: std_logic_vector(RAM_DEPTH - 1 downto 0);
-    signal i_RF_MEM_ADDR: std_logic_vector(RAM_DEPTH - 1 downto 0);
-    signal i_RF_MEM_RM: std_logic;
+    
+	signal i_RF_MEM_RM: std_logic;
     signal i_RF_MEM_WM: std_logic;
     
 	-- -- Data Memory signal
@@ -299,27 +309,33 @@ begin  -- DLX
     end process PC_P;
 
     -- Control Unit Instantiation
-    -- CU_I: dlx_cu port map (
-	-- 	Clk             => Clk,
-	-- 	Rst             => Rst,
-	-- 	IR_IN           => IR,
-	-- 	IR_LATCH_EN     => IR_LATCH_EN_i,
-	-- 	NPC_LATCH_EN    => NPC_LATCH_EN_i,
-	-- 	RegA_LATCH_EN   => RegA_LATCH_EN_i,
-	-- 	RegB_LATCH_EN   => RegB_LATCH_EN_i,
-	-- 	RegIMM_LATCH_EN => RegIMM_LATCH_EN_i,
-	-- 	MUXA_SEL        => MUXA_SEL_i,
-	-- 	MUXB_SEL        => MUXB_SEL_i,
-	-- 	ALU_OUTREG_EN   => ALU_OUTREG_EN_i,
-	-- 	EQ_COND         => EQ_COND_i,
-	-- 	ALU_OPCODE      => ALU_OPCODE_i,
-	-- 	DRAM_WE         => DRAM_WE_i,
-	-- 	LMD_LATCH_EN    => LMD_LATCH_EN_i,
-	-- 	JUMP_EN         => JUMP_EN_i,
-	-- 	PC_LATCH_EN     => PC_LATCH_EN_i,
-	-- 	WB_MUX_SEL      => WB_MUX_SEL_i,
-	-- 	RF_WE           => RF_WE_i
-	-- );
+    CU_I: dlx_cu generic map (
+		FUNC_SIZE =>  N_BIT_INSTR-OPCODE_SIZE-3*N_BIT_ADDR_RF,
+		OP_CODE_SIZE => OPCODE_SIZE,
+		IR_SIZE => IR_SIZE
+	) port map (
+		Clk             => CLk,
+		Rst             => Rst,
+		IR_IN           => IR,
+		HAZARD_SIG      => i_HAZARD_SIG_CU,
+		PIPLIN_IF_EN    => i_IR_LATCH_EN,
+		PC_EN			=> i_PC_LATCH_EN,
+		PIPLIN_ID_EN 	=> i_EN1,
+		JUMP_EN			=> i_JUMP_EN,
+		GT_CHECK		=> i_A_GT_B,
+		GE_CHECK		=> i_A_GE_B,
+		LT_CHECK		=> i_A_LT_B,
+		LE_CHECK		=> i_A_LE_B,
+		PIPLIN_EX_EN	=> i_EN2,
+		MUXA_SEL		=> i_S1,
+		MUXB_SEL		=> i_S2,
+		ALU_OPCODE		=> i_ALU_OP,
+		DRAM_WE			=> i_DATAMEM_WM,
+		DRAM_RE			=> i_DATAMEM_RM,
+		PIPLIN_MEM_EN 	=> i_EN3,
+		WB_MUX_SEL		=> i_S3,
+		PIPLIN_WB_EN	=> i_WF
+	);
 
     -- Instruction Ram Instantiation
     IRAM_I: IRAM port map (
