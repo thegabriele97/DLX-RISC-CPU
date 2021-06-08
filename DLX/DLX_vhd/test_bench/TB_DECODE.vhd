@@ -12,18 +12,22 @@ architecture test of tb_decode is
             N_BIT_INSTR:    integer := 32;
             N_BIT_ADDR_RF:  integer := 5;
             N_BIT_DATA:     integer := 32;            
-            OPCODE_SIZE:    integer := 6  -- Operation Code Size
+            OPCODE_SIZE:    integer := 6;  -- Operation Code Size
+            PC_SIZE      : integer := 32
         );
         port (
             CLK:        in std_logic;
             RST:        in std_logic;
             INSTR:      in std_logic_vector(N_BIT_INSTR - 1 downto 0);      -- Instruction
             ADD_WB:     in std_logic_vector(N_BIT_ADDR_RF-1 downto 0);      -- 
+            CPC:        in std_logic_vector(PC_SIZE-1 downto 0);
             HAZARD_SIG: out std_logic;
             ADD_RS1:    out std_logic_vector(N_BIT_ADDR_RF-1 downto 0);     -- Address 1 that goes in the register file
             ADD_RS2:    out std_logic_vector(N_BIT_ADDR_RF-1 downto 0);     -- Address 2 that goes in the register file
             ADD_WS1:    out std_logic_vector(N_BIT_ADDR_RF-1 downto 0);     -- Address for the write back that goes in the register file
-            IMM:       out std_logic_vector(N_BIT_DATA-1 downto 0)
+            IMM:        out std_logic_vector(N_BIT_DATA-1 downto 0);
+            ALL_ZEROS:  out std_logic;
+            NPC:        out std_logic_vector(PC_SIZE-1 downto 0)
         );
     end component;
     
@@ -31,11 +35,13 @@ architecture test of tb_decode is
     signal RST, HAZARD_SIG: std_logic;
     signal INSTR: std_logic_vector(32 - 1 downto 0);
     signal ADD_WB, ADD_RS1, ADD_RS2, ADD_WS1: std_logic_vector(5-1 downto 0); 
-    signal INP1, INP2: std_logic_vector(32-1 downto 0);
+    signal IMM: std_logic_vector(32-1 downto 0);
+    signal CPC, NPC: std_logic_vector(32-1 downto 0);
+    signal ALL_ZEROS: std_logic;
 
 begin
 
-    DUT: decode generic map(32, 5, 32, 6) port map(CLK, RST, INSTR, ADD_WB, HAZARD_SIG, ADD_RS1, ADD_RS2, ADD_WS1, INP1);
+    DUT: decode generic map(32, 5, 32, 6, 32) port map(CLK, RST, INSTR, ADD_WB, CPC, HAZARD_SIG, ADD_RS1, ADD_RS2, ADD_WS1, IMM, ALL_ZEROS, NPC);
 
     process
     begin
