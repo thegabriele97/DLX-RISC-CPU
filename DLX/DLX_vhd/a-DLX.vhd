@@ -97,21 +97,22 @@ architecture dlx_rtl of DLX is
 			PC_SIZE      : integer := 32
 		);
 		port (
-			CLK:        in std_logic;
-			RST:        in std_logic;
-			INSTR:      in std_logic_vector(N_BIT_INSTR - 1 downto 0);      -- Instruction
-			ADD_WB:     in std_logic_vector(N_BIT_ADDR_RF-1 downto 0);      -- Address for the write back
-			CPC:        in std_logic_vector(PC_SIZE-1 downto 0);            -- Current program counter
-			RD1:        in std_logic_vector(N_BIT_DATA-1 downto 0);         -- Data coming from the read port 1 of the Data Path
-			RD2:        in std_logic_vector(N_BIT_DATA-1 downto 0);         -- Data coming from the read port 2 of the Data Path
-			JUMP_EN:    in std_logic;
-			HAZARD_SIG: out std_logic;
-			ADD_RS1:    out std_logic_vector(N_BIT_ADDR_RF-1 downto 0);     -- Address 1 that goes in the register file
-			ADD_RS2:    out std_logic_vector(N_BIT_ADDR_RF-1 downto 0);     -- Address 2 that goes in the register file
-			ADD_WS1:    out std_logic_vector(N_BIT_ADDR_RF-1 downto 0);     -- Address for the write back that goes in the register file
-			IMM:        out std_logic_vector(N_BIT_DATA-1 downto 0);
-			NPC:        out std_logic_vector(PC_SIZE-1 downto 0);           -- Next program counter
-			PC_OVF:     out std_logic;                                      -- Signal for PC overflow
+			CLK:            in std_logic;
+			RST:            in std_logic;
+			INSTR:          in std_logic_vector(N_BIT_INSTR - 1 downto 0);      -- Instruction
+			ADD_WB:         in std_logic_vector(N_BIT_ADDR_RF-1 downto 0);      -- Address for the write back
+			CPC:            in std_logic_vector(PC_SIZE-1 downto 0);            -- Current program counter
+			RD1:            in std_logic_vector(N_BIT_DATA-1 downto 0);         -- Data coming from the read port 1 of the Data Path
+			RD2:            in std_logic_vector(N_BIT_DATA-1 downto 0);         -- Data coming from the read port 2 of the Data Path
+			JUMP_EN:        in std_logic;
+			ZERO_DATA_WB:   out std_logic;
+			HAZARD_SIG:     out std_logic;
+			ADD_RS1:        out std_logic_vector(N_BIT_ADDR_RF-1 downto 0);     -- Address 1 that goes in the register file
+			ADD_RS2:        out std_logic_vector(N_BIT_ADDR_RF-1 downto 0);     -- Address 2 that goes in the register file
+			ADD_WS1:        out std_logic_vector(N_BIT_ADDR_RF-1 downto 0);     -- Address for the write back that goes in the register file
+			IMM:            out std_logic_vector(N_BIT_DATA-1 downto 0);
+			NPC:            out std_logic_vector(PC_SIZE-1 downto 0);           -- Next program counter
+			PC_OVF:         out std_logic;                                      -- Signal for PC overflow
 	
 			-- Signal that goes to the control unit
 			a_le_b: out std_logic;
@@ -119,7 +120,7 @@ architecture dlx_rtl of DLX is
 			a_g_b: 	out std_logic;
 			a_ge_b: out std_logic;
 			a_e_b: 	out std_logic
-		);
+		);	
 	end component;
 
 
@@ -226,6 +227,7 @@ architecture dlx_rtl of DLX is
 
 	-- -- Control Unit
 	signal i_PC_OVF: std_logic;
+	signal i_ZERO_DATA_WB: std_logic;
 
 	-- -- Control Unit Bus signals
 	signal i_HAZARD_SIG_CU: std_logic;
@@ -378,6 +380,7 @@ begin  -- DLX
 		RD1 => i_RD1,
 		RD2 => i_RD2,
 		JUMP_EN => i_JUMP_EN,
+		ZERO_DATA_WB => i_ZERO_DATA_WB,
         HAZARD_SIG => i_HAZARD_SIG_CU, 
         ADD_RS1 => i_ADD_RS1,    
         ADD_RS2 => i_ADD_RS2,    

@@ -11,21 +11,22 @@ entity decode is
         PC_SIZE:        integer := 32
     );
     port (
-        CLK:        in std_logic;
-        RST:        in std_logic;
-        INSTR:      in std_logic_vector(N_BIT_INSTR - 1 downto 0);      -- Instruction
-        ADD_WB:     in std_logic_vector(N_BIT_ADDR_RF-1 downto 0);      -- Address for the write back
-        CPC:        in std_logic_vector(PC_SIZE-1 downto 0);            -- Current program counter
-        RD1:        in std_logic_vector(N_BIT_DATA-1 downto 0);         -- Data coming from the read port 1 of the Data Path
-        RD2:        in std_logic_vector(N_BIT_DATA-1 downto 0);         -- Data coming from the read port 2 of the Data Path
-        JUMP_EN:    in std_logic;
-        HAZARD_SIG: out std_logic;
-        ADD_RS1:    out std_logic_vector(N_BIT_ADDR_RF-1 downto 0);     -- Address 1 that goes in the register file
-        ADD_RS2:    out std_logic_vector(N_BIT_ADDR_RF-1 downto 0);     -- Address 2 that goes in the register file
-        ADD_WS1:    out std_logic_vector(N_BIT_ADDR_RF-1 downto 0);     -- Address for the write back that goes in the register file
-        IMM:        out std_logic_vector(N_BIT_DATA-1 downto 0);
-        NPC:        out std_logic_vector(PC_SIZE-1 downto 0);           -- Next program counter
-        PC_OVF:     out std_logic;                                      -- Signal for PC overflow
+        CLK:            in std_logic;
+        RST:            in std_logic;
+        INSTR:          in std_logic_vector(N_BIT_INSTR - 1 downto 0);      -- Instruction
+        ADD_WB:         in std_logic_vector(N_BIT_ADDR_RF-1 downto 0);      -- Address for the write back
+        CPC:            in std_logic_vector(PC_SIZE-1 downto 0);            -- Current program counter
+        RD1:            in std_logic_vector(N_BIT_DATA-1 downto 0);         -- Data coming from the read port 1 of the Data Path
+        RD2:            in std_logic_vector(N_BIT_DATA-1 downto 0);         -- Data coming from the read port 2 of the Data Path
+        JUMP_EN:        in std_logic;
+        ZERO_DATA_WB:   out std_logic;
+        HAZARD_SIG:     out std_logic;
+        ADD_RS1:        out std_logic_vector(N_BIT_ADDR_RF-1 downto 0);     -- Address 1 that goes in the register file
+        ADD_RS2:        out std_logic_vector(N_BIT_ADDR_RF-1 downto 0);     -- Address 2 that goes in the register file
+        ADD_WS1:        out std_logic_vector(N_BIT_ADDR_RF-1 downto 0);     -- Address for the write back that goes in the register file
+        IMM:            out std_logic_vector(N_BIT_DATA-1 downto 0);
+        NPC:            out std_logic_vector(PC_SIZE-1 downto 0);           -- Next program counter
+        PC_OVF:         out std_logic;                                      -- Signal for PC overflow
 
         -- Signal that goes to the control unit
         a_le_b: out std_logic;
@@ -40,7 +41,7 @@ architecture structural of decode is
 
     component hazard_table is
         generic (
-            N_REGS_LOG  : integer := 8
+            N_REGS_LOG: integer := 8
         );
         port (
             CLK:        in std_logic;
@@ -49,11 +50,10 @@ architecture structural of decode is
             WR2:        in std_logic;       -- Enable write 2 signal
             ADD_WR1:    in std_logic_vector(N_REGS_LOG-1 downto 0);     -- Address wirte 1 signal
             ADD_WR2:    in std_logic_vector(N_REGS_LOG-1 downto 0);     -- Address wirte 2 signal
-
-            ADD_CHECK1:  in std_logic_vector(N_REGS_LOG-1 downto 0);     -- Address reader 2 signal
+            ADD_CHECK1:  in std_logic_vector(N_REGS_LOG-1 downto 0);     -- Address reader 1 signal
             ADD_CHECK2:  in std_logic_vector(N_REGS_LOG-1 downto 0);     -- Address reader 2 signal
-
-            BUSY:       out std_logic
+            BUSY:       out std_logic;     -- Signal to identify that there is an hazard. When '1' there is an hazard, when '0' there are no hazard
+            ALL_ZEROS: out std_logic
         );
     end component;
 
@@ -190,7 +190,8 @@ begin
         ADD_WR2 => ADD_WB,
         ADD_CHECK1 => i_RS1,
         ADD_CHECK2 => i_RS2,
-        BUSY => HAZARD_SIG
+        BUSY => HAZARD_SIG,
+        ALL_ZEROS => ZERO_DATA_WB
     );
 
 

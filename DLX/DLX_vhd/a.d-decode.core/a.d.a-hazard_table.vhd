@@ -2,7 +2,9 @@ library IEEE;
 use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
 
--- This block is used to manage the data hazard and dependency. We have 2**N_REGS_LOG in which we put 1 if the register is BUSY and 0 if the register is not BUSY
+-- This block is used to manage the data hazard and dependency. 
+-- We have 2**N_REGS_LOG in which we put 1 if the register is BUSY and 0 if the register is not BUSY
+-- 
 -- For example this block manages this case:
 -- ADD R3, R2, R1
 -- ADD R5, R4, R3
@@ -23,15 +25,19 @@ entity hazard_table is
         ADD_WR2:    in std_logic_vector(N_REGS_LOG-1 downto 0);     -- Address wirte 2 signal
         ADD_CHECK1:  in std_logic_vector(N_REGS_LOG-1 downto 0);     -- Address reader 1 signal
         ADD_CHECK2:  in std_logic_vector(N_REGS_LOG-1 downto 0);     -- Address reader 2 signal
-        BUSY:       out std_logic     -- Signal to identify that there is an hazard. When '1' there is an hazard, when '0' there are no hazard
+        BUSY:       out std_logic;     -- Signal to identify that there is an hazard. When '1' there is an hazard, when '0' there are no hazard
+        ALL_ZEROS: out std_logic
     );
 end entity;
 
 
 
 architecture behavioural of hazard_table is
+
     TYPE Storage IS ARRAY(0 TO (2**N_REGS_LOG) - 1) OF std_logic;
     SIGNAL Table : Storage;
+
+    signal i_all_zeros: std_logic_vector(2**N_REGS_LOG-1 downto 0);
 
 BEGIN
 
@@ -55,5 +61,12 @@ BEGIN
             END IF;
         END IF;
     END PROCESS Wr;
+
+    i_all_zeros(0) <= Table(0);
+    ORGen: for i in 1 to (2**N_REGS_LOG)-1 generate
+      i_all_zeros(i) <= i_all_zeros(i-1) or Table(i);
+    end generate ORGen;
+
+    ALL_ZEROS <= not i_all_zeros(2**N_REGS_LOG - 1);
 
 end behavioural;
