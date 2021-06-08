@@ -34,8 +34,7 @@ architecture behavioural of hazard_table is
     TYPE Storage IS ARRAY(0 TO (2**N_REGS_LOG) - 1) OF std_logic;
     SIGNAL Table : Storage;
 
-    signal i_all_zeros: std_logic := '0';
-
+    signal i_all_zeros: std_logic_vector(2**N_REGS_LOG-1 downto 0);
 BEGIN
 
     Rd: PROCESS(ADD_CHECK1, ADD_CHECK2, Table)
@@ -59,10 +58,11 @@ BEGIN
         END IF;
     END PROCESS Wr;
 
-    ORGen: for i in 0 to (2**N_REGS_LOG)-1 generate
-        i_all_zeros <= i_all_zeros or Table(i);
+    i_all_zeros(0) <= Table(0);
+    ORGen: for i in 1 to (2**N_REGS_LOG)-1 generate
+      i_all_zeros(i) <= i_all_zeros(i-1) or Table(i);
     end generate ORGen;
 
-    ALL_ZEROS <= not(i_all_zeros);
+    ALL_ZEROS <= not i_all_zeros(2**N_REGS_LOG - 1);
 
 end behavioural;
