@@ -59,15 +59,15 @@ architecture dlx_cu_hw of dlx_cu is
 		
 
 	signal cw_memory: mem_array := (
-		"1101111000000000001", -- R type: IS IT CORRECT?
+		"1101111000000000101", -- R type: IS IT CORRECT?
 		"0000000000000000000", -- [VOID]
-		"1010000000000000000", -- J (0X02) instruction encoding corresponds to the address to this ROM
-		"1011011110000000001", -- JAL to be filled
+		"0110000000000000000", -- J (0X02) instruction encoding corresponds to the address to this ROM
+		"0111011110000000001", -- JAL to be filled
 		"1100000000000000000", -- BEQZ to be filled
 		"1100000000000000000", -- BNEZ
 		"1100000000000000000", -- 
 		"1100000000000000000",
-		"1101011110000000001", -- ADD i (0X08): FILL IT!!!
+		"1101011010000000101", -- ADD i (0X08): FILL IT!!!
 		"1100000000000000000",
 		"1100000000000000000",
 		"1100000000000000000",
@@ -131,6 +131,8 @@ begin
 	PIPLIN_WB_EN    <= CW_WB(CW_SIZE - 9 - alu_op_sig_t'length - 5);
 
 	CW_IF <= CW;
+	CW_ID <= CW_IF(CW_SIZE-1-3 downto 0);
+
 
 	-- process to pipeline control words
 	CW_PIPE : process (Clk)
@@ -140,7 +142,7 @@ begin
 		
 			if (Rst = '1') then
 				--CW_IF <= (others => '0');
-				CW_ID <= (others => '0');
+				--CW_ID <= (others => '0');
 				CW_EX <= (others => '0');
 				CW_MEM <= (others => '0');
 				CW_WB <= (others => '0');
@@ -155,7 +157,6 @@ begin
 				--	CW_IF <= cw_memory(21); -- 21 = 0x15 
 				--end if;
 
-				CW_ID <= CW_IF(CW_SIZE-1-3 downto 0);
 				CW_EX <= CW_ID(CW_SIZE-1-3-3 downto 0);
 				CW_MEM <= CW_EX(CW_SIZE-1-3-3-3-alu_op_sig_t'length downto 0);
 				CW_WB <= CW_MEM(CW_SIZE-1-3-3-3-alu_op_sig_t'length-3 downto 0);

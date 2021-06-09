@@ -112,7 +112,6 @@ architecture structural of decode is
 
     signal i_PC_OFFSET: std_logic_vector(PC_SIZE-1 downto 0); -- with sign ext -- TO THE ADDER NPC
     signal i_OFFSET_ADDER: std_logic_vector(PC_SIZE-1 downto 0); -- mux output, '4' or the passed immediate
-    signal i_JUMPEN: std_logic;
 
 begin
 
@@ -138,7 +137,6 @@ begin
 
         i_WR1 <= '1';
         i_WR2 <= '1';
-        i_JUMPEN <= '0';
 
         if (op_code = "000000") then -- R_TYPE
 
@@ -152,7 +150,6 @@ begin
         elsif (op_code = "000010") then -- J_TYPE: J
 
             i_WR1 <= '0'; -- Inhibition of i_WS1. It's 0 but we are not writing into it so no data hazard control
-            i_JUMPEN <= '1';
 
             i_RS1 <= (others => '0');
             i_RS2 <= (others => '0');
@@ -162,8 +159,6 @@ begin
             INP2 <= (others => '0');
 
         elsif (op_code = "000011") then -- J_TYPE: JAL
-
-            i_JUMPEN <= '1';
 
             -- JAL so we have to execute ADDI R31, R0, PC
             i_RS1 <= (others => '0'); -- R0
@@ -223,7 +218,7 @@ begin
     ) port map(
         a => i_PC_OFFSET,
         b => i_CONSTANT_PC_ADD,
-        s => i_JUMPEN,
+        s => JUMP_EN,
         y => i_OFFSET_ADDER
     );
 

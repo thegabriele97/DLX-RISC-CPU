@@ -225,6 +225,7 @@ architecture structural of DP is
     signal i_PIPLIN_IN1: std_logic_vector(N_BIT_DATA-1 downto 0); -- output of the register IN1 that goes into MUX_IN1_A
     signal i_PIPLIN_IN2: std_logic_vector(N_BIT_DATA-1 downto 0); -- output of the register IN2 that goes into MUX_IN1_B
     signal i_PIPLIN_WRB1: std_logic_vector(N_BIT_ADDR_RF-1 downto 0);
+    signal i_PIPLIN_WRB2: std_logic_vector(N_BIT_ADDR_RF-1 downto 0);
     
     
     --
@@ -242,6 +243,7 @@ architecture structural of DP is
     --
     -- PIPELINE STAGE 3
     --
+    signal i_REG_MEM_ALUOUT: std_logic_vector(N_BIT_DATA-1 downto 0);
     signal i_MUX_STAGE3_REG_OUT: std_logic_vector(N_BIT_DATA-1 downto 0);
     signal i_REG_DATAOUT: std_logic_vector(N_BIT_DATA-1 downto 0);
 
@@ -444,7 +446,20 @@ begin
     );
 
 
-        
+    -- 
+    -- REGISTER MEM STAGE - ALU OUT --
+    --
+    REG_MEM_ALUOUT: reg_generic generic map(
+        N => N_BIT_DATA,
+        RSTVAL => 0
+    ) port map(
+        D => i_REG_ALU_OUT_ADDRESS_DATAMEM,   
+        Q => i_REG_MEM_ALUOUT,                  -- TODO: Check if correct
+        Clk => Clk,       
+        Rst => Rst,     
+        Enable => EN3
+    );
+
     --
     --  MUX STAGE 3
     --
@@ -455,11 +470,10 @@ begin
         NBIT => N_BIT_DATA
     ) port map(
         a => i_REG_ME_DATA_DATAMEM,
-        b => i_REG_ALU_OUT_ADDRESS_DATAMEM,
+        b => i_REG_MEM_ALUOUT,
         s => S3,
         y => i_MUX_STAGE3_REG_OUT
     );
-
 
     -- 
     -- REGISTER OUT --
@@ -498,10 +512,24 @@ begin
         RSTVAL => 0
     ) port map(
         D => i_PIPLIN_WRB1,   
-        Q => i_RF_WS,                  
+        Q => i_PIPLIN_WRB2,                  
         Clk => Clk,
         Rst => Rst,
         Enable => EN2
+    );
+
+        -- 
+    -- WRB 2 --
+    --
+    WRB3: reg_generic generic map(
+        N => N_BIT_ADDR_RF,
+        RSTVAL => 0
+    ) port map(
+        D => i_PIPLIN_WRB2,   
+        Q => i_RF_WS,                  
+        Clk => Clk,
+        Rst => Rst,
+        Enable => EN3
     );
 
 

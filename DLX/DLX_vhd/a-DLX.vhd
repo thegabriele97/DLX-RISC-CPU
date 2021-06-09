@@ -7,7 +7,7 @@ entity DLX is
 	generic (
 		IR_SIZE      : integer := 32;       -- Instruction Register Size
 		PC_SIZE      : integer := 32;       -- Program Counter Size
-		RAM_DEPTH	 : integer := 10
+		RAM_DEPTH	 : integer := 10		-- Number of bits for RAM
 	);       -- ALU_OPC_SIZE if explicit ALU Op Code Word Size
 	port (
 		Clk : in std_logic;
@@ -311,10 +311,12 @@ begin  -- DLX
     IR_P: process (Clk, Rst)
     begin  -- process IR_P
 		if Rst = '1' then
-			IR <= (others => '0');
+			IR <= x"54000000";
 		elsif rising_edge(Clk) then  -- rising clock edge
 			if (i_IR_LATCH_EN = '1') then
 				IR <= IRam_DOut;
+			elsif (i_IR_LATCH_EN = '0') then
+				IR <= x"54000000";
 			end if;
 		end if;
     end process IR_P;
@@ -368,7 +370,7 @@ begin  -- DLX
 
     -- Instruction Ram Instantiation
     IRAM_I: IRAM generic map(
-		RAM_DEPTH => RAM_DEPTH,
+		RAM_DEPTH => 2**RAM_DEPTH,
 		I_SIZE => IR_SIZE
 	) port map (
 		Rst  => Rst,

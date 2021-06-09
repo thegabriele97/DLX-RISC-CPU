@@ -31,7 +31,7 @@ begin
 
     -- instance of DLX
 	U1: DLX
-	Generic Map (SIZE_IR, SIZE_PC, 20) -- SIZE_ALU_OPC)   
+	Generic Map (SIZE_IR, SIZE_PC, 10) -- SIZE_ALU_OPC)   
 	Port Map (Clock, Reset);
 	
 
