@@ -4,10 +4,10 @@
 ## Domande LAB 01
  - Chiedere se il mux generico va fatto con N livelli di mux oppure con i generic in AND/OR/IV - Generate with for
  - Chiedere se nella nand si può togliere la seconda achitettura - No
- 
+
  - Chiedere se nel registro bisogna mettere il delay - No
  - Chiedere se nel registro bisogna mettere il segnale enable - Up to you
- 
+
  - Chiedere se bisogna togliere completamente i delay (anche dai generic map) nella fase di sintesi - Only in the VHDL code
  - Chiedere se va bene utilizzare la numeric_std al posto della std_logic_unsigned e della std_logic_arith - Ok
  - Chiedere se lo shift va gestito anche per valori > N - Yes
@@ -57,3 +57,10 @@
 - Hold time non rispettatto, il segnale cambia prima del clock (es 5.2 hold time violation check)
 - Percentage variation between HS and LL for the X1 and the X8 cases. All measures?
 - Com'è la struttura della delivery? Dato che non abbiamo iù sim/syn
+
+
+
+
+
+![](./Documentazione/Control_Word.pdf)
+
