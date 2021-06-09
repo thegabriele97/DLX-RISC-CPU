@@ -14,7 +14,7 @@ architecture TEST of tb_dlx is
     signal Clock: std_logic := '0';
     signal Reset: std_logic := '1';
 
-    component DLX
+    component DLX is
     	generic (
         	IR_SIZE      : integer := 32;       -- Instruction Register Size
         	PC_SIZE      : integer := 32;       -- Program Counter Size
@@ -31,7 +31,7 @@ begin
 
     -- instance of DLX
 	U1: DLX
-	Generic Map (SIZE_IR, SIZE_PC, 10) -- SIZE_ALU_OPC)   
+	Generic Map (SIZE_IR, SIZE_PC, 20) -- SIZE_ALU_OPC)   
 	Port Map (Clock, Reset);
 	
 

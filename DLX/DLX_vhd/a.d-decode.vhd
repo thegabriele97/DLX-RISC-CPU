@@ -24,7 +24,8 @@ entity decode is
         ADD_RS1:        out std_logic_vector(N_BIT_ADDR_RF-1 downto 0);     -- Address 1 that goes in the register file
         ADD_RS2:        out std_logic_vector(N_BIT_ADDR_RF-1 downto 0);     -- Address 2 that goes in the register file
         ADD_WS1:        out std_logic_vector(N_BIT_ADDR_RF-1 downto 0);     -- Address for the write back that goes in the register file
-        IMM:            out std_logic_vector(N_BIT_DATA-1 downto 0);
+        INP1:           out std_logic_vector(N_BIT_DATA-1 downto 0);
+        INP2:           out std_logic_vector(N_BIT_DATA-1 downto 0);
         NPC:            out std_logic_vector(PC_SIZE-1 downto 0);           -- Next program counter
         PC_OVF:         out std_logic;                                      -- Signal for PC overflow
 
@@ -111,6 +112,7 @@ architecture structural of decode is
 
     signal i_PC_OFFSET: std_logic_vector(PC_SIZE-1 downto 0); -- with sign ext -- TO THE ADDER NPC
     signal i_OFFSET_ADDER: std_logic_vector(PC_SIZE-1 downto 0); -- mux output, '4' or the passed immediate
+    signal i_JUMPEN: std_logic;
 
 begin
 
@@ -118,13 +120,15 @@ begin
     ADD_RS2 <= i_RS2;
     ADD_WS1 <= i_WS1;
 
-
+    
     op_code <= INSTR(N_BIT_INSTR-1 downto N_BIT_INSTR-OPCODE_SIZE);
-
+    
     process(INSTR)
     begin
-
+        
+        --i_PC_OFFSET(i_PC_OFFSET'length-1 downto N_BIT_INSTR-OPCODE_SIZE) <= (others => INSTR(N_BIT_INSTR-OPCODE_SIZE-1)); -- sign extension
         i_PC_OFFSET <= (others => INSTR(N_BIT_INSTR-OPCODE_SIZE-1)); -- sign extension
+        --i_PC_OFFSET(N_BIT_INSTR-OPCODE_SIZE-1 downto 0) <= std_logic_vector(unsigned(INSTR(N_BIT_INSTR-OPCODE_SIZE-1 downto 0)) + 0);
         i_PC_OFFSET(N_BIT_INSTR-OPCODE_SIZE-1 downto 0) <= INSTR(N_BIT_INSTR-OPCODE_SIZE-1 downto 0);
 
     end process;
@@ -134,6 +138,7 @@ begin
 
         i_WR1 <= '1';
         i_WR2 <= '1';
+        i_JUMPEN <= '0';
 
         if (op_code = "000000") then -- R_TYPE
 
@@ -141,20 +146,24 @@ begin
             i_RS2 <= INSTR(N_BIT_INSTR-OPCODE_SIZE-N_BIT_ADDR_RF-1 downto N_BIT_INSTR-OPCODE_SIZE-2*N_BIT_ADDR_RF);
             i_WS1 <= INSTR(N_BIT_INSTR-OPCODE_SIZE-2*N_BIT_ADDR_RF-1 downto N_BIT_INSTR-OPCODE_SIZE-3*N_BIT_ADDR_RF);     -- RD field
 
-            IMM <= (others => '0');
+            INP1 <= (others => '0');
+            INP2 <= (others => '0');
 
         elsif (op_code = "000010") then -- J_TYPE: J
 
             i_WR1 <= '0'; -- Inhibition of i_WS1. It's 0 but we are not writing into it so no data hazard control
+            i_JUMPEN <= '1';
 
             i_RS1 <= (others => '0');
             i_RS2 <= (others => '0');
             i_WS1 <= (others => '0');
 
-            IMM <= (others => '0'); -- The new PC is computed by the DECODE, the EXEC stage won't be executed
-
+            INP1 <= (others => '0'); -- The new PC is computed by the DECODE, the EXEC stage won't be executed
+            INP2 <= (others => '0');
 
         elsif (op_code = "000011") then -- J_TYPE: JAL
+
+            i_JUMPEN <= '1';
 
             -- JAL so we have to execute ADDI R31, R0, PC
             i_RS1 <= (others => '0'); -- R0
@@ -162,8 +171,8 @@ begin
             i_WS1 <= "11111"; -- R31
 
             -- The IMM is the CPC that will be written into R31
-            IMM <= (others => '0');
-            IMM <= CPC;
+            INP1 <= CPC;
+            INP2 <= std_logic_vector(TO_UNSIGNED(4, INP2'length));
 
         else -- I_TYPE
 
@@ -171,8 +180,10 @@ begin
             i_RS2 <= (OTHERS => '0');
             i_WS1 <= INSTR(N_BIT_INSTR-OPCODE_SIZE-N_BIT_ADDR_RF-1 downto N_BIT_INSTR-OPCODE_SIZE-2*N_BIT_ADDR_RF);
 
-            IMM <= (others => INSTR(N_BIT_INSTR-OPCODE_SIZE-2*N_BIT_ADDR_RF-1));
-            IMM(N_BIT_INSTR-OPCODE_SIZE-2*N_BIT_ADDR_RF-1 downto 0) <= INSTR(N_BIT_INSTR-OPCODE_SIZE-2*N_BIT_ADDR_RF-1 downto 0);
+            INP1 <= (others => '0');
+            
+            INP2 <= (others => INSTR(N_BIT_INSTR-OPCODE_SIZE-2*N_BIT_ADDR_RF-1));
+            INP2(N_BIT_INSTR-OPCODE_SIZE-2*N_BIT_ADDR_RF-1 downto 0) <= INSTR(N_BIT_INSTR-OPCODE_SIZE-2*N_BIT_ADDR_RF-1 downto 0);
 
         end if;
 
@@ -212,7 +223,7 @@ begin
     ) port map(
         a => i_PC_OFFSET,
         b => i_CONSTANT_PC_ADD,
-        s => JUMP_EN,
+        s => i_JUMPEN,
         y => i_OFFSET_ADDER
     );
 

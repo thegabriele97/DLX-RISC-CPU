@@ -11,8 +11,8 @@ entity DLX is
 	);       -- ALU_OPC_SIZE if explicit ALU Op Code Word Size
 	port (
 		Clk : in std_logic;
-		Rst : in std_logic
-	);                -- Active Low
+		Rst : in std_logic		-- Active high
+	);                
 end DLX;
 
 
@@ -31,9 +31,10 @@ architecture dlx_rtl of DLX is
   
   	--Instruction Ram
 	component IRAM
-		--     generic (
-		--       RAM_DEPTH : integer;
-		--       I_SIZE    : integer);
+		generic (
+			RAM_DEPTH : integer := 48;
+			I_SIZE : integer := 32
+		);
 	    port (
 		    Rst  : in  std_logic;
 		    Addr : in  std_logic_vector(PC_SIZE - 1 downto 0);
@@ -84,7 +85,10 @@ architecture dlx_rtl of DLX is
 
 			-- WB Control signals
 			WB_MUX_SEL 		: out std_logic; 	-- Write Back MUX Sel
-			PIPLIN_WB_EN    : out std_logic 	-- Register File Write Enable
+			PIPLIN_WB_EN    : out std_logic; 	-- Register File Write Enable
+
+			RF_RD1_EN		: out std_logic;
+			RF_RD2_EN		: out std_logic
 		);
     end component;
   
@@ -110,7 +114,8 @@ architecture dlx_rtl of DLX is
 			ADD_RS1:        out std_logic_vector(N_BIT_ADDR_RF-1 downto 0);     -- Address 1 that goes in the register file
 			ADD_RS2:        out std_logic_vector(N_BIT_ADDR_RF-1 downto 0);     -- Address 2 that goes in the register file
 			ADD_WS1:        out std_logic_vector(N_BIT_ADDR_RF-1 downto 0);     -- Address for the write back that goes in the register file
-			IMM:            out std_logic_vector(N_BIT_DATA-1 downto 0);
+			INP1:           out std_logic_vector(N_BIT_DATA-1 downto 0);
+        	INP2:           out std_logic_vector(N_BIT_DATA-1 downto 0);
 			NPC:            out std_logic_vector(PC_SIZE-1 downto 0);           -- Next program counter
 			PC_OVF:         out std_logic;                                      -- Signal for PC overflow
 	
@@ -223,7 +228,8 @@ architecture dlx_rtl of DLX is
 	signal i_ADD_RS1: std_logic_vector(N_BIT_ADDR_RF-1 downto 0);
 	signal i_ADD_RS2: std_logic_vector(N_BIT_ADDR_RF-1 downto 0);
 	signal i_ADD_WS1: std_logic_vector(N_BIT_ADDR_RF-1 downto 0);
-	signal i_IMM: std_logic_vector(IR_SIZE - 1 downto 0);
+	signal i_INP1: std_logic_vector(IR_SIZE - 1 downto 0);
+	signal i_INP2: std_logic_vector(IR_SIZE - 1 downto 0);
 
 	-- -- Control Unit
 	signal i_PC_OVF: std_logic;
@@ -285,8 +291,8 @@ architecture dlx_rtl of DLX is
 begin  -- DLX
 
 	-- TODO: to remove
-	i_IR_LATCH_EN <= '1';
-	i_PC_LATCH_EN <= '1';
+	-- i_IR_LATCH_EN <= '1';
+	-- i_PC_LATCH_EN <= '1';
 
     -- This is the input to program counter: currently zero 
     -- so no uptade of PC happens
@@ -355,11 +361,16 @@ begin  -- DLX
 		DRAM_RE			=> i_DATAMEM_RM,
 		PIPLIN_MEM_EN 	=> i_EN3,
 		WB_MUX_SEL		=> i_S3,
-		PIPLIN_WB_EN	=> i_WF
+		PIPLIN_WB_EN	=> i_WF,
+		RF_RD1_EN		=> i_RF1,
+		RF_RD2_EN		=> i_RF2
 	);
 
     -- Instruction Ram Instantiation
-    IRAM_I: IRAM port map (
+    IRAM_I: IRAM generic map(
+		RAM_DEPTH => RAM_DEPTH,
+		I_SIZE => IR_SIZE
+	) port map (
 		Rst  => Rst,
 		Addr => PC,
 		Dout => IRam_DOut
@@ -385,7 +396,8 @@ begin  -- DLX
         ADD_RS1 => i_ADD_RS1,    
         ADD_RS2 => i_ADD_RS2,    
         ADD_WS1 => i_ADD_WS1,    
-        IMM => i_IMM,
+        INP1 => i_INP1,
+        INP2 => i_INP2,
 		NPC => PC_BUS,
 		PC_OVF => i_PC_OVF,
 		a_le_b => i_A_LE_B,
@@ -428,8 +440,8 @@ begin  -- DLX
         RET => '0', -- TODO
         FILL => i_FILL,
         SPILL => i_SPILL,
-        INP1 => i_IMM,
-        INP2 => i_IMM,
+        INP1 => i_INP1,
+        INP2 => i_INP2,
         S1 => i_S1,
         S2 => i_S2,
         ALU_OP => i_ALU_OP,

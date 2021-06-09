@@ -43,41 +43,44 @@ entity dlx_cu is
 
 		-- WB Control signals
 		WB_MUX_SEL 		: out std_logic; 	-- Write Back MUX Sel
-		PIPLIN_WB_EN    : out std_logic 	-- Register File Write Enable
+		PIPLIN_WB_EN    : out std_logic; 	-- Register File Write Enable
+
+		RF_RD1_EN		: out std_logic;
+		RF_RD2_EN		: out std_logic
 	);
 end dlx_cu;
 
 architecture dlx_cu_hw of dlx_cu is
 	
 	constant MICROCODE_MEM_SIZE: integer := 22; -- Microcode Memory Size
-	constant CW_SIZE: integer := (12 + alu_op_sig_t'length); -- Control Word Size
+	constant CW_SIZE: integer := (14 + alu_op_sig_t'length); -- Control Word Size
 	
 	type mem_array is array (0 to MICROCODE_MEM_SIZE - 1) of std_logic_vector(CW_SIZE-1 downto 0);
 		
 
 	signal cw_memory: mem_array := (
-		"11111100010000111", -- R type: IS IT CORRECT?
-		"11000000000000000", -- [VOID]
-		"11111011111001100", -- J (0X02) instruction encoding corresponds to the address to this ROM
-		"11000000000000000", -- JAL to be filled
-		"11000000000000000", -- BEQZ to be filled
-		"11000000000000000", -- BNEZ
-		"11000000000000000", -- 
-		"11000000000000000",
-		"11000000000000000", -- ADD i (0X08): FILL IT!!!
-		"11000000000000000",
-		"11000000000000000",
-		"11000000000000000",
-		"11000000000000000",
-		"11000000000000000",
-		"11000000000000000",
-		"11000000000000000",
-		"11000000000000000",
-		"11000000000000000",
-		"11000000000000000",
-		"11000000000000000",
-		"11000000000000000",
-		"11000000000000000"	-- NOP (0x15)
+		"1101111000000000001", -- R type: IS IT CORRECT?
+		"0000000000000000000", -- [VOID]
+		"1010000000000000000", -- J (0X02) instruction encoding corresponds to the address to this ROM
+		"1011011110000000001", -- JAL to be filled
+		"1100000000000000000", -- BEQZ to be filled
+		"1100000000000000000", -- BNEZ
+		"1100000000000000000", -- 
+		"1100000000000000000",
+		"1101011110000000001", -- ADD i (0X08): FILL IT!!!
+		"1100000000000000000",
+		"1100000000000000000",
+		"1100000000000000000",
+		"1100000000000000000",
+		"1100000000000000000",
+		"1100000000000000000",
+		"1100000000000000000",
+		"1100000000000000000",
+		"1100000000000000000",
+		"1100000000000000000",
+		"1100000000000000000",
+		"1100000000000000000",
+		"1100000000000000000"	-- NOP (0x15)
 	);
 	
 	
@@ -86,10 +89,10 @@ architecture dlx_cu_hw of dlx_cu is
 	
 	signal CW  		: std_logic_vector(CW_SIZE-1 downto 0); 		-- full control word read from cw_mem
 	signal CW_IF 	: std_logic_vector(CW_SIZE-1 downto 0); 		-- first stage
-	signal CW_ID 	: std_logic_vector(CW_SIZE-1-2 downto 0); 	-- second stage
-	signal CW_EX 	: std_logic_vector(CW_SIZE-1-4 downto 0); 	-- third stage
-	signal CW_MEM 	: std_logic_vector(CW_SIZE-1-8 downto 0); 	-- fourth stage
-	signal CW_WB 	: std_logic_vector(CW_SIZE-1-13 downto 0); 	-- fifth stage
+	signal CW_ID 	: std_logic_vector(CW_SIZE-1-3 downto 0); 	-- second stage
+	signal CW_EX 	: std_logic_vector(CW_SIZE-1-6 downto 0); 	-- third stage
+	signal CW_MEM 	: std_logic_vector(CW_SIZE-1-6-alu_op_sig_t'length-3 downto 0); 	-- fourth stage
+	signal CW_WB 	: std_logic_vector(CW_SIZE-1-6-alu_op_sig_t'length-6 downto 0); 	-- fifth stage
 
 	signal aluOpcode_i : alu_op_sig_t := ALU_ADD; -- alu_op_sig_t defined in package
 	signal aluOpcode1  : alu_op_sig_t := ALU_ADD;
@@ -106,24 +109,28 @@ begin
 	-- IF control Signals
 	PIPLIN_IF_EN 	<= CW_IF(CW_SIZE - 1);
 	PC_EN 			<= CW_IF(CW_SIZE - 2);
+	-- JUMP_EN
 
 	-- ID Control Signals
-	PIPLIN_ID_EN	<= CW_ID(CW_SIZE - 3);
+	RF_RD1_EN		<= CW_ID(CW_SIZE - 4);
+	RF_RD2_EN		<= CW_ID(CW_SIZE - 5);
+	PIPLIN_ID_EN	<= CW_ID(CW_SIZE - 6);
 
 	-- EX control Signals
-	PIPLIN_EX_EN 	<= CW_EX(CW_SIZE - 5);
-	MUXA_SEL      	<= CW_EX(CW_SIZE - 6);
-	MUXB_SEL      	<= CW_EX(CW_SIZE - 7);
+	PIPLIN_EX_EN 	<= CW_EX(CW_SIZE - 7);
+	MUXA_SEL      	<= CW_EX(CW_SIZE - 8);
+	MUXB_SEL      	<= CW_EX(CW_SIZE - 9);
 
 	-- MEM control Signals
-	DRAM_WE      	<= CW_MEM(CW_SIZE - 7 - alu_op_sig_t'length - 1);
-	DRAM_RE	    	<= CW_MEM(CW_SIZE - 7 - alu_op_sig_t'length - 2);
-	PIPLIN_MEM_EN 	<= CW_MEM(CW_SIZE - 7 - alu_op_sig_t'length - 3);
+	DRAM_WE      	<= CW_MEM(CW_SIZE - 9 - alu_op_sig_t'length - 1);
+	DRAM_RE	    	<= CW_MEM(CW_SIZE - 9 - alu_op_sig_t'length - 2);
+	PIPLIN_MEM_EN 	<= CW_MEM(CW_SIZE - 9 - alu_op_sig_t'length - 3);
 
 	-- WB control Signals
-	WB_MUX_SEL 		<= CW_WB(CW_SIZE - 7 - alu_op_sig_t'length - 4);
-	PIPLIN_WB_EN    <= CW_WB(CW_SIZE - 7 - alu_op_sig_t'length - 5);
+	WB_MUX_SEL 		<= CW_WB(CW_SIZE - 9 - alu_op_sig_t'length - 4);
+	PIPLIN_WB_EN    <= CW_WB(CW_SIZE - 9 - alu_op_sig_t'length - 5);
 
+	CW_IF <= CW;
 
 	-- process to pipeline control words
 	CW_PIPE : process (Clk)
@@ -132,7 +139,7 @@ begin
 		if (rising_edge(Clk)) then
 		
 			if (Rst = '1') then
-				CW_IF <= (others => '0');
+				--CW_IF <= (others => '0');
 				CW_ID <= (others => '0');
 				CW_EX <= (others => '0');
 				CW_MEM <= (others => '0');
@@ -143,15 +150,15 @@ begin
 				aluOpcode3 <= ALU_ADD;
 			else
 				
-				CW_IF <= CW;
-				if (HAZARD_SIG = '1') then -- If there is a data hazard, we insert a NOP in the pipeline
-					CW_IF <= cw_memory(21); -- 21 = 0x15 
-				end if;
+				
+				--if (HAZARD_SIG = '1') then -- If there is a data hazard, we insert a NOP in the pipeline
+				--	CW_IF <= cw_memory(21); -- 21 = 0x15 
+				--end if;
 
-				CW_ID <= CW_IF(CW_SIZE-1-2 downto 0);
-				CW_EX <= CW_ID(CW_SIZE-1-4 downto 0);
-				CW_MEM <= CW_EX(CW_SIZE-1-3-alu_op_sig_t'length downto 0);
-				CW_WB <= CW_MEM(CW_SIZE-1-5-alu_op_sig_t'length-3 downto 0);
+				CW_ID <= CW_IF(CW_SIZE-1-3 downto 0);
+				CW_EX <= CW_ID(CW_SIZE-1-3-3 downto 0);
+				CW_MEM <= CW_EX(CW_SIZE-1-3-3-3-alu_op_sig_t'length downto 0);
+				CW_WB <= CW_MEM(CW_SIZE-1-3-3-3-alu_op_sig_t'length-3 downto 0);
 
 				aluOpcode1 <= aluOpcode_i; -- IF 
 				aluOpcode2 <= aluOpcode1;  -- ID
@@ -200,10 +207,10 @@ begin
 	end process ALU_OP_CODE_P;
 
 	
-	JBRANCH_CTRL: process(IR_opcode, CW_ID)
+	JBRANCH_CTRL: process(IR_opcode, CW_IF)
 	begin
 
-		JUMP_EN <= CW_ID(CW_SIZE - 4);
+		JUMP_EN <= CW_IF(CW_SIZE - 3);
 		-- Do things when OPCODE == SOME BRANCH INSTRUCTION
 		-- if OPCODE == BNEZ AND GE = '1' then JUMP_EN = '1' else '0';
 		-- and so on
