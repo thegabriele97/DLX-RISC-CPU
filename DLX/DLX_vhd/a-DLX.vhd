@@ -62,6 +62,7 @@ architecture dlx_rtl of DLX is
 
 			-- IF Control Signals
 			PIPLIN_IF_EN  	: out std_logic; -- Instruction Register Latch Enable
+			IF_STALL		: out std_logic;
 			PC_EN 			: out std_logic;
 
 			-- ID Control Signals
@@ -108,6 +109,8 @@ architecture dlx_rtl of DLX is
 			CPC:            in std_logic_vector(PC_SIZE-1 downto 0);            -- Current program counter
 			RD1:            in std_logic_vector(N_BIT_DATA-1 downto 0);         -- Data coming from the read port 1 of the Data Path
 			RD2:            in std_logic_vector(N_BIT_DATA-1 downto 0);         -- Data coming from the read port 2 of the Data Path
+			WB_EN:          in std_logic;  
+			PIPLIN_ID_EN:   in std_logic;
 			JUMP_EN:        in std_logic;
 			ZERO_DATA_WB:   out std_logic;
 			HAZARD_SIG:     out std_logic;
@@ -236,10 +239,11 @@ architecture dlx_rtl of DLX is
 	signal i_ZERO_DATA_WB: std_logic;
 
 	-- -- Control Unit Bus signals
-	signal i_HAZARD_SIG_CU: std_logic;
 	signal i_ALU_OP: std_logic_vector(ALU_ADD'length-1 downto 0);
+	signal i_HAZARD_SIG_CU: std_logic;
 	signal i_ALU_COUT: std_logic;
 	signal i_IR_LATCH_EN: std_logic;
+	signal i_IR_STALL: std_logic;
 	signal i_PC_LATCH_EN: std_logic;
 
 	-- -- Pipeline Enable Signals
@@ -313,11 +317,16 @@ begin  -- DLX
 		if Rst = '1' then
 			IR <= x"54000000";
 		elsif rising_edge(Clk) then  -- rising clock edge
+
 			if (i_IR_LATCH_EN = '1') then
+				
 				IR <= IRam_DOut;
-			elsif (i_IR_LATCH_EN = '0') then
-				IR <= x"54000000";
+				if (i_IR_STALL = '1') then
+					IR <= x"54000000";		-- NOP
+				end if;
+			
 			end if;
+
 		end if;
     end process IR_P;
 
@@ -348,6 +357,7 @@ begin  -- DLX
 		IR_IN           => IR,
 		HAZARD_SIG      => i_HAZARD_SIG_CU,
 		PIPLIN_IF_EN    => i_IR_LATCH_EN,
+		IF_STALL		=> i_IR_STALL,
 		PC_EN			=> i_PC_LATCH_EN,
 		PIPLIN_ID_EN 	=> i_EN1,
 		JUMP_EN			=> i_JUMP_EN,
@@ -392,6 +402,8 @@ begin  -- DLX
 		CPC => PC,
 		RD1 => i_RD1,
 		RD2 => i_RD2,
+		WB_EN => i_WF,
+		PIPLIN_ID_EN => i_EN1,
 		JUMP_EN => i_JUMP_EN,
 		ZERO_DATA_WB => i_ZERO_DATA_WB,
         HAZARD_SIG => i_HAZARD_SIG_CU, 
@@ -432,7 +444,7 @@ begin  -- DLX
 		RD2 => i_RD2,
         RF1 => i_RF1,
         RF2 => i_RF2,
-        WF => i_WF,
+        WF => i_WF,									
         RF_BUS_TOMEM => i_RF_BUS_TOMEM,
         RF_BUS_FROMEM => i_RF_BUS_FROMEM,
         RF_MEM_ADDR => i_RF_MEM_ADDR,

@@ -20,6 +20,7 @@ entity dlx_cu is
 
 		-- IF Control Signals
 		PIPLIN_IF_EN  	: out std_logic; -- Instruction Register Latch Enable
+		IF_STALL		: out std_logic;
 		PC_EN 			: out std_logic;
 
 		-- ID Control Signals
@@ -53,34 +54,38 @@ end dlx_cu;
 architecture dlx_cu_hw of dlx_cu is
 	
 	constant MICROCODE_MEM_SIZE: integer := 22; -- Microcode Memory Size
-	constant CW_SIZE: integer := (14 + alu_op_sig_t'length); -- Control Word Size
+	constant CW_SIZE: integer := (15 + alu_op_sig_t'length); -- Control Word Size
 	
 	type mem_array is array (0 to MICROCODE_MEM_SIZE - 1) of std_logic_vector(CW_SIZE-1 downto 0);
 		
 
 	signal cw_memory: mem_array := (
-		"1101111000000000101", -- R type: IS IT CORRECT?
-		"0000000000000000000", -- [VOID]
-		"0110000000000000000", -- J (0X02) instruction encoding corresponds to the address to this ROM
-		"0111011110000000001", -- JAL to be filled
-		"1100000000000000000", -- BEQZ to be filled
-		"1100000000000000000", -- BNEZ
-		"1100000000000000000", -- 
-		"1100000000000000000",
-		"1101011010000000101", -- ADD i (0X08): FILL IT!!!
-		"1100000000000000000",
-		"1100000000000000000",
-		"1100000000000000000",
-		"1100000000000000000",
-		"1100000000000000000",
-		"1100000000000000000",
-		"1100000000000000000",
-		"1100000000000000000",
-		"1100000000000000000",
-		"1100000000000000000",
-		"1100000000000000000",
-		"1100000000000000000",
-		"1100000000000000000"	-- NOP (0x15)
+	--  "FSPJ12DXAB-----WRMCK"	
+		"10101111000000000101", -- R type: IS IT CORRECT?
+	--  "FSPJ12DXAB-----WRMCK"	
+		"00000000000000000000", -- [VOID]
+	--  "FSPJ12DXAB-----WRMCK"	
+		"11110000000000000000", -- J (0X02) instruction encoding corresponds to the address to this ROM
+	--  "FSPJ12DXAB-----WRMCK"	
+		"11111011010000000001", -- JAL to be filled
+		"10100000000000000000", -- BEQZ to be filled
+		"10100000000000000000", -- BNEZ
+		"10100000000000000000", -- 
+		"10100000000000000000",
+		"10101011010000000101", -- ADD i (0X08): FILL IT!!!
+		"10100000000000000000",
+		"10100000000000000000",
+		"10100000000000000000",
+		"10100000000000000000",
+		"10100000000000000000",
+		"10100000000000000000",
+		"10100000000000000000",
+		"10100000000000000000",
+		"10100000000000000000",
+		"10100000000000000000",
+		"10100000000000000000",
+		"10100000000000000000",
+		"10100000000000000000"	-- NOP (0x15)
 	);
 	
 	
@@ -89,10 +94,10 @@ architecture dlx_cu_hw of dlx_cu is
 	
 	signal CW  		: std_logic_vector(CW_SIZE-1 downto 0); 		-- full control word read from cw_mem
 	signal CW_IF 	: std_logic_vector(CW_SIZE-1 downto 0); 		-- first stage
-	signal CW_ID 	: std_logic_vector(CW_SIZE-1-3 downto 0); 	-- second stage
-	signal CW_EX 	: std_logic_vector(CW_SIZE-1-6 downto 0); 	-- third stage
-	signal CW_MEM 	: std_logic_vector(CW_SIZE-1-6-alu_op_sig_t'length-3 downto 0); 	-- fourth stage
-	signal CW_WB 	: std_logic_vector(CW_SIZE-1-6-alu_op_sig_t'length-6 downto 0); 	-- fifth stage
+	signal CW_ID 	: std_logic_vector(CW_SIZE-1-4 downto 0); 	-- second stage
+	signal CW_EX 	: std_logic_vector(CW_SIZE-1-7 downto 0); 	-- third stage
+	signal CW_MEM 	: std_logic_vector(CW_SIZE-1-7-alu_op_sig_t'length-3 downto 0); 	-- fourth stage
+	signal CW_WB 	: std_logic_vector(CW_SIZE-1-7-alu_op_sig_t'length-6 downto 0); 	-- fifth stage
 
 	signal aluOpcode_i : alu_op_sig_t := ALU_ADD; -- alu_op_sig_t defined in package
 	signal aluOpcode1  : alu_op_sig_t := ALU_ADD;
@@ -108,31 +113,49 @@ begin
 
 	-- IF control Signals
 	PIPLIN_IF_EN 	<= CW_IF(CW_SIZE - 1);
-	PC_EN 			<= CW_IF(CW_SIZE - 2);
-	-- JUMP_EN
+	IF_STALL		<= CW_IF(CW_SIZE - 2);
+	PC_EN 			<= CW_IF(CW_SIZE - 3);
+	-- JUMP_EN      ................ - 4
 
 	-- ID Control Signals
-	RF_RD1_EN		<= CW_ID(CW_SIZE - 4);
-	RF_RD2_EN		<= CW_ID(CW_SIZE - 5);
-	PIPLIN_ID_EN	<= CW_ID(CW_SIZE - 6);
+	RF_RD1_EN		<= CW_ID(CW_SIZE - 5);
+	RF_RD2_EN		<= CW_ID(CW_SIZE - 6);
+	PIPLIN_ID_EN	<= CW_ID(CW_SIZE - 7);
 
 	-- EX control Signals
-	PIPLIN_EX_EN 	<= CW_EX(CW_SIZE - 7);
-	MUXA_SEL      	<= CW_EX(CW_SIZE - 8);
-	MUXB_SEL      	<= CW_EX(CW_SIZE - 9);
+	PIPLIN_EX_EN 	<= CW_EX(CW_SIZE - 8);
+	MUXA_SEL      	<= CW_EX(CW_SIZE - 9);
+	MUXB_SEL      	<= CW_EX(CW_SIZE - 10);
 
 	-- MEM control Signals
-	DRAM_WE      	<= CW_MEM(CW_SIZE - 9 - alu_op_sig_t'length - 1);
-	DRAM_RE	    	<= CW_MEM(CW_SIZE - 9 - alu_op_sig_t'length - 2);
-	PIPLIN_MEM_EN 	<= CW_MEM(CW_SIZE - 9 - alu_op_sig_t'length - 3);
+	DRAM_WE      	<= CW_MEM(CW_SIZE - 10 - alu_op_sig_t'length - 1);
+	DRAM_RE	    	<= CW_MEM(CW_SIZE - 10 - alu_op_sig_t'length - 2);
+	PIPLIN_MEM_EN 	<= CW_MEM(CW_SIZE - 10 - alu_op_sig_t'length - 3);
 
 	-- WB control Signals
-	WB_MUX_SEL 		<= CW_WB(CW_SIZE - 9 - alu_op_sig_t'length - 4);
-	PIPLIN_WB_EN    <= CW_WB(CW_SIZE - 9 - alu_op_sig_t'length - 5);
+	WB_MUX_SEL 		<= CW_WB(CW_SIZE - 10 - alu_op_sig_t'length - 4);
+	PIPLIN_WB_EN    <= CW_WB(CW_SIZE - 10 - alu_op_sig_t'length - 5);
+	
+	process(CW, CW_IF, HAZARD_SIG)
+	begin
+		
+		CW_IF <= CW;
+	
+		if (HAZARD_SIG = '1') then
+			--CW_IF <= "01011011111010"
+			CW_IF(CW_SIZE-1) <= '0';
+			CW_IF(CW_SIZE-3) <= '0';
+			CW_IF(CW_SIZE-7) <= '0';
+			CW_IF(CW_SIZE-8) <= '0';
+			CW_IF(CW_SIZE-18) <= '0';
+			CW_IF(CW_SIZE-20) <= '0';
+		end if;
+			
+	
+	end process;
 
-	CW_IF <= CW;
-	CW_ID <= CW_IF(CW_SIZE-1-3 downto 0);
-
+	CW_ID <= CW_IF(CW_SIZE-1-4 downto 0);
+	
 
 	-- process to pipeline control words
 	CW_PIPE : process (Clk)
@@ -157,9 +180,9 @@ begin
 				--	CW_IF <= cw_memory(21); -- 21 = 0x15 
 				--end if;
 
-				CW_EX <= CW_ID(CW_SIZE-1-3-3 downto 0);
-				CW_MEM <= CW_EX(CW_SIZE-1-3-3-3-alu_op_sig_t'length downto 0);
-				CW_WB <= CW_MEM(CW_SIZE-1-3-3-3-alu_op_sig_t'length-3 downto 0);
+				CW_EX <= CW_ID(CW_SIZE-1-4-3 downto 0);
+				CW_MEM <= CW_EX(CW_SIZE-1-4-3-3-alu_op_sig_t'length downto 0);
+				CW_WB <= CW_MEM(CW_SIZE-1-4-3-3-alu_op_sig_t'length-3 downto 0);
 
 				aluOpcode1 <= aluOpcode_i; -- IF 
 				aluOpcode2 <= aluOpcode1;  -- ID
@@ -211,7 +234,7 @@ begin
 	JBRANCH_CTRL: process(IR_opcode, CW_IF)
 	begin
 
-		JUMP_EN <= CW_IF(CW_SIZE - 3);
+		JUMP_EN <= CW_IF(CW_SIZE - 4);
 		-- Do things when OPCODE == SOME BRANCH INSTRUCTION
 		-- if OPCODE == BNEZ AND GE = '1' then JUMP_EN = '1' else '0';
 		-- and so on

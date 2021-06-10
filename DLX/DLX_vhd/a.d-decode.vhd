@@ -18,6 +18,8 @@ entity decode is
         CPC:            in std_logic_vector(PC_SIZE-1 downto 0);            -- Current program counter
         RD1:            in std_logic_vector(N_BIT_DATA-1 downto 0);         -- Data coming from the read port 1 of the Data Path
         RD2:            in std_logic_vector(N_BIT_DATA-1 downto 0);         -- Data coming from the read port 2 of the Data Path
+        WB_EN:          in std_logic;            
+        PIPLIN_ID_EN:   in std_logic;
         JUMP_EN:        in std_logic;
         ZERO_DATA_WB:   out std_logic;
         HAZARD_SIG:     out std_logic;
@@ -119,7 +121,8 @@ begin
     ADD_RS2 <= i_RS2;
     ADD_WS1 <= i_WS1;
 
-    
+    i_WR2 <= WB_EN; -- Inhibition of ADD_WB when DataPath's WB stage is off
+
     op_code <= INSTR(N_BIT_INSTR-1 downto N_BIT_INSTR-OPCODE_SIZE);
     
     process(INSTR)
@@ -132,11 +135,10 @@ begin
 
     end process;
 
-    process(op_code, INSTR)
+    process(op_code, INSTR, PIPLIN_ID_EN)
     begin
 
-        i_WR1 <= '1';
-        i_WR2 <= '1';
+        i_WR1 <= PIPLIN_ID_EN; -- Writing on the Hazard Table only when the instruction is ready to go on EX stage (ID_EN = '1')
 
         if (op_code = "000000") then -- R_TYPE
 
@@ -168,6 +170,17 @@ begin
             -- The IMM is the CPC that will be written into R31
             INP1 <= CPC;
             INP2 <= std_logic_vector(TO_UNSIGNED(4, INP2'length));
+
+        elsif (op_code = "010101") then -- NOP
+
+            i_WR1 <= '0'; -- Inhibition of i_WS1. It's 0 but we are not writing into it so no data hazard control
+
+            i_RS1 <= (others => '0');
+            i_RS2 <= (others => '0');
+            i_WS1 <= (others => '0');
+
+            INP1 <= (others => '0'); -- The new PC is computed by the DECODE, the EXEC stage won't be executed
+            INP2 <= (others => '0');
 
         else -- I_TYPE
 
