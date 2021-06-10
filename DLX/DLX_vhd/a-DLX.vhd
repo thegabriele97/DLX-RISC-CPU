@@ -54,40 +54,39 @@ architecture dlx_rtl of DLX is
 		port (
 			Clk : in std_logic; -- Clock
 			Rst : in std_logic; -- Reset:Active-Low
-
+	
 			-- Instruction Register
 			IR_IN : in std_logic_vector(IR_SIZE - 1 downto 0);
-
+	
 			HAZARD_SIG: in std_logic; 	-- Data Hazard signal from ID
-
+	
 			-- IF Control Signals
 			PIPLIN_IF_EN  	: out std_logic; -- Instruction Register Latch Enable
 			IF_STALL		: out std_logic;
 			PC_EN 			: out std_logic;
-
+	
 			-- ID Control Signals
-			PIPLIN_ID_EN : out std_logic;	-- ID Pipeline Stage Enable
-			JUMP_EN      : out std_logic; 	-- JUMP Enable Signal for PC input MUX
-			GT_CHECK     : in std_logic; 	-- Conditional branch status (= '1' means branch taken)
-			GE_CHECK     : in std_logic; 	-- Conditional branch status (= '1' means branch taken)
-			LT_CHECK     : in std_logic; 	-- Conditional branch status (= '1' means branch taken)
-			LE_CHECK     : in std_logic; 	-- Conditional branch status (= '1' means branch taken)
-
+			PIPLIN_ID_EN 	: out std_logic;	-- ID Pipeline Stage Enable
+			JUMP_EN      	: out std_logic; 	-- JUMP Enable Signal for PC input MUX
+			LGET			: in std_logic_vector(1 downto 0);	-- From Decode Comparator
+	
 			-- EX Control Signals
 			PIPLIN_EX_EN 	: out std_logic; 	-- ALU Output Register Enable
 			MUXA_SEL      	: out std_logic; 	-- MUX-A Sel
 			MUXB_SEL      	: out std_logic; 	-- MUX-B Sel
 			ALU_OPCODE 	  	: out alu_op_sig_t; -- ALU OP to execute
-
+			SEL_ALU_SETCMP	: out std_logic;
+			SEL_LGET		: out std_logic_vector(2 downto 0);
+	
 			-- MEM Control Signals
 			DRAM_WE      	: out std_logic; 	-- Data RAM Write Enable
 			DRAM_RE      	: out std_logic; 	-- Data RAM Read Enable
 			PIPLIN_MEM_EN   : out std_logic; 	-- LMD Register Latch Enable
-
+	
 			-- WB Control signals
 			WB_MUX_SEL 		: out std_logic; 	-- Write Back MUX Sel
 			PIPLIN_WB_EN    : out std_logic; 	-- Register File Write Enable
-
+	
 			RF_RD1_EN		: out std_logic;
 			RF_RD2_EN		: out std_logic
 		);
@@ -121,13 +120,7 @@ architecture dlx_rtl of DLX is
         	INP2:           out std_logic_vector(N_BIT_DATA-1 downto 0);
 			NPC:            out std_logic_vector(PC_SIZE-1 downto 0);           -- Next program counter
 			PC_OVF:         out std_logic;                                      -- Signal for PC overflow
-	
-			-- Signal that goes to the control unit
-			a_le_b: out std_logic;
-			a_l_b: 	out std_logic;
-			a_g_b: 	out std_logic;
-			a_ge_b: out std_logic;
-			a_e_b: 	out std_logic
+			LGET: 			out std_logic_vector(1 downto 0)					-- Comparator output towards CU and DP
 		);	
 	end component;
 
@@ -197,6 +190,12 @@ architecture dlx_rtl of DLX is
 			-- ALU 
 			ALU_OP: in std_logic_vector(N_OPSEL + 3 - 1 downto 0); -- Control signal for the ALU in order to decide the operation
 			ALU_COUT: out std_logic;    -- Carry out of the operation made by the ALU
+			
+
+			-- Comparator results coming from the datapath
+			SEL_ALU_SETCMP: in std_logic;
+			LGET:   in std_logic_vector(1 downto 0);
+			SEL_LGET:   in std_logic_vector(2 downto 0);
 	
 			-- Mux selector for stage 3 of the pipeline
 			S3: in std_logic; -- Selector for mux of stage 3
@@ -237,6 +236,7 @@ architecture dlx_rtl of DLX is
 	-- -- Control Unit
 	signal i_PC_OVF: std_logic;
 	signal i_ZERO_DATA_WB: std_logic;
+	signal i_SEL_ALU_SETCMP: std_logic;
 
 	-- -- Control Unit Bus signals
 	signal i_ALU_OP: std_logic_vector(ALU_ADD'length-1 downto 0);
@@ -245,6 +245,7 @@ architecture dlx_rtl of DLX is
 	signal i_IR_LATCH_EN: std_logic;
 	signal i_IR_STALL: std_logic;
 	signal i_PC_LATCH_EN: std_logic;
+	signal i_SEL_LGET: std_logic_vector(set_op_sig_t'length-1 downto 0);
 
 	-- -- Pipeline Enable Signals
     signal i_EN1: std_logic;
@@ -258,11 +259,7 @@ architecture dlx_rtl of DLX is
 
 	-- -- JUMP / BRANCH Control Signals
 	signal i_JUMP_EN: std_logic;
-	signal i_A_EQ_B: std_logic;
-	signal i_A_GE_B: std_logic; 
-	signal i_A_GT_B: std_logic;
-	signal i_A_LT_B: std_logic; 
-	signal i_A_LE_B: std_logic;
+	signal i_LGET: std_logic_vector(1 downto 0);
 
 	-- -- RF Data Signals
 	signal i_RD1: std_logic_vector(IR_SIZE-1 downto 0);
@@ -361,14 +358,13 @@ begin  -- DLX
 		PC_EN			=> i_PC_LATCH_EN,
 		PIPLIN_ID_EN 	=> i_EN1,
 		JUMP_EN			=> i_JUMP_EN,
-		GT_CHECK		=> i_A_GT_B,
-		GE_CHECK		=> i_A_GE_B,
-		LT_CHECK		=> i_A_LT_B,
-		LE_CHECK		=> i_A_LE_B,
+		LGET			=> i_LGET,
 		PIPLIN_EX_EN	=> i_EN2,
 		MUXA_SEL		=> i_S1,
 		MUXB_SEL		=> i_S2,
 		ALU_OPCODE		=> i_ALU_OP,
+		SEL_ALU_SETCMP	=> i_SEL_ALU_SETCMP,
+		SEL_LGET		=> i_SEL_LGET,
 		DRAM_WE			=> i_DATAMEM_WM,
 		DRAM_RE			=> i_DATAMEM_RM,
 		PIPLIN_MEM_EN 	=> i_EN3,
@@ -414,11 +410,7 @@ begin  -- DLX
         INP2 => i_INP2,
 		NPC => PC_BUS,
 		PC_OVF => i_PC_OVF,
-		a_le_b => i_A_LE_B,
-		a_l_b => i_A_LT_B,
-		a_g_b => i_A_GT_B,
-		a_ge_b => i_A_GE_B,
-		a_e_b => i_A_EQ_B
+		LGET => i_LGET
 	);
 
 
@@ -460,6 +452,9 @@ begin  -- DLX
         S2 => i_S2,
         ALU_OP => i_ALU_OP,
         ALU_COUT => i_ALU_COUT,
+        SEL_ALU_SETCMP => i_SEL_ALU_SETCMP,
+        LGET => i_LGET,
+        SEL_LGET => i_SEL_LGET,
         S3 => i_S3,
         ADD_WB => i_ADD_WB
     );

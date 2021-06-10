@@ -30,13 +30,7 @@ entity decode is
         INP2:           out std_logic_vector(N_BIT_DATA-1 downto 0);
         NPC:            out std_logic_vector(PC_SIZE-1 downto 0);           -- Next program counter
         PC_OVF:         out std_logic;                                      -- Signal for PC overflow
-
-        -- Signal that goes to the control unit
-        a_le_b: out std_logic;
-        a_l_b: 	out std_logic;
-        a_g_b: 	out std_logic;
-        a_ge_b: out std_logic;
-        a_e_b: 	out std_logic
+        LGET: out std_logic_vector(1 downto 0)                              -- Comparator output towards CU and DP
     );
 end entity;
 
@@ -62,21 +56,21 @@ architecture structural of decode is
 
 
     component comparator is
-        generic (NBIT: integer := 16);
+        generic (
+            NBIT: integer := 16
+        );
         port (
             A:		in	std_logic_vector(NBIT-1 downto 0);
             B:		in	std_logic_vector(NBIT-1 downto 0);
-            a_le_b: out std_logic;
-            a_l_b: 	out std_logic;
-            a_g_b: 	out std_logic;
-            a_ge_b: out std_logic;
-            a_e_b: 	out std_logic
+            LGET:	out std_logic_vector(1 downto 0)
         );
     end component;
 
     component mux2_1 is
-        generic (NBIT: integer:= 32);
-    	  port (
+        generic (
+            NBIT: integer:= 32
+        );
+    	port (
             a:	in	std_logic_vector(NBIT - 1 downto 0);
             b:	in	std_logic_vector(NBIT - 1 downto 0);
             s: 	in	std_logic;
@@ -219,11 +213,7 @@ begin
     ) port map(
         A => RD1,
         B => RD2,
-        a_le_b => a_le_b,
-        a_l_b => a_l_b,
-        a_g_b => a_g_b,
-        a_ge_b => a_ge_b,
-        a_e_b => a_e_b
+        LGET => LGET
     );
 
     MUX: mux2_1 generic map(

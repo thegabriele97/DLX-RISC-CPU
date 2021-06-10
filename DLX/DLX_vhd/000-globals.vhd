@@ -16,6 +16,7 @@ package myTypes is
 
 	-- Exlicit Encoding for ALU OPERATION
 	subtype alu_op_sig_t is std_logic_vector(ALU_OPSEL+3-1 downto 0);
+	subtype set_op_sig_t is std_logic_vector(2 downto 0);
 
 	constant ALU_ADD: 	alu_op_sig_t := "00000";
 	constant ALU_SUB: 	alu_op_sig_t := "00100";
@@ -32,6 +33,13 @@ package myTypes is
 	constant ALU_ASR: 	alu_op_sig_t := "01111";
 	constant ALU_ROL: 	alu_op_sig_t := "10011";
 	constant ALU_ROR: 	alu_op_sig_t := "10111";
+
+	constant SET_SEQ: 	set_op_sig_t := "000";
+	constant SET_SNE: 	set_op_sig_t := "001";
+	constant SET_SLE: 	set_op_sig_t := "010";
+	constant SET_SLT: 	set_op_sig_t := "011";
+	constant SET_SGE: 	set_op_sig_t := "100";
+	constant SET_SGT: 	set_op_sig_t := "101";
 
 end myTypes;
 

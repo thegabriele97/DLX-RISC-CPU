@@ -7,11 +7,7 @@ entity comparator is
 	port (
         A:		in	std_logic_vector(NBIT-1 downto 0);
         B:		in	std_logic_vector(NBIT-1 downto 0);
-		a_le_b: out std_logic;
-		a_l_b: 	out std_logic;
-		a_g_b: 	out std_logic;
-		a_ge_b: out std_logic;
-		a_e_b: 	out std_logic	
+		LGET:	out std_logic_vector(1 downto 0)
     );
 
 end comparator; 
@@ -37,7 +33,18 @@ architecture behavioural of comparator is
 	signal Cout: std_logic;
 	signal zn: std_logic;
 
+	signal a_le_b: std_logic;
+	signal a_l_b: std_logic;
+	signal a_ge_b: std_logic;
+	signal a_g_b: std_logic;
+
 begin
+
+	LGET <= "01" when (a_l_b = '1') else
+			"00" when (a_le_b = '1') else 
+			"11" when (a_g_b = '1') else
+			"10" when (a_ge_b = '1');
+	
 
 	z(0) <= S(0);
 	ORGen: for i in 1 to NBIT-1 generate
@@ -50,7 +57,7 @@ begin
 	a_l_b <= not(Cout);
 	a_g_b <= Cout and z(NBIT-1);
 	a_ge_b <= Cout;
-	a_e_b <= zn;
+
 
 	ADDER: P4_ADDER generic map(
 		NBIT => NBIT

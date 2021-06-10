@@ -24,18 +24,17 @@ entity dlx_cu is
 		PC_EN 			: out std_logic;
 
 		-- ID Control Signals
-		PIPLIN_ID_EN : out std_logic;	-- ID Pipeline Stage Enable
-		JUMP_EN      : out std_logic; 	-- JUMP Enable Signal for PC input MUX
-		GT_CHECK     : in std_logic; 	-- Conditional branch status (= '1' means branch taken)
-		GE_CHECK     : in std_logic; 	-- Conditional branch status (= '1' means branch taken)
-		LT_CHECK     : in std_logic; 	-- Conditional branch status (= '1' means branch taken)
-		LE_CHECK     : in std_logic; 	-- Conditional branch status (= '1' means branch taken)
+		PIPLIN_ID_EN 	: out std_logic;	-- ID Pipeline Stage Enable
+		JUMP_EN      	: out std_logic; 	-- JUMP Enable Signal for PC input MUX
+		LGET			: in std_logic_vector(1 downto 0);	-- From Decode Comparator
 
 		-- EX Control Signals
 		PIPLIN_EX_EN 	: out std_logic; 	-- ALU Output Register Enable
 		MUXA_SEL      	: out std_logic; 	-- MUX-A Sel
 		MUXB_SEL      	: out std_logic; 	-- MUX-B Sel
 		ALU_OPCODE 	  	: out alu_op_sig_t; -- ALU OP to execute
+		SEL_ALU_SETCMP	: out std_logic;
+        SEL_LGET		: out std_logic_vector(2 downto 0);
 
 		-- MEM Control Signals
 		DRAM_WE      	: out std_logic; 	-- Data RAM Write Enable
@@ -54,38 +53,39 @@ end dlx_cu;
 architecture dlx_cu_hw of dlx_cu is
 	
 	constant MICROCODE_MEM_SIZE: integer := 22; -- Microcode Memory Size
-	constant CW_SIZE: integer := (15 + alu_op_sig_t'length); -- Control Word Size
+	constant CW_SIZE: integer := (16 + alu_op_sig_t'length + set_op_sig_t'length); -- Control Word Size
 	
 	type mem_array is array (0 to MICROCODE_MEM_SIZE - 1) of std_logic_vector(CW_SIZE-1 downto 0);
 		
 
 	signal cw_memory: mem_array := (
-	--  "FSPJ12DXAB-----WRMCK"	
-		"10101111000000000101", -- R type: IS IT CORRECT?
-	--  "FSPJ12DXAB-----WRMCK"	
-		"00000000000000000000", -- [VOID]
-	--  "FSPJ12DXAB-----WRMCK"	
-		"11110000000000000000", -- J (0X02) instruction encoding corresponds to the address to this ROM
-	--  "FSPJ12DXAB-----WRMCK"	
-		"11111011010000000001", -- JAL to be filled
-		"10100000000000000000", -- BEQZ to be filled
-		"10100000000000000000", -- BNEZ
-		"10100000000000000000", -- 
-		"10100000000000000000",
-		"10101011010000000101", -- ADD i (0X08): FILL IT!!!
-		"10100000000000000000",
-		"10100000000000000000",
-		"10100000000000000000",
-		"10100000000000000000",
-		"10100000000000000000",
-		"10100000000000000000",
-		"10100000000000000000",
-		"10100000000000000000",
-		"10100000000000000000",
-		"10100000000000000000",
-		"10100000000000000000",
-		"10100000000000000000",
-		"10100000000000000000"	-- NOP (0x15)
+	--  "FSPJ12DXAB-----+++TWRMCK"	
+		"101011110000000000000101", -- R type: IS IT CORRECT?
+	--  "FSPJ12DXAB-----+++TWRMCK"	
+		"000000000000000000000000", -- [VOID]
+	--  "FSPJ12DXAB-----+++TWRMCK"	
+		"111100000000000000000000", -- J (0X02) instruction encoding corresponds to the address to this ROM
+	--  "FSPJ12DXAB-----+++TWRMCK"	
+		"111110110100000000000001", -- JAL to be filled
+		"101000000000000000000000", -- BEQZ to be filled
+		"101000000000000000000000", -- BNEZ
+		"101000000000000000000000", -- 
+		"101000000000000000000000",
+	--  "FSPJ12DXAB-----+++TWRMCK"	
+		"101010110100000000000101", -- ADD i (0X08): FILL IT!!!
+		"101000000000000000000000",
+		"101000000000000000000000",
+		"101000000000000000000000",
+		"101000000000000000000000",
+		"101000000000000000000000",
+		"101000000000000000000000",
+		"101000000000000000000000",
+		"101000000000000000000000",
+		"101000000000000000000000",
+		"101000000000000000000000",
+		"101000000000000000000000",
+		"101000000000000000000000",
+		"101000000000000000000000"	-- NOP (0x15)
 	);
 	
 	
@@ -96,13 +96,17 @@ architecture dlx_cu_hw of dlx_cu is
 	signal CW_IF 	: std_logic_vector(CW_SIZE-1 downto 0); 		-- first stage
 	signal CW_ID 	: std_logic_vector(CW_SIZE-1-4 downto 0); 	-- second stage
 	signal CW_EX 	: std_logic_vector(CW_SIZE-1-7 downto 0); 	-- third stage
-	signal CW_MEM 	: std_logic_vector(CW_SIZE-1-7-alu_op_sig_t'length-3 downto 0); 	-- fourth stage
-	signal CW_WB 	: std_logic_vector(CW_SIZE-1-7-alu_op_sig_t'length-6 downto 0); 	-- fifth stage
+	signal CW_MEM 	: std_logic_vector(CW_SIZE-1-7-alu_op_sig_t'length-set_op_sig_t'length-1-3 downto 0); 	-- fourth stage
+	signal CW_WB 	: std_logic_vector(CW_SIZE-1-7-alu_op_sig_t'length-set_op_sig_t'length-1-6 downto 0); 	-- fifth stage
 
 	signal aluOpcode_i : alu_op_sig_t := ALU_ADD; -- alu_op_sig_t defined in package
 	signal aluOpcode1  : alu_op_sig_t := ALU_ADD;
-	signal aluOpcode2  : alu_op_sig_t := ALU_ADD;
-	signal aluOpcode3  : alu_op_sig_t := ALU_ADD;
+
+	signal setcmp_i: set_op_sig_t;
+	signal setcmp_1: set_op_sig_t;
+
+	signal sel_alu_setcmp_i: std_logic;
+	signal sel_alu_setcmp_1: std_logic;
 
 begin
 
@@ -128,13 +132,13 @@ begin
 	MUXB_SEL      	<= CW_EX(CW_SIZE - 10);
 
 	-- MEM control Signals
-	DRAM_WE      	<= CW_MEM(CW_SIZE - 10 - alu_op_sig_t'length - 1);
-	DRAM_RE	    	<= CW_MEM(CW_SIZE - 10 - alu_op_sig_t'length - 2);
-	PIPLIN_MEM_EN 	<= CW_MEM(CW_SIZE - 10 - alu_op_sig_t'length - 3);
+	DRAM_WE      	<= CW_MEM(CW_SIZE - 10 - alu_op_sig_t'length - set_op_sig_t'length - 1 - 1);
+	DRAM_RE	    	<= CW_MEM(CW_SIZE - 10 - alu_op_sig_t'length - set_op_sig_t'length - 1 - 2);
+	PIPLIN_MEM_EN 	<= CW_MEM(CW_SIZE - 10 - alu_op_sig_t'length - set_op_sig_t'length - 1 - 3);
 
 	-- WB control Signals
-	WB_MUX_SEL 		<= CW_WB(CW_SIZE - 10 - alu_op_sig_t'length - 4);
-	PIPLIN_WB_EN    <= CW_WB(CW_SIZE - 10 - alu_op_sig_t'length - 5);
+	WB_MUX_SEL 		<= CW_WB(CW_SIZE - 10 - alu_op_sig_t'length - set_op_sig_t'length - 1 - 4);
+	PIPLIN_WB_EN    <= CW_WB(CW_SIZE - 10 - alu_op_sig_t'length - set_op_sig_t'length - 1 - 5);
 	
 	process(CW, CW_IF, HAZARD_SIG)
 	begin
@@ -147,8 +151,8 @@ begin
 			CW_IF(CW_SIZE-3) <= '0';
 			CW_IF(CW_SIZE-7) <= '0';
 			CW_IF(CW_SIZE-8) <= '0';
-			CW_IF(CW_SIZE-18) <= '0';
-			CW_IF(CW_SIZE-20) <= '0';
+			CW_IF(CW_SIZE-22) <= '0';
+			CW_IF(CW_SIZE-24) <= '0';
 		end if;
 			
 	
@@ -171,8 +175,9 @@ begin
 				CW_WB <= (others => '0');
 				
 				aluOpcode1 <= ALU_ADD;
-				aluOpcode2 <= ALU_ADD;
-				aluOpcode3 <= ALU_ADD;
+				setcmp_1 <= (others => '0');
+				sel_alu_setcmp_1 <= '0';
+
 			else
 				
 				
@@ -181,19 +186,20 @@ begin
 				--end if;
 
 				CW_EX <= CW_ID(CW_SIZE-1-4-3 downto 0);
-				CW_MEM <= CW_EX(CW_SIZE-1-4-3-3-alu_op_sig_t'length downto 0);
-				CW_WB <= CW_MEM(CW_SIZE-1-4-3-3-alu_op_sig_t'length-3 downto 0);
+				CW_MEM <= CW_EX(CW_SIZE-1-4-3-3-alu_op_sig_t'length-set_op_sig_t'length-1 downto 0);
+				CW_WB <= CW_MEM(CW_SIZE-1-4-3-3-alu_op_sig_t'length-set_op_sig_t'length-1-3 downto 0);
 
-				aluOpcode1 <= aluOpcode_i; -- IF 
-				aluOpcode2 <= aluOpcode1;  -- ID
-				aluOpcode3 <= aluOpcode2;  -- EX
+				aluOpcode1 <= aluOpcode_i;
+				setcmp_1 <= setcmp_i;
+				sel_alu_setcmp_1 <= sel_alu_setcmp_i;
+
 			end if;
 
 		end if;
 
 	end process CW_PIPE;
 
-	ALU_OPCODE <= aluOpcode3;
+	ALU_OPCODE <= aluOpcode1;
 
 	-- purpose: Generation of ALU OpCode
 	-- type   : combinational
@@ -229,6 +235,83 @@ begin
 		end case;
 
 	end process ALU_OP_CODE_P;
+
+	
+	SEL_LGET <= setcmp_1;
+
+	SETCMP_P: process (IR_opcode, IR_func)
+	begin -- process SETCMP_P
+		
+		case (TO_INTEGER(unsigned(IR_opcode))) is
+			
+			when 0 => -- R_TYPE
+
+				case TO_INTEGER(unsigned(IR_func)) is
+					
+					when 40 => 
+						setcmp_i <= SET_SEQ; -- SEQ;
+					
+					when 41 => 
+						setcmp_i <= SET_SNE; -- SNEQ;
+
+					when 42 => 
+						setcmp_i <= SET_SLT; -- SLT;
+					
+					when 43 => 
+						setcmp_i <= SET_SGT; -- SGT;
+
+					when 44 => 
+						setcmp_i <= SET_SLE; -- SLE;
+					
+					when 45 => 
+						setcmp_i <= SET_SGE; -- SGE;
+					
+					-- when 58 => 
+					-- 	setcmp_i <= ALU_ADD; -- SLTU;
+					
+					-- when 59 => 
+					-- 	setcmp_i <= ALU_ADD; -- SGTU;
+					
+					-- when 60 => 
+					-- 	setcmp_i <= ALU_ADD; -- SLEU;
+					
+					-- when 61 => 
+					-- 	setcmp_i <= ALU_ADD; -- SGEU;
+					
+					when others => 
+						setcmp_i <= SET_SEQ;
+				
+				end case;
+			
+			when others => 
+				setcmp_i <= SET_SEQ;
+
+		end case;
+
+	end process SETCMP_P;
+
+
+	SEL_ALU_SETCMP <= sel_alu_setcmp_1;
+
+	SEL_ALU_SETCMP_P: process (IR_opcode, IR_func, CW)
+	begin -- process SETCMP_P
+		
+		case (TO_INTEGER(unsigned(IR_opcode))) is
+			
+			when 0 => -- R_TYPE
+
+				if (TO_INTEGER(unsigned(IR_func)) >= 40 and TO_INTEGER(unsigned(IR_func)) <= 45) then
+					sel_alu_setcmp_i <= '1';
+				else
+					sel_alu_setcmp_i <= '0';
+				end if;
+			
+			when others => 
+				sel_alu_setcmp_i <= CW(CW_SIZE-1-18);
+
+		end case;
+
+	end process SEL_ALU_SETCMP_P;
 
 	
 	JBRANCH_CTRL: process(IR_opcode, CW_IF)
