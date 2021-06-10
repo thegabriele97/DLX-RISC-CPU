@@ -52,7 +52,7 @@ end dlx_cu;
 
 architecture dlx_cu_hw of dlx_cu is
 	
-	constant MICROCODE_MEM_SIZE: integer := 22; -- Microcode Memory Size
+	constant MICROCODE_MEM_SIZE: integer := 62; -- Microcode Memory Size
 	constant CW_SIZE: integer := (16 + alu_op_sig_t'length + set_op_sig_t'length); -- Control Word Size
 	
 	type mem_array is array (0 to MICROCODE_MEM_SIZE - 1) of std_logic_vector(CW_SIZE-1 downto 0);
@@ -66,8 +66,9 @@ architecture dlx_cu_hw of dlx_cu is
 	--  "FSPJ12DXAB-----+++TWRMCK"	
 		"111100000000000000000000", -- J (0X02) instruction encoding corresponds to the address to this ROM
 	--  "FSPJ12DXAB-----+++TWRMCK"	
-		"111110110100000000000001", -- JAL to be filled
-		"101000000000000000000000", -- BEQZ to be filled
+		"111110110100000000000101", -- JAL to be filled
+	--  "FSPJ12DXAB-----+++TWRMCK"	
+		"111000000000000000000000", -- BEQZ to be filled
 		"101000000000000000000000", -- BNEZ
 		"101000000000000000000000", -- 
 		"101000000000000000000000",
@@ -85,7 +86,49 @@ architecture dlx_cu_hw of dlx_cu is
 		"101000000000000000000000",
 		"101000000000000000000000",
 		"101000000000000000000000",
-		"101000000000000000000000"	-- NOP (0x15)
+		"101000000000000000000000",	-- NOP (0x15)
+		"XXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXX",
+	--  "FSPJ12DXAB-----+++TWRMCK"
+		"101010110000000101100101",	-- SGTI (0x1b)
+		"XXXXXXXXXXXXXXXXXXXXXXXX",
+	--  "FSPJ12DXAB-----+++TWRMCK"	
+		"101010110000000100100101",	-- SGEI (0x1d)
+		"XXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXX"
 	);
 	
 	
@@ -146,7 +189,6 @@ begin
 		CW_IF <= CW;
 	
 		if (HAZARD_SIG = '1') then
-			--CW_IF <= "01011011111010"
 			CW_IF(CW_SIZE-1) <= '0';
 			CW_IF(CW_SIZE-3) <= '0';
 			CW_IF(CW_SIZE-7) <= '0';
@@ -179,11 +221,6 @@ begin
 				sel_alu_setcmp_1 <= '0';
 
 			else
-				
-				
-				--if (HAZARD_SIG = '1') then -- If there is a data hazard, we insert a NOP in the pipeline
-				--	CW_IF <= cw_memory(21); -- 21 = 0x15 
-				--end if;
 
 				CW_EX <= CW_ID(CW_SIZE-1-4-3 downto 0);
 				CW_MEM <= CW_EX(CW_SIZE-1-4-3-3-alu_op_sig_t'length-set_op_sig_t'length-1 downto 0);
@@ -205,7 +242,7 @@ begin
 	-- type   : combinational
 	-- inputs : IR_i
 	-- outputs: aluOpcode
-	ALU_OP_CODE_P: process (IR_opcode, IR_func)
+	ALU_OP_CODE_P: process (IR_opcode, IR_func, CW)
 	begin -- process ALU_OP_CODE_P
 
 		case (TO_INTEGER(unsigned(IR_opcode))) is
@@ -219,6 +256,18 @@ begin
 					
 					when 6 => 
 						aluOpcode_i <= ALU_ADD; -- LRS;
+
+					when 36 =>
+						aluOpcode_i <= ALU_AND;	-- AND
+
+					when 37 =>
+						aluOpcode_i <= ALU_OR;	-- OR
+
+					when 38 =>
+						aluOpcode_i <= ALU_XOR;	-- OR
+
+					-- when 14 =>
+					-- 	aluOpcode_i <= ALU_MUL;	-- MUL
 					
 					when others => 
 						aluOpcode_i <= ALU_ADD;
@@ -230,7 +279,7 @@ begin
 			-- when 8 => aluOpcode_i <= ALU_ADD; -- addi
 			
 			when others => 
-				aluOpcode_i <= ALU_ADD;
+				aluOpcode_i <= CW(CW_SIZE-1-10 downto CW_SIZE-1-14);
 
 		end case;
 
@@ -239,7 +288,7 @@ begin
 	
 	SEL_LGET <= setcmp_1;
 
-	SETCMP_P: process (IR_opcode, IR_func)
+	SETCMP_P: process (IR_opcode, IR_func, CW)
 	begin -- process SETCMP_P
 		
 		case (TO_INTEGER(unsigned(IR_opcode))) is
@@ -284,7 +333,7 @@ begin
 				end case;
 			
 			when others => 
-				setcmp_i <= SET_SEQ;
+				setcmp_i <= CW(CW_SIZE-1-15 downto CW_SIZE-1-17);
 
 		end case;
 
@@ -314,13 +363,14 @@ begin
 	end process SEL_ALU_SETCMP_P;
 
 	
-	JBRANCH_CTRL: process(IR_opcode, CW_IF)
+	JBRANCH_CTRL: process(IR_opcode, CW_IF, LGET)
 	begin
 
 		JUMP_EN <= CW_IF(CW_SIZE - 4);
-		-- Do things when OPCODE == SOME BRANCH INSTRUCTION
-		-- if OPCODE == BNEZ AND GE = '1' then JUMP_EN = '1' else '0';
-		-- and so on
+
+		if (IR_opcode = "000100" and LGET(0) = '0') then -- BEQZ 
+			JUMP_EN <= '1';
+		end if;
 
 	end process JBRANCH_CTRL;
 

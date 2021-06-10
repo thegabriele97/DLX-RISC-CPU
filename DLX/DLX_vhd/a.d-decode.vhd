@@ -102,6 +102,7 @@ architecture structural of decode is
     signal i_RS1: std_logic_vector(N_BIT_ADDR_RF-1 downto 0);
     signal i_RS2: std_logic_vector(N_BIT_ADDR_RF-1 downto 0);
     signal i_WS1: std_logic_vector(N_BIT_ADDR_RF-1 downto 0);
+    signal i_INP2: std_logic_vector(N_BIT_DATA-1 downto 0);
 
     signal i_WR1: std_logic;
     signal i_WR2: std_logic;
@@ -109,23 +110,30 @@ architecture structural of decode is
     signal i_PC_OFFSET: std_logic_vector(PC_SIZE-1 downto 0); -- with sign ext -- TO THE ADDER NPC
     signal i_OFFSET_ADDER: std_logic_vector(PC_SIZE-1 downto 0); -- mux output, '4' or the passed immediate
 
+    signal i_SEL_CMPB: std_logic;
+    signal i_CMP_B: std_logic_vector(N_BIT_DATA-1 downto 0);
+
 begin
 
     ADD_RS1 <= i_RS1;
     ADD_RS2 <= i_RS2;
     ADD_WS1 <= i_WS1;
+    INP2 <= i_INP2;
 
     i_WR2 <= WB_EN; -- Inhibition of ADD_WB when DataPath's WB stage is off
 
     op_code <= INSTR(N_BIT_INSTR-1 downto N_BIT_INSTR-OPCODE_SIZE);
     
-    process(INSTR)
+    process(INSTR, op_code)
     begin
-        
-        --i_PC_OFFSET(i_PC_OFFSET'length-1 downto N_BIT_INSTR-OPCODE_SIZE) <= (others => INSTR(N_BIT_INSTR-OPCODE_SIZE-1)); -- sign extension
+
         i_PC_OFFSET <= (others => INSTR(N_BIT_INSTR-OPCODE_SIZE-1)); -- sign extension
-        --i_PC_OFFSET(N_BIT_INSTR-OPCODE_SIZE-1 downto 0) <= std_logic_vector(unsigned(INSTR(N_BIT_INSTR-OPCODE_SIZE-1 downto 0)) + 0);
         i_PC_OFFSET(N_BIT_INSTR-OPCODE_SIZE-1 downto 0) <= INSTR(N_BIT_INSTR-OPCODE_SIZE-1 downto 0);
+
+        if (op_code /= "000010" and op_code /= "000011") then -- for branch instructions, the immediate is 16 bits wide
+            i_PC_OFFSET <= (others => INSTR(N_BIT_INSTR-OPCODE_SIZE-2*N_BIT_ADDR_RF-1)); -- sign extension
+            i_PC_OFFSET(N_BIT_INSTR-OPCODE_SIZE-2*N_BIT_ADDR_RF-1 downto 0) <= INSTR(N_BIT_INSTR-OPCODE_SIZE-2*N_BIT_ADDR_RF-1 downto 0);
+        end if;
 
     end process;
 
@@ -133,6 +141,7 @@ begin
     begin
 
         i_WR1 <= PIPLIN_ID_EN; -- Writing on the Hazard Table only when the instruction is ready to go on EX stage (ID_EN = '1')
+        i_SEL_CMPB <= '1';
 
         if (op_code = "000000") then -- R_TYPE
 
@@ -141,7 +150,7 @@ begin
             i_WS1 <= INSTR(N_BIT_INSTR-OPCODE_SIZE-2*N_BIT_ADDR_RF-1 downto N_BIT_INSTR-OPCODE_SIZE-3*N_BIT_ADDR_RF);     -- RD field
 
             INP1 <= (others => '0');
-            INP2 <= (others => '0');
+            i_INP2 <= (others => '0');
 
         elsif (op_code = "000010") then -- J_TYPE: J
 
@@ -152,7 +161,7 @@ begin
             i_WS1 <= (others => '0');
 
             INP1 <= (others => '0'); -- The new PC is computed by the DECODE, the EXEC stage won't be executed
-            INP2 <= (others => '0');
+            i_INP2 <= (others => '0');
 
         elsif (op_code = "000011") then -- J_TYPE: JAL
 
@@ -162,8 +171,8 @@ begin
             i_WS1 <= "11111"; -- R31
 
             -- The IMM is the CPC that will be written into R31
-            INP1 <= CPC;
-            INP2 <= std_logic_vector(TO_UNSIGNED(4, INP2'length));
+            INP1 <= std_logic_vector(TO_UNSIGNED(4, INP2'length));
+            i_INP2 <= CPC;
 
         elsif (op_code = "010101") then -- NOP
 
@@ -174,9 +183,11 @@ begin
             i_WS1 <= (others => '0');
 
             INP1 <= (others => '0'); -- The new PC is computed by the DECODE, the EXEC stage won't be executed
-            INP2 <= (others => '0');
+            i_INP2 <= (others => '0');
 
         else -- I_TYPE
+
+            i_SEL_CMPB <= '0';
 
             i_RS1 <= INSTR(N_BIT_INSTR-OPCODE_SIZE-1 downto N_BIT_INSTR-OPCODE_SIZE-N_BIT_ADDR_RF);
             i_RS2 <= (OTHERS => '0');
@@ -184,8 +195,8 @@ begin
 
             INP1 <= (others => '0');
             
-            INP2 <= (others => INSTR(N_BIT_INSTR-OPCODE_SIZE-2*N_BIT_ADDR_RF-1));
-            INP2(N_BIT_INSTR-OPCODE_SIZE-2*N_BIT_ADDR_RF-1 downto 0) <= INSTR(N_BIT_INSTR-OPCODE_SIZE-2*N_BIT_ADDR_RF-1 downto 0);
+            i_INP2 <= (others => INSTR(N_BIT_INSTR-OPCODE_SIZE-2*N_BIT_ADDR_RF-1));
+            i_INP2(N_BIT_INSTR-OPCODE_SIZE-2*N_BIT_ADDR_RF-1 downto 0) <= INSTR(N_BIT_INSTR-OPCODE_SIZE-2*N_BIT_ADDR_RF-1 downto 0);
 
         end if;
 
@@ -207,12 +218,21 @@ begin
         ALL_ZEROS => ZERO_DATA_WB
     );
 
+    MUX_CMPB: mux2_1 generic map(
+        NBIT => N_BIT_DATA
+    ) port map(
+        a => RD2,
+        b => i_INP2,
+        s => i_SEL_CMPB,
+        y => i_CMP_B
+    );
+
 
     Cmp: comparator generic map(
         NBIT => N_BIT_DATA
     ) port map(
         A => RD1,
-        B => RD2,
+        B => i_CMP_B,
         LGET => LGET
     );
 
