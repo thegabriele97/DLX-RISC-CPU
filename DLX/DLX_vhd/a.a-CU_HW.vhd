@@ -68,7 +68,7 @@ architecture dlx_cu_hw of dlx_cu is
 	--  "FSPJ12DXAB-----+++TWRMCK"	
 		"111110110100000000000101", -- JAL to be filled
 	--  "FSPJ12DXAB-----+++TWRMCK"	
-		"111000000000000000000000", -- BEQZ to be filled
+		"101000000000000000000000", -- BEQZ to be filled
 		"101000000000000000000000", -- BNEZ
 		"101000000000000000000000", -- 
 		"101000000000000000000000",
@@ -160,7 +160,7 @@ begin
 
 	-- IF control Signals
 	PIPLIN_IF_EN 	<= CW_IF(CW_SIZE - 1);
-	IF_STALL		<= CW_IF(CW_SIZE - 2);
+	--IF_STALL		<= CW_IF(CW_SIZE - 2);
 	PC_EN 			<= CW_IF(CW_SIZE - 3);
 	-- JUMP_EN      ................ - 4
 
@@ -366,10 +366,15 @@ begin
 	JBRANCH_CTRL: process(IR_opcode, CW_IF, LGET)
 	begin
 
+		IF_STALL <= CW_IF(CW_SIZE - 2);
 		JUMP_EN <= CW_IF(CW_SIZE - 4);
 
 		if (IR_opcode = "000100" and LGET(0) = '0') then -- BEQZ 
 			JUMP_EN <= '1';
+			IF_STALL <= '1';
+		elsif (IR_opcode = "000101" and LGET(0) = '1') then -- BEQZ
+			JUMP_EN <= '1';
+			IF_STALL <= '1';
 		end if;
 
 	end process JBRANCH_CTRL;

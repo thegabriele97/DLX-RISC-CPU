@@ -187,7 +187,9 @@ begin
 
         else -- I_TYPE
 
-            i_SEL_CMPB <= '0';
+            if (op_code /= "000100" and op_code /= "000101") then -- if BEQZ, BNEZ => SEL MUST BE 1
+                i_SEL_CMPB <= '0';
+            end if;
 
             i_RS1 <= INSTR(N_BIT_INSTR-OPCODE_SIZE-1 downto N_BIT_INSTR-OPCODE_SIZE-N_BIT_ADDR_RF);
             i_RS2 <= (OTHERS => '0');

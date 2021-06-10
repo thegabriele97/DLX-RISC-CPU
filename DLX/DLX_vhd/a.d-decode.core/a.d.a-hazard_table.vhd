@@ -34,29 +34,26 @@ end entity;
 
 architecture behavioural of hazard_table is
 
-    TYPE Storage IS ARRAY(0 TO (2**N_REGS_LOG) - 1) OF std_logic;
-    SIGNAL Table : Storage;
+    TYPE Storage IS ARRAY(0 TO (2**N_REGS_LOG) - 1) OF std_logic_vector(2 downto 0);
+    SIGNAL Table, i_all_zeros : Storage;
 
-    signal i_all_zeros: std_logic_vector(2**N_REGS_LOG-1 downto 0);
+    -- signal i_all_zeros: std_logic_vector(2**N_REGS_LOG-1 downto 0);
 
 BEGIN
 
-    Rd: PROCESS(ADD_CHECK1, ADD_CHECK2, Table)
-    BEGIN
-        BUSY <= Table(to_integer(unsigned(ADD_CHECK1))) or Table(to_integer(unsigned(ADD_CHECK2)));
-    END PROCESS Rd;
+    BUSY <= '1' when ((unsigned(Table(to_integer(unsigned(ADD_CHECK1)))) /= 0) or (unsigned(Table(to_integer(unsigned(ADD_CHECK2)))) /= 0)) else '0';
 
     Wr: PROCESS(CLK)
     BEGIN
         IF rising_edge(CLK) THEN
             IF RST = '1' THEN
-                Table <= (OTHERS => '0');
+                Table <= (OTHERS => (others => '0'));
             ELSE
                 IF WR1 = '1' THEN
-                    Table(to_integer(unsigned(ADD_WR1))) <= '1';
+                    Table(to_integer(unsigned(ADD_WR1))) <= std_logic_vector(unsigned(Table(to_integer(unsigned(ADD_WR1)))) + 1);
                 END IF;
                 IF WR2 = '1' THEN
-                    Table(to_integer(unsigned(ADD_WR2))) <= '0';
+                    Table(to_integer(unsigned(ADD_WR2))) <= std_logic_vector(unsigned(Table(to_integer(unsigned(ADD_WR2)))) - 1);
                 END IF;
             END IF;
         END IF;
@@ -64,9 +61,11 @@ BEGIN
 
     i_all_zeros(0) <= Table(0);
     ORGen: for i in 1 to (2**N_REGS_LOG)-1 generate
-      i_all_zeros(i) <= i_all_zeros(i-1) or Table(i);
+        i_all_zeros(i) <= i_all_zeros(i-1) or Table(i);
     end generate ORGen;
 
-    ALL_ZEROS <= not i_all_zeros(2**N_REGS_LOG - 1);
+    ALL_ZEROS <= i_all_zeros(2**N_REGS_LOG - 1)(2) or 
+        i_all_zeros(2**N_REGS_LOG - 1)(1) or 
+        i_all_zeros(2**N_REGS_LOG - 1)(0);
 
 end behavioural;

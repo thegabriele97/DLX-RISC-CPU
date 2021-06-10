@@ -5,6 +5,8 @@
     slt r6, r2, r1
     sgei r7, r1, #5         ; r7 <- 1 because 10 > 5
     sgti r7, r1, #15        ; r7 <- 0 because 10 < 15
+    
+    bnez r7, bk
     beqz r7, ak
     
     and r8, r2, r1          ; 1010 & 1001 = 1000 = 8
