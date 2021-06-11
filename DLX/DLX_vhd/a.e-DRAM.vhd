@@ -12,6 +12,7 @@ entity DRAM is
         Rst         : in std_logic;
         RM          : in std_logic;     -- Read memory signal
         WM          : in std_logic;     -- Write memory signal
+        EN          : in std_logic;
         address     : in std_logic_vector(LOG_RAM_DEPTH-1 downto 0);        
         data_in     : in std_logic_vector(N_BIT_DATA-1 downto 0);
         data_out    : out std_logic_vector(N_BIT_DATA-1 downto 0)
@@ -23,22 +24,28 @@ architecture Behavioral of DRAM is
     TYPE Storage IS ARRAY(0 to ((2**LOG_RAM_DEPTH) - 1)) OF std_logic_vector(N_BIT_DATA-1  downto 0);
     SIGNAL Memory : Storage;
 
+    signal i_RM: std_logic;
+    signal i_WM: std_logic;
+
 begin
+
+    i_RM <= RM and EN;
+    i_WM <= WM and EN;
     
     Wr: PROCESS(Clk)
     BEGIN
         IF rising_edge(Clk) THEN
             IF Rst = '1' THEN
                 Memory <= (OTHERS => (OTHERS => '0'));
-            ELSIF WM = '1' THEN
+            ELSIF i_WM = '1' THEN
                 Memory(to_integer(unsigned(address))) <= data_in;
             END IF;
         END IF;
     END PROCESS Wr;
     
-    Rd: PROCESS(address, RM, Memory)
+    Rd: PROCESS(address, i_RM, Memory)
     BEGIN
-        IF RM = '1' THEN
+        IF i_RM = '1' THEN
             data_out <= Memory(to_integer(unsigned(address)));
         ELSE
             data_out <= (others => '0');

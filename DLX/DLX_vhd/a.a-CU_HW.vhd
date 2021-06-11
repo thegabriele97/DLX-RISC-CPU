@@ -26,6 +26,7 @@ entity dlx_cu is
 		-- ID Control Signals
 		PIPLIN_ID_EN 	: out std_logic;	-- ID Pipeline Stage Enable
 		JUMP_EN      	: out std_logic; 	-- JUMP Enable Signal for PC input MUX
+		HAZARD_TABLE_WR1: out std_logic;		-- Inhibition of Hazard Control on the current DEST ADDRESS of the INSTR
 		LGET			: in std_logic_vector(1 downto 0);	-- From Decode Comparator
 
 		-- EX Control Signals
@@ -55,90 +56,91 @@ end dlx_cu;
 architecture dlx_cu_hw of dlx_cu is
 	
 	constant MICROCODE_MEM_SIZE: integer := 62; -- Microcode Memory Size
-	constant CW_SIZE: integer := (19 + alu_op_sig_t'length + set_op_sig_t'length); -- Control Word Size
+	constant CW_SIZE: integer := (20 + alu_op_sig_t'length + set_op_sig_t'length); -- Control Word Size
 	 
 	type mem_array is array (0 to MICROCODE_MEM_SIZE - 1) of std_logic_vector(CW_SIZE-1 downto 0);
 		
 
 	signal cw_memory: mem_array := (
-	--  "FSPJ12DXAB-----+++TWR10UMCK"	
-		"101011110000000000000000101", -- R type: IS IT CORRECT?
-	--  "FSPJ12DXAB-----+++TWR10UMCK"	
-		"000000000000000000000000000", -- [VOID]
-	--  "FSPJ12DXAB-----+++TWR10UMCK"	
-		"111100000000000000000000000", -- J (0X02) instruction encoding corresponds to the address to this ROM
-	--  "FSPJ12DXAB-----+++TWR10UMCK"	
-		"111110110100000000000000101", -- JAL to be filled
-	--  "FSPJ12DXAB-----+++TWR10UMCK"	
-		"101000000000000000000000000", -- BEQZ to be filled
-		"101000000000000000000000000", -- BNEZ
-		"101000000000000000000000000", -- 
-		"101000000000000000000000000",
-	--  "FSPJ12DXAB-----+++TWR10UMCK"	
-		"101010110100000000000000101", -- ADD i (0X08): FILL IT!!!
-		"101000000000000000000000000",
-		"101000000000000000000000000",
-		"101000000000000000000000000",
-		"101000000000000000000000000",
-		"101000000000000000000000000",
-		"101000000000000000000000000",
-	--  "FSPJ12DXAB-----+++TWR10UMCK"	
-		"101010110100000000001010111",	-- LHI (0x0f)
-		"101000000000000000000000000",
-		"101000000000000000000000000",
-		"101000000000000000000000000",
-		"101000000000000000000000000",
-		"101000000000000000000000000",
-		"101000000000000000000000000",	-- NOP (0x15)
-		"XXXXXXXXXXXXXXXXXXXXXXXXXXX",
-		"XXXXXXXXXXXXXXXXXXXXXXXXXXX",
-		"XXXXXXXXXXXXXXXXXXXXXXXXXXX",
-		"XXXXXXXXXXXXXXXXXXXXXXXXXXX",
-		"XXXXXXXXXXXXXXXXXXXXXXXXXXX",
-	--  "FSPJ12DXAB-----+++TWR10UMCK"
-		"101010110000000101100000101",	-- SGTI (0x1b)
-		"XXXXXXXXXXXXXXXXXXXXXXXXXXX",
-	--  "FSPJ12DXAB-----+++TWR10UMCK"	
-		"101010110000000100100000101",	-- SGEI (0x1d)
-		"XXXXXXXXXXXXXXXXXXXXXXXXXXX",
-		"XXXXXXXXXXXXXXXXXXXXXXXXXXX",
-	--  "FSPJ12DXAB-----+++TWR10UMCK"	
-		"101010110100000000001100111",	-- LB (0x20)
-	--  "FSPJ12DXAB-----+++TWR10UMCK"	
-		"101010110100000000001010111",	-- LH (0x21)
-		"XXXXXXXXXXXXXXXXXXXXXXXXXXX",
-		"101010110100000000001000111",	-- LW (0x23)
-	--  "FSPJ12DXAB-----+++TWR10UMCK"	
-		"101010110100000000001101111",	-- LBU (0x24)
-	--  "FSPJ12DXAB-----+++TWR10UMCK"	
-		"101010110100000000001011111",	-- LHU (0x25)
-		"XXXXXXXXXXXXXXXXXXXXXXXXXXX",	-- LF (0x26)    TODO ??
-		"XXXXXXXXXXXXXXXXXXXXXXXXXXX", 	-- LD (0x27)    TODO ??
-	--  "FSPJ12DXAB-----+++TWR10UMCK"
-		"101011110100000000010100100",	-- SB (0x28)
-	--  "FSPJ12DXAB-----+++TWR10UMCK"
-		"101011110100000000010010100",	-- SH (0x29)
-		"XXXXXXXXXXXXXXXXXXXXXXXXXXX", 	
-	--  "FSPJ12DXAB-----+++TWR10UMCK"
-		"101011110100000000010000100",	-- SW (0x2b)
-		"XXXXXXXXXXXXXXXXXXXXXXXXXXX",
-		"XXXXXXXXXXXXXXXXXXXXXXXXXXX",
-		"XXXXXXXXXXXXXXXXXXXXXXXXXXX",	-- SF (0x2e)
-		"XXXXXXXXXXXXXXXXXXXXXXXXXXX",	-- SD (0x2f)
-		"XXXXXXXXXXXXXXXXXXXXXXXXXXX",
-		"XXXXXXXXXXXXXXXXXXXXXXXXXXX",
-		"XXXXXXXXXXXXXXXXXXXXXXXXXXX",
-		"XXXXXXXXXXXXXXXXXXXXXXXXXXX",
-		"XXXXXXXXXXXXXXXXXXXXXXXXXXX",
-		"XXXXXXXXXXXXXXXXXXXXXXXXXXX",
-		"XXXXXXXXXXXXXXXXXXXXXXXXXXX",
-		"XXXXXXXXXXXXXXXXXXXXXXXXXXX",
-		"XXXXXXXXXXXXXXXXXXXXXXXXXXX",
-		"XXXXXXXXXXXXXXXXXXXXXXXXXXX",
-		"XXXXXXXXXXXXXXXXXXXXXXXXXXX",
-		"XXXXXXXXXXXXXXXXXXXXXXXXXXX",
-		"XXXXXXXXXXXXXXXXXXXXXXXXXXX",
-		"XXXXXXXXXXXXXXXXXXXXXXXXXXX"
+	--  "FSPJ12HDXAB-----+++TWR10UMCK"	
+		"1010111110000000000000000101", -- R type: IS IT CORRECT?
+	--  "FSPJ12HDXAB-----+++TWR10UMCK"	
+		"0000000000000000000000000000", -- [VOID]
+	--  "FSPJ12HDXAB-----+++TWR10UMCK"	
+		"1111000000000000000000000000", -- J (0X02) instruction encoding corresponds to the address to this ROM
+	--  "FSPJ12HDXAB-----+++TWR10UMCK"	
+		"1111101110100000000000000101", -- JAL to be filled
+	--  "FSPJ12HDXAB-----+++TWR10UMCK"	
+		"1010000000000000000000000000", -- BEQZ to be filled
+		"1010000000000000000000000000", -- BNEZ
+		"1010000000000000000000000000", -- 
+		"1010000000000000000000000000",
+	--  "FSPJ12HDXAB-----+++TWR10UMCK"	
+		"1010101110100000000000000101", -- ADD i (0X08): FILL IT!!!
+		"1010000000000000000000000000",
+		"1010000000000000000000000000",
+		"1010000000000000000000000000",
+		"1010000000000000000000000000",
+		"1010000000000000000000000000",
+		"1010000000000000000000000000",
+	--  "FSPJ12HDXAB-----+++TWR10UMCK"	
+		"1010101110100000000001010111",	-- LHI (0x0f)
+		"1010000000000000000000000000",
+		"1010000000000000000000000000",
+		"1010000000000000000000000000",
+		"1010000000000000000000000000",
+		"1010000000000000000000000000",
+		"1010000000000000000000000000",	-- NOP (0x15)
+		"XXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+	--  "FSPJ12HDXAB-----+++TWR10UMCK"
+		"1010101110000000101100000101",	-- SGTI (0x1b)
+		"XXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+	--  "FSPJ12HDXAB-----+++TWR10UMCK"	
+		"1010101110000000100100000101",	-- SGEI (0x1d)
+		"XXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+	--  "FSPJ12HDXAB-----+++TWR10UMCK"	
+		"1010101110100000000001100111",	-- LB (0x20)
+	--  "FSPJ12HDXAB-----+++TWR10UMCK"	
+		"1010101110100000000001010111",	-- LH (0x21)
+		"XXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+	--  "FSPJ12HDXAB-----+++TWR10UMCK"	
+		"1010101110100000000001000111",	-- LW (0x23)
+	--  "FSPJ12HDXAB-----+++TWR10UMCK"	
+		"1010101110100000000001101111",	-- LBU (0x24)
+	--  "FSPJ12HDXAB-----+++TWR10UMCK"	
+		"1010101110100000000001011111",	-- LHU (0x25)
+		"XXXXXXXXXXXXXXXXXXXXXXXXXXXX",	-- LF (0x26)    TODO ??
+		"XXXXXXXXXXXXXXXXXXXXXXXXXXXX",	-- LD (0x27)    TODO ??
+	--  "FSPJ12HDXAB-----+++TWR10UMCK"
+		"1010110110100000000010100100",	-- SB (0x28)
+	--  "FSPJ12HDXAB-----+++TWR10UMCK"
+		"1010110110100000000010010100",	-- SH (0x29)
+		"XXXXXXXXXXXXXXXXXXXXXXXXXXXX", 	
+	--  "FSPJ12HDXAB-----+++TWR10UMCK"
+		"1010110110100000000010000100",	-- SW (0x2b)
+		"XXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXXXXXX",	-- SF (0x2e)
+		"XXXXXXXXXXXXXXXXXXXXXXXXXXXX",	-- SD (0x2f)
+		"XXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXXXXXX"
 	);
 	
 	
@@ -148,9 +150,9 @@ architecture dlx_cu_hw of dlx_cu is
 	signal CW  		: std_logic_vector(CW_SIZE-1 downto 0); 		-- full control word read from cw_mem
 	signal CW_IF 	: std_logic_vector(CW_SIZE-1 downto 0); 		-- first stage
 	signal CW_ID 	: std_logic_vector(CW_SIZE-1-4 downto 0); 	-- second stage
-	signal CW_EX 	: std_logic_vector(CW_SIZE-1-7 downto 0); 	-- third stage
-	signal CW_MEM 	: std_logic_vector(CW_SIZE-1-7-alu_op_sig_t'length-set_op_sig_t'length-1-3 downto 0); 	-- fourth stage
-	signal CW_WB 	: std_logic_vector(CW_SIZE-1-7-alu_op_sig_t'length-set_op_sig_t'length-1-9 downto 0); 	-- fifth stage
+	signal CW_EX 	: std_logic_vector(CW_SIZE-1-8 downto 0); 	-- third stage
+	signal CW_MEM 	: std_logic_vector(CW_SIZE-1-8-alu_op_sig_t'length-set_op_sig_t'length-1-3 downto 0); 	-- fourth stage
+	signal CW_WB 	: std_logic_vector(CW_SIZE-1-8-alu_op_sig_t'length-set_op_sig_t'length-1-9 downto 0); 	-- fifth stage
 
 	signal aluOpcode_i : alu_op_sig_t := ALU_ADD; -- alu_op_sig_t defined in package
 	signal aluOpcode1  : alu_op_sig_t := ALU_ADD;
@@ -167,34 +169,43 @@ begin
 	IR_func(FUNC_SIZE - 1 downto 0)      <= IR_IN(FUNC_SIZE - 1 downto 0);
 
 	CW <= cw_memory(TO_INTEGER(unsigned(IR_opcode)));
-
+	
+	-- EX control Signals
+	-- CW_SIZE: 28
+	-- CW_IF: "FSPJ12HDXAB-----+++TWR10UMCK" : 28
+	-- CW_ID: "12HDXAB-----+++TWR10UMCK"	 : 24 
+	-- CW_EX: "XAB-----+++TWR10UMCK"	 	 : 20 
+	-- CW_ME: "WR10UMCK"	 	 			 : 8
+	-- CW_WB: "CK"	 	 			 		 : 2
+	
 	-- IF control Signals
-	PIPLIN_IF_EN 	<= CW_IF(CW_SIZE - 1);
-	--IF_STALL		<= CW_IF(CW_SIZE - 2);
-	PC_EN 			<= CW_IF(CW_SIZE - 3);
-	-- JUMP_EN      ................ - 4
+	PIPLIN_IF_EN 		<= CW_IF(CW_SIZE - 1);
+	--IF_STALL			<= CW_IF(CW_SIZE - 2);
+	PC_EN 				<= CW_IF(CW_SIZE - 3);
+	-- JUMP_EN      	................ - 4
+	
 
 	-- ID Control Signals
-	RF_RD1_EN		<= CW_ID(CW_SIZE - 5);
-	RF_RD2_EN		<= CW_ID(CW_SIZE - 6);
-	PIPLIN_ID_EN	<= CW_ID(CW_SIZE - 7);
+	RF_RD1_EN			<= CW_ID(CW_ID'length - 1);
+	RF_RD2_EN			<= CW_ID(CW_ID'length - 2);
+	HAZARD_TABLE_WR1	<= CW_ID(CW_ID'length - 3);
+	PIPLIN_ID_EN		<= CW_ID(CW_ID'length - 4);
 
-	-- EX control Signals
-	PIPLIN_EX_EN 	<= CW_EX(CW_SIZE - 8);
-	MUXA_SEL      	<= CW_EX(CW_SIZE - 9);
-	MUXB_SEL      	<= CW_EX(CW_SIZE - 10);
+	PIPLIN_EX_EN 		<= CW_EX(CW_EX'length - 1);
+	MUXA_SEL      		<= CW_EX(CW_EX'length - 2);
+	MUXB_SEL      		<= CW_EX(CW_EX'length - 3);
 
 	-- MEM control Signals
-	DRAM_WE      	<= CW_MEM(CW_SIZE - 10 - alu_op_sig_t'length - set_op_sig_t'length - 1 - 1);
-	DRAM_RE	    	<= CW_MEM(CW_SIZE - 10 - alu_op_sig_t'length - set_op_sig_t'length - 1 - 2);
-	DATA_SIZE(1)	<= CW_MEM(CW_SIZE - 10 - alu_op_sig_t'length - set_op_sig_t'length - 1 - 3);
-	DATA_SIZE(0)	<= CW_MEM(CW_SIZE - 10 - alu_op_sig_t'length - set_op_sig_t'length - 1 - 4);
-	UNSIG_SIGN_N	<= CW_MEM(CW_SIZE - 10 - alu_op_sig_t'length - set_op_sig_t'length - 1 - 5);
-	PIPLIN_MEM_EN 	<= CW_MEM(CW_SIZE - 10 - alu_op_sig_t'length - set_op_sig_t'length - 1 - 6);
+	DRAM_WE      		<= CW_MEM(CW_MEM'length - 1);
+	DRAM_RE	    		<= CW_MEM(CW_MEM'length - 2);
+	DATA_SIZE(1)		<= CW_MEM(CW_MEM'length - 3);
+	DATA_SIZE(0)		<= CW_MEM(CW_MEM'length - 4);
+	UNSIG_SIGN_N		<= CW_MEM(CW_MEM'length - 5);
+	PIPLIN_MEM_EN 		<= CW_MEM(CW_MEM'length - 6);
 
 	-- WB control Signals
-	WB_MUX_SEL 		<= CW_WB(CW_SIZE - 10 - alu_op_sig_t'length - set_op_sig_t'length - 1 - 7);
-	PIPLIN_WB_EN    <= CW_WB(CW_SIZE - 10 - alu_op_sig_t'length - set_op_sig_t'length - 1 - 8);
+	WB_MUX_SEL 			<= CW_WB(CW_WB'length - 1);
+	PIPLIN_WB_EN    	<= CW_WB(CW_WB'length - 2);
 	
 	process(CW, CW_IF, HAZARD_SIG)
 	begin
@@ -202,12 +213,12 @@ begin
 		CW_IF <= CW;
 	
 		if (HAZARD_SIG = '1') then
-			CW_IF(CW_SIZE-1) <= '0';
-			CW_IF(CW_SIZE-3) <= '0';
-			CW_IF(CW_SIZE-7) <= '0';
-			CW_IF(CW_SIZE-8) <= '0';
-			CW_IF(CW_SIZE-25) <= '0';
-			CW_IF(CW_SIZE-27) <= '0';
+			CW_IF(CW_SIZE-1) <= '0';	-- IF disabling
+			CW_IF(CW_SIZE-3) <= '0';	-- PC disabling
+			CW_IF(CW_SIZE-8) <= '0';	-- ID disabling
+			CW_IF(CW_SIZE-9) <= '0';	-- EZ disabling
+			CW_IF(CW_SIZE-26) <= '0';	-- MEM disabling
+			CW_IF(CW_SIZE-28) <= '0';	-- WB disabling
 		end if;
 			
 	
@@ -235,9 +246,9 @@ begin
 
 			else
 
-				CW_EX <= CW_ID(CW_SIZE-1-4-3 downto 0);
-				CW_MEM <= CW_EX(CW_SIZE-1-4-3-3-alu_op_sig_t'length-set_op_sig_t'length-1 downto 0);
-				CW_WB <= CW_MEM(CW_SIZE-1-4-3-3-alu_op_sig_t'length-set_op_sig_t'length-1-6 downto 0);
+				CW_EX <= CW_ID(CW_SIZE-1-4-4 downto 0);
+				CW_MEM <= CW_EX(CW_SIZE-1-4-4-3-alu_op_sig_t'length-set_op_sig_t'length-1 downto 0);
+				CW_WB <= CW_MEM(CW_SIZE-1-4-4-3-alu_op_sig_t'length-set_op_sig_t'length-1-6 downto 0);
 
 				aluOpcode1 <= aluOpcode_i;
 				setcmp_1 <= setcmp_i;
@@ -292,7 +303,7 @@ begin
 			-- when 8 => aluOpcode_i <= ALU_ADD; -- addi
 			
 			when others => 
-				aluOpcode_i <= CW(CW_SIZE-1-10 downto CW_SIZE-1-14);
+				aluOpcode_i <= CW(CW_SIZE-1-11 downto CW_SIZE-1-15);
 
 		end case;
 
@@ -346,7 +357,7 @@ begin
 				end case;
 			
 			when others => 
-				setcmp_i <= CW(CW_SIZE-1-15 downto CW_SIZE-1-17);
+				setcmp_i <= CW(CW_SIZE-1-16 downto CW_SIZE-1-18);
 
 		end case;
 
@@ -369,7 +380,7 @@ begin
 				end if;
 			
 			when others => 
-				sel_alu_setcmp_i <= CW(CW_SIZE-1-18);
+				sel_alu_setcmp_i <= CW(CW_SIZE-1-19);
 
 		end case;
 

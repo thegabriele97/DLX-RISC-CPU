@@ -11,8 +11,8 @@ myloop:
     lhu r11, 5(r1)                      ;1C
     addi r10, r10, 1                    ;20
 
-    lw r2, 4(r1)                        ;24
-    sb 20(r1), r2                       ;28
+    lbu r2, 5(r1)                        ;24
+    sh 20(r1), r2                       ;28
     
     lh r3, 8(r1)                        ;2C
     lhi r3, 9                           ;30
