@@ -8,6 +8,7 @@ vcom a.a-CU_HW.vhd
 vcom a.b-DataPath.vhd 
 vcom a.c-IRAM.vhd 
 vcom a.d-decode.vhd
+vcom a.e-DRAM.vhd 
 
 
 vcom a-DLX.vhd 

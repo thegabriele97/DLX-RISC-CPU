@@ -54,22 +54,22 @@ architecture dlx_rtl of DLX is
 		port (
 			Clk : in std_logic; -- Clock
 			Rst : in std_logic; -- Reset:Active-Low
-	
+
 			-- Instruction Register
 			IR_IN : in std_logic_vector(IR_SIZE - 1 downto 0);
-	
+
 			HAZARD_SIG: in std_logic; 	-- Data Hazard signal from ID
-	
+
 			-- IF Control Signals
 			PIPLIN_IF_EN  	: out std_logic; -- Instruction Register Latch Enable
 			IF_STALL		: out std_logic;
 			PC_EN 			: out std_logic;
-	
+
 			-- ID Control Signals
 			PIPLIN_ID_EN 	: out std_logic;	-- ID Pipeline Stage Enable
 			JUMP_EN      	: out std_logic; 	-- JUMP Enable Signal for PC input MUX
 			LGET			: in std_logic_vector(1 downto 0);	-- From Decode Comparator
-	
+
 			-- EX Control Signals
 			PIPLIN_EX_EN 	: out std_logic; 	-- ALU Output Register Enable
 			MUXA_SEL      	: out std_logic; 	-- MUX-A Sel
@@ -77,16 +77,18 @@ architecture dlx_rtl of DLX is
 			ALU_OPCODE 	  	: out alu_op_sig_t; -- ALU OP to execute
 			SEL_ALU_SETCMP	: out std_logic;
 			SEL_LGET		: out std_logic_vector(2 downto 0);
-	
+
 			-- MEM Control Signals
-			DRAM_WE      	: out std_logic; 	-- Data RAM Write Enable
-			DRAM_RE      	: out std_logic; 	-- Data RAM Read Enable
-			PIPLIN_MEM_EN   : out std_logic; 	-- LMD Register Latch Enable
-	
+			DRAM_WE      	: out std_logic; 					-- Data RAM Write Enable
+			DRAM_RE      	: out std_logic; 					-- Data RAM Read Enable
+			DATA_SIZE		: out std_logic_vector(1 downto 0);	-- word, half, byte
+			UNSIG_SIGN_N	: out std_logic;
+			PIPLIN_MEM_EN   : out std_logic; 					-- LMD Register Latch Enable
+
 			-- WB Control signals
 			WB_MUX_SEL 		: out std_logic; 	-- Write Back MUX Sel
 			PIPLIN_WB_EN    : out std_logic; 	-- Register File Write Enable
-	
+
 			RF_RD1_EN		: out std_logic;
 			RF_RD2_EN		: out std_logic
 		);
@@ -170,6 +172,9 @@ architecture dlx_rtl of DLX is
 			RF_MEM_ADDR:   out std_logic_vector(N_BIT_RF_MEM_ADDR-1 downto 0); -- Address of the RF memory
 			RF_MEM_RM: out std_logic;
 			RF_MEM_WM: out std_logic; -- TODO: comments here
+			RWM: in std_logic;
+        	DATA_SIZE: in std_logic_vector(1 downto 0);
+        	UNSIG_SIGN_N: in std_logic;
 			
 			-- Used to manage the procedure call
 			CALL:       in std_logic;
@@ -204,6 +209,23 @@ architecture dlx_rtl of DLX is
 	
 		);
     end component;
+
+	component DRAM is
+		generic (
+			N_BIT_DATA: integer := 32;
+			LOG_RAM_DEPTH : integer := 48
+		);
+		port(
+			Clk         : in std_logic;
+			Rst         : in std_logic;
+			RM          : in std_logic;     -- Read memory signal
+			WM          : in std_logic;     -- Write memory signal
+			address     : in std_logic_vector(LOG_RAM_DEPTH-1 downto 0);        
+			data_in     : in std_logic_vector(N_BIT_DATA-1 downto 0);
+			data_out    : out std_logic_vector(N_BIT_DATA-1 downto 0)
+		);
+	end component;
+
 
 	----------------------------------------------------------------
 	-- Constants Declaration
@@ -284,6 +306,10 @@ architecture dlx_rtl of DLX is
     
 	signal i_RF_MEM_RM: std_logic;
     signal i_RF_MEM_WM: std_logic;
+
+	signal i_DATA_SIZE: std_logic_vector(1 downto 0);
+	signal i_UNSIG_SIGN_N: std_logic;
+
     
 	-- -- Data Memory signal
 	signal i_FILL: std_logic;
@@ -367,6 +393,8 @@ begin  -- DLX
 		SEL_LGET		=> i_SEL_LGET,
 		DRAM_WE			=> i_DATAMEM_WM,
 		DRAM_RE			=> i_DATAMEM_RM,
+		DATA_SIZE		=> i_DATA_SIZE,
+		UNSIG_SIGN_N 	=> i_UNSIG_SIGN_N,
 		PIPLIN_MEM_EN 	=> i_EN3,
 		WB_MUX_SEL		=> i_S3,
 		PIPLIN_WB_EN	=> i_WF,
@@ -442,6 +470,9 @@ begin  -- DLX
         RF_MEM_ADDR => i_RF_MEM_ADDR,
         RF_MEM_RM => i_RF_MEM_RM,
         RF_MEM_WM => i_RF_MEM_WM,
+		RWM => i_DATAMEM_RM,		
+        DATA_SIZE =>  i_DATA_SIZE,
+        UNSIG_SIGN_N => i_UNSIG_SIGN_N,			
         CALL => '0', -- TODO
         RET => '0', -- TODO
         FILL => i_FILL,
@@ -458,5 +489,24 @@ begin  -- DLX
         S3 => i_S3,
         ADD_WB => i_ADD_WB
     );
+
+	-- 		RM WM 	- 	RWM
+	--   	0  0    	 -
+	--   	0  1    	 0
+	--   	1  0    	 1
+	--   	1  1    	 -
+
+	DRAM_I: DRAM generic map (
+		N_BIT_DATA => IR_SIZE,
+		LOG_RAM_DEPTH => 10
+	) port map(
+		Clk => Clk,
+        Rst => Rst,
+		RM => i_DATAMEM_RM,
+		WM => i_DATAMEM_WM,
+		address => i_DATAMEM_ADDR,    
+		data_in => i_DATAMEM_BUS_TOMEM,
+		data_out => i_DATAMEM_BUS_FROMEM
+	);
 
 end dlx_rtl;

@@ -191,9 +191,17 @@ begin
                 i_SEL_CMPB <= '0';
             end if;
 
+            
             i_RS1 <= INSTR(N_BIT_INSTR-OPCODE_SIZE-1 downto N_BIT_INSTR-OPCODE_SIZE-N_BIT_ADDR_RF);
-            i_RS2 <= (OTHERS => '0');
+            i_RS2 <= (others => '0');
             i_WS1 <= INSTR(N_BIT_INSTR-OPCODE_SIZE-N_BIT_ADDR_RF-1 downto N_BIT_INSTR-OPCODE_SIZE-2*N_BIT_ADDR_RF);
+            
+            if (op_code = "101000" or op_code = "101001" or op_code = "101011" or op_code = "101110" or op_code = "101111") then    -- if it is a store
+                i_RS2 <= INSTR(N_BIT_INSTR-OPCODE_SIZE-N_BIT_ADDR_RF-1 downto N_BIT_INSTR-OPCODE_SIZE-2*N_BIT_ADDR_RF);
+                i_WS1 <= (others => '0');
+                i_WR1 <= '0'; -- inhibition of hazard control on i_WS1 
+            end if;
+
 
             INP1 <= (others => '0');
             

@@ -47,8 +47,11 @@ entity DP is
         RF_BUS_TOMEM:  out std_logic_vector(N_BIT_DATA - 1 downto 0); -- Data bus from the datapath to the RF memory
         RF_BUS_FROMEM: in std_logic_vector(N_BIT_DATA - 1 downto 0); -- Data bus from the RF memory to the datapath
         RF_MEM_ADDR:   out std_logic_vector(N_BIT_RF_MEM_ADDR-1 downto 0); -- Address of the RF memory
-        RF_MEM_RM: out std_logic;
-        RF_MEM_WM: out std_logic; -- TODO: comments here
+        RF_MEM_RM: out std_logic;       -- Register file memory enable read signal
+        RF_MEM_WM: out std_logic;       -- Register file memory enable write signal
+        RWM: in std_logic;              -- Data memory read/write enable signal: 1 read, 0 write
+        DATA_SIZE: in std_logic_vector(1 downto 0);     -- Signal to decide how many bits to extend the data for the load/store
+        UNSIG_SIGN_N: in std_logic;                     -- Signal to decide if the load/store is unsigned or not: 1 unsigned, 0 signed
         
         -- Used to manage the procedure call
         CALL:       in std_logic;
@@ -223,6 +226,24 @@ architecture structural of DP is
         );
     end component;
 
+    component datamem_ldstr is 
+        generic(
+            N_BIT_DATA: integer := 32 
+        );
+        port(
+
+            DATA_RAW    : in std_logic_vector(N_BIT_DATA-1 downto 0);
+            
+            -- 00 -> N_BIT_DATA bit     (lw/sw)
+            -- 01 -> N_BIT_DATA/2 bit   (lh/sh)
+            -- 10 -> 8 bit              (lb/sb)
+            DATA_SIZE   : in std_logic_vector(1 downto 0); 
+            UNSIG_SIGN_N: in std_logic;                                 -- 0 is signed, 1 is unsigned
+                        
+            DATA_OUT    : out std_logic_vector(N_BIT_DATA-1 downto 0)
+        );
+    end component;
+
 
     --
     -- PIPELINE STAGE 1
@@ -266,6 +287,10 @@ architecture structural of DP is
     signal i_REG_MEM_ALUOUT: std_logic_vector(N_BIT_DATA-1 downto 0);
     signal i_MUX_STAGE3_REG_OUT: std_logic_vector(N_BIT_DATA-1 downto 0);
     signal i_REG_DATAOUT: std_logic_vector(N_BIT_DATA-1 downto 0);
+    signal i_DATA_RAW: std_logic_vector(N_BIT_DATA-1 downto 0);
+    signal i_LDSTR_OUT: std_logic_vector(N_BIT_DATA-1 downto 0);
+    signal i_REG_LDSTR_OUT: std_logic_vector(N_BIT_DATA-1 downto 0);
+
 
 begin
 
@@ -490,7 +515,6 @@ begin
     -- 
     -- REGISTER ME --
     --
-    DATAMEM_BUS_TOMEM <= i_REG_ME_DATA_DATAMEM;
 
     REG_ME: reg_generic generic map(
         N => N_BIT_DATA,
@@ -504,30 +528,71 @@ begin
     );
 
 
+
+
+    MUX_LDSTR: mux2_1 generic map(
+        NBIT => N_BIT_DATA
+    ) port map(
+        a => DATAMEM_BUS_FROMEM,
+        b => i_REG_ME_DATA_DATAMEM,
+        s => RWM,
+        y => i_DATA_RAW
+    );
+
     -- 
-    -- REGISTER MEM STAGE - ALU OUT --
+    -- LDSTR
+    --
+    DATAMEM_BUS_TOMEM <= i_LDSTR_OUT;
+    
+    LDSTR: datamem_ldstr generic map (
+        N_BIT_DATA => N_BIT_DATA
+    ) port map( 
+        DATA_RAW => i_DATA_RAW,
+        DATA_SIZE => DATA_SIZE,
+        UNSIG_SIGN_N => UNSIG_SIGN_N,
+        DATA_OUT => i_LDSTR_OUT
+    );
+
+    
+    -- 
+    -- PIPELINE: MEM STAGE -- LDSTR OUT --
+    --
+    REG_MEM_LDSTR_OUT: reg_generic generic map(
+        N => N_BIT_DATA,
+        RSTVAL => 0
+    ) port map(
+        D => i_LDSTR_OUT,   
+        Q => i_REG_LDSTR_OUT,                  
+        Clk => Clk,       
+        Rst => Rst,     
+        Enable => EN3
+    );
+
+    
+    -- 
+    -- PIPELINE: MEM STAGE -- ALU OUT --
     --
     REG_MEM_ALUOUT: reg_generic generic map(
         N => N_BIT_DATA,
         RSTVAL => 0
     ) port map(
         D => i_REG_ALU_OUT_ADDRESS_DATAMEM,   
-        Q => i_REG_MEM_ALUOUT,                  -- TODO: Check if correct
+        Q => i_REG_MEM_ALUOUT,               
         Clk => Clk,       
         Rst => Rst,     
         Enable => EN3
     );
 
+    
     --
     --  MUX STAGE 3
     --
-    i_REG_ME_DATA_DATAMEM <= DATAMEM_BUS_FROMEM;
     i_RF_DATA_IN <= i_MUX_STAGE3_REG_OUT;
 
     MUX_STAGE_3: mux2_1 generic map(
         NBIT => N_BIT_DATA
     ) port map(
-        a => i_REG_ME_DATA_DATAMEM,
+        a => i_REG_LDSTR_OUT,
         b => i_REG_MEM_ALUOUT,
         s => S3,
         y => i_MUX_STAGE3_REG_OUT
@@ -577,7 +642,7 @@ begin
     );
 
         -- 
-    -- WRB 2 --
+    -- WRB 3 --
     --
     WRB3: reg_generic generic map(
         N => N_BIT_ADDR_RF,

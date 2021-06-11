@@ -8,3 +8,4 @@ vcom ./a.b-DataPath.core/a.b.c-reg_generic.vhd
 vcom ./a.b-DataPath.core/a.b.d-ALU.vhd
 vcom ./a.b-DataPath.core/a.b.e-wRF_CU.vhd
 vcom ./a.b-DataPath.core/a.b.f-set_comparator.vhd
+vcom ./a.b-DataPath.core/a.b.g-datamem_ldstr.vhd
