@@ -34,6 +34,8 @@ entity DP is
         RS1 :   in std_logic_vector(N_BIT_ADDR_RF-1 downto 0);      -- address PORT 1 of the register file
         RS2 :   in std_logic_vector(N_BIT_ADDR_RF-1 downto 0);      -- address PORT 2 of the register file
         WS1 :   in std_logic_vector(N_BIT_ADDR_RF-1 downto 0);      -- Address used for the write back
+        RD1 :   out std_logic_vector(N_BIT_DATA-1 downto 0);
+        RD2 :   out std_logic_vector(N_BIT_DATA-1 downto 0);        -- RD1 & RD2 towards the DECODE unit
 
         -- Our RF has two reading port and one writing port
 
@@ -64,18 +66,20 @@ entity DP is
         S2: in std_logic; -- Selector for bottom mux, called mux B
         
 
-
         -- ALU 
         ALU_OP: in std_logic_vector(N_OPSEL + 3 - 1 downto 0); -- Control signal for the ALU in order to decide the operation
         ALU_COUT: out std_logic;    -- Carry out of the operation made by the ALU
-        A_LE_B: out std_logic;      -- A less equal B 
-        A_LT_B: out std_logic;      -- A less than B
-        A_GT_B: out std_logic;      -- A greater that B
-        A_GE_B: out std_logic;      -- A greater equal B
-        A_EQ_B: out std_logic;      -- A equal B
 
+        -- Comparator results coming from the datapath
+        SEL_ALU_SETCMP: in std_logic;
+        LGET:   in std_logic_vector(1 downto 0);
+        SEL_LGET:   in std_logic_vector(2 downto 0);
+        
         -- Mux selector for stage 3 of the pipeline
-        S3: in std_logic -- Selector for mux of stage 3
+        S3: in std_logic; -- Selector for mux of stage 3
+
+        ADD_WB: out std_logic_vector(N_BIT_ADDR_RF-1 downto 0)      -- Adress that goes into the hazard table that tells that we can execute the other operation
+
     );
 end entity;
 
@@ -179,14 +183,7 @@ architecture structural of DP is
     
             Y:      out std_logic_vector(N_BIT_DATA-1 downto 0);
             
-            COUT:   out std_logic;
-            
-            A_LE_B: out std_logic;
-            A_LT_B: out std_logic;
-            A_GT_B: out std_logic;
-            A_GE_B: out std_logic;
-            A_EQ_B: out std_logic	
-    
+            COUT:   out std_logic    
         );
     
     end component;
@@ -215,6 +212,17 @@ architecture structural of DP is
     
     end component;
 
+    component set_comparator is
+        generic(
+            N_BIT_DATA: integer := 32
+        );
+        port(
+            LGET:       in std_logic_vector(1 downto 0);
+            SEL_LGET:   in std_logic_vector(2 downto 0);
+            SET_OUT:    out std_logic_vector(N_BIT_DATA-1 downto 0)
+        );
+    end component;
+
 
     --
     -- PIPELINE STAGE 1
@@ -233,6 +241,7 @@ architecture structural of DP is
     signal i_PIPLIN_IN1: std_logic_vector(N_BIT_DATA-1 downto 0); -- output of the register IN1 that goes into MUX_IN1_A
     signal i_PIPLIN_IN2: std_logic_vector(N_BIT_DATA-1 downto 0); -- output of the register IN2 that goes into MUX_IN1_B
     signal i_PIPLIN_WRB1: std_logic_vector(N_BIT_ADDR_RF-1 downto 0);
+    signal i_PIPLIN_WRB2: std_logic_vector(N_BIT_ADDR_RF-1 downto 0);
     
     
     --
@@ -240,16 +249,21 @@ architecture structural of DP is
     --
     signal i_RF_WS: std_logic_vector(N_BIT_ADDR_RF-1 downto 0); -- Write address for the register file
     
+    signal i_SETCMP_OUT: std_logic_vector(N_BIT_DATA-1 downto 0);
     signal i_ALU_IN_A: std_logic_vector(N_BIT_DATA-1 downto 0); -- output of the multiplexer A that goes into the ALU
     signal i_ALU_IN_B: std_logic_vector(N_BIT_DATA-1 downto 0); -- output of the multiplexer B that goes into the ALU
     signal i_ALU_OUT: std_logic_vector(N_BIT_DATA-1 downto 0); -- output of the ALU that goes into the REG_ALU_OUT
+    signal i_MUX_ALU_SETCMP: std_logic_vector(N_BIT_DATA-1 downto 0);
     signal i_REG_ALU_OUT_ADDRESS_DATAMEM: std_logic_vector(N_BIT_DATA-1 downto 0); -- output of the REG_ALU_OUT that goes into the address of the DATA_MEMORY
     signal i_REG_ME_DATA_DATAMEM: std_logic_vector(N_BIT_DATA-1 downto 0); -- output of the REG_ME that goes into the data of the DATA_MEMORY
+
+    signal i_LGET: std_logic_vector(1 downto 0);
 
 
     --
     -- PIPELINE STAGE 3
     --
+    signal i_REG_MEM_ALUOUT: std_logic_vector(N_BIT_DATA-1 downto 0);
     signal i_MUX_STAGE3_REG_OUT: std_logic_vector(N_BIT_DATA-1 downto 0);
     signal i_REG_DATAOUT: std_logic_vector(N_BIT_DATA-1 downto 0);
 
@@ -268,6 +282,9 @@ begin
     -- This is used not to avoid writing on the register R0. When we initialize the register file, 
     -- the whole content in 0. After that we cannot touch anymore R0 that will be fixed to 0
     i_WF <= WF when (TO_INTEGER(unsigned(i_RF_WS)) /= 0) else '0';
+    ADD_WB <= i_RF_WS;
+    RD1 <= i_RF_DATA_O1;
+    RD2 <= i_RF_DATA_O2;
 
     RF: windowing_rf generic map( 
         NBIT_DATA => N_BIT_DATA, 
@@ -401,6 +418,33 @@ begin
 
 
     --
+    --  REG COMPARATOR for seqi, snei, slti, sgti, slei, sge
+    --
+    REG_CMP: reg_generic generic map(
+        N => 2,
+        RSTVAL => 0
+    ) port map(
+        D => LGET,   
+        Q => i_LGET,
+        Clk => Clk,       
+        Rst => Rst,     
+        Enable => EN1
+    );
+
+    --
+    --  SET COMPARATOR for seqi, snei, slti, sgti, slei, sge
+    --
+    SETCMP: set_comparator generic map(
+        N_BIT_DATA => N_BIT_DATA
+    ) port map(
+        LGET => i_LGET,
+        SEL_LGET => SEL_LGET, 
+        SET_OUT => i_SETCMP_OUT
+    );
+    
+
+
+    --
     --  ALU
     --
     ALUhw: ALU generic map(
@@ -411,14 +455,20 @@ begin
         INB => i_ALU_IN_B,
         OP => ALU_OP,
         Y => i_ALU_OUT,
-        COUT => ALU_COUT,
-        A_LE_B => A_LE_B,
-        A_LT_B => A_LT_B,
-        A_GT_B => A_GT_B,
-        A_GE_B => A_GE_B,
-        A_EQ_B => A_EQ_B
+        COUT => ALU_COUT
     );
 
+    -- 
+    -- MUX ALU/SETCMP --
+    --
+    MUX_ALU_SETCMP: mux2_1 generic map(
+        NBIT => N_BIT_DATA
+    ) port map(
+        a => i_SETCMP_OUT,
+        b => i_ALU_OUT,
+        s => SEL_ALU_SETCMP,
+        y => i_MUX_ALU_SETCMP
+    );
 
     -- 
     -- REGISTER ALU_OUT --
@@ -429,7 +479,7 @@ begin
         N => N_BIT_DATA,
         RSTVAL => 0
     ) port map(
-        D => i_ALU_OUT,        
+        D => i_MUX_ALU_SETCMP,        
         Q => i_REG_ALU_OUT_ADDRESS_DATAMEM,
         Clk => Clk,       
         Rst => Rst,     
@@ -454,7 +504,20 @@ begin
     );
 
 
-        
+    -- 
+    -- REGISTER MEM STAGE - ALU OUT --
+    --
+    REG_MEM_ALUOUT: reg_generic generic map(
+        N => N_BIT_DATA,
+        RSTVAL => 0
+    ) port map(
+        D => i_REG_ALU_OUT_ADDRESS_DATAMEM,   
+        Q => i_REG_MEM_ALUOUT,                  -- TODO: Check if correct
+        Clk => Clk,       
+        Rst => Rst,     
+        Enable => EN3
+    );
+
     --
     --  MUX STAGE 3
     --
@@ -465,11 +528,10 @@ begin
         NBIT => N_BIT_DATA
     ) port map(
         a => i_REG_ME_DATA_DATAMEM,
-        b => i_REG_ALU_OUT_ADDRESS_DATAMEM,
+        b => i_REG_MEM_ALUOUT,
         s => S3,
         y => i_MUX_STAGE3_REG_OUT
     );
-
 
     -- 
     -- REGISTER OUT --
@@ -508,10 +570,24 @@ begin
         RSTVAL => 0
     ) port map(
         D => i_PIPLIN_WRB1,   
-        Q => i_RF_WS,                  
+        Q => i_PIPLIN_WRB2,                  
         Clk => Clk,
         Rst => Rst,
         Enable => EN2
+    );
+
+        -- 
+    -- WRB 2 --
+    --
+    WRB3: reg_generic generic map(
+        N => N_BIT_ADDR_RF,
+        RSTVAL => 0
+    ) port map(
+        D => i_PIPLIN_WRB2,   
+        Q => i_RF_WS,                  
+        Clk => Clk,
+        Rst => Rst,
+        Enable => EN3
     );
 
 

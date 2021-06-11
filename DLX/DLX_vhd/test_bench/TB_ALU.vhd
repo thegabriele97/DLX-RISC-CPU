@@ -43,12 +43,7 @@ architecture test of tb_alu is
 
 
             Y:      out std_logic_vector(N_BIT_DATA-1 downto 0);
-            Cout:   out std_logic;
-            A_LE_B: out std_logic;
-            A_LT_B: out std_logic;
-            A_GT_B: out std_logic;
-            A_GE_B: out std_logic;
-            A_EQ_B: out std_logic	
+            Cout:   out std_logic
 
         );
     
@@ -57,11 +52,10 @@ architecture test of tb_alu is
     signal a, b, y: std_logic_vector(32-1 downto 0);
     signal op: std_logic_vector(5-1 downto 0);
     signal co: std_logic;
-    signal a_le_b, a_lt_b, a_gt_b, a_ge_b, a_eq_b: std_logic;
 
 begin
 
-    DUT: ALU generic map(32, 2) port map(a, b, op, y, co, a_le_b, a_lt_b, a_gt_b, a_ge_b, a_eq_b);
+    DUT: ALU generic map(32, 2) port map(a, b, op, y, co);
 
     process
     begin

@@ -1,0 +1,2 @@
+vcom ./a.d-decode.core/a.d.a-hazard_table.vhd
+vcom ./a.d-decode.core/a.d.b-comparator.vhd

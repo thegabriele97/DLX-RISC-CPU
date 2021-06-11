@@ -1,173 +1,383 @@
 library ieee;
 use ieee.std_logic_1164.all;
-use ieee.std_logic_unsigned.all;
-use ieee.std_logic_arith.all;
+use ieee.numeric_std.all;
 use work.myTypes.all;
---use ieee.numeric_std.all;
---use work.all;
 
 entity dlx_cu is
-  generic (
-    MICROCODE_MEM_SIZE :     integer := 10;  -- Microcode Memory Size
-    FUNC_SIZE          :     integer := 11;  -- Func Field Size for R-Type Ops
-    OP_CODE_SIZE       :     integer := 6;  -- Op Code Size
-    -- ALU_OPC_SIZE       :     integer := 6;  -- ALU Op Code Word Size
-    IR_SIZE            :     integer := 32;  -- Instruction Register Size    
-    CW_SIZE            :     integer := 15);  -- Control Word Size
-  port (
-    Clk                : in  std_logic;  -- Clock
-    Rst                : in  std_logic;  -- Reset:Active-Low
-    -- Instruction Register
-    IR_IN              : in  std_logic_vector(IR_SIZE - 1 downto 0);
-    
-    -- IF Control Signal
-    IR_LATCH_EN        : out std_logic;  -- Instruction Register Latch Enable
-    NPC_LATCH_EN       : out std_logic;
-                                        -- NextProgramCounter Register Latch Enable
-    -- ID Control Signals
-    RegA_LATCH_EN      : out std_logic;  -- Register A Latch Enable
-    RegB_LATCH_EN      : out std_logic;  -- Register B Latch Enable
-    RegIMM_LATCH_EN    : out std_logic;  -- Immediate Register Latch Enable
+	generic (
+		FUNC_SIZE          	: integer := 11; -- Func Field Size for R-Type Ops
+		OP_CODE_SIZE       	: integer := 6; -- Op Code Size
+		IR_SIZE 			: integer := 32 -- Instruction Register Size    
+	);
+	port (
+		Clk : in std_logic; -- Clock
+		Rst : in std_logic; -- Reset:Active-Low
 
-    -- EX Control Signals
-    MUXA_SEL           : out std_logic;  -- MUX-A Sel
-    MUXB_SEL           : out std_logic;  -- MUX-B Sel
-    ALU_OUTREG_EN      : out std_logic;  -- ALU Output Register Enable
-    EQ_COND            : out std_logic;  -- Branch if (not) Equal to Zero
-    
-    -- ALU Operation Code
-    ALU_OPCODE         : out aluOp; -- choose between implicit or exlicit coding, like std_logic_vector(ALU_OPC_SIZE -1 downto 0);
-    
-    -- MEM Control Signals
-    DRAM_WE            : out std_logic;  -- Data RAM Write Enable
-    LMD_LATCH_EN       : out std_logic;  -- LMD Register Latch Enable
-    JUMP_EN            : out std_logic;  -- JUMP Enable Signal for PC input MUX
-    PC_LATCH_EN        : out std_logic;  -- Program Counte Latch Enable
+		-- Instruction Register
+		IR_IN : in std_logic_vector(IR_SIZE - 1 downto 0);
 
-    -- WB Control signals
-    WB_MUX_SEL         : out std_logic;  -- Write Back MUX Sel
-    RF_WE              : out std_logic);  -- Register File Write Enable
+		HAZARD_SIG: in std_logic; 	-- Data Hazard signal from ID
 
+		-- IF Control Signals
+		PIPLIN_IF_EN  	: out std_logic; -- Instruction Register Latch Enable
+		IF_STALL		: out std_logic;
+		PC_EN 			: out std_logic;
+
+		-- ID Control Signals
+		PIPLIN_ID_EN 	: out std_logic;	-- ID Pipeline Stage Enable
+		JUMP_EN      	: out std_logic; 	-- JUMP Enable Signal for PC input MUX
+		LGET			: in std_logic_vector(1 downto 0);	-- From Decode Comparator
+
+		-- EX Control Signals
+		PIPLIN_EX_EN 	: out std_logic; 	-- ALU Output Register Enable
+		MUXA_SEL      	: out std_logic; 	-- MUX-A Sel
+		MUXB_SEL      	: out std_logic; 	-- MUX-B Sel
+		ALU_OPCODE 	  	: out alu_op_sig_t; -- ALU OP to execute
+		SEL_ALU_SETCMP	: out std_logic;
+        SEL_LGET		: out std_logic_vector(2 downto 0);
+
+		-- MEM Control Signals
+		DRAM_WE      	: out std_logic; 	-- Data RAM Write Enable
+		DRAM_RE      	: out std_logic; 	-- Data RAM Read Enable
+		PIPLIN_MEM_EN   : out std_logic; 	-- LMD Register Latch Enable
+
+		-- WB Control signals
+		WB_MUX_SEL 		: out std_logic; 	-- Write Back MUX Sel
+		PIPLIN_WB_EN    : out std_logic; 	-- Register File Write Enable
+
+		RF_RD1_EN		: out std_logic;
+		RF_RD2_EN		: out std_logic
+	);
 end dlx_cu;
 
 architecture dlx_cu_hw of dlx_cu is
-  type mem_array is array (integer range 0 to MICROCODE_MEM_SIZE - 1) of std_logic_vector(CW_SIZE - 1 downto 0);
-  signal cw_mem : mem_array := ("111100010000111", -- R type: IS IT CORRECT?
-                                "000000000000000",
-                                "111011111001100", -- J (0X02) instruction encoding corresponds to the address to this ROM
-                                "000000000000000", -- JAL to be filled
-                                "000000000000000", -- BEQZ to be filled
-                                "000000000000000", -- BNEZ
-                                "000000000000000", -- 
-                                "000000000000000",
-                                "000000000000000", -- ADD i (0X08): FILL IT!!!
-                                "000000000000000");-- to be completed (enlarged and filled)
-                                
-                                
-  signal IR_opcode : std_logic_vector(OP_CODE_SIZE -1 downto 0);  -- OpCode part of IR
-  signal IR_func : std_logic_vector(FUNC_SIZE-1 downto 0);   -- Func part of IR when Rtype
-  signal cw   : std_logic_vector(CW_SIZE - 1 downto 0); -- full control word read from cw_mem
-
-
-  -- control word is shifted to the correct stage
-  signal cw1 : std_logic_vector(CW_SIZE -1 downto 0); -- first stage
-  signal cw2 : std_logic_vector(CW_SIZE - 1 - 2 downto 0); -- second stage
-  signal cw3 : std_logic_vector(CW_SIZE - 1 - 5 downto 0); -- third stage
-  signal cw4 : std_logic_vector(CW_SIZE - 1 - 9 downto 0); -- fourth stage
-  signal cw5 : std_logic_vector(CW_SIZE -1 - 13 downto 0); -- fifth stage
-
-  signal aluOpcode_i: aluOp := NOP; -- ALUOP defined in package
-  signal aluOpcode1: aluOp := NOP;
-  signal aluOpcode2: aluOp := NOP;
-  signal aluOpcode3: aluOp := NOP;
-
-
- 
-begin  -- dlx_cu_rtl
-
-  IR_opcode(OP_CODE_SIZE -1 downto 0) <= IR_IN(31 downto 26);
-  IR_func(FUNC_SIZE-1 downto 0)  <= IR_IN(FUNC_SIZE -1 downto 0);
-
-  cw <= cw_mem(conv_integer(IR_opcode));
-
-
-  -- stage one control signals
-  IR_LATCH_EN  <= cw1(CW_SIZE - 1);
-  NPC_LATCH_EN <= cw1(CW_SIZE - 2);
-  
-  -- stage two control signals
-  RegA_LATCH_EN   <= cw2(CW_SIZE - 3);
-  RegB_LATCH_EN   <= cw2(CW_SIZE - 4);
-  RegIMM_LATCH_EN <= cw2(CW_SIZE - 5);
-  
-  -- stage three control signals
-  MUXA_SEL      <= cw3(CW_SIZE - 6);
-  MUXB_SEL      <= cw3(CW_SIZE - 7);
-  ALU_OUTREG_EN <= cw3(CW_SIZE - 8);
-  EQ_COND       <= cw3(CW_SIZE - 9);
-  
-  -- stage four control signals
-  DRAM_WE      <= cw4(CW_SIZE - 10);
-  LMD_LATCH_EN <= cw4(CW_SIZE - 11);
-  JUMP_EN      <= cw4(CW_SIZE - 12);
-  PC_LATCH_EN  <= cw4(CW_SIZE - 13);
-  
-  -- stage five control signals
-  WB_MUX_SEL <= cw5(CW_SIZE - 14);
-  RF_WE      <= cw5(CW_SIZE - 15);
-
-
-  -- process to pipeline control words
-  CW_PIPE: process (Clk, Rst)
-  begin  -- process Clk
-    if Rst = '0' then                   -- asynchronous reset (active low)
-        cw1 <= (others => '0');
-        cw2 <= (others => '0');
-        cw3 <= (others => '0');
-        cw4 <= (others => '0');
-        cw5 <= (others => '0');
-        aluOpcode1 <= NOP;
-        aluOpcode2 <= NOP;
-        aluOpcode3 <= NOP;
-    elsif Clk'event and Clk = '1' then  -- rising clock edge
-        cw1 <= cw;
-        cw2 <= cw1(CW_SIZE - 1 - 2 downto 0);
-        cw3 <= cw2(CW_SIZE - 1 - 5 downto 0);
-        cw4 <= cw3(CW_SIZE - 1 - 9 downto 0);
-        cw5 <= cw4(CW_SIZE -1 - 13 downto 0);
-
-        aluOpcode1 <= aluOpcode_i;
-        aluOpcode2 <= aluOpcode1;
-        aluOpcode3 <= aluOpcode2;
-    end if;
-  end process CW_PIPE;
-
-  ALU_OPCODE <= aluOpcode3;
-
-  -- purpose: Generation of ALU OpCode
-  -- type   : combinational
-  -- inputs : IR_i
-  -- outputs: aluOpcode
-  ALU_OP_CODE_P : process (IR_opcode, IR_func)
-  begin  -- process ALU_OP_CODE_P
-    
-  case conv_integer(unsigned(IR_opcode)) is
-      -- case of R type requires analysis of FUNC
-        when 0 =>
-        
-          case conv_integer(unsigned(IR_func)) is
-              when 4 => aluOpcode_i <= LLS; -- sll according to instruction set coding
-              when 6 => aluOpcode_i <= LRS; -- srl
-              -- to be continued and filled with all the other instructions  
-              when others => aluOpcode_i <= NOP;
-          end case;
-
-        when 2 => aluOpcode_i <= NOP; -- j
-        when 3 => aluOpcode_i <= NOP; -- jal
-        when 8 => aluOpcode_i <= ADDS; -- addi
-        -- to be continued and filled with other cases
-        when others => aluOpcode_i <= NOP;
-    end case;
 	
-    end process ALU_OP_CODE_P;
+	constant MICROCODE_MEM_SIZE: integer := 62; -- Microcode Memory Size
+	constant CW_SIZE: integer := (16 + alu_op_sig_t'length + set_op_sig_t'length); -- Control Word Size
+	
+	type mem_array is array (0 to MICROCODE_MEM_SIZE - 1) of std_logic_vector(CW_SIZE-1 downto 0);
+		
+
+	signal cw_memory: mem_array := (
+	--  "FSPJ12DXAB-----+++TWRMCK"	
+		"101011110000000000000101", -- R type: IS IT CORRECT?
+	--  "FSPJ12DXAB-----+++TWRMCK"	
+		"000000000000000000000000", -- [VOID]
+	--  "FSPJ12DXAB-----+++TWRMCK"	
+		"111100000000000000000000", -- J (0X02) instruction encoding corresponds to the address to this ROM
+	--  "FSPJ12DXAB-----+++TWRMCK"	
+		"111110110100000000000101", -- JAL to be filled
+	--  "FSPJ12DXAB-----+++TWRMCK"	
+		"101000000000000000000000", -- BEQZ to be filled
+		"101000000000000000000000", -- BNEZ
+		"101000000000000000000000", -- 
+		"101000000000000000000000",
+	--  "FSPJ12DXAB-----+++TWRMCK"	
+		"101010110100000000000101", -- ADD i (0X08): FILL IT!!!
+		"101000000000000000000000",
+		"101000000000000000000000",
+		"101000000000000000000000",
+		"101000000000000000000000",
+		"101000000000000000000000",
+		"101000000000000000000000",
+		"101000000000000000000000",
+		"101000000000000000000000",
+		"101000000000000000000000",
+		"101000000000000000000000",
+		"101000000000000000000000",
+		"101000000000000000000000",
+		"101000000000000000000000",	-- NOP (0x15)
+		"XXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXX",
+	--  "FSPJ12DXAB-----+++TWRMCK"
+		"101010110000000101100101",	-- SGTI (0x1b)
+		"XXXXXXXXXXXXXXXXXXXXXXXX",
+	--  "FSPJ12DXAB-----+++TWRMCK"	
+		"101010110000000100100101",	-- SGEI (0x1d)
+		"XXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXX"
+	);
+	
+	
+	signal IR_opcode : std_logic_vector(OP_CODE_SIZE-1 downto 0); -- OpCode part of IR
+	signal IR_func   : std_logic_vector(FUNC_SIZE-1 downto 0); 	-- Func part of IR when Rtype
+	
+	signal CW  		: std_logic_vector(CW_SIZE-1 downto 0); 		-- full control word read from cw_mem
+	signal CW_IF 	: std_logic_vector(CW_SIZE-1 downto 0); 		-- first stage
+	signal CW_ID 	: std_logic_vector(CW_SIZE-1-4 downto 0); 	-- second stage
+	signal CW_EX 	: std_logic_vector(CW_SIZE-1-7 downto 0); 	-- third stage
+	signal CW_MEM 	: std_logic_vector(CW_SIZE-1-7-alu_op_sig_t'length-set_op_sig_t'length-1-3 downto 0); 	-- fourth stage
+	signal CW_WB 	: std_logic_vector(CW_SIZE-1-7-alu_op_sig_t'length-set_op_sig_t'length-1-6 downto 0); 	-- fifth stage
+
+	signal aluOpcode_i : alu_op_sig_t := ALU_ADD; -- alu_op_sig_t defined in package
+	signal aluOpcode1  : alu_op_sig_t := ALU_ADD;
+
+	signal setcmp_i: set_op_sig_t;
+	signal setcmp_1: set_op_sig_t;
+
+	signal sel_alu_setcmp_i: std_logic;
+	signal sel_alu_setcmp_1: std_logic;
+
+begin
+
+	IR_opcode(OP_CODE_SIZE - 1 downto 0) <= IR_IN(31 downto 26);
+	IR_func(FUNC_SIZE - 1 downto 0)      <= IR_IN(FUNC_SIZE - 1 downto 0);
+
+	CW <= cw_memory(TO_INTEGER(unsigned(IR_opcode)));
+
+	-- IF control Signals
+	PIPLIN_IF_EN 	<= CW_IF(CW_SIZE - 1);
+	--IF_STALL		<= CW_IF(CW_SIZE - 2);
+	PC_EN 			<= CW_IF(CW_SIZE - 3);
+	-- JUMP_EN      ................ - 4
+
+	-- ID Control Signals
+	RF_RD1_EN		<= CW_ID(CW_SIZE - 5);
+	RF_RD2_EN		<= CW_ID(CW_SIZE - 6);
+	PIPLIN_ID_EN	<= CW_ID(CW_SIZE - 7);
+
+	-- EX control Signals
+	PIPLIN_EX_EN 	<= CW_EX(CW_SIZE - 8);
+	MUXA_SEL      	<= CW_EX(CW_SIZE - 9);
+	MUXB_SEL      	<= CW_EX(CW_SIZE - 10);
+
+	-- MEM control Signals
+	DRAM_WE      	<= CW_MEM(CW_SIZE - 10 - alu_op_sig_t'length - set_op_sig_t'length - 1 - 1);
+	DRAM_RE	    	<= CW_MEM(CW_SIZE - 10 - alu_op_sig_t'length - set_op_sig_t'length - 1 - 2);
+	PIPLIN_MEM_EN 	<= CW_MEM(CW_SIZE - 10 - alu_op_sig_t'length - set_op_sig_t'length - 1 - 3);
+
+	-- WB control Signals
+	WB_MUX_SEL 		<= CW_WB(CW_SIZE - 10 - alu_op_sig_t'length - set_op_sig_t'length - 1 - 4);
+	PIPLIN_WB_EN    <= CW_WB(CW_SIZE - 10 - alu_op_sig_t'length - set_op_sig_t'length - 1 - 5);
+	
+	process(CW, CW_IF, HAZARD_SIG)
+	begin
+		
+		CW_IF <= CW;
+	
+		if (HAZARD_SIG = '1') then
+			CW_IF(CW_SIZE-1) <= '0';
+			CW_IF(CW_SIZE-3) <= '0';
+			CW_IF(CW_SIZE-7) <= '0';
+			CW_IF(CW_SIZE-8) <= '0';
+			CW_IF(CW_SIZE-22) <= '0';
+			CW_IF(CW_SIZE-24) <= '0';
+		end if;
+			
+	
+	end process;
+
+	CW_ID <= CW_IF(CW_SIZE-1-4 downto 0);
+	
+
+	-- process to pipeline control words
+	CW_PIPE : process (Clk)
+	begin -- process Clk
+		
+		if (rising_edge(Clk)) then
+		
+			if (Rst = '1') then
+				--CW_IF <= (others => '0');
+				--CW_ID <= (others => '0');
+				CW_EX <= (others => '0');
+				CW_MEM <= (others => '0');
+				CW_WB <= (others => '0');
+				
+				aluOpcode1 <= ALU_ADD;
+				setcmp_1 <= (others => '0');
+				sel_alu_setcmp_1 <= '0';
+
+			else
+
+				CW_EX <= CW_ID(CW_SIZE-1-4-3 downto 0);
+				CW_MEM <= CW_EX(CW_SIZE-1-4-3-3-alu_op_sig_t'length-set_op_sig_t'length-1 downto 0);
+				CW_WB <= CW_MEM(CW_SIZE-1-4-3-3-alu_op_sig_t'length-set_op_sig_t'length-1-3 downto 0);
+
+				aluOpcode1 <= aluOpcode_i;
+				setcmp_1 <= setcmp_i;
+				sel_alu_setcmp_1 <= sel_alu_setcmp_i;
+
+			end if;
+
+		end if;
+
+	end process CW_PIPE;
+
+	ALU_OPCODE <= aluOpcode1;
+
+	-- purpose: Generation of ALU OpCode
+	-- type   : combinational
+	-- inputs : IR_i
+	-- outputs: aluOpcode
+	ALU_OP_CODE_P: process (IR_opcode, IR_func, CW)
+	begin -- process ALU_OP_CODE_P
+
+		case (TO_INTEGER(unsigned(IR_opcode))) is
+			
+			when 0 => -- R_TYPE
+
+				case TO_INTEGER(unsigned(IR_func)) is
+					
+					when 4 => 
+						aluOpcode_i <= ALU_ADD; -- LLS;
+					
+					when 6 => 
+						aluOpcode_i <= ALU_ADD; -- LRS;
+
+					when 36 =>
+						aluOpcode_i <= ALU_AND;	-- AND
+
+					when 37 =>
+						aluOpcode_i <= ALU_OR;	-- OR
+
+					when 38 =>
+						aluOpcode_i <= ALU_XOR;	-- OR
+
+					-- when 14 =>
+					-- 	aluOpcode_i <= ALU_MUL;	-- MUL
+					
+					when others => 
+						aluOpcode_i <= ALU_ADD;
+				
+				end case;
+
+			-- when 2 => aluOpcode_i <= ALU_ADD; -- j
+			-- when 3 => aluOpcode_i <= ALU_ADD; -- jal
+			-- when 8 => aluOpcode_i <= ALU_ADD; -- addi
+			
+			when others => 
+				aluOpcode_i <= CW(CW_SIZE-1-10 downto CW_SIZE-1-14);
+
+		end case;
+
+	end process ALU_OP_CODE_P;
+
+	
+	SEL_LGET <= setcmp_1;
+
+	SETCMP_P: process (IR_opcode, IR_func, CW)
+	begin -- process SETCMP_P
+		
+		case (TO_INTEGER(unsigned(IR_opcode))) is
+			
+			when 0 => -- R_TYPE
+
+				case TO_INTEGER(unsigned(IR_func)) is
+					
+					when 40 => 
+						setcmp_i <= SET_SEQ; -- SEQ;
+					
+					when 41 => 
+						setcmp_i <= SET_SNE; -- SNEQ;
+
+					when 42 => 
+						setcmp_i <= SET_SLT; -- SLT;
+					
+					when 43 => 
+						setcmp_i <= SET_SGT; -- SGT;
+
+					when 44 => 
+						setcmp_i <= SET_SLE; -- SLE;
+					
+					when 45 => 
+						setcmp_i <= SET_SGE; -- SGE;
+					
+					-- when 58 => 
+					-- 	setcmp_i <= ALU_ADD; -- SLTU;
+					
+					-- when 59 => 
+					-- 	setcmp_i <= ALU_ADD; -- SGTU;
+					
+					-- when 60 => 
+					-- 	setcmp_i <= ALU_ADD; -- SLEU;
+					
+					-- when 61 => 
+					-- 	setcmp_i <= ALU_ADD; -- SGEU;
+					
+					when others => 
+						setcmp_i <= SET_SEQ;
+				
+				end case;
+			
+			when others => 
+				setcmp_i <= CW(CW_SIZE-1-15 downto CW_SIZE-1-17);
+
+		end case;
+
+	end process SETCMP_P;
+
+
+	SEL_ALU_SETCMP <= sel_alu_setcmp_1;
+
+	SEL_ALU_SETCMP_P: process (IR_opcode, IR_func, CW)
+	begin -- process SETCMP_P
+		
+		case (TO_INTEGER(unsigned(IR_opcode))) is
+			
+			when 0 => -- R_TYPE
+
+				if (TO_INTEGER(unsigned(IR_func)) >= 40 and TO_INTEGER(unsigned(IR_func)) <= 45) then
+					sel_alu_setcmp_i <= '1';
+				else
+					sel_alu_setcmp_i <= '0';
+				end if;
+			
+			when others => 
+				sel_alu_setcmp_i <= CW(CW_SIZE-1-18);
+
+		end case;
+
+	end process SEL_ALU_SETCMP_P;
+
+	
+	JBRANCH_CTRL: process(IR_opcode, CW_IF, LGET)
+	begin
+
+		IF_STALL <= CW_IF(CW_SIZE - 2);
+		JUMP_EN <= CW_IF(CW_SIZE - 4);
+
+		if (IR_opcode = "000100" and LGET(0) = '0') then -- BEQZ 
+			JUMP_EN <= '1';
+			IF_STALL <= '1';
+		elsif (IR_opcode = "000101" and LGET(0) = '1') then -- BEQZ
+			JUMP_EN <= '1';
+			IF_STALL <= '1';
+		end if;
+
+	end process JBRANCH_CTRL;
+
+
 end dlx_cu_hw;
