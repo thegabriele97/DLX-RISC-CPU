@@ -23,7 +23,7 @@ entity decode is
         WB_EN:              in std_logic;            
         PIPLIN_ID_EN:       in std_logic;
         JUMP_EN:            in std_logic;
-        ZERO_DATA_WB:       out std_logic;
+        BUSY_WINDOW:        out std_logic;
         HAZARD_SIG:         out std_logic;
         ADD_RS1:            out std_logic_vector(N_BIT_ADDR_RF-1 downto 0);     -- Address 1 that goes in the register file
         ADD_RS2:            out std_logic_vector(N_BIT_ADDR_RF-1 downto 0);     -- Address 2 that goes in the register file
@@ -43,16 +43,16 @@ architecture structural of decode is
             N_REGS_LOG: integer := 8
         );
         port (
-            CLK:        in std_logic;
-            RST:        in std_logic;
-            WR1:        in std_logic;       -- Enable write 1 signal
-            WR2:        in std_logic;       -- Enable write 2 signal
-            ADD_WR1:    in std_logic_vector(N_REGS_LOG-1 downto 0);     -- Address wirte 1 signal
-            ADD_WR2:    in std_logic_vector(N_REGS_LOG-1 downto 0);     -- Address wirte 2 signal
-            ADD_CHECK1:  in std_logic_vector(N_REGS_LOG-1 downto 0);     -- Address reader 1 signal
-            ADD_CHECK2:  in std_logic_vector(N_REGS_LOG-1 downto 0);     -- Address reader 2 signal
-            BUSY:       out std_logic;     -- Signal to identify that there is an hazard. When '1' there is an hazard, when '0' there are no hazard
-            ALL_ZEROS: out std_logic
+            CLK:            in std_logic;
+            RST:            in std_logic;
+            WR1:            in std_logic;       -- Enable write 1 signal
+            WR2:            in std_logic;       -- Enable write 2 signal
+            ADD_WR1:        in std_logic_vector(N_REGS_LOG-1 downto 0);     -- Address wirte 1 signal
+            ADD_WR2:        in std_logic_vector(N_REGS_LOG-1 downto 0);     -- Address wirte 2 signal
+            ADD_CHECK1:     in std_logic_vector(N_REGS_LOG-1 downto 0);     -- Address reader 1 signal
+            ADD_CHECK2:     in std_logic_vector(N_REGS_LOG-1 downto 0);     -- Address reader 2 signal
+            BUSY:           out std_logic;     -- Signal to identify that there is an hazard. When '1' there is an hazard, when '0' there are no hazard
+            BUSY_WINDOW:    out std_logic
         );
     end component;
 
@@ -168,7 +168,7 @@ begin
             INP1 <= (others => '0'); -- The new PC is computed by the DECODE, the EXEC stage won't be executed
             i_INP2 <= (others => '0');
 
-        elsif (op_code = "000011") then -- J_TYPE: JAL
+        elsif (op_code = "000011" or op_code = "011110") then -- J_TYPE: JAL
 
             -- JAL so we have to execute ADDI R31, R0, PC
             i_RS1 <= (others => '0'); -- R0
@@ -212,7 +212,7 @@ begin
         ADD_CHECK1 => i_RS1,
         ADD_CHECK2 => i_RS2_masked,
         BUSY => HAZARD_SIG,
-        ALL_ZEROS => ZERO_DATA_WB
+        BUSY_WINDOW => BUSY_WINDOW
     );
 
     MUX_CMPB: mux2_1 generic map(

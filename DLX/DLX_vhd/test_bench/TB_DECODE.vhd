@@ -53,7 +53,7 @@ architecture test of tb_decode is
     signal RD1, RD2: std_logic_vector(32-1 downto 0);
     signal JUMP_EN: std_logic;
     signal PC_OVF: std_logic;
-    signal ALL_ZEROS: std_logic;
+    signal BUSY_WINDOW: std_logic;
 
 begin
 

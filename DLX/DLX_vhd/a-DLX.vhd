@@ -52,18 +52,23 @@ architecture dlx_rtl of DLX is
 			IR_SIZE 			: integer := 32 -- Instruction Register Size    
 		);
 		port (
-			Clk : in std_logic; -- Clock
-			Rst : in std_logic; -- Reset:Active-Low
+			Clk 			: in std_logic; -- Clock
+			Rst 			: in std_logic; -- Reset:Active-Low
 
 			-- Instruction Register
-			IR_IN : in std_logic_vector(IR_SIZE - 1 downto 0);
+			IR_IN 			: in std_logic_vector(IR_SIZE - 1 downto 0);
 
-			HAZARD_SIG: in std_logic; 	-- Data Hazard signal from ID
+			HAZARD_SIG		: in std_logic; 	-- Data Hazard signal from ID
+			BUSY_WINDOW		: in std_logic;	-- Signal about R8..R31 still not wrote back (instructions still in the pipeline)
+			SPILL			: in std_logic;		-- PUSH to memory
+			FILL 			: in std_logic;		-- POP from memory
 
 			-- IF Control Signals
 			PIPLIN_IF_EN  	: out std_logic; -- Instruction Register Latch Enable
 			IF_STALL		: out std_logic;
 			PC_EN 			: out std_logic;
+			CALL 			: out std_logic;
+			RET				: out std_logic;
 
 			-- ID Control Signals
 			PIPLIN_ID_EN 	: out std_logic;	-- ID Pipeline Stage Enable
@@ -116,7 +121,7 @@ architecture dlx_rtl of DLX is
 			WB_EN:          	in std_logic;  
 			PIPLIN_ID_EN:   	in std_logic;
 			JUMP_EN:        	in std_logic;
-			ZERO_DATA_WB:   	out std_logic;
+			BUSY_WINDOW:   	out std_logic;
 			HAZARD_SIG:     	out std_logic;
 			ADD_RS1:        	out std_logic_vector(N_BIT_ADDR_RF-1 downto 0);     -- Address 1 that goes in the register file
 			ADD_RS2:        	out std_logic_vector(N_BIT_ADDR_RF-1 downto 0);     -- Address 2 that goes in the register file
@@ -140,20 +145,25 @@ architecture dlx_rtl of DLX is
 		);
 
 		port (
-        
+		
 			Clk :   in std_logic;     -- CLock
 			Rst :   in std_logic;     -- Reset: Active-Low
-	
-	
+
+
 			EN1 :  in std_logic;     -- Enable stage 1 of the pipeline
 			EN2 :  in std_logic;     -- Enable stage 2 of the pipeline
 			EN3 :  in std_logic;     -- Enable stage 3 of the pipeline
-	
+
+			-- Data Memory Control Signals
+			RWM:            in std_logic;                     -- Data memory read/write enable signal: 1 read, 0 write
+			DATA_SIZE:      in std_logic_vector(1 downto 0);  -- Signal to decide how many bits to extend the data for the load/store
+			UNSIG_SIGN_N:   in std_logic;                     -- Signal to decide if the load/store is unsigned or not: 1 unsigned, 0 signed
+			
 			-- Bus to DATA MEMORY
 			DATAMEM_BUS_TOMEM:  out std_logic_vector(N_BIT_DATA - 1 downto 0); -- Data bus from the datapath to the data memory
 			DATAMEM_BUS_FROMEM: in std_logic_vector(N_BIT_DATA - 1 downto 0); -- Data bus from the data memory to the datapath
 			DATAMEM_ADDR:       out std_logic_vector(N_BIT_MEM_ADDR-1 downto 0); -- Address of the data memory
-	
+			
 			--
 			--          REGISTER FILE
 			--
@@ -162,9 +172,8 @@ architecture dlx_rtl of DLX is
 			WS1 :   in std_logic_vector(N_BIT_ADDR_RF-1 downto 0);      -- Address used for the write back
 			RD1 :   out std_logic_vector(N_BIT_DATA-1 downto 0);
 			RD2 :   out std_logic_vector(N_BIT_DATA-1 downto 0);        -- RD1 & RD2 towards the DECODE unit
-	
+
 			-- Our RF has two reading port and one writing port
-	
 			RF1 :   in std_logic;     -- Read enable port 1 of the register file
 			RF2 :   in std_logic;     -- Read enable port 2 of the register file 
 			WF  :   in std_logic;     -- Write enable of the register file
@@ -173,20 +182,16 @@ architecture dlx_rtl of DLX is
 			RF_BUS_TOMEM:  out std_logic_vector(N_BIT_DATA - 1 downto 0); -- Data bus from the datapath to the RF memory
 			RF_BUS_FROMEM: in std_logic_vector(N_BIT_DATA - 1 downto 0); -- Data bus from the RF memory to the datapath
 			RF_MEM_ADDR:   out std_logic_vector(N_BIT_RF_MEM_ADDR-1 downto 0); -- Address of the RF memory
-			RF_MEM_RM: out std_logic;
-			RF_MEM_WM: out std_logic; -- TODO: comments here
-			RWM: in std_logic;
-        	DATA_SIZE: in std_logic_vector(1 downto 0);
-        	UNSIG_SIGN_N: in std_logic;
+			RF_MEM_RM: out std_logic;       -- Register file memory enable read signal
+			RF_MEM_WM: out std_logic;       -- Register file memory enable write signal
 			
 			-- Used to manage the procedure call
 			CALL:       in std_logic;
 			RET:        in std_logic;
 			FILL:       out std_logic;
 			SPILL:      out std_logic;
-	
-			-- Immediate value for the datapath 
-			
+
+			-- Immediate value for the datapath  
 			INP1:   in std_logic_vector(N_BIT_DATA - 1 downto 0); -- immediate 1
 			INP2:   in std_logic_vector(N_BIT_DATA - 1 downto 0); -- immediate 2
 			
@@ -194,23 +199,21 @@ architecture dlx_rtl of DLX is
 			S1: in std_logic; -- Selector for top mux, called mux A
 			S2: in std_logic; -- Selector for bottom mux, called mux B
 			
-	
+
 			-- ALU 
 			ALU_OP: in std_logic_vector(N_OPSEL + 3 - 1 downto 0); -- Control signal for the ALU in order to decide the operation
 			ALU_COUT: out std_logic;    -- Carry out of the operation made by the ALU
-			
 
 			-- Comparator results coming from the datapath
 			SEL_ALU_SETCMP: in std_logic;
 			LGET:   in std_logic_vector(1 downto 0);
 			SEL_LGET:   in std_logic_vector(2 downto 0);
-	
+			
 			-- Mux selector for stage 3 of the pipeline
 			S3: in std_logic; -- Selector for mux of stage 3
-	
+
 			ADD_WB: out std_logic_vector(N_BIT_ADDR_RF-1 downto 0)      -- Adress that goes into the hazard table that tells that we can execute the other operation
-	
-		);
+	);
     end component;
 
 	component DRAM is
@@ -261,9 +264,11 @@ architecture dlx_rtl of DLX is
 
 	-- -- Control Unit
 	signal i_PC_OVF: std_logic;
-	signal i_ZERO_DATA_WB: std_logic;
+	signal i_BUSY_WINDOW: std_logic;
 	signal i_SEL_ALU_SETCMP: std_logic;
 	signal i_HAZARD_TABLE_WR1: std_logic;
+	signal i_CALL: std_logic;
+	signal i_RET: std_logic;
 
 	-- -- Control Unit Bus signals
 	signal i_ALU_OP: std_logic_vector(ALU_ADD'length-1 downto 0);
@@ -384,9 +389,14 @@ begin  -- DLX
 		Rst             => Rst,
 		IR_IN           => IR,
 		HAZARD_SIG      => i_HAZARD_SIG_CU,
+		BUSY_WINDOW		=> i_BUSY_WINDOW,
+		SPILL 			=> i_SPILL,
+		FILL			=> i_FILL,
 		PIPLIN_IF_EN    => i_IR_LATCH_EN,
 		IF_STALL		=> i_IR_STALL,
 		PC_EN			=> i_PC_LATCH_EN,
+		CALL 			=> i_CALL,
+		RET 			=> i_RET,
 		PIPLIN_ID_EN 	=> i_EN1,
 		JUMP_EN			=> i_JUMP_EN,
 		HAZARD_TABLE_WR1=> i_HAZARD_TABLE_WR1,
@@ -437,7 +447,7 @@ begin  -- DLX
 		WB_EN => i_WF,
 		PIPLIN_ID_EN => i_EN1,
 		JUMP_EN => i_JUMP_EN,
-		ZERO_DATA_WB => i_ZERO_DATA_WB,
+		BUSY_WINDOW => i_BUSY_WINDOW,
         HAZARD_SIG => i_HAZARD_SIG_CU, 
         ADD_RS1 => i_ADD_RS1,    
         ADD_RS2 => i_ADD_RS2,    
@@ -481,7 +491,7 @@ begin  -- DLX
 		RWM => i_DATAMEM_RM,		
         DATA_SIZE =>  i_DATA_SIZE,
         UNSIG_SIGN_N => i_UNSIG_SIGN_N,			
-        CALL => '0', -- TODO
+        CALL => i_CALL, -- TODO
         RET => '0', -- TODO
         FILL => i_FILL,
         SPILL => i_SPILL,
@@ -506,7 +516,7 @@ begin  -- DLX
 
 	DRAM_I: DRAM generic map (
 		N_BIT_DATA => IR_SIZE,
-		LOG_RAM_DEPTH => 10
+		LOG_RAM_DEPTH => RAM_DEPTH
 	) port map(
 		Clk => Clk,
         Rst => Rst,
@@ -516,6 +526,20 @@ begin  -- DLX
 		address => i_DATAMEM_ADDR,    
 		data_in => i_DATAMEM_BUS_TOMEM,
 		data_out => i_DATAMEM_BUS_FROMEM
+	);
+
+	DRAM_RF: DRAM generic map (
+		N_BIT_DATA => IR_SIZE,
+		LOG_RAM_DEPTH => RAM_DEPTH				-- 256 is enough
+	) port map(
+		Clk => Clk,
+        Rst => Rst,
+		RM => i_RF_MEM_RM,
+		WM => i_RF_MEM_WM,
+		EN => '1',
+		address => i_RF_MEM_ADDR,    
+		data_in => i_RF_BUS_TOMEM,
+		data_out => i_RF_BUS_FROMEM
 	);
 
 end dlx_rtl;

@@ -10,18 +10,24 @@ entity dlx_cu is
 		IR_SIZE 			: integer := 32 -- Instruction Register Size    
 	);
 	port (
-		Clk : in std_logic; -- Clock
-		Rst : in std_logic; -- Reset:Active-Low
+		Clk 			: in std_logic; -- Clock
+		Rst 			: in std_logic; -- Reset:Active-Low
 
 		-- Instruction Register
-		IR_IN : in std_logic_vector(IR_SIZE - 1 downto 0);
+		IR_IN 			: in std_logic_vector(IR_SIZE - 1 downto 0);
 
-		HAZARD_SIG: in std_logic; 	-- Data Hazard signal from ID
+		HAZARD_SIG		: in std_logic; 	-- Data Hazard signal from ID
+		BUSY_WINDOW		: in std_logic;		-- Signal about R8..R31 still not wrote back (instructions still in the pipeline)
+		SPILL			: in std_logic;		-- PUSH to memory
+		FILL 			: in std_logic;		-- POP from memory
+
 
 		-- IF Control Signals
 		PIPLIN_IF_EN  	: out std_logic; -- Instruction Register Latch Enable
 		IF_STALL		: out std_logic;
 		PC_EN 			: out std_logic;
+		CALL 			: out std_logic;
+		RET				: out std_logic;
 
 		-- ID Control Signals
 		PIPLIN_ID_EN 	: out std_logic;	-- ID Pipeline Stage Enable
@@ -56,91 +62,92 @@ end dlx_cu;
 architecture dlx_cu_hw of dlx_cu is
 	
 	constant MICROCODE_MEM_SIZE: integer := 62; -- Microcode Memory Size
-	constant CW_SIZE: integer := (20 + alu_op_sig_t'length + set_op_sig_t'length); -- Control Word Size
+	constant CW_SIZE: integer := (21 + alu_op_sig_t'length + set_op_sig_t'length); -- Control Word Size
 	 
 	type mem_array is array (0 to MICROCODE_MEM_SIZE - 1) of std_logic_vector(CW_SIZE-1 downto 0);
 		
 
 	signal cw_memory: mem_array := (
-	--  "FSPJ12HDXAB-----+++TWR10UMCK"	
-		"1010111110000000000000000101", -- R type: IS IT CORRECT?
-	--  "FSPJ12HDXAB-----+++TWR10UMCK"	
-		"0000000000000000000000000000", -- [VOID]
-	--  "FSPJ12HDXAB-----+++TWR10UMCK"	
-		"1111000000000000000000000000", -- J (0X02) instruction encoding corresponds to the address to this ROM
-	--  "FSPJ12HDXAB-----+++TWR10UMCK"	
-		"1111101110100000000000000101", -- JAL to be filled
-	--  "FSPJ12HDXAB-----+++TWR10UMCK"	
-		"1010000000000000000000000000", -- BEQZ to be filled
-		"1010000000000000000000000000", -- BNEZ
-		"1010000000000000000000000000", -- 
-		"1010000000000000000000000000",
-	--  "FSPJ12HDXAB-----+++TWR10UMCK"	
-		"1010101110100000000000000101", -- ADD i (0X08): FILL IT!!!
-		"1010000000000000000000000000",
-		"1010000000000000000000000000",
-		"1010000000000000000000000000",
-		"1010000000000000000000000000",
-		"1010000000000000000000000000",
-		"1010000000000000000000000000",
-	--  "FSPJ12HDXAB-----+++TWR10UMCK"	
-		"1010101110100000000001010111",	-- LHI (0x0f)
-		"1010000000000000000000000000",
-		"1010000000000000000000000000",
-		"1010000000000000000000000000",
-		"1010000000000000000000000000",
-		"1010000000000000000000000000",
-		"1010000000000000000000000000",	-- NOP (0x15)
-		"XXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-		"XXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-		"XXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-		"XXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-		"XXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-	--  "FSPJ12HDXAB-----+++TWR10UMCK"
-		"1010101110000000101100000101",	-- SGTI (0x1b)
-		"XXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-	--  "FSPJ12HDXAB-----+++TWR10UMCK"	
-		"1010101110000000100100000101",	-- SGEI (0x1d)
-		"XXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-		"XXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-	--  "FSPJ12HDXAB-----+++TWR10UMCK"	
-		"1010101110100000000001100111",	-- LB (0x20)
-	--  "FSPJ12HDXAB-----+++TWR10UMCK"	
-		"1010101110100000000001010111",	-- LH (0x21)
-		"XXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-	--  "FSPJ12HDXAB-----+++TWR10UMCK"	
-		"1010101110100000000001000111",	-- LW (0x23)
-	--  "FSPJ12HDXAB-----+++TWR10UMCK"	
-		"1010101110100000000001101111",	-- LBU (0x24)
-	--  "FSPJ12HDXAB-----+++TWR10UMCK"	
-		"1010101110100000000001011111",	-- LHU (0x25)
-		"XXXXXXXXXXXXXXXXXXXXXXXXXXXX",	-- LF (0x26)    TODO ??
-		"XXXXXXXXXXXXXXXXXXXXXXXXXXXX",	-- LD (0x27)    TODO ??
-	--  "FSPJ12HDXAB-----+++TWR10UMCK"
-		"1010110110100000000010100100",	-- SB (0x28)
-	--  "FSPJ12HDXAB-----+++TWR10UMCK"
-		"1010110110100000000010010100",	-- SH (0x29)
-		"XXXXXXXXXXXXXXXXXXXXXXXXXXXX", 	
-	--  "FSPJ12HDXAB-----+++TWR10UMCK"
-		"1010110110100000000010000100",	-- SW (0x2b)
-		"XXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-		"XXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-		"XXXXXXXXXXXXXXXXXXXXXXXXXXXX",	-- SF (0x2e)
-		"XXXXXXXXXXXXXXXXXXXXXXXXXXXX",	-- SD (0x2f)
-		"XXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-		"XXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-		"XXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-		"XXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-		"XXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-		"XXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-		"XXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-		"XXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-		"XXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-		"XXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-		"XXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-		"XXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-		"XXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-		"XXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+	--  "FSPJL12HDXAB-----+++TWR10UMCK"	
+		"10100111110000000000000000101", -- R type: IS IT CORRECT?
+	--  "FSPJL12HDXAB-----+++TWR10UMCK"	
+		"00000000000000000000000000000", -- [VOID]
+	--  "FSPJL12HDXAB-----+++TWR10UMCK"	
+		"11110000000000000000000000000", -- J (0X02) instruction encoding corresponds to the address to this ROM
+	--  "FSPJL12HDXAB-----+++TWR10UMCK"	
+		"11110101110100000000000000101", -- JAL to be filled
+	--  "FSPJL12HDXAB-----+++TWR10UMCK"	
+		"10100000000000000000000000000", -- BEQZ to be filled
+		"10100000000000000000000000000", -- BNEZ
+		"10100000000000000000000000000", -- 
+		"10100000000000000000000000000",
+	--  "FSPJL12HDXAB-----+++TWR10UMCK"	
+		"10100101110100000000000000101", -- ADD i (0X08): FILL IT!!!
+		"10100000000000000000000000000",
+		"10100000000000000000000000000",
+		"10100000000000000000000000000",
+		"10100000000000000000000000000",
+		"10100000000000000000000000000",
+		"10100000000000000000000000000",
+	--  "FSPJL12HDXAB-----+++TWR10UMCK"	
+		"10100101110100000000001010111",	-- LHI (0x0f)
+		"10100000000000000000000000000",
+		"10100000000000000000000000000",
+		"10100000000000000000000000000",
+		"10100000000000000000000000000",
+		"10100000000000000000000000000",
+		"10100000000000000000000000000",	-- NOP (0x15)
+		"XXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+	--  "FSPJL12HDXAB-----+++TWR10UMCK"
+		"10100101110000000101100000101",	-- SGTI (0x1b)
+		"XXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+	--  "FSPJL12HDXAB-----+++TWR10UMCK"	
+		"10100101110000000100100000101",	-- SGEI (0x1d)
+	--  "FSPJL12HDXAB-----+++TWR10UMCK"	
+		"11111101110100000000000000101",	-- CALL (0x1e)
+		"XXXXXXXXXXXXXXXXXXXXXXXXXXXXX",	-- RET (0x1f)
+	--  "FSPJL12HDXAB-----+++TWR10UMCK"	
+		"10100101110100000000001100111",	-- LB (0x20)
+	--  "FSPJL12HDXAB-----+++TWR10UMCK"	
+		"10100101110100000000001010111",	-- LH (0x21)
+		"XXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+	--  "FSPJL12HDXAB-----+++TWR10UMCK"	
+		"10100101110100000000001000111",	-- LW (0x23)
+	--  "FSPJL12HDXAB-----+++TWR10UMCK"	
+		"10100101110100000000001101111",	-- LBU (0x24)
+	--  "FSPJL12HDXAB-----+++TWR10UMCK"	
+		"10100101110100000000001011111",	-- LHU (0x25)
+		"XXXXXXXXXXXXXXXXXXXXXXXXXXXXX",	-- LF (0x26)    TODO ??
+		"XXXXXXXXXXXXXXXXXXXXXXXXXXXXX",	-- LD (0x27)    TODO ??
+	--  "FSPJL12HDXAB-----+++TWR10UMCK"
+		"10100110110100000000010100100",	-- SB (0x28)
+	--  "FSPJL12HDXAB-----+++TWR10UMCK"
+		"10100110110100000000010010100",	-- SH (0x29)
+		"XXXXXXXXXXXXXXXXXXXXXXXXXXXXX", 	
+	--  "FSPJL12HDXAB-----+++TWR10UMCK"
+		"10100110110100000000010000100",	-- SW (0x2b)
+		"XXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXXXXXXX",	-- SF (0x2e)
+		"XXXXXXXXXXXXXXXXXXXXXXXXXXXXX",	-- SD (0x2f)
+		"XXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+		"XXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
 	);
 	
 	
@@ -149,10 +156,10 @@ architecture dlx_cu_hw of dlx_cu is
 	
 	signal CW  		: std_logic_vector(CW_SIZE-1 downto 0); 		-- full control word read from cw_mem
 	signal CW_IF 	: std_logic_vector(CW_SIZE-1 downto 0); 		-- first stage
-	signal CW_ID 	: std_logic_vector(CW_SIZE-1-4 downto 0); 	-- second stage
-	signal CW_EX 	: std_logic_vector(CW_SIZE-1-8 downto 0); 	-- third stage
-	signal CW_MEM 	: std_logic_vector(CW_SIZE-1-8-alu_op_sig_t'length-set_op_sig_t'length-1-3 downto 0); 	-- fourth stage
-	signal CW_WB 	: std_logic_vector(CW_SIZE-1-8-alu_op_sig_t'length-set_op_sig_t'length-1-9 downto 0); 	-- fifth stage
+	signal CW_ID 	: std_logic_vector(CW_SIZE-1-4 downto 0); 		-- second stage
+	signal CW_EX 	: std_logic_vector(CW_SIZE-1-9 downto 0); 		-- third stage
+	signal CW_MEM 	: std_logic_vector(CW_SIZE-1-9-alu_op_sig_t'length-set_op_sig_t'length-1-3 downto 0); 	-- fourth stage
+	signal CW_WB 	: std_logic_vector(CW_SIZE-1-9-alu_op_sig_t'length-set_op_sig_t'length-1-9 downto 0); 	-- fifth stage
 
 	signal aluOpcode_i : alu_op_sig_t := ALU_ADD; -- alu_op_sig_t defined in package
 	signal aluOpcode1  : alu_op_sig_t := ALU_ADD;
@@ -163,6 +170,8 @@ architecture dlx_cu_hw of dlx_cu is
 	signal sel_alu_setcmp_i: std_logic;
 	signal sel_alu_setcmp_1: std_logic;
 
+	signal i_SPILL_delay: std_logic;
+
 begin
 
 	IR_opcode(OP_CODE_SIZE - 1 downto 0) <= IR_IN(31 downto 26);
@@ -172,7 +181,7 @@ begin
 	
 	-- EX control Signals
 	-- CW_SIZE: 28
-	-- CW_IF: "FSPJ12HDXAB-----+++TWR10UMCK" : 28
+	-- CW_IF: "FSPJL12HDXAB-----+++TWR10UMCK" : 28
 	-- CW_ID: "12HDXAB-----+++TWR10UMCK"	 : 24 
 	-- CW_EX: "XAB-----+++TWR10UMCK"	 	 : 20 
 	-- CW_ME: "WR10UMCK"	 	 			 : 8
@@ -186,10 +195,11 @@ begin
 	
 
 	-- ID Control Signals
-	RF_RD1_EN			<= CW_ID(CW_ID'length - 1);
-	RF_RD2_EN			<= CW_ID(CW_ID'length - 2);
-	HAZARD_TABLE_WR1	<= CW_ID(CW_ID'length - 3);
-	PIPLIN_ID_EN		<= CW_ID(CW_ID'length - 4);
+	--CALL 				<= CW_ID(CW_ID'length - 1);
+	RF_RD1_EN			<= CW_ID(CW_ID'length - 2);
+	RF_RD2_EN			<= CW_ID(CW_ID'length - 3);
+	HAZARD_TABLE_WR1	<= CW_ID(CW_ID'length - 4);
+	PIPLIN_ID_EN		<= CW_ID(CW_ID'length - 5);
 
 	PIPLIN_EX_EN 		<= CW_EX(CW_EX'length - 1);
 	MUXA_SEL      		<= CW_EX(CW_EX'length - 2);
@@ -207,18 +217,18 @@ begin
 	WB_MUX_SEL 			<= CW_WB(CW_WB'length - 1);
 	PIPLIN_WB_EN    	<= CW_WB(CW_WB'length - 2);
 	
-	process(CW, CW_IF, HAZARD_SIG)
+	process(CW, CW_IF, HAZARD_SIG, IR_opcode, BUSY_WINDOW, i_SPILL_delay)
 	begin
 		
 		CW_IF <= CW;
 	
-		if (HAZARD_SIG = '1') then
+		if (HAZARD_SIG = '1' or (IR_opcode = "011110" and BUSY_WINDOW = '1') or i_SPILL_delay = '1') then
 			CW_IF(CW_SIZE-1) <= '0';	-- IF disabling
 			CW_IF(CW_SIZE-3) <= '0';	-- PC disabling
-			CW_IF(CW_SIZE-8) <= '0';	-- ID disabling
-			CW_IF(CW_SIZE-9) <= '0';	-- EZ disabling
-			CW_IF(CW_SIZE-26) <= '0';	-- MEM disabling
-			CW_IF(CW_SIZE-28) <= '0';	-- WB disabling
+			CW_IF(CW_SIZE-9) <= '0';	-- ID disabling
+			CW_IF(CW_SIZE-10) <= '0';	-- EZ disabling
+			CW_IF(CW_SIZE-27) <= '0';	-- MEM disabling
+			CW_IF(CW_SIZE-29) <= '0';	-- WB disabling
 		end if;
 			
 	
@@ -246,13 +256,15 @@ begin
 
 			else
 
-				CW_EX <= CW_ID(CW_SIZE-1-4-4 downto 0);
+				CW_EX <= CW_ID(CW_EX'length-1 downto 0);
 				CW_MEM <= CW_EX(CW_MEM'length-1 downto 0);
 				CW_WB <= CW_MEM(CW_WB'length-1 downto 0);
 
 				aluOpcode1 <= aluOpcode_i;
 				setcmp_1 <= setcmp_i;
 				sel_alu_setcmp_1 <= sel_alu_setcmp_i;
+
+				i_SPILL_delay <= SPILL;
 
 			end if;
 
@@ -303,7 +315,7 @@ begin
 			-- when 8 => aluOpcode_i <= ALU_ADD; -- addi
 			
 			when others => 
-				aluOpcode_i <= CW(CW_SIZE-1-11 downto CW_SIZE-1-15);
+				aluOpcode_i <= CW(CW_SIZE-1-12 downto CW_SIZE-1-16);
 
 		end case;
 
@@ -357,7 +369,7 @@ begin
 				end case;
 			
 			when others => 
-				setcmp_i <= CW(CW_SIZE-1-16 downto CW_SIZE-1-18);
+				setcmp_i <= CW(CW_SIZE-1-17 downto CW_SIZE-1-19);
 
 		end case;
 
@@ -380,18 +392,19 @@ begin
 				end if;
 			
 			when others => 
-				sel_alu_setcmp_i <= CW(CW_SIZE-1-19);
+				sel_alu_setcmp_i <= CW(CW_SIZE-1-20);
 
 		end case;
 
 	end process SEL_ALU_SETCMP_P;
 
 	
-	JBRANCH_CTRL: process(IR_opcode, CW_IF, LGET)
+	JBRANCH_CTRL: process(IR_opcode, CW_IF, LGET, BUSY_WINDOW)
 	begin
 
 		IF_STALL <= CW_IF(CW_SIZE - 2);
 		JUMP_EN <= CW_IF(CW_SIZE - 4);
+		CALL <= CW_IF(CW_SIZE - 5);
 
 		if (IR_opcode = "000100" and LGET(0) = '0') then -- BEQZ 
 			JUMP_EN <= '1';
@@ -399,9 +412,12 @@ begin
 		elsif (IR_opcode = "000101" and LGET(0) = '1') then -- BEQZ
 			JUMP_EN <= '1';
 			IF_STALL <= '1';
+		elsif (IR_opcode = "011110" and BUSY_WINDOW = '1') then
+			CALL <= '0';
+			JUMP_EN <= '0';			
 		end if;
 
 	end process JBRANCH_CTRL;
-
+	
 
 end dlx_cu_hw;

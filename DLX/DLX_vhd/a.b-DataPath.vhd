@@ -23,11 +23,16 @@ entity DP is
         EN2 :  in std_logic;     -- Enable stage 2 of the pipeline
         EN3 :  in std_logic;     -- Enable stage 3 of the pipeline
 
+        -- Data Memory Control Signals
+        RWM:            in std_logic;                     -- Data memory read/write enable signal: 1 read, 0 write
+        DATA_SIZE:      in std_logic_vector(1 downto 0);  -- Signal to decide how many bits to extend the data for the load/store
+        UNSIG_SIGN_N:   in std_logic;                     -- Signal to decide if the load/store is unsigned or not: 1 unsigned, 0 signed
+        
         -- Bus to DATA MEMORY
         DATAMEM_BUS_TOMEM:  out std_logic_vector(N_BIT_DATA - 1 downto 0); -- Data bus from the datapath to the data memory
         DATAMEM_BUS_FROMEM: in std_logic_vector(N_BIT_DATA - 1 downto 0); -- Data bus from the data memory to the datapath
         DATAMEM_ADDR:       out std_logic_vector(N_BIT_MEM_ADDR-1 downto 0); -- Address of the data memory
-
+        
         --
         --          REGISTER FILE
         --
@@ -38,7 +43,6 @@ entity DP is
         RD2 :   out std_logic_vector(N_BIT_DATA-1 downto 0);        -- RD1 & RD2 towards the DECODE unit
 
         -- Our RF has two reading port and one writing port
-
         RF1 :   in std_logic;     -- Read enable port 1 of the register file
         RF2 :   in std_logic;     -- Read enable port 2 of the register file 
         WF  :   in std_logic;     -- Write enable of the register file
@@ -49,9 +53,6 @@ entity DP is
         RF_MEM_ADDR:   out std_logic_vector(N_BIT_RF_MEM_ADDR-1 downto 0); -- Address of the RF memory
         RF_MEM_RM: out std_logic;       -- Register file memory enable read signal
         RF_MEM_WM: out std_logic;       -- Register file memory enable write signal
-        RWM: in std_logic;              -- Data memory read/write enable signal: 1 read, 0 write
-        DATA_SIZE: in std_logic_vector(1 downto 0);     -- Signal to decide how many bits to extend the data for the load/store
-        UNSIG_SIGN_N: in std_logic;                     -- Signal to decide if the load/store is unsigned or not: 1 unsigned, 0 signed
         
         -- Used to manage the procedure call
         CALL:       in std_logic;
@@ -59,8 +60,7 @@ entity DP is
         FILL:       out std_logic;
         SPILL:      out std_logic;
 
-        -- Immediate value for the datapath 
-        
+        -- Immediate value for the datapath  
         INP1:   in std_logic_vector(N_BIT_DATA - 1 downto 0); -- immediate 1
         INP2:   in std_logic_vector(N_BIT_DATA - 1 downto 0); -- immediate 2
         
@@ -194,23 +194,19 @@ architecture structural of DP is
     component wRF_CU is
     
         generic (
-            N_BIT_MEM_ADDR: integer := 10;
-            MEM_DATAWIDTH: integer := 32
+            N_BIT_MEM_ADDR: integer := 10
         );
     
-        port(
+        port (
             CLK:    in std_logic;
             RST:    in std_logic;
             SPILL:  in std_logic;
             FILL:   in std_logic;
-    
-            FROMEM:  in std_logic_vector(MEM_DATAWIDTH-1 downto 0);
-            TOMEM:   out std_logic_vector(MEM_DATAWIDTH-1 downto 0);
+
             MEMADDR: out std_logic_vector(N_BIT_MEM_ADDR-1 downto 0);
     
             RM: out std_logic;
             WM: out std_logic
-    
         );
     
     end component;
@@ -345,15 +341,12 @@ begin
     SPILL <= i_RFSPILL;
     
     WRF_CUhw: wRF_CU generic map(
-        N_BIT_MEM_ADDR => N_BIT_RF_MEM_ADDR,
-        MEM_DATAWIDTH => N_BIT_DATA
+        N_BIT_MEM_ADDR => N_BIT_RF_MEM_ADDR
     ) port map(
         CLK => Clk,
         RST => Rst,
         FILL => i_RFFILL, 
         SPILL => i_RFSPILL,
-        TOMEM => RF_BUS_TOMEM,
-        FROMEM => RF_BUS_FROMEM,
         MEMADDR => RF_MEM_ADDR,
         RM => RF_MEM_RM,
         WM => RF_MEM_WM
