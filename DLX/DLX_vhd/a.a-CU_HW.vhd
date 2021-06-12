@@ -247,8 +247,8 @@ begin
 			else
 
 				CW_EX <= CW_ID(CW_SIZE-1-4-4 downto 0);
-				CW_MEM <= CW_EX(CW_SIZE-1-4-4-3-alu_op_sig_t'length-set_op_sig_t'length-1 downto 0);
-				CW_WB <= CW_MEM(CW_SIZE-1-4-4-3-alu_op_sig_t'length-set_op_sig_t'length-1-6 downto 0);
+				CW_MEM <= CW_EX(CW_MEM'length-1 downto 0);
+				CW_WB <= CW_MEM(CW_WB'length-1 downto 0);
 
 				aluOpcode1 <= aluOpcode_i;
 				setcmp_1 <= setcmp_i;
