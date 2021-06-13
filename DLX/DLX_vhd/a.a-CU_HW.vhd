@@ -293,6 +293,9 @@ begin
 					when 6 => 
 						aluOpcode_i <= ALU_ADD; -- LRS;
 
+					when 14 =>
+							aluOpcode_i <= ALU_MUL;	-- MUL
+
 					when 36 =>
 						aluOpcode_i <= ALU_AND;	-- AND
 
@@ -302,8 +305,6 @@ begin
 					when 38 =>
 						aluOpcode_i <= ALU_XOR;	-- OR
 
-					-- when 14 =>
-					-- 	aluOpcode_i <= ALU_MUL;	-- MUL
 					
 					when others => 
 						aluOpcode_i <= ALU_ADD;

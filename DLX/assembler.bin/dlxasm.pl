@@ -59,6 +59,7 @@ if ($srcfile =~ /^(.*)\.dlx$/) {
 %instTbl = (
 # Register-register instructions
   "sll"  => "r,0x04",
+  "mult"  => "r,0x0e",
   "srl"  => "r,0x06",
   "sra"  => "r,0x07",
   "add"  => "r,0x20",
@@ -101,7 +102,6 @@ if ($srcfile =~ /^(.*)\.dlx$/) {
   "cvtd2i" => "fd,0x0b",
   "cvti2f" => "fd,0x0c",
   "cvti2d" => "fd,0x0d",
-  "mult"  => "f,0x0e",
   "div"   => "f,0x0f",
   "eqf"   => "f2,0x10",
   "nef"   => "f2,0x11",
