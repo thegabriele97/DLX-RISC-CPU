@@ -112,7 +112,7 @@ architecture dlx_cu_hw of dlx_cu is
 	--  "FSPJLE12NHDXAB-----+++TWR10UMCK"	
 		"1010001001110100000100100000101",	-- SGEI (0x1d)
 	--  "FSPJLE12NHDXAB-----+++TWR10UMCK"	
-		"1111101001110100000000000000101",	-- CALL (0x1e)
+		"1111001001110100000000000000101",	-- CALL (0x1e)
 		"1111011010000000000000000000000",	-- RET (0x1f)
 	--  "FSPJLE12NHDXAB-----+++TWR10UMCK"	
 		"1010001001110100000000001100111",	-- LB (0x20)
@@ -224,12 +224,12 @@ begin
 	WB_MUX_SEL 			<= CW_WB(CW_WB'length - 1);
 	PIPLIN_WB_EN    	<= CW_WB(CW_WB'length - 2);
 	
-	process(CW, CW_IF, HAZARD_SIG, IR_opcode, BUSY_WINDOW, i_SPILL_delay, i_FILL_delay)
+	process(CW, CW_IF, HAZARD_SIG, IR_opcode, BUSY_WINDOW, i_SPILL_delay, i_FILL_delay, SPILL)
 	begin
 		
 		CW_IF <= CW;
 	
-		if (HAZARD_SIG = '1' or ((IR_opcode = "011110" or IR_opcode = "011111") and BUSY_WINDOW = '1') or i_SPILL_delay = '1' or i_FILL_delay = '1') then
+		if (HAZARD_SIG = '1' or ((IR_opcode = "011110" or IR_opcode = "011111") and BUSY_WINDOW = '1') or SPILL = '1' or i_FILL_delay = '1') then
 			CW_IF(CW_SIZE-1) <= '0';	-- IF disabling
 			CW_IF(CW_SIZE-3) <= '0';	-- PC disabling
 			CW_IF(CW_SIZE-11) <= '0';	-- ID disabling
@@ -408,7 +408,7 @@ begin
 	end process SEL_ALU_SETCMP_P;
 
 	
-	JBRANCH_CTRL: process(IR_opcode, CW_IF, LGET, BUSY_WINDOW)
+	JBRANCH_CTRL: process(IR_opcode, CW_IF, LGET, BUSY_WINDOW, i_SPILL_delay)
 	begin
 
 		IF_STALL <= CW_IF(CW_SIZE - 2);
@@ -425,6 +425,8 @@ begin
 		elsif (IR_opcode = "011110" and BUSY_WINDOW = '1') then -- CALL
 			CALL <= '0';
 			JUMP_EN <= '0';	
+		elsif (IR_opcode = "011110" and BUSY_WINDOW = '0' and i_SPILL_delay = '0') then -- CALL
+			CALL <= '1';	
 		elsif (IR_opcode = "011111" and BUSY_WINDOW = '1') then -- RET
 			RET <= '0';
 			JUMP_EN <= '0';			

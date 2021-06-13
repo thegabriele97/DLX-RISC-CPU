@@ -3,6 +3,7 @@
     addi r5, r0, #5     ;4    
     addi r10, r0, #2    ;8
     addi r16, r0, #3    ;C
+    addi r15, r0, #987
     mult r17, r16, r1   ;10
     addi r22, r0, #7    ;14
     addi r8, r8, #5     ;18
