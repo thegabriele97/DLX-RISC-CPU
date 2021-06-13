@@ -23,6 +23,7 @@ entity decode is
         WB_EN:              in std_logic;            
         PIPLIN_ID_EN:       in std_logic;
         JUMP_EN:            in std_logic;
+        NPC_SEL:            in std_logic;
         BUSY_WINDOW:        out std_logic;
         HAZARD_SIG:         out std_logic;
         ADD_RS1:            out std_logic_vector(N_BIT_ADDR_RF-1 downto 0);     -- Address 1 that goes in the register file
@@ -116,6 +117,8 @@ architecture structural of decode is
 
     signal i_SEL_CMPB: std_logic;
     signal i_CMP_B: std_logic_vector(N_BIT_DATA-1 downto 0);
+
+    signal i_NPC_ADDER: std_logic_vector(PC_SIZE-1 downto 0);
 
 begin
 
@@ -248,8 +251,17 @@ begin
         A => CPC,
         B => i_OFFSET_ADDER,
         SUB_SUMN => '0',
-        S => NPC,
+        S => i_NPC_ADDER,
         Cout =>	PC_OVF
+    );
+
+    MUX_NPC: mux2_1 generic map(
+        NBIT => PC_SIZE
+    ) port map(
+        a => RD1,
+        b => i_NPC_ADDER,
+        s => NPC_SEL,
+        y => NPC
     );
 
 end architecture structural;

@@ -23,9 +23,9 @@ begin
         SET_OUT <= (others => '0');
 
         if (SEL_LGET = "000") then -- SEQ
-            SET_OUT(0) <= LGET(0);
-        elsif (SEL_LGET = "001") then -- SNE
             SET_OUT(0) <= not LGET(0);
+        elsif (SEL_LGET = "001") then -- SNE
+            SET_OUT(0) <= LGET(0);
         elsif (SEL_LGET = "010") then -- SLE
             if (LGET(1) = '0') then
                 SET_OUT(0) <= '1';

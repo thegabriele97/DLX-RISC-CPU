@@ -184,7 +184,12 @@ architecture mix of windowing_rf is
     signal writeen_ext: std_logic_vector(3*N+M-1 downto 0);
     signal dec_out_with_wen: std_logic_vector(3*N+M-1 downto 0);
     signal c_win: std_logic_vector(F-1 downto 0);
+    signal c_win_mux: std_logic_vector(F-1 downto 0);
     signal en_regi: std_logic_vector(M+2*N*F-1 downto 0);
+    signal int_pop_ret_encoding: std_logic_vector(1 downto 0);
+    signal out_nwin_in_mux: std_logic_vector(F-1 downto 0);
+    signal bus_mux_tcwp: std_logic_vector((2*F-1) downto 0);
+    signal mux_tcwp_sel: std_logic_vector(0 downto 0);
 
     signal bus_reg_dataout: std_logic_vector(NBIT_DATA*2*N*F-1 downto 0);
     signal bus_global_dataout: std_logic_vector(NBIT_DATA*M-1 downto 0);
@@ -348,6 +353,36 @@ begin
     end generate REGS;
 
 
+    --------------------------------------------------------------------------------------------
+    --------------------------------------------------------------------------------------------
+    --------------------------------------------------------------------------------------------
+    --------------------------------------------------------------------------------------------
+
+
+    int_pop_ret_encoding <= int_POP & int_PUSH;
+
+    TCWP_NEXT_CALC: nwin_calc generic map(F => F) 
+    port map(
+        c_win => c_win,
+        sel => int_pop_ret_encoding,
+        n_win => out_nwin_in_mux
+    );
+
+    mux_tcwp_sel(0) <= int_POP or int_PUSH;
+    bus_mux_tcwp <= out_nwin_in_mux & c_win;
+    TCWP_MUX: mux generic map(N => F, M => f_log2(2))
+    port map(
+        S => mux_tcwp_sel,
+        Q => bus_mux_tcwp,
+        Y => c_win_mux
+    );
+    --------------------------------------------------------------------------------------------
+    --------------------------------------------------------------------------------------------
+    --------------------------------------------------------------------------------------------
+    --------------------------------------------------------------------------------------------
+
+
+
     DEC: decoder generic map(N => NBIT_ADD)
         port map(
             Q => ADD_WR,
@@ -361,7 +396,7 @@ begin
         port map(
             dec => dec_out_with_wen,
             addr_pop => fill_address_ext,
-            win => c_win,
+            win => c_win_mux,
             swp => c_swin_masked,
             sel => en_regi
         );

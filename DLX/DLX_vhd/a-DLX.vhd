@@ -59,21 +59,23 @@ architecture dlx_rtl of DLX is
 			IR_IN 			: in std_logic_vector(IR_SIZE - 1 downto 0);
 
 			HAZARD_SIG		: in std_logic; 	-- Data Hazard signal from ID
-			BUSY_WINDOW		: in std_logic;	-- Signal about R8..R31 still not wrote back (instructions still in the pipeline)
+			BUSY_WINDOW		: in std_logic;		-- Signal about R8..R31 still not wrote back (instructions still in the pipeline)
 			SPILL			: in std_logic;		-- PUSH to memory
 			FILL 			: in std_logic;		-- POP from memory
+
 
 			-- IF Control Signals
 			PIPLIN_IF_EN  	: out std_logic; -- Instruction Register Latch Enable
 			IF_STALL		: out std_logic;
 			PC_EN 			: out std_logic;
+			JUMP_EN      	: out std_logic; 	-- JUMP Enable Signal for PC input MUX
+			
+			-- ID Control Signals
 			CALL 			: out std_logic;
 			RET				: out std_logic;
-
-			-- ID Control Signals
-			PIPLIN_ID_EN 	: out std_logic;	-- ID Pipeline Stage Enable
-			JUMP_EN      	: out std_logic; 	-- JUMP Enable Signal for PC input MUX
+			NPC_SEL	        : out std_logic;
 			HAZARD_TABLE_WR1: out std_logic;		-- Inhibition of Hazard Control on the current DEST ADDRESS of the INSTR
+			PIPLIN_ID_EN 	: out std_logic;		-- ID Pipeline Stage Enable
 			LGET			: in std_logic_vector(1 downto 0);	-- From Decode Comparator
 
 			-- EX Control Signals
@@ -104,34 +106,35 @@ architecture dlx_rtl of DLX is
 		generic (
 			N_BIT_INSTR:    integer := 32;
 			N_BIT_ADDR_RF:  integer := 5;
-			N_BIT_DATA:     integer := 32;            
+			N_BIT_DATA:     integer := 32;
 			OPCODE_SIZE:    integer := 6;  -- Operation Code Size
-			PC_SIZE      : integer := 32
-		);
-		port (
-			CLK:            	in std_logic;
-			RST:            	in std_logic;
-			INSTR:          	in std_logic_vector(N_BIT_INSTR - 1 downto 0);      -- Instruction
-			ADD_WB:         	in std_logic_vector(N_BIT_ADDR_RF-1 downto 0);      -- Address for the write back
-			CPC:            	in std_logic_vector(PC_SIZE-1 downto 0);            -- Current program counter
-			RD1:            	in std_logic_vector(N_BIT_DATA-1 downto 0);         -- Data coming from the read port 1 of the Data Path
-			RD2:            	in std_logic_vector(N_BIT_DATA-1 downto 0);         -- Data coming from the read port 2 of the Data Path
-			RF2:            	in std_logic;       	                            -- RF Read Port 2 Enable signal
-			HAZARD_TABLE_WR1:   in std_logic;      	    	                        -- CU signal to enable Hazard Ctrl on the current RF WR address    
-			WB_EN:          	in std_logic;  
-			PIPLIN_ID_EN:   	in std_logic;
-			JUMP_EN:        	in std_logic;
-			BUSY_WINDOW:   	out std_logic;
-			HAZARD_SIG:     	out std_logic;
-			ADD_RS1:        	out std_logic_vector(N_BIT_ADDR_RF-1 downto 0);     -- Address 1 that goes in the register file
-			ADD_RS2:        	out std_logic_vector(N_BIT_ADDR_RF-1 downto 0);     -- Address 2 that goes in the register file
-			ADD_WS1:        	out std_logic_vector(N_BIT_ADDR_RF-1 downto 0);     -- Address for the write back that goes in the register file
-			INP1:           	out std_logic_vector(N_BIT_DATA-1 downto 0);
-        	INP2:           	out std_logic_vector(N_BIT_DATA-1 downto 0);
-			NPC:            	out std_logic_vector(PC_SIZE-1 downto 0);           -- Next program counter
-			PC_OVF:         	out std_logic;                                      -- Signal for PC overflow
-			LGET: 				out std_logic_vector(1 downto 0)					-- Comparator output towards CU and DP
-		);	
+			PC_SIZE:        integer := 32
+    	);
+    	port (
+			CLK:                in std_logic;
+			RST:                in std_logic;
+			INSTR:              in std_logic_vector(N_BIT_INSTR - 1 downto 0);      -- Instruction
+			ADD_WB:             in std_logic_vector(N_BIT_ADDR_RF-1 downto 0);      -- Address for the write back
+			CPC:                in std_logic_vector(PC_SIZE-1 downto 0);            -- Current program counter
+			RD1:                in std_logic_vector(N_BIT_DATA-1 downto 0);         -- Data coming from the read port 1 of the Data Path
+			RD2:                in std_logic_vector(N_BIT_DATA-1 downto 0);         -- Data coming from the read port 2 of the Data Path
+			RF2:                in std_logic;                                       -- RF Read Port 2 Enable signal
+			HAZARD_TABLE_WR1:   in std_logic;                                       -- CU signal to enable Hazard Ctrl on the current RF WR address    
+			WB_EN:              in std_logic;            
+			PIPLIN_ID_EN:       in std_logic;
+			JUMP_EN:            in std_logic;
+			NPC_SEL:            in std_logic;
+			BUSY_WINDOW:        out std_logic;
+			HAZARD_SIG:         out std_logic;
+			ADD_RS1:            out std_logic_vector(N_BIT_ADDR_RF-1 downto 0);     -- Address 1 that goes in the register file
+			ADD_RS2:            out std_logic_vector(N_BIT_ADDR_RF-1 downto 0);     -- Address 2 that goes in the register file
+			ADD_WS1:            out std_logic_vector(N_BIT_ADDR_RF-1 downto 0);     -- Address for the write back that goes in the register file
+			INP1:               out std_logic_vector(N_BIT_DATA-1 downto 0);
+			INP2:               out std_logic_vector(N_BIT_DATA-1 downto 0);
+			NPC:                out std_logic_vector(PC_SIZE-1 downto 0);           -- Next program counter
+			PC_OVF:             out std_logic;                                      -- Signal for PC overflow
+			LGET:               out std_logic_vector(1 downto 0)                    -- Comparator output towards CU and DP
+    	);
 	end component;
 
 
@@ -269,6 +272,7 @@ architecture dlx_rtl of DLX is
 	signal i_HAZARD_TABLE_WR1: std_logic;
 	signal i_CALL: std_logic;
 	signal i_RET: std_logic;
+	signal i_NPC_SEL: std_logic;
 
 	-- -- Control Unit Bus signals
 	signal i_ALU_OP: std_logic_vector(ALU_ADD'length-1 downto 0);
@@ -397,6 +401,7 @@ begin  -- DLX
 		PC_EN			=> i_PC_LATCH_EN,
 		CALL 			=> i_CALL,
 		RET 			=> i_RET,
+		NPC_SEL 		=> i_NPC_SEL,
 		PIPLIN_ID_EN 	=> i_EN1,
 		JUMP_EN			=> i_JUMP_EN,
 		HAZARD_TABLE_WR1=> i_HAZARD_TABLE_WR1,
@@ -447,6 +452,7 @@ begin  -- DLX
 		WB_EN => i_WF,
 		PIPLIN_ID_EN => i_EN1,
 		JUMP_EN => i_JUMP_EN,
+		NPC_SEL => i_NPC_SEL,
 		BUSY_WINDOW => i_BUSY_WINDOW,
         HAZARD_SIG => i_HAZARD_SIG_CU, 
         ADD_RS1 => i_ADD_RS1,    
@@ -491,8 +497,8 @@ begin  -- DLX
 		RWM => i_DATAMEM_RM,		
         DATA_SIZE =>  i_DATA_SIZE,
         UNSIG_SIGN_N => i_UNSIG_SIGN_N,			
-        CALL => i_CALL, -- TODO
-        RET => '0', -- TODO
+        CALL => i_CALL,
+        RET => i_RET,
         FILL => i_FILL,
         SPILL => i_SPILL,
         INP1 => i_INP1,

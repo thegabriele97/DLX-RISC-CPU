@@ -147,7 +147,7 @@ if ($srcfile =~ /^(.*)\.dlx$/) {
   "slei" => "i,0x1c",
   "sgei" => "i,0x1d",
   "call" => "j,0x1e",
-  "ret"  => "j,0x1f",
+  "ret"  => "jret,0x1f",
   "lb"   => "l,0x20",
   "lh"   => "l,0x21",
   "lw"   => "l,0x23",
@@ -519,6 +519,9 @@ sub forminstr {
     $out = ($op << 26) | ($dst & 0x3ffffff);
   } elsif ($itype eq "jr") {
     $dst = &getreg ($a[1]);
+    $out = ($op << 26) | ($dst << 21);
+  } elsif ($itype eq "jret") {
+    $dst = 31;
     $out = ($op << 26) | ($dst << 21);
   } elsif ($itype eq "t") {
     $dst = &getimm ($a[1]);
