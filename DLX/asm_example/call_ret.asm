@@ -9,7 +9,7 @@
     addi r8, r8, #5     ;18
     addi r30, r0, #30   ;1C
 
-    call lab            ;20
+    j labn              ;20
     addi r4, r0, #3     ;24 
 
     addi r29, r0, #1    ;28
