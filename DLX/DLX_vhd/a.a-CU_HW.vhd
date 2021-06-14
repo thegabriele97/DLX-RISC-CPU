@@ -246,13 +246,21 @@ begin
 		
 		CW_IF <= CW;
 	
-		if (HAZARD_SIG = '1' or ((IR_opcode = "011110" or IR_opcode = "011111") and BUSY_WINDOW = '1') or SPILL = '1' or i_FILL_delay = '1') then
+		-- if (HAZARD_SIG = '1' or ((IR_opcode = "011110" or IR_opcode = "011111") and BUSY_WINDOW = '1') or SPILL = '1' or i_FILL_delay = '1') then
+			
+		-- end if ;
+
+		if (HAZARD_SIG = '1' or ((IR_opcode = CALL or IR_opcode = RET) and BUSY_WINDOW = '1') or SPILL = '1' or i_FILL_delay = '1') then
 			CW_IF(CW_SIZE-1) <= '0';	-- IF disabling
 			CW_IF(CW_SIZE-3) <= '0';	-- PC disabling
 			CW_IF(CW_SIZE-11) <= '0';	-- ID disabling
+			-- CW_IF(CW_ID'length - 7) <= '0';
 			CW_IF(CW_SIZE-12) <= '0';	-- EX disabling
+			-- CW_IF(CW_EX'length - 1) <= '0';
 			CW_IF(CW_SIZE-29) <= '0';	-- MEM disabling
+			-- CW_IF(CW_MEM'length - 6) <= '0';
 			CW_IF(CW_SIZE-31) <= '0';	-- WB disabling
+			-- CW_IF(CW_WB'length - 2) <= '0';
 		end if;
 			
 	
@@ -396,6 +404,8 @@ begin
 			
 			when others => 
 				setcmp_i <= CW(CW_SIZE-1-19 downto CW_SIZE-1-21);
+				-- (11 downto 9)
+				-- setcom_i <= CW(CW_EX'length - 1 - 2 - alu_op_sig_t'length - 1 downto CW_EX'length - 1 - alu_op_sig_t'length - 2 - set_alu_op_sig_t'length)
 
 		end case;
 
@@ -419,7 +429,8 @@ begin
 			
 			when others => 
 				sel_alu_setcmp_i <= CW(CW_SIZE-1-22);
-
+				-- sel_alu_setcmp_i <= CW(CW_EX'length - 1 - alu_op_sig_t'length - set_op_sig_t'length - 1 - 2)
+				-- sel_alu_setcmp_i <= CW(CW_MEM'length);
 		end case;
 
 	end process SEL_ALU_SETCMP_P;
@@ -433,17 +444,22 @@ begin
 		CALL <= CW_IF(CW_SIZE - 5);
 		RET <= CW_IF(CW_SIZE - 6);
 
+		-- if (IR_opcode = BEQZ and LGET(0) = '0') then
 		if (IR_opcode = "000100" and LGET(0) = '0') then -- BEQZ 
 			JUMP_EN <= '1';
 			IF_STALL <= '1';
-		elsif (IR_opcode = "000101" and LGET(0) = '1') then -- BEQZ
+		-- elsif (IR_opcode = BNEZ and LGET(0) = '1') then
+		elsif (IR_opcode = "000101" and LGET(0) = '1') then -- BNEZ
 			JUMP_EN <= '1';
 			IF_STALL <= '1';
+		-- elsif (IR_opcode = CALL and BUSY_WINDOW = '1') then
 		elsif (IR_opcode = "011110" and BUSY_WINDOW = '1') then -- CALL
 			CALL <= '0';
 			JUMP_EN <= '0';	
+		-- elsif (IR_opcode = CALL and BUSY_WINDOW = '0' and i_SPILL_delay = '0') then
 		elsif (IR_opcode = "011110" and BUSY_WINDOW = '0' and i_SPILL_delay = '0') then -- CALL
-			CALL <= '1';	
+			CALL <= '1';
+		-- elsif (IR_opcode = RET and BUSY_WINDOW = '1')	
 		elsif (IR_opcode = "011111" and BUSY_WINDOW = '1') then -- RET
 			RET <= '0';
 			JUMP_EN <= '0';
