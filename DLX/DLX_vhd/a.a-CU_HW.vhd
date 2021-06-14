@@ -245,12 +245,12 @@ begin
 	begin
 		
 		CW_IF <= CW;
-	
-		-- if (HAZARD_SIG = '1' or ((IR_opcode = "011110" or IR_opcode = "011111") and BUSY_WINDOW = '1') or SPILL = '1' or i_FILL_delay = '1') then
+		
+		--if (HAZARD_SIG = '1' or ((IR_opcode = CALL or IR_opcode = RET) and BUSY_WINDOW = '1') or SPILL = '1' or i_FILL_delay = '1') then
 			
 		-- end if ;
-
-		if (HAZARD_SIG = '1' or ((IR_opcode = CALL or IR_opcode = RET) and BUSY_WINDOW = '1') or SPILL = '1' or i_FILL_delay = '1') then
+			
+	 	if (HAZARD_SIG = '1' or ((IR_opcode = "011110" or IR_opcode = "011111") and BUSY_WINDOW = '1') or SPILL = '1' or i_FILL_delay = '1') then
 			CW_IF(CW_SIZE-1) <= '0';	-- IF disabling
 			CW_IF(CW_SIZE-3) <= '0';	-- PC disabling
 			CW_IF(CW_SIZE-11) <= '0';	-- ID disabling
