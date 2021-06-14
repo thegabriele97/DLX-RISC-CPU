@@ -31,9 +31,9 @@ package myTypes is
 	constant ALU_NOR: 	alu_op_sig_t := "01110";
 	constant ALU_XOR: 	alu_op_sig_t := "10010";
 	constant ALU_XNOR: 	alu_op_sig_t := "10110";
-	constant ALU_LSR: 	alu_op_sig_t := "00011";
-	constant ALU_LSL: 	alu_op_sig_t := "00111";
-	constant ALU_ASR: 	alu_op_sig_t := "01011";
+	constant ALU_SRL: 	alu_op_sig_t := "00011";
+	constant ALU_SLL: 	alu_op_sig_t := "00111";
+	constant ALU_SRA: 	alu_op_sig_t := "01011";
 	constant ALU_ASL: 	alu_op_sig_t := "01111";
 	constant ALU_ROR: 	alu_op_sig_t := "10011";
 	constant ALU_ROL: 	alu_op_sig_t := "10111";

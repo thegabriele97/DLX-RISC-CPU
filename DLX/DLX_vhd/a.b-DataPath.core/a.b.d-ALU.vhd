@@ -95,13 +95,33 @@ architecture structural of ALU is
             Y:      OUT std_logic_vector(N-1 downto 0)
         );
     end component;
-    
+
+    component shifter is
+        generic(
+            N_BIT_DATA: integer := 32;
+            N_BIT_COARSE_MASK_SEL: integer := 2
+        );
+        port(
+            A:      in std_logic_vector(N_BIT_DATA-1 downto 0);  
+            B:      in std_logic_vector(N_BIT_DATA-1 downto 0);  
+            sel:    in std_logic_vector(2 downto 0);               -- first bit: arith/logic, second bit: shift left/right    
+            -- 000       logic right
+            -- 001       logic left
+            -- 010       arithmetic right
+            -- 011       arithmetic left
+            -- 100       rotate right
+            -- 101       rotate left
+            Y:      out std_logic_vector(N_BIT_DATA-1 downto 0)
+        );
+    end component;
+
     signal i_Q_EXTENDED: std_logic_vector((2**N_OPSEL)*N_BIT_DATA-1 downto 0);
 
     signal i_ADDER_OUT: std_logic_vector(N_BIT_DATA-1 downto 0);
     signal i_ADDER_COUT: std_logic;
     signal i_MULTIPLIER_OUT: std_logic_vector(2*N_BIT_DATA-1 downto 0);
     signal i_BWISE_OUT: std_logic_vector(N_BIT_DATA-1 downto 0);
+    signal i_SHIFT_OUT: std_logic_vector(N_BIT_DATA-1 downto 0);
 
 begin
 
@@ -109,7 +129,7 @@ begin
     -- OPERATION MULTIPLEXER
     --
 
-    i_Q_EXTENDED <= x"00000000" & i_BWISE_OUT & i_MULTIPLIER_OUT(N_BIT_DATA-1 downto 0) & i_ADDER_OUT;
+    i_Q_EXTENDED <= i_SHIFT_OUT & i_BWISE_OUT & i_MULTIPLIER_OUT(N_BIT_DATA-1 downto 0) & i_ADDER_OUT;
 
     MUXOUT: mux generic map(
         N => N_BIT_DATA,
@@ -159,8 +179,22 @@ begin
     ) port map(
         A => INA,
         B => INB,
-        S => OP(N_OPSEL+3-1 downto 2),
+        S => OP(OP'length-1 downto 2),
         Y => i_BWISE_OUT
+    );
+
+    --
+    --  SHIFTER
+    --
+
+    SHIFTER_HW: shifter generic map (
+        N_BIT_DATA => N_BIT_DATA,
+        N_BIT_COARSE_MASK_SEL => 2
+    ) port map (
+        A => INA, 
+        B => INB,
+        sel => OP(OP'length-1 downto 2),
+        Y => i_SHIFT_OUT
     );
 
 end structural;

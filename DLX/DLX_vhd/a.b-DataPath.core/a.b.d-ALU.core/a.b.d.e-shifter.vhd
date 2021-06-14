@@ -18,7 +18,6 @@ entity shifter is
         -- 100       rotate right
         -- 101       rotate left
         Y:      out std_logic_vector(N_BIT_DATA-1 downto 0)
-               
     );
 end entity;
     

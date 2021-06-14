@@ -27,7 +27,7 @@ begin
         elsif (SEL_LGET = "001") then -- SNE
             SET_OUT(0) <= LGET(0);
         elsif (SEL_LGET = "010") then -- SLE
-            if (LGET(1) = '0') then
+            if (LGET(1) = '0' or LGET(0) = '0') then
                 SET_OUT(0) <= '1';
             end if;
         elsif (SEL_LGET = "011") then -- SLT
@@ -35,7 +35,7 @@ begin
                 SET_OUT(0) <= '1';
             end if;
         elsif (SEL_LGET = "100") then -- SGE
-            if (LGET(1) = '1') then
+            if (LGET(1) = '1' or LGET(0) = '0') then
                 SET_OUT(0) <= '1';
             end if;
         elsif (SEL_LGET = "101") then -- SGT

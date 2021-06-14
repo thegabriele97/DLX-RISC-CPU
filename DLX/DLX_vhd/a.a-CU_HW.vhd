@@ -88,9 +88,10 @@ architecture dlx_cu_hw of dlx_cu is
 	--  "FSPJLE12NHDXAB-----+++TWR10UMCK"	
 		"1010001001110100100000000000101", -- SUBI (0x0A)
 		"1010000000000000000000000000000",
-		"1010000000000000000000000000000",
-		"1010000000000000000000000000000",
-		"1010000000000000000000000000000",
+	--  "FSPJLE12NHDXAB-----+++TWR10UMCK"	
+		"1010001001110100010000000000101", -- ANDI (0x0c)
+		"1010001001110101010000000000101", -- ORI  (0x0d)
+		"1010001001110110010000000000101", -- XORI (0x0e)
 	--  "FSPJLE12NHDXAB-----+++TWR10UMCK"	
 		"1010001001110100000000001010111",	-- LHI (0x0f)
 		"1010000000000000000000000000000",
@@ -103,12 +104,12 @@ architecture dlx_cu_hw of dlx_cu is
 		"XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
 		"XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
 	--  "FSPJLE12NHDXAB-----+++TWR10UMCK"	
-		"1010001001110100000000100000101",  -- SEQI(0x18)
-		"XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-		"XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+		"1010001001110100000000100000101",  -- SEQI (0x18)
+		"1010001001110100000001100000101",	-- SNEI (0x19)	
+		"1010001001110100000011100000101",	-- SLTI (0x1a)
 	--  "FSPJLE12NHDXAB-----+++TWR10UMCK"
 		"1010001001110100000101100000101",	-- SGTI (0x1b)
-		"XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+		"1010001001110100000010100000101",	-- SLEI (0x1c)
 	--  "FSPJLE12NHDXAB-----+++TWR10UMCK"	
 		"1010001001110100000100100000101",	-- SGEI (0x1d)
 	--  "FSPJLE12NHDXAB-----+++TWR10UMCK"	
@@ -246,7 +247,7 @@ begin
 		
 		CW_IF <= CW;
 		
-		--if (HAZARD_SIG = '1' or ((IR_opcode = CALL or IR_opcode = RET) and BUSY_WINDOW = '1') or SPILL = '1' or i_FILL_delay = '1') then
+		--if (HAZARD_SIG = '1' or ((IR_opcode = OP_CALL or IR_opcode = OP_RET) and BUSY_WINDOW = '1') or SPILL = '1' or i_FILL_delay = '1') then
 			
 		-- end if ;
 			
@@ -321,13 +322,34 @@ begin
 				case TO_INTEGER(unsigned(IR_func)) is
 					
 					when 4 => 
-						aluOpcode_i <= ALU_ADD; -- LLS;
+						aluOpcode_i <= ALU_SLL; -- SLL;
 					
 					when 6 => 
-						aluOpcode_i <= ALU_ADD; -- LRS;
+						aluOpcode_i <= ALU_SRL; -- SRL;
+
+					when 7 => 
+						aluOpcode_i <= ALU_SRA; -- SRA;
+
+					when 8 =>
+						aluOpcode_i <= ALU_ROR; -- ROR;
+
+					when 9 =>
+						aluOpcode_i <= ALU_ROL; -- ROL;
 
 					when 14 =>
-							aluOpcode_i <= ALU_MUL;	-- MUL
+						aluOpcode_i <= ALU_MUL;	-- MUL
+
+					when 32 =>
+						aluOpcode_i <= ALU_ADD;	-- ADD
+
+					when 33 =>
+						aluOpcode_i <= ALU_ADD;	-- ADDU	TODO
+
+					when 34 =>
+						aluOpcode_i <= ALU_SUB;	-- SUB
+
+					when 35 =>
+						aluOpcode_i <= ALU_SUB;	-- SUBU TODO
 
 					when 36 =>
 						aluOpcode_i <= ALU_AND;	-- AND
@@ -336,7 +358,9 @@ begin
 						aluOpcode_i <= ALU_OR;	-- OR
 
 					when 38 =>
-						aluOpcode_i <= ALU_XOR;	-- OR
+						aluOpcode_i <= ALU_XOR;	-- XOR
+
+					
 
 					
 					when others => 
@@ -371,7 +395,7 @@ begin
 						setcmp_i <= SET_SEQ; -- SEQ;
 					
 					when 41 => 
-						setcmp_i <= SET_SNE; -- SNEQ;
+						setcmp_i <= SET_SNE; -- SNE;
 
 					when 42 => 
 						setcmp_i <= SET_SLT; -- SLT;
@@ -444,22 +468,22 @@ begin
 		CALL <= CW_IF(CW_SIZE - 5);
 		RET <= CW_IF(CW_SIZE - 6);
 
-		-- if (IR_opcode = BEQZ and LGET(0) = '0') then
+		-- if (IR_opcode = OP_BEQZ and LGET(0) = '0') then
 		if (IR_opcode = "000100" and LGET(0) = '0') then -- BEQZ 
 			JUMP_EN <= '1';
 			IF_STALL <= '1';
-		-- elsif (IR_opcode = BNEZ and LGET(0) = '1') then
+		-- elsif (IR_opcode = OP_BNEZ and LGET(0) = '1') then
 		elsif (IR_opcode = "000101" and LGET(0) = '1') then -- BNEZ
 			JUMP_EN <= '1';
 			IF_STALL <= '1';
-		-- elsif (IR_opcode = CALL and BUSY_WINDOW = '1') then
+		-- elsif (IR_opcode = OP_CALL and BUSY_WINDOW = '1') then
 		elsif (IR_opcode = "011110" and BUSY_WINDOW = '1') then -- CALL
 			CALL <= '0';
 			JUMP_EN <= '0';	
-		-- elsif (IR_opcode = CALL and BUSY_WINDOW = '0' and i_SPILL_delay = '0') then
+		-- elsif (IR_opcode = OP_CALL and BUSY_WINDOW = '0' and i_SPILL_delay = '0') then
 		elsif (IR_opcode = "011110" and BUSY_WINDOW = '0' and i_SPILL_delay = '0') then -- CALL
 			CALL <= '1';
-		-- elsif (IR_opcode = RET and BUSY_WINDOW = '1')	
+		-- elsif (IR_opcode = OP_RET and BUSY_WINDOW = '1')	
 		elsif (IR_opcode = "011111" and BUSY_WINDOW = '1') then -- RET
 			RET <= '0';
 			JUMP_EN <= '0';
