@@ -27,12 +27,12 @@ entity ALU is
         -- OP := 100 10 -> XOR
         -- OP := 101 10 -> XNOR
 
-        -- OP := 000 11 -> SHIFT LEFT
-        -- OP := 001 11 -> SHIFT RIGHT
-        -- OP := 010 11 -> ARITH SHIFT LEFT
-        -- OP := 011 11 -> ARITH SHIFT RIGHT
-        -- OP := 100 11 -> ROTATE LEFT
-        -- OP := 101 11 -> ROTATE RIGHT
+        -- OP := 000 11 -> SHIFT RIGHT
+        -- OP := 001 11 -> SHIFT LEFT
+        -- OP := 010 11 -> ARITH SHIFT RIGHT
+        -- OP := 011 11 -> ARITH SHIFT LEFT
+        -- OP := 100 11 -> ROTATE RIGHT
+        -- OP := 101 11 -> ROTATE LEFT
 
 
         -- ....
