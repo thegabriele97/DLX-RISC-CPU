@@ -112,7 +112,7 @@ architecture dlx_cu_hw of dlx_cu is
 	--  "FSPJLE12NHDXAB-----+++TWR10UMCK"	
 		"1010001001110100000100100000101",	-- SGEI (0x1d)
 	--  "FSPJLE12NHDXAB-----+++TWR10UMCK"	
-		"1111101001110100000000000000101",	-- CALL (0x1e)
+		"1111001001110100000000000000101",	-- CALL (0x1e)
 		"1111011010000000000000000000000",	-- RET (0x1f)
 	--  "FSPJLE12NHDXAB-----+++TWR10UMCK"	
 		"1010001001110100000000001100111",	-- LB (0x20)
@@ -224,18 +224,43 @@ begin
 	WB_MUX_SEL 			<= CW_WB(CW_WB'length - 1);
 	PIPLIN_WB_EN    	<= CW_WB(CW_WB'length - 2);
 	
-	process(CW, CW_IF, HAZARD_SIG, IR_opcode, BUSY_WINDOW, i_SPILL_delay, i_FILL_delay)
+	--
+	--	This process allows to stop entirely the pipeline for the fetched instruction. Means that one of the conditions is true,
+	--  all the pipeline registers are disabled (PC, IR, ID, EX, MEM, WB) for the instruction
+	--	The stalled instruction is waiting in the Decode stage of the pipeline.
+	--
+	--	In particular we want this situation when:
+	--	- a Data Hazard occurs,
+	--	- We want to do a CALL and we have to wait for a SPILL to be completed (so SPILL = '1' means a JAL stalled in the ID stage
+	--    and meanwhile the CALL signal will we high only for a cc. Then i_SPILL_delay will be = '1' at next cc so CALL will go to 0 and
+	--    actually the CALL is stalled in the ID because immediately the SPILL rises to 1.
+	--	  We want the CALL to be high only for a cc so we are ok (accomplished by JBRANCH_CTRL)). At the end of the SPILL, the process
+	-- 	  below will free everything and the JAL will be executed (so a JUMP to the address of the CALL + saving in the current R31 the current PC)
+	--	- We want to do a RET. In this case it corresponds to a JR (so a JUMP to the actual R31). Because it's a jump to the actual R31,
+	--    we want to execute the JUMP immediately before the FILL starts. In fact we do it and we stall when i_FILL_delay = '1' that will be
+	--	  1 cc later the jump so means that after this cc, we have i_FILL_delay = '1' and meanwhile a NOP is inserted in the pipeline. So now
+	--	  we have a NOP stalled in the ID stage 'till i_FILL_delay = '0' so after the FILL will finish.
+	--
+	process(CW, CW_IF, HAZARD_SIG, IR_opcode, BUSY_WINDOW, i_FILL_delay, SPILL)
 	begin
 		
 		CW_IF <= CW;
-	
-		if (HAZARD_SIG = '1' or ((IR_opcode = "011110" or IR_opcode = "011111") and BUSY_WINDOW = '1') or i_SPILL_delay = '1' or i_FILL_delay = '1') then
+		
+		--if (HAZARD_SIG = '1' or ((IR_opcode = CALL or IR_opcode = RET) and BUSY_WINDOW = '1') or SPILL = '1' or i_FILL_delay = '1') then
+			
+		-- end if ;
+			
+	 	if (HAZARD_SIG = '1' or ((IR_opcode = "011110" or IR_opcode = "011111") and BUSY_WINDOW = '1') or SPILL = '1' or i_FILL_delay = '1') then
 			CW_IF(CW_SIZE-1) <= '0';	-- IF disabling
 			CW_IF(CW_SIZE-3) <= '0';	-- PC disabling
 			CW_IF(CW_SIZE-11) <= '0';	-- ID disabling
-			CW_IF(CW_SIZE-12) <= '0';	-- EZ disabling
+			-- CW_IF(CW_ID'length - 7) <= '0';
+			CW_IF(CW_SIZE-12) <= '0';	-- EX disabling
+			-- CW_IF(CW_EX'length - 1) <= '0';
 			CW_IF(CW_SIZE-29) <= '0';	-- MEM disabling
+			-- CW_IF(CW_MEM'length - 6) <= '0';
 			CW_IF(CW_SIZE-31) <= '0';	-- WB disabling
+			-- CW_IF(CW_WB'length - 2) <= '0';
 		end if;
 			
 	
@@ -379,6 +404,8 @@ begin
 			
 			when others => 
 				setcmp_i <= CW(CW_SIZE-1-19 downto CW_SIZE-1-21);
+				-- (11 downto 9)
+				-- setcom_i <= CW(CW_EX'length - 1 - 2 - alu_op_sig_t'length - 1 downto CW_EX'length - 1 - alu_op_sig_t'length - 2 - set_alu_op_sig_t'length)
 
 		end case;
 
@@ -402,13 +429,14 @@ begin
 			
 			when others => 
 				sel_alu_setcmp_i <= CW(CW_SIZE-1-22);
-
+				-- sel_alu_setcmp_i <= CW(CW_EX'length - 1 - alu_op_sig_t'length - set_op_sig_t'length - 1 - 2)
+				-- sel_alu_setcmp_i <= CW(CW_MEM'length);
 		end case;
 
 	end process SEL_ALU_SETCMP_P;
 
 	
-	JBRANCH_CTRL: process(IR_opcode, CW_IF, LGET, BUSY_WINDOW)
+	JBRANCH_CTRL: process(IR_opcode, CW_IF, LGET, BUSY_WINDOW, i_SPILL_delay, i_FILL_delay)
 	begin
 
 		IF_STALL <= CW_IF(CW_SIZE - 2);
@@ -416,18 +444,25 @@ begin
 		CALL <= CW_IF(CW_SIZE - 5);
 		RET <= CW_IF(CW_SIZE - 6);
 
+		-- if (IR_opcode = BEQZ and LGET(0) = '0') then
 		if (IR_opcode = "000100" and LGET(0) = '0') then -- BEQZ 
 			JUMP_EN <= '1';
 			IF_STALL <= '1';
-		elsif (IR_opcode = "000101" and LGET(0) = '1') then -- BEQZ
+		-- elsif (IR_opcode = BNEZ and LGET(0) = '1') then
+		elsif (IR_opcode = "000101" and LGET(0) = '1') then -- BNEZ
 			JUMP_EN <= '1';
 			IF_STALL <= '1';
+		-- elsif (IR_opcode = CALL and BUSY_WINDOW = '1') then
 		elsif (IR_opcode = "011110" and BUSY_WINDOW = '1') then -- CALL
 			CALL <= '0';
 			JUMP_EN <= '0';	
+		-- elsif (IR_opcode = CALL and BUSY_WINDOW = '0' and i_SPILL_delay = '0') then
+		elsif (IR_opcode = "011110" and BUSY_WINDOW = '0' and i_SPILL_delay = '0') then -- CALL
+			CALL <= '1';
+		-- elsif (IR_opcode = RET and BUSY_WINDOW = '1')	
 		elsif (IR_opcode = "011111" and BUSY_WINDOW = '1') then -- RET
 			RET <= '0';
-			JUMP_EN <= '0';			
+			JUMP_EN <= '0';
 		end if;
 
 	end process JBRANCH_CTRL;
