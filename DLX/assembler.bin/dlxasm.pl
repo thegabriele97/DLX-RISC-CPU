@@ -59,8 +59,11 @@ if ($srcfile =~ /^(.*)\.dlx$/) {
 %instTbl = (
 # Register-register instructions
   "sll"  => "r,0x04",
+  "mult"  => "r,0x0e",
   "srl"  => "r,0x06",
   "sra"  => "r,0x07",
+  "ror" => "r,0x08",
+  "rol" => "r,0x09",
   "add"  => "r,0x20",
   "addu" => "r,0x21",
   "sub"  => "r,0x22",
@@ -101,7 +104,6 @@ if ($srcfile =~ /^(.*)\.dlx$/) {
   "cvtd2i" => "fd,0x0b",
   "cvti2f" => "fd,0x0c",
   "cvti2d" => "fd,0x0d",
-  "mult"  => "f,0x0e",
   "div"   => "f,0x0f",
   "eqf"   => "f2,0x10",
   "nef"   => "f2,0x11",
@@ -146,6 +148,8 @@ if ($srcfile =~ /^(.*)\.dlx$/) {
   "sgti" => "i,0x1b",
   "slei" => "i,0x1c",
   "sgei" => "i,0x1d",
+  "call" => "j,0x1e",
+  "ret"  => "jret,0x1f",
   "lb"   => "l,0x20",
   "lh"   => "l,0x21",
   "lw"   => "l,0x23",
@@ -517,6 +521,9 @@ sub forminstr {
     $out = ($op << 26) | ($dst & 0x3ffffff);
   } elsif ($itype eq "jr") {
     $dst = &getreg ($a[1]);
+    $out = ($op << 26) | ($dst << 21);
+  } elsif ($itype eq "jret") {
+    $dst = 31;
     $out = ($op << 26) | ($dst << 21);
   } elsif ($itype eq "t") {
     $dst = &getimm ($a[1]);

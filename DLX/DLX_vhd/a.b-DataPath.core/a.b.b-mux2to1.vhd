@@ -3,7 +3,7 @@ use ieee.std_logic_1164.all;
 
 entity mux2_1 is
     generic (NBIT: integer:= 32);
-	Port (	
+	port (	
         a:	in	std_logic_vector(NBIT - 1 downto 0);
         b:	in	std_logic_vector(NBIT - 1 downto 0);
         s: 	in	std_logic;
