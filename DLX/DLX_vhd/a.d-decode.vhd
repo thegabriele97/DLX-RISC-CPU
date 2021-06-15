@@ -1,6 +1,7 @@
 library IEEE;
 use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
+use work.myTypes.all;
 
 entity decode is
     generic (
@@ -23,6 +24,7 @@ entity decode is
         WB_EN:              in std_logic;            
         PIPLIN_ID_EN:       in std_logic;
         JUMP_EN:            in std_logic;
+        UNSIGNED_ID:        in std_logic;
         NPC_SEL:            in std_logic;
         BUSY_WINDOW:        out std_logic;
         HAZARD_SIG:         out std_logic;
@@ -148,7 +150,7 @@ begin
 
     end process;
 
-    process(op_code, INSTR)
+    process(op_code, INSTR, UNSIGNED_ID)
     begin
  
         i_SEL_CMPB <= '1';
@@ -184,7 +186,7 @@ begin
 
         else -- I_TYPE
 
-            if (op_code /= "000100" and op_code /= "000101") then -- if BEQZ, BNEZ => SEL MUST BE 1
+            if (op_code /= OP_BEQZ and op_code /= OP_BNEZ) then -- if BEQZ, BNEZ => SEL MUST BE 1
                 i_SEL_CMPB <= '0';
             end if;
 
@@ -196,7 +198,16 @@ begin
             INP1 <= (others => '0');
             
             i_INP2 <= (others => INSTR(N_BIT_INSTR-OPCODE_SIZE-2*N_BIT_ADDR_RF-1));
+            if (UNSIGNED_ID = '1') then
+                i_INP2 <= (others => '0');
+            end if;
+            
             i_INP2(N_BIT_INSTR-OPCODE_SIZE-2*N_BIT_ADDR_RF-1 downto 0) <= INSTR(N_BIT_INSTR-OPCODE_SIZE-2*N_BIT_ADDR_RF-1 downto 0);
+
+            if (op_code = OP_LHI) then
+                INP1 <= x"0000" & INSTR(N_BIT_INSTR-OPCODE_SIZE-2*N_BIT_ADDR_RF-1 downto 0);
+                i_INP2 <= x"00000010";
+            end if;
 
         end if;
 

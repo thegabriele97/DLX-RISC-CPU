@@ -31,6 +31,7 @@ entity dlx_cu is
 		-- ID Control Signals
 		CALL 			: out std_logic;
 		RET				: out std_logic;
+		UNSIGNED_ID		: out std_logic;
 		NPC_SEL       	: out std_logic;
 		HAZARD_TABLE_WR1: out std_logic;		-- Inhibition of Hazard Control on the current DEST ADDRESS of the INSTR
 		PIPLIN_ID_EN 	: out std_logic;		-- ID Pipeline Stage Enable
@@ -69,72 +70,74 @@ architecture dlx_cu_hw of dlx_cu is
 		
 
 	signal cw_memory: mem_array := (
-	--  "FSPJLE12NHDXAB-----+++TWR10UMCK"	
-		"1010001101110000000000000000101", -- R type: IS IT CORRECT?
-	--  "FSPJLE12NHDXAB-----+++TWR10UMCK"	
+	--  "FSPJLE12UNHDXAB-----+++TWR10MCK"	
+		"1010001100111000000000000000101", -- R type
+	--  "FSPJLE12UNHDXAB-----+++TWR10MCK"	
 		"0000000000000000000000000000000", -- [VOID]
-	--  "FSPJLE12NHDXAB-----+++TWR10UMCK"	
-		"1111000000000000000000000000000", -- J (0X02) instruction encoding corresponds to the address to this ROM
-	--  "FSPJLE12NHDXAB-----+++TWR10UMCK"	
-		"1111001001110100000000000000101", -- JAL to be filled
-	--  "FSPJLE12NHDXAB-----+++TWR10UMCK"	
-		"1010001100000000000000000000000", -- BEQZ to be filled
+	--  "FSPJLE12UNHDXAB-----+++TWR10MCK"	
+		"1111000000000000000000000000000", -- J (0X02)
+	--  "FSPJLE12UNHDXAB-----+++TWR10MCK"	
+		"1111001000111010000000000000101", -- JAL
+	--  "FSPJLE12UNHDXAB-----+++TWR10MCK"	
+		"1010001100000000000000000000000", -- BEQZ
 		"1010001100000000000000000000000", -- BNEZ
 		"1010000000000000000000000000000", -- 
 		"1010000000000000000000000000000",
-	--  "FSPJLE12NHDXAB-----+++TWR10UMCK"	
-		"1010001001110100000000000000101", -- ADDI (0X08):
+	--  "FSPJLE12UNHDXAB-----+++TWR10MCK"	
+		"1010001000111010000000000000101", -- ADDI (0X08)
 		"1010000000000000000000000000000",
-	--  "FSPJLE12NHDXAB-----+++TWR10UMCK"	
-		"1010001001110100100000000000101", -- SUBI (0x0A)
+	--  "FSPJLE12UNHDXAB-----+++TWR10MCK"	
+		"1010001000111010010000000000101", -- SUBI (0x0A)
 		"1010000000000000000000000000000",
-	--  "FSPJLE12NHDXAB-----+++TWR10UMCK"	
-		"1010001001110100010000000000101", -- ANDI (0x0c)
-		"1010001001110101010000000000101", -- ORI  (0x0d)
-		"1010001001110110010000000000101", -- XORI (0x0e)
-	--  "FSPJLE12NHDXAB-----+++TWR10UMCK"	
-		"1010001001110100000000001010111",	-- LHI (0x0f)
-		"1010000000000000000000000000000",
-		"1010000000000000000000000000000",
-	--  "FSPJLE12NHDXAB-----+++TWR10UMCK"	
-		"1111001010000000000000000000000",	-- JR (0x12)
+	--  "FSPJLE12UNHDXAB-----+++TWR10MCK"	
+		"1010001010111010001000000000101", -- ANDI (0x0c)
+		"1010001010111010101000000000101", -- ORI  (0x0d)
+		"1010001010111011001000000000101", -- XORI (0x0e)
+	--  "FSPJLE12UNHDXAB-----+++TWR10MCK"	
+		"1010000000111110011100000000101",	-- LHI (0x0f)
 		"1010000000000000000000000000000",
 		"1010000000000000000000000000000",
+	--  "FSPJLE12UNHDXAB-----+++TWR10MCK"	
+		"1111001001000000000000000000000",	-- JR (0x12)
+		"1010000000000000000000000000000",
+	--  "FSPJLE12UNHDXAB-----+++TWR10MCK"	
+		"1010001010111010011100000000101",	-- SLLI (0x14)
 		"1010000000000000000000000000000",	-- NOP (0x15)
+	--  "FSPJLE12UNHDXAB-----+++TWR10MCK"	
+		"1010001010111010001100000000101",	-- SRLI (0x16)
+		"1010001010111010101100000000101",	-- SRAI (0x17)
+	--  "FSPJLE12UNHDXAB-----+++TWR10MCK"	
+		"1010001000111010000000010000101",  -- SEQI (0x18)
+		"1010001000111010000000110000101",	-- SNEI (0x19)	
+		"1010001000111010000001110000101",	-- SLTI (0x1a)
+	--  "FSPJLE12UNHDXAB-----+++TWR10MCK"
+		"1010001000111010000010110000101",	-- SGTI (0x1b)
+		"1010001000111010000001010000101",	-- SLEI (0x1c)
+	--  "FSPJLE12UNHDXAB-----+++TWR10MCK"	
+		"1010001000111010000010010000101",	-- SGEI (0x1d)
+	--  "FSPJLE12UNHDXAB-----+++TWR10MCK"	
+		"1111001000111010000000000000101",	-- CALL (0x1e)
+		"1111011001000000000000000000000",	-- RET (0x1f)
+	--  "FSPJLE12UNHDXAB-----+++TWR10MCK"	
+		"1010001000111010000000000110111",	-- LB (0x20)
+	--  "FSPJLE12UNHDXAB-----+++TWR10MCK"	
+		"1010001000111010000000000101111",	-- LH (0x21)
 		"XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-		"XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-	--  "FSPJLE12NHDXAB-----+++TWR10UMCK"	
-		"1010001001110100000000100000101",  -- SEQI (0x18)
-		"1010001001110100000001100000101",	-- SNEI (0x19)	
-		"1010001001110100000011100000101",	-- SLTI (0x1a)
-	--  "FSPJLE12NHDXAB-----+++TWR10UMCK"
-		"1010001001110100000101100000101",	-- SGTI (0x1b)
-		"1010001001110100000010100000101",	-- SLEI (0x1c)
-	--  "FSPJLE12NHDXAB-----+++TWR10UMCK"	
-		"1010001001110100000100100000101",	-- SGEI (0x1d)
-	--  "FSPJLE12NHDXAB-----+++TWR10UMCK"	
-		"1111001001110100000000000000101",	-- CALL (0x1e)
-		"1111011010000000000000000000000",	-- RET (0x1f)
-	--  "FSPJLE12NHDXAB-----+++TWR10UMCK"	
-		"1010001001110100000000001100111",	-- LB (0x20)
-	--  "FSPJLE12NHDXAB-----+++TWR10UMCK"	
-		"1010001001110100000000001010111",	-- LH (0x21)
-		"XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-	--  "FSPJLE12NHDXAB-----+++TWR10UMCK"	
-		"1010001001110100000000001000111",	-- LW (0x23)
-	--  "FSPJLE12NHDXAB-----+++TWR10UMCK"	
-		"1010001001110100000000001101111",	-- LBU (0x24)
-	--  "FSPJLE12NHDXAB-----+++TWR10UMCK"	
-		"1010001001110100000000001011111",	-- LHU (0x25)
+	--  "FSPJLE12UNHDXAB-----+++TWR10MCK"	
+		"1010001000111010000000000100111",	-- LW (0x23)
+	--  "FSPJLE12UNHDXAB-----+++TWR10MCK"	
+		"1010001010111010000000000110111",	-- LBU (0x24)
+	--  "FSPJLE12UNHDXAB-----+++TWR10MCK"	
+		"1010001010111010000000000101111",	-- LHU (0x25)
 		"XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",	-- LF (0x26)    TODO ??
 		"XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",	-- LD (0x27)    TODO ??
-	--  "FSPJLE12NHDXAB-----+++TWR10UMCK"
-		"1010001100110100000000010100100",	-- SB (0x28)
-	--  "FSPJLE12NHDXAB-----+++TWR10UMCK"
-		"1010001100110100000000010010100",	-- SH (0x29)
+	--  "FSPJLE12UNHDXAB-----+++TWR10MCK"
+		"1010001100011010000000001010100",	-- SB (0x28)
+	--  "FSPJLE12UNHDXAB-----+++TWR10MCK"
+		"1010001100011010000000001001100",	-- SH (0x29)
 		"XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX", 	
-	--  "FSPJLE12NHDXAB-----+++TWR10UMCK"
-		"1010001100110100000000010000100",	-- SW (0x2b)
+	--  "FSPJLE12UNHDXAB-----+++TWR10MCK"
+		"1010001100011010000000001000100",	-- SW (0x2b)
 		"XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
 		"XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
 		"XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",	-- SF (0x2e)
@@ -162,9 +165,9 @@ architecture dlx_cu_hw of dlx_cu is
 	signal CW  		: std_logic_vector(CW_SIZE-1 downto 0); 		-- full control word read from cw_mem
 	signal CW_IF 	: std_logic_vector(CW_SIZE-1 downto 0); 		-- first stage
 	signal CW_ID 	: std_logic_vector(CW_SIZE-1-4 downto 0); 		-- second stage
-	signal CW_EX 	: std_logic_vector(CW_SIZE-1-11 downto 0); 		-- third stage
-	signal CW_MEM 	: std_logic_vector(CW_SIZE-1-11-alu_op_sig_t'length-set_op_sig_t'length-1-3 downto 0); 	-- fourth stage
-	signal CW_WB 	: std_logic_vector(CW_SIZE-1-11-alu_op_sig_t'length-set_op_sig_t'length-1-9 downto 0); 	-- fifth stage
+	signal CW_EX 	: std_logic_vector(CW_SIZE-1-12 downto 0); 		-- third stage
+	signal CW_MEM 	: std_logic_vector(CW_SIZE-1-12-alu_op_sig_t'length-set_op_sig_t'length-1-3 downto 0); 	-- fourth stage
+	signal CW_WB 	: std_logic_vector(CW_SIZE-1-12-alu_op_sig_t'length-set_op_sig_t'length-1-8 downto 0); 	-- fifth stage
 
 	signal aluOpcode_i : alu_op_sig_t := ALU_ADD; -- alu_op_sig_t defined in package
 	signal aluOpcode1  : alu_op_sig_t := ALU_ADD;
@@ -178,6 +181,10 @@ architecture dlx_cu_hw of dlx_cu is
 	signal i_SPILL_delay: std_logic;
 	signal i_FILL_delay: std_logic;
 
+	signal unsigned_i: std_logic;
+	signal unsigned_1: std_logic;
+	signal unsigned_2: std_logic;
+
 begin
 
 	IR_opcode(OP_CODE_SIZE - 1 downto 0) <= IR_IN(31 downto 26);
@@ -187,7 +194,7 @@ begin
 	
 	-- EX control Signals
 	-- CW_SIZE: 28
-	-- CW_IF: "FSPJLE12NHDXAB-----+++TWR10UMCK" : 28
+	-- CW_IF: "FSPJLE12UNHDXAB-----+++TWR10UMCK" : 28
 	-- CW_ID: "12HDXAB-----+++TWR10UMCK"	 : 24 
 	-- CW_EX: "XAB-----+++TWR10UMCK"	 	 : 20 
 	-- CW_ME: "WR10UMCK"	 	 			 : 8
@@ -199,15 +206,16 @@ begin
 	PC_EN 				<= CW_IF(CW_SIZE - 3);
 	-- JUMP_EN      	................ - 4
 	
-
+	--  "FSPJLE12UNHDXAB-----+++TWR10MCK"	
 	-- ID Control Signals
 	--CALL 				<= CW_ID(CW_ID'length - 1);
 	--RET				<= CW_ID(CW_ID'length - 2);
 	RF_RD1_EN			<= CW_ID(CW_ID'length - 3);
 	RF_RD2_EN			<= CW_ID(CW_ID'length - 4);
-	NPC_SEL				<= CW_ID(CW_ID'length - 5);
-	HAZARD_TABLE_WR1	<= CW_ID(CW_ID'length - 6);
-	PIPLIN_ID_EN		<= CW_ID(CW_ID'length - 7);
+	UNSIGNED_ID			<= CW_ID(CW_ID'length - 5);
+	NPC_SEL				<= CW_ID(CW_ID'length - 6);
+	HAZARD_TABLE_WR1	<= CW_ID(CW_ID'length - 7);
+	PIPLIN_ID_EN		<= CW_ID(CW_ID'length - 8);
 
 	PIPLIN_EX_EN 		<= CW_EX(CW_EX'length - 1);
 	MUXA_SEL      		<= CW_EX(CW_EX'length - 2);
@@ -218,8 +226,7 @@ begin
 	DRAM_RE	    		<= CW_MEM(CW_MEM'length - 2);
 	DATA_SIZE(1)		<= CW_MEM(CW_MEM'length - 3);
 	DATA_SIZE(0)		<= CW_MEM(CW_MEM'length - 4);
-	UNSIG_SIGN_N		<= CW_MEM(CW_MEM'length - 5);
-	PIPLIN_MEM_EN 		<= CW_MEM(CW_MEM'length - 6);
+	PIPLIN_MEM_EN 		<= CW_MEM(CW_MEM'length - 5);
 
 	-- WB control Signals
 	WB_MUX_SEL 			<= CW_WB(CW_WB'length - 1);
@@ -246,28 +253,22 @@ begin
 	begin
 		
 		CW_IF <= CW;
-		
-		--if (HAZARD_SIG = '1' or ((IR_opcode = OP_CALL or IR_opcode = OP_RET) and BUSY_WINDOW = '1') or SPILL = '1' or i_FILL_delay = '1') then
 			
-		-- end if ;
-			
-	 	if (HAZARD_SIG = '1' or ((IR_opcode = "011110" or IR_opcode = "011111") and BUSY_WINDOW = '1') or SPILL = '1' or i_FILL_delay = '1') then
-			CW_IF(CW_SIZE-1) <= '0';	-- IF disabling
-			CW_IF(CW_SIZE-3) <= '0';	-- PC disabling
-			CW_IF(CW_SIZE-11) <= '0';	-- ID disabling
-			-- CW_IF(CW_ID'length - 7) <= '0';
-			CW_IF(CW_SIZE-12) <= '0';	-- EX disabling
-			-- CW_IF(CW_EX'length - 1) <= '0';
-			CW_IF(CW_SIZE-29) <= '0';	-- MEM disabling
-			-- CW_IF(CW_MEM'length - 6) <= '0';
-			CW_IF(CW_SIZE-31) <= '0';	-- WB disabling
-			-- CW_IF(CW_WB'length - 2) <= '0';
+	 	if (HAZARD_SIG = '1' or ((IR_opcode = OP_CALL or IR_opcode = OP_RET) and BUSY_WINDOW = '1') or SPILL = '1' or i_FILL_delay = '1') then
+			CW_IF(CW_SIZE-1) 			<= '0';		-- IF disabling
+			CW_IF(CW_SIZE-3) 			<= '0';	    -- PC disabling
+			CW_IF(CW_ID'length - 7) 	<= '0'; 	-- ID disabling
+			CW_IF(CW_EX'length - 1) 	<= '0';		-- EX disabling
+			CW_IF(CW_MEM'length - 6)	<= '0';		-- MEM disabling
+			CW_IF(CW_WB'length - 2) 	<= '0';		-- WB disabling
 		end if;
-			
 	
 	end process;
 
 	CW_ID <= CW_IF(CW_ID'length-1 downto 0);
+	
+	unsigned_i <= CW_ID(CW_ID'length - 5);
+	UNSIG_SIGN_N <= unsigned_2; 
 	
 
 	-- process to pipeline control words
@@ -286,6 +287,8 @@ begin
 				aluOpcode1 <= ALU_ADD;
 				setcmp_1 <= (others => '0');
 				sel_alu_setcmp_1 <= '0';
+				unsigned_1 <= '0';
+				unsigned_2 <= '0';
 
 			else
 
@@ -296,6 +299,9 @@ begin
 				aluOpcode1 <= aluOpcode_i;
 				setcmp_1 <= setcmp_i;
 				sel_alu_setcmp_1 <= sel_alu_setcmp_i;
+
+				unsigned_1 <= unsigned_i;
+				unsigned_2 <= unsigned_1;
 
 				i_SPILL_delay <= SPILL;
 				i_FILL_delay <= FILL;
@@ -427,9 +433,7 @@ begin
 				end case;
 			
 			when others => 
-				setcmp_i <= CW(CW_SIZE-1-19 downto CW_SIZE-1-21);
-				-- (11 downto 9)
-				-- setcom_i <= CW(CW_EX'length - 1 - 2 - alu_op_sig_t'length - 1 downto CW_EX'length - 1 - alu_op_sig_t'length - 2 - set_alu_op_sig_t'length)
+				setcmp_i <= CW(CW_EX'length - 1 - 2 - alu_op_sig_t'length - 1 downto CW_EX'length - 1 - alu_op_sig_t'length - 2 - set_op_sig_t'length);
 
 		end case;
 
@@ -452,9 +456,7 @@ begin
 				end if;
 			
 			when others => 
-				sel_alu_setcmp_i <= CW(CW_SIZE-1-22);
-				-- sel_alu_setcmp_i <= CW(CW_EX'length - 1 - alu_op_sig_t'length - set_op_sig_t'length - 1 - 2)
-				-- sel_alu_setcmp_i <= CW(CW_MEM'length);
+				sel_alu_setcmp_i <= CW(CW_EX'length - 1 - alu_op_sig_t'length - set_op_sig_t'length - 1 - 2);
 		end case;
 
 	end process SEL_ALU_SETCMP_P;
@@ -468,23 +470,18 @@ begin
 		CALL <= CW_IF(CW_SIZE - 5);
 		RET <= CW_IF(CW_SIZE - 6);
 
-		-- if (IR_opcode = OP_BEQZ and LGET(0) = '0') then
-		if (IR_opcode = "000100" and LGET(0) = '0') then -- BEQZ 
+		if (IR_opcode = OP_BEQZ and LGET(0) = '0') then -- BEQZ 
 			JUMP_EN <= '1';
 			IF_STALL <= '1';
-		-- elsif (IR_opcode = OP_BNEZ and LGET(0) = '1') then
-		elsif (IR_opcode = "000101" and LGET(0) = '1') then -- BNEZ
+		elsif (IR_opcode = OP_BNEZ and LGET(0) = '1') then -- BNEZ
 			JUMP_EN <= '1';
 			IF_STALL <= '1';
-		-- elsif (IR_opcode = OP_CALL and BUSY_WINDOW = '1') then
-		elsif (IR_opcode = "011110" and BUSY_WINDOW = '1') then -- CALL
+		elsif (IR_opcode = OP_CALL and BUSY_WINDOW = '1') then -- CALL
 			CALL <= '0';
 			JUMP_EN <= '0';	
-		-- elsif (IR_opcode = OP_CALL and BUSY_WINDOW = '0' and i_SPILL_delay = '0') then
-		elsif (IR_opcode = "011110" and BUSY_WINDOW = '0' and i_SPILL_delay = '0') then -- CALL
+		elsif (IR_opcode = OP_CALL and BUSY_WINDOW = '0' and i_SPILL_delay = '0') then -- CALL
 			CALL <= '1';
-		-- elsif (IR_opcode = OP_RET and BUSY_WINDOW = '1')	
-		elsif (IR_opcode = "011111" and BUSY_WINDOW = '1') then -- RET
+		elsif (IR_opcode = OP_RET and BUSY_WINDOW = '1') then -- RET
 			RET <= '0';
 			JUMP_EN <= '0';
 		end if;

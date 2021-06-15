@@ -38,18 +38,27 @@ ori r14,r12,#65535  ;FFFFFFF
 and r15,r14,r2      ;1
 andi r16,r14,#1     ;1
 sll r17,r16,r2      ;2
-;slli r18,r16,#1    
+slli r18,r16,#1    
 srl r19,r16,r2      ;0
-;srli r20,r16,#1    
+srli r20,r16,#1    
 sra r21,r12,r2      ;2
-;srai r22,r12,#1    
+srai r22,r12,#1    
 mult r23,r1,r5      ;0
 xor r24,r1,r1       ;0
-xori r25, r1, #0xf  ;14
+;xori r25, r1, #0xf  ;14
 
 addi r6, r0, #5     ;5
 addi r1, r0, #2     ;2
-ror r6, r6, r1      ;0100 0000 0000 0000 0000 ... 0001
+ror r30, r6, r1      ;0100 0000 0000 0000 0000 ... 0001
 addi r7, r0, #5     ;5
-rol r7, r7, r1      ;0000 0000 0000 0000 .0001 0100
+rol r29, r7, r1      ;0000 0000 0000 0000 .0001 0100
+
+lhi r28, #-40
+
+sw 0(r0), r14
+lh r27, 2(r0)
+lhu r26, 2(r0)
+
 nop
+halt:
+    j halt
