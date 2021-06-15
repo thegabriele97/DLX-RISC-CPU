@@ -1,0 +1,46 @@
+vcom test_bench/TB_DLX.vhd
+
+vsim -t 10ps work.tb_dlx
+log -r *
+
+add wave -position insertpoint sim:/tb_dlx/Clock
+
+add wave -position insertpoint sim:/tb_dlx/U1/DECODEhw/op_code sim:/tb_dlx/U1/DECODEhw/ADD_RS1 sim:/tb_dlx/U1/DECODEhw/ADD_RS2 sim:/tb_dlx/U1/DECODEhw/ADD_WS1
+
+add wave -divider
+add wave -position insertpoint sim:/tb_dlx/U1/DataPath/RF/DATAIN
+add wave -position insertpoint sim:/tb_dlx/U1/DataPath/RF/ADD_WR
+
+add wave -position insertpoint -group PROC_REGS -label R0 sim:/tb_dlx/U1/DataPath/RF/REGS(0)/GLOB_BLK/BLOCK_GLOB/Q
+add wave -position insertpoint -group PROC_REGS -label R1 sim:/tb_dlx/U1/DataPath/RF/REGS(1)/GLOB_BLK/BLOCK_GLOB/Q
+add wave -position insertpoint -group PROC_REGS -label R2 sim:/tb_dlx/U1/DataPath/RF/REGS(2)/GLOB_BLK/BLOCK_GLOB/Q
+add wave -position insertpoint -group PROC_REGS -label R3 sim:/tb_dlx/U1/DataPath/RF/REGS(3)/GLOB_BLK/BLOCK_GLOB/Q
+add wave -position insertpoint -group PROC_REGS -label R4 sim:/tb_dlx/U1/DataPath/RF/REGS(4)/GLOB_BLK/BLOCK_GLOB/Q
+add wave -position insertpoint -group PROC_REGS -label R5 sim:/tb_dlx/U1/DataPath/RF/REGS(5)/GLOB_BLK/BLOCK_GLOB/Q
+add wave -position insertpoint -group PROC_REGS -label R6 sim:/tb_dlx/U1/DataPath/RF/REGS(6)/GLOB_BLK/BLOCK_GLOB/Q
+add wave -position insertpoint -group PROC_REGS -label R7 sim:/tb_dlx/U1/DataPath/RF/REGS(7)/GLOB_BLK/BLOCK_GLOB/Q
+
+add wave -position insertpoint -group PROC_REGS -label R8 sim:/tb_dlx/U1/DataPath/RF/SEL_BLK/curr_proc_regs[31:0]
+add wave -position insertpoint -group PROC_REGS -label R9 sim:/tb_dlx/U1/DataPath/RF/SEL_BLK/curr_proc_regs[63:32]
+add wave -position insertpoint -group PROC_REGS -label R10 sim:/tb_dlx/U1/DataPath/RF/SEL_BLK/curr_proc_regs[95:64]
+add wave -position insertpoint -group PROC_REGS -label R11 sim:/tb_dlx/U1/DataPath/RF/SEL_BLK/curr_proc_regs[127:96]
+add wave -position insertpoint -group PROC_REGS -label R12 sim:/tb_dlx/U1/DataPath/RF/SEL_BLK/curr_proc_regs[159:128]
+add wave -position insertpoint -group PROC_REGS -label R13 sim:/tb_dlx/U1/DataPath/RF/SEL_BLK/curr_proc_regs[191:160]
+add wave -position insertpoint -group PROC_REGS -label R14 sim:/tb_dlx/U1/DataPath/RF/SEL_BLK/curr_proc_regs[223:192]
+add wave -position insertpoint -group PROC_REGS -label R15 sim:/tb_dlx/U1/DataPath/RF/SEL_BLK/curr_proc_regs[255:224]
+add wave -position insertpoint -group PROC_REGS -label R16 sim:/tb_dlx/U1/DataPath/RF/SEL_BLK/curr_proc_regs[287:256]
+add wave -position insertpoint -group PROC_REGS -label R17 sim:/tb_dlx/U1/DataPath/RF/SEL_BLK/curr_proc_regs[319:288]
+add wave -position insertpoint -group PROC_REGS -label R18 sim:/tb_dlx/U1/DataPath/RF/SEL_BLK/curr_proc_regs[351:320]
+add wave -position insertpoint -group PROC_REGS -label R19 sim:/tb_dlx/U1/DataPath/RF/SEL_BLK/curr_proc_regs[383:352]
+add wave -position insertpoint -group PROC_REGS -label R20 sim:/tb_dlx/U1/DataPath/RF/SEL_BLK/curr_proc_regs[415:384]
+add wave -position insertpoint -group PROC_REGS -label R21 sim:/tb_dlx/U1/DataPath/RF/SEL_BLK/curr_proc_regs[447:416]
+add wave -position insertpoint -group PROC_REGS -label R22 sim:/tb_dlx/U1/DataPath/RF/SEL_BLK/curr_proc_regs[479:448]
+add wave -position insertpoint -group PROC_REGS -label R23 sim:/tb_dlx/U1/DataPath/RF/SEL_BLK/curr_proc_regs[511:480]
+add wave -position insertpoint -group PROC_REGS -label R24 sim:/tb_dlx/U1/DataPath/RF/SEL_BLK/curr_proc_regs[543:512]
+add wave -position insertpoint -group PROC_REGS -label R25 sim:/tb_dlx/U1/DataPath/RF/SEL_BLK/curr_proc_regs[575:544]
+add wave -position insertpoint -group PROC_REGS -label R26 sim:/tb_dlx/U1/DataPath/RF/SEL_BLK/curr_proc_regs[607:576]
+add wave -position insertpoint -group PROC_REGS -label R27 sim:/tb_dlx/U1/DataPath/RF/SEL_BLK/curr_proc_regs[639:608]
+add wave -position insertpoint -group PROC_REGS -label R28 sim:/tb_dlx/U1/DataPath/RF/SEL_BLK/curr_proc_regs[671:640]
+add wave -position insertpoint -group PROC_REGS -label R29 sim:/tb_dlx/U1/DataPath/RF/SEL_BLK/curr_proc_regs[703:672]
+add wave -position insertpoint -group PROC_REGS -label R30 sim:/tb_dlx/U1/DataPath/RF/SEL_BLK/curr_proc_regs[735:704]
+add wave -position insertpoint -group PROC_REGS -label R31 sim:/tb_dlx/U1/DataPath/RF/SEL_BLK/curr_proc_regs[767:736]
