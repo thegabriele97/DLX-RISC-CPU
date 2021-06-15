@@ -230,6 +230,7 @@ architecture dlx_rtl of DLX is
 			RM          : in std_logic;     -- Read memory signal
 			WM          : in std_logic;     -- Write memory signal
 			EN          : in std_logic;
+        	DATA_SIZE   : in std_logic_vector(1 downto 0);    
 			address     : in std_logic_vector(LOG_RAM_DEPTH-1 downto 0);        
 			data_in     : in std_logic_vector(N_BIT_DATA-1 downto 0);
 			data_out    : out std_logic_vector(N_BIT_DATA-1 downto 0)
@@ -529,6 +530,7 @@ begin  -- DLX
 		RM => i_DATAMEM_RM,
 		WM => i_DATAMEM_WM,
 		EN => i_EN3,
+		DATA_SIZE => i_DATA_SIZE,					
 		address => i_DATAMEM_ADDR,    
 		data_in => i_DATAMEM_BUS_TOMEM,
 		data_out => i_DATAMEM_BUS_FROMEM
@@ -543,6 +545,7 @@ begin  -- DLX
 		RM => i_RF_MEM_RM,
 		WM => i_RF_MEM_WM,
 		EN => '1',
+		DATA_SIZE => "00",						-- 32 bit
 		address => i_RF_MEM_ADDR,    
 		data_in => i_RF_BUS_TOMEM,
 		data_out => i_RF_BUS_FROMEM

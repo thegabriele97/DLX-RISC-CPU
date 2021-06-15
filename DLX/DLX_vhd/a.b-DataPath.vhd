@@ -240,6 +240,17 @@ architecture structural of DP is
         );
     end component;
 
+    component addr_mask is
+        generic (
+            N_BIT_MEM_ADDR: integer := 32
+        );
+        port (
+            ADDR_IN: in std_logic_vector(N_BIT_MEM_ADDR-1 downto 0);
+            DATA_SIZE: in std_logic_vector(1 downto 0);
+            ADDR_OUT: out std_logic_vector(N_BIT_MEM_ADDR-1 downto 0)
+        );
+    end component;
+
 
     --
     -- PIPELINE STAGE 1
@@ -491,8 +502,6 @@ begin
     -- 
     -- REGISTER ALU_OUT --
     --
-    DATAMEM_ADDR <= i_REG_ALU_OUT_ADDRESS_DATAMEM(DATAMEM_ADDR'range);
-
     REG_ALU_OUT: reg_generic generic map(
         N => N_BIT_DATA,
         RSTVAL => 0
@@ -504,6 +513,17 @@ begin
         Enable => EN2
     );
 
+
+    --
+    --  MEMORY ADDRESS MASK
+    --
+    MEM_ADDR_MASK: addr_mask generic map(
+        N_BIT_MEM_ADDR => N_BIT_MEM_ADDR
+    ) port map(
+        ADDR_IN     => i_REG_ALU_OUT_ADDRESS_DATAMEM(DATAMEM_ADDR'range),
+        DATA_SIZE   => DATA_SIZE,
+        ADDR_OUT    => DATAMEM_ADDR
+    );
 
     -- 
     -- REGISTER ME --
