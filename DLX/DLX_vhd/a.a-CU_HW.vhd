@@ -85,10 +85,12 @@ architecture dlx_cu_hw of dlx_cu is
 		"1010000000000000000000000000000",
 	--  "FSPJLE12UNHDXAB-----+++TWR10MCK"	
 		"1010001000111010000000000000101", -- ADDI (0X08)
-		"1010000000000000000000000000000",
 	--  "FSPJLE12UNHDXAB-----+++TWR10MCK"	
+		"1010001010111010000000000000101", -- ADDUI (0x09)
+	--  "FSPJLE12UNHDXAB-----+++TWR10MCK"		
 		"1010001000111010010000000000101", -- SUBI (0x0A)
-		"1010000000000000000000000000000",
+	--  "FSPJLE12UNHDXAB-----+++TWR10MCK"
+		"1010001010111010010000000000101", -- SUBUI (0x0B)
 	--  "FSPJLE12UNHDXAB-----+++TWR10MCK"	
 		"1010001010111010001000000000101", -- ANDI (0x0c)
 		"1010001010111010101000000000101", -- ORI  (0x0d)
@@ -99,7 +101,8 @@ architecture dlx_cu_hw of dlx_cu is
 		"1010000000000000000000000000000",
 	--  "FSPJLE12UNHDXAB-----+++TWR10MCK"	
 		"1111001001000000000000000000000",	-- JR (0x12)
-		"1010000000000000000000000000000",
+	--  "FSPJLE12UNHDXAB-----+++TWR10MCK"
+		"1111001001111010000000000000101",	-- JALR (0x13)
 	--  "FSPJLE12UNHDXAB-----+++TWR10MCK"	
 		"1010001010111010011100000000101",	-- SLLI (0x14)
 		"1010000000000000000000000000000",	-- NOP (0x15)
@@ -152,10 +155,14 @@ architecture dlx_cu_hw of dlx_cu is
 		"XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
 		"XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
 		"XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-		"XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-		"XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-		"XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-		"XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+	--  "FSPJLE12UNHDXAB-----+++TWR10MCK"
+		"1010001010111010000001110000101",	-- SLTUI (0x3a)
+	--  "FSPJLE12UNHDXAB-----+++TWR10MCK"
+		"1010001010111010000010110000101",	-- SGTUI (0x3b)
+	--  "FSPJLE12UNHDXAB-----+++TWR10MCK"
+		"1010001010111010000001010000101",	-- SLEUI (0x3c)
+	--  "FSPJLE12UNHDXAB-----+++TWR10MCK"
+		"1010001010111010000010010000101"	-- SGEUI (0x3d)
 	);
 	
 	
@@ -212,7 +219,7 @@ begin
 	--RET				<= CW_ID(CW_ID'length - 2);
 	RF_RD1_EN			<= CW_ID(CW_ID'length - 3);
 	RF_RD2_EN			<= CW_ID(CW_ID'length - 4);
-	UNSIGNED_ID			<= CW_ID(CW_ID'length - 5);
+	-- UNSIGNED_ID			<= CW_ID(CW_ID'length - 5);
 	NPC_SEL				<= CW_ID(CW_ID'length - 6);
 	HAZARD_TABLE_WR1	<= CW_ID(CW_ID'length - 7);
 	PIPLIN_ID_EN		<= CW_ID(CW_ID'length - 8);
@@ -349,13 +356,13 @@ begin
 						aluOpcode_i <= ALU_ADD;	-- ADD
 
 					when 33 =>
-						aluOpcode_i <= ALU_ADD;	-- ADDU	TODO
+						aluOpcode_i <= ALU_ADD;	-- ADDU
 
 					when 34 =>
 						aluOpcode_i <= ALU_SUB;	-- SUB
 
 					when 35 =>
-						aluOpcode_i <= ALU_SUB;	-- SUBU TODO
+						aluOpcode_i <= ALU_SUB;	-- SUBU
 
 					when 36 =>
 						aluOpcode_i <= ALU_AND;	-- AND
@@ -365,8 +372,6 @@ begin
 
 					when 38 =>
 						aluOpcode_i <= ALU_XOR;	-- XOR
-
-					
 
 					
 					when others => 
@@ -388,9 +393,11 @@ begin
 	
 	SEL_LGET <= setcmp_1;
 
-	SETCMP_P: process (IR_opcode, IR_func, CW)
+	SETCMP_P: process (IR_opcode, IR_func, CW, CW_ID)
 	begin -- process SETCMP_P
-		
+	
+		UNSIGNED_ID	<= CW_ID(CW_ID'length - 5);	
+	
 		case (TO_INTEGER(unsigned(IR_opcode))) is
 			
 			when 0 => -- R_TYPE
@@ -414,19 +421,23 @@ begin
 					
 					when 45 => 
 						setcmp_i <= SET_SGE; -- SGE;
-					
-					-- when 58 => 
-					-- 	setcmp_i <= ALU_ADD; -- SLTU;
-					
-					-- when 59 => 
-					-- 	setcmp_i <= ALU_ADD; -- SGTU;
-					
-					-- when 60 => 
-					-- 	setcmp_i <= ALU_ADD; -- SLEU;
-					
-					-- when 61 => 
-					-- 	setcmp_i <= ALU_ADD; -- SGEU;
-					
+				
+					when 58 => 
+						setcmp_i <= SET_SLT; -- SLTU;	
+						UNSIGNED_ID	<= '1';
+
+					when 59 => 
+						setcmp_i <= SET_SGT; -- SGTU;
+						UNSIGNED_ID	<= '1';
+						
+					when 60 => 
+						setcmp_i <= SET_SLE; -- SLEU;
+						UNSIGNED_ID	<= '1';
+
+					when 61 => 
+						setcmp_i <= SET_SGE; -- SGEU;
+						UNSIGNED_ID	<= '1';
+
 					when others => 
 						setcmp_i <= SET_SEQ;
 				
@@ -449,7 +460,7 @@ begin
 			
 			when 0 => -- R_TYPE
 
-				if (TO_INTEGER(unsigned(IR_func)) >= 40 and TO_INTEGER(unsigned(IR_func)) <= 45) then
+				if ((TO_INTEGER(unsigned(IR_func)) >= 40 and TO_INTEGER(unsigned(IR_func)) <= 45) or (TO_INTEGER(unsigned(IR_FUNC)) >= 58 and TO_INTEGER(unsigned(IR_FUNC)) <= 61)) then
 					sel_alu_setcmp_i <= '1';
 				else
 					sel_alu_setcmp_i <= '0';

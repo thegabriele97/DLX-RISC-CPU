@@ -65,9 +65,10 @@ architecture structural of decode is
             NBIT: integer := 16
         );
         port (
-            A:		in	std_logic_vector(NBIT-1 downto 0);
-            B:		in	std_logic_vector(NBIT-1 downto 0);
-            LGET:	out std_logic_vector(1 downto 0)
+            A:				in	std_logic_vector(NBIT-1 downto 0);
+            B:				in	std_logic_vector(NBIT-1 downto 0);
+            UNSIG_SIGN_N: 	in std_logic;
+            LGET:			out std_logic_vector(1 downto 0)
         );
     end component;
 
@@ -244,6 +245,7 @@ begin
     ) port map(
         A => RD1,
         B => i_CMP_B,
+        UNSIG_SIGN_N => UNSIGNED_ID,
         LGET => LGET
     );
 
