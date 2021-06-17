@@ -5,9 +5,10 @@ use ieee.numeric_std.all;
 entity comparator is
 	generic (NBIT: integer := 16);
 	port (
-        A:		in	std_logic_vector(NBIT-1 downto 0);
-        B:		in	std_logic_vector(NBIT-1 downto 0);
-		LGET:	out std_logic_vector(1 downto 0)
+        A:				in	std_logic_vector(NBIT-1 downto 0);
+        B:				in	std_logic_vector(NBIT-1 downto 0);
+		UNSIG_SIGN_N: 	in std_logic;
+		LGET:			out std_logic_vector(1 downto 0)
     );
 
 end comparator; 
@@ -31,6 +32,7 @@ architecture behavioural of comparator is
 	signal z: std_logic_vector(NBIT-1 downto 0);
 	signal S: std_logic_vector(NBIT-1 downto 0);
 	signal Cout: std_logic;
+	signal i_cout_masked: std_logic;
 	signal zn: std_logic;
 
 	signal a_le_b: std_logic;
@@ -53,11 +55,12 @@ begin
 
 	zn <= not z(NBIT-1);
 
-	a_le_b <= not(Cout) or zn;
-	a_l_b <= not(Cout);
-	a_g_b <= Cout and z(NBIT-1);
-	a_ge_b <= Cout;
+	a_le_b <= not(i_cout_masked) or zn;
+	a_l_b <= not(i_cout_masked);
+	a_g_b <= i_cout_masked and z(NBIT-1);
+	a_ge_b <= i_cout_masked;
 
+	i_cout_masked <= Cout xor (not(UNSIG_SIGN_N) and (A(A'length-1) xor B(B'length-1)));
 
 	ADDER: P4_ADDER generic map(
 		NBIT => NBIT

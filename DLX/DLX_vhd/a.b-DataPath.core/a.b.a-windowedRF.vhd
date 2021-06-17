@@ -367,7 +367,6 @@ begin
         );
 
 
-    --TODO: a day it will be: done_fill & done_spill
     donespill_donefill_encoding <= done_fill & done_spill;
     
     SWP_NEXT_CALC: nwin_calc generic map(F => F) 
