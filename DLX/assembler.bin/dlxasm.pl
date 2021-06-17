@@ -166,6 +166,7 @@ if ($srcfile =~ /^(.*)\.dlx$/) {
   "bge"  => "ibc,0x31",
   "blt"  => "ibc,0x32",
   "ble"  => "ibc,0x33",
+  "ticktmr" => "dtmr,0x34",
   "itlb" => "n,0x38",
   "sltui" => "i,0x3a",
   "sgtui" => "i,0x3b",
@@ -538,7 +539,11 @@ sub forminstr {
     $dst -= $addr{t} + 4;
     $src2 = &getreg ($a[2]);
     $out = ($op << 26) | ($src1 << 21) | ($src2 << 16) | ($dst & 0xffff);
+  } elsif ($itype eq "dtmr") {
+    $dst = &getreg ($a[1]);
+    $out = ($op << 26) | ($dst << 21);
   }
+
   return ($out);
 }
 

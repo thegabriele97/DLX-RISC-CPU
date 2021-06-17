@@ -100,6 +100,16 @@ architecture structural of decode is
         );
     end component;
 
+    component ha_counter is
+        generic (
+            N_BIT_DATA : integer := 32
+        );
+        port (
+            CLK:    in std_logic;
+            RST:    in std_logic;
+            TICK:   out std_logic_vector(N_BIT_DATA-1 downto 0)
+        );
+    end component;
 
     constant i_CONSTANT_PC_ADD: std_logic_vector(PC_SIZE-1 downto 0) := std_logic_vector(to_unsigned(4, PC_SIZE));
 
@@ -120,8 +130,9 @@ architecture structural of decode is
     signal i_OFFSET_ADDER: std_logic_vector(PC_SIZE-1 downto 0); -- mux output, '4' or the passed immediate
 
     signal i_CMP_B: std_logic_vector(N_BIT_DATA-1 downto 0);
-
     signal i_NPC_ADDER: std_logic_vector(PC_SIZE-1 downto 0);
+
+    signal i_tickcounter: std_logic_vector(N_BIT_DATA-1 downto 0);
 
 begin
 
@@ -151,7 +162,7 @@ begin
 
     end process;
 
-    process(op_code, INSTR, UNSIGNED_ID)
+    process(op_code, INSTR, UNSIGNED_ID, i_tickcounter)
     begin
  
         if (op_code = "000000") then -- R_TYPE
@@ -192,6 +203,15 @@ begin
             -- The IMM is the CPC that will be written into R31
             INP1 <= (others => '0');
             i_INP2 <= CPC;
+
+        elsif (op_code = OP_TICKTMR) then
+
+            i_RS1 <= (others => '0');
+            i_RS2 <= (others => '0');
+            i_WS1 <= INSTR(N_BIT_INSTR-OPCODE_SIZE-1 downto N_BIT_INSTR-OPCODE_SIZE-N_BIT_ADDR_RF);
+            
+            INP1 <= (others => '0'); 
+            i_INP2 <= i_tickcounter; 
 
         else -- I_TYPE
 
@@ -278,6 +298,14 @@ begin
         b => i_NPC_ADDER,
         s => NPC_SEL,
         y => NPC
+    );
+
+    HALF_ADDER_COUNTER: ha_counter generic map(
+        N_BIT_DATA => N_BIT_DATA
+    ) port map (
+        CLK => CLK,
+        RST => RST,
+        TICK => i_tickcounter 
     );
 
 end architecture structural;

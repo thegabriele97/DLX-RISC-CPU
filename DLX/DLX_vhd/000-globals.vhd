@@ -90,6 +90,7 @@ package myTypes is
 	constant OP_BGE:		instr_op_sig_t := "110001";
 	constant OP_BLT:		instr_op_sig_t := "110010";
 	constant OP_BLE:		instr_op_sig_t := "110011";
+	constant OP_TICKTMR:	instr_op_sig_t := "110100";
 	constant OP_ITLB:		instr_op_sig_t := "111000";
 	constant OP_SLTUI:		instr_op_sig_t := "111010";
 	constant OP_SGTUI:		instr_op_sig_t := "111011";
