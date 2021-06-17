@@ -73,6 +73,7 @@ architecture dlx_rtl of DLX is
 			-- ID Control Signals
 			CALL 			: out std_logic;
 			RET				: out std_logic;
+			SEL_CMPB		: out std_logic;
 			UNSIGNED_ID		: out std_logic;
 			NPC_SEL	        : out std_logic;
 			HAZARD_TABLE_WR1: out std_logic;		-- Inhibition of Hazard Control on the current DEST ADDRESS of the INSTR
@@ -124,6 +125,7 @@ architecture dlx_rtl of DLX is
 			WB_EN:              in std_logic;            
 			PIPLIN_ID_EN:       in std_logic;
 			JUMP_EN:            in std_logic;
+			SEL_CMPB:           in std_logic;
         	UNSIGNED_ID:        in std_logic;
 			NPC_SEL:            in std_logic;
 			BUSY_WINDOW:        out std_logic;
@@ -277,6 +279,7 @@ architecture dlx_rtl of DLX is
 	signal i_RET: std_logic;
 	signal i_NPC_SEL: std_logic;
 	signal i_UNSIGNED_ID: std_logic;
+    signal i_SEL_CMPB: std_logic;
 
 	-- -- Control Unit Bus signals
 	signal i_ALU_OP: std_logic_vector(ALU_ADD'length-1 downto 0);
@@ -405,6 +408,7 @@ begin  -- DLX
 		PC_EN			=> i_PC_LATCH_EN,
 		CALL 			=> i_CALL,
 		RET 			=> i_RET,
+		SEL_CMPB		=> i_SEL_CMPB,
 		UNSIGNED_ID		=> i_UNSIGNED_ID,
 		NPC_SEL 		=> i_NPC_SEL,
 		PIPLIN_ID_EN 	=> i_EN1,
@@ -457,6 +461,7 @@ begin  -- DLX
 		WB_EN => i_WF,
 		PIPLIN_ID_EN => i_EN1,
 		JUMP_EN => i_JUMP_EN,
+		SEL_CMPB => i_SEL_CMPB,
 		UNSIGNED_ID => i_UNSIGNED_ID,
 		NPC_SEL => i_NPC_SEL,
 		BUSY_WINDOW => i_BUSY_WINDOW,

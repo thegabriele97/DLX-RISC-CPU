@@ -24,6 +24,7 @@ entity decode is
         WB_EN:              in std_logic;            
         PIPLIN_ID_EN:       in std_logic;
         JUMP_EN:            in std_logic;
+		SEL_CMPB:           in std_logic;
         UNSIGNED_ID:        in std_logic;
         NPC_SEL:            in std_logic;
         BUSY_WINDOW:        out std_logic;
@@ -118,7 +119,6 @@ architecture structural of decode is
     signal i_PC_OFFSET: std_logic_vector(PC_SIZE-1 downto 0); -- with sign ext -- TO THE ADDER NPC
     signal i_OFFSET_ADDER: std_logic_vector(PC_SIZE-1 downto 0); -- mux output, '4' or the passed immediate
 
-    signal i_SEL_CMPB: std_logic;
     signal i_CMP_B: std_logic_vector(N_BIT_DATA-1 downto 0);
 
     signal i_NPC_ADDER: std_logic_vector(PC_SIZE-1 downto 0);
@@ -154,8 +154,6 @@ begin
     process(op_code, INSTR, UNSIGNED_ID)
     begin
  
-        i_SEL_CMPB <= '1';
-
         if (op_code = "000000") then -- R_TYPE
 
             i_RS1 <= INSTR(N_BIT_INSTR-OPCODE_SIZE-1 downto N_BIT_INSTR-OPCODE_SIZE-N_BIT_ADDR_RF);
@@ -165,7 +163,7 @@ begin
             INP1 <= (others => '0');
             i_INP2 <= (others => '0');
 
-        elsif (op_code = "000010") then -- J_TYPE: J
+        elsif (op_code = OP_J) then -- J_TYPE: J
 
             i_RS1 <= (others => '0');
             i_RS2 <= (others => '0');
@@ -174,7 +172,7 @@ begin
             INP1 <= (others => '0'); -- The new PC is computed by the DECODE, the EXEC stage won't be executed
             i_INP2 <= (others => '0');
 
-        elsif (op_code = "000011" or op_code = "011110") then -- J_TYPE: JAL
+        elsif (op_code = OP_JAL or op_code = OP_CALL) then -- J_TYPE: JAL / CALL: CALL is a JAL too
 
             -- JAL so we have to execute ADDI R31, R0, PC
             i_RS1 <= (others => '0'); -- R0
@@ -185,13 +183,18 @@ begin
             INP1 <= std_logic_vector(TO_UNSIGNED(4, INP2'length));
             i_INP2 <= CPC;
 
+        elsif (op_code = OP_JALR) then
+
+            i_RS1 <= INSTR(N_BIT_INSTR-OPCODE_SIZE-1 downto N_BIT_INSTR-OPCODE_SIZE-N_BIT_ADDR_RF);
+            i_RS2 <= (others => '0');
+            i_WS1 <= "11111"; -- R31
+
+            -- The IMM is the CPC that will be written into R31
+            INP1 <= (others => '0');
+            i_INP2 <= CPC;
+
         else -- I_TYPE
 
-            if (op_code /= OP_BEQZ and op_code /= OP_BNEZ) then -- if BEQZ, BNEZ => SEL MUST BE 1
-                i_SEL_CMPB <= '0';
-            end if;
-
-            
             i_RS1 <= INSTR(N_BIT_INSTR-OPCODE_SIZE-1 downto N_BIT_INSTR-OPCODE_SIZE-N_BIT_ADDR_RF);
             i_RS2 <= INSTR(N_BIT_INSTR-OPCODE_SIZE-N_BIT_ADDR_RF-1 downto N_BIT_INSTR-OPCODE_SIZE-2*N_BIT_ADDR_RF);
             i_WS1 <= INSTR(N_BIT_INSTR-OPCODE_SIZE-N_BIT_ADDR_RF-1 downto N_BIT_INSTR-OPCODE_SIZE-2*N_BIT_ADDR_RF);
@@ -235,7 +238,7 @@ begin
     ) port map(
         a => RD2,
         b => i_INP2,
-        s => i_SEL_CMPB,
+        s => SEL_CMPB,
         y => i_CMP_B
     );
 

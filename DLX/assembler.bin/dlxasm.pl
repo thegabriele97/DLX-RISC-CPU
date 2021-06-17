@@ -162,6 +162,10 @@ if ($srcfile =~ /^(.*)\.dlx$/) {
   "sw"   => "s,0x2b",
   "sf"   => "s,0x2e",
   "sd"   => "s,0x2f",
+  "bgt"  => "ibc,0x30",
+  "bge"  => "ibc,0x31",
+  "blt"  => "ibc,0x32",
+  "ble"  => "ibc,0x33",
   "itlb" => "n,0x38",
   "sltui" => "i,0x3a",
   "sgtui" => "i,0x3b",
@@ -528,6 +532,12 @@ sub forminstr {
   } elsif ($itype eq "t") {
     $dst = &getimm ($a[1]);
     $out = ($op << 26) | ($dst & 0x3ffffff);
+  } elsif ($itype eq "ibc") {
+    $src1 = &getreg ($a[1]);
+    $dst = &getimm ($a[3]);
+    $dst -= $addr{t} + 4;
+    $src2 = &getreg ($a[2]);
+    $out = ($op << 26) | ($src1 << 21) | ($src2 << 16) | ($dst & 0xffff);
   }
   return ($out);
 }
