@@ -338,20 +338,6 @@ architecture dlx_rtl of DLX is
 
 begin  -- DLX
 
-	-- TODO: to remove
-	-- i_IR_LATCH_EN <= '1';
-	-- i_PC_LATCH_EN <= '1';
-
-    -- This is the input to program counter: currently zero 
-    -- so no uptade of PC happens
-    -- TO BE REMOVED AS SOON AS THE DATAPATH IS INSERTED!!!!!
-    -- a proper connection must be made here if more than one
-    -- instruction must be executed
-    
-	--PC_BUS <= (others => '0'); 
-	--PC_BUS <= (others => '0'); 
-
-
     -- purpose: Instruction Register Process
     -- type   : sequential
     -- inputs : Clk, Rst, IRam_DOut, IR_LATCH_EN_i

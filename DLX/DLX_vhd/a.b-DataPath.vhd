@@ -293,7 +293,6 @@ architecture structural of DP is
     --
     signal i_REG_MEM_ALUOUT: std_logic_vector(N_BIT_DATA-1 downto 0);
     signal i_MUX_STAGE3_REG_OUT: std_logic_vector(N_BIT_DATA-1 downto 0);
-    signal i_REG_DATAOUT: std_logic_vector(N_BIT_DATA-1 downto 0);
     signal i_DATA_RAW: std_logic_vector(N_BIT_DATA-1 downto 0);
     signal i_LDSTR_OUT: std_logic_vector(N_BIT_DATA-1 downto 0);
     signal i_REG_LDSTR_OUT: std_logic_vector(N_BIT_DATA-1 downto 0);
@@ -609,20 +608,6 @@ begin
         b => i_REG_MEM_ALUOUT,
         s => S3,
         y => i_MUX_STAGE3_REG_OUT
-    );
-
-    -- 
-    -- REGISTER OUT --
-    --
-    REG_OUT: reg_generic generic map(
-        N => N_BIT_DATA,
-        RSTVAL => 0
-    ) port map(
-        D => i_MUX_STAGE3_REG_OUT,   
-        Q => i_REG_DATAOUT,                  -- TODO: Check if correct
-        Clk => Clk,       
-        Rst => Rst,     
-        Enable => EN3
     );
 
     -- 

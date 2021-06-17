@@ -51,7 +51,7 @@ architecture test of tb_dp is
             RF_BUS_FROMEM: in std_logic_vector(N_BIT_DATA - 1 downto 0); -- Data bus from the RF memory to the datapath
             RF_MEM_ADDR:   out std_logic_vector(N_BIT_RF_MEM_ADDR-1 downto 0); -- Address of the RF memory
             RF_MEM_RM:      out std_logic;
-            RF_MEM_WM:      out std_logic; -- TODO: comments here
+            RF_MEM_WM:      out std_logic;
             
             -- Used to manage the procedure call
             CALL:       in std_logic;
