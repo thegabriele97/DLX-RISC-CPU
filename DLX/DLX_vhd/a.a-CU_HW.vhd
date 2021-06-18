@@ -324,7 +324,7 @@ begin
 				unsigned_1 <= unsigned_i;
 				unsigned_2 <= unsigned_1;
 
-				-- if the DRAM is not ready, I stall everything
+				-- if the DRAM is not ready, everything is stalled
 				-- so all the ControlWords will remain the same
 				-- until the DRAM will become ready. 
 				-- Meanwhile, all the PIPELINE enable signals are at 0
