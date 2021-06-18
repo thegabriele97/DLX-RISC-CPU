@@ -155,7 +155,7 @@ begin
         i_PC_OFFSET <= (others => INSTR(N_BIT_INSTR-OPCODE_SIZE-1)); -- sign extension
         i_PC_OFFSET(N_BIT_INSTR-OPCODE_SIZE-1 downto 0) <= INSTR(N_BIT_INSTR-OPCODE_SIZE-1 downto 0);
 
-        if (op_code /= "000010" and op_code /= "000011") then -- for branch instructions, the immediate is 16 bits wide
+        if (op_code /= OP_J and op_code /= OP_JAL and op_code /= OP_CALL) then -- for branch instructions, the immediate is 16 bits wide i_PC_OFFSET <= (others => INSTR(N_BIT_INSTR-OPCODE_SIZE-2*N_BIT_ADDR_RF-1)); -- sign extension
             i_PC_OFFSET <= (others => INSTR(N_BIT_INSTR-OPCODE_SIZE-2*N_BIT_ADDR_RF-1)); -- sign extension
             i_PC_OFFSET(N_BIT_INSTR-OPCODE_SIZE-2*N_BIT_ADDR_RF-1 downto 0) <= INSTR(N_BIT_INSTR-OPCODE_SIZE-2*N_BIT_ADDR_RF-1 downto 0);
         end if;
@@ -165,7 +165,7 @@ begin
     process(op_code, INSTR, UNSIGNED_ID, i_tickcounter)
     begin
  
-        if (op_code = "000000") then -- R_TYPE
+        if (op_code = OP_RTYPE) then -- R_TYPE
 
             i_RS1 <= INSTR(N_BIT_INSTR-OPCODE_SIZE-1 downto N_BIT_INSTR-OPCODE_SIZE-N_BIT_ADDR_RF);
             i_RS2 <= INSTR(N_BIT_INSTR-OPCODE_SIZE-N_BIT_ADDR_RF-1 downto N_BIT_INSTR-OPCODE_SIZE-2*N_BIT_ADDR_RF);

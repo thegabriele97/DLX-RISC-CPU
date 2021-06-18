@@ -44,6 +44,7 @@ package myTypes is
 
 	-- INSTRUCTIONS OPCODE --
 
+	constant OP_RTYPE:		instr_op_sig_t := "000000";
 	constant OP_J:			instr_op_sig_t := "000010";
 	constant OP_JAL:		instr_op_sig_t := "000011";
 	constant OP_BEQZ:		instr_op_sig_t := "000100";
