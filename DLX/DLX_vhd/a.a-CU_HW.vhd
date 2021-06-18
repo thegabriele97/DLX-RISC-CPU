@@ -47,6 +47,7 @@ entity dlx_cu is
         SEL_LGET		: out std_logic_vector(2 downto 0);
 
 		-- MEM Control Signals
+		DRAM_READY		: in std_logic;						-- Data RAM Ready Signal
 		DRAM_WE      	: out std_logic; 					-- Data RAM Write Enable
 		DRAM_RE      	: out std_logic; 					-- Data RAM Read Enable
 		DATA_SIZE		: out std_logic_vector(1 downto 0);	-- word, half, byte
@@ -195,6 +196,8 @@ architecture dlx_cu_hw of dlx_cu is
 	signal unsigned_1: std_logic;
 	signal unsigned_2: std_logic;
 
+	signal i_DRAM_NOTREADY: std_logic;
+
 begin
 
 	IR_opcode(OP_CODE_SIZE - 1 downto 0) <= IR_IN(31 downto 26);
@@ -226,9 +229,9 @@ begin
 	-- UNSIGNED_ID			<= CW_ID(CW_ID'length - 6);
 	NPC_SEL				<= CW_ID(CW_ID'length - 7);
 	HAZARD_TABLE_WR1	<= CW_ID(CW_ID'length - 8);
-	PIPLIN_ID_EN		<= CW_ID(CW_ID'length - 9);
+	PIPLIN_ID_EN		<= CW_ID(CW_ID'length - 9) and not i_DRAM_NOTREADY;
 
-	PIPLIN_EX_EN 		<= CW_EX(CW_EX'length - 1);
+	PIPLIN_EX_EN 		<= CW_EX(CW_EX'length - 1) and not i_DRAM_NOTREADY;
 	MUXA_SEL      		<= CW_EX(CW_EX'length - 2);
 	MUXB_SEL      		<= CW_EX(CW_EX'length - 3);
 
@@ -237,11 +240,11 @@ begin
 	DRAM_RE	    		<= CW_MEM(CW_MEM'length - 2);
 	DATA_SIZE(1)		<= CW_MEM(CW_MEM'length - 3);
 	DATA_SIZE(0)		<= CW_MEM(CW_MEM'length - 4);
-	PIPLIN_MEM_EN 		<= CW_MEM(CW_MEM'length - 5);
+	PIPLIN_MEM_EN 		<= CW_MEM(CW_MEM'length - 5) and not i_DRAM_NOTREADY;
 
 	-- WB control Signals
 	WB_MUX_SEL 			<= CW_WB(CW_WB'length - 1);
-	PIPLIN_WB_EN    	<= CW_WB(CW_WB'length - 2);
+	PIPLIN_WB_EN    	<= CW_WB(CW_WB'length - 2) and not i_DRAM_NOTREADY;
 	
 	--
 	--	This process allows to stop entirely the pipeline for the fetched instruction. Means that one of the conditions is true,
@@ -260,24 +263,30 @@ begin
 	--	  1 cc later the jump so means that after this cc, we have i_FILL_delay = '1' and meanwhile a NOP is inserted in the pipeline. So now
 	--	  we have a NOP stalled in the ID stage 'till i_FILL_delay = '0' so after the FILL will finish.
 	--
-	process(CW, CW_IF, HAZARD_SIG, IR_opcode, BUSY_WINDOW, i_FILL_delay, SPILL)
+	process(CW, CW_IF, HAZARD_SIG, IR_opcode, BUSY_WINDOW, i_FILL_delay, SPILL, i_DRAM_NOTREADY)
 	begin
 		
 		CW_IF <= CW;
 			
-	 	if (HAZARD_SIG = '1' or ((IR_opcode = OP_CALL or IR_opcode = OP_RET) and BUSY_WINDOW = '1') or SPILL = '1' or i_FILL_delay = '1') then
+	 	if (i_DRAM_NOTREADY = '1' or HAZARD_SIG = '1' or ((IR_opcode = OP_CALL or IR_opcode = OP_RET) and BUSY_WINDOW = '1') or SPILL = '1' or i_FILL_delay = '1') then
 			CW_IF(CW_SIZE-1) 			<= '0';		-- IF disabling
 			CW_IF(CW_SIZE-3) 			<= '0';	    -- PC disabling
 			CW_IF(CW_ID'length - 9) 	<= '0'; 	-- ID disabling
 			CW_IF(CW_EX'length - 1) 	<= '0';		-- EX disabling
-			CW_IF(CW_MEM'length - 6)	<= '0';		-- MEM disabling
+			CW_IF(CW_MEM'length - 5)	<= '0';		-- MEM disabling
 			CW_IF(CW_WB'length - 2) 	<= '0';		-- WB disabling
 		end if;
 	
 	end process;
 
-	CW_ID <= CW_IF(CW_ID'length-1 downto 0);
+	-- DRAM_NOTREADY is at 1 if the DRAM is not ready and at the MEM stage we have
+	-- an instruction that wants to write/read in the memory (a load or a store).
+	-- If yes, we stall everything, otherwise we go ahead with the pipeline 
+	i_DRAM_NOTREADY <= not DRAM_READY and (CW_MEM(CW_MEM'length-1) or CW_MEM(CW_MEM'length-2));
 	
+
+	CW_ID <= CW_IF(CW_ID'length-1 downto 0) when i_DRAM_NOTREADY = '0' else CW_ID;
+
 	unsigned_i <= CW_ID(CW_ID'length - 6);
 	UNSIG_SIGN_N <= unsigned_2; 
 	
@@ -302,10 +311,11 @@ begin
 				unsigned_2 <= '0';
 
 			else
-
+				
 				CW_EX <= CW_ID(CW_EX'length-1 downto 0);
 				CW_MEM <= CW_EX(CW_MEM'length-1 downto 0);
 				CW_WB <= CW_MEM(CW_WB'length-1 downto 0);
+
 
 				aluOpcode1 <= aluOpcode_i;
 				setcmp_1 <= setcmp_i;
@@ -313,6 +323,19 @@ begin
 
 				unsigned_1 <= unsigned_i;
 				unsigned_2 <= unsigned_1;
+
+				-- if the DRAM is not ready, I stall everything
+				-- so all the ControlWords will remain the same
+				-- until the DRAM will become ready. 
+				-- Meanwhile, all the PIPELINE enable signals are at 0
+				if (i_DRAM_NOTREADY = '1') then
+					CW_EX <= CW_EX;
+					CW_MEM <= CW_MEM;
+					aluOpcode1 <= aluOpcode1;
+					setcmp_1 <= setcmp_1;
+					sel_alu_setcmp_1 <= sel_alu_setcmp_1;
+					CW_WB <= (others => '0');
+				end if;
 
 				i_SPILL_delay <= SPILL;
 				i_FILL_delay <= FILL;

@@ -13,6 +13,7 @@ entity DRAM is
         RM          : in std_logic;     -- Read memory signal
         WM          : in std_logic;     -- Write memory signal
         EN          : in std_logic;
+        READY       : out std_logic;
         
         DATA_SIZE   : in std_logic_vector(1 downto 0);    
         -- 00: non bisogna fare alcuna estensione di segno
@@ -34,29 +35,42 @@ architecture Behavioral of DRAM is
 
     signal i_RM: std_logic;
     signal i_WM: std_logic;
+    
+    signal i_READY: std_logic := '1';    
 
 begin
 
     i_RM <= RM and EN;
     i_WM <= WM and EN;
+    READY <= i_READY;
     
     Wr: PROCESS(Clk)
     BEGIN
         if rising_edge(Clk) then
             if Rst = '1' then
                 Memory <= (OTHERS => (OTHERS => '0'));
-            elsif i_WM = '1' then
+            else
 
-                if (DATA_SIZE = "00") then      -- WORD
-                    Memory(to_integer(unsigned(address) + 3)) <= data_in(7 downto 0);
-                    Memory(to_integer(unsigned(address) + 2)) <= data_in(15 downto 8);
-                    Memory(to_integer(unsigned(address)) + 1) <= data_in(23 downto 16);
-                    Memory(to_integer(unsigned(address))) <= data_in(31 downto 24);
-                elsif (DATA_SIZE = "01") then   -- HALF
-                    Memory(to_integer(unsigned(address))) <= data_in(15 downto 8);
-                    Memory(to_integer(unsigned(address)) + 1) <= data_in(7 downto 0);
-                else                            -- BYTE
-                    Memory(to_integer(unsigned(address))) <= data_in(7 downto 0);
+                if (i_READY = '0') then
+                    i_READY <= '1';
+                end if;
+                
+                if i_WM = '1' then
+
+                    i_READY <= '0'; 
+
+                    if (DATA_SIZE = "00") then      -- WORD
+                        Memory(to_integer(unsigned(address) + 3)) <= data_in(7 downto 0);
+                        Memory(to_integer(unsigned(address) + 2)) <= data_in(15 downto 8);
+                        Memory(to_integer(unsigned(address)) + 1) <= data_in(23 downto 16);
+                        Memory(to_integer(unsigned(address))) <= data_in(31 downto 24);
+                    elsif (DATA_SIZE = "01") then   -- HALF
+                        Memory(to_integer(unsigned(address))) <= data_in(15 downto 8);
+                        Memory(to_integer(unsigned(address)) + 1) <= data_in(7 downto 0);
+                    else                            -- BYTE
+                        Memory(to_integer(unsigned(address))) <= data_in(7 downto 0);
+                    end if;
+
                 end if;
             end if;
         end if;
@@ -77,10 +91,14 @@ begin
             else
                 data_out <= x"000000" & Memory(to_integer(unsigned(address)));
             end if;
-                
+
+            if (i_READY = '0') then
+                data_out <= (others => 'X');
+            end if;
+            
         ELSE
             data_out <= (others => '0');
         END IF;
-    END PROCESS Rd;
+    END PROCESS Rd; 
 
 end Behavioral;

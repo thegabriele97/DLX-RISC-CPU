@@ -14,10 +14,10 @@ myloop:
     lbu r2, 5(r1)                        ;24
     sh 20(r1), r2                       ;28
     
-    lh r3, 8(r1)                        ;2C
+    lh r3, 20(r1)                        ;2C
     lhi r3, #9                           ;30
     
-    addi r4, r3, #15                     ;34
+    addi r4, r5, #15                     ;34
     addi r7, r0, myloop                 ;38
     
     jal myloop        	                ;3C
