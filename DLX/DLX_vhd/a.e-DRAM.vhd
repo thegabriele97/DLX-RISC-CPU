@@ -57,7 +57,7 @@ begin
         if rising_edge(Clk) then
             if Rst = '1' then
                 Memory <= (OTHERS => (OTHERS => '0'));
-                file_open(mem_fp,"test_bench/mems/bubble_sort.asm.mem",READ_MODE);
+                file_open(mem_fp,"test_bench/mems/factorial_pro.asm.mem",READ_MODE);
 
                 while (not endfile(mem_fp)) loop
                     readline(mem_fp,file_line);
@@ -101,7 +101,9 @@ begin
                 
                 if i_WM = '1' then
 
-                    i_READY <= '0'; 
+                    if (i_READY = '1') then
+                        i_READY <= '0'; 
+                    end if;
 
                     if (DATA_SIZE = "00") then      -- WORD
                         Memory(to_integer(unsigned(address) + 3)) <= data_in(7 downto 0);

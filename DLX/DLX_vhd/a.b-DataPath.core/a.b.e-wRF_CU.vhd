@@ -7,14 +7,15 @@ entity wRF_CU is
         N_BIT_MEM_ADDR: integer := 10
     );
     port(
-        CLK:    in std_logic;
-        RST:    in std_logic;
-        SPILL:  in std_logic;
-        FILL:   in std_logic;
-        MEMADDR: out std_logic_vector(N_BIT_MEM_ADDR-1 downto 0);
+        CLK:        in std_logic;
+        RST:        in std_logic;
+        SPILL:      in std_logic;
+        FILL:       in std_logic;
+        RAM_READY:  in std_logic;
+        MEMADDR:    out std_logic_vector(N_BIT_MEM_ADDR-1 downto 0);
 
-        RM: out std_logic;
-        WM: out std_logic
+        RM:         out std_logic;
+        WM:         out std_logic
     );
 end entity;
 
@@ -29,10 +30,10 @@ architecture mix of wRF_CU is
 begin
 
     MEMADDR <= next_addr;
-    RM <= FILL;
-    WM <= SPILL;
+    RM <= FILL and RAM_READY;
+    WM <= SPILL and RAM_READY;
 
-    process(curr_state, curr_addr, SPILL, FILL)
+    process(curr_state, curr_addr, SPILL, FILL, RAM_READY)
     begin
 
         next_state <= curr_state;
@@ -45,7 +46,7 @@ begin
                 next_state <= STAND_BY;
 
             when STAND_BY =>
-                if (SPILL = '1') then
+                if (SPILL = '1' and RAM_READY = '1') then
                     next_addr <= std_logic_vector(unsigned(curr_addr) + 4);
                     next_state <= PUSHING;
                 elsif (FILL = '1') then
@@ -53,8 +54,10 @@ begin
                 end if;
 
             when PUSHING =>
-                next_addr <= std_logic_vector(unsigned(curr_addr) + 4);
-                
+                if (RAM_READY = '1') then
+                    next_addr <= std_logic_vector(unsigned(curr_addr) + 4);
+                end if;
+
                 if (FILL = '1') then
                     next_addr <= curr_addr;
                     next_state <= POPPING;
@@ -64,8 +67,10 @@ begin
                 end if;
 
             when POPPING =>
-                next_addr <= std_logic_vector(unsigned(curr_addr) - 4);
-                
+                if (RAM_READY = '1') then
+                    next_addr <= std_logic_vector(unsigned(curr_addr) - 4);
+                end if;
+                    
                 if (SPILL = '1') then
                     next_addr <= curr_addr;
                     next_state <= PUSHING;

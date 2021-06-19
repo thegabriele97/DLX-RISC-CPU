@@ -171,7 +171,7 @@ architecture dlx_rtl of DLX is
 			DATAMEM_BUS_TOMEM:  out std_logic_vector(N_BIT_DATA - 1 downto 0); -- Data bus from the datapath to the data memory
 			DATAMEM_BUS_FROMEM: in std_logic_vector(N_BIT_DATA - 1 downto 0); -- Data bus from the data memory to the datapath
 			DATAMEM_ADDR:       out std_logic_vector(N_BIT_MEM_ADDR-1 downto 0); -- Address of the data memory
-			
+			RAM_READY:          in std_logic;
 			--
 			--          REGISTER FILE
 			--
@@ -488,6 +488,7 @@ begin  -- DLX
         DATAMEM_BUS_TOMEM => i_DATAMEM_BUS_TOMEM,
         DATAMEM_BUS_FROMEM => i_DATAMEM_BUS_FROMEM,
         DATAMEM_ADDR => i_DATAMEM_ADDR,
+		RAM_READY => i_DRAMRF_READY,
         RS1 => i_ADD_RS1,
         RS2 => i_ADD_RS2,
         WS1 => i_ADD_WS1,
