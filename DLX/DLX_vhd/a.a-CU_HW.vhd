@@ -500,13 +500,13 @@ begin
 	end process SEL_ALU_SETCMP_P;
 
 	
-	JBRANCH_CTRL: process(IR_opcode, CW_IF, LGET, BUSY_WINDOW, i_SPILL_delay, i_FILL_delay)
+	JBRANCH_CTRL: process(IR_opcode, CW_IF, LGET, BUSY_WINDOW, i_SPILL_delay, i_FILL_delay, i_DRAM_NOTREADY)
 	begin
 
 		IF_STALL <= CW_IF(CW_SIZE - 2);
 		JUMP_EN <= CW_IF(CW_SIZE - 4);
-		CALL <= CW_IF(CW_SIZE - 5);
-		RET <= CW_IF(CW_SIZE - 6);
+		CALL <= CW_IF(CW_SIZE - 5) and not(i_DRAM_NOTREADY);
+		RET <= CW_IF(CW_SIZE - 6) and not(i_DRAM_NOTREADY);
 
 		if (IR_opcode = OP_BEQZ and LGET(0) = '0') then -- BEQZ 
 			JUMP_EN <= '1';
@@ -530,7 +530,7 @@ begin
 			CALL <= '0';
 			JUMP_EN <= '0';	
 		elsif (IR_opcode = OP_CALL and BUSY_WINDOW = '0' and i_SPILL_delay = '0') then -- CALL
-			CALL <= '1';
+			CALL <= '1' and not (i_DRAM_NOTREADY);
 		elsif (IR_opcode = OP_RET and BUSY_WINDOW = '1') then -- RET
 			RET <= '0';
 			JUMP_EN <= '0';

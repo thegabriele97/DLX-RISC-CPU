@@ -46,7 +46,7 @@ begin  -- IRam_Bhe
         variable tmp_data_u : std_logic_vector(I_SIZE-1 downto 0);
     begin  -- process FILL_MEM_P
         if (Rst = '1') then
-        file_open(mem_fp,"test_bench/mems/LoadStoreTest2.asm.mem",READ_MODE);
+        file_open(mem_fp,"test_bench/mems/bubble_sort.asm.mem",READ_MODE);
         while (not endfile(mem_fp)) loop
             readline(mem_fp,file_line);
             hread(file_line,tmp_data_u);

@@ -1,6 +1,8 @@
 library IEEE;
 use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
+use std.textio.all;
+use ieee.std_logic_textio.all;
 
 entity DRAM is
     generic (
@@ -36,7 +38,7 @@ architecture Behavioral of DRAM is
     signal i_RM: std_logic;
     signal i_WM: std_logic;
     
-    signal i_READY: std_logic := '1';    
+    signal i_READY: std_logic := '1';
 
 begin
 
@@ -45,10 +47,52 @@ begin
     READY <= i_READY;
     
     Wr: PROCESS(Clk)
+        file mem_fp: text;
+        variable file_line : line;
+        variable index : integer :=256;
+        variable tmp_data_u : std_logic_vector(N_BIT_DATA-1 downto 0) := (others => '0');
+        variable start_read: integer := 0;
+        variable acca: integer;
     BEGIN
         if rising_edge(Clk) then
             if Rst = '1' then
                 Memory <= (OTHERS => (OTHERS => '0'));
+                file_open(mem_fp,"test_bench/mems/bubble_sort.asm.mem",READ_MODE);
+
+                while (not endfile(mem_fp)) loop
+                    readline(mem_fp,file_line);
+                    hread(file_line,tmp_data_u);
+                    
+                    if (start_read = 0 and tmp_data_u = x"00000000") then 
+                        start_read := 1;
+                    elsif (start_read = 1) then
+                        start_read := 2; -- skip the empty line after the end fo the program
+                    elsif(start_read = 2) then
+
+                        if (not is_x(tmp_data_u)) then 
+                            -- report file_line;
+                            acca := to_integer(unsigned(tmp_data_u));
+                            report "read: >" & integer'image(acca);
+                            Memory(index) <= tmp_data_u(31 downto 24);       
+                            index := index + 1;
+
+                            Memory(index) <= tmp_data_u(23 downto 16);       
+                            index := index + 1;
+
+                            Memory(index) <= tmp_data_u(15 downto 8);       
+                            index := index + 1;
+
+                            Memory(index) <= tmp_data_u(7 downto 0);       
+                            index := index + 1;
+
+                        end if;
+                    end if;
+
+                end loop;
+
+                file_close(mem_fp);
+                start_read := 0;
+                index := 256;
             else
 
                 if (i_READY = '0') then
