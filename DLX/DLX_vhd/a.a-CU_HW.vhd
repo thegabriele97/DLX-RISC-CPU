@@ -334,6 +334,8 @@ begin
 					aluOpcode1 <= aluOpcode1;
 					setcmp_1 <= setcmp_1;
 					sel_alu_setcmp_1 <= sel_alu_setcmp_1;
+					unsigned_1 <= unsigned_1;
+					unsigned_2 <= unsigned_2;
 					CW_WB <= (others => '0');
 				end if;
 
