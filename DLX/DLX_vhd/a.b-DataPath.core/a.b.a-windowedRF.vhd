@@ -24,6 +24,7 @@ entity windowing_rf is
         ADD_RD1: 	IN std_logic_vector(NBIT_ADD - 1 downto 0);
         ADD_RD2: 	IN std_logic_vector(NBIT_ADD - 1 downto 0);
         DATAIN: 	IN std_logic_vector(NBIT_DATA- 1 downto 0);
+        RAM_READY:  IN std_logic;
         OUT1: 		OUT std_logic_vector(NBIT_DATA - 1 downto 0);
 	    OUT2: 		OUT std_logic_vector(NBIT_DATA - 1 downto 0);
 
@@ -149,6 +150,7 @@ architecture mix of windowing_rf is
             clk:        in std_logic;
             rst:        in std_logic;
             enable:     in std_logic;
+            ram_ready:  in std_logic;
             done:       out std_logic;
             working:    out std_logic;
             addr:       out std_logic_vector(N-1 downto 0)
@@ -412,6 +414,7 @@ begin
             clk => CLK,
             rst => RESET,
             enable => int_PUSH,
+            ram_ready => RAM_READY,
             done => done_spill,
             working => working_PUSH,
             addr => spill_address_ext
@@ -451,6 +454,7 @@ begin
             clk => CLK,
             rst => RESET,
             enable => int_POP,
+            ram_ready => RAM_READY,
             done => done_fill,
             working => working_POP,
             addr => fill_address_ext

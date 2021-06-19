@@ -11,6 +11,7 @@ entity address_generator is
         clk:        in std_logic;
         rst:        in std_logic;
         enable:     in std_logic;
+        ram_ready:  in std_logic;
         done:       out std_logic;
         working:    out std_logic;
         addr:       out std_logic_vector(N-1 downto 0)
@@ -27,7 +28,7 @@ begin
     addr <= curr_addr;
 
     -- done = '1' if msb = '1'
-    done <= curr_addr(N-1);
+    done <= curr_addr(N-1) and ram_ready;
     working <= not curr_addr(0);
 
     process(curr_addr, enable)
@@ -49,7 +50,7 @@ begin
             if (rst = '1') then
                 curr_addr <= (others => '0');
                 curr_addr(0) <= '1';
-            else
+            elsif (ram_ready = '1') then
                 curr_addr <= next_addr;
             end if;
         end if;

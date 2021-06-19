@@ -89,6 +89,7 @@ architecture dlx_rtl of DLX is
 			SEL_LGET		: out std_logic_vector(2 downto 0);
 
 			-- MEM Control Signals
+			DRAM_READY		: in std_logic;						-- Data RAM Ready Signal
 			DRAM_WE      	: out std_logic; 					-- Data RAM Write Enable
 			DRAM_RE      	: out std_logic; 					-- Data RAM Read Enable
 			DATA_SIZE		: out std_logic_vector(1 downto 0);	-- word, half, byte
@@ -170,7 +171,7 @@ architecture dlx_rtl of DLX is
 			DATAMEM_BUS_TOMEM:  out std_logic_vector(N_BIT_DATA - 1 downto 0); -- Data bus from the datapath to the data memory
 			DATAMEM_BUS_FROMEM: in std_logic_vector(N_BIT_DATA - 1 downto 0); -- Data bus from the data memory to the datapath
 			DATAMEM_ADDR:       out std_logic_vector(N_BIT_MEM_ADDR-1 downto 0); -- Address of the data memory
-			
+			RAM_READY:          in std_logic;
 			--
 			--          REGISTER FILE
 			--
@@ -234,7 +235,13 @@ architecture dlx_rtl of DLX is
 			RM          : in std_logic;     -- Read memory signal
 			WM          : in std_logic;     -- Write memory signal
 			EN          : in std_logic;
-        	DATA_SIZE   : in std_logic_vector(1 downto 0);    
+			READY       : out std_logic;
+			
+			DATA_SIZE   : in std_logic_vector(1 downto 0);    
+			-- 00: non bisogna fare alcuna estensione di segno
+			-- 01: bisogna estendere di N_BIT_DATA/2
+			-- 10: bisogna estendere di N_BIT_DATA - 8
+			
 			address     : in std_logic_vector(LOG_RAM_DEPTH-1 downto 0);        
 			data_in     : in std_logic_vector(N_BIT_DATA-1 downto 0);
 			data_out    : out std_logic_vector(N_BIT_DATA-1 downto 0)
@@ -335,6 +342,8 @@ architecture dlx_rtl of DLX is
 	-- -- Data Memory signal
 	signal i_FILL: std_logic;
 	signal i_SPILL: std_logic;
+	signal i_DRAM_READY: std_logic;
+	signal i_DRAMRF_READY: std_logic;
 
 begin  -- DLX
 
@@ -407,6 +416,7 @@ begin  -- DLX
 		ALU_OPCODE		=> i_ALU_OP,
 		SEL_ALU_SETCMP	=> i_SEL_ALU_SETCMP,
 		SEL_LGET		=> i_SEL_LGET,
+		DRAM_READY		=> i_DRAM_READY,
 		DRAM_WE			=> i_DATAMEM_WM,
 		DRAM_RE			=> i_DATAMEM_RM,
 		DATA_SIZE		=> i_DATA_SIZE,
@@ -478,6 +488,7 @@ begin  -- DLX
         DATAMEM_BUS_TOMEM => i_DATAMEM_BUS_TOMEM,
         DATAMEM_BUS_FROMEM => i_DATAMEM_BUS_FROMEM,
         DATAMEM_ADDR => i_DATAMEM_ADDR,
+		RAM_READY => i_DRAMRF_READY,
         RS1 => i_ADD_RS1,
         RS2 => i_ADD_RS2,
         WS1 => i_ADD_WS1,
@@ -526,6 +537,7 @@ begin  -- DLX
 		RM => i_DATAMEM_RM,
 		WM => i_DATAMEM_WM,
 		EN => i_EN3,
+        READY => i_DRAM_READY,
 		DATA_SIZE => i_DATA_SIZE,					
 		address => i_DATAMEM_ADDR,    
 		data_in => i_DATAMEM_BUS_TOMEM,
@@ -541,6 +553,7 @@ begin  -- DLX
 		RM => i_RF_MEM_RM,
 		WM => i_RF_MEM_WM,
 		EN => '1',
+        READY => i_DRAMRF_READY,
 		DATA_SIZE => "00",						-- 32 bit
 		address => i_RF_MEM_ADDR,    
 		data_in => i_RF_BUS_TOMEM,

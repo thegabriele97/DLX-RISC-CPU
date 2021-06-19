@@ -32,6 +32,7 @@ entity DP is
         DATAMEM_BUS_TOMEM:  out std_logic_vector(N_BIT_DATA - 1 downto 0); -- Data bus from the datapath to the data memory
         DATAMEM_BUS_FROMEM: in std_logic_vector(N_BIT_DATA - 1 downto 0); -- Data bus from the data memory to the datapath
         DATAMEM_ADDR:       out std_logic_vector(N_BIT_MEM_ADDR-1 downto 0); -- Address of the data memory
+        RAM_READY:          in std_logic;
         
         --
         --          REGISTER FILE
@@ -109,6 +110,7 @@ architecture structural of DP is
             ADD_RD1: 	IN std_logic_vector(NBIT_ADD - 1 downto 0);
             ADD_RD2: 	IN std_logic_vector(NBIT_ADD - 1 downto 0);
             DATAIN: 	IN std_logic_vector(NBIT_DATA- 1 downto 0);
+            RAM_READY:  IN std_logic;
             OUT1: 		OUT std_logic_vector(NBIT_DATA - 1 downto 0);
             OUT2: 		OUT std_logic_vector(NBIT_DATA - 1 downto 0);
     
@@ -202,7 +204,7 @@ architecture structural of DP is
             RST:    in std_logic;
             SPILL:  in std_logic;
             FILL:   in std_logic;
-
+            RAM_READY: in std_logic;
             MEMADDR: out std_logic_vector(N_BIT_MEM_ADDR-1 downto 0);
     
             RM: out std_logic;
@@ -334,6 +336,7 @@ begin
         ADD_RD1 => RS1, 
         ADD_RD2 => RS2,
         DATAIN => i_RF_DATA_IN,
+        RAM_READY => RAM_READY,
         OUT1 => i_RF_DATA_O1,
         OUT2 => i_RF_DATA_O2,
         CALL => CALL,
@@ -356,6 +359,7 @@ begin
         CLK => Clk,
         RST => Rst,
         FILL => i_RFFILL, 
+        RAM_READY => RAM_READY,
         SPILL => i_RFSPILL,
         MEMADDR => RF_MEM_ADDR,
         RM => RF_MEM_RM,
