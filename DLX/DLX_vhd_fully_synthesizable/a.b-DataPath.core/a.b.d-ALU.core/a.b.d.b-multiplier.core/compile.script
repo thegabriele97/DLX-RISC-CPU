@@ -1,0 +1,5 @@
+
+vcom ./a.b-DataPath.core/a.b.d-ALU.core/a.b.d.b-multiplier.core/a.b.d.b.a-adder.vhd
+vcom ./a.b-DataPath.core/a.b.d-ALU.core/a.b.d.b-multiplier.core/a.b.d.b.b-encoder.vhd
+vcom ./a.b-DataPath.core/a.b.d-ALU.core/a.b.d.b-multiplier.core/a.b.d.b.c-mux3_1.vhd
+

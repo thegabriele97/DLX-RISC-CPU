@@ -1,0 +1,2 @@
+vcom ./test_bench_and_memory/TB_rwmem/rwcache.vhd
+vcom ./test_bench_and_memory/TB_rwmem/rwmem.vhd
