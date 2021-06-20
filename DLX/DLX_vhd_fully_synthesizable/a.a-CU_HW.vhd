@@ -2,6 +2,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 use work.myTypes.all;
+use work.record_CU.all;
 
 entity dlx_cu is
 	generic (
@@ -23,6 +24,7 @@ entity dlx_cu is
 
 
 		-- IF Control Signals
+		IRAM_READY		: in std_logic;
 		PIPLIN_IF_EN  	: out std_logic; -- Instruction Register Latch Enable
 		IF_STALL		: out std_logic;
 		PC_EN 			: out std_logic;
@@ -50,6 +52,7 @@ entity dlx_cu is
 		DRAM_READY		: in std_logic;						-- Data RAM Ready Signal
 		DRAM_WE      	: out std_logic; 					-- Data RAM Write Enable
 		DRAM_RE      	: out std_logic; 					-- Data RAM Read Enable
+		DRAM_ME			: out std_logic;					-- Memory enable signal
 		DATA_SIZE		: out std_logic_vector(1 downto 0);	-- word, half, byte
 		UNSIG_SIGN_N	: out std_logic;
 		PIPLIN_MEM_EN   : out std_logic; 					-- LMD Register Latch Enable
@@ -69,7 +72,17 @@ architecture dlx_cu_hw of dlx_cu is
 	constant CW_SIZE: integer := (24 + alu_op_sig_t'length + set_op_sig_t'length); -- Control Word Size
 	 
 	type mem_array is array (0 to MICROCODE_MEM_SIZE - 1) of std_logic_vector(CW_SIZE-1 downto 0);
-		
+
+	-- EXAMPLE PURPOSES
+	--
+	-- type mem_prova is array (0 to 2) of prova;
+	-- signal cw_memory_prova: mem_prova := (
+	--	c_record_prova,
+	--	c_record_prova,
+	--	c_record_prova
+	--);
+	--
+	--
 
 	signal cw_memory: mem_array := (
 	--  "FSPJLE12PUNHDXAB-----+++TWR10MCK"	
@@ -197,8 +210,15 @@ architecture dlx_cu_hw of dlx_cu is
 	signal unsigned_2: std_logic;
 
 	signal i_DRAM_NOTREADY: std_logic;
+	signal i_JUMP_EN: std_logic;
 
 begin
+
+	-- EXAMPLE PURPOSES
+	--
+	-- cw_memory_prova(0).test_sig <= '1';
+	--
+	---
 
 	IR_opcode(OP_CODE_SIZE - 1 downto 0) <= IR_IN(31 downto 26);
 	IR_func(FUNC_SIZE - 1 downto 0)      <= IR_IN(FUNC_SIZE - 1 downto 0);
@@ -216,7 +236,7 @@ begin
 	-- IF control Signals
 	PIPLIN_IF_EN 		<= CW_IF(CW_SIZE - 1);
 	--IF_STALL			<= CW_IF(CW_SIZE - 2);
-	PC_EN 				<= CW_IF(CW_SIZE - 3);
+	PC_EN 				<= CW_IF(CW_SIZE - 3) or i_JUMP_EN;
 	-- JUMP_EN      	................ - 4
 	
 	--  "FSPJLE12PUNHDXAB-----+++TWR10MCK"	
@@ -246,6 +266,10 @@ begin
 	WB_MUX_SEL 			<= CW_WB(CW_WB'length - 1);
 	PIPLIN_WB_EN    	<= CW_WB(CW_WB'length - 2) and not i_DRAM_NOTREADY;
 	
+
+	-- Signals outside the Control Word direct assignment
+	DRAM_ME				<= (CW_MEM(CW_MEM'length-1) or CW_MEM(CW_MEM'length-2)) and CW_MEM(CW_MEM'length - 5);
+
 	--
 	--	This process allows to stop entirely the pipeline for the fetched instruction. Means that one of the conditions is true,
 	--  all the pipeline registers are disabled (PC, IR, ID, EX, MEM, WB) for the instruction
@@ -263,11 +287,14 @@ begin
 	--	  1 cc later the jump so means that after this cc, we have i_FILL_delay = '1' and meanwhile a NOP is inserted in the pipeline. So now
 	--	  we have a NOP stalled in the ID stage 'till i_FILL_delay = '0' so after the FILL will finish.
 	--
-	process(CW, CW_IF, HAZARD_SIG, IR_opcode, BUSY_WINDOW, i_FILL_delay, SPILL, i_DRAM_NOTREADY)
+	process(CW, CW_IF, HAZARD_SIG, IR_opcode, BUSY_WINDOW, i_FILL_delay, SPILL, i_DRAM_NOTREADY, IRAM_READY)
 	begin
 		
 		CW_IF <= CW;
-			
+		if (IRAM_READY = '0') then
+			CW_IF(CW_SIZE-2) 			<= '1';	    -- STALL enabling
+			CW_IF(CW_SIZE-3) 			<= '0';	    -- PC disabling
+		end if;
 	 	if (i_DRAM_NOTREADY = '1' or HAZARD_SIG = '1' or ((IR_opcode = OP_CALL or IR_opcode = OP_RET) and BUSY_WINDOW = '1') or SPILL = '1' or i_FILL_delay = '1') then
 			CW_IF(CW_SIZE-1) 			<= '0';		-- IF disabling
 			CW_IF(CW_SIZE-3) 			<= '0';	    -- PC disabling
@@ -282,7 +309,7 @@ begin
 	-- DRAM_NOTREADY is at 1 if the DRAM is not ready and at the MEM stage we have
 	-- an instruction that wants to write/read in the memory (a load or a store).
 	-- If yes, we stall everything, otherwise we go ahead with the pipeline 
-	i_DRAM_NOTREADY <= not DRAM_READY and (CW_MEM(CW_MEM'length-1) or CW_MEM(CW_MEM'length-2));
+	i_DRAM_NOTREADY <= not(DRAM_READY) and (CW_MEM(CW_MEM'length-1) or CW_MEM(CW_MEM'length-2)) and CW_MEM(CW_MEM'length-5);
 	
 
 	CW_ID <= CW_IF(CW_ID'length-1 downto 0) when i_DRAM_NOTREADY = '0' else CW_ID;
@@ -334,6 +361,8 @@ begin
 					aluOpcode1 <= aluOpcode1;
 					setcmp_1 <= setcmp_1;
 					sel_alu_setcmp_1 <= sel_alu_setcmp_1;
+					unsigned_1 <= unsigned_1;
+					unsigned_2 <= unsigned_2;
 					CW_WB <= (others => '0');
 				end if;
 
@@ -500,40 +529,41 @@ begin
 	end process SEL_ALU_SETCMP_P;
 
 	
+	JUMP_EN <= i_JUMP_EN;
 	JBRANCH_CTRL: process(IR_opcode, CW_IF, LGET, BUSY_WINDOW, i_SPILL_delay, i_FILL_delay, i_DRAM_NOTREADY)
 	begin
 
 		IF_STALL <= CW_IF(CW_SIZE - 2);
-		JUMP_EN <= CW_IF(CW_SIZE - 4);
+		i_JUMP_EN <= CW_IF(CW_SIZE - 4);
 		CALL <= CW_IF(CW_SIZE - 5) and not(i_DRAM_NOTREADY);
 		RET <= CW_IF(CW_SIZE - 6) and not(i_DRAM_NOTREADY);
 
 		if (IR_opcode = OP_BEQZ and LGET(0) = '0') then -- BEQZ 
-			JUMP_EN <= '1';
+			i_JUMP_EN <= '1';
 			IF_STALL <= '1';
 		elsif (IR_opcode = OP_BNEZ and LGET(0) = '1') then -- BNEZ
-			JUMP_EN <= '1';
+			i_JUMP_EN <= '1';
 			IF_STALL <= '1';
 		elsif (IR_opcode = OP_BGE and (LGET(1) = '1' or LGET(0) = '0')) then -- BGE
-			JUMP_EN <= '1';
+			i_JUMP_EN <= '1';
 			IF_STALL <= '1';
 		elsif (IR_opcode = OP_BLE and LGET(1) = '0') then -- BGE
-			JUMP_EN <= '1';
+			i_JUMP_EN <= '1';
 			IF_STALL <= '1';
 		elsif (IR_opcode = OP_BGT and LGET = "11") then -- BGT
-			JUMP_EN <= '1';
+			i_JUMP_EN <= '1';
 			IF_STALL <= '1';
 		elsif (IR_opcode = OP_BLT and LGET = "01") then -- BLT
-			JUMP_EN <= '1';
+			i_JUMP_EN <= '1';
 			IF_STALL <= '1';
 		elsif (IR_opcode = OP_CALL and BUSY_WINDOW = '1') then -- CALL
 			CALL <= '0';
-			JUMP_EN <= '0';	
+			i_JUMP_EN <= '0';	
 		elsif (IR_opcode = OP_CALL and BUSY_WINDOW = '0' and i_SPILL_delay = '0') then -- CALL
 			CALL <= '1' and not (i_DRAM_NOTREADY);
 		elsif (IR_opcode = OP_RET and BUSY_WINDOW = '1') then -- RET
 			RET <= '0';
-			JUMP_EN <= '0';
+			i_JUMP_EN <= '0';
 		end if;
 
 	end process JBRANCH_CTRL;

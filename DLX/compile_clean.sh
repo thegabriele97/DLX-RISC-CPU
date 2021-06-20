@@ -11,6 +11,7 @@ filename=$(basename $1)
 filename="${filename%.*}"
 
 assembler.bin/conv2memory ${1%/*}/$filename.bin > DLX_vhd/test_bench/mems/${filename}.asm.mem
+assembler.bin/conv2memory ${1%/*}/$filename.bin > DLX_vhd_fully_synthesizable/test_bench_and_memory/mems/${filename}.asm.mem
 
 rm ${1%/*}/$filename.bin
 rm ${1%/*}/$filename.list

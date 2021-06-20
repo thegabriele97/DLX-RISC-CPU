@@ -12,7 +12,7 @@ entity ROMEM is
 	generic (
 		file_path	: -- string(1 to 37) := "C://DLX//dlx-master//rocache//hex.txt";
 					string;
-		ENTRIES		: integer := 128;
+		ENTRIES		: integer := 512;
 		WORD_SIZE	: integer := 32;
 		data_delay	: natural := 2
 	);
@@ -22,7 +22,7 @@ entity ROMEM is
 		ADDRESS				: in std_logic_vector(WORD_SIZE - 1 downto 0);
 		ENABLE				: in std_logic;
 		DATA_READY			: out std_logic;
-		DATA				: out std_logic_vector(2*WORD_SIZE - 1 downto 0)
+		DATA				: out std_logic_vector(WORD_SIZE - 1 downto 0)
 	);
 end ROMEM;
 
@@ -30,7 +30,7 @@ architecture Behavioral of ROMEM is
 	type RAM is array (0 to ENTRIES-1) of integer;
 	signal Memory : RAM;
 	signal valid : std_logic;
-	signal idout : std_logic_vector(2*WORD_SIZE-1 downto 0);
+	signal idout : std_logic_vector(WORD_SIZE-1 downto 0);
 	signal count: integer range 0 to (data_delay + 1);
 
 begin
@@ -57,18 +57,16 @@ begin
 			end loop;
 
 			file_close(mem_fp);
-
+			valid <= '0';
 			count <= 0;
 		elsif CLK'event and clk= '1' then
 			if (ENABLE = '1' ) then
 				count <= count + 1;
+				valid <= '0';
 				if (count = data_delay) then
 					count <= 0;
 					valid <= '1';
-					idout <=
-					conv_std_logic_vector(Memory(conv_integer(unsigned(ADDRESS))+1),WORD_SIZE) &
-					conv_std_logic_vector(Memory(conv_integer(unsigned(ADDRESS))),WORD_SIZE
-					);
+					idout <= conv_std_logic_vector(Memory(conv_integer("00" & unsigned(ADDRESS(ADDRESS'length - 1 downto 2)))), WORD_SIZE);
 				end if;
 			else
 				count <= 0;
