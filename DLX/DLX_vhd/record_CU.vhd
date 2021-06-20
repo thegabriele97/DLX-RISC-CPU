@@ -1,6 +1,6 @@
 library ieee;
 use ieee.std_logic_1164.all;
-use use work.myTypes.all;
+use work.myTypes.all;
  
 package record_CU is
 
@@ -33,4 +33,16 @@ package record_CU is
     wb_en               : std_logic; -- K
   end record control_word;
 
-end package example_CU;
+  
+  -- EXAMPLE PURPOSES
+  --
+  type prova is record
+    test_sig: std_logic;
+  end record prova;
+
+
+  constant c_record_prova: prova := (
+    test_sig => '0'
+  );
+
+end package record_CU;
