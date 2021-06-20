@@ -2,6 +2,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 use work.myTypes.all;
+use work.record_CU.all
 
 entity dlx_cu is
 	generic (
@@ -69,7 +70,6 @@ architecture dlx_cu_hw of dlx_cu is
 	constant CW_SIZE: integer := (24 + alu_op_sig_t'length + set_op_sig_t'length); -- Control Word Size
 	 
 	type mem_array is array (0 to MICROCODE_MEM_SIZE - 1) of std_logic_vector(CW_SIZE-1 downto 0);
-		
 
 	signal cw_memory: mem_array := (
 	--  "FSPJLE12PUNHDXAB-----+++TWR10MCK"	
