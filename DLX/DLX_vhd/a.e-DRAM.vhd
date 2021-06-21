@@ -57,7 +57,7 @@ begin
         if rising_edge(Clk) then
             if Rst = '1' then
                 Memory <= (OTHERS => (OTHERS => '0'));
-                file_open(mem_fp,"test_bench/mems/LoadStore_test.asm.mem",READ_MODE);
+                file_open(mem_fp,"test_bench/mems/factorial_pro.asm.mem",READ_MODE);
 
                 while (not endfile(mem_fp)) loop
                     readline(mem_fp,file_line);

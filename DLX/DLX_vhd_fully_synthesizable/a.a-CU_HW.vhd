@@ -236,7 +236,7 @@ begin
 	-- IF control Signals
 	PIPLIN_IF_EN 		<= CW_IF(CW_SIZE - 1);
 	--IF_STALL			<= CW_IF(CW_SIZE - 2);
-	PC_EN 				<= CW_IF(CW_SIZE - 3) or i_JUMP_EN;
+	PC_EN 				<= CW_IF(CW_SIZE - 3) or (i_JUMP_EN and not SPILL);
 	-- JUMP_EN      	................ - 4
 	
 	--  "FSPJLE12PUNHDXAB-----+++TWR10MCK"	
@@ -560,7 +560,7 @@ begin
 			CALL <= '0';
 			i_JUMP_EN <= '0';	
 		elsif (IR_opcode = OP_CALL and BUSY_WINDOW = '0' and i_SPILL_delay = '0') then -- CALL
-			CALL <= '1' and not (i_DRAM_NOTREADY);
+			CALL <= '1';
 		elsif (IR_opcode = OP_RET and BUSY_WINDOW = '1') then -- RET
 			RET <= '0';
 			i_JUMP_EN <= '0';

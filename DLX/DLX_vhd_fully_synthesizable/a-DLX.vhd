@@ -35,7 +35,8 @@ entity DLX is
 		DRAMRF_ISSUE			: out std_logic;
 		DRAMRF_READNOTWRITE		: out std_logic;
 		DRAMRF_READY			: in std_logic;
-		DRAMRF_DATA				: inout std_logic_vector(IR_SIZE-1 downto 0);
+		DRAMRF_DATA_IN			: in std_logic_vector(IR_SIZE-1 downto 0);
+		DRAMRF_DATA_OUT			: OUT std_logic_vector(IR_SIZE-1 downto 0);
 		DATA_SIZE_RF			: out std_logic_vector(1 downto 0)
 	);
 end DLX;
@@ -359,8 +360,8 @@ begin  -- DLX
 	-- RF DRAM Connections
 	DRAMRF_ADDRESS <= i_RF_MEM_ADDR;
 
-	DRAMRF_DATA <= i_RF_BUS_TOMEM;
-	i_RF_BUS_FROMEM <= DRAMRF_DATA;
+	DRAMRF_DATA_OUT <= i_RF_BUS_TOMEM;
+	i_RF_BUS_FROMEM <= DRAMRF_DATA_IN;
 
 	DRAMRF_ISSUE <= i_RF_MEM_RM or i_RF_MEM_WM;
 	DRAMRF_READNOTWRITE <= i_RF_MEM_RM;
@@ -372,7 +373,7 @@ begin  -- DLX
     -- inputs : Clk, Rst, IRam_DOut, IR_LATCH_EN_i
     -- outputs: IR_IN_i
 	IRAM_ADDRESS <= PC;
-	IRAM_ISSUE <= i_IR_LATCH_EN;
+	IRAM_ISSUE <= '1';
 
     IR_P: process (Clk, Rst)
     begin  -- process IR_P

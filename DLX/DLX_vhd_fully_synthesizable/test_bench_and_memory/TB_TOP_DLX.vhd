@@ -76,7 +76,8 @@ architecture tb of DLX_TestBench is
 			DRAMRF_ISSUE			: out std_logic;
 			DRAMRF_READNOTWRITE		: out std_logic;
 			DRAMRF_READY			: in std_logic;
-			DRAMRF_DATA				: inout std_logic_vector(IR_SIZE-1 downto 0);
+			DRAMRF_DATA_IN			: in std_logic_vector(IR_SIZE-1 downto 0);
+			DRAMRF_DATA_OUT			: OUT std_logic_vector(IR_SIZE-1 downto 0);
 			DATA_SIZE_RF			: out std_logic_vector(1 downto 0)
 		);
 	end component;
@@ -92,14 +93,14 @@ architecture tb of DLX_TestBench is
 	signal DRAM_ENABLE :		std_logic;
 	signal DRAM_READNOTWRITE :	std_logic;
 	signal DRAM_READY :			std_logic;
-	signal DRAM_DATA :			std_logic_vector(32-1 downto 0);
 	signal MAS :				std_logic_vector(1 downto 0);
 	
 	signal DRAMRF_ADDRESS			: std_logic_vector(32-1 downto 0);
 	signal DRAMRF_ISSUE				: std_logic;
 	signal DRAMRF_READNOTWRITE		: std_logic;
 	signal DRAMRF_READY				: std_logic;
-	signal DRAMRF_DATA				: std_logic_vector(32-1 downto 0);
+	signal DRAMRF_DATA_IN				: std_logic_vector(32-1 downto 0);
+	signal DRAMRF_DATA_OUT				: std_logic_vector(32-1 downto 0);
 	signal DATA_SIZE_RF				: std_logic_vector(1 downto 0);
 
 	signal DATA_OUT, DATA_IN: std_logic_vector(32-1 downto 0);
@@ -108,18 +109,24 @@ architecture tb of DLX_TestBench is
 begin
 	-- IRAM
 	IRAM : ROMEM
-		generic map (file_path => "test_bench_and_memory/mems/bubble_sort.asm.mem", ENTRIES => 512)
+		generic map (data_delay => 1, file_path => "test_bench_and_memory/mems/bubble_sort.asm.mem", ENTRIES => 512)
 		port map (CLK, RST, IRAM_ADDRESS, IRAM_ENABLE, IRAM_READY, IRAM_DATA);
 
 	-- DRAM
 	DRAM : RWMEM
-		generic map (RAM_DEPTH => 512, file_path => "test_bench_and_memory/mems/writed/bubble_sort.asm.mem", file_path_init => "test_bench_and_memory/mems/bubble_sort.asm.mem")
+		generic map (data_delay => 1, RAM_DEPTH => 512, file_path => "test_bench_and_memory/mems/writed/bubble_sort.asm.mem", file_path_init => "test_bench_and_memory/mems/bubble_sort.asm.mem")
 		port map ( CLK, RST, DRAM_ADDRESS, DRAM_ENABLE, MAS, DRAM_READNOTWRITE, DRAM_READY, DATA_OUT, DATA_IN);
+
+	
+	-- DRAM RF
+	DRAMRF : RWMEM
+		generic map (data_delay => 1, RAM_DEPTH => 1024, file_path => "test_bench_and_memory/mems/writed/bubble_sort_RF.asm.mem", file_path_init => "test_bench_and_memory/mems/bubble_sort.asm.mem")
+		port map ( CLK, RST, DRAMRF_ADDRESS, DRAMRF_ISSUE, DATA_SIZE_RF, DRAMRF_READNOTWRITE, DRAMRF_READY, DRAMRF_DATA_OUT, DRAMRF_DATA_IN);
 
 	-- DLX
 	DDLX : DLX
 		generic map (IR_SIZE => 32, PC_SIZE => 32, RAM_DEPTH => 32)
-		port map ( CLK, RST, IRAM_ADDRESS, IRAM_ENABLE, IRAM_READY, IRAM_DATA, DRAM_ADDRESS, DRAM_ENABLE, DRAM_READNOTWRITE, DRAM_READY, DATA_IN, DATA_OUT, MAS, DRAMRF_ADDRESS, DRAMRF_ISSUE, DRAMRF_READNOTWRITE, DRAMRF_READY, DRAMRF_DATA, DATA_SIZE_RF);
+		port map ( CLK, RST, IRAM_ADDRESS, IRAM_ENABLE, IRAM_READY, IRAM_DATA, DRAM_ADDRESS, DRAM_ENABLE, DRAM_READNOTWRITE, DRAM_READY, DATA_IN, DATA_OUT, MAS, DRAMRF_ADDRESS, DRAMRF_ISSUE, DRAMRF_READNOTWRITE, DRAMRF_READY, DRAMRF_DATA_IN, DRAMRF_DATA_OUT, DATA_SIZE_RF);
 
 	Clk <= not Clk after 1 ns;
 	Rst <= '1', '0' after 2 ns;

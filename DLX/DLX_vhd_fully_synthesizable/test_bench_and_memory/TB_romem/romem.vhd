@@ -33,6 +33,8 @@ architecture Behavioral of ROMEM is
 	signal idout : std_logic_vector(WORD_SIZE-1 downto 0);
 	signal count: integer range 0 to (data_delay + 1);
 
+	signal last_address: std_logic_vector(WORD_SIZE-1 downto 0);
+
 begin
 
 	-- purpose: This process is in charge of filling the Instruction RAM with the firmware
@@ -61,13 +63,22 @@ begin
 			count <= 0;
 		elsif CLK'event and clk= '1' then
 			if (ENABLE = '1' ) then
-				count <= count + 1;
-				valid <= '0';
-				if (count = data_delay) then
+
+				last_address <= ADDRESS;
+				if (last_address /= ADDRESS) then
 					count <= 0;
-					valid <= '1';
-					idout <= conv_std_logic_vector(Memory(conv_integer("00" & unsigned(ADDRESS(ADDRESS'length - 1 downto 2)))), WORD_SIZE);
+					valid <= '0';
+				else
+					count <= count + 1;
+					valid <= '0';
+					if (count = data_delay) then
+						count <= 0;
+						valid <= '1';
+						idout <= conv_std_logic_vector(Memory(conv_integer("00" & unsigned(ADDRESS(ADDRESS'length - 1 downto 2)))), WORD_SIZE);
+					end if;
+
 				end if;
+
 			else
 				count <= 0;
 				valid <= '0';

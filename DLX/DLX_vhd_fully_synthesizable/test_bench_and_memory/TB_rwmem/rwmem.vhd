@@ -12,7 +12,7 @@ entity RWMEM is
 		file_path_init: string;
 		Data_size : natural := 32;
 		addr_log: natural := 32;
-		RAM_DEPTH: 	natural := 128;
+		RAM_DEPTH: 	natural := 1024;
 		data_delay: natural := 2
 		);
 	port (
@@ -62,6 +62,7 @@ begin  -- beh
 		variable tmp_data_u : std_logic_vector(addr_log -1 downto 0);
         variable start_read: integer := 0;
         variable acca: integer;
+		variable v_tmp_data: std_logic_vector(Data_size -1 downto 0);
 	begin  -- process
 
 		if RST = '1' then  	 -- asynchronous reset (active low)
@@ -99,15 +100,13 @@ begin  -- beh
 
 		elsif CLK'event and CLK = '1' then  -- rising clock edge
 
-			report "ENABLE: " & std_logic'image(READNOTWRITE);
-
 			if(ENABLE = '1') then
 				counter <= counter + 1;
 				if (counter = data_delay) then
 					counter <= 0;
 					if (READNOTWRITE = '0') then
 
-
+						report "\tRWMEM, WRITE @ " & integer'image(to_integer(unsigned(ADDR))) & " : " & integer'image(to_integer(unsigned(DATA_IN)));
 						-- ADDR = ADDR(length-1 dwonto 2) & "00";
 						--- 1000
 
@@ -146,10 +145,17 @@ begin  -- beh
 
 						mem_ready <= '1';
 					else	
-						tmp_data <= DRAM_mem(to_integer(unsigned(ADDR(ADDR'length-1 downto 2)) & "00"))(7 downto 0) & 
+
+						v_tmp_data := DRAM_mem(to_integer(unsigned(ADDR(ADDR'length-1 downto 2)) & "00"))(7 downto 0) & 
 									DRAM_mem(to_integer(unsigned(ADDR(ADDR'length-1 downto 2)) & "00"))(15 downto 8) &
 									DRAM_mem(to_integer(unsigned(ADDR(ADDR'length-1 downto 2)) & "00"))(23 downto 16) &
 									DRAM_mem(to_integer(unsigned(ADDR(ADDR'length-1 downto 2)) & "00"))(31 downto 24);
+
+						acca := to_integer(unsigned(v_tmp_data));
+						tmp_data <= v_tmp_data;
+
+						report "\tRWMEM, READ @ " & integer'image(to_integer(unsigned(ADDR))) & " : " & integer'image(acca);
+
 						int_data_ready <= '1';
 					end if;
 				else
@@ -159,9 +165,6 @@ begin  -- beh
 			else
 				counter <= 0;
 			end if;
-
-			report "ENABLE2: " & std_logic'image(READNOTWRITE);
-
 
 		end if;
 
