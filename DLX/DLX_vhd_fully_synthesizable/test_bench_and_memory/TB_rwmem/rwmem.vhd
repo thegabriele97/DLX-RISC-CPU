@@ -58,6 +58,8 @@ begin  -- beh
 	process (CLK, RST,READNOTWRITE)
 		file mem_fp: text;
 		variable index: integer range 0 to RAM_DEPTH;
+		variable real_index_uns : unsigned(addr'length-1 downto 0);
+		variable real_index: integer range 0 to RAM_DEPTH;
 		variable file_line : line;
 		variable tmp_data_u : std_logic_vector(addr_log -1 downto 0);
         variable start_read: integer := 0;
@@ -83,7 +85,9 @@ begin  -- beh
 						-- report file_line;
 						acca := to_integer(unsigned(tmp_data_u));
 						report "RWMEM, LOAD IMAGE... MEM[" & integer'image(index) & "]: " & integer'image(acca);
-						DRAM_Mem(index) <= tmp_data_u(7 downto 0) & tmp_data_u(15 downto 8) & tmp_data_u(23 downto 16) & tmp_data_u(31 downto 24);       
+						real_index_uns := to_unsigned(index, addr'length);
+						real_index := to_integer("00" & real_index_uns(real_index_uns'length-1 downto 2));
+						DRAM_Mem(real_index) <= tmp_data_u(7 downto 0) & tmp_data_u(15 downto 8) & tmp_data_u(23 downto 16) & tmp_data_u(31 downto 24);       
 						index := index + 4;
 
 					end if;
@@ -119,42 +123,42 @@ begin  -- beh
 						-- READ BYTE_3: DD -- -- --
 
 						if (MAS = "00") then      -- WORD
-							DRAM_Mem(to_integer(unsigned(ADDR(ADDR'length-1 downto 2)) & "00"))(31 downto 24) <= DATA_IN(7 downto 0);
-							DRAM_Mem(to_integer(unsigned(ADDR(ADDR'length-1 downto 2)) & "00"))(23 downto 16) <= DATA_IN(15 downto 8);
-							DRAM_Mem(to_integer(unsigned(ADDR(ADDR'length-1 downto 2)) & "00"))(15 downto 8) <= DATA_IN(23 downto 16);
-							DRAM_Mem(to_integer(unsigned(ADDR(ADDR'length-1 downto 2)) & "00"))(7 downto 0) <= DATA_IN(31 downto 24);
+							DRAM_Mem(to_integer("00" & unsigned(ADDR(ADDR'length-1 downto 2))))(31 downto 24) <= DATA_IN(7 downto 0);
+							DRAM_Mem(to_integer("00" & unsigned(ADDR(ADDR'length-1 downto 2))))(23 downto 16) <= DATA_IN(15 downto 8);
+							DRAM_Mem(to_integer("00" & unsigned(ADDR(ADDR'length-1 downto 2))))(15 downto 8) <= DATA_IN(23 downto 16);
+							DRAM_Mem(to_integer("00" & unsigned(ADDR(ADDR'length-1 downto 2))))(7 downto 0) <= DATA_IN(31 downto 24);
 						elsif (MAS = "01") then   -- HALF
 							if (ADDR(1 downto 0) = "00") then	
-								DRAM_Mem(to_integer(unsigned(ADDR(ADDR'length-1 downto 2)) & "00"))(15 downto 8) <= DATA_IN(23 downto 16);
-								DRAM_Mem(to_integer(unsigned(ADDR(ADDR'length-1 downto 2)) & "00"))(7 downto 0) <= DATA_IN(31 downto 24);
+								DRAM_Mem(to_integer("00" & unsigned(ADDR(ADDR'length-1 downto 2))))(15 downto 8) <= DATA_IN(23 downto 16);
+								DRAM_Mem(to_integer("00" & unsigned(ADDR(ADDR'length-1 downto 2))))(7 downto 0) <= DATA_IN(31 downto 24);
 							else
-								DRAM_Mem(to_integer(unsigned(ADDR(ADDR'length-1 downto 2)) & "00"))(31 downto 24) <= DATA_IN(23 downto 16);
-								DRAM_Mem(to_integer(unsigned(ADDR(ADDR'length-1 downto 2)) & "00"))(23 downto 16) <= DATA_IN(31 downto 24);
+								DRAM_Mem(to_integer("00" & unsigned(ADDR(ADDR'length-1 downto 2))))(31 downto 24) <= DATA_IN(23 downto 16);
+								DRAM_Mem(to_integer("00" & unsigned(ADDR(ADDR'length-1 downto 2))))(23 downto 16) <= DATA_IN(31 downto 24);
 							end if;
 						elsif (MAS = "10") then
 							if (ADDR(1 downto 0) = "00") then
-								DRAM_Mem(to_integer(unsigned(ADDR(ADDR'length-1 downto 2)) & "00"))(7 downto 0) <= DATA_IN(7 downto 0);
+								DRAM_Mem(to_integer("00" & unsigned(ADDR(ADDR'length-1 downto 2))))(7 downto 0) <= DATA_IN(7 downto 0);
 							elsif (ADDR(1 downto 0) = "01") then
-								DRAM_Mem(to_integer(unsigned(ADDR(ADDR'length-1 downto 2)) & "00"))(15 downto 8) <= DATA_IN(7 downto 0);
+								DRAM_Mem(to_integer("00" & unsigned(ADDR(ADDR'length-1 downto 2))))(15 downto 8) <= DATA_IN(7 downto 0);
 							elsif (ADDR(1 downto 0) = "10") then
-								DRAM_Mem(to_integer(unsigned(ADDR(ADDR'length-1 downto 2)) & "00"))(23 downto 16) <= DATA_IN(7 downto 0);
+								DRAM_Mem(to_integer("00" & unsigned(ADDR(ADDR'length-1 downto 2))))(23 downto 16) <= DATA_IN(7 downto 0);
 							elsif (ADDR(1 downto 0) = "11") then
-								DRAM_Mem(to_integer(unsigned(ADDR(ADDR'length-1 downto 2)) & "00"))(31 downto 24) <= DATA_IN(7 downto 0);
+								DRAM_Mem(to_integer("00" & unsigned(ADDR(ADDR'length-1 downto 2))))(31 downto 24) <= DATA_IN(7 downto 0);
 							end if;
 						end if;
 
 						mem_ready <= '1';
 					else	
 
-						v_tmp_data := DRAM_mem(to_integer(unsigned(ADDR(ADDR'length-1 downto 2)) & "00"))(7 downto 0) & 
-									DRAM_mem(to_integer(unsigned(ADDR(ADDR'length-1 downto 2)) & "00"))(15 downto 8) &
-									DRAM_mem(to_integer(unsigned(ADDR(ADDR'length-1 downto 2)) & "00"))(23 downto 16) &
-									DRAM_mem(to_integer(unsigned(ADDR(ADDR'length-1 downto 2)) & "00"))(31 downto 24);
+						v_tmp_data := DRAM_mem(to_integer("00" & unsigned(ADDR(ADDR'length-1 downto 2))))(7 downto 0) & 
+									DRAM_mem(to_integer("00" & unsigned(ADDR(ADDR'length-1 downto 2))))(15 downto 8) &
+									DRAM_mem(to_integer("00" & unsigned(ADDR(ADDR'length-1 downto 2))))(23 downto 16) &
+									DRAM_mem(to_integer("00" & unsigned(ADDR(ADDR'length-1 downto 2))))(31 downto 24);
 
 						acca := to_integer(unsigned(v_tmp_data));
 						tmp_data <= v_tmp_data;
 
-						report "\tRWMEM, READ @ " & integer'image(to_integer(unsigned(ADDR))) & " : " & integer'image(acca);
+						report "\tRWMEM, READ @ " & integer'image(to_integer(unsigned(ADDR))) & " [W" & integer'image(to_integer("00" & unsigned(ADDR(ADDR'length-1 downto 2)))) & "] : " & integer'image(acca);
 
 						int_data_ready <= '1';
 					end if;

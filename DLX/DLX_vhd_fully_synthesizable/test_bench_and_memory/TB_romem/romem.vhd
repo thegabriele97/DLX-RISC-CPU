@@ -64,19 +64,12 @@ begin
 		elsif CLK'event and clk= '1' then
 			if (ENABLE = '1' ) then
 
-				last_address <= ADDRESS;
-				if (last_address /= ADDRESS) then
+				count <= count + 1;
+				valid <= '0';
+				if (count = data_delay) then
 					count <= 0;
-					valid <= '0';
-				else
-					count <= count + 1;
-					valid <= '0';
-					if (count = data_delay) then
-						count <= 0;
-						valid <= '1';
-						idout <= conv_std_logic_vector(Memory(conv_integer("00" & unsigned(ADDRESS(ADDRESS'length - 1 downto 2)))), WORD_SIZE);
-					end if;
-
+					valid <= '1';
+					idout <= conv_std_logic_vector(Memory(conv_integer("00" & unsigned(ADDRESS(ADDRESS'length - 1 downto 2)))), WORD_SIZE);
 				end if;
 
 			else

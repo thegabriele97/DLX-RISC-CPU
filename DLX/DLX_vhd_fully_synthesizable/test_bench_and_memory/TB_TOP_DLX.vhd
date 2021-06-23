@@ -82,6 +82,31 @@ architecture tb of DLX_TestBench is
 		);
 	end component;
 
+
+	component mcu is
+		generic (
+			N_BIT_ADDR: integer := 32
+		);
+		port (
+
+			Clk: in std_logic;
+			Rst: in std_logic;
+
+			CPU_ADDR: in std_logic_vector(N_BIT_ADDR-1 downto 0);
+			-- CPU_TOMEM: in std_logic_vector(N_BIT_DATA-1 downto 0);
+			-- CPU_FROMEM: out std_logic_vector(N_BIT_DATA-1 downto 0);
+			CPU_ENABLE: in std_logic;
+			CPU_RDNOTWR: in std_logic;
+			CPU_MAS: in std_logic_vector(1 downto 0);
+			CPU_VALID: out std_logic;
+
+			MEM_ISSUE: out std_logic;
+			MEM_RDNOTWR: out std_logic;
+			MEM_MAS: out std_logic_vector(1 downto 0);
+			MEM_READY: in std_logic
+		);
+	end component;
+
 	signal CLK :				std_logic := '0';		-- Clock
 	signal RST :				std_logic;		-- Reset:Active-Low
 	signal IRAM_ADDRESS :		std_logic_vector(32 - 1 downto 0);
@@ -89,11 +114,22 @@ architecture tb of DLX_TestBench is
 	signal IRAM_READY :			std_logic;
 	signal IRAM_DATA :			std_logic_vector(32-1 downto 0);
 
+	signal CPU_IRAM_ENABLE :		std_logic;
+	signal CPU_IRAM_READY :			std_logic;
+	signal CPU_IRAM_DATA :			std_logic_vector(32-1 downto 0);
+
 	signal DRAM_ADDRESS :		std_logic_vector(32-1 downto 0);
 	signal DRAM_ENABLE :		std_logic;
 	signal DRAM_READNOTWRITE :	std_logic;
 	signal DRAM_READY :			std_logic;
 	signal MAS :				std_logic_vector(1 downto 0);
+
+
+	signal CPU_DRAM_ENABLE :		std_logic;
+	signal CPU_DRAM_READNOTWRITE :	std_logic;
+	signal CPU_DRAM_READY :			std_logic;
+	signal CPU_MAS :				std_logic_vector(1 downto 0);
+
 	
 	signal DRAMRF_ADDRESS			: std_logic_vector(32-1 downto 0);
 	signal DRAMRF_ISSUE				: std_logic;
@@ -105,28 +141,41 @@ architecture tb of DLX_TestBench is
 
 	signal DATA_OUT, DATA_IN: std_logic_vector(32-1 downto 0);
 	
+	signal bintrash: std_logic;
+	signal bintrash_vector: std_logic_vector(1 downto 0);
+
+	constant memfile: string := "LoadStore_test.asm.mem"; 
 
 begin
 	-- IRAM
+	MCUIRAM: mcu 
+		generic map(32)
+		port map(CLK, RST, IRAM_ADDRESS, CPU_IRAM_ENABLE, '1', "00", CPU_IRAM_READY, IRAM_ENABLE, bintrash, bintrash_vector, IRAM_READY);
+
 	IRAM : ROMEM
-		generic map (data_delay => 1, file_path => "test_bench_and_memory/mems/bubble_sort.asm.mem", ENTRIES => 512)
+		generic map (data_delay => 0, file_path => "test_bench_and_memory/mems/" & memfile, ENTRIES => 512)
 		port map (CLK, RST, IRAM_ADDRESS, IRAM_ENABLE, IRAM_READY, IRAM_DATA);
+
+	MCURWMEM: mcu 
+		generic map(32)
+		port map(CLK, RST, DRAM_ADDRESS, CPU_DRAM_ENABLE, CPU_DRAM_READNOTWRITE, CPU_MAS, CPU_DRAM_READY, DRAM_ENABLE, DRAM_READNOTWRITE, MAS, DRAM_READY);
+
 
 	-- DRAM
 	DRAM : RWMEM
-		generic map (data_delay => 1, RAM_DEPTH => 512, file_path => "test_bench_and_memory/mems/writed/bubble_sort.asm.mem", file_path_init => "test_bench_and_memory/mems/bubble_sort.asm.mem")
+		generic map (data_delay => 1, RAM_DEPTH => 512, file_path => "test_bench_and_memory/mems/writed/" & memfile, file_path_init => "test_bench_and_memory/mems/" & memfile)
 		port map ( CLK, RST, DRAM_ADDRESS, DRAM_ENABLE, MAS, DRAM_READNOTWRITE, DRAM_READY, DATA_OUT, DATA_IN);
 
 	
 	-- DRAM RF
 	DRAMRF : RWMEM
-		generic map (data_delay => 1, RAM_DEPTH => 1024, file_path => "test_bench_and_memory/mems/writed/bubble_sort_RF.asm.mem", file_path_init => "test_bench_and_memory/mems/bubble_sort.asm.mem")
+		generic map (data_delay => 0, RAM_DEPTH => 1024, file_path => "test_bench_and_memory/mems/writed/" & memfile & "_rf", file_path_init => "test_bench_and_memory/mems/" & memfile)
 		port map ( CLK, RST, DRAMRF_ADDRESS, DRAMRF_ISSUE, DATA_SIZE_RF, DRAMRF_READNOTWRITE, DRAMRF_READY, DRAMRF_DATA_OUT, DRAMRF_DATA_IN);
 
 	-- DLX
 	DDLX : DLX
 		generic map (IR_SIZE => 32, PC_SIZE => 32, RAM_DEPTH => 32)
-		port map ( CLK, RST, IRAM_ADDRESS, IRAM_ENABLE, IRAM_READY, IRAM_DATA, DRAM_ADDRESS, DRAM_ENABLE, DRAM_READNOTWRITE, DRAM_READY, DATA_IN, DATA_OUT, MAS, DRAMRF_ADDRESS, DRAMRF_ISSUE, DRAMRF_READNOTWRITE, DRAMRF_READY, DRAMRF_DATA_IN, DRAMRF_DATA_OUT, DATA_SIZE_RF);
+		port map ( CLK, RST, IRAM_ADDRESS, CPU_IRAM_ENABLE, CPU_IRAM_READY, IRAM_DATA, DRAM_ADDRESS, CPU_DRAM_ENABLE, CPU_DRAM_READNOTWRITE, CPU_DRAM_READY, DATA_IN, DATA_OUT, CPU_MAS, DRAMRF_ADDRESS, DRAMRF_ISSUE, DRAMRF_READNOTWRITE, DRAMRF_READY, DRAMRF_DATA_IN, DRAMRF_DATA_OUT, DATA_SIZE_RF);
 
 	Clk <= not Clk after 1 ns;
 	Rst <= '1', '0' after 2 ns;

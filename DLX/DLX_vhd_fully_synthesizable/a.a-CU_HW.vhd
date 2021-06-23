@@ -211,6 +211,7 @@ architecture dlx_cu_hw of dlx_cu is
 
 	signal i_DRAM_NOTREADY: std_logic;
 	signal i_JUMP_EN: std_logic;
+	signal i_JUMP_EN_READY: std_logic;
 
 begin
 
@@ -236,7 +237,7 @@ begin
 	-- IF control Signals
 	PIPLIN_IF_EN 		<= CW_IF(CW_SIZE - 1);
 	--IF_STALL			<= CW_IF(CW_SIZE - 2);
-	PC_EN 				<= CW_IF(CW_SIZE - 3) or (i_JUMP_EN and not SPILL);
+	PC_EN 				<= CW_IF(CW_SIZE - 3) or i_JUMP_EN_READY;
 	-- JUMP_EN      	................ - 4
 	
 	--  "FSPJLE12PUNHDXAB-----+++TWR10MCK"	
@@ -264,11 +265,12 @@ begin
 
 	-- WB control Signals
 	WB_MUX_SEL 			<= CW_WB(CW_WB'length - 1);
-	PIPLIN_WB_EN    	<= CW_WB(CW_WB'length - 2) and not i_DRAM_NOTREADY;
+	PIPLIN_WB_EN    	<= CW_WB(CW_WB'length - 2);
 	
 
 	-- Signals outside the Control Word direct assignment
 	DRAM_ME				<= (CW_MEM(CW_MEM'length-1) or CW_MEM(CW_MEM'length-2)) and CW_MEM(CW_MEM'length - 5);
+	JUMP_EN				<= i_JUMP_EN_READY;
 
 	--
 	--	This process allows to stop entirely the pipeline for the fetched instruction. Means that one of the conditions is true,
@@ -287,9 +289,11 @@ begin
 	--	  1 cc later the jump so means that after this cc, we have i_FILL_delay = '1' and meanwhile a NOP is inserted in the pipeline. So now
 	--	  we have a NOP stalled in the ID stage 'till i_FILL_delay = '0' so after the FILL will finish.
 	--
-	process(CW, CW_IF, HAZARD_SIG, IR_opcode, BUSY_WINDOW, i_FILL_delay, SPILL, i_DRAM_NOTREADY, IRAM_READY)
+	process(CW, CW_IF, HAZARD_SIG, IR_opcode, BUSY_WINDOW, i_FILL_delay, SPILL, i_DRAM_NOTREADY, IRAM_READY, i_JUMP_EN)
 	begin
 		
+		i_JUMP_EN_READY <= i_JUMP_EN;
+
 		CW_IF <= CW;
 		if (IRAM_READY = '0') then
 			CW_IF(CW_SIZE-2) 			<= '1';	    -- STALL enabling
@@ -302,6 +306,8 @@ begin
 			CW_IF(CW_EX'length - 1) 	<= '0';		-- EX disabling
 			CW_IF(CW_MEM'length - 5)	<= '0';		-- MEM disabling
 			CW_IF(CW_WB'length - 2) 	<= '0';		-- WB disabling
+
+			i_JUMP_EN_READY <= '0';
 		end if;
 	
 	end process;
@@ -529,7 +535,6 @@ begin
 	end process SEL_ALU_SETCMP_P;
 
 	
-	JUMP_EN <= i_JUMP_EN;
 	JBRANCH_CTRL: process(IR_opcode, CW_IF, LGET, BUSY_WINDOW, i_SPILL_delay, i_FILL_delay, i_DRAM_NOTREADY)
 	begin
 
