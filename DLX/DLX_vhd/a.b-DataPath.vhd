@@ -231,6 +231,8 @@ architecture structural of DP is
         port(
 
             DATA_RAW    : in std_logic_vector(N_BIT_DATA-1 downto 0);
+            ALOW        : in std_logic_vector(1 downto 0); -- Address LSBs in order to know the right data position on the bus      
+            RWM         : in std_logic; 
             
             -- 00 -> N_BIT_DATA bit     (lw/sw)
             -- 01 -> N_BIT_DATA/2 bit   (lh/sh)
@@ -564,6 +566,8 @@ begin
         N_BIT_DATA => N_BIT_DATA
     ) port map( 
         DATA_RAW => i_DATA_RAW,
+        ALOW => i_REG_ALU_OUT_ADDRESS_DATAMEM(1 downto 0),
+        RWM => RWM,
         DATA_SIZE => DATA_SIZE,
         UNSIG_SIGN_N => UNSIG_SIGN_N,
         DATA_OUT => i_LDSTR_OUT

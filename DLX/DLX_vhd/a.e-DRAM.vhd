@@ -57,7 +57,7 @@ begin
         if rising_edge(Clk) then
             if Rst = '1' then
                 Memory <= (OTHERS => (OTHERS => '0'));
-                file_open(mem_fp,"test_bench/mems/factorial_pro.asm.mem",READ_MODE);
+                file_open(mem_fp,"test_bench/mems/LoadStore_test.asm.mem",READ_MODE);
 
                 while (not endfile(mem_fp)) loop
                     readline(mem_fp,file_line);
@@ -109,34 +109,25 @@ begin
                         Memory(to_integer(unsigned(address) + 3)) <= data_in(7 downto 0);
                         Memory(to_integer(unsigned(address) + 2)) <= data_in(15 downto 8);
                         Memory(to_integer(unsigned(address)) + 1) <= data_in(23 downto 16);
-                        Memory(to_integer(unsigned(address))) <= data_in(31 downto 24);
                     elsif (DATA_SIZE = "01") then   -- HALF
-                        Memory(to_integer(unsigned(address))) <= data_in(15 downto 8);
                         Memory(to_integer(unsigned(address)) + 1) <= data_in(7 downto 0);
-                    else                            -- BYTE
-                        Memory(to_integer(unsigned(address))) <= data_in(7 downto 0);
                     end if;
+
+                    Memory(to_integer(unsigned(address))) <= data_in(31 downto 24);
 
                 end if;
             end if;
         end if;
     END PROCESS Wr;
     
-    Rd: PROCESS(address, i_RM, Memory, DATA_SIZE)
+    Rd: PROCESS(address, i_RM, Memory)
     BEGIN
         IF i_RM = '1' THEN
-            if (DATA_SIZE = "00" ) then
-                data_out <= Memory(to_integer(unsigned(address))) & 
-                        Memory(to_integer(unsigned(address) + 1)) & 
-                        Memory(to_integer(unsigned(address) + 2)) & 
-                        Memory(to_integer(unsigned(address) + 3));
-            elsif (DATA_SIZE = "01" ) then
-                data_out <= x"0000" &
-                        Memory(to_integer(unsigned(address) + 0)) & 
-                        Memory(to_integer(unsigned(address) + 1));
-            else
-                data_out <= x"000000" & Memory(to_integer(unsigned(address)));
-            end if;
+
+            data_out <= Memory(to_integer(unsigned(address(address'length-1 downto 2)) & "00")) & 
+                    Memory(to_integer(unsigned(address(address'length-1 downto 2)) & "00" + 1)) & 
+                    Memory(to_integer(unsigned(address(address'length-1 downto 2)) & "00" + 2)) & 
+                    Memory(to_integer(unsigned(address(address'length-1 downto 2)) & "00" + 3));
 
             if (i_READY = '0') then
                 data_out <= (others => 'X');
