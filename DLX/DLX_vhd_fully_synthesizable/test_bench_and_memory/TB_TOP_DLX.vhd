@@ -144,7 +144,10 @@ architecture tb of DLX_TestBench is
 	signal bintrash: std_logic;
 	signal bintrash_vector: std_logic_vector(1 downto 0);
 
-	constant memfile: string := "LoadStore_test.asm.mem"; 
+	-- constant memfile: string := "LoadStore_test.asm.mem"; 
+	-- constant memfile: string := "factorial_pro.asm.mem"; 
+	-- constant memfile: string := "bubble_sort.asm.mem"; 
+	constant memfile: string := "fibonacci_pro.asm.mem"; 
 
 begin
 	-- IRAM
@@ -163,7 +166,7 @@ begin
 
 	-- DRAM
 	DRAM : RWMEM
-		generic map (data_delay => 1, RAM_DEPTH => 512, file_path => "test_bench_and_memory/mems/writed/" & memfile, file_path_init => "test_bench_and_memory/mems/" & memfile)
+		generic map (data_delay => 0, RAM_DEPTH => 512, file_path => "test_bench_and_memory/mems/writed/" & memfile, file_path_init => "test_bench_and_memory/mems/" & memfile)
 		port map ( CLK, RST, DRAM_ADDRESS, DRAM_ENABLE, MAS, DRAM_READNOTWRITE, DRAM_READY, DATA_OUT, DATA_IN);
 
 	

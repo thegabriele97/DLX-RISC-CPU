@@ -2,7 +2,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 use work.myTypes.all;
-use work.record_CU.all;
+-- use work.record_CU.all;
 
 entity dlx_cu is
 	generic (
@@ -343,37 +343,35 @@ begin
 				unsigned_1 <= '0';
 				unsigned_2 <= '0';
 
-			else
-				
-				CW_EX <= CW_ID(CW_EX'length-1 downto 0);
-				CW_MEM <= CW_EX(CW_MEM'length-1 downto 0);
-				CW_WB <= CW_MEM(CW_WB'length-1 downto 0);
+			else 
+			
+				i_SPILL_delay <= SPILL;
+				i_FILL_delay <= FILL;
+
+				CW_WB <= (others => '0');
 
 
-				aluOpcode1 <= aluOpcode_i;
-				setcmp_1 <= setcmp_i;
-				sel_alu_setcmp_1 <= sel_alu_setcmp_i;
-
-				unsigned_1 <= unsigned_i;
-				unsigned_2 <= unsigned_1;
-
+				-------------------------------------------------------
 				-- if the DRAM is not ready, everything is stalled
 				-- so all the ControlWords will remain the same
 				-- until the DRAM will become ready. 
 				-- Meanwhile, all the PIPELINE enable signals are at 0
-				if (i_DRAM_NOTREADY = '1') then
-					CW_EX <= CW_EX;
-					CW_MEM <= CW_MEM;
-					aluOpcode1 <= aluOpcode1;
-					setcmp_1 <= setcmp_1;
-					sel_alu_setcmp_1 <= sel_alu_setcmp_1;
-					unsigned_1 <= unsigned_1;
-					unsigned_2 <= unsigned_2;
-					CW_WB <= (others => '0');
-				end if;
+				-------------------------------------------------------
+				if (i_DRAM_NOTREADY = '0') then		-- DRAM READY
 
-				i_SPILL_delay <= SPILL;
-				i_FILL_delay <= FILL;
+					CW_EX <= CW_ID(CW_EX'length-1 downto 0);
+					CW_MEM <= CW_EX(CW_MEM'length-1 downto 0);
+					CW_WB <= CW_MEM(CW_WB'length-1 downto 0);
+
+
+					aluOpcode1 <= aluOpcode_i;
+					setcmp_1 <= setcmp_i;
+					sel_alu_setcmp_1 <= sel_alu_setcmp_i;
+
+					unsigned_1 <= unsigned_i;
+					unsigned_2 <= unsigned_1;
+
+				end if;
 
 			end if;
 
