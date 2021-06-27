@@ -1,3 +1,0 @@
-source ./test_bench_and_memory/TB_packages/compile.script
-source ./test_bench_and_memory/TB_romem/compile.script
-source ./test_bench_and_memory/TB_rwmem/compile.script

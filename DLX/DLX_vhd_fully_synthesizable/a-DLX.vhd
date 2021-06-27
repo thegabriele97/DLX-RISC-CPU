@@ -3,9 +3,6 @@ use IEEE.std_logic_1164.all;
 
 use work.myTypes.all;
 
-use work.ROCACHE_PKG.all;
-use work.RWCACHE_PKG.all;
-
 
 entity DLX is
 	generic (

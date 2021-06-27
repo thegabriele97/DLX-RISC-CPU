@@ -1,8 +1,0 @@
-source ./a.b-DataPath.core/a.b.d-ALU.core/a.b.d.b-multiplier.core/compile.script
-source ./a.b-DataPath.core/a.b.d-ALU.core/a.b.d.c-adder.core/compile.script
-
-vcom ./a.b-DataPath.core/a.b.d-ALU.core/a.b.d.a-logic.vhd
-vcom ./a.b-DataPath.core/a.b.d-ALU.core/a.b.d.b-multiplier.vhd
-vcom ./a.b-DataPath.core/a.b.d-ALU.core/a.b.d.c-adder.vhd
-vcom ./a.b-DataPath.core/a.b.d-ALU.core/a.b.d.d-mux_generic.vhd
-vcom ./a.b-DataPath.core/a.b.d-ALU.core/a.b.d.e-shifter.vhd

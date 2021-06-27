@@ -1,2 +1,0 @@
-vcom ./test_bench_and_memory/TB_packages/rocache.vhd
-vcom ./test_bench_and_memory/TB_packages/rwcache.vhd

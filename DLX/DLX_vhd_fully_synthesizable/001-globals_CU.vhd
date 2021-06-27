@@ -58,7 +58,7 @@ package record_CU is
 		data_size			=> "00",
 		mem_en				=> '1',
 		wb_mux_sel			=> '0',
-		wb_en				=> '1',
+		wb_en				=> '1'
 	);
 
 
