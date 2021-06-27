@@ -33,6 +33,8 @@ entity windowing_rf is
         RET:        IN std_logic;
         FILL:       OUT std_logic; -- POP towards memory
         SPILL:      OUT std_logic; -- PUSH towards memory
+        DONE_SPILL_EX: OUT std_logic;
+        DONE_FILL_EX: OUT std_logic;
 
         -- TO MEMORY
         BUS_TOMEM:  OUT std_logic_vector(NBIT_DATA - 1 downto 0);
@@ -151,6 +153,7 @@ architecture mix of windowing_rf is
             rst:        in std_logic;
             enable:     in std_logic;
             ram_ready:  in std_logic;
+            push_notfill: in std_logic;
             done:       out std_logic;
             working:    out std_logic;
             addr:       out std_logic_vector(N-1 downto 0)
@@ -409,12 +412,14 @@ begin
             curr_proc_regs => bus_sel_savedwin_data
         );
 
+    DONE_SPILL_EX <= done_spill;
     PUSH_ADDRGEN: address_generator generic map(N => 2*N)
         port map(
             clk => CLK,
             rst => RESET,
             enable => int_PUSH,
             ram_ready => RAM_READY,
+            push_notfill => int_PUSH,
             done => done_spill,
             working => working_PUSH,
             addr => spill_address_ext
@@ -449,12 +454,14 @@ begin
     trigger_POP <= filleq and RET;
     int_POP <= working_POP or trigger_POP;
     
+    DONE_FILL_EX <= done_fill;
     POP_ADDRGEN: address_generator generic map(N => 2*N)
         port map(
             clk => CLK,
             rst => RESET,
             enable => int_POP,
             ram_ready => RAM_READY,
+            push_notfill => int_PUSH,
             done => done_fill,
             working => working_POP,
             addr => fill_address_ext

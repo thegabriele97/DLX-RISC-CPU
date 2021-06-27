@@ -3,36 +3,38 @@ use IEEE.std_logic_1164.all;
 
 use work.myTypes.all;
 
-use work.ROCACHE_PKG.all;
-use work.RWCACHE_PKG.all;
-
 
 entity DLX is
 	generic (
-    	IR_SIZE      : integer := 32;       -- Instruction Register Size
-    	PC_SIZE      : integer := 32       -- Program Counter Size
+		IR_SIZE      : integer := 32;       -- Instruction Register Size
+		PC_SIZE      : integer := 32;       -- Program Counter Size
+		RAM_DEPTH	 : integer := 32		-- Number of bits for RAM
     );
 	port (
 		-- Inputs
 		CLK						: in std_logic;		-- Clock
 		RST						: in std_logic;		-- Reset:Active-High
 
-		IRAM_ADDRESS			: out std_logic_vector(Instr_size - 1 downto 0);
+		IRAM_ADDRESS			: out std_logic_vector(PC_SIZE - 1 downto 0);
 		IRAM_ISSUE				: out std_logic;
 		IRAM_READY				: in std_logic;
-		IRAM_DATA				: in std_logic_vector(2*Data_size-1 downto 0);
+		IRAM_DATA				: in std_logic_vector(IR_SIZE-1 downto 0);
 
-		DRAM_ADDRESS			: out std_logic_vector(Instr_size-1 downto 0);
+		DRAM_ADDRESS			: out std_logic_vector(RAM_DEPTH-1 downto 0);
 		DRAM_ISSUE				: out std_logic;
 		DRAM_READNOTWRITE		: out std_logic;
 		DRAM_READY				: in std_logic;
-		DRAM_DATA				: inout std_logic_vector(2*Data_size-1 downto 0)
+		DRAM_DATA_IN			: in std_logic_vector(IR_SIZE-1 downto 0);
+		DRAM_DATA_OUT			: out std_logic_vector(IR_SIZE-1 downto 0);
+		DATA_SIZE				: out std_logic_vector(1 downto 0);
 
-		DRAMRF_ADDRESS			: out std_logic_vector(Instr_size-1 downto 0);
-		DRAMRF_ISSUE				: out std_logic;
+		DRAMRF_ADDRESS			: out std_logic_vector(RAM_DEPTH-1 downto 0);
+		DRAMRF_ISSUE			: out std_logic;
 		DRAMRF_READNOTWRITE		: out std_logic;
-		DRAMRF_READY				: in std_logic;
-		DRAMRF_DATA				: inout std_logic_vector(2*Data_size-1 downto 0)
+		DRAMRF_READY			: in std_logic;
+		DRAMRF_DATA_IN			: in std_logic_vector(IR_SIZE-1 downto 0);
+		DRAMRF_DATA_OUT			: OUT std_logic_vector(IR_SIZE-1 downto 0);
+		DATA_SIZE_RF			: out std_logic_vector(1 downto 0)
 	);
 end DLX;
 
@@ -70,6 +72,7 @@ architecture dlx_rtl of DLX is
 
 
 			-- IF Control Signals
+			IRAM_READY		: in std_logic;
 			PIPLIN_IF_EN  	: out std_logic; -- Instruction Register Latch Enable
 			IF_STALL		: out std_logic;
 			PC_EN 			: out std_logic;
@@ -97,6 +100,7 @@ architecture dlx_rtl of DLX is
 			DRAM_READY		: in std_logic;						-- Data RAM Ready Signal
 			DRAM_WE      	: out std_logic; 					-- Data RAM Write Enable
 			DRAM_RE      	: out std_logic; 					-- Data RAM Read Enable
+			DRAM_ME			: out std_logic;					-- Memory enable signal
 			DATA_SIZE		: out std_logic_vector(1 downto 0);	-- word, half, byte
 			UNSIG_SIGN_N	: out std_logic;
 			PIPLIN_MEM_EN   : out std_logic; 					-- LMD Register Latch Enable
@@ -314,6 +318,7 @@ architecture dlx_rtl of DLX is
     
 	signal i_RF_MEM_RM: std_logic;
     signal i_RF_MEM_WM: std_logic;
+	signal i_DATAMEM_ME: std_logic;
 
 	signal i_DATA_SIZE: std_logic_vector(1 downto 0);
 	signal i_UNSIG_SIGN_N: std_logic;
@@ -330,28 +335,41 @@ begin  -- DLX
 	-- DRAM Connections
 	DRAM_ADDRESS <= i_DATAMEM_ADDR;
 
-	DRAM_DATA <= i_DATAMEM_BUS_TOMEM;
-	i_DATAMEM_BUS_FROMEM <= DRAM_DATA;
+	DRAM_DATA_OUT <= i_DATAMEM_BUS_TOMEM;
+	i_DATAMEM_BUS_FROMEM <= DRAM_DATA_IN;
 
-	DRAM_ISSUE <= (i_DATAMEM_RM or i_DATAMEM_WM) and i_EN3;
-	DRAM_READNOTWRITE <= i_DATAMEM_RM;
-	DRAM_READY <= i_DRAM_READY;
+	DRAM_ISSUE <= i_DATAMEM_ME;
+	-----
+	--- R W READNOTWRITE
+	----0 0  1
+	----0 1  0
+	----1 0  1
+	----1 1  -
+	-- always @1 except when RW or WM = '1' <- ready <= DRAM_READY
+	
+	
+
+	DRAM_READNOTWRITE <= not i_DATAMEM_WM;
+	-- i_DRAM_READY <= DRAM_READY when (i_DATAMEM_RM = '1' or i_DATAMEM_WM = '1') else '1';
+	i_DRAM_READY <= DRAM_READY;
+	DATA_SIZE <= i_DATA_SIZE;
 
 	-- RF DRAM Connections
 	DRAMRF_ADDRESS <= i_RF_MEM_ADDR;
 
-	DRAMRF_DATA <= i_RF_DATAMEM_BUS_TOMEM;
-	i_RF_DATAMEM_BUS_FROMEM <= DRAMRF_DATA;
+	DRAMRF_DATA_OUT <= i_RF_BUS_TOMEM;
+	i_RF_BUS_FROMEM <= DRAMRF_DATA_IN;
 
 	DRAMRF_ISSUE <= i_RF_MEM_RM or i_RF_MEM_WM;
 	DRAMRF_READNOTWRITE <= i_RF_MEM_RM;
-	DRAMRF_READY <= i_DRAMRF_READY;
+	i_DRAMRF_READY <= DRAMRF_READY;
+	DATA_SIZE_RF <= "00";
 
     -- purpose: Instruction Register Process
     -- type   : sequential
     -- inputs : Clk, Rst, IRam_DOut, IR_LATCH_EN_i
     -- outputs: IR_IN_i
-	IRAM_ADDRESS <= PC_BUS;
+	IRAM_ADDRESS <= PC;
 	IRAM_ISSUE <= '1';
 
     IR_P: process (Clk, Rst)
@@ -363,7 +381,7 @@ begin  -- DLX
 			if (i_IR_LATCH_EN = '1') then
 				
 				IR <= IRAM_DATA;
-				if (i_IR_STALL = '1' or IRAM_READY = '0') then
+				if (i_IR_STALL = '1') then
 					IR <= x"54000000";		-- NOP
 				end if;
 			
@@ -401,6 +419,7 @@ begin  -- DLX
 		BUSY_WINDOW		=> i_BUSY_WINDOW,
 		SPILL 			=> i_SPILL,
 		FILL			=> i_FILL,
+		IRAM_READY		=> IRAM_READY,
 		PIPLIN_IF_EN    => i_IR_LATCH_EN,
 		IF_STALL		=> i_IR_STALL,
 		PC_EN			=> i_PC_LATCH_EN,
@@ -422,6 +441,7 @@ begin  -- DLX
 		DRAM_READY		=> i_DRAM_READY,
 		DRAM_WE			=> i_DATAMEM_WM,
 		DRAM_RE			=> i_DATAMEM_RM,
+		DRAM_ME			=> i_DATAMEM_ME,
 		DATA_SIZE		=> i_DATA_SIZE,
 		UNSIG_SIGN_N 	=> i_UNSIG_SIGN_N,
 		PIPLIN_MEM_EN 	=> i_EN3,
@@ -438,10 +458,10 @@ begin  -- DLX
 		OPCODE_SIZE => OPCODE_SIZE,
 		PC_SIZE => PC_SIZE
 	) port map (
-    CLK => Clk,       
-    RST => Rst,        
-    INSTR => IR,
-    ADD_WB => i_ADD_WB,
+    	CLK => Clk,       
+    	RST => Rst,        
+    	INSTR => IR,
+    	ADD_WB => i_ADD_WB,
 		CPC => PC,
 		RD1 => i_RD1,
 		RD2 => i_RD2,
@@ -454,12 +474,12 @@ begin  -- DLX
 		UNSIGNED_ID => i_UNSIGNED_ID,
 		NPC_SEL => i_NPC_SEL,
 		BUSY_WINDOW => i_BUSY_WINDOW,
-    HAZARD_SIG => i_HAZARD_SIG_CU, 
-    ADD_RS1 => i_ADD_RS1,    
-    ADD_RS2 => i_ADD_RS2,    
-    ADD_WS1 => i_ADD_WS1,    
-    INP1 => i_INP1,
-    INP2 => i_INP2,
+    	HAZARD_SIG => i_HAZARD_SIG_CU, 
+    	ADD_RS1 => i_ADD_RS1,    
+    	ADD_RS2 => i_ADD_RS2,    
+    	ADD_WS1 => i_ADD_WS1,    
+    	INP1 => i_INP1,
+    	INP2 => i_INP2,
 		NPC => PC_BUS,
 		PC_OVF => i_PC_OVF,
 		LGET => i_LGET
@@ -467,11 +487,11 @@ begin  -- DLX
 
 
     DataPath: DP generic map(
-      N_BIT_DATA => IR_SIZE,    
-      N_BIT_ADDR_RF => N_BIT_ADDR_RF,
-      N_OPSEL => ALU_OPSEL,
-      N_BIT_MEM_ADDR => RAM_DEPTH,
-      N_BIT_RF_MEM_ADDR => RAM_DEPTH
+      	N_BIT_DATA => IR_SIZE,    
+      	N_BIT_ADDR_RF => N_BIT_ADDR_RF,
+      	N_OPSEL => ALU_OPSEL,
+      	N_BIT_MEM_ADDR => RAM_DEPTH,
+      	N_BIT_RF_MEM_ADDR => RAM_DEPTH
     ) port map(
         Clk => Clk,
         Rst => Rst,
@@ -481,12 +501,12 @@ begin  -- DLX
         DATAMEM_BUS_TOMEM => i_DATAMEM_BUS_TOMEM,
         DATAMEM_BUS_FROMEM => i_DATAMEM_BUS_FROMEM,
         DATAMEM_ADDR => i_DATAMEM_ADDR,
-		    RAM_READY => i_DRAMRF_READY,
+		RAM_READY => i_DRAMRF_READY,
         RS1 => i_ADD_RS1,
         RS2 => i_ADD_RS2,
         WS1 => i_ADD_WS1,
-		    RD1 => i_RD1,
-		    RD2 => i_RD2,
+		RD1 => i_RD1,
+		RD2 => i_RD2,
         RF1 => i_RF1,
         RF2 => i_RF2,
         WF => i_WF,									
@@ -495,7 +515,7 @@ begin  -- DLX
         RF_MEM_ADDR => i_RF_MEM_ADDR,
         RF_MEM_RM => i_RF_MEM_RM,
         RF_MEM_WM => i_RF_MEM_WM,
-		    RWM => i_DATAMEM_RM,		
+		RWM => i_DATAMEM_RM,		
         DATA_SIZE =>  i_DATA_SIZE,
         UNSIG_SIGN_N => i_UNSIG_SIGN_N,			
         CALL => i_CALL,

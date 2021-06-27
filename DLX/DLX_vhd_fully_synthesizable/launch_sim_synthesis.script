@@ -1,0 +1,8 @@
+
+source test_bench_and_memory/compile.script
+
+vcom test_bench_and_memory/TB_TOP_DLX_SYN.vhd
+vcom synthesis_result/DLX_SYN.vhdl
+
+# vsim work.dlx_testbench -t ns -L /software/dk/nangate45/verilog/qsim10.7c -sdftyp /=/home/ms21.16/gabri-ms-lab/ms-lab/DLX/DLX_synthesis/dlx_sdf_out.sdf
+vsim work.dlx_testbench -t ns -L /software/dk/nangate45/verilog/qsim10.7c 

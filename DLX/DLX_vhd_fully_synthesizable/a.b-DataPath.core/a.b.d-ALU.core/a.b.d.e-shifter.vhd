@@ -55,8 +55,9 @@ begin
     SIGNEXT_GEN: for i in 1 to signext'length-1 generate
     
         signext(i) <= (A(15+8*(i-1) downto 8*i))                      when sel(2) = '1' and sel(0) = '0' else
-                      (A(A'length-8*i-1 downto A'length-(8+8*i)))    when sel(2) = '1' and sel(0) = '1';        
-    
+                      (A(A'length-8*i-1 downto A'length-(8+8*i)))    when sel(2) = '1' and sel(0) = '1' else      
+                    (others => '0');    
+
     end generate;
 
     
@@ -78,8 +79,22 @@ begin
 
     mask_sel <= mask(TO_INTEGER(unsigned(B(3+N_BIT_COARSE_MASK_SEL-1 downto 3))));
 
-    with sel(0) select
-        Y <= mask_sel(N_BIT_DATA + TO_INTEGER(unsigned(B(2 downto 0))) -1 downto TO_INTEGER(unsigned(B(2 downto 0)))) when '0',
-             mask_sel(mask_sel'length - TO_INTEGER(unsigned(B(2 downto 0))) -1 downto 8- TO_INTEGER(unsigned(B(2 downto 0)))) when others;
+    process(B, mask_sel, sel)
+    begin
+
+        Y <= (others => '0');
+        for i in 0 to 7 loop
+            if (i = TO_INTEGER(unsigned(B(2 downto 0)))) then
+                
+                if (sel(0) = '0') then
+                    Y <= mask_sel(N_BIT_DATA + i -1 downto i);
+                else
+                    Y <= mask_sel(mask_sel'length - i -1 downto 8- i);
+                end if;
+
+            end if;
+        end loop;
+
+    end process;
 
 end mix;

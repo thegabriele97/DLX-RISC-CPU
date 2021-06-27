@@ -1,5 +1,6 @@
 
 vcom 000-globals.vhd 
+# vcom 001-globals_CU.vhd
 
 source a.b-DataPath.core/compile.script
 source a.d-decode.core/compile.script
@@ -7,9 +8,7 @@ source test_bench_and_memory/compile.script
 
 vcom a.a-CU_HW.vhd 
 vcom a.b-DataPath.vhd 
-vcom a.c-IRAM.vhd 
 vcom a.d-decode.vhd
-vcom a.e-DRAM.vhd 
 
 
 vcom a-DLX.vhd 

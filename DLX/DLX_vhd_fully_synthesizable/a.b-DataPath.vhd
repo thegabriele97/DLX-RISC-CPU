@@ -119,6 +119,8 @@ architecture structural of DP is
             RET:        IN std_logic;
             FILL:       OUT std_logic; -- POP towards memory
             SPILL:      OUT std_logic; -- PUSH towards memory
+            DONE_SPILL_EX: OUT std_logic;
+            DONE_FILL_EX: OUT std_logic;
     
             -- TO MEMORY
             BUS_TOMEM:  OUT std_logic_vector(NBIT_DATA - 1 downto 0);
@@ -194,25 +196,30 @@ architecture structural of DP is
     end component;
 
     component wRF_CU is
-    
         generic (
-            N_BIT_MEM_ADDR: integer := 10
+            N_BIT_MEM_ADDR: integer := 10;
+            N_BIT_DATA: integer := 32
         );
-    
-        port (
-            CLK:    in std_logic;
-            RST:    in std_logic;
-            SPILL:  in std_logic;
-            FILL:   in std_logic;
-            RAM_READY: in std_logic;
-            MEMADDR: out std_logic_vector(N_BIT_MEM_ADDR-1 downto 0);
-    
-            RM: out std_logic;
-            WM: out std_logic
-        );
-    
-    end component;
+        port(
+            CLK:        in std_logic;
+            RST:        in std_logic;
+            SPILL:      in std_logic;
+            DONE_SPILL: in std_logic;
+            DONE_FILL: in std_logic;
+            FILL:       in std_logic;
+            RAM_READY:  in std_logic;
+            MEMADDR:    out std_logic_vector(N_BIT_MEM_ADDR-1 downto 0);
 
+            DATA_IN_RF:    in std_logic_vector(N_BIT_DATA-1 downto 0);
+            DATA_OUT_RF:   out std_logic_vector(N_BIT_DATA-1 downto 0);
+            DATA_IN_MEM:    in std_logic_vector(N_BIT_DATA-1 downto 0);
+            DATA_OUT_MEM:   out std_logic_vector(N_BIT_DATA-1 downto 0);
+
+            RM:         out std_logic;
+            WM:         out std_logic
+        );
+    end component;
+    
     component set_comparator is
         generic(
             N_BIT_DATA: integer := 32
@@ -231,6 +238,8 @@ architecture structural of DP is
         port(
 
             DATA_RAW    : in std_logic_vector(N_BIT_DATA-1 downto 0);
+            ALOW        : in std_logic_vector(1 downto 0); -- Address LSBs in order to know the right data position on the bus      
+            RWM         : in std_logic; 
             
             -- 00 -> N_BIT_DATA bit     (lw/sw)
             -- 01 -> N_BIT_DATA/2 bit   (lh/sh)
@@ -262,9 +271,13 @@ architecture structural of DP is
     signal i_RF_DATA_IN: std_logic_vector(N_BIT_DATA-1 downto 0); -- WRITE BACK into RF
     signal i_RF_DATA_O1: std_logic_vector(N_BIT_DATA-1 downto 0); -- output 1 of the register file that goes into register A
     signal i_RF_DATA_O2: std_logic_vector(N_BIT_DATA-1 downto 0); -- output 2 of the register file that goes into register B
+    signal i_RF_BUS_TO_RF_CU: std_logic_vector(N_BIT_DATA-1 downto 0);
+    signal i_RF_BUS_FROM_RF_CU: std_logic_vector(N_BIT_DATA-1 downto 0);
     
     signal i_RFFILL: std_logic; -- POP towards memory
     signal i_RFSPILL: std_logic; -- PUSH towards memory
+    signal i_DONE_SPILL_EX: std_logic;
+    signal i_DONE_FILL_EX: std_logic;
     
     signal i_PIPLIN_A: std_logic_vector(N_BIT_DATA-1 downto 0); -- output of the register A that goes into MUX_IN1_A
     signal i_PIPLIN_B: std_logic_vector(N_BIT_DATA-1 downto 0); -- output of the register B that goes into MUX_IN1_B
@@ -343,8 +356,10 @@ begin
         RET => RET,
         FILL => i_RFFILL,
         SPILL => i_RFSPILL,
-        BUS_TOMEM => RF_BUS_TOMEM,
-        BUS_FROMEM => RF_BUS_FROMEM
+        DONE_SPILL_EX => i_DONE_SPILL_EX,
+        DONE_FILL_EX => i_DONE_FILL_EX,
+        BUS_TOMEM => i_RF_BUS_TO_RF_CU,
+        BUS_FROMEM => i_RF_BUS_FROM_RF_CU
     );
 
     --
@@ -354,14 +369,21 @@ begin
     SPILL <= i_RFSPILL;
     
     WRF_CUhw: wRF_CU generic map(
-        N_BIT_MEM_ADDR => N_BIT_RF_MEM_ADDR
+        N_BIT_MEM_ADDR => N_BIT_RF_MEM_ADDR,
+        N_BIT_DATA => N_BIT_DATA
     ) port map(
         CLK => Clk,
         RST => Rst,
         FILL => i_RFFILL, 
         RAM_READY => RAM_READY,
         SPILL => i_RFSPILL,
+        DONE_SPILL => i_DONE_SPILL_EX,
+        DONE_FILL => i_DONE_FILL_EX,
         MEMADDR => RF_MEM_ADDR,
+        DATA_IN_RF => i_RF_BUS_TO_RF_CU,
+        DATA_OUT_RF => i_RF_BUS_FROM_RF_CU,
+        DATA_IN_MEM => RF_BUS_FROMEM,
+        DATA_OUT_MEM => RF_BUS_TOMEM,
         RM => RF_MEM_RM,
         WM => RF_MEM_WM
     );
@@ -564,6 +586,8 @@ begin
         N_BIT_DATA => N_BIT_DATA
     ) port map( 
         DATA_RAW => i_DATA_RAW,
+        ALOW => i_REG_ALU_OUT_ADDRESS_DATAMEM(1 downto 0),
+        RWM => RWM,
         DATA_SIZE => DATA_SIZE,
         UNSIG_SIGN_N => UNSIG_SIGN_N,
         DATA_OUT => i_LDSTR_OUT
