@@ -5,9 +5,9 @@ use work.myTypes.all;
 package record_CU is
 
 	-- Control word bits
-	type control_word is record
+	type control_word_t is record
 		fetch_en            : std_logic; -- F
-		fecth_stall         : std_logic; -- S
+		fetch_stall         : std_logic; -- S
 		pc_en               : std_logic; -- P
 		jump_en             : std_logic; -- J
 		call                : std_logic; -- L
@@ -31,11 +31,11 @@ package record_CU is
 		mem_en              : std_logic; -- M
 		wb_mux_sel          : std_logic; -- C
 		wb_en               : std_logic; -- K
-	end record control_word;
+	end record control_word_t;
 
-	constant R_TYPE_RECORD: control_word := (
+	constant RECORD_RTYPE: control_word_t := (
 		fetch_en          => '1', 
-		fecth_stall       => '0',
+		fetch_stall       => '0',
 		pc_en             => '1',
 		jump_en           => '0',
 		call              => '0',
@@ -61,9 +61,9 @@ package record_CU is
 		wb_en             => '1'
 	);
 
-	constant VOID_RECORD: control_word := (
+	constant RECORD_VOID: control_word_t := (
 		fetch_en          => '0', 
-		fecth_stall       => '0',
+		fetch_stall       => '0',
 		pc_en             => '0',
 		jump_en           => '0',
 		call              => '0',
@@ -89,9 +89,9 @@ package record_CU is
 		wb_en             => '0'
 	);
 
-	constant J_RECORD: control_word := (
+	constant RECORD_J: control_word_t := (
 		fetch_en          => '1', 
-		fecth_stall       => '1',
+		fetch_stall       => '1',
 		pc_en             => '1',
 		jump_en           => '1',
 		call              => '0',
@@ -117,9 +117,9 @@ package record_CU is
 		wb_en             => '0'
 	);
 
-	constant JAL_RECORD: control_word := (
+	constant RECORD_JAL: control_word_t := (
 		fetch_en          => '1', 
-		fecth_stall       => '1',
+		fetch_stall       => '1',
 		pc_en             => '1',
 		jump_en           => '1',
 		call              => '0',
@@ -145,9 +145,9 @@ package record_CU is
 		wb_en             => '1'
 	);
 
-	constant BEQZ_RECORD: control_word := (
+	constant RECORD_BEQZ: control_word_t := (
 		fetch_en          => '1', 
-		fecth_stall       => '0',
+		fetch_stall       => '0',
 		pc_en             => '1',
 		jump_en           => '0',
 		call              => '0',
@@ -173,9 +173,9 @@ package record_CU is
 		wb_en             => '0'
 	);
 
-	constant BNEZ_RECORD: control_word := (
+	constant RECORD_BNEZ: control_word_t := (
 		fetch_en          => '1', 
-		fecth_stall       => '0',
+		fetch_stall       => '0',
 		pc_en             => '1',
 		jump_en           => '0',
 		call              => '0',
@@ -201,9 +201,9 @@ package record_CU is
 		wb_en             => '0'
 	);
 
-	constant ADDI_RECORD: control_word := (
+	constant RECORD_ADDI: control_word_t := (
 		fetch_en          => '1', 
-		fecth_stall       => '0',
+		fetch_stall       => '0',
 		pc_en             => '1',
 		jump_en           => '0',
 		call              => '0',
@@ -229,9 +229,9 @@ package record_CU is
 		wb_en             => '1'
 	);
 
-	constant ADDUI_RECORD: control_word := (
+	constant RECORD_ADDUI: control_word_t := (
 		fetch_en          => '1', 
-		fecth_stall       => '0',
+		fetch_stall       => '0',
 		pc_en             => '1',
 		jump_en           => '0',
 		call              => '0',
@@ -257,9 +257,9 @@ package record_CU is
 		wb_en             => '1'
 	);
 
-	constant SUBI_RECORD: control_word := (
+	constant RECORD_SUBI: control_word_t := (
 		fetch_en          => '1', 
-		fecth_stall       => '0',
+		fetch_stall       => '0',
 		pc_en             => '1',
 		jump_en           => '0',
 		call              => '0',
@@ -285,9 +285,9 @@ package record_CU is
 		wb_en             => '1'
 	);
 
-	constant SUBUI_RECORD: control_word := (
+	constant RECORD_SUBUI: control_word_t := (
 		fetch_en          => '1', 
-		fecth_stall       => '0',
+		fetch_stall       => '0',
 		pc_en             => '1',
 		jump_en           => '0',
 		call              => '0',
@@ -313,9 +313,9 @@ package record_CU is
 		wb_en             => '1'
 	);
 
-	constant ANDI_RECORD: control_word := (
+	constant RECORD_ANDI: control_word_t := (
 		fetch_en          => '1', 
-		fecth_stall       => '0',
+		fetch_stall       => '0',
 		pc_en             => '1',
 		jump_en           => '0',
 		call              => '0',
@@ -341,9 +341,9 @@ package record_CU is
 		wb_en             => '1'
 	);
 
-	constant ORI_RECORD: control_word := (
+	constant RECORD_ORI: control_word_t := (
 		fetch_en          => '1', 
-		fecth_stall       => '0',
+		fetch_stall       => '0',
 		pc_en             => '1',
 		jump_en           => '0',
 		call              => '0',
@@ -369,9 +369,9 @@ package record_CU is
 		wb_en             => '1'
 	);
 
-	constant XORI_RECORD: control_word := (
+	constant RECORD_XORI: control_word_t := (
 		fetch_en          => '1', 
-		fecth_stall       => '0',
+		fetch_stall       => '0',
 		pc_en             => '1',
 		jump_en           => '0',
 		call              => '0',
@@ -397,9 +397,9 @@ package record_CU is
 		wb_en             => '1'
 	);
 
-	constant LHI_RECORD: control_word := (
+	constant RECORD_LHI: control_word_t := (
 		fetch_en          => '1', 
-		fecth_stall       => '0',
+		fetch_stall       => '0',
 		pc_en             => '1',
 		jump_en           => '0',
 		call              => '0',
@@ -425,9 +425,9 @@ package record_CU is
 		wb_en             => '1'
 	);
 
-	constant JR_RECORD: control_word := (
+	constant RECORD_JR: control_word_t := (
 		fetch_en          => '1', 
-		fecth_stall       => '1',
+		fetch_stall       => '1',
 		pc_en             => '1',
 		jump_en           => '1',
 		call              => '0',
@@ -453,9 +453,9 @@ package record_CU is
 		wb_en             => '0'
 	);
 
-	constant JALR_RECORD: control_word := (
+	constant RECORD_JALR: control_word_t := (
 		fetch_en          => '1', 
-		fecth_stall       => '1',
+		fetch_stall       => '1',
 		pc_en             => '1',
 		jump_en           => '1',
 		call              => '0',
@@ -481,9 +481,9 @@ package record_CU is
 		wb_en             => '1'
 	);
 
-	constant SLLI_RECORD: control_word := (
+	constant RECORD_SLLI: control_word_t := (
 		fetch_en          => '1', 
-		fecth_stall       => '0',
+		fetch_stall       => '0',
 		pc_en             => '1',
 		jump_en           => '0',
 		call              => '0',
@@ -509,9 +509,9 @@ package record_CU is
 		wb_en             => '1'
 	);
 
-	constant NOP_RECORD: control_word := (
+	constant RECORD_NOP: control_word_t := (
 		fetch_en          => '1', 
-		fecth_stall       => '0',
+		fetch_stall       => '0',
 		pc_en             => '1',
 		jump_en           => '0',
 		call              => '0',
@@ -537,9 +537,9 @@ package record_CU is
 		wb_en             => '0'
 	);
 
-	constant SRLI_RECORD: control_word := (
+	constant RECORD_SRLI: control_word_t := (
 		fetch_en          => '1', 
-		fecth_stall       => '0',
+		fetch_stall       => '0',
 		pc_en             => '1',
 		jump_en           => '0',
 		call              => '0',
@@ -565,9 +565,9 @@ package record_CU is
 		wb_en             => '1'
 	);
 
-	constant SRAI_RECORD: control_word := (
+	constant RECORD_SRAI: control_word_t := (
 		fetch_en          => '1', 
-		fecth_stall       => '0',
+		fetch_stall       => '0',
 		pc_en             => '1',
 		jump_en           => '0',
 		call              => '0',
@@ -593,9 +593,9 @@ package record_CU is
 		wb_en             => '1'
 	);
 
-	constant SEQI_RECORD: control_word := (
+	constant RECORD_SEQI: control_word_t := (
 		fetch_en          => '1', 
-		fecth_stall       => '0',
+		fetch_stall       => '0',
 		pc_en             => '1',
 		jump_en           => '0',
 		call              => '0',
@@ -621,9 +621,9 @@ package record_CU is
 		wb_en             => '1'
 	);
 
-	constant SNEI_RECORD: control_word := (
+	constant RECORD_SNEI: control_word_t := (
 		fetch_en          => '1', 
-		fecth_stall       => '0',
+		fetch_stall       => '0',
 		pc_en             => '1',
 		jump_en           => '0',
 		call              => '0',
@@ -649,9 +649,9 @@ package record_CU is
 		wb_en             => '1'
 	);
 
-	constant SLTI_RECORD: control_word := (
+	constant RECORD_SLTI: control_word_t := (
 		fetch_en          => '1', 
-		fecth_stall       => '0',
+		fetch_stall       => '0',
 		pc_en             => '1',
 		jump_en           => '0',
 		call              => '0',
@@ -677,9 +677,9 @@ package record_CU is
 		wb_en             => '1'
 	);
 
-	constant SGTI_RECORD: control_word := (
+	constant RECORD_SGTI: control_word_t := (
 		fetch_en          => '1', 
-		fecth_stall       => '0',
+		fetch_stall       => '0',
 		pc_en             => '1',
 		jump_en           => '0',
 		call              => '0',
@@ -705,9 +705,9 @@ package record_CU is
 		wb_en             => '1'
 	);
 
-	constant SLEI_RECORD: control_word := (
+	constant RECORD_SLEI: control_word_t := (
 		fetch_en          => '1', 
-		fecth_stall       => '0',
+		fetch_stall       => '0',
 		pc_en             => '1',
 		jump_en           => '0',
 		call              => '0',
@@ -733,9 +733,9 @@ package record_CU is
 		wb_en             => '1'
 	);
 
-	constant SGEI_RECORD: control_word := (
+	constant RECORD_SGEI: control_word_t := (
 		fetch_en          => '1', 
-		fecth_stall       => '0',
+		fetch_stall       => '0',
 		pc_en             => '1',
 		jump_en           => '0',
 		call              => '0',
@@ -761,9 +761,9 @@ package record_CU is
 		wb_en             => '1'
 	);
 
-	constant CALL_RECORD: control_word := (
+	constant RECORD_CALL: control_word_t := (
 		fetch_en          => '1', 
-		fecth_stall       => '1',
+		fetch_stall       => '1',
 		pc_en             => '1',
 		jump_en           => '1',
 		call              => '0',
@@ -789,9 +789,9 @@ package record_CU is
 		wb_en             => '1'
 	);
 
-	constant RET_RECORD: control_word := (
+	constant RECORD_RET: control_word_t := (
 		fetch_en          => '1', 
-		fecth_stall       => '1',
+		fetch_stall       => '1',
 		pc_en             => '1',
 		jump_en           => '1',
 		call              => '0',
@@ -817,9 +817,9 @@ package record_CU is
 		wb_en             => '0'
 	);
 
-	constant LB_RECORD: control_word := (
+	constant RECORD_LB: control_word_t := (
 		fetch_en          => '1', 
-		fecth_stall       => '0',
+		fetch_stall       => '0',
 		pc_en             => '1',
 		jump_en           => '0',
 		call              => '0',
@@ -845,9 +845,9 @@ package record_CU is
 		wb_en             => '1'
 	);
 
-	constant LH_RECORD: control_word := (
+	constant RECORD_LH: control_word_t := (
 		fetch_en          => '1', 
-		fecth_stall       => '0',
+		fetch_stall       => '0',
 		pc_en             => '1',
 		jump_en           => '0',
 		call              => '0',
@@ -873,9 +873,9 @@ package record_CU is
 		wb_en             => '1'
 	);
 
-	constant LW_RECORD: control_word := (
+	constant RECORD_LW: control_word_t := (
 		fetch_en          => '1', 
-		fecth_stall       => '0',
+		fetch_stall       => '0',
 		pc_en             => '1',
 		jump_en           => '0',
 		call              => '0',
@@ -901,9 +901,9 @@ package record_CU is
 		wb_en             => '1'
 	);
 
-	constant LBU_RECORD: control_word := (
+	constant RECORD_LBU: control_word_t := (
 		fetch_en          => '1', 
-		fecth_stall       => '0',
+		fetch_stall       => '0',
 		pc_en             => '1',
 		jump_en           => '0',
 		call              => '0',
@@ -929,9 +929,9 @@ package record_CU is
 		wb_en             => '1'
 	);
 
-	constant LHU_RECORD: control_word := (
+	constant RECORD_LHU: control_word_t := (
 		fetch_en          => '1', 
-		fecth_stall       => '0',
+		fetch_stall       => '0',
 		pc_en             => '1',
 		jump_en           => '0',
 		call              => '0',
@@ -957,9 +957,9 @@ package record_CU is
 		wb_en             => '1'
 	);
 
-	constant SB_RECORD: control_word := (
+	constant RECORD_SB: control_word_t := (
 		fetch_en          => '1', 
-		fecth_stall       => '0',
+		fetch_stall       => '0',
 		pc_en             => '1',
 		jump_en           => '0',
 		call              => '0',
@@ -985,9 +985,9 @@ package record_CU is
 		wb_en             => '0'
 	);
 
-	constant SH_RECORD: control_word := (
+	constant RECORD_SH: control_word_t := (
 		fetch_en          => '1', 
-		fecth_stall       => '0',
+		fetch_stall       => '0',
 		pc_en             => '1',
 		jump_en           => '0',
 		call              => '0',
@@ -1013,9 +1013,9 @@ package record_CU is
 		wb_en             => '0'
 	);
 
-	constant SW_RECORD: control_word := (
+	constant RECORD_SW: control_word_t := (
 		fetch_en          => '1', 
-		fecth_stall       => '0',
+		fetch_stall       => '0',
 		pc_en             => '1',
 		jump_en           => '0',
 		call              => '0',
@@ -1041,9 +1041,9 @@ package record_CU is
 		wb_en             => '0'
 	);
 
-	constant BGT_RECORD: control_word := (
+	constant RECORD_BGT: control_word_t := (
 		fetch_en          => '1', 
-		fecth_stall       => '0',
+		fetch_stall       => '0',
 		pc_en             => '1',
 		jump_en           => '0',
 		call              => '0',
@@ -1069,9 +1069,9 @@ package record_CU is
 		wb_en             => '0'
 	);
 
-	constant BGE_RECORD: control_word := (
+	constant RECORD_BGE: control_word_t := (
 		fetch_en          => '1', 
-		fecth_stall       => '0',
+		fetch_stall       => '0',
 		pc_en             => '1',
 		jump_en           => '0',
 		call              => '0',
@@ -1097,9 +1097,9 @@ package record_CU is
 		wb_en             => '0'
 	);
 
-	constant BLT_RECORD: control_word := (
+	constant RECORD_BLT: control_word_t := (
 		fetch_en          => '1', 
-		fecth_stall       => '0',
+		fetch_stall       => '0',
 		pc_en             => '1',
 		jump_en           => '0',
 		call              => '0',
@@ -1125,9 +1125,9 @@ package record_CU is
 		wb_en             => '0'
 	);
 
-	constant BLE_RECORD: control_word := (
+	constant RECORD_BLE: control_word_t := (
 		fetch_en          => '1', 
-		fecth_stall       => '0',
+		fetch_stall       => '0',
 		pc_en             => '1',
 		jump_en           => '0',
 		call              => '0',
@@ -1153,9 +1153,9 @@ package record_CU is
 		wb_en             => '0'
 	);
 
-	constant TICKTMR_RECORD: control_word := (
+	constant RECORD_TICKTMR: control_word_t := (
 		fetch_en          => '1', 
-		fecth_stall       => '0',
+		fetch_stall       => '0',
 		pc_en             => '1',
 		jump_en           => '0',
 		call              => '0',
@@ -1181,9 +1181,9 @@ package record_CU is
 		wb_en             => '1'
 	);
 
-	constant SLTUI_RECORD: control_word := (
+	constant RECORD_SLTUI: control_word_t := (
 		fetch_en          => '1', 
-		fecth_stall       => '0',
+		fetch_stall       => '0',
 		pc_en             => '1',
 		jump_en           => '0',
 		call              => '0',
@@ -1209,9 +1209,9 @@ package record_CU is
 		wb_en             => '1'
 	);
 
-	constant SGTUI_RECORD: control_word := (
+	constant RECORD_SGTUI: control_word_t := (
 		fetch_en          => '1', 
-		fecth_stall       => '0',
+		fetch_stall       => '0',
 		pc_en             => '1',
 		jump_en           => '0',
 		call              => '0',
@@ -1237,9 +1237,9 @@ package record_CU is
 		wb_en             => '1'
 	);
 
-	constant SLEUI_RECORD: control_word := (
+	constant RECORD_SLEUI: control_word_t := (
 		fetch_en          => '1', 
-		fecth_stall       => '0',
+		fetch_stall       => '0',
 		pc_en             => '1',
 		jump_en           => '0',
 		call              => '0',
@@ -1265,9 +1265,9 @@ package record_CU is
 		wb_en             => '1'
 	);
 
-	constant SGEUI_RECORD: control_word := (
+	constant RECORD_SGEUI: control_word_t := (
 		fetch_en          => '1', 
-		fecth_stall       => '0',
+		fetch_stall       => '0',
 		pc_en             => '1',
 		jump_en           => '0',
 		call              => '0',
