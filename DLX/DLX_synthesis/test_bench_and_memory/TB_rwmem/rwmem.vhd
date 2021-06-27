@@ -57,7 +57,7 @@ begin  -- beh
 	WR_PROCESS:
 	process (CLK, RST,READNOTWRITE)
 		file mem_fp: text;
-		variable index: integer range 0 to RAM_DEPTH;
+		variable index: integer range 0 to RAM_DEPTH := 256;
 		variable real_index_uns : unsigned(addr'length-1 downto 0);
 		variable real_index: integer range 0 to RAM_DEPTH;
 		variable file_line : line;

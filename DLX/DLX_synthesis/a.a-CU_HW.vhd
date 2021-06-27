@@ -84,7 +84,7 @@ architecture dlx_cu_hw of dlx_cu is
 	--
 	--
 
-	signal cw_memory: mem_array := (
+	constant cw_memory: mem_array := (
 	--  "FSPJLE12PUNHDXAB-----+++TWR10MCK"	
 		"10100011100111000000000000000101", -- R type
 	--  "FSPJLE12PUNHDXAB-----+++TWR10MCK"	
@@ -289,7 +289,7 @@ begin
 	--	  1 cc later the jump so means that after this cc, we have i_FILL_delay = '1' and meanwhile a NOP is inserted in the pipeline. So now
 	--	  we have a NOP stalled in the ID stage 'till i_FILL_delay = '0' so after the FILL will finish.
 	--
-	process(CW, CW_IF, HAZARD_SIG, IR_opcode, BUSY_WINDOW, i_FILL_delay, SPILL, i_DRAM_NOTREADY, IRAM_READY, i_JUMP_EN)
+	process(CW, HAZARD_SIG, IR_opcode, BUSY_WINDOW, i_FILL_delay, SPILL, i_DRAM_NOTREADY, IRAM_READY, i_JUMP_EN)
 	begin
 		
 		i_JUMP_EN_READY <= i_JUMP_EN;
@@ -342,6 +342,9 @@ begin
 				sel_alu_setcmp_1 <= '0';
 				unsigned_1 <= '0';
 				unsigned_2 <= '0';
+
+				i_FILL_delay <= '0';
+				i_SPILL_delay <= '0';
 
 			else 
 			

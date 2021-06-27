@@ -146,8 +146,8 @@ architecture tb of DLX_TestBench is
 
 	-- constant memfile: string := "LoadStore_test.asm.mem"; 
 	-- constant memfile: string := "factorial_pro.asm.mem"; 
-	-- constant memfile: string := "bubble_sort.asm.mem"; 
-	constant memfile: string := "fibonacci_pro.asm.mem"; 
+	constant memfile: string := "bubble_sort.asm.mem"; 
+	-- constant memfile: string := "fibonacci_pro.asm.mem"; 
 
 begin
 	-- IRAM

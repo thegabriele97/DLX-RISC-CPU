@@ -45,7 +45,8 @@ begin
 	LGET <= "01" when (a_l_b = '1') else
 			"00" when (a_le_b = '1') else 
 			"11" when (a_g_b = '1') else
-			"10" when (a_ge_b = '1');
+			"10" when (a_ge_b = '1') else
+			"00";
 	
 
 	z(0) <= S(0);

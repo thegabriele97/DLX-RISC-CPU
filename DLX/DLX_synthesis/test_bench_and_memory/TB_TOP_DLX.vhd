@@ -60,9 +60,7 @@ architecture tb of DLX_TestBench is
 				DRAMRF_READNOTWRITE : out std_logic;  DRAMRF_READY : in std_logic;  
 				DRAMRF_DATA_IN : in std_logic_vector (31 downto 0);  DRAMRF_DATA_OUT :
 				out std_logic_vector (31 downto 0);  DATA_SIZE_RF : out 
-				std_logic_vector (1 downto 0);  OPCODE : out std_logic_vector (5 
-				downto 0);  RS1, RS2, WS1 : out std_logic_vector (4 downto 0);  IRO, 
-				PCO : out std_logic_vector (31 downto 0);  DIR_EN : out std_logic);
+				std_logic_vector (1 downto 0));
 	end component;
 
 
@@ -122,14 +120,6 @@ architecture tb of DLX_TestBench is
 	signal DRAMRF_DATA_OUT				: std_logic_vector(32-1 downto 0);
 	signal DATA_SIZE_RF				: std_logic_vector(1 downto 0);
 
-	signal deb_opcode: std_logic_vector(5 downto 0);
-	signal rs1: std_logic_vector(4 downto 0);
-	signal rs2: std_logic_vector(4 downto 0);
-	signal ws1: std_logic_vector(4 downto 0);
-	signal iro: std_logic_vector(31 downto 0);
-	signal pco: std_logic_vector(31 downto 0);
-	signal ir_en: std_logic;
-
 	signal DATA_OUT, DATA_IN: std_logic_vector(32-1 downto 0);
 	
 	signal bintrash: std_logic;
@@ -168,10 +158,10 @@ begin
 
 	-- DLX
 	DDLX : DLX_IR_SIZE32_PC_SIZE32_RAM_DEPTH32
-		port map ( CLK, RST, IRAM_ADDRESS, CPU_IRAM_ENABLE, CPU_IRAM_READY, IRAM_DATA, DRAM_ADDRESS, CPU_DRAM_ENABLE, CPU_DRAM_READNOTWRITE, CPU_DRAM_READY, DATA_IN, DATA_OUT, CPU_MAS, DRAMRF_ADDRESS, DRAMRF_ISSUE, DRAMRF_READNOTWRITE, DRAMRF_READY, DRAMRF_DATA_IN, DRAMRF_DATA_OUT, DATA_SIZE_RF, deb_opcode, rs1, rs2, ws1, iro, pco, ir_en);
+		port map ( CLK, RST, IRAM_ADDRESS, CPU_IRAM_ENABLE, CPU_IRAM_READY, IRAM_DATA, DRAM_ADDRESS, CPU_DRAM_ENABLE, CPU_DRAM_READNOTWRITE, CPU_DRAM_READY, DATA_IN, DATA_OUT, CPU_MAS, DRAMRF_ADDRESS, DRAMRF_ISSUE, DRAMRF_READNOTWRITE, DRAMRF_READY, DRAMRF_DATA_IN, DRAMRF_DATA_OUT, DATA_SIZE_RF);
 
-	Clk <= not Clk after 2.5 ns;
-	Rst <= '1', '0' after 8 ns;
+	Clk <= not Clk after 5 ns;
+	Rst <= '1', '0' after 12 ns;
 
 end tb;
 

@@ -33,17 +33,7 @@ entity DLX is
 		DRAMRF_READY			: in std_logic;
 		DRAMRF_DATA_IN			: in std_logic_vector(IR_SIZE-1 downto 0);
 		DRAMRF_DATA_OUT			: OUT std_logic_vector(IR_SIZE-1 downto 0);
-		DATA_SIZE_RF			: out std_logic_vector(1 downto 0);
-
-		-- DEBUG
-		OPCODE: out std_logic_vector(5 downto 0);
-		RS1: out std_logic_vector(4 downto 0);
-		RS2: out std_logic_vector(4 downto 0);
-		WS1: out std_logic_vector(4 downto 0);
-		IRO: out std_logic_vector(IR_SIZE-1 downto 0);
-		PCO: out std_logic_vector(IR_SIZE-1 downto 0);
-		DIR_EN: out std_logic
-
+		DATA_SIZE_RF			: out std_logic_vector(1 downto 0)
 	);
 end DLX;
 
@@ -543,15 +533,5 @@ begin  -- DLX
         S3 => i_S3,
         ADD_WB => i_ADD_WB
     );
-
-
-	-- DEBUG
-	OPCODE <= IR(IR'length-1 downto IR'length-1-5);
-	RS1 <= i_ADD_RS1;
-	RS2 <= i_ADD_RS2;
-	WS1 <= i_ADD_WS1;
-	IRO <= IR;
-	PCO <= PC;
-	DIR_EN <= i_IR_LATCH_EN;
 
 end dlx_rtl;

@@ -1,6 +1,6 @@
 #@ # 
 #@ # Running dc_shell Version F-2011.09-SP3 for amd64 -- Jan 26, 2012
-#@ # Date:   Sat Jun 26 14:05:49 2021
+#@ # Date:   Sun Jun 27 11:57:31 2021
 #@ # Run by: ms21.16@localhost.localdomain
 #@ 
 
@@ -4821,23 +4821,19 @@ source synthesis.script
 #@ 
 #@ elaborate DLX -architecture dlx_rtl -library WORK -parameters "IR_SIZE = 32, PC_SIZE = 32, RAM_DEPTH = 32"
 #@ 
-#@ set hdlin_preserve_sequential true
+#@ # create_clock -name "CLK" -period 3 CLK
+#@ # compile -exact_map -ungroup_all
+#@ # compile -exact_map -incremental_mapping -ungroup_all
+#@ # compile -exact_map -incremental_mapping -ungroup_all
 #@ 
-#@ create_clock -name "CLK" -period 3 CLK
-#@ compile -map_effort medium -ungroup_all
-#@ compile -map_effort medium -incremental_mapping -ungroup_all
-#@ compile -map_effort medium -incremental_mapping -ungroup_all
-#@ 
-#@ create_clock -name "CLK" -period 5 CLK
-#@ compile -map_effort medium -incremental_mapping -ungroup_all
-#@ compile -map_effort medium -incremental_mapping -ungroup_all
-#@ compile -map_effort medium -incremental_mapping -ungroup_all
+#@ create_clock -name "CLK" -period 10 CLK
+#@ compile -exact_map -ungroup_all
+#@ # compile -exact_map -incremental_mapping -ungroup_all
+#@ # compile -exact_map -incremental_mapping -ungroup_all
+#@ # compile -exact_map -incremental_mapping -ungroup_all
 #@ 
 #@ write -hierarchy -format vhdl -output ./DLX_SYN.vhdl
-#@ write_sdf dlx_sdf
+#@ write_sdf dlx_sdf.sdf
 #@ report_timing > timing_report.txt
 #@ # -- End source synthesis.script
 
-cat DLX_SYN.vhdl | wc -l
-cat DLX_SYN.vhdl | wc -l
-exit
