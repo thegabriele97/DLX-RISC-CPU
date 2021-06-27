@@ -126,8 +126,8 @@ architecture tb of DLX_TestBench is
 	signal bintrash_vector: std_logic_vector(1 downto 0);
 
 	-- constant memfile: string := "LoadStore_test.asm.mem"; 
-	-- constant memfile: string := "factorial_pro.asm.mem"; 
-	constant memfile: string := "bubble_sort.asm.mem"; 
+	constant memfile: string := "factorial_pro.asm.mem"; 
+	-- constant memfile: string := "bubble_sort.asm.mem"; 
 	-- constant memfile: string := "fibonacci_pro.asm.mem"; 
 
 begin

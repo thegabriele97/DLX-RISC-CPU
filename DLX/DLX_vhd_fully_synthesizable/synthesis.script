@@ -50,19 +50,27 @@ analyze -library WORK -format vhdl {
 
 elaborate DLX -architecture dlx_rtl -library WORK -parameters "IR_SIZE = 32, PC_SIZE = 32, RAM_DEPTH = 32"
 
+
+# compile -ungroup_all
+
 # create_clock -name "CLK" -period 3 CLK
-# compile -exact_map -ungroup_all
+# compile -incremental_mapping -ungroup_all
 # compile -exact_map -incremental_mapping -ungroup_all
 # compile -exact_map -incremental_mapping -ungroup_all
 
-create_clock -name "CLK" -period 10 CLK
-compile -exact_map -ungroup_all
+create_clock -name "CLK" -period 2.35 CLK
+# compile map_effort high -incremental_mapping -ungroup_all
 # compile -exact_map -incremental_mapping -ungroup_all
 # compile -exact_map -incremental_mapping -ungroup_all
 # compile -exact_map -incremental_mapping -ungroup_all
+
+compile_ultra
 
 write -hierarchy -format vhdl -output ./DLX_SYN.vhdl
 write_sdf dlx_sdf.sdf
-report_timing > timing_report.txt
+
+report_timing > report_timing.txt
+report_area > report_area.txt
+report_power > report_power.txt
 
 exit
