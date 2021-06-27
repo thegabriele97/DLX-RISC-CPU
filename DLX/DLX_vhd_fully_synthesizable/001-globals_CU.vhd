@@ -22,8 +22,8 @@ package record_CU is
 		ex_en               : std_logic; -- X
 		muxa_sel            : std_logic; -- A
 		muxb_sel            : std_logic; -- B
-		alu_opcode          : std_logic_vector(alu_op_sig_t'length - 1 downto 0); -- -----
-		set_cmp             : std_logic_vector(set_op_sig_t'length - 1 downto 0); -- +++
+		alu_opcode          : alu_op_sig_t; -- -----
+		set_cmp             : set_op_sig_t; -- +++
 		sel_alu             : std_logic; -- T
 		dram_we             : std_logic; -- W
 		dram_re             : std_logic; -- R
