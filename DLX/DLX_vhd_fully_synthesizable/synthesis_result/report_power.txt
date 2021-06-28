@@ -8,7 +8,7 @@ Report : power
         -analysis_effort low
 Design : DLX_IR_SIZE32_PC_SIZE32_RAM_DEPTH32
 Version: F-2011.09-SP3
-Date   : Sun Jun 27 15:04:27 2021
+Date   : Mon Jun 28 11:50:43 2021
 ****************************************
 
 
@@ -35,12 +35,12 @@ Power-specific unit information :
     Leakage Power Units = 1nW
 
 
-  Cell Internal Power  =  10.0645 mW   (95%)
-  Net Switching Power  = 569.0712 uW    (5%)
+  Cell Internal Power  =  10.0256 mW   (96%)
+  Net Switching Power  = 463.7698 uW    (4%)
                          ---------
-Total Dynamic Power    =  10.6335 mW  (100%)
+Total Dynamic Power    =  10.4893 mW  (100%)
 
-Cell Leakage Power     = 654.3923 uW
+Cell Leakage Power     = 655.1326 uW
 
 
                  Internal         Switching           Leakage            Total
@@ -50,9 +50,9 @@ io_pad             0.0000            0.0000            0.0000            0.0000 
 memory             0.0000            0.0000            0.0000            0.0000  (   0.00%)
 black_box          0.0000            0.0000            0.0000            0.0000  (   0.00%)
 clock_network      0.0000            0.0000            0.0000            0.0000  (   0.00%)
-register       9.8667e+03           21.3146        2.6607e+05        1.0154e+04  (  89.96%)
-sequential        15.2323            1.4843        3.1600e+03           19.8766  (   0.18%)
-combinational    182.4276          546.2712        3.8515e+05        1.1139e+03  (   9.87%)
+register       9.8768e+03           15.2028        2.6604e+05        1.0158e+04  (  91.15%)
+sequential        12.8740            1.3149        3.1561e+03           17.3450  (   0.16%)
+combinational    135.8354          447.2439        3.8593e+05          969.0268  (   8.70%)
 --------------------------------------------------------------------------------------------------
-Total          1.0064e+04 uW       569.0703 uW     6.5438e+05 nW     1.1288e+04 uW
+Total          1.0026e+04 uW       463.7616 uW     6.5512e+05 nW     1.1144e+04 uW
 1

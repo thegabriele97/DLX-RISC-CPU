@@ -255,7 +255,7 @@ begin
 	-- DRAM_NOTREADY is at 1 if the DRAM is not ready and at the MEM stage we have
 	-- an instruction that wants to write/read in the memory (a load or a store).
 	-- If yes, we stall everything, otherwise we go ahead with the pipeline 
-	i_DRAM_NOTREADY <= not(DRAM_READY) and (CW_MEM.mem_we or CW_MEM.mem_re) and CW_MEM.mem_en;
+	i_DRAM_NOTREADY <= not(DRAM_READY) and (CW_MEM.dram_we or CW_MEM.dram_re) and CW_MEM.mem_en;
 	
 
 	CW_ID <= CW_IF when i_DRAM_NOTREADY = '0' else CW_ID;
