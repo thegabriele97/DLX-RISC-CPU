@@ -1,6 +1,6 @@
 
 vcom 000-globals.vhd 
-# vcom 001-globals_CU.vhd
+vcom 001-globals_CU.vhd
 
 source a.b-DataPath.core/compile.script
 source a.d-decode.core/compile.script

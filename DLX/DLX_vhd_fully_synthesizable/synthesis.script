@@ -3,6 +3,7 @@ suppress_message VHDL-290
 
 analyze -library WORK -format vhdl {
     ./000-globals.vhd
+    ./001-globals_CU.vhd
     ./a.b-DataPath.core/a.b.a-windowedRF.core/a.b.a.m-utils.vhd
     ./a.b-DataPath.core/a.b.a-windowedRF.core/a.b.a.a-addr_encoder.vhd
     ./a.b-DataPath.core/a.b.a-windowedRF.core/a.b.a.b-address_generator.vhd

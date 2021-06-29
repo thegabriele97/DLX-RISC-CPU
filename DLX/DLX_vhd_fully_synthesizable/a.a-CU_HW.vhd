@@ -2,7 +2,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 use work.myTypes.all;
--- use work.record_CU.all;
+use work.record_CU.all;
 
 entity dlx_cu is
 	generic (
@@ -69,129 +69,84 @@ end dlx_cu;
 architecture dlx_cu_hw of dlx_cu is
 	
 	constant MICROCODE_MEM_SIZE: integer := 62; -- Microcode Memory Size
-	constant CW_SIZE: integer := (24 + alu_op_sig_t'length + set_op_sig_t'length); -- Control Word Size
 	 
-	type mem_array is array (0 to MICROCODE_MEM_SIZE - 1) of std_logic_vector(CW_SIZE-1 downto 0);
-
-	-- EXAMPLE PURPOSES
-	--
-	-- type mem_prova is array (0 to 2) of prova;
-	-- signal cw_memory_prova: mem_prova := (
-	--	c_record_prova,
-	--	c_record_prova,
-	--	c_record_prova
-	--);
-	--
-	--
+	type mem_array is array (0 to MICROCODE_MEM_SIZE - 1) of control_word_t;
 
 	constant cw_memory: mem_array := (
-	--  "FSPJLE12PUNHDXAB-----+++TWR10MCK"	
-		"10100011100111000000000000000101", -- R type
-	--  "FSPJLE12PUNHDXAB-----+++TWR10MCK"	
-		"00000000100000000000000000000000", -- [VOID]
-	--  "FSPJLE12PUNHDXAB-----+++TWR10MCK"	
-		"11110000100000000000000000000000", -- J (0X02)
-	--  "FSPJLE12PUNHDXAB-----+++TWR10MCK"	
-		"11110010100111010000000000000101", -- JAL
-	--  "FSPJLE12PUNHDXAB-----+++TWR10MCK"	
-		"10100011100000000000000000000000", -- BEQZ
-		"10100011100000000000000000000000", -- BNEZ
-		"10100000100000000000000000000000", -- 
-		"10100000100000000000000000000000",
-	--  "FSPJLE12PUNHDXAB-----+++TWR10MCK"	
-		"10100010000111010000000000000101", -- ADDI (0X08)
-	--  "FSPJLE12PUNHDXAB-----+++TWR10MCK"	
-		"10100010010111010000000000000101", -- ADDUI (0x09)
-	--  "FSPJLE12PUNHDXAB-----+++TWR10MCK"		
-		"10100010000111010010000000000101", -- SUBI (0x0A)
-	--  "FSPJLE12PUNHDXAB-----+++TWR10MCK"
-		"10100010010111010010000000000101", -- SUBUI (0x0B)
-	--  "FSPJLE12PUNHDXAB-----+++TWR10MCK"	
-		"10100010010111010001000000000101", -- ANDI (0x0c)
-		"10100010010111010101000000000101", -- ORI  (0x0d)
-		"10100010010111011001000000000101", -- XORI (0x0e)
-	--  "FSPJLE12PUNHDXAB-----+++TWR10MCK"	
-		"10100000000111110011100000000101",	-- LHI (0x0f)
-		"10100000100000000000000000000000",
-		"10100000100000000000000000000000",
-	--  "FSPJLE12PUNHDXAB-----+++TWR10MCK"	
-		"11110010101000000000000000000000",	-- JR (0x12)
-	--  "FSPJLE12PUNHDXAB-----+++TWR10MCK"
-		"11110011101111010000000000000101",	-- JALR (0x13)
-	--  "FSPJLE12PUNHDXAB-----+++TWR10MCK"	
-		"10100010010111010011100000000101",	-- SLLI (0x14)
-		"10100000100000000000000000000000",	-- NOP (0x15)
-	--  "FSPJLE12PUNHDXAB-----+++TWR10MCK"	
-		"10100010010111010001100000000101",	-- SRLI (0x16)
-		"10100010110111010101100000000101",	-- SRAI (0x17)
-	--  "FSPJLE12PUNHDXAB-----+++TWR10MCK"	
-		"10100010000111010000000010000101", -- SEQI (0x18)
-		"10100010000111010000000110000101",	-- SNEI (0x19)	
-		"10100010000111010000001110000101",	-- SLTI (0x1a)
-	--  "FSPJLE12PUNHDXAB-----+++TWR10MCK"
-		"10100010000111010000010110000101",	-- SGTI (0x1b)
-		"10100010000111010000001010000101",	-- SLEI (0x1c)
-	--  "FSPJLE12PUNHDXAB-----+++TWR10MCK"	
-		"10100010000111010000010010000101",	-- SGEI (0x1d)
-	--  "FSPJLE12PUNHDXAB-----+++TWR10MCK"	
-		"11110010100111010000000000000101",	-- CALL (0x1e)
-		"11110110001000000000000000000000",	-- RET (0x1f)
-	--  "FSPJLE12PUNHDXAB-----+++TWR10MCK"	
-		"10100010000111010000000000110111",	-- LB (0x20)
-	--  "FSPJLE12PUNHDXAB-----+++TWR10MCK"	
-		"10100010000111010000000000101111",	-- LH (0x21)
-		"XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-	--  "FSPJLE12PUNHDXAB-----+++TWR10MCK"	
-		"10100010000111010000000000100111",	-- LW (0x23)
-	--  "FSPJLE12PUNHDXAB-----+++TWR10MCK"	
-		"10100010010111010000000000110111",	-- LBU (0x24)
-	--  "FSPJLE12PUNHDXAB-----+++TWR10MCK"	
-		"10100010010111010000000000101111",	-- LHU (0x25)
-		"XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-		"XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-	--  "FSPJLE12PUNHDXAB-----+++TWR10MCK"
-		"10100011000011010000000001010100",	-- SB (0x28)
-	--  "FSPJLE12PUNHDXAB-----+++TWR10MCK"
-		"10100011000011010000000001001100",	-- SH (0x29)
-		"XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX", 	
-	--  "FSPJLE12PUNHDXAB-----+++TWR10MCK"
-		"10100011000011010000000001000100",	-- SW (0x2b)
-		"XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-		"XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-		"XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",	-- SF (0x2e)
-		"XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",	-- SD (0x2f)
-	--  "FSPJLE12PUNHDXAB-----+++TWR10MCK"
-		"10100011100000000000000000000000",	-- BGT (0x30)
-		"10100011100000000000000000000000",	-- BGE (0x31)
-		"10100011100000000000000000000000",	-- BLT (0x32)
-		"10100011100000000000000000000000",	-- BLE (0x33)
-	--  "FSPJLE12PUNHDXAB-----+++TWR10MCK"
-		"10100010100111010000000000000101", -- TICKTMR (0x34)
-		"XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-		"XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-		"XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-		"XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-		"XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-	--  "FSPJLE12PUNHDXAB-----+++TWR10MCK"
-		"10100010010111010000001110000101",	-- SLTUI (0x3a)
-	--  "FSPJLE12PUNHDXAB-----+++TWR10MCK"
-		"10100010010111010000010110000101",	-- SGTUI (0x3b)
-	--  "FSPJLE12PUNHDXAB-----+++TWR10MCK"
-		"10100010010111010000001010000101",	-- SLEUI (0x3c)
-	--  "FSPJLE12PUNHDXAB-----+++TWR10MCK"
-		"10100010010111010000010010000101"	-- SGEUI (0x3d)
+		RECORD_RTYPE,	-- RTYPE 	(0x00)
+		RECORD_VOID,	
+		RECORD_J,		-- J 		(0x02)
+		RECORD_JAL,		-- JAL 		(0x03)
+		RECORD_BEQZ,	-- BEQZ		(0x04) 
+		RECORD_BNEZ,	-- BNEZ		(0x05)
+		RECORD_VOID,	
+		RECORD_VOID,	
+		RECORD_ADDI,	-- ADDI 	(0x08)
+		RECORD_ADDUI,	-- ADDUI 	(0x09)
+		RECORD_SUBI,	-- SUBI		(0x0a)
+		RECORD_SUBUI,	-- SUBUI	(0x0b)
+		RECORD_ANDI,	-- ANDI		(0x0c)
+		RECORD_ORI,		-- ORI		(0x0d)
+		RECORD_XORI,	-- XORI		(0x0e)
+		RECORD_LHI,		-- LHI		(0x0f)
+		RECORD_VOID,	
+		RECORD_VOID,	
+		RECORD_JR,		-- JR		(0x12)
+		RECORD_JALR,	-- JALR		(0x13)
+		RECORD_SLLI,	-- SLLI		(0x14)
+		RECORD_NOP,		-- NOP		(0x15)
+		RECORD_SRLI,	-- SRLI		(0x16)
+		RECORD_SRAI,	-- SRAI		(0x17)
+		RECORD_SEQI,	-- SEQI		(0x18)
+		RECORD_SNEI,	-- SNEI		(0x19)
+		RECORD_SLTI,	-- SLTI		(0x1a)
+		RECORD_SGTI,	-- SGTI		(0x1b)
+		RECORD_SLEI,	-- SLEI		(0x1c)
+		RECORD_SGEI,	-- SGEI		(0x1d)
+		RECORD_CALL,	-- CALL		(0x1e)
+		RECORD_RET,		-- RET		(0x1f)
+		RECORD_LB,		-- LB		(0x20)
+		RECORD_LH,		-- LH		(0x21)
+		RECORD_VOID,	
+		RECORD_LW,		-- LW		(0x23)
+		RECORD_LBU,		-- LBU		(0x24)
+		RECORD_LHU,		-- LHU		(0x25)
+		RECORD_VOID,	
+		RECORD_VOID,	
+		RECORD_SB,		-- SB		(0x28)
+		RECORD_SH,		-- SH		(0x29)
+		RECORD_VOID,	
+		RECORD_SW,		-- SW		(0x2B)
+		RECORD_VOID,	
+		RECORD_VOID,	
+		RECORD_VOID,	
+		RECORD_VOID,	
+		RECORD_BGT,		-- BGT		(0x30)
+		RECORD_BGE,		-- BGE		(0x31)
+		RECORD_BLT,		-- BLT		(0x32)
+		RECORD_BLE,		-- BLE		(0x33)
+		RECORD_TICKTMR,	-- TICKTMR	(0x34)
+		RECORD_VOID,	
+		RECORD_VOID,	
+		RECORD_VOID,	
+		RECORD_VOID,	
+		RECORD_VOID,	
+		RECORD_SLTUI,	-- SLTUI	(0x3a)
+		RECORD_SGTUI,	-- SGTUI	(0x3b)
+		RECORD_SLEUI,	-- SLEUI	(0x3c)
+		RECORD_SGEUI	-- SGEUI	(0x3d)
 	);
 	
 	
 	signal IR_opcode : std_logic_vector(OP_CODE_SIZE-1 downto 0); -- OpCode part of IR
 	signal IR_func   : std_logic_vector(FUNC_SIZE-1 downto 0); 	-- Func part of IR when Rtype
 	
-	signal CW  		: std_logic_vector(CW_SIZE-1 downto 0); 		-- full control word read from cw_mem
-	signal CW_IF 	: std_logic_vector(CW_SIZE-1 downto 0); 		-- first stage
-	signal CW_ID 	: std_logic_vector(CW_SIZE-1-4 downto 0); 		-- second stage
-	signal CW_EX 	: std_logic_vector(CW_SIZE-1-13 downto 0); 		-- third stage
-	signal CW_MEM 	: std_logic_vector(CW_SIZE-1-13-alu_op_sig_t'length-set_op_sig_t'length-1-3 downto 0); 	-- fourth stage
-	signal CW_WB 	: std_logic_vector(CW_SIZE-1-13-alu_op_sig_t'length-set_op_sig_t'length-1-8 downto 0); 	-- fifth stage
+	signal CW  		: control_word_t; 		-- full control word read from cw_mem
+	signal CW_IF 	: control_word_t; 		-- first stage
+	signal CW_ID 	: control_word_t; 		-- second stage
+	signal CW_EX 	: control_word_t; 		-- third stage
+	signal CW_MEM 	: control_word_t; 		-- fourth stage
+	signal CW_WB 	: control_word_t; 		-- fifth stage
 
 	signal aluOpcode_i : alu_op_sig_t := ALU_ADD; -- alu_op_sig_t defined in package
 	signal aluOpcode1  : alu_op_sig_t := ALU_ADD;
@@ -215,61 +170,46 @@ architecture dlx_cu_hw of dlx_cu is
 
 begin
 
-	-- EXAMPLE PURPOSES
-	--
-	-- cw_memory_prova(0).test_sig <= '1';
-	--
-	---
-
 	IR_opcode(OP_CODE_SIZE - 1 downto 0) <= IR_IN(31 downto 26);
 	IR_func(FUNC_SIZE - 1 downto 0)      <= IR_IN(FUNC_SIZE - 1 downto 0);
 
 	CW <= cw_memory(TO_INTEGER(unsigned(IR_opcode)));
 	
-	-- EX control Signals
-	-- CW_SIZE: 28
-	-- CW_IF: "FSPJLE12UNHDXAB-----+++TWR10UMCK" : 28
-	-- CW_ID: "12HDXAB-----+++TWR10UMCK"	 : 24 
-	-- CW_EX: "XAB-----+++TWR10UMCK"	 	 : 20 
-	-- CW_ME: "WR10UMCK"	 	 			 : 8
-	-- CW_WB: "CK"	 	 			 		 : 2
 	
 	-- IF control Signals
-	PIPLIN_IF_EN 		<= CW_IF(CW_SIZE - 1);
+	PIPLIN_IF_EN 		<= CW_IF.fetch_en;
 	--IF_STALL			<= CW_IF(CW_SIZE - 2);
-	PC_EN 				<= CW_IF(CW_SIZE - 3) or i_JUMP_EN_READY;
+	PC_EN 				<= CW_IF.pc_en or i_JUMP_EN_READY;
 	-- JUMP_EN      	................ - 4
 	
-	--  "FSPJLE12PUNHDXAB-----+++TWR10MCK"	
 	-- ID Control Signals
 	--CALL 				<= CW_ID(CW_ID'length - 1);
 	--RET				<= CW_ID(CW_ID'length - 2);
-	RF_RD1_EN			<= CW_ID(CW_ID'length - 3);
-	RF_RD2_EN			<= CW_ID(CW_ID'length - 4);
-	SEL_CMPB			<= CW_ID(CW_ID'length - 5);
+	RF_RD1_EN			<= CW_ID.rf_rd1_en;
+	RF_RD2_EN			<= CW_ID.rf_rd2_en;
+	SEL_CMPB			<= CW_ID.sel_cmpb;
 	-- UNSIGNED_ID			<= CW_ID(CW_ID'length - 6);
-	NPC_SEL				<= CW_ID(CW_ID'length - 7);
-	HAZARD_TABLE_WR1	<= CW_ID(CW_ID'length - 8);
-	PIPLIN_ID_EN		<= CW_ID(CW_ID'length - 9) and not i_DRAM_NOTREADY;
+	NPC_SEL				<= CW_ID.npc_sel;
+	HAZARD_TABLE_WR1	<= CW_ID.hazard_table_wr1;
+	PIPLIN_ID_EN		<= CW_ID.id_en and not i_DRAM_NOTREADY;
 
-	PIPLIN_EX_EN 		<= CW_EX(CW_EX'length - 1) and not i_DRAM_NOTREADY;
-	MUXA_SEL      		<= CW_EX(CW_EX'length - 2);
-	MUXB_SEL      		<= CW_EX(CW_EX'length - 3);
+	PIPLIN_EX_EN 		<= CW_EX.ex_en and not i_DRAM_NOTREADY;
+	MUXA_SEL      		<= CW_EX.muxa_sel;
+	MUXB_SEL      		<= CW_EX.muxb_sel;
 
 	-- MEM control Signals
-	DRAM_WE      		<= CW_MEM(CW_MEM'length - 1);
-	DRAM_RE	    		<= CW_MEM(CW_MEM'length - 2);
-	DATA_SIZE(1)		<= CW_MEM(CW_MEM'length - 3);
-	DATA_SIZE(0)		<= CW_MEM(CW_MEM'length - 4);
-	PIPLIN_MEM_EN 		<= CW_MEM(CW_MEM'length - 5) and not i_DRAM_NOTREADY;
+	DRAM_WE      		<= CW_MEM.dram_we;
+	DRAM_RE	    		<= CW_MEM.dram_re;
+	DATA_SIZE			<= CW_MEM.data_size;
+	PIPLIN_MEM_EN 		<= CW_MEM.mem_en and not i_DRAM_NOTREADY;
 
 	-- WB control Signals
-	WB_MUX_SEL 			<= CW_WB(CW_WB'length - 1);
-	PIPLIN_WB_EN    	<= CW_WB(CW_WB'length - 2);
+	WB_MUX_SEL 			<= CW_WB.wb_mux_sel;
+	PIPLIN_WB_EN    	<= CW_WB.wb_en;
 	
 
 	-- Signals outside the Control Word direct assignment
-	DRAM_ME				<= (CW_MEM(CW_MEM'length-1) or CW_MEM(CW_MEM'length-2)) and CW_MEM(CW_MEM'length - 5);
+	DRAM_ME				<= (CW_MEM.dram_we or CW_MEM.dram_re) and CW_MEM.mem_en;
 	JUMP_EN				<= i_JUMP_EN_READY;
 
 	--
@@ -296,16 +236,16 @@ begin
 
 		CW_IF <= CW;
 		if (IRAM_READY = '0') then
-			CW_IF(CW_SIZE-2) 			<= '1';	    -- STALL enabling
-			CW_IF(CW_SIZE-3) 			<= '0';	    -- PC disabling
+			CW_IF.fetch_stall 			<= '1';	    -- STALL enabling
+			CW_IF.pc_en 				<= '0';	    -- PC disabling
 		end if;
 	 	if (i_DRAM_NOTREADY = '1' or HAZARD_SIG = '1' or ((IR_opcode = OP_CALL or IR_opcode = OP_RET) and BUSY_WINDOW = '1') or SPILL = '1' or i_FILL_delay = '1') then
-			CW_IF(CW_SIZE-1) 			<= '0';		-- IF disabling
-			CW_IF(CW_SIZE-3) 			<= '0';	    -- PC disabling
-			CW_IF(CW_ID'length - 9) 	<= '0'; 	-- ID disabling
-			CW_IF(CW_EX'length - 1) 	<= '0';		-- EX disabling
-			CW_IF(CW_MEM'length - 5)	<= '0';		-- MEM disabling
-			CW_IF(CW_WB'length - 2) 	<= '0';		-- WB disabling
+			CW_IF.fetch_en 				<= '0';		-- IF disabling
+			CW_IF.pc_en 				<= '0';	    -- PC disabling
+			CW_IF.id_en 				<= '0'; 	-- ID disabling
+			CW_IF.ex_en 				<= '0';		-- EX disabling
+			CW_IF.mem_en				<= '0';		-- MEM disabling
+			CW_IF.wb_en 				<= '0';		-- WB disabling
 
 			i_JUMP_EN_READY <= '0';
 		end if;
@@ -315,12 +255,12 @@ begin
 	-- DRAM_NOTREADY is at 1 if the DRAM is not ready and at the MEM stage we have
 	-- an instruction that wants to write/read in the memory (a load or a store).
 	-- If yes, we stall everything, otherwise we go ahead with the pipeline 
-	i_DRAM_NOTREADY <= not(DRAM_READY) and (CW_MEM(CW_MEM'length-1) or CW_MEM(CW_MEM'length-2)) and CW_MEM(CW_MEM'length-5);
+	i_DRAM_NOTREADY <= not(DRAM_READY) and (CW_MEM.dram_we or CW_MEM.dram_re) and CW_MEM.mem_en;
 	
 
-	CW_ID <= CW_IF(CW_ID'length-1 downto 0) when i_DRAM_NOTREADY = '0' else CW_ID;
+	CW_ID <= CW_IF when i_DRAM_NOTREADY = '0' else CW_ID;
 
-	unsigned_i <= CW_ID(CW_ID'length - 6);
+	unsigned_i <= CW_ID.unsigned_id;
 	UNSIG_SIGN_N <= unsigned_2; 
 	
 
@@ -331,11 +271,9 @@ begin
 		if (rising_edge(Clk)) then
 		
 			if (Rst = '1') then
-				--CW_IF <= (others => '0');
-				--CW_ID <= (others => '0');
-				CW_EX <= (others => '0');
-				CW_MEM <= (others => '0');
-				CW_WB <= (others => '0');
+				CW_EX <= RECORD_VOID;
+				CW_MEM <= RECORD_VOID;
+				CW_WB <= RECORD_VOID;
 				
 				aluOpcode1 <= ALU_ADD;
 				setcmp_1 <= (others => '0');
@@ -351,7 +289,7 @@ begin
 				i_SPILL_delay <= SPILL;
 				i_FILL_delay <= FILL;
 
-				CW_WB <= (others => '0');
+				CW_WB <= RECORD_VOID;
 
 
 				-------------------------------------------------------
@@ -362,9 +300,9 @@ begin
 				-------------------------------------------------------
 				if (i_DRAM_NOTREADY = '0') then		-- DRAM READY
 
-					CW_EX <= CW_ID(CW_EX'length-1 downto 0);
-					CW_MEM <= CW_EX(CW_MEM'length-1 downto 0);
-					CW_WB <= CW_MEM(CW_WB'length-1 downto 0);
+					CW_EX <= CW_ID;
+					CW_MEM <= CW_EX;
+					CW_WB <= CW_MEM;
 
 
 					aluOpcode1 <= aluOpcode_i;
@@ -442,12 +380,8 @@ begin
 				
 				end case;
 
-			-- when 2 => aluOpcode_i <= ALU_ADD; -- j
-			-- when 3 => aluOpcode_i <= ALU_ADD; -- jal
-			-- when 8 => aluOpcode_i <= ALU_ADD; -- addi
-			
 			when others => 
-				aluOpcode_i <= CW(CW_EX'length-1-3 downto CW_EX'length-3-alu_op_sig_t'length);
+				aluOpcode_i <= CW.alu_opcode;
 
 		end case;
 
@@ -459,7 +393,7 @@ begin
 	SETCMP_P: process (IR_opcode, IR_func, CW, CW_ID)
 	begin -- process SETCMP_P
 	
-		UNSIGNED_ID	<= CW_ID(CW_ID'length - 6);	
+		UNSIGNED_ID	<= CW_ID.unsigned_id;	
 	
 		case (TO_INTEGER(unsigned(IR_opcode))) is
 			
@@ -507,7 +441,7 @@ begin
 				end case;
 			
 			when others => 
-				setcmp_i <= CW(CW_EX'length - 1 - 2 - alu_op_sig_t'length - 1 downto CW_EX'length - 1 - alu_op_sig_t'length - 2 - set_op_sig_t'length);
+				setcmp_i <= CW.set_cmp;
 
 		end case;
 
@@ -530,7 +464,7 @@ begin
 				end if;
 			
 			when others => 
-				sel_alu_setcmp_i <= CW(CW_EX'length - 1 - alu_op_sig_t'length - set_op_sig_t'length - 1 - 2);
+				sel_alu_setcmp_i <= CW.sel_alu;
 		end case;
 
 	end process SEL_ALU_SETCMP_P;
@@ -539,10 +473,10 @@ begin
 	JBRANCH_CTRL: process(IR_opcode, CW_IF, LGET, BUSY_WINDOW, i_SPILL_delay, i_FILL_delay, i_DRAM_NOTREADY)
 	begin
 
-		IF_STALL <= CW_IF(CW_SIZE - 2);
-		i_JUMP_EN <= CW_IF(CW_SIZE - 4);
-		CALL <= CW_IF(CW_SIZE - 5) and not(i_DRAM_NOTREADY);
-		RET <= CW_IF(CW_SIZE - 6) and not(i_DRAM_NOTREADY);
+		IF_STALL <= CW_IF.fetch_stall;
+		i_JUMP_EN <= CW_IF.jump_en;
+		CALL <= CW_IF.call and not(i_DRAM_NOTREADY);
+		RET <= CW_IF.ret and not(i_DRAM_NOTREADY);
 
 		if (IR_opcode = OP_BEQZ and LGET(0) = '0') then -- BEQZ 
 			i_JUMP_EN <= '1';
@@ -553,7 +487,7 @@ begin
 		elsif (IR_opcode = OP_BGE and (LGET(1) = '1' or LGET(0) = '0')) then -- BGE
 			i_JUMP_EN <= '1';
 			IF_STALL <= '1';
-		elsif (IR_opcode = OP_BLE and LGET(1) = '0') then -- BGE
+		elsif (IR_opcode = OP_BLE and LGET(1) = '0') then -- BLE
 			i_JUMP_EN <= '1';
 			IF_STALL <= '1';
 		elsif (IR_opcode = OP_BGT and LGET = "11") then -- BGT
