@@ -7,6 +7,7 @@
 \usepackage{listings}
 \usepackage{booktabs}
 \usepackage{hyperref}
+\usepackage[most]{tcolorbox}
 
 \newenvironment{listato}{\footnotesize}{\normalsize }
 
@@ -44,6 +45,15 @@
 \usepackage{verbatim}
 \usepackage{fancyvrb}
 \usepackage{multicol}
+\definecolor{LightGreen}{HTML}{E5F1E5}
+\definecolor{DarkGreen}{HTML}{377b07}
+\newtcolorbox{mybox}{
+	enhanced,
+	boxrule=0pt,frame hidden,
+	borderline west={3pt}{0pt}{DarkGreen},
+	colback=LightGreen,
+	sharp corners
+}
 
 % Definisce i colori per il codice in VHDL
 
