@@ -13,5 +13,7 @@ rm -f ./.synopsys_dc.setup
 rm -f default.svf
 
 mv DLX_SYN.vhdl ./synthesis_result
+mv DLX_SYN.v ./synthesis_result
 mv dlx_sdf.sdf ./synthesis_result
+mv dlx_sdc.sdc ./synthesis_result
 mv report_*.txt ./synthesis_result

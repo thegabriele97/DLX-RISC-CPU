@@ -1,0 +1,133 @@
+<mxfile host="app.diagrams.net" modified="2021-06-09T19:11:18.469Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" etag="_x0kWKKa98BK6ymHDoGX" version="14.7.6" type="github">
+  <diagram id="4UOWLSsZz0uHO1KUJpTw" name="Page-1">
+    <mxGraphModel dx="1383" dy="600" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="2d_xXYmy09Y_BbdFF-Ag-1" value="" style="rounded=0;whiteSpace=wrap;html=1;labelBackgroundColor=none;labelBorderColor=none;fillColor=#ffe6cc;strokeColor=#d79b00;" parent="1" vertex="1">
+          <mxGeometry x="-120" y="240" width="200" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="2d_xXYmy09Y_BbdFF-Ag-2" value="" style="rounded=0;whiteSpace=wrap;html=1;labelBackgroundColor=#E6D0DE;labelBorderColor=#9933FF;fillColor=#ffe6cc;strokeColor=#d79b00;" parent="1" vertex="1">
+          <mxGeometry x="80" y="240" width="200" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="2d_xXYmy09Y_BbdFF-Ag-3" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
+          <mxGeometry x="480" y="240" width="200" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="2d_xXYmy09Y_BbdFF-Ag-4" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
+          <mxGeometry x="680" y="240" width="200" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="2d_xXYmy09Y_BbdFF-Ag-5" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
+          <mxGeometry x="880" y="240" width="200" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="2d_xXYmy09Y_BbdFF-Ag-6" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
+          <mxGeometry x="1080" y="240" width="200" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="2d_xXYmy09Y_BbdFF-Ag-7" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
+          <mxGeometry x="1280" y="240" width="200" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="2d_xXYmy09Y_BbdFF-Ag-8" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
+          <mxGeometry x="1480" y="240" width="200" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="2d_xXYmy09Y_BbdFF-Ag-9" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
+          <mxGeometry x="1680" y="240" width="200" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="2d_xXYmy09Y_BbdFF-Ag-10" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
+          <mxGeometry x="1880" y="240" width="200" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="2d_xXYmy09Y_BbdFF-Ag-11" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
+          <mxGeometry x="2080" y="240" width="200" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="2d_xXYmy09Y_BbdFF-Ag-12" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
+          <mxGeometry x="2280" y="240" width="200" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="2d_xXYmy09Y_BbdFF-Ag-13" value="PIPLIN_IF_EN" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#FF0000;" parent="1" vertex="1">
+          <mxGeometry x="-75" y="310" width="110" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="2d_xXYmy09Y_BbdFF-Ag-14" value="PC_EN" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#FF0000;" parent="1" vertex="1">
+          <mxGeometry x="125" y="310" width="110" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="2d_xXYmy09Y_BbdFF-Ag-15" value="PC_EN" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#FF0000;" parent="1" vertex="1">
+          <mxGeometry x="525" y="310" width="110" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="2d_xXYmy09Y_BbdFF-Ag-16" value="RF_RD1_EN" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#FF0000;" parent="1" vertex="1">
+          <mxGeometry x="725" y="310" width="110" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="2d_xXYmy09Y_BbdFF-Ag-17" value="RF_RD2_EN" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#FF0000;" parent="1" vertex="1">
+          <mxGeometry x="925" y="310" width="110" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="2d_xXYmy09Y_BbdFF-Ag-18" value="PIPLIN_ID_EN" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#FF0000;" parent="1" vertex="1">
+          <mxGeometry x="1125" y="310" width="110" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="2d_xXYmy09Y_BbdFF-Ag-19" value="" style="rounded=0;whiteSpace=wrap;html=1;labelBackgroundColor=#E6D0DE;labelBorderColor=#9933FF;fillColor=#ffe6cc;strokeColor=#d79b00;" parent="1" vertex="1">
+          <mxGeometry x="280" y="240" width="200" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="2d_xXYmy09Y_BbdFF-Ag-20" value="JUMP_EN" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#FF0000;" parent="1" vertex="1">
+          <mxGeometry x="325" y="310" width="110" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="2d_xXYmy09Y_BbdFF-Ag-22" value="PIPLIN_EX_EN" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#FF0000;" parent="1" vertex="1">
+          <mxGeometry x="1325" y="310" width="110" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="2d_xXYmy09Y_BbdFF-Ag-23" value="MUXA_SEL" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#FF0000;" parent="1" vertex="1">
+          <mxGeometry x="1525" y="310" width="110" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="2d_xXYmy09Y_BbdFF-Ag-24" value="MUXB_SEL" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#FF0000;" parent="1" vertex="1">
+          <mxGeometry x="1725" y="310" width="110" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="2d_xXYmy09Y_BbdFF-Ag-25" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
+          <mxGeometry x="2480" y="240" width="200" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="2d_xXYmy09Y_BbdFF-Ag-26" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
+          <mxGeometry x="2680" y="240" width="200" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="2d_xXYmy09Y_BbdFF-Ag-27" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="1" vertex="1">
+          <mxGeometry x="2880" y="240" width="200" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="2d_xXYmy09Y_BbdFF-Ag-28" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="1" vertex="1">
+          <mxGeometry x="3080" y="240" width="200" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="2d_xXYmy09Y_BbdFF-Ag-29" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="1" vertex="1">
+          <mxGeometry x="3280" y="240" width="200" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="2d_xXYmy09Y_BbdFF-Ag-30" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" parent="1" vertex="1">
+          <mxGeometry x="3480" y="240" width="200" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="2d_xXYmy09Y_BbdFF-Ag-31" value="ALU_OPCODE(4)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#FF0000;" parent="1" vertex="1">
+          <mxGeometry x="1925" y="310" width="110" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="2d_xXYmy09Y_BbdFF-Ag-32" value="ALU_OPCODE(3)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#FF0000;" parent="1" vertex="1">
+          <mxGeometry x="2125" y="310" width="110" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="2d_xXYmy09Y_BbdFF-Ag-33" value="ALU_OPCODE(2)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#FF0000;" parent="1" vertex="1">
+          <mxGeometry x="2325" y="310" width="110" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="2d_xXYmy09Y_BbdFF-Ag-34" value="ALU_OPCODE(1)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#FF0000;" parent="1" vertex="1">
+          <mxGeometry x="2525" y="310" width="110" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="2d_xXYmy09Y_BbdFF-Ag-35" value="ALU_OPCODE(0)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#FF0000;" parent="1" vertex="1">
+          <mxGeometry x="2725" y="310" width="110" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="2d_xXYmy09Y_BbdFF-Ag-36" value="DRAM_WE" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#FF0000;" parent="1" vertex="1">
+          <mxGeometry x="2925" y="310" width="110" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="2d_xXYmy09Y_BbdFF-Ag-37" value="DRAM_RE" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#FF0000;" parent="1" vertex="1">
+          <mxGeometry x="3125" y="310" width="110" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="2d_xXYmy09Y_BbdFF-Ag-38" value="PIPLIN_MEM_EN" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#FF0000;" parent="1" vertex="1">
+          <mxGeometry x="3325" y="310" width="110" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="2d_xXYmy09Y_BbdFF-Ag-39" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" parent="1" vertex="1">
+          <mxGeometry x="3680" y="240" width="200" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="2d_xXYmy09Y_BbdFF-Ag-40" value="WB_MUX_SEL" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#FF0000;" parent="1" vertex="1">
+          <mxGeometry x="3525" y="310" width="110" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="2d_xXYmy09Y_BbdFF-Ag-41" value="PIPLIN_WB_EN" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#FF0000;" parent="1" vertex="1">
+          <mxGeometry x="3730" y="310" width="110" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="gpRdnrQJDkrlLkCKEBam-1" value="&lt;h1&gt;&lt;span&gt;Spiegazione&lt;/span&gt;&lt;/h1&gt;&lt;h1&gt;&lt;span style=&quot;font-size: 12px ; font-weight: 400&quot;&gt;The control word is expressed on 19 bits. Here is the explanation bit a bit starting from the most significant one:&lt;/span&gt;&lt;/h1&gt;&lt;div&gt;&lt;ul&gt;&lt;li&gt;&lt;font color=&quot;#ff0000&quot;&gt;PIPLIN_IF_EN: &lt;/font&gt;This signal enables the fetch stage of the pipeline&lt;/li&gt;&lt;li&gt;&lt;font color=&quot;#ff0000&quot;&gt;PC_EN: &lt;/font&gt;This signal enables the program counter&amp;nbsp;&lt;/li&gt;&lt;li&gt;&lt;font color=&quot;#ff0000&quot;&gt;JUMP_EN: &lt;/font&gt;This signal is set to 1 when there is a jump instrcution (J, JAL, BNEZ, BEQZ)&lt;/li&gt;&lt;li&gt;&lt;font color=&quot;#ff0000&quot;&gt;RF_RD1_EN: &lt;/font&gt;This signal enables the first read port of the register file&lt;/li&gt;&lt;li&gt;&lt;font color=&quot;#ff0000&quot;&gt;RF_RD2_EN:&amp;nbsp;&lt;/font&gt;This signal enables the first read port of the register file&lt;/li&gt;&lt;li&gt;&lt;font color=&quot;#ff0000&quot;&gt;PIPLIN_ID_EN: &lt;/font&gt;This signal enables the decode stage of the pipeline&lt;/li&gt;&lt;li&gt;&lt;font color=&quot;#ff0000&quot;&gt;MUXA_SEL: &lt;/font&gt;This signal is the selector of the top multiplexer&lt;/li&gt;&lt;li&gt;&lt;font color=&quot;#ff0000&quot;&gt;MUXB_SEL:&amp;nbsp;&lt;/font&gt;This signal is the selector of the bottom multiplexer&lt;/li&gt;&lt;li&gt;&lt;font color=&quot;#ff0000&quot;&gt;ALU_OPCODE (5 bits): &lt;/font&gt;This signal decide the operation that the ALU need to perform&lt;/li&gt;&lt;li&gt;&lt;font color=&quot;#ff0000&quot;&gt;DRAM_WE: &lt;/font&gt;This signal enables writing on the DRAM&lt;/li&gt;&lt;li&gt;&lt;font color=&quot;#ff0000&quot;&gt;DRAM_RE: &lt;/font&gt;This signal enables reading the DRAM&lt;/li&gt;&lt;li&gt;&lt;font color=&quot;#ff0000&quot;&gt;PIPLIN_MEM_EN: &lt;/font&gt;This signals enable the memory stage of the pipeline&lt;/li&gt;&lt;li&gt;&lt;font color=&quot;#ff0000&quot;&gt;WB_MUX_SEL: &lt;/font&gt;This signals is the selector of the last multiplexer&lt;/li&gt;&lt;li&gt;&lt;font color=&quot;#ff0000&quot;&gt;PIPLIN_WB_EN: &lt;/font&gt;This signal enables the write back stage of the pipeline&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="-120" y="480" width="620" height="440" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

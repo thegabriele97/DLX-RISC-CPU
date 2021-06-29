@@ -39,7 +39,7 @@ sgti r15,r1,#1      ;1
 slti r16,r1,#1      ;0
 slti r17,r1,#3      ;1
 sgeui r10,r1,#4     ;0
-sgeui r10,r1,#-4     ;1
+sgeui r10,r1,#-4    ;0 
 sgeui r11,r1,#1     ;1
 sgtui r12,r1,#3     ;0
 sgtui r13,r1,#1     ;1
@@ -66,10 +66,10 @@ ror r30, r6, r1      ;0100 0000 0000 0000 0000 ... 0001
 addi r7, r0, #5     ;5
 rol r29, r7, r1     ;0000 0000 0000 0000 ... 0001 0100
 
-addui r28, r0, #0xffff
-subui r28, r0, #0xffff
+addui r28, r0, #0xffff  ; 0x0000ffff
+subui r28, r0, #0xffff  ; 0xffff0001
 
-lhi r28, #-40
+lhi r28, #-40           ; 0xfffd8000
 
 sw 0(r0), r14
 lh r27, 2(r0)       ;ffffffff
