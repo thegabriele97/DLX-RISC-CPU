@@ -4,6 +4,94 @@
 \subsection{Adder}
 \subsection{Multiplier}
 \subsection{Logic Operands}
+The basic and most simple implementation of a logic unit is based on single logic gates on $N$ bits whose outputs are muxed, in order to generate the correct output. The problem with this solution is that the number of input signals to the multiplexer is extremely high; this implementation does not only suffer from the point of view of the delay but, since each logic function is implemented with a specific gate, the total area is huge.\newline\newline
+In order to overcome the problems highlighted before, a more compact implementation has been chosen: the T2 logic unit.
+
+This logic unit allows to perform AND, NAND, OR, NOR, XOR and XNOR using only 5 NAND gates, on two levels, and 4 selection signals. The schematic is the one in figure \ref{fig:log_unit}.
+
+\begin{figure}
+	\centering
+	\tikzstyle{branch}=[fill,shape=circle,minimum size=3pt,inner sep=0pt]
+	\begin{tikzpicture}[label distance=2mm]
+		\draw (0.92,-0.40) -- (1.09,-0.56);
+		\draw (1.92,-0.40) -- (2.09,-0.56);
+		% nodes
+		\node (y1) at (1,0) {$R_1$};
+		\node (y2) at (2,0) {$R_2$};
+		\node[not gate US, draw, rotate=-90] at ($(y1)+(0.5,-1.5)$) (noty1) {};
+		\node[not gate US, draw, rotate=-90] at ($(y2)+(0.5,-1.5)$) (noty2) {};
+		
+		% draw nodes to NOT
+		\foreach \i in {1,2} {
+			\path (y\i) -- coordinate (punt\i) (y\i |- noty\i.input);
+			\draw (punt\i) node[branch] {} -| (noty\i.input);
+		}
+	
+		\node (x1) at (0,-2.33) {$S_0$};
+		\node (x2) at (0,-3.33) {$S_1$};
+		\node (x3) at (0,-4.33) {$S_2$};
+		\node (x4) at (0,-5.33) {$S_3$};
+		
+		\node[nand gate US, draw, logic gate inputs=nnn] at ($(y2)+(2,-2.5)$) (And1) {};
+		\node[nand gate US, draw, logic gate inputs=nnn] at ($(And1)+(0,-1)$) (And2) {};
+		\node[nand gate US, draw, logic gate inputs=nnn] at ($(And2)+(0,-1)$) (And3) {};
+		\node[nand gate US, draw, logic gate inputs=nnn] at ($(And3)+(0,-1)$) (And4) {};
+		\node[nand gate US, draw, logic gate inputs=nnnn, anchor=input 1] at ($(And1.output -| And2.output)+(2,-1.25)$) (Or1) {};
+		
+
+		% connect x_i to AND_i
+		\foreach \i in {1,2,3,4} {
+			\draw (x\i) -- (And\i.input 1);
+		}
+		
+		% y1
+
+		\draw (noty1 |- And1.input 2) node[branch] {} -- (And1.input 2);
+		\draw (noty1 |- And2.input 2) node[branch] {} -- (And2.input 2);
+		\draw (y1 |- And3.input 2) node[branch] {} -- (And3.input 2);
+		\draw (y1) |- (And4.input 2);
+		\draw (noty1) |- (And2.input 2);
+		
+		\draw (noty2 |- And1.input 3) node[branch] {} -- (And1.input 3);
+		\draw (y2 |- And2.input 3) node[branch] {} -- (And2.input 3);
+		\draw (noty2 |- And3.input 3) node[branch] {} -- (And3.input 3);
+		\draw (y2) |- (And4.input 3);
+		\draw (noty2) |- (And3.input 3);
+		
+
+		% AND
+		\draw (And1.output) -- ([xshift=0.8cm]And1.output) |- (Or1.input 1);
+		\draw (And2.output) -- ([xshift=0.6cm]And2.output) |- (Or1.input 2);
+		\draw (And3.output) -- ([xshift=0.6cm]And3.output) |- (Or1.input 3);
+		\draw (And4.output) -- ([xshift=0.8cm]And4.output) |- (Or1.input 4);
+	
+		
+		% OR
+		\draw (Or1.output) -- ([xshift=0.5cm]Or1.output) node[above] {$out$};
+		
+	\end{tikzpicture}  
+	\caption{Logic unit}
+	\label{fig:log_unit}
+	\end{figure}
+
+	In order to compute one of the logical instructions, the select signals are properly activated as follow:
+	
+	\[
+	\begin{vmatrix}
+		S_0 & S_1 & S_2 & S_3 & \text{operation}\\
+		0 & 0 & 0 & 1 & AND \\
+		1 & 1 & 1 & 0 & NAND \\
+		0 & 1 & 1 & 1 & OR \\
+		1 & 0 & 0 & 0 & NOR \\
+		0 & 1 & 1 & 0 & XOR \\
+		1 & 0 & 0 & 1 & NXOR \\
+	\end{vmatrix}
+	\]
+	
+	
+	For example, in order to generate the AND logical operation, we have to select $S_3 = 1$, so that $out = R_1 \cdot R_2$; on the other hand, if we need NAND $S_0 = S_1 = S_2 = 1$ and $S_3 = 0$, so that $out = \overline{R_1} \cdot \overline{R_2} + \overline{R_1} \cdot R_2 + R_1 \cdot \overline{R_2} = \overline{R_1} \cdot \overline{R_2}$ that using the De Morgan law $out = \overline{R_1 \cdot R_2}$.
+	This allows to obtain the best performances also because all paths work in parallel, compacting the area and the delay.
+
 \subsection{Shifting}
 
 \section{Set-Like Operations unit}
