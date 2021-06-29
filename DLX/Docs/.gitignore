@@ -5,3 +5,8 @@
 *.out
 *.synctex.gz
 *.toc
+*.ps
+*.dvi
+*.ilg
+*.ind
+*.idx

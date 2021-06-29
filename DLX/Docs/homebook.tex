@@ -1,0 +1,166 @@
+
+\documentclass[10pt,  english, makeidx, a4paper, titlepage, oneside]{book}
+\usepackage{babel}
+\usepackage{fancyhdr}
+\usepackage{makeidx}
+\usepackage{titlesec}
+\usepackage{listings}
+\usepackage{booktabs}
+\usepackage{hyperref}
+
+\newenvironment{listato}{\footnotesize}{\normalsize }
+
+%\pagestyle{empty}
+
+\textwidth 15.5cm
+\textheight 23cm
+\topmargin -1cm
+\oddsidemargin 0cm
+\linespread{1.1}
+
+\pagestyle{fancy}
+\lhead{}
+\chead{Microelectronic Systems}
+\lfoot{}
+\cfoot{}
+\rfoot{}
+\rhead{\thepage}
+
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{amssymb}
+%\oddsidemargin -1.1cm
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{float}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+%\usepackage{subscript}
+\usepackage{empheq}
+\usepackage{verbatim}
+\usepackage{fancyvrb}
+\usepackage{multicol}
+
+% Definisce i colori per il codice in VHDL
+
+\lstdefinestyle{vhdl}{
+   language=vhdl,
+   frame=single,
+   basicstyle=\scriptsize,
+   breaklines=true,
+   captionpos=b,
+   keepspaces=true,
+   backgroundcolor=\color{backcolor},
+   keywordstyle=[1]\color{blue}\bf,
+   keywordstyle=[2]\color{red}\bf,
+   keywordstyle=[3]\color{cyan!50}\bf,
+   stringstyle=\color{orange},
+   commentstyle=\color{comment},
+   tabsize=2,
+    numbers=left,
+   showspaces=false,
+   showstringspaces=false,
+   showtabs=false,
+   moredelim=[s][\textcolor{green}]{component}{is},
+   morekeywords=[1]{
+      library, use ,all,entty,is,port,in,out,end,architecture,of, body,
+      function, variable, begin,and,or,Not,downto,ALL, signal, process, if,
+      else, elsif, case, when, then, range, to, component, type, with, select,
+      others, constant, inout, buffer, map, true, false, array, subtype, wait,
+      wait for, generic, =, <, >, <=, >=, =>,
+   },
+   alsoletter={=, <, >},
+   morekeywords=[2]{
+          STD_LOGIC_VECTOR,STD_LOGIC,IEEE,STD_LOGIC_1164, work, local, real,
+          math_real, time, NUMERIC_STD,STD_LOGIC_ARITH,STD_LOGIC_UNSIGNED,
+          std_logic_vectr, std_logic, ieee, numeric_std, std_ulogic,
+          std_logic_1164, natural, bit, bit_vector, signed, unsigned,
+          boolean, integer
+    },
+    morekeywords=[3]{rising_edge, falling_edge, resize, to_signed, to_unsigned},
+    morecomment=[l]{--},
+    morecomment=[s][\color{orange}]{'}{'},
+    numbers=left,
+}
+
+
+\titleformat{\chapter}[display]
+{\normalfont\Large\filcenter\sffamily}
+{\titlerule[0.5pt]%
+\vspace{1pt}
+\titlerule
+\vspace{1pc}
+\LARGE\MakeUppercase{\chaptertitlename} \thechapter
+}
+{1pc}
+{\titlerule
+\vspace{1pc}
+\Huge}
+
+\makeindex
+
+\begin{document}
+
+\frontmatter
+\begin{titlepage}
+\vspace{0cm}
+\centerline{
+\includegraphics[width=9cm]{./logopoli}} 
+\vspace{0.5cm}
+\vspace{2.5cm}
+\centerline{\huge\sf Microelectronic Systems}
+\vspace{1cm}
+\centerline{\Huge\sf DLX Microprocessor: Design \& Development}
+\bigskip
+\centerline{\huge\sf Final Project Report}
+\vspace{1cm}
+\centerline{\Large Master degree in Computer Engineering}
+\bigskip
+\centerline{\Large Master degree in Electronics Engineering}
+\vspace{4.5cm}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+\centerline{\large Referents: Prof. Mariagrazia Graziano, Giovanna Turvani}
+\bigskip
+\vspace{1cm}
+\centerline{\large Authors: group\_16}
+\bigskip
+\centerline{\large \textbf{Battilana Matteo, La Greca Salvatore Gabriele, Pollo Giovanni}}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\vspace{2cm}
+\centerline{\large \today}
+\end{titlepage}
+
+
+\shipout\null
+
+\input{./chapters/0_feature/0_feature.tex}
+
+\tableofcontents
+\lstlistoflistings
+
+\mainmatter
+
+\input{./chapters/1_introduction/1_introduction.tex}
+\input{./chapters/2_dlx/2_hardware_architecture.tex}
+\input{./chapters/3_FetchStage/3_fetch_stage.tex}
+\input{./chapters/4_DecodeStage/4_decode_stage.tex}
+\input{./chapters/5_ExecuteStage/5_execute_stage.tex}
+\input{./chapters/6_MemoryStage/6_memory_stage.tex}
+\input{./chapters/7_WriteBackStage/7_write_back_stage.tex}
+\input{./chapters/8_TestingVerification/8_testing_verification.tex}
+\input{./chapters/9_PhysicalDesign/9_physical_design.tex}
+\input{./chapters/10_Conclusion/10_conclusion.tex}
+
+\appendix
+% \input{./Appendix/appendix1.tex}
+% and so on
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}
