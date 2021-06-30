@@ -8,6 +8,7 @@
 \usepackage{booktabs}
 \usepackage{hyperref}
 \usepackage{tikz}
+\usepackage{tikz-timing}
 \usetikzlibrary{circuits.logic.US}
 
 \newenvironment{listato}{\footnotesize}{\normalsize }
@@ -46,6 +47,23 @@
 \usepackage{verbatim}
 \usepackage{fancyvrb}
 \usepackage{multicol}
+
+
+\usepackage{xparse} % NewDocumentCommand, IfValueTF, IFBooleanTF
+
+% Reference a bus.
+%
+% Usage:
+%
+%     \busref[3::0]{C/BE}    ->   C/BE[3::0]
+%     \busref*{AD}           ->   AD#
+%     \busref*[3::0]{C/BE}   ->   C/BE[3::0]#
+%
+\NewDocumentCommand{\busref}{som}{\texttt{%
+#3%
+\IfValueTF{#2}{[#2]}{}%
+\IfBooleanTF{#1}{\#}{}%
+}}
 
 % Definisce i colori per il codice in VHDL
 
