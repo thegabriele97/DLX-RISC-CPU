@@ -2,7 +2,37 @@
 
 \section{Instruction Decode}
 \section{Register File and Windowing}
-WRITE SOMETHING
+The general structure of a register file is based on a decoder that takes the selection input (so the address of the desired register) and enables it (using also the enable signal). At this point, an input signal will contain the value to be written. On the other hand, a read signal is used to select among all the registers.\newline\newline
+The DLX presented in this document has been enhanced in order to be able to manage subroutine in a transparent manner from the point of view of the user. For this reason, the DLX must be able to handle subroutines, and so the context switching, that consists in saving the
+registers content in order to be restored once the procedure has been completed. The straightforward solution is to save into the memory all registers but this is not feasible in terms of delay, since for 32 registers we will need 32 clock cycles; if you image this in a pipeline, this corresponds to a long stall each time a procedure is called.
+
+A windowed register allows to reduce the overhead due to the context switch; the basic idea
+is to split the available registers in the physical register file into blocks, called \textit{windows}. We have limited amount of physical registers in the register file, for this reason a finite number of windows are defined. Each window is assigned to a subroutine, so that the procedure can write only on those register. This is transparent from the point of view of the CPU, that sees all registers available. Thus, the physical register file has a wrapper around it with a logic and a Register Management Logic (MML) that allows to perform the translation between the CPU requests to corresponding window for the running procedure.\newline\newline
+What if the number of called procedure is larger than the number of available windows? The main
+memory is involved only when there are no free windows in the register file. In this case, the oldest allocated window is swapped into the main memory, so that the new one can be allocated. Obviously, once all the recursion chain has been unrolled, the swapped window in the memory must be restored into the register file.
+All windows, so each procedure, has 4 blocks of 8 registers each one:
+\begin{enumerate}
+	\itemsep0sp
+	\item \textbf{IN}: the first block is dedicated to the data inherited from the parent routine (OUT);
+	\item \textbf{LOCALS}: contains the registers that are dedicated to the procedure;
+	\item \textbf{OUT}: is dedicated to the variables to be passed to the child routine, that is the IN of the next sub-procedure
+	\item \textbf{GLOBAL}: the last block is common to every windows.
+\end{enumerate}
+When a procedure is called, the first LOCALS and OUT blocks are allocated from the physical file register and assigned to it (because IN is the OUT of the previous one).
+
+By calling many nested procedures, at some point there will be no free windows; for this reason the oldest is de-allocated from the physical FR and swapped to the main memory, the operation is called \textbf{SPILL}. This it accomplished by using a support pointer, called \textbf{Saved Window Pointer SWP} that stores the point of the spilled data, exactly the end of the LOCALS block (only IN and LOCAL are spilled, the OUT block is not spilled because is the IN of the next sub-procedure). In practice it define the position of the last free cell. Notice that this operation cannot be executed in one clock cycle: each register is spilled once at a clock cycle.\newline\newline
+On the other hand, when the last procedure in the chain is finished, the other are unrolled; if some of them have been spilled, a \textbf{FILL} must be executed before the actual execution. This can be achieved by, firstly decrement CWP by 16 and check if now CWP $>>$ SWP.\newline\newline
+It's important to notice that the implementation of the entire register file has been implemented in Structural. Is is composed by several components:
+\begin{itemize}
+	\item \textbf{Decoder}: it is used to generate a single enable signal from a signal on \textbf{NBIT\_ADD} bits; in this way, a register is selected in order to perform a write. The register will check also if a write is requested;
+	\item \textbf{Connection matrix}: this block allows to ``highlight" the active windows, the block IN, LOCAL and OUT will be the default destination when writing and reading;
+	\item \textbf{Register file}: this block corresponds to the physical registers, composed by rows of Flip-Flops;
+	\item \textbf{Select block}: this block is used for the reading, is connected to all the registers and selects, using the read address, the single register to be read;
+	\item \textbf{Address generator}: this block is used only when perform a FILL or a SPILL, it generates the address for the registers to be moved from/to the memory. The memory, in this case works exactly like a stack.
+\end{itemize}
+Additional, but less complex components, have been used in order to manage the management of the CWP and SWP.
+
+
 \subsection{Decoder}
 This block receives as input the \emph{write address} on \textbf{NBIT\_ADD} bits and outputs \(\mathbf{2^{NBIT\_ADD} - 1} \) bits. It has the utility of converting the address of the register at which we need to write into its enable signal. 
 
