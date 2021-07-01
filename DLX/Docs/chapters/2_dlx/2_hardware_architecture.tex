@@ -26,6 +26,13 @@ This DLX is a 32-bit RISC processor with a five-stage pipeline. The external int
 
 The DLX processor has a Harvard architecture, with two 32-bit data bus carrying instructions and data respectively. Only load and store instructions can access data from Data Memory. The Data are stored in memory in a Big-Endian format.\\
 
+\begin{bytefield}[endianness=big,bitwidth=0.03\linewidth]{32}
+\bitheader{0, 7, 8, 15, 16, 23, 24, 31} \\
+\bitbox{32}{Word at address A}\\
+\bitbox{16}{Half at address A} & \bitbox{16}{Word at address A+2}\\
+\bitbox{8}{Byte at address A} & \bitbox{8}{Byte at address A+1} & \bitbox{8}{Byte at address A+2} & \bitbox{8}{Byte at address A+3}\\
+\end{bytefield}
+
 The third RAM required, the one for the register file, is not under the direct access of the User. It's managed as a Stack memory by the Register File for automatic sub routines management and it has a dedicated interface. It can be merged with the Data Memory with an external logic.\\
 
 
@@ -91,6 +98,35 @@ When a word access is signaled the memory system ignores the bottom two bits, A[
 
 The \emph{MAS[1:0]} bus encodes the size of the transfer. The DLX processor can transfer word, halfword, and byte quantities and the processor indicates the size of the transfer through this signal.\\
 
-When a halfword or byte read is performed, a 32-bit memory system can return the complete 32-bit word, and the processor extracts the valid halfword or byte field from it. For 8 and 16 bit memories, the data must be placed on the right byte lanes in the data bus.
+When a halfword or byte read is performed, a 32-bit memory system can return the complete 32-bit word, and the processor extracts the valid halfword or byte field from it as shown in Table \ref{table:memory_read_configuration}. For 8 and 16 bit memories, the data must be placed on the right byte lanes in the data bus.
+
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|l|c|l|l|}
+    \hline
+        DATA\_SIZE[1:0] & A[1:0] & D[31:0] & DLX Register \\ \hline
+        00 WORD & 00 & \texttt{0xAABBCCDD} & \texttt{0xAABBCCDD} \\ \hline
+        01 HALF & 00 & \texttt{0xAABB----} & \texttt{0x0000AABB} \\ \hline
+        01 HALF & 10 & \texttt{0x----CCDD} & \texttt{0x0000CCDD} \\ \hline
+        10 BYTE & 00 & \texttt{0xAA------} & \texttt{0x000000AA} \\ \hline
+        10 BYTE & 01 & \texttt{0x--BB----} & \texttt{0x000000BB} \\ \hline
+        10 BYTE & 10 & \texttt{0x----CC--} & \texttt{0x000000CC} \\ \hline
+        10 BYTE & 11 & \texttt{0x------DD} & \texttt{0x000000DD} \\ \hline
+    \end{tabular}
+    \caption{How data are read by the CPU in different MAS configurations}
+    \label{table:memory_read_configuration}
+\end{table}
+
+Instead, when the DLX processor performs a byte or halfword write, the data being written is replicated across the data bus, as shown in Figure \ref{figure:dlx:memory_replication}. The memory system can use the most convenient copy of the data.\\
+
+A writable memory system must be capable of performing a write to any single byte in the memory system. This is required for the correct working of the DLX. 
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{chapters/2_dlx/images/DLX-MemoryWordReplication.pdf}
+    \caption{Data Write Replication}
+    \label{figure:dlx:memory_replication}
+\end{figure} 
 
 \section{Instruction Set}
