@@ -82,16 +82,49 @@ The addr\_pop\_inverted is composed like this:
 
 The signal is splitted into two wires and is anded with the saved related saved window pointer. 
 
-In the end, we definitely OR the output of the previously described OR with the output of this AND. This is visible in the schematic. 
+In the end, we definitely OR the output of the previously described OR with the output of this AND. This is visible in \autoref{connection_matrix}
 
+\begin{figure}[ht]
+  \centering
+  \addtolength{\leftskip}{-3cm}
+  \addtolength{\rightskip}{-3cm}
+  \includegraphics[width=1.4\textwidth]{chapters/4_DecodeStage/images/connection_matrix.pdf}
+  \caption{Connection matrix}
+  \label{connection_matrix}
+\end{figure}
 
 \newpage
 
 \subsection{Register File}
 
-The next block is the Register File, that is a sequence of registers. The important thing to notice in our design is how we managed the data that goes into the registers. We have two choice, data\_in and from\_mem. In order to choose we decided to use multiplexers. 
+The next block is the Register File, that is a sequence of registers. The important thing to notice in our design is how we managed the data that goes into the registers. We have two choices, data\_in and from\_mem. In order to choose we decided to use multiplexers. 
 We have a multiplexer for each window. The signal used to drive the multiplexer is the saved window pointer, rotated right by 1 position and anded with the pop signal. In fact, we select from\_mem only when the pop signal is 1, otherwise we need to select data\_in. 
-We use the saved window pointer shifted by 1 because....... TODO
+We use the saved window pointer shifted right by 1 because when the saved window pointer is, for example 00010 we need to restore the window 00001. 
+
+Indeed, for dataout there are no multiplexers, because there is no choice. 
+
+\subsection{Select Block}
+
+This block is very simple and straightforward. It receives as input the current window, and the output of the register file (of all windows). The it selects the bit of the IN, LOCAL, OUT of the current window. The interface is shown in \autoref{select_block}.
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.65\textwidth]{chapters/4_DecodeStage/images/select_block.pdf}
+  \caption{Interface of the select block}
+  \label{select_block}
+\end{figure}
+
+\subsection{Output Selection}
+This is the stage that decide the two output Data1\_Out and Data2\_Out. The design is shown in \autoref{output_choice}.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.65\textwidth]{chapters/4_DecodeStage/images/output_choice.pdf}
+  \caption{Design of the output selection}
+  \label{output_choice}
+\end{figure}
+
+This stage receives the IN, LOCAL, OUT of the current window, thanks to the select block and the GLOBAL. The two addresses, ADD\_RD1 and ADD\_RD2, select the output of the multiplexer which goes into the register, used to respect the timing. The Enable of each register is the and of the ENABLE and the RD signal. The decision was made in order to stop reading when the circuit is not enabled, and so to have a granural and precise control of the circuit.
 
 \section{Hazard Control}
 \section{Comparator}
