@@ -21,17 +21,61 @@ This DLX is a 32-bit RISC processor with a five-stage pipeline. The external int
 \end{figure} 
 \newpage
 \section{Pipeline Stages}
+
 \section{Control Unit}
+
+The Control Unit is one of the most important part of the DLX processor. Its role is orchestrate all the jobs through the pipeline of the processor and to manage dangerous situations.\\
+
+Its interface is made of input signals (status signals from other components) and of control signals (towards other components), as described in Table \ref{table:cu:input_signals} and Table \ref{table:cu:output_signals}.
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{l|l}
+        \textbf{Signal Name} & \textbf{Description}\\
+        \hline
+        IR\_IN & Fetched Instruction, output from the IR Register \\
+        HAZARD\_SIG & The Decode Stage is signaling a Hazard situation \\
+        BUSY\_WINDOW & The Current RF Window has some registers in use \\
+        SPILL & The Register File has started a push operations towards the memory \\
+        FILL & The Register File has started a pop operations from the memory \\
+        IRAM\_READY & The Instruction Memory has a data ready as output \\
+    \end{tabular}
+    \caption{Input signals towards the Control Unit}
+    \label{table:cu:input_signals}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{l|l}
+        \textbf{Signal Name} & \textbf{Description}\\
+        \hline
+        PIPLIN\_IF\_EN & IF Stage enable: enable the of IR register \\
+        IF\_STALL & IF Stage stall: a NOP is insterted in the IR register \\
+        PC\_EN & Enable of the PC register \\
+        JUMP\_EN & A JUMP must occur, used by the Decode Stage to compute the new PC \\
+        CALL & The Register File must start the context switch (creation of a new window)\\
+        RET & The Register File must restore the previous window\\
+        SEL\_CMPB & Register or Immediate field as comparator input in the Decode Stage\\
+        UNSIGNED\_ID & Indicates that arithmetic units must consider operands as unsigned\\
+
+    \end{tabular}
+    \caption{Output signals towards the Control Unit}
+    \label{table:cu:output_signals}
+\end{table}
+
+
 \section{Memory Interface}
 
 The DLX processor has a Harvard architecture, with two 32-bit data bus carrying instructions and data respectively. Only load and store instructions can access data from Data Memory. The Data are stored in memory in a Big-Endian format.\\
 
-\begin{bytefield}[endianness=big,bitwidth=0.03\linewidth]{32}
-\bitheader{0, 7, 8, 15, 16, 23, 24, 31} \\
-\bitbox{32}{Word at address A}\\
-\bitbox{16}{Half at address A} & \bitbox{16}{Word at address A+2}\\
-\bitbox{8}{Byte at address A} & \bitbox{8}{Byte at address A+1} & \bitbox{8}{Byte at address A+2} & \bitbox{8}{Byte at address A+3}\\
-\end{bytefield}
+\begin{center}
+    \begin{bytefield}[endianness=big,bitwidth=0.03\linewidth]{32}
+    \bitheader{0, 7, 8, 15, 16, 23, 24, 31} \\
+    \bitbox{32}{Word at address A}\\
+    \bitbox{16}{Half at address A} & \bitbox{16}{Word at address A+2}\\
+    \bitbox{8}{Byte at address A} & \bitbox{8}{Byte at address A+1} & \bitbox{8}{Byte at address A+2} & \bitbox{8}{Byte at address A+3}\\
+    \end{bytefield}
+\end{center}
 
 The third RAM required, the one for the register file, is not under the direct access of the User. It's managed as a Stack memory by the Register File for automatic sub routines management and it has a dedicated interface. It can be merged with the Data Memory with an external logic.\\
 
@@ -61,28 +105,30 @@ The \emph{Memory Request signals} are:
 
 Moreover, all the memories connected must agree on a certain protocol both for writing and reading operations. The most important thing to take under consideration is the \emph{Ready} signal: it must be high only when the operation is really completed. For example after a data read, the \emph{Ready} stays at 1 only when the data is valid. If meanwhile the address changes, the \emph{Ready} signal must go off.
 
-\begin{tikztimingtable}[%
-    timing/dslope=0.2,
-    timing/.style={x=8ex,y=2ex},
-    x=8ex,
-    timing/rowdist=3ex,
-    timing/name/.style={font=\sffamily\scriptsize}
-]
-    \busref{CLK}                & 16{c} \\
-    \busref[31:0]{Address}      & 2x 1D{$A_1$} 2D{$A_2$} 1X 1D{$A_4$} UX \\
-    \busref[1:0]{MAS}           & 2x 1D{WORD 00} 2D{HALF 01} X 1D{BYTE 10} 2X\\
-    \busref{Enable}             & 1L 2H HL HL L\\
-    \busref{$RnW$}              & 1L 2H 2H LH L\\
-    Ready                       & ll lh lh hh ll lh LL\\
-    \busref[31:0]{Data In}      & 2x 2x 1X 1X 1X 1D{$D_1$} XX \\
-    \busref[31:0]{DATA Out}      & 2x x1d{$D_1$} x3d{$D_2$} 4X  \\
-    \extracode
-    \begin{pgfonlayer}{background}
-    \begin{scope}[semitransparent ,semithick]
-    \vertlines[darkgray,dotted]{0.5,1.5 ,...,8.0}
-    \end{scope}
-    \end{pgfonlayer}
-\end{tikztimingtable}
+\begin{center}
+    \begin{tikztimingtable}[%
+        timing/dslope=0.2,
+        timing/.style={x=8ex,y=2ex},
+        x=8ex,
+        timing/rowdist=3ex,
+        timing/name/.style={font=\sffamily\scriptsize}
+    ]
+        \busref{CLK}                & 16{c} \\
+        \busref[31:0]{Address}      & 2x 1D{$A_1$} 2D{$A_2$} 1X 1D{$A_4$} UX \\
+        \busref[1:0]{MAS}           & 2x 1D{WORD 00} 2D{HALF 01} X 1D{BYTE 10} 2X\\
+        \busref{Enable}             & 1L 2H HL HL L\\
+        \busref{$RnW$}              & 1L 2H 2H LH L\\
+        Ready                       & ll lh lh hh ll lh LL\\
+        \busref[31:0]{Data In}      & 2x 2x 1X 1X 1X 1D{$D_1$} XX \\
+        \busref[31:0]{DATA Out}      & 2x x1d{$D_1$} x3d{$D_2$} 4X  \\
+        \extracode
+        \begin{pgfonlayer}{background}
+        \begin{scope}[semitransparent ,semithick]
+        \vertlines[darkgray,dotted]{0.5,1.5 ,...,8.0}
+        \end{scope}
+        \end{pgfonlayer}
+    \end{tikztimingtable}
+\end{center}
 
 
 If the memory in use can't accomplish to this timing, an external \emph{Memory Control Unit} must be placed between the CPU and the Memory.
