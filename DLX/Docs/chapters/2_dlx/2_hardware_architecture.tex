@@ -19,6 +19,7 @@ This DLX is a 32-bit RISC processor with a five-stage pipeline. The external int
     \caption{Schematic of the DLX}
     \label{DLX}
 \end{figure} 
+
 \newpage
 \section{Pipeline Stages}
 
@@ -39,6 +40,8 @@ Its interface is made of input signals (status signals from other components) an
         SPILL & The Register File has started a push operations towards the memory \\
         FILL & The Register File has started a pop operations from the memory \\
         IRAM\_READY & The Instruction Memory has a data ready as output \\
+        LGET & Comparison status from the comparator inside the Decode Unit\\
+        DRAM\_READY & Indicates if the DRAM is ready or not\\
     \end{tabular}
     \caption{Input signals towards the Control Unit}
     \label{table:cu:input_signals}
@@ -49,24 +52,64 @@ Its interface is made of input signals (status signals from other components) an
     \begin{tabular}{l|l}
         \textbf{Signal Name} & \textbf{Description}\\
         \hline
-        PIPLIN\_IF\_EN & IF Stage enable: enable the of IR register \\
+        PIPLIN\_IF\_EN & IF Stage enable: enable of IR register \\
         IF\_STALL & IF Stage stall: a NOP is insterted in the IR register \\
         PC\_EN & Enable of the PC register \\
-        JUMP\_EN & A JUMP must occur, used by the Decode Stage to compute the new PC \\
-        CALL & The Register File must start the context switch (creation of a new window)\\
+        JUMP\_EN & A JUMP must occur, the Decode Stage will compute the new PC \\
+        CALL & The Register File must start the context switch in a new window\\
         RET & The Register File must restore the previous window\\
         SEL\_CMPB & Register or Immediate field as comparator input in the Decode Stage\\
-        UNSIGNED\_ID & Indicates that arithmetic units must consider operands as unsigned\\
-
+        UNSIGNED\_ID & Indicates that all arithmetic units must consider operands as unsigned\\
+        NPC\_SEL & Selects as new PC between the value of a REG NPC Adder's output\\
+        HAZARD\_TABLE\_WR1 & Enables the logging of the current instruction in the hazard control\\
+        RF\_RD1\_EN & Enables the Read Port 1 in the RF\\
+        RF\_RD2\_EN & Enables the Read Port 2 in the RF\\
+        PIPLIN\_ID\_EN & ID Stage enable: enables all the ID pipeline REGs\\
+        PIPLIN\_EX\_EN & EX Stage enable: enables all the EX pipeline REGs\\
+        SEL\_LGET & Used by the SET Comparator unit for selection of the SET operand\\
+        DRAM\_WE & Enables the Write Operation in the DRAM\\
+        DRAM\_RE & Enables the Read Operation in the DRAM\\
+        DRAM\_ME & Enable signal for the DRAM\\
+        DATA\_SIZE & Indicates the data of transfer towards/from the DRAM\\
+        UNSIG\_SIGN\_N & Same as \emph{UNSIGNED\_ID} but 2 clock cycles delayed\\
+        PIPLIN\_MEM\_EN & MEM Stage enable: enables all the MEM pipeline REGs\\
+        WB\_MUX\_SEL & Selects between MEM output and ALU out the content to write back\\
+        PIPLIN\_WB\_EN & WB Stage enable: enables the Write signal in the RF\\
     \end{tabular}
     \caption{Output signals towards the Control Unit}
     \label{table:cu:output_signals}
 \end{table}
 
+\subsection{Internal organization of the Control Unit}
+
+The Control Unit internally is organized mainly with a stage that converts the actual Instruction into a Control Word and then this control word is propagated in order to support all the pipeline stages, as shown in Figure \ref{dlx:cu:schematic}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.72\textwidth]{chapters/2_dlx/images/DLX-Cu.pdf}
+    \caption{Schematic of the DLX Control Unit}
+    \label{dlx:cu:schematic}
+\end{figure} 
+
+It is made mainly by the following components:
+
+\begin{itemize}
+    \item IR-Control Word Generation \& Translation Unit: its role is to take the Instruction given as input and to output a valid Control Word related to that instruction.
+    \item Pipeline Execution Unit: it's in charge of controlling the Pipeline Flow and stop it in case of needs and/or masking the actual Control Word in order to stop its propagation through the chain in case of Hazards.
+    \item Control Word Mask Unit: when the \emph{Pipeline Execution Unit} signals to mask the control word, this unit will do it by disabling all the bits in the CW that referees to the stage enabling signals.
+    \item Jump \& Branch Control unit: given the Control Word and other internal control signals, its job is to manage (by enabling or disabling them) signals like \emph{CALL}, \emph{RET}, \emph{JUMP\_EN} and \emph{IF\_STALL}.
+\end{itemize}
+
+% \begin{box_implementation_details}
+%     {\large{\textbf{Implementation details: CW Generation Unit}}}
+% 	\newline
+%     As said, the \emph{IR-Control Word Generation \& Translation Unit} is in charge of taking as input the actual instruction and to give as output a valid control word. How the mapping IR$\xrightarrow$CW is done?\\
+% \end{box_implementation_details}
+
 
 \section{Memory Interface}
 
-The DLX processor has a Harvard architecture, with two 32-bit data bus carrying instructions and data respectively. Only load and store instructions can access data from Data Memory. The Data are stored in memory in a Big-Endian format.\\
+The DLX processor has a Harvard architecture, with two 32-bit data bus carrying instructions and data respectively. Only load and store instructions can access data from Data Memory. The data are stored in memory in a Big-Endian format.\\
 
 \begin{center}
     \begin{bytefield}[endianness=big,bitwidth=0.03\linewidth]{32}
