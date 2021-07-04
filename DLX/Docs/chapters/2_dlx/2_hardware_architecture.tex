@@ -213,9 +213,32 @@ A writable memory system must be capable of performing a write to any single byt
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.85\textwidth]{chapters/2_dlx/images/DLX-MemoryWordReplication.pdf}
+    \includegraphics[width=1.0\textwidth]{chapters/2_dlx/images/DLX-MemoryWordReplication.pdf}
     \caption{Data Write Replication}
     \label{figure:dlx:memory_replication}
 \end{figure} 
 
+\newpage
 \section{Instruction Set}
+
+The Instruction Set supported by the DLX is made of different instructions, in particual regarding Integer operations. Instructions are on 32 bit and are grouped in 3 different types:\\
+
+\begin{figure}[ht]
+    \begin{center}
+        \begin{bytefield}[endianness=big,bitwidth=0.03\linewidth]{32}
+            \bitheader{0, 10, 11, 15, 16, 20, 21, 25, 26, 31} \\
+            \bitbox{6}{OP CODE} & \bitbox{5}{REG SRC1} & \bitbox{5}{REG SRC2} &  \bitbox{5}{REG DEST} & \bitbox{11}{FUNC CODE} \\
+        \end{bytefield}
+    \end{center}
+    \caption{R-Type}
+\end{figure}
+
+\begin{figure}[ht]
+    \begin{center}
+        \begin{bytefield}[endianness=big,bitwidth=0.03\linewidth]{32}
+            \bitheader{0, 15, 16, 20, 21, 25, 26, 31} \\
+            \bitbox{6}{OP CODE} & \bitbox{5}{REG SRC} & \bitbox{5}{REG DEST} &  \bitbox{16}{IMMEDIATE} \\
+        \end{bytefield}
+    \end{center}
+    \caption{I-Type}
+\end{figure}
