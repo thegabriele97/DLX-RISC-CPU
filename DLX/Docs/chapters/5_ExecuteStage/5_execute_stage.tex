@@ -114,7 +114,14 @@ Differently from the T2 version, it uses and addition signal in order to be able
 	\end{center}
 \end{itemize}
 
- The unit perform the requested operation in three stages:
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=0.2\textwidth]{chapters/5_ExecuteStage/images/Shifter.pdf}
+	\caption{Blocks of the Shifter/Rotate Unit}
+	\label{fig:shifter}
+\end{figure}
+
+ The unit perform the requested operation in three stages, sketched in figure \ref{fig:shifter}:
 \begin{enumerate}
 	\item The first consist in preparing 4 possible ``masks", each already shifted of {0, 8, 16, 32} left
 	or right depending on the configuration. This allows to shift for all 32 bits. Basically it copies
@@ -125,14 +132,35 @@ Differently from the T2 version, it uses and addition signal in order to be able
 	\item The third level, using the bits {2, 1, 0} of \texttt{B} and the selected mask, preform a fine grain refinement. The 3 bits allows to select the starting index from the mask, in fact it allows to select among 8 positions.
 \end{enumerate}
 
-\begin{figure}[ht]
-	\centering
-	\includegraphics[width=0.2\textwidth]{chapters/5_ExecuteStage/images/Shifter.pdf}
-	\caption{Blocks of the Shifter/Rotate Unit}
-	\label{shifter}
+
+
+\begin{figure}[H] 
+	\label{ fig7} 
+	\begin{minipage}[b]{0.5\linewidth}
+		\centering
+		\includegraphics[width=.78\linewidth]{chapters/5_ExecuteStage/images/left_shift.pdf} 
+		\caption{Masks for left shift} 
+		\vspace{4ex}
+	\end{minipage}%%
+	\begin{minipage}[b]{0.5\linewidth}
+		\centering
+		\includegraphics[width=.78\linewidth]{chapters/5_ExecuteStage/images/right_shift.pdf}
+		\caption{Masks for right shift} 
+		\vspace{4ex}
+	\end{minipage} 
+	\begin{minipage}[b]{0.5\linewidth}
+		\centering
+		\includegraphics[width=.78\linewidth]{chapters/5_ExecuteStage/images/left_rotate.pdf} 
+		\caption{Masks for left rotate} 
+		\vspace{4ex}
+	\end{minipage}%% 
+	\begin{minipage}[b]{0.5\linewidth}
+		\centering
+		\includegraphics[width=.78\linewidth]{chapters/5_ExecuteStage/images/right_rotate.pdf} 
+		\caption{Masks for right rotate} 
+		\vspace{4ex}
+	\end{minipage} 
 \end{figure}
-
-
 \begin{mybox}
 	\textbf{Examples}
 	\newline
