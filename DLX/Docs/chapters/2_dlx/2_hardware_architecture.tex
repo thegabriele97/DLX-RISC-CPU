@@ -19,12 +19,106 @@ This DLX is a 32-bit RISC processor with a five-stage pipeline. The external int
     \caption{Schematic of the DLX}
     \label{DLX}
 \end{figure} 
+
 \newpage
 \section{Pipeline Stages}
+
 \section{Control Unit}
+
+The Control Unit is one of the most important part of the DLX processor. Its role is orchestrate all the jobs through the pipeline of the processor and to manage dangerous situations.\\
+
+Its interface is made of input signals (status signals from other components) and of control signals (towards other components), as described in Table \ref{table:cu:input_signals} and Table \ref{table:cu:output_signals}.
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{l|l}
+        \textbf{Signal Name} & \textbf{Description}\\
+        \hline
+        IR\_IN & Fetched Instruction, output from the IR Register \\
+        HAZARD\_SIG & The Decode Stage is signaling a Hazard situation \\
+        BUSY\_WINDOW & The Current RF Window has some registers in use \\
+        SPILL & The Register File has started a push operations towards the memory \\
+        FILL & The Register File has started a pop operations from the memory \\
+        IRAM\_READY & The Instruction Memory has a data ready as output \\
+        LGET & Comparison status from the comparator inside the Decode Unit\\
+        DRAM\_READY & Indicates if the DRAM is ready or not\\
+    \end{tabular}
+    \caption{Input signals towards the Control Unit}
+    \label{table:cu:input_signals}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{l|l}
+        \textbf{Signal Name} & \textbf{Description}\\
+        \hline
+        PIPLIN\_IF\_EN & IF Stage enable: enable of IR register \\
+        IF\_STALL & IF Stage stall: a NOP is insterted in the IR register \\
+        PC\_EN & Enable of the PC register \\
+        JUMP\_EN & A JUMP must occur, the Decode Stage will compute the new PC \\
+        CALL & The Register File must start the context switch in a new window\\
+        RET & The Register File must restore the previous window\\
+        SEL\_CMPB & Register or Immediate field as comparator input in the Decode Stage\\
+        UNSIGNED\_ID & Indicates that all arithmetic units must consider operands as unsigned\\
+        NPC\_SEL & Selects as new PC between the value of a REG NPC Adder's output\\
+        HAZARD\_TABLE\_WR1 & Enables the logging of the current instruction in the hazard control\\
+        RF\_RD1\_EN & Enables the Read Port 1 in the RF\\
+        RF\_RD2\_EN & Enables the Read Port 2 in the RF\\
+        PIPLIN\_ID\_EN & ID Stage enable: enables all the ID pipeline REGs\\
+        PIPLIN\_EX\_EN & EX Stage enable: enables all the EX pipeline REGs\\
+        SEL\_LGET & Used by the SET Comparator unit for selection of the SET operand\\
+        DRAM\_WE & Enables the Write Operation in the DRAM\\
+        DRAM\_RE & Enables the Read Operation in the DRAM\\
+        DRAM\_ME & Enable signal for the DRAM\\
+        DATA\_SIZE & Indicates the data of transfer towards/from the DRAM\\
+        UNSIG\_SIGN\_N & Same as \emph{UNSIGNED\_ID} but 2 clock cycles delayed\\
+        PIPLIN\_MEM\_EN & MEM Stage enable: enables all the MEM pipeline REGs\\
+        WB\_MUX\_SEL & Selects between MEM output and ALU out the content to write back\\
+        PIPLIN\_WB\_EN & WB Stage enable: enables the Write signal in the RF\\
+    \end{tabular}
+    \caption{Output signals towards the Control Unit}
+    \label{table:cu:output_signals}
+\end{table}
+
+\subsection{Internal organization of the Control Unit}
+
+The Control Unit internally is organized mainly with a stage that converts the actual Instruction into a Control Word and then this control word is propagated in order to support all the pipeline stages, as shown in Figure \ref{dlx:cu:schematic}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.72\textwidth]{chapters/2_dlx/images/DLX-Cu.pdf}
+    \caption{Schematic of the DLX Control Unit}
+    \label{dlx:cu:schematic}
+\end{figure} 
+
+It is made mainly by the following components:
+
+\begin{itemize}
+    \item IR-Control Word Generation \& Translation Unit: its role is to take the Instruction given as input and to output a valid Control Word related to that instruction.
+    \item Pipeline Execution Unit: it's in charge of controlling the Pipeline Flow and stop it in case of needs and/or masking the actual Control Word in order to stop its propagation through the chain in case of Hazards.
+    \item Control Word Mask Unit: when the \emph{Pipeline Execution Unit} signals to mask the control word, this unit will do it by disabling all the bits in the CW that referees to the stage enabling signals.
+    \item Jump \& Branch Control unit: given the Control Word and other internal control signals, its job is to manage (by enabling or disabling them) signals like \emph{CALL}, \emph{RET}, \emph{JUMP\_EN} and \emph{IF\_STALL}.
+\end{itemize}
+
+% \begin{box_implementation_details}
+%     {\large{\textbf{Implementation details: CW Generation Unit}}}
+% 	\newline
+%     As said, the \emph{IR-Control Word Generation \& Translation Unit} is in charge of taking as input the actual instruction and to give as output a valid control word. How the mapping IR$\xrightarrow$CW is done?\\
+% \end{box_implementation_details}
+
+
 \section{Memory Interface}
 
-The DLX processor has a Harvard architecture, with two 32-bit data bus carrying instructions and data respectively. Only load and store instructions can access data from Data Memory. The Data are stored in memory in a Big-Endian format.\\
+The DLX processor has a Harvard architecture, with two 32-bit data bus carrying instructions and data respectively. Only load and store instructions can access data from Data Memory. The data are stored in memory in a Big-Endian format.\\
+
+\begin{center}
+    \begin{bytefield}[endianness=big,bitwidth=0.03\linewidth]{32}
+    \bitheader{0, 7, 8, 15, 16, 23, 24, 31} \\
+    \bitbox{32}{Word at address A}\\
+    \bitbox{16}{Half at address A} & \bitbox{16}{Word at address A+2}\\
+    \bitbox{8}{Byte at address A} & \bitbox{8}{Byte at address A+1} & \bitbox{8}{Byte at address A+2} & \bitbox{8}{Byte at address A+3}\\
+    \end{bytefield}
+\end{center}
 
 The third RAM required, the one for the register file, is not under the direct access of the User. It's managed as a Stack memory by the Register File for automatic sub routines management and it has a dedicated interface. It can be merged with the Data Memory with an external logic.\\
 
@@ -54,28 +148,30 @@ The \emph{Memory Request signals} are:
 
 Moreover, all the memories connected must agree on a certain protocol both for writing and reading operations. The most important thing to take under consideration is the \emph{Ready} signal: it must be high only when the operation is really completed. For example after a data read, the \emph{Ready} stays at 1 only when the data is valid. If meanwhile the address changes, the \emph{Ready} signal must go off.
 
-\begin{tikztimingtable}[%
-    timing/dslope=0.2,
-    timing/.style={x=8ex,y=2ex},
-    x=8ex,
-    timing/rowdist=3ex,
-    timing/name/.style={font=\sffamily\scriptsize}
-]
-    \busref{CLK}                & 16{c} \\
-    \busref[31:0]{Address}      & 2x 1D{$A_1$} 2D{$A_2$} 1X 1D{$A_4$} UX \\
-    \busref[1:0]{MAS}           & 2x 1D{WORD 00} 2D{HALF 01} X 1D{BYTE 10} 2X\\
-    \busref{Enable}             & 1L 2H HL HL L\\
-    \busref{$RnW$}              & 1L 2H 2H LH L\\
-    Ready                       & ll lh lh hh ll lh LL\\
-    \busref[31:0]{Data In}      & 2x 2x 1X 1X 1X 1D{$D_1$} XX \\
-    \busref[31:0]{DATA Out}      & 2x x1d{$D_1$} x3d{$D_2$} 4X  \\
-    \extracode
-    \begin{pgfonlayer}{background}
-    \begin{scope}[semitransparent ,semithick]
-    \vertlines[darkgray,dotted]{0.5,1.5 ,...,8.0}
-    \end{scope}
-    \end{pgfonlayer}
-\end{tikztimingtable}
+\begin{center}
+    \begin{tikztimingtable}[%
+        timing/dslope=0.2,
+        timing/.style={x=8ex,y=2ex},
+        x=8ex,
+        timing/rowdist=3ex,
+        timing/name/.style={font=\sffamily\scriptsize}
+    ]
+        \busref{CLK}                & 16{c} \\
+        \busref[31:0]{Address}      & 2x 1D{$A_1$} 2D{$A_2$} 1X 1D{$A_4$} UX \\
+        \busref[1:0]{MAS}           & 2x 1D{WORD 00} 2D{HALF 01} X 1D{BYTE 10} 2X\\
+        \busref{Enable}             & 1L 2H HL HL L\\
+        \busref{$RnW$}              & 1L 2H 2H LH L\\
+        Ready                       & ll lh lh hh ll lh LL\\
+        \busref[31:0]{Data In}      & 2x 2x 1X 1X 1X 1D{$D_1$} XX \\
+        \busref[31:0]{DATA Out}      & 2x x1d{$D_1$} x3d{$D_2$} 4X  \\
+        \extracode
+        \begin{pgfonlayer}{background}
+        \begin{scope}[semitransparent ,semithick]
+        \vertlines[darkgray,dotted]{0.5,1.5 ,...,8.0}
+        \end{scope}
+        \end{pgfonlayer}
+    \end{tikztimingtable}
+\end{center}
 
 
 If the memory in use can't accomplish to this timing, an external \emph{Memory Control Unit} must be placed between the CPU and the Memory.
@@ -91,6 +187,58 @@ When a word access is signaled the memory system ignores the bottom two bits, A[
 
 The \emph{MAS[1:0]} bus encodes the size of the transfer. The DLX processor can transfer word, halfword, and byte quantities and the processor indicates the size of the transfer through this signal.\\
 
-When a halfword or byte read is performed, a 32-bit memory system can return the complete 32-bit word, and the processor extracts the valid halfword or byte field from it. For 8 and 16 bit memories, the data must be placed on the right byte lanes in the data bus.
+When a halfword or byte read is performed, a 32-bit memory system can return the complete 32-bit word, and the processor extracts the valid halfword or byte field from it as shown in Table \ref{table:memory_read_configuration}. For 8 and 16 bit memories, the data must be placed on the right byte lanes in the data bus.
 
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|l|c|l|l|}
+    \hline
+        DATA\_SIZE[1:0] & A[1:0] & D[31:0] & DLX Register \\ \hline
+        00 WORD & 00 & \texttt{0xAABBCCDD} & \texttt{0xAABBCCDD} \\ \hline
+        01 HALF & 00 & \texttt{0xAABB----} & \texttt{0x0000AABB} \\ \hline
+        01 HALF & 10 & \texttt{0x----CCDD} & \texttt{0x0000CCDD} \\ \hline
+        10 BYTE & 00 & \texttt{0xAA------} & \texttt{0x000000AA} \\ \hline
+        10 BYTE & 01 & \texttt{0x--BB----} & \texttt{0x000000BB} \\ \hline
+        10 BYTE & 10 & \texttt{0x----CC--} & \texttt{0x000000CC} \\ \hline
+        10 BYTE & 11 & \texttt{0x------DD} & \texttt{0x000000DD} \\ \hline
+    \end{tabular}
+    \caption{How data are read by the CPU in different MAS configurations}
+    \label{table:memory_read_configuration}
+\end{table}
+
+Instead, when the DLX processor performs a byte or halfword write, the data being written is replicated across the data bus, as shown in Figure \ref{figure:dlx:memory_replication}. The memory system can use the most convenient copy of the data.\\
+
+A writable memory system must be capable of performing a write to any single byte in the memory system. This is required for the correct working of the DLX. 
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\textwidth]{chapters/2_dlx/images/DLX-MemoryWordReplication.pdf}
+    \caption{Data Write Replication}
+    \label{figure:dlx:memory_replication}
+\end{figure} 
+
+\newpage
 \section{Instruction Set}
+
+The Instruction Set supported by the DLX is made of different instructions, in particual regarding Integer operations. Instructions are on 32 bit and are grouped in 3 different types:\\
+
+\begin{figure}[ht]
+    \begin{center}
+        \begin{bytefield}[endianness=big,bitwidth=0.03\linewidth]{32}
+            \bitheader{0, 10, 11, 15, 16, 20, 21, 25, 26, 31} \\
+            \bitbox{6}{OP CODE} & \bitbox{5}{REG SRC1} & \bitbox{5}{REG SRC2} &  \bitbox{5}{REG DEST} & \bitbox{11}{FUNC CODE} \\
+        \end{bytefield}
+    \end{center}
+    \caption{R-Type}
+\end{figure}
+
+\begin{figure}[ht]
+    \begin{center}
+        \begin{bytefield}[endianness=big,bitwidth=0.03\linewidth]{32}
+            \bitheader{0, 15, 16, 20, 21, 25, 26, 31} \\
+            \bitbox{6}{OP CODE} & \bitbox{5}{REG SRC} & \bitbox{5}{REG DEST} &  \bitbox{16}{IMMEDIATE} \\
+        \end{bytefield}
+    \end{center}
+    \caption{I-Type}
+\end{figure}

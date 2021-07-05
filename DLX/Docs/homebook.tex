@@ -11,6 +11,8 @@
 \usepackage{tikz-timing}
 \usetikzlibrary{circuits.logic.US}
 \usepackage[most]{tcolorbox}
+\usepackage{array}
+\usepackage{bytefield}
 
 \newenvironment{listato}{\footnotesize}{\normalsize }
 
@@ -55,6 +57,13 @@
 	boxrule=0pt,frame hidden,
 	borderline west={3pt}{0pt}{DarkGreen},
 	colback=LightGreen,
+	sharp corners
+}
+\newtcolorbox{box_implementation_details}{
+	enhanced,
+	boxrule=0pt,frame hidden,
+	borderline west={3pt}{0pt}{DarkGreen},
+	colback=lightgray,
 	sharp corners
 }
 
