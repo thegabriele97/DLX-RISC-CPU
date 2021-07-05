@@ -2,6 +2,106 @@
 
 \section{ALU: Arithmetic Logic Unit}
 \subsection{Adder}
+The straightforward way to implement an adder is to use the Ripple Carry Adder structure, that is composed of $N-1$ Full Adder and one Half Adder (the first), where $N$ is the number of bits of the two operands. This solution is not optimal from a timing point of view due to the time needed to propagate the carry, that defines the critical path, that is the bottleneck. \newline\newline
+Since the sum and the subtraction is one of the most common operation, the DLX includes an adder that is based on a CLA - Carry Look Ahead (Sparse Tree) and a Carry Select Like Adder. The complete structure can be seen at figure \ref{fig:P4}.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.5\textwidth]{chapters/5_ExecuteStage/images/P4.pdf}
+	\caption{Booth's multiplier on 32 bits}
+	\label{fig:P4}
+\end{figure}
+As said before, the adder is composed of two blocks:
+\begin{itemize} 
+	\item \textbf{Carry Select Like Adder}: The main point of the Carry Select Adder is that it doubles the complexity of the adder itself in order to obtain better performances. It is composed by two RCA, in order to perform two sums in parallel.
+	
+	The idea is to compute both the results, on 4 bits in this case, for both when the carry-in is equal to `0' or `1'. In this way, the results is computed in parallel for all the stages, even if the carry-in is `0' or `1'; then the carry-in is used to mux against the two results (on 4 bits) and the two carry-outs. The carry-out will be used as result selection signal for the next Carry Select unit.
+	
+	We are paying complexity in order to reduce the addition computation time, in fact by having a carry out that is used as carry in for the next state, there is still propagation but is lower.\newline\newline	
+	The DLX implementation, instead of using a straightforward implementation of the Carry Select Adder, it uses a modified version of it. It has been implemented using \textit{CLA - Sparse Tree Carry Generator} and a \textit{Carry Select Like Adder}. The base idea is to use the CLA in order to compute a carry every $n$ bits, then these carries are fed into the sum generator that uses them to compute the results in parallel.
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=1\textwidth]{chapters/5_ExecuteStage/images/carry_sum.pdf}
+		\caption{Carry Select Like Adder block for a 32 bits implementation}
+		\label{fig:carry_sum}
+	\end{figure}
+	\item \textbf{Carry Look Ahead - Sparse Tree}: this block is used to compute the carry out every 4 bits. The idea behind the CLA is to compute several carries simultaneously and to avoid waiting until the correct carry propagates from the stage of the adder in which it has been generated. This is done thanks to the \textit{propagate (P)} (that is 1 if the carry-in is equal to the carry-out) and \textit{generate (G)} (that is one if carry-in is 0 and carry-out is 1).
+	\begin{table}[H]
+		\begin{center}
+			\begin{tabular}{ c c c | c c | c c}
+				$a$ & $b$ & $c_{in}$ & $out$ & $c_{out}$ & $p$ & $g$ \\
+				\hline
+				0 & 0 & 0 & 0 & 0 & 0 & 0\\ 
+				0 & 0 & 1 & 1 & 0 & 0 & 0\\ 
+				0 & 1 & 0 & 1 & 0 & 1 & 0\\ 
+				0 & 1 & 1 & 0 & 1 & 1 & 0\\ 
+				1 & 0 & 0 & 1 & 0 & 1 & 0\\ 
+				1 & 0 & 1 & 0 & 1 & 1 & 0\\ 
+				1 & 1 & 0 & 0 & 1 & 0 & 1\\ 
+				1 & 1 & 1 & 1 & 1 & 0 & 1\\ 
+			\end{tabular}
+			\caption{Computation of propagate and generate bits}
+		\end{center}
+	\end{table}
+	\begin{equation} \label{eq:pandg}
+		g = a \oplus b \quad\quad p = a \cdot b
+	\end{equation}
+	The base idea is to write any $s_i$, that is the i-esim bit of the sum and $c_i$, the carry-out at $i$ index in function of $p$ and $g$.
+	We now use $p$ and $g$ to express the same result:
+	\begin{align*}
+		& s_1 = a \oplus b \oplus c_{in} = p_1 \oplus c_0\\
+		& c_1 = a \cdot b + a \cdot c + b \cdot c = a_1 \cdot b_1 + (a_1 + b_1) \cdot c_0 =  g_1 + p_1 \cdot c_0
+	\end{align*}
+	The crucial point is that it's possible to compute the carry at $i$ position only using the initial carry-in $c_{in}$ and $p$ and $g$ generate in the current and previous blocks. Tree are a family of Carry Look Ahead that differ for the carry-logic. They are based always on \textit{propagate} and \textit{generate}. We have that 	
+	\begin{align*}
+		& carry = g + p \cdot c_{in}\\
+		& G_{i:j} = G_{i:k} + P_{i:k} \cdot G_{k-1:j}\\
+		& P_{i:j} = P_{i:k} \cdot P_{k-1:j}
+	\end{align*}
+	where
+	\begin{itemize}
+		\itemsep0sp
+		\item $i \ge k > j$
+		\item $G_{x:x} = g_x$ and $P_{x:x} = p_x$
+		\item $g_0 = C_{in}$
+	\end{itemize}
+	The white and gray blocks in the Sparse Tree block at \ref{fig:pg_network}, that are used in the \texttt{carry\_generator} block, are PG and G blocks.
+	Normally two blocks are used, the first \textit{G} generates only $G_{i:j}$ and the other \textit{PG} both $G_{i:j}$ and $P_{i:j}$.
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=0.4\textwidth]{chapters/5_ExecuteStage/images/PG_and_G.pdf}
+		\caption{PG and P block}
+		\label{fig:PG_and_G}
+	\end{figure}
+	The base idea is to combine their outputs and take only the G one as carries.
+\end{itemize}
+So, Carry Look Ahead - Sparse Tree needs a starting block that generates all the $p$ and $g$ for all the couples of bit using the \ref{eq:pandg} equation. The spars tree and the PG network structure is shown in the figure \ref{fig:pg_network}, in the code this block is called \texttt{prop\_gen\_generic} and is made of \texttt{prop\_gen} block in order to compute $p$ and $g$.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\textwidth]{chapters/5_ExecuteStage/images/CLA.pdf}
+	\caption{Carry Look Ahead - Carry Generator Block}
+	\label{fig:pg_network}
+\end{figure}
+In order to be able to perform both subtraction and sum, the first block must be modified and must include the logic to manage also the carry-in, that in case of a subtraction it is `1'. This is not enough to perform subtraction, in fact, an additional signal called \texttt{SUB\_SUMN} is needed.
+So, the same structure can be used to implement the subtraction, by adding an XOR on each B input with the \texttt{SUB\_SUMN} control signal.
+
+We can say that a subtraction in 2's complement can be implemented as $A + \overline{B} + 1$; in order to implement this in the circuit we need to set the carry-in to `1' (so \texttt{SUB\_SUMN} = `1') in order to add 1 and invert the B input by using the XOR. In fact:
+\begin{displaymath}
+	\begin{array}{c c|c}
+		% |c c|c| means that there are three columns in the table and
+		% a vertical bar '|' will be printed on the left and right borders,
+		% and between the second and the third columns.
+		% The letter 'c' means the value will be centered within the column,
+		% letter 'l', left-aligned, and 'r', right-aligned.
+		x & y & y \oplus q\\ % Use & to separate the columns
+		\hline % Put a horizontal line between the table header and the rest.
+		0 & 0 & 0\\
+		0 & 1 & 1\\
+		1 & 0 & 1\\
+		1 & 1 & 0\\
+	\end{array}
+\end{displaymath}
+This solution is good because the PG and G block has the same delay, that is driven by G and since both include it, they are the same. Many paths have the same delay and the load on components is good since an output of a block is connected at maximum to 2 other block. These two factors bring a good \textit{equilibrium} to the entire structure.
 \subsection{Multiplier}
 In order to overcome the limitation of the array multiplier, this DLX implementation includes the Booth's multiplier. The Booth's algorithm copes with 3 bits at a time, so the number of stages is $N/2$ (this corresponds to the number of the encoders) and this allows to speed up the result computation. 
 The Booth's algorithm is the following:
@@ -16,7 +116,7 @@ The Booth's algorithm is the following:
 \end{lstlisting}
 Where \texttt{P} is the final value of the product and during the algorithm execution it will contain the partial result; \texttt{M} represents the number of bit of the multiplicand, in this case $B$. The algorithm takes as convention that $B_{i-1} = 0$. The \texttt{Vp} is a lookup table (see \ref{mult:lut}), that return the value to add to \texttt{P}, according to the 3 bits selected. The value of $A$ is multiplied by 4.
 
-\begin{table}
+\begin{table}[H]
 	\begin{center}
 		\begin{tabular}{ c c c | c}
 			0 & 0 & 0 & 0\\ 
@@ -37,7 +137,7 @@ The Booth's multiplier work with 3 main components, supposing $A$ is the multipl
 \begin{enumerate}
 	\item $N/2$ encoders in order to take 3 bits from the operand $B$ that are used as selection signal for the multiplexers;
 	\item $N/2$ multiplexers that select among $\{0, A, -A, 2A, -2A\}$, since at each stage $A$ must be multiplied by 4, a shift by two is done starting from $A$ of the previous multiplexer. The sign extension for $A$ is needed in order be able to multiply negative numbers, since the adder works with $NBIT*2$ bits;
-	\item $N/2$ ripple carry adders on $NBIT*2 + 1$ bits, that allow to preform the partial sums. An addition signal called \texttt{SUB\_SUMn} has been added in order to be able to perform the subtraction.
+	\item $N/2$ ripple carry adders on $NBIT*2 + 1$ bits, that allow to preform the partial sums. An addition signal called \texttt{SUB\_SUMn} has been added in order to be able to perform the subtraction. The Ripple Carry Adder has been select for its simplicity and since the multiplication is a less common instruction, it was not worth to use a more sophisticated adder. This allowed to reduce the total area of the multiplier itself.
 \end{enumerate}
 The multiplexer implements the \textit{LUT} and at the same time the $A = A * 4$. The two values from the two multiplexer are summed together via an adder, this implements the partial sum. The overall structure can be observed at \ref{fig:multiplier}.
 
