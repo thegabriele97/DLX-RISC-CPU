@@ -68,7 +68,7 @@ begin
 	) port map(
 		A => A,	  
 		B => B,	  
-		SUB_SUMN => '1', 	-- set to 0 because we always need to do the SUB, neve SUM
+		SUB_SUMN => '1', 	-- set to 1 because we always need to do the SUB, neve SUM
 		S => S, 		  
 		Cout => Cout	  
 	);
