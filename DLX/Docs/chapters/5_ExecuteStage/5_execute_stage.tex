@@ -3,6 +3,52 @@
 \section{ALU: Arithmetic Logic Unit}
 \subsection{Adder}
 \subsection{Multiplier}
+In order to overcome the limitation of the array multiplier, this DLX implementation includes the Booth's multiplier. The Booth's algorithm copes with 3 bits at a time, so the number of stages is $N/2$ (this corresponds to the number of the encoders) and this allows to speed up the result computation. 
+The Booth's algorithm is the following:
+\begin{lstlisting}[frame=none, escapeinside={(*}{*)}]
+	i = 0
+	P = 0
+	while i (*$\leq$*) M - 2 loop
+		P = P + Vp( (*$B_{i+1}, B_i, B_{i-1}$*) )
+		A = A * 4
+		i = i + 2
+	end loop
+\end{lstlisting}
+Where \texttt{P} is the final value of the product and during the algorithm execution it will contain the partial result; \texttt{M} represents the number of bit of the multiplicand, in this case $B$. The algorithm takes as convention that $B_{i-1} = 0$. The \texttt{Vp} is a lookup table (see \ref{mult:lut}), that return the value to add to \texttt{P}, according to the 3 bits selected. The value of $A$ is multiplied by 4.
+
+\begin{table}
+	\begin{center}
+		\begin{tabular}{ c c c | c}
+			0 & 0 & 0 & 0\\ 
+			0 & 0 & 1 & +A\\ 
+			0 & 1 & 0 & +A\\ 
+			0 & 1 & 1 & +2A\\ 
+			1 & 0 & 0 & -2A\\ 
+			1 & 0 & 1 & -A\\ 
+			1 & 1 & 0 & -A\\ 
+			1 & 1 & 1 & 0\\ 
+		\end{tabular}
+		\caption{Booth's LUT}
+		\label{mult:lut}
+	\end{center}
+\end{table}
+
+The Booth's multiplier work with 3 main components, supposing $A$ is the multiplicand and $B$ the multiplier:
+\begin{enumerate}
+	\item $N/2$ encoders in order to take 3 bits from the operand $B$ that are used as selection signal for the multiplexers;
+	\item $N/2$ multiplexers that select among $\{0, A, -A, 2A, -2A\}$, since at each stage $A$ must be multiplied by 4, a shift by two is done starting from $A$ of the previous multiplexer. The sign extension for $A$ is needed in order be able to multiply negative numbers, since the adder works with $NBIT*2$ bits;
+	\item $N/2$ ripple carry adders on $NBIT*2 + 1$ bits, that allow to preform the partial sums. An addition signal called \texttt{SUB\_SUMn} has been added in order to be able to perform the subtraction.
+\end{enumerate}
+The multiplexer implements the \textit{LUT} and at the same time the $A = A * 4$. The two values from the two multiplexer are summed together via an adder, this implements the partial sum. The overall structure can be observed at \ref{fig:multiplier}.
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=0.8\textwidth]{chapters/5_ExecuteStage/images/multiplier.pdf}
+	\caption{Booth's multiplier on 32 bits}
+	\label{fig:multiplier}
+\end{figure}
+
+	
 \subsection{Logic Operands}
 The basic and most simple implementation of a logic unit is based on single logic gates on $N$ bits whose outputs are muxed, in order to generate the correct output. The problem with this solution is that the number of input signals to the multiplexer is extremely high; this implementation does not only suffer from the point of view of the delay but, since each logic function is implemented with a specific gate, the total area is huge.\newline\newline
 In order to overcome the problems highlighted before, a more compact implementation has been chosen: the T2 logic unit.
@@ -134,7 +180,7 @@ Differently from the T2 version, it uses and addition signal in order to be able
 
 
 
-\begin{figure}[H] 
+\begin{figure}[h] 
 	\label{ fig7} 
 	\begin{minipage}[b]{0.5\linewidth}
 		\centering
@@ -160,6 +206,7 @@ Differently from the T2 version, it uses and addition signal in order to be able
 		\caption{Masks for right rotate} 
 		\vspace{4ex}
 	\end{minipage} 
+	\caption{Masks for shift unit on 32 bits} 
 \end{figure}
 \begin{mybox}
 	\textbf{Examples}
