@@ -126,6 +126,21 @@ This is the stage that decide the two output Data1\_Out and Data2\_Out. The desi
 
 This stage receives the IN, LOCAL, OUT of the current window, thanks to the select block and the GLOBAL. The two addresses, ADD\_RD1 and ADD\_RD2, select the output of the multiplexer which goes into the register, used to respect the timing. The Enable of each register is the and of the ENABLE and the RD signal. The decision was made in order to stop reading when the circuit is not enabled, and so to have a granural and precise control of the circuit.
 
+\subsection{Next Window Calculator}
+
+This block is used to compute the next window, both for the current window and the saved window. The schematic is shown in \autoref{nwin_cal}.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=1\textwidth]{chapters/4_DecodeStage/images/nwin_cal.pdf}
+  \caption{Design of the next window calculator}
+  \label{nwin_cal}
+\end{figure}
+
+Inside this block there is a logic able to rotate right or left and a multiplexer, that allows to select the correct output based on what the circuit needs. 
+
+\subsection{Spill}
+
 \section{Hazard Control}
 \section{Comparator}
 - Unsigned things 
