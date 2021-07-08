@@ -1,6 +1,53 @@
 \chapter{Execute Stage}
 
 \section{ALU: Arithmetic Logic Unit}
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.7\textwidth]{chapters/5_ExecuteStage/images/ALU.pdf}
+	\caption{ALU unit}
+	\label{fig:ALU}
+\end{figure}
+The Arithmetic Logic Unit can be seen as a block, that given a selection signal and the inputs is able to perform computation over the operands. The ALU implementation described in this document is based on the following block:
+\begin{itemize}
+	\itemsep0sp
+	\item Adder
+	\item Multiplier
+	\item Logic unit
+	\item Shifter
+\end{itemize}
+Each one of these blocks will be explained in the following sections.
+
+
+The base concept is that, internally, the 4 units are selected through a multiplexer that takes two out five bits from a selection signal called \texttt{OP}. Having 5 bits to describe the type of operation, the possible combinations and their relative operations are:
+\begin{table}[H]
+	\centering
+	\begin{tabular}{c | c |l}
+		\texttt{OP} & \textbf{Unit} &\textbf{Operation}\\
+		\hline
+		000 00 & \multirow{2}{*}{ADD}& ADD\\
+		001 00 & & SUB \\
+		\hline
+		000 01 & MUL & MUL\\
+		\hline
+		000 10 & \multirow{6}{*}{LOGIC}& AND \\
+		001 10 & & NAND \\
+		010 10 & & OR \\
+		011 10 & & NOR \\
+		100 10 & & XOR \\
+		101 10 & & XNOR \\
+		\hline
+		000 11 &\multirow{6}{*}{SHIFT} & SHIFT RIGHT \\
+		001 11 & & SHIFT LEFT \\
+		010 110 & & ARITH SHIFT RIGHT \\
+		011 11 &  & ARITH SHIFT LEFT\\
+		100 11 &  & ROTATE RIGHT\\
+		101 11 &  & ROTATE LEFT\\
+	\end{tabular}
+	\caption{ALU operations encoding}
+\end{table}
+
+The two LSBs are the ones used as selection input for the multiplexer that select from which ALU unit takes the result. In fact, the univocally define the unit to be used. The remaining three MSBs are used as input for the units that compose the ALU in order to select the correct operation.
+
 \subsection{Adder}
 The straightforward way to implement an adder is to use the Ripple Carry Adder structure, that is composed of $N-1$ Full Adder and one Half Adder (the first), where $N$ is the number of bits of the two operands. This solution is not optimal from a timing point of view due to the time needed to propagate the carry, that defines the critical path, that is the bottleneck. \newline\newline
 Since the sum and the subtraction is one of the most common operation, the DLX includes an adder that is based on a CLA - Carry Look Ahead (Sparse Tree) and a Carry Select Like Adder. The complete structure can be seen at figure \ref{fig:P4}.
@@ -119,6 +166,8 @@ Where \texttt{P} is the final value of the product and during the algorithm exec
 \begin{table}[H]
 	\begin{center}
 		\begin{tabular}{ c c c | c}
+			$B_{i+1}$ & $B_{i}$ & $B_{i-1}$ & \\
+			\hline 
 			0 & 0 & 0 & 0\\ 
 			0 & 0 & 1 & +A\\ 
 			0 & 1 & 0 & +A\\ 
@@ -222,9 +271,11 @@ This logic unit allows to perform AND, NAND, OR, NOR, XOR and XNOR using only 5 
 
 	In order to compute one of the logical instructions, the select signals are properly activated as follow:
 	
+	\begin{figure}[ht]
+		\centering
 	\[
 	\begin{vmatrix}
-		S_0 & S_1 & S_2 & S_3 & \text{operation}\\
+		S_0 & S_1 & S_2 & S_3 & \text{Operation}\\
 		0 & 0 & 0 & 1 & AND \\
 		1 & 1 & 1 & 0 & NAND \\
 		0 & 1 & 1 & 1 & OR \\
@@ -233,12 +284,32 @@ This logic unit allows to perform AND, NAND, OR, NOR, XOR and XNOR using only 5 
 		1 & 0 & 0 & 1 & NXOR \\
 	\end{vmatrix}
 	\]
-	
+	  \caption{Logic input signals with the relative operation}
+	  \label{tab:log_sign}
+\end{figure}
 	
 	For example, in order to generate the AND logical operation, we have to select $S_3 = 1$, so that $out = R_1 \cdot R_2$; on the other hand, if we need NAND $S_0 = S_1 = S_2 = 1$ and $S_3 = 0$, so that $out = \overline{R_1} \cdot \overline{R_2} + \overline{R_1} \cdot R_2 + R_1 \cdot \overline{R_2} = \overline{R_1} \cdot \overline{R_2}$ that using the De Morgan law $out = \overline{R_1 \cdot R_2}$.
-	This allows to obtain the best performances also because all paths work in parallel, compacting the area and the delay.
+	This allows to obtain the best performances also because all paths work in parallel, compacting the area and the delay.\newline\newline
+	Since only the 3 bits are used to select among the logical operations (\texttt{S} signal), a direct correspondance is needed to generate the signal show in table \ref{tab:log_sign}. The following table, shows the conversion:
+	\begin{table}[H]
+		\begin{center}
+			\begin{tabular}{ c| c}
+				\texttt{S} & Decoded signal \\
+				\hline
+				000 & 0001 \\
+				001 & 1110 \\
+				010 & 0111 \\
+				011 & 1000 \\
+				100 & 0110 \\ 
+				101 & 1001 \\ 
+				110 & 0000 \\ 
+				
+			\end{tabular}
+			\caption{Conversion table, from \texttt{S} input signal on 3 bits into 4 bits}
+		\end{center}
+	\end{table}
 
-\subsection{Shifting}
+\subsection{Shifter}
 The implemented shifter allows to perform shift right, logical/arithmetical shift left and left/right rotate using the full operand \texttt{A} on 32 bits and 6 bits from the second one \texttt{B} and three \textit{control signals}.
 Differently from the T2 version, it uses and addition signal in order to be able to manage also the rotate instruction. Our implementation takes three inputs:
 \begin{itemize}
