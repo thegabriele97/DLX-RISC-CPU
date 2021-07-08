@@ -103,7 +103,7 @@ We can say that a subtraction in 2's complement can be implemented as $A + \over
 \end{displaymath}
 This solution is good because the PG and G block has the same delay, that is driven by G and since both include it, they are the same. Many paths have the same delay and the load on components is good since an output of a block is connected at maximum to 2 other block. These two factors bring a good \textit{equilibrium} to the entire structure.
 \subsection{Multiplier}
-In order to overcome the limitation of the array multiplier, this DLX implementation includes the Booth's multiplier. The Booth's algorithm copes with 3 bits at a time, so the number of stages is $N/2$ (this corresponds to the number of the encoders) and this allows to speed up the result computation. 
+In order to overcome the limitation of the array multiplier, this DLX implementation includes a modified version of the Booth's multiplier, since the multiplex for the partial values to be added is only on two bits instead of three. The Booth's algorithm copes with 3 bits at a time, so the number of stages is $N/2$ (this corresponds to the number of the encoders) and this allows to speed up the result computation. 
 The Booth's algorithm is the following:
 \begin{lstlisting}[frame=none, escapeinside={(*}{*)}]
 	i = 0
@@ -135,11 +135,11 @@ Where \texttt{P} is the final value of the product and during the algorithm exec
 
 The Booth's multiplier work with 3 main components, supposing $A$ is the multiplicand and $B$ the multiplier:
 \begin{enumerate}
-	\item $N/2$ encoders in order to take 3 bits from the operand $B$ that are used as selection signal for the multiplexers;
-	\item $N/2$ multiplexers that select among $\{0, A, -A, 2A, -2A\}$, since at each stage $A$ must be multiplied by 4, a shift by two is done starting from $A$ of the previous multiplexer. The sign extension for $A$ is needed in order be able to multiply negative numbers, since the adder works with $NBIT*2$ bits;
-	\item $N/2$ ripple carry adders on $NBIT*2 + 1$ bits, that allow to preform the partial sums. An addition signal called \texttt{SUB\_SUMn} has been added in order to be able to perform the subtraction. The Ripple Carry Adder has been select for its simplicity and since the multiplication is a less common instruction, it was not worth to use a more sophisticated adder. This allowed to reduce the total area of the multiplier itself.
+	\item $N/2$ encoders in order to take 3 bits from the operand $B$; the two LSB are used as selection signal for the multiplexers and the last one, the MSB, for the adder. In fact, as it's possible to notice from the table \ref{mult:lut}, when the MSB is 1 the value to be added to the partial result is positive, negative otherwise. For this reason, the inputs to the multiplexers are only $\{0, A, 2A\}$. Since we need also to generate negative values, like ${-A, -2A}$, the MSB of the three bits is used as input for the adder. This signal, called \texttt{SUB\_SUMn} is used to define if the operation is a sum or a subtraction; if it is 1, a subtraction is performed;
+	\item $N/2$ multiplexers that select only among $\{0, A, 2A\}$, since at each stage $A$ must be multiplied by 4, a shift by two is done starting from $A$ of the previous multiplexer;
+	\item $N/2$ ripple carry adders, that allow to preform the partial sums. Since the final results will be on $NBIT \cdot 2+1$ bits, the adders in each level have been optimized in order to work only with the minimum bits needed. In fact, the adder at $i$ level, will generate the result on $NBIT + 2 \cdot i$ bits. As said before, an addition signal called \texttt{SUB\_SUMn} has been added in order to be able to perform the subtraction. The Ripple Carry Adder has been select for its simplicity and since the multiplication is a less common instruction, it was not worth to use a more sophisticated adder. This allowed to reduce the total area of the multiplier itself.
 \end{enumerate}
-The multiplexer implements the \textit{LUT} and at the same time the $A = A * 4$. The two values from the two multiplexer are summed together via an adder, this implements the partial sum. The overall structure can be observed at \ref{fig:multiplier}.
+The multiplexer implements the \textit{LUT} and at the same time the $A = A \cdot 4$. The two values from the two multiplexer are summed together via an adder, this implements the partial sum. The overall structure can be observed at \ref{fig:multiplier}.
 
 \begin{figure}[ht]
 	\centering
