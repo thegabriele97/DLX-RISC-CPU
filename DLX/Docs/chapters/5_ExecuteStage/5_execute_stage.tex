@@ -1,5 +1,12 @@
 \chapter{Execute Stage}
 
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=0.8\textwidth]{chapters/5_ExecuteStage/images/exe_stage.pdf}
+	\caption{Execute stage}
+	\label{fig:execute-stage}
+\end{figure}
+
 \section{ALU: Arithmetic Logic Unit}
 \begin{figure}[h]
 	\centering
@@ -21,29 +28,12 @@ Each one of these blocks will be explained in the following sections.
 The base concept is that, internally, the 4 units are selected through a multiplexer that takes two out five bits from a selection signal called \texttt{OP}. Having 5 bits to describe the type of operation, the possible combinations and their relative operations are:
 \begin{table}[H]
 	\centering
-	\begin{tabular}{c | c |l}
-		\texttt{OP} & \textbf{Unit} &\textbf{Operation}\\
+	\begin{tabular}{c | l}
+		\texttt{LGET} & \textbf{Description}\\
 		\hline
-		000 00 & \multirow{2}{*}{ADD}& ADD\\
-		001 00 & & SUB \\
-		\hline
-		000 01 & MUL & MUL\\
-		\hline
-		000 10 & \multirow{6}{*}{LOGIC}& AND \\
-		001 10 & & NAND \\
-		010 10 & & OR \\
-		011 10 & & NOR \\
-		100 10 & & XOR \\
-		101 10 & & XNOR \\
-		\hline
-		000 11 &\multirow{6}{*}{SHIFT} & SHIFT RIGHT \\
-		001 11 & & SHIFT LEFT \\
-		010 110 & & ARITH SHIFT RIGHT \\
-		011 11 &  & ARITH SHIFT LEFT\\
-		100 11 &  & ROTATE RIGHT\\
-		101 11 &  & ROTATE LEFT\\
+	
 	\end{tabular}
-	\caption{ALU operations encoding}
+	\caption{LGET encoding}
 \end{table}
 
 The two LSBs are the ones used as selection input for the multiplexer that select from which ALU unit takes the result. In fact, the univocally define the unit to be used. The remaining three MSBs are used as input for the units that compose the ALU in order to select the correct operation.
@@ -400,5 +390,14 @@ Differently from the T2 version, it uses and addition signal in order to be able
 \end{mybox}
 	
 
-\section{Set-Like Operations unit}
-- setcmp
+\section{Set-Like Operations Unit}
+\label{section:set_link_operations_unit}
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=0.8\textwidth]{chapters/5_ExecuteStage/images/set_cmp.pdf}
+	\caption{Execute stage with focus on the SET-CMP unit}
+	\label{fig:set-cmp}
+\end{figure}
+
+The execution stage includes also the ability to set a 

@@ -141,25 +141,70 @@ Inside this block there is a logic able to rotate right or left and a multiplexe
 
 \section{Hazard Control}
 \section{Comparator}
-Describe basic and advanced comparator
+The straightforward way to implement a comparator, allows only to check if two operands, \texttt{A} and \texttt{B}, are equals. The solution is sketched at figure \ref{fig:comparator_basic}, that is based on $N$ XNOR, where $N$ is the number of bits of the operands and an AND gate with $N$ inputs.
+
+Even if this solution is extremely compact, it allows to perform only the equality comparison; since this DLX implementation has the ability to perform complex conditional branch instructions (refer to the Instruction section \ref{section:inst_set}) and conditional set instructions (refer to the Set-Like Operations Unit \ref{section:set_link_operations_unit}) we need a more complex solution. In fact, if we need to perform a jump only if \texttt{A} $>$ \texttt{B} (strictly greater) we need to check exactly this precise condition.
 
 \begin{figure}[H]
-  \centering
-  \includegraphics[width=0.5\textwidth]{chapters/4_DecodeStage/images/comparator_basic.pdf}
-  \caption{Design of the basic comparator}
-  \label{comparator_basic}
+	\centering
+	\begin{minipage}{.5\textwidth}
+		\centering
+		\includegraphics[width=0.55\textwidth]{chapters/4_DecodeStage/images/comparator_basic.pdf}
+		\caption{Design of the basic comparator}
+		\label{fig:comparator_basic}
+	\end{minipage}%
+	\begin{minipage}{.5\textwidth}
+		\centering
+		\includegraphics[width=0.7\textwidth]{chapters/4_DecodeStage/images/comparator_advanced.pdf}
+		\caption{Design of the advanced comparator}
+		\label{comparator_advanced}
+	\end{minipage}
 \end{figure}
 
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.6\textwidth]{chapters/4_DecodeStage/images/comparator_advanced.pdf}
-  \caption{Design of the advanced comparator}
-  \label{comparator_advanced}
-\end{figure}
+The advance comparator exploits the comparison by performing a subtraction between \texttt{A} and \texttt{B} and then checking the result. This DLX implementation is based on a P4 adder that is able to perform subtraction and then a set of checks, the same that are in the \ref{comparator_advanced} are performed in order to generate the comparison outputs. We can perform the comparisons using this boolean equations, where $C$ is the carry-out and $Z$ is the zero check (all bits of the results are zeros):
+\begin{align*}
+	A > B &\rightarrow C \cdot \overline{Z}\\
+	A \geq B &\rightarrow C\\
+	A < B  &\rightarrow \overline{C}\\
+	A \leq B &\rightarrow \overline{C} + Z\\
+	A = B &\rightarrow Z\\
+	A \neq B  &\rightarrow \overline{Z} 
+\end{align*}
 
-A further improvement has been done to the advanced comparator in order to manage comparison between both signed and unsigned numbers. 
+ In order to avoid to propagate six different signal, the outcomes of the comparisons are encoded into a signal \texttt{LGET} on two bits. The encoded value are the ones in the \ref{tab:lget} table.
+ \begin{multicols}{2}
+ 	\begin{table}[H]
+ 		\begin{center}
+ 			\begin{tabular}{ c| c}
+ 				\texttt{LGET} & Case\\
+ 				\hline
+ 				01 & $A < B$ \\
+ 				00 & $A \leq B$ \\
+ 				11 & $A > B$ \\
+ 				10 & $A \geq B$
+ 				
+ 			\end{tabular}
+ 			\caption{LEQ encoding}
+ 			\label{tab:lget}
+ 		\end{center}
+ 	\end{table}
+ 	
+ 	\columnbreak
+ 	
+ 	\begin{lstlisting}[style=vhdl,caption={VHDL code for the encodig},label=lget_code]
+ 	LGET <= "01" when (a_l_b = '1') else
+	 	"00" when (a_le_b = '1') else 
+	 	"11" when (a_g_b = '1') else
+	 	"10" when (a_ge_b = '1') else
+	 	"00";
+ 	\end{lstlisting}
+ \end{multicols}
 
-The carry value works like this:
+The ordering of the comparison in the \texttt{when} statement is not casual nor follows the normal patterns but, the strictly lower comparison is done before the lower equals one, because, if the latter one is true it means that is also \texttt{A} lower than \texttt{B} but not vice-versa. Using this encoding, we can simply check the second bit in order to understand if \texttt{A} $\leq$ \texttt{B} or \texttt{A} $\geq$ \texttt{B}; instead, if we want to check only $<$ or $>$ comparisons we have to check also the first bit.
+
+ 
+
+A further improvement has been done to the advanced comparator in order to manage comparison between both signed and unsigned numbers. The carry value works like this:
 \begin{itemize}
   \item Carry = 1: if \(A > B\) in unsigned
   \item Carry \(=\) 0: if \(A \leq B\) in unsigned
@@ -217,9 +262,11 @@ It is easy to notice that in the red lines A and B always have different sign. T
       -3 & -2 & 0 & Less & Less \\
       -3 & -5 & 0 & Greater & Greater \\
   \end{tabular}
-  \caption{All cases of possibile comparison}
+  \caption{All cases of possible comparison}
   \label{comparator_cases}
 \end{table}
+So, we can summarize 
+// INSERT HERE SCHEMA AND EXPLANATION
 
 
 \section{Jump and Branch decision}
