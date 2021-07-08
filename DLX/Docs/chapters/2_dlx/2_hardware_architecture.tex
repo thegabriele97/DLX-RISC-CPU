@@ -200,7 +200,7 @@ When a halfword or byte read is performed, a 32-bit memory system can return the
         01 HALF & 10 & \texttt{0x----CCDD} & \texttt{0x0000CCDD} \\ \hline
         10 BYTE & 00 & \texttt{0xAA------} & \texttt{0x000000AA} \\ \hline
         10 BYTE & 01 & \texttt{0x--BB----} & \texttt{0x000000BB} \\ \hline
-        10 BYTE & 10 & \texttt{0x----CC--} & \texttt{0x000000CC} \\ \hline
+        0 BYTE & 10 & \texttt{0x----CC--} & \texttt{0x000000CC} \\ \hline
         10 BYTE & 11 & \texttt{0x------DD} & \texttt{0x000000DD} \\ \hline
     \end{tabular}
     \caption{How data are read by the CPU in different MAS configurations}
@@ -242,3 +242,79 @@ The Instruction Set supported by the DLX is made of different instructions, in p
     \end{center}
     \caption{I-Type}
 \end{figure}
+
+\begin{figure}[ht]
+    \begin{center}
+        \begin{bytefield}[endianness=big,bitwidth=0.03\linewidth]{32}
+            \bitheader{0, 25, 26, 31} \\
+            \bitbox{6}{OP CODE} & \bitbox{26}{IMMEDIATE} \\
+        \end{bytefield}
+    \end{center}
+    \caption{J-Type}
+\end{figure}
+
+In particular, all of them have in common the \emph{OP CODE} field, used to identify the instruction.
+
+\subsection{R-Type Instructions}
+
+R-Type Instructions are called in this way because all the operands are between registers. They all have in common the \emph{OP CODE} equal to \texttt{0b00000} and each instruction is differentiated from another one thanks to the \emph{FUNC CODE} field, as shown in Table \ref{table:r_type}.
+
+\begin{table}[H]
+\begin{tabularx}{\textwidth}{|l|c|l|l|X|}
+    \hline
+    MNEMONIC & FUNC CODE & EXAMPLE & OPERATION & DESCRIPTION \\ 
+    \hline
+    SLL & \texttt{0x04} & SLL R3, R2, R1 & $R3 \leftarrow R2 \ll R1$ & Logical shift left\\ 
+    \hline
+    SRL & \texttt{0x06} & SRL R3, R2, R1 & $R3 \leftarrow R2 \gg R1$ & Logical shift right\\ 
+    \hline
+    ROR & \texttt{0x08} & ROR R3, R2, R1 & $R3 \leftarrow R2 \circlearrowright R1$ & Right rotation\\ 
+    \hline
+    ROL & \texttt{0x09} & ROL R3, R2, R1 & $R3 \leftarrow R2 \circlearrowleft R1$ & Left rotation\\ 
+    \hline
+    MUL & \texttt{0x0E} & MUL R3, R2, R1 & $R3 \leftarrow R2 * R1$ & Integer multiplication\\ 
+    \hline
+    ADD & \texttt{0x20} & ADD R3, R2, R1 & $R3 \leftarrow R2 + R1$ & Integer Add\\ 
+    \hline
+    ADDU & \texttt{0x21} & ADDU R3, R2, R1 & $R3 \leftarrow R2 + R1$ & Integer Add\\ 
+    \hline
+    SUB & \texttt{0x22} & SUB R3, R2, R1 & $R3 \leftarrow R2 - R1$ & Integer subtraction\\ 
+    \hline
+    SUBU & \texttt{0x23} & SUBU R3, R2, R1 & $R3 \leftarrow R2 - R1$ & Integer subtraction\\ 
+    \hline
+    AND & \texttt{0x24} & AND R3, R2, R1 & $R3 \leftarrow R2 \texttt{\&} R1$ & Bitwise AND\\ 
+    \hline
+    OR & \texttt{0x25} & OR R3, R2, R1 & $R3 \leftarrow R2 \mid R1$ & Bitwise OR\\ 
+    \hline
+    XOR & \texttt{0x26} & XOR R3, R2, R1 & $R3 \leftarrow R2 \oplus R1$ & Bitwise XOR\\ 
+    \hline
+\end{tabularx}
+\caption{R-TYPE Instructions: logical and arithmetic}
+\label{table:r_type}
+\end{table}
+
+\begin{table}[H]
+\begin{tabularx}{\textwidth}{|l|c|l|l|X|}
+    \hline
+    MNEMONIC & FUNC CODE & EXAMPLE & OPERATION & DESCRIPTION \\ 
+    \hline
+    SEQ & \texttt{0x28} & SEQ R3, R2, R1 & $R3 \leftarrow R2 == R1$ & 1 if R2 eqaul R1\\ 
+    \hline
+\end{tabularx}
+\caption{R-TYPE Instructions: test instructions}
+\label{table:r_type_test}
+\end{table}
+
+\subsection{J-Type Instructions}
+
+J-Type Instructions are groups of instructions made for .
+
+\begin{table}[H]
+\begin{tabularx}{\textwidth}{|l|c|l|l|X|}
+    \hline
+    MNEMONIC & FUNC CODE & EXAMPLE & OPERATION & DESCRIPTION \\ 
+    \hline
+\end{tabularx}
+\caption{J-TYPE Instructions}
+\label{table:j_type}
+\end{table}

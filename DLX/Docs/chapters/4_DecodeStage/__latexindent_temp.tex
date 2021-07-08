@@ -159,19 +159,6 @@ Describe basic and advanced comparator
 
 A further improvement has been done to the advanced comparator in order to manage comparison between both signed and unsigned numbers. 
 
-The carry value works like this:
-\begin{itemize}
-  \item Carry = 1: if \(A > B\) in unsigned
-  \item Carry \(=\) 0: if \(A \leq B\) in unsigned
-\end{itemize}
-
-The advanced comparator works with unsigned numbers only. So it simply needs to be adapted for cases in which signed comparison and unsigned comparison are different. They are shown in the \autoref{comparator_cases} highlighted in red. 
-It is easy to notice that in the red lines A and B always have different sign. The logic must work when the UNSIG\_SIGN\_N bit is 0, that means the circuit is dealing with a signed number. In this case the carry bit must be complemented. Knowing this things, it's easy to derive the following logic:
-
-\begin{verbatim}
-  i_cout_masked <= Cout xor (not(UNSIG_SIGN_N) and (A(A'length-1) xor B(B'length-1)));
-\end{verbatim}
-
 \begin{table}[H]
   \centering
   \begin{tabular}{c|c|c|c|c}
@@ -180,38 +167,26 @@ It is easy to notice that in the red lines A and B always have different sign. T
       2 & 3 & 0 & Less & Less \\
       4 & 3 & 1 & Greater & Greater \\
       3 & 3 & 1 & Equal & Equal \\
-      \rowcolor{red!50}
       -3 & 3 & 1 & Less & Greater \\
-      \rowcolor{red!50}
       -2 & 3 & 1 & Less & Greater \\
-      \rowcolor{red!50}
       -5 & 3 & 1 & Greater & Greater \\
       \hline
       3 & 2 & 1 & Greater & Greater \\
       3 & 4 & 0 & Less & Less \\
       3 & 3 & 1 & Equal & Equal \\
-      \rowcolor{red!50}
       3 & -3 & 0 & Greater & Less \\
-      \rowcolor{red!50}
       3 & -2 & 0 & Greater & Less \\
-      \rowcolor{red!50}
       3 & -5 & 0 & Greater & Less \\
       \hline
-      \rowcolor{red!50}
       2 & -3 & 0 & Greater & Less \\
-      \rowcolor{red!50}
       4 & -3 & 1 & Greater & Less \\
-      \rowcolor{red!50}
       3 & -3 & 1 & Greater & Less \\
       -3 & -3 & 1 & Equal & Equal \\
       -2 & -3 & 1 & Greater & Greater \\
       -5 & -3 & 1 & Less & Less \\
       \hline
-      \rowcolor{red!50}
       -3 & 2 & 1 & Less & Greater \\
-      \rowcolor{red!50}
       -3 & 4 & 0 & Less & Greater \\
-      \rowcolor{red!50}
       -3 & 3 & 1 & Less & Greater \\
       -3 & -3 & 0 & Equal & Equal \\
       -3 & -2 & 0 & Less & Less \\
@@ -220,6 +195,7 @@ It is easy to notice that in the red lines A and B always have different sign. T
   \caption{All cases of possibile comparison}
   \label{comparator_cases}
 \end{table}
+
 
 
 \section{Jump and Branch decision}
