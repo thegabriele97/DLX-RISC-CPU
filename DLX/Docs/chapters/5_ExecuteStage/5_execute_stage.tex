@@ -2,7 +2,7 @@
 
 \begin{figure}[ht]
 	\centering
-	\includegraphics[width=0.8\textwidth]{chapters/5_ExecuteStage/images/exe_stage.pdf}
+	\includegraphics[width=1\textwidth]{chapters/5_ExecuteStage/images/exe_stage.pdf}
 	\caption{Execute stage}
 	\label{fig:execute-stage}
 \end{figure}
@@ -28,15 +28,33 @@ Each one of these blocks will be explained in the following sections.
 The base concept is that, internally, the 4 units are selected through a multiplexer that takes two out five bits from a selection signal called \texttt{OP}. Having 5 bits to describe the type of operation, the possible combinations and their relative operations are:
 \begin{table}[H]
 	\centering
-	\begin{tabular}{c | l}
-		\texttt{LGET} & \textbf{Description}\\
+	\begin{tabular}{c | c |l}
+		\texttt{OP} & \textbf{Unit} &\textbf{Operation}\\
 		\hline
-	
+		000 00 & \multirow{2}{*}{ADD}& ADD\\
+		001 00 & & SUB \\
+		\hline
+		000 01 & MUL & MUL\\
+		\hline
+		000 10 & \multirow{6}{*}{LOGIC}& AND \\
+		001 10 & & NAND \\
+		010 10 & & OR \\
+		011 10 & & NOR \\
+		100 10 & & XOR \\
+		101 10 & & XNOR \\
+		\hline
+		000 11 &\multirow{6}{*}{SHIFT} & SHIFT RIGHT \\
+		001 11 & & SHIFT LEFT \\
+		010 110 & & ARITH SHIFT RIGHT \\
+		011 11 &  & ARITH SHIFT LEFT\\
+		100 11 &  & ROTATE RIGHT\\
+		101 11 &  & ROTATE LEFT\\
 	\end{tabular}
-	\caption{LGET encoding}
+	\caption{ALU operations encoding}
 \end{table}
 
 The two LSBs are the ones used as selection input for the multiplexer that select from which ALU unit takes the result. In fact, the univocally define the unit to be used. The remaining three MSBs are used as input for the units that compose the ALU in order to select the correct operation.
+
 
 \subsection{Adder}
 The straightforward way to implement an adder is to use the Ripple Carry Adder structure, that is composed of $N-1$ Full Adder and one Half Adder (the first), where $N$ is the number of bits of the two operands. This solution is not optimal from a timing point of view due to the time needed to propagate the carry, that defines the critical path, that is the bottleneck. \newline\newline
@@ -106,7 +124,7 @@ As said before, the adder is composed of two blocks:
 	Normally two blocks are used, the first \textit{G} generates only $G_{i:j}$ and the other \textit{PG} both $G_{i:j}$ and $P_{i:j}$.
 	\begin{figure}[h]
 		\centering
-		\includegraphics[width=0.4\textwidth]{chapters/5_ExecuteStage/images/PG_and_G.pdf}
+		\includegraphics[width=0.32\textwidth]{chapters/5_ExecuteStage/images/PG_and_G.pdf}
 		\caption{PG and P block}
 		\label{fig:PG_and_G}
 	\end{figure}
@@ -115,7 +133,7 @@ As said before, the adder is composed of two blocks:
 So, Carry Look Ahead - Sparse Tree needs a starting block that generates all the $p$ and $g$ for all the couples of bit using the \ref{eq:pandg} equation. The spars tree and the PG network structure is shown in the figure \ref{fig:pg_network}, in the code this block is called \texttt{prop\_gen\_generic} and is made of \texttt{prop\_gen} block in order to compute $p$ and $g$.
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.7\textwidth]{chapters/5_ExecuteStage/images/CLA.pdf}
+	\includegraphics[width=0.65\textwidth]{chapters/5_ExecuteStage/images/CLA.pdf}
 	\caption{Carry Look Ahead - Carry Generator Block}
 	\label{fig:pg_network}
 \end{figure}
