@@ -141,6 +141,7 @@ Inside this block there is a logic able to rotate right or left and a multiplexe
 
 \section{Hazard Control}
 \section{Comparator}
+\label{sec:comparator}
 The straightforward way to implement a comparator, allows only to check if two operands, \texttt{A} and \texttt{B}, are equals. The solution is sketched at figure \ref{fig:comparator_basic}, that is based on $N$ XNOR, where $N$ is the number of bits of the operands and an AND gate with $N$ inputs.
 
 Even if this solution is extremely compact, it allows to perform only the equality comparison; since this DLX implementation has the ability to perform complex conditional branch instructions (refer to the Instruction section \ref{section:inst_set}) and conditional set instructions (refer to the Set-Like Operations Unit \ref{section:set_link_operations_unit}) we need a more complex solution. In fact, if we need to perform a jump only if \texttt{A} $>$ \texttt{B} (strictly greater) we need to check exactly this precise condition.
@@ -265,9 +266,14 @@ It is easy to notice that in the red lines A and B always have different sign. T
   \caption{All cases of possible comparison}
   \label{comparator_cases}
 \end{table}
-So, we can summarize 
-// INSERT HERE SCHEMA AND EXPLANATION
+So, we the final unit corresponds to the one at figure \ref{comparator_advanced} with an additional encoder before the output, that encode the six conditions into a signal on two bits. The resulting schema is the one in figure \ref{cmp_final}.
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.3\textwidth]{chapters/4_DecodeStage/images/cmp_final.pdf}
+	\caption{Final implementation of the comparator}
+	\label{cmp_final}
+\end{figure}
 
 \section{Jump and Branch decision}
 \section{Next Program Counter computation}
