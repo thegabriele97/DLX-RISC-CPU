@@ -258,36 +258,36 @@ In particular, all of them have in common the \emph{OP CODE} field, used to iden
 
 \subsection{R-Type Instructions}
 
-R-Type Instructions are called in this way because all the operands are between registers. They all have in common the \emph{OP CODE} equal to \texttt{0b00000} and each instruction is differentiated from another one thanks to the \emph{FUNC CODE} field, as shown in Table \ref{table:r_type}.
+R-Type Instructions are called in this way because all the operands are between registers. They all have in common the \emph{OP CODE} equal to \texttt{0b00000} and each instruction is differentiated from another one thanks to the \emph{FUNC CODE} field, as shown in Table \ref{table:r_type} and Table \ref{table:r_type_test}.
 
 \begin{table}[H]
 \begin{tabularx}{\textwidth}{|l|c|l|l|X|}
     \hline
     MNEMONIC & FUNC CODE & EXAMPLE & OPERATION & DESCRIPTION \\ 
     \hline
-    SLL & \texttt{0x04} & SLL R3, R2, R1 & $R3 \leftarrow R2 \ll R1$ & Logical shift left\\ 
+    SLL & \texttt{0x04} & \texttt{SLL R3, R2, R1} & $R3 \leftarrow R2 \ll R1$ & Logical shift left\\ 
     \hline
-    SRL & \texttt{0x06} & SRL R3, R2, R1 & $R3 \leftarrow R2 \gg R1$ & Logical shift right\\ 
+    SRL & \texttt{0x06} & \texttt{SRL R3, R2, R1} & $R3 \leftarrow R2 \gg R1$ & Logical shift right\\ 
     \hline
-    ROR & \texttt{0x08} & ROR R3, R2, R1 & $R3 \leftarrow R2 \circlearrowright R1$ & Right rotation\\ 
+    ROR & \texttt{0x08} & \texttt{ROR R3, R2, R1} & $R3 \leftarrow R2 \circlearrowright R1$ & Right rotation\\ 
     \hline
-    ROL & \texttt{0x09} & ROL R3, R2, R1 & $R3 \leftarrow R2 \circlearrowleft R1$ & Left rotation\\ 
+    ROL & \texttt{0x09} & \texttt{ROL R3, R2, R1} & $R3 \leftarrow R2 \circlearrowleft R1$ & Left rotation\\ 
     \hline
-    MUL & \texttt{0x0E} & MUL R3, R2, R1 & $R3 \leftarrow R2 * R1$ & Integer multiplication\\ 
+    MUL & \texttt{0x0E} & \texttt{MUL R3, R2, R1} & $R3 \leftarrow R2 * R1$ & Integer multiplication\\ 
     \hline
-    ADD & \texttt{0x20} & ADD R3, R2, R1 & $R3 \leftarrow R2 + R1$ & Integer Add\\ 
+    ADD & \texttt{0x20} & \texttt{ADD R3, R2, R1} & $R3 \leftarrow R2 + R1$ & Integer Add\\ 
     \hline
-    ADDU & \texttt{0x21} & ADDU R3, R2, R1 & $R3 \leftarrow R2 + R1$ & Integer Add\\ 
+    ADDU & \texttt{0x21} & \texttt{ADDU R3, R2, R1} & $R3 \leftarrow R2 + R1$ & Integer Add\\ 
     \hline
-    SUB & \texttt{0x22} & SUB R3, R2, R1 & $R3 \leftarrow R2 - R1$ & Integer subtraction\\ 
+    SUB & \texttt{0x22} & \texttt{SUB R3, R2, R1} & $R3 \leftarrow R2 - R1$ & Integer subtraction\\ 
     \hline
-    SUBU & \texttt{0x23} & SUBU R3, R2, R1 & $R3 \leftarrow R2 - R1$ & Integer subtraction\\ 
+    SUBU & \texttt{0x23} & \texttt{SUBU R3, R2, R1} & $R3 \leftarrow R2 - R1$ & Integer subtraction\\ 
     \hline
-    AND & \texttt{0x24} & AND R3, R2, R1 & $R3 \leftarrow R2 \texttt{\&} R1$ & Bitwise AND\\ 
+    AND & \texttt{0x24} & \texttt{AND R3, R2, R1} & $R3 \leftarrow R2 \texttt{\&} R1$ & Bitwise AND\\ 
     \hline
-    OR & \texttt{0x25} & OR R3, R2, R1 & $R3 \leftarrow R2 \mid R1$ & Bitwise OR\\ 
+    OR & \texttt{0x25} & \texttt{OR R3, R2, R1} & $R3 \leftarrow R2 \mid R1$ & Bitwise OR\\ 
     \hline
-    XOR & \texttt{0x26} & XOR R3, R2, R1 & $R3 \leftarrow R2 \oplus R1$ & Bitwise XOR\\ 
+    XOR & \texttt{0x26} & \texttt{XOR R3, R2, R1} & $R3 \leftarrow R2 \oplus R1$ & Bitwise XOR\\ 
     \hline
 \end{tabularx}
 \caption{R-TYPE Instructions: logical and arithmetic}
@@ -299,23 +299,101 @@ R-Type Instructions are called in this way because all the operands are between 
     \hline
     MNEMONIC & FUNC CODE & EXAMPLE & OPERATION & DESCRIPTION \\ 
     \hline
-    SEQ & \texttt{0x28} & SEQ R3, R2, R1 & $R3 \leftarrow R2 == R1$ & 1 if R2 eqaul R1\\ 
+    SEQ & \texttt{0x28} & \texttt{SEQ R3, R2, R1} & $R3 \leftarrow R2 == R1$ & 1 if R2 equal R1\\ 
+    \hline
+    SNE & \texttt{0x29} & \texttt{SNE R3, R2, R1} & $R3 \leftarrow R2 != R1$ & 1 if R2 not equal R1\\ 
+    \hline
+    SLT & \texttt{0x30} & \texttt{SLT R3, R2, R1} & $R3 \leftarrow R2 < R1$ & 1 if R2 less R1\\ 
+    \hline
+    SGT & \texttt{0x31} & \texttt{SGT R3, R2, R1} & $R3 \leftarrow R2 > R1$ & 1 if R2 great R1\\ 
+    \hline
+    SLE & \texttt{0x32} & \texttt{SLE R3, R2, R1} & $R3 \leftarrow R2 \leq R1$ & 1 if R2 less or equal R1\\ 
+    \hline
+    SGE & \texttt{0x33} & \texttt{SGE R3, R2, R1} & $R3 \leftarrow R2 \geq R1$ & 1 if R2 great or equal R1\\ 
+    \hline
+    SLTU & \texttt{0x3A} & \texttt{SLTU R3, R2, R1} & $R3 \leftarrow R2 < R1$ & 1 if R2 unsigned less R1\\ 
+    \hline
+    SGTU & \texttt{0x3B} & \texttt{SGTU R3, R2, R1} & $R3 \leftarrow R2 > R1$ & 1 if R2 uns great R1\\ 
+    \hline
+    SLEU & \texttt{0x3C} & \texttt{SLEU R3, R2, R1} & $R3 \leftarrow R2 \leq R1$ & 1 if R2 uns less/eq R1\\ 
+    \hline
+    SGEU & \texttt{0x3D} & \texttt{SGEU R3, R2, R1} & $R3 \leftarrow R2 \geq R1$ & 1 if R2 uns great/eq R1\\ 
     \hline
 \end{tabularx}
 \caption{R-TYPE Instructions: test instructions}
 \label{table:r_type_test}
 \end{table}
 
-\subsection{J-Type Instructions}
+\subsection{Pseudo R-Type Instructions}
 
-J-Type Instructions are groups of instructions made for .
+Here we find R-Type like operations: they works only with regiters but have their own OP CODE.
 
 \begin{table}[H]
 \begin{tabularx}{\textwidth}{|l|c|l|l|X|}
     \hline
-    MNEMONIC & FUNC CODE & EXAMPLE & OPERATION & DESCRIPTION \\ 
+    MNEMONIC & OP CODE & EXAMPLE & OPERATION & DESCRIPTION \\ 
+    \hline
+    JR & \texttt{0x12} & \texttt{JR R1} & $PC \leftarrow PC + R1$ & PC += R31\\ 
+    \hline
+    JALR & \texttt{0x13} & \texttt{JALR R1} & $R31 \leftarrow PC $ & R31 = actual PC\\ 
+    & & & $PC \leftarrow PC + R1$ & PC += R1\\ 
+    \hline
+    RET & \texttt{0x1F} & \texttt{RET} & $PC \leftarrow R31$ & PC = R31\\ 
+    & & & & Context Switch begins\\ 
+    \hline
+\end{tabularx}
+\caption{Pseudo R-TYPE Instructions: branch and jump instructions}
+\label{table:r_type_jump}
+\end{table}
+
+\subsection{J-Type Instructions}
+
+J-Type Instructions are groups of instructions made for code jump. Thanks to the structure of these instructions, long jumps can be executed (i.e. the relative address can be very big).
+
+\begin{table}[H]
+\begin{tabularx}{\textwidth}{|l|c|l|l|X|}
+    \hline
+    MNEMONIC & OP CODE & EXAMPLE & OPERATION & DESCRIPTION \\ 
+    \hline
+    J & \texttt{0x02} & \texttt{J LABEL} & $PC \leftarrow PC + LABEL$ & PC += rel label\\ 
+    \hline
+    JAL & \texttt{0x03} & \texttt{JAL LABEL} & $R31 \leftarrow PC $ & R31 = actual PC\\ 
+    & & & $PC \leftarrow PC + LABEL$ & PC += rel label\\ 
+    \hline
+    CALL & \texttt{0x1E} & \texttt{CALL LABEL} & $R31 \leftarrow PC $ & R31 = actual PC\\ 
+    & & & $PC \leftarrow PC + LABEL$ & PC += rel label\\ 
+    & & & & Context Switch begins\\ 
     \hline
 \end{tabularx}
 \caption{J-TYPE Instructions}
 \label{table:j_type}
+\end{table}
+
+\newpage
+\subsection{I-Type Instructions}
+
+I-Type instructions support immediate operands, as shown in Table \ref{table:i_type_airth_logic}. 
+
+\begin{table}[H]
+\begin{tabularx}{\textwidth}{|l|c|l|l|X|}
+    \hline
+    MNEMONIC & OP CODE & EXAMPLE & OPERATION & DESCRIPTION \\ 
+    \hline
+    ADDI & \texttt{0x08} & \texttt{ADDI R3, R0, \#2} & $R3 \leftarrow R0 + 3$ & Integer Add\\ 
+    \hline
+    ADDUI & \texttt{0x09} & \texttt{ADDU R3, R2, R1} & $R3 \leftarrow R2 + R1$ & Integer Add\\ 
+    \hline
+    SUBI & \texttt{0x22} & \texttt{SUB R3, R2, R1} & $R3 \leftarrow R2 - R1$ & Integer subtraction\\ 
+    \hline
+    SUBUI & \texttt{0x23} & \texttt{SUBU R3, R2, R1} & $R3 \leftarrow R2 - R1$ & Integer subtraction\\ 
+    \hline
+    ANDI & \texttt{0x24} & \texttt{AND R3, R2, R1} & $R3 \leftarrow R2 \texttt{\&} R1$ & Bitwise AND\\ 
+    \hline
+    ORI & \texttt{0x25} & \texttt{OR R3, R2, R1} & $R3 \leftarrow R2 \mid R1$ & Bitwise OR\\ 
+    \hline
+    XORI & \texttt{0x26} & \texttt{XOR R3, R2, R1} & $R3 \leftarrow R2 \oplus R1$ & Bitwise XOR\\ 
+    \hline
+\end{tabularx}
+\caption{I-TYPE Instructions: branch and jump instructions}
+\label{table:i_type_airth_logic}
 \end{table}
