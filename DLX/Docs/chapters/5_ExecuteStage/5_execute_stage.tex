@@ -1,18 +1,37 @@
 \chapter{Execute Stage}
 
-\begin{figure}[ht]
+\begin{figure}[H]   
 	\centering
 	\includegraphics[width=0.9\textwidth]{chapters/5_ExecuteStage/images/exe_stage.pdf}
 	\caption{Execute stage}
 	\label{fig:execute-stage}
 \end{figure}
 
+The execute stage is the second stage of the Datapath; the Control Word coming from the Control Unit, allows to correctly configure the internal signal to perform the desired operation with the correct operands. In fact, in this stage we have multiple signals that can be configured:
+\begin{itemize}
+	\itemsep0sp
+	\item \texttt{EN1}: this signal used in order to enable/disable the registers sampling in the DECODE/EXE junction;
+	\item \texttt{EN2}: this signal used in order to enable/disable the registers sampling in the EXE/MEM junction;
+	\item \texttt{S1}: this signal is used to select between the output of \texttt{REG\_A} (from register file) and \texttt{REG\_IN1} (immediate). If 0, \texttt{REG\_A} is selected;
+	\item \texttt{S2}: this signal is used to select between the output of \texttt{REG\_B} (from register file) and \texttt{REG\_IN2} (immediate). If 0, \texttt{REG\_B} is selected;
+	\item \texttt{SEL\_ALU\_SETCMP}: it is used to select the input for \texttt{REG\_ALU\_OUT} between the SET-CMP and ALU outputs;
+	\item \texttt{SEL\_LGET}: this is a 3 bits signal, that is used to select among the \texttt{SEQ, SNE, SLE, SLT, SGE, SGT} operation for the SET-CMP unit;
+ 	\item \texttt{ALU\_OP}: this is a 5 bit signal, that is used to select the correct operation among the sub-unit that composes the ALU. Refer to the table \ref{tab:alu_op} for a complete description.
+	
+\end{itemize}
+
+Beside the main path, used to compute the output result, two addition paths are present in order to correctly manage the execution of the operations:
+\begin{itemize}
+	\item A path for the propagation of the immediate meme
+	\item //TO COMPLETE
+\end{itemize}
+
 \section{ALU: Arithmetic Logic Unit}
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.7\textwidth]{chapters/5_ExecuteStage/images/ALU.pdf}
 	\caption{ALU unit}
-	\label{fig:ALU}
+	\label{fig:ALU}	
 \end{figure}
 The Arithmetic Logic Unit can be seen as a block, that given a selection signal and the inputs is able to perform computation over the operands. The ALU implementation described in this document is based on the following block:
 \begin{itemize}
@@ -51,6 +70,7 @@ The base concept is that, internally, the 4 units are selected through a multipl
 		101 11 &  & ROTATE LEFT\\
 	\end{tabular}
 	\caption{ALU operations encoding}
+	\label{tab:alu_op}
 \end{table}
 
 The two LSBs are the ones used as selection input for the multiplexer that select from which ALU unit takes the result. In fact, the univocally define the unit to be used. The remaining three MSBs are used as input for the units that compose the ALU in order to select the correct operation.
