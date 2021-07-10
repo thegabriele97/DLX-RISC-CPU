@@ -1,5 +1,18 @@
 \chapter{Fetch Stage}
+The first stage of the DLX pipeline is the Fetch Stage, that has been included directly inside the \texttt{DLX}. It is used to manage the current Program Counter \texttt{PC} and send it out to the memory in order to fetch the instruction from it and save the instruction into the Instruction Register \texttt{IR}. At each clock cycle, the new \texttt{PC} is computed by summing 4, since the instructions are on 32 bits and the memory is organized in words of 1 byte. This can be summarized in the following way:
+\begin{align*}
+	IR &\leftarrow MEM[PC]\\
+	NPN &\leftarrow PC + 4
+\end{align*}
+As will be explained in the Jump and Branch Management section (refer to \ref{sec:jmp_branch}), in order to manage jumps and conditional branches, some additional hardware is necessary in order to compute the new address.
 
+// INSERT DIAGRAM - I DON'T KNOW WHAT TO INSERT HERE 
 \section{Instruction Register}
+The Instruction Register (\texttt{IR}) is, in this case, a 32 bits register that is used to store the instruction (that is in fact on 32 bits) that comes from the Instruction RAM. Instead, the length of the Program Counter (\texttt{PC}) strictly depends on the IRAM size, in fact it is $log_2(N)$, where $N$ is the number of bytes of the IRAM.
+
+During the normal operation without hazards 
+
 \section{Program Counter}
+As anticipated before, the Program Counter (\texttt{PC}) is the address used to fetch the instruction from the IRAM.
 \section{Jump and Branch Management}
+\label{sec:jmp_branch}

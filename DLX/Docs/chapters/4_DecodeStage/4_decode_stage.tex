@@ -1,4 +1,5 @@
 \chapter{Decode Stage}
+\label{sec:decode_stage}
 
 \section{Instruction Decode}
 \section{Register File and Windowing}
@@ -28,9 +29,10 @@ It's important to notice that the implementation of the entire register file has
 	\item \textbf{Connection matrix}: this block allows to ``highlight" the active windows, the block IN, LOCAL and OUT will be the default destination when writing and reading;
 	\item \textbf{Register file}: this block corresponds to the physical registers, composed by rows of Flip-Flops;
 	\item \textbf{Select block}: this block is used for the reading, is connected to all the registers and selects, using the read address, the single register to be read;
-	\item \textbf{Address generator}: this block is used only when perform a FILL or a SPILL, it generates the address for the registers to be moved from/to the memory. The memory, in this case works exactly like a stack.
+	\item \textbf{Address generator}: this block is used only when perform a FILL or a SPILL, it generates the address for the registers to be moved from/to the memory. The memory, in this case works exactly like a stack;
+	\item \textbf{WRF Control Unit}: A FSM used to manage the address generator when performing a SPILL or a FILL.
 \end{itemize}
-Additional, but less complex components, have been used in order to manage the management of the CWP and SWP.
+Additional, but less complex components, have been used in order to manage the CWP and SWP.
 
 
 \subsection{Decoder}
@@ -138,6 +140,18 @@ This block is used to compute the next window, both for the current window and t
 \end{figure}
 
 Inside this block there is a logic able to rotate right or left and a multiplexer, that allows to select the correct output based on what the circuit needs. 
+
+\subsection{WRF Control Unit}
+
+An additional element is necessary in order to be able to manage the addresses for the SPILL and FILL procedure, to and from the memory. It has been implemented using a Moore FSM and basically consists in different phases; a starting one that set the memory address to 0 and when the FILL or SPILL input is `1' and the ram is ready, the address is decreased or increased by 4, accordingly to the operation. Refer to figure \ref{wrf_cu}. It's important to say that, if the RAM is not ready the address is keep untouched, so that, when the RAM returns in a ready state, the procedure can continue.
+
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=0.8\textwidth]{chapters/4_DecodeStage/images/wRF_CU.pdf}
+	\caption{Moore FSM implementation for WRF CU}
+	\label{wrf_cu}
+\end{figure}
 
 \section{Hazard Control}
 \section{Comparator}

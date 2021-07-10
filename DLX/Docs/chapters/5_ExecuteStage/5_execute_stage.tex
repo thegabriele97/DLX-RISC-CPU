@@ -23,13 +23,13 @@ The execute stage is the second stage of the Datapath and it is used to perform 
 Beside the main path, used to compute the output result, two addition paths (the ones in the dotted rectangles) are present in order to correctly manage the execution of all the operations in the instruction set:
 \begin{itemize}
 	\item A path for the propagation of the register value to be saved into the memory in case of a load. It was not possible to pass thought the addition with \texttt{B} and \texttt{0} because it's already needed in order to compute the address. So, the output from \texttt{REG\_B} is directly connected to the input of \texttt{REG\_ME};
-	\item The second path is the one used to manage the Write Back, at each step, until the MEM one, the reference to the register to perform the WB must be propagated through the three stages (decode, execute and write back). So, the output of the \texttt{WRB1} register goes into the input of the \texttt{WRB2} register.
+	\item The second path is the one used to manage the Write Back, at each step, until the MEM one, the reference to the register to perform the WB must be propagated through three stages (decode, execute and memory). So, the output of the \texttt{WRB1} register goes into the input of the \texttt{WRB2} register.
 \end{itemize}
 
 \section{ALU: Arithmetic Logic Unit}
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=0.7\textwidth]{chapters/5_ExecuteStage/images/ALU.pdf}
+	\includegraphics[width=0.6\textwidth]{chapters/5_ExecuteStage/images/ALU.pdf}
 	\caption{ALU unit}
 	\label{fig:ALU}	
 \end{figure}
