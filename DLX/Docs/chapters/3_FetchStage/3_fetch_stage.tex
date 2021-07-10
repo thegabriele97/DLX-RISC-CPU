@@ -6,13 +6,32 @@ The first stage of the DLX pipeline is the Fetch Stage, that has been included d
 \end{align*}
 As will be explained in the Jump and Branch Management section (refer to \ref{sec:jmp_branch}), in order to manage jumps and conditional branches, some additional hardware is necessary in order to compute the new address.
 
-// INSERT DIAGRAM - I DON'T KNOW WHAT TO INSERT HERE 
 \section{Instruction Register}
 The Instruction Register (\texttt{IR}) is, in this case, a 32 bits register that is used to store the instruction (that is in fact on 32 bits) that comes from the Instruction RAM. Instead, the length of the Program Counter (\texttt{PC}) strictly depends on the IRAM size, in fact it is $log_2(N)$, where $N$ is the number of bytes of the IRAM.
 
-During the normal operation without hazards 
+During the normal operation, this register is updated with the new instruction coming from the IRAM, but this is not always true. We have two cases in which the register is not updated:
+\begin{enumerate}
+	\item When \texttt{i\_IR\_LATCH\_EN} is at 0, in fact this signal is used to avoid to update the value inside the \texttt{IR}. During the instruction execution, it could be that the DRAM is not ready, a signal \texttt{i\_DRAM\_NOTREADY} is checked inside the Control Unit and in case of `1' the \texttt{i\_IR\_LATCH\_EN} is put at 0. In this way, everything is stalled so the CW in the pipeline and the Instruction Register will remain the same until the DRAM will become ready again. 
+	\item When the reset signal is asserted or when the \texttt{i\_IR\_STALL} is at one, a ``bubble" is added to the pipeline. So, the Instruction Register will contain the \texttt{x"54000000"} value. This is used in order to manage the jump and branch instructions. A more detailed description is available at section \ref{sec:jmp_branch}.
+\end{enumerate}
 
 \section{Program Counter}
-As anticipated before, the Program Counter (\texttt{PC}) is the address used to fetch the instruction from the IRAM.
+As anticipated before, the Program Counter (\texttt{PC}) is the address used to fetch the instruction from the IRAM. 
+
+At each clock cycle, the current Program Counter is incremented by 4, in order to point to the next instruction. Only in case of reset, it is set to 0 otherwise it will set to the value of the new Program Counter, computed in the Decode stage. In a specular way, from what done for the Instruction Register, the \texttt{PC} is update only when the \texttt{i\_PC\_LATCH\_EN} is `1'.
+
 \section{Jump and Branch Management}
 \label{sec:jmp_branch}
+Jumps and branches are crucial instructions in order to be able to build a program, but their management from the point of view of the pipeline is not straightforward. In fact, the Fetch Stage must be able to manage three additional signals:
+\begin{enumerate}
+	\item \texttt{i\_PC\_LATCH\_EN}: this signal is used to avoid to update the PC with the new one coming from the Decode Stage. The update is inhibited when the instruction is a NOP or when performing a jump or when \texttt{i\_IR\_LATCH\_EN} is `0'. 
+	\item \texttt{i\_IR\_LATCH\_EN}: it is used to avoid to update the Instruction Register. This happens when:
+	\begin{itemize}
+		\item A Data Hazard occurs
+		\item A branch instruction is executed and we have to wait for a spill operation to be completed
+		\item A return instruction is executed and we have to wait for a fill operation to be completed
+	\end{itemize}
+	\item \texttt{i\_IR\_STALL}: a NOP is inserted in the pipeline in order to manage the jump and the branch instructions. This is due to the control hazards; when a branch is executed, it may or may not change the PC to something other than its current value plus 4. As it will be described more precisely in the Decode Stage section, the computation of the new PC, both for branch and jump, is done there. For this reason, it is updated only at the end of the Decode Stage and, if not blocked, a wrong instruction is fetch.
+	
+	The solution is this DLX implements is to add a NOP instruction, in order to not execute a wrong instruction.
+\end{enumerate}
