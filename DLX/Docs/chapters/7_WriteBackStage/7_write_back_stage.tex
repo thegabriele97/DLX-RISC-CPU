@@ -1,5 +1,5 @@
 \chapter{Write Back Stage}
-The Write Back Stage is the last one in the DLX pipeline and it is used to write the results, that can come from the memory (due to a load) or from the computation of ALU, into the File Register.
+The Write Back Stage is the last stage in the DLX pipeline and it is used to write the results, that can come from the memory (due to a load) or from the computation of ALU, into the File Register.
 Since this DXL is a pipelined processor, the destination register is available when the instruction is decoded and must be propagated until the write back register is needed. For this purpose, inside the entire Datapath, there is a skewing network that is used to have the register index exactly when necessary. \newline\newline
 So, we need to extract from the instruction itself, depending on its type, the destination address. The position on a 32 bit instruction of the destination address is the following (refer to \ref{section:inst_set}):
 \begin{itemize}
@@ -13,19 +13,18 @@ So, we need to extract from the instruction itself, depending on its type, the d
 	\caption{Execute stage}
 	\label{fig:wb_stage}
 \end{figure}
-The figure \ref{fig:wb_stage} shows the simplified diagram used to delaying the destination register (\texttt{WS1}) that comes from the Decode Stage after the extraction from the instruction, through the three register in the Datapath.
-When the instruction reach the Write Back stage in the pipeline, the register index, on 5 bits, is feed back to the write input of the Register File and an additional signal, called \texttt{WF} is used to enable the write.\newline\newline
-The \texttt{R0} must be protected against the Write Back, in fact it must be always 0. For this reason, a masking procedure has been implemented in order to solve this problem. The \texttt{WF} signal is gated with a non-zero check over the \texttt{i\_RF\_WS} signal; using few words, the write enable signal is set to 0 if a write on \texttt{R0} is requested.
-
-\hfill
-\begin{lstlisting}[style=vhdl,caption={VHDL code gating the WS signal coming from the CU}]
-	i_WF <= WF when (TO_INTEGER(unsigned(i_RF_WS)) /= 0) else '0';
-\end{lstlisting}
-\hfill
-
+The figure \ref{fig:wb_stage} shows the simplified diagram used to delaying the destination register (\texttt{WS1}) that comes from the Decode Stage after the extraction from the instruction, through the three registers in the Datapath.
+When the instruction reaches the Write Back stage in the pipeline, the register index on 5 bits, is feed back to the write input of the Register File and an additional signal, called \texttt{WF} is used to enable the write.\newline\newline
 An additional signal, called \texttt{S3}, is used to select which data take as input fro the register file in order to perform the Write Back. Data can come from two different sources:
 \begin{itemize}
 	\itemsep0sp
 	\item It can take directly the output of the Load and Store unit, via the \texttt{REG\_MEM\_LDSR\_OUT} in case the selection signal \texttt{S3 = 1}
 	\item It can take the output of the ALU (that includes set-cmp unit), via the \texttt{REG\_MEM\_ALU\_OUT} in case the selection signal \texttt{S3 = 0}
 \end{itemize}
+
+The \texttt{R0} register must be protected against the Write Back, in fact it has to be always 0. For this reason, a masking procedure has been implemented in order to solve this problem. The \texttt{WF} signal is gated with a non-zero check over the \texttt{i\_RF\_WS} signal; using few words, the write enable signal is set to 0 if a write on \texttt{R0} is requested.
+
+\hfill
+\begin{lstlisting}[style=vhdl,caption={VHDL code gating for the WS signal coming from the CU}]
+	i_WF <= WF when (TO_INTEGER(unsigned(i_RF_WS)) /= 0) else '0';
+\end{lstlisting}
