@@ -269,6 +269,8 @@ R-Type Instructions are called in this way because all the operands are between 
     \hline
     SRL & \texttt{0x06} & \texttt{SRL R3, R2, R1} & $R3 \leftarrow R2 \gg R1$ & Logical shift right\\ 
     \hline
+    SRA & \texttt{0x07} & \texttt{SRA R3, R2, R1} & $R3 \leftarrow R2 \gg R1$ & Arithmetic shift right\\ 
+    \hline
     ROR & \texttt{0x08} & \texttt{ROR R3, R2, R1} & $R3 \leftarrow R2 \circlearrowright R1$ & Right rotation\\ 
     \hline
     ROL & \texttt{0x09} & \texttt{ROL R3, R2, R1} & $R3 \leftarrow R2 \circlearrowleft R1$ & Left rotation\\ 
@@ -341,8 +343,12 @@ Here we find R-Type like operations: they works only with regiters but have thei
     RET & \texttt{0x1F} & \texttt{RET} & $PC \leftarrow R31$ & PC = R31\\ 
     & & & & Context Switch begins\\ 
     \hline
+    NOP & \texttt{0x15} & \texttt{NOP} & & Does exactly nothing\\ 
+    \hline
+    TICKTMR & \texttt{0x34} & \texttt{TICKTMR R16} &  $R16 \leftarrow TICK TIMER $ & Get Tick Timer value\\ 
+    \hline
 \end{tabularx}
-\caption{Pseudo R-TYPE Instructions: branch and jump instructions}
+\caption{Pseudo R-TYPE Instructions: branch, jump and mix}
 \label{table:r_type_jump}
 \end{table}
 
@@ -379,21 +385,97 @@ I-Type instructions support immediate operands, as shown in Table \ref{table:i_t
     \hline
     MNEMONIC & OP CODE & EXAMPLE & OPERATION & DESCRIPTION \\ 
     \hline
-    ADDI & \texttt{0x08} & \texttt{ADDI R3, R0, \#2} & $R3 \leftarrow R0 + 3$ & Integer Add\\ 
+    ADDI & \texttt{0x08} & \texttt{ADDI R3, R0, \#2} & $R3 \leftarrow R0 + 2$ & Integer Add\\ 
     \hline
-    ADDUI & \texttt{0x09} & \texttt{ADDU R3, R2, R1} & $R3 \leftarrow R2 + R1$ & Integer Add\\ 
+    ADDUI & \texttt{0x09} & \texttt{ADDUI R3, R2, \#2} & $R3 \leftarrow R2 + 2$ & Integer Add\\ 
     \hline
-    SUBI & \texttt{0x22} & \texttt{SUB R3, R2, R1} & $R3 \leftarrow R2 - R1$ & Integer subtraction\\ 
+    SUBI & \texttt{0x0A} & \texttt{SUBI R3, R2, R1} & $R3 \leftarrow R2 - R1$ & Integer subtraction\\ 
     \hline
-    SUBUI & \texttt{0x23} & \texttt{SUBU R3, R2, R1} & $R3 \leftarrow R2 - R1$ & Integer subtraction\\ 
+    SUBUI & \texttt{0x0B} & \texttt{SUBUI R3, R2, R1} & $R3 \leftarrow R2 - R1$ & Integer subtraction\\ 
     \hline
-    ANDI & \texttt{0x24} & \texttt{AND R3, R2, R1} & $R3 \leftarrow R2 \texttt{\&} R1$ & Bitwise AND\\ 
+    ANDI & \texttt{0x0C} & \texttt{ANDI R3, R2, R1} & $R3 \leftarrow R2 \texttt{\&} R1$ & Bitwise AND\\ 
     \hline
-    ORI & \texttt{0x25} & \texttt{OR R3, R2, R1} & $R3 \leftarrow R2 \mid R1$ & Bitwise OR\\ 
+    ORI & \texttt{0x0D} & \texttt{ORI R3, R2, R1} & $R3 \leftarrow R2 \mid R1$ & Bitwise OR\\ 
     \hline
-    XORI & \texttt{0x26} & \texttt{XOR R3, R2, R1} & $R3 \leftarrow R2 \oplus R1$ & Bitwise XOR\\ 
+    XORI & \texttt{0x0E} & \texttt{XORI R3, R2, R1} & $R3 \leftarrow R2 \oplus R1$ & Bitwise XOR\\ 
+    \hline
+    LHI & \texttt{0x0F} & \texttt{LHI R3, \#0xABCD} & $R3 \leftarrow \texttt{0xABCD0000}$ & Load Upper Half\\ 
+    \hline
+    SLLI & \texttt{0x14} & \texttt{SLLI R3, R2, \#1} & $R3 \leftarrow R2 \ll 1$ & Logical shift left\\ 
+    \hline
+    SRLI & \texttt{0x16} & \texttt{SRLI R3, R2, \#1} & $R3 \leftarrow R2 \gg 1$ & Logical shift right\\ 
+    \hline
+    SRAI & \texttt{0x17} & \texttt{SRAI R3, R2, \#1} & $R3 \leftarrow R2 \gg 1$ & Arithmetic shift right\\ 
     \hline
 \end{tabularx}
-\caption{I-TYPE Instructions: branch and jump instructions}
+\caption{I-TYPE Instructions: logical and arithmetic}
 \label{table:i_type_airth_logic}
+\end{table}
+
+
+\begin{table}[H]
+\begin{tabularx}{\textwidth}{|l|c|l|l|X|}
+    \hline
+    MNEMONIC & OP CODE & EXAMPLE & OPERATION & DESCRIPTION \\ 
+    \hline
+    SEQI & \texttt{0x18} & \texttt{SEQI R3, R2, \#1} & $R3 \leftarrow R2 == 1$ & 1 if R2 equal 1\\ 
+    \hline
+    SNEI & \texttt{0x19} & \texttt{SNEI R3, R2, \#1} & $R3 \leftarrow R2 != 1$ & 1 if R2 not equal 1\\ 
+    \hline
+    SLTI & \texttt{0x1A} & \texttt{SLTI R3, R2, \#1} & $R3 \leftarrow R2 < 1$ & 1 if R2 less 1\\ 
+    \hline
+    SGTI & \texttt{0x1B} & \texttt{SGTI R3, R2, \#1} & $R3 \leftarrow R2 > 1$ & 1 if R2 great 1\\ 
+    \hline
+    SLEI & \texttt{0x1C} & \texttt{SLEI R3, R2, \#1} & $R3 \leftarrow R2 \leq 1$ & 1 if R2 less or equal 1\\ 
+    \hline
+    SGEI & \texttt{0x1D} & \texttt{SGEI R3, R2, \#1} & $R3 \leftarrow R2 \geq 1$ & 1 if R2 great or equal 1\\ 
+    \hline
+    SLTUI & \texttt{0x3A} & \texttt{SLTUI R3, R2, \#1} & $R3 \leftarrow R2 < 1$ & 1 if R2 unsigned less 1\\ 
+    \hline
+    SGTUI & \texttt{0x3B} & \texttt{SGTUI R3, R2, \#1} & $R3 \leftarrow R2 > 1$ & 1 if R2 uns great 1\\ 
+    \hline
+    SLEUI & \texttt{0x3C} & \texttt{SLEUI R3, R2, \#1} & $R3 \leftarrow R2 \leq 1$ & 1 if R2 uns less/eq 1\\ 
+    \hline
+    SGEUI & \texttt{0x3D} & \texttt{SGEUI R3, R2, \#1} & $R3 \leftarrow R2 \geq 1$ & 1 if R2 uns great/eq 1\\ 
+    \hline
+\end{tabularx}
+\caption{I-TYPE Instructions: test instructions}
+\label{table:i_type_test}
+\end{table}
+
+
+\begin{table}[H]
+\begin{tabularx}{\textwidth}{|l|c|l|l|X|}
+    \hline
+    MNEMONIC & OP CODE & EXAMPLE & OPERATION & DESCRIPTION \\ 
+    \hline
+    LB & \texttt{0x20} & \texttt{LB R1, 40(R2)} & $R1 \leftarrow MEM[ R2 + 40 ] $ & Load Byte / Sign Ext\\ 
+    \hline
+    LH & \texttt{0x21} & \texttt{LH R1, 40(R2)} & $R1 \leftarrow MEM[ R2 + 40 ] $ & Load Half / Sign Ext\\ 
+    \hline
+    LW & \texttt{0x23} & \texttt{LW R1, 40(R2)} & $R1 \leftarrow MEM[ R2 + 40 ] $ & Load Word / Sign Ext\\ 
+    \hline
+    LBU & \texttt{0x24} & \texttt{LBU R1, 40(R2)} & $R1 \leftarrow MEM[ R2 + 40 ] $ & Load Byte\\ 
+    \hline
+    LHU & \texttt{0x25} & \texttt{LHU R1, 40(R2)} & $R1 \leftarrow MEM[ R2 + 40 ] $ & Load Half\\ 
+    \hline
+    SB & \texttt{0x28} & \texttt{SB 40(R2), R1} & $MEM[ R2 + 40 ] \leftarrow R1 $ & Store Byte \\ 
+    \hline
+    SH & \texttt{0x29} & \texttt{SH 40(R2), R1} & $MEM[ R2 + 40 ] \leftarrow R1 $ & Store Half \\ 
+    \hline
+    SW & \texttt{0x2B} & \texttt{SW 40(R2), R1} & $MEM[ R2 + 40 ] \leftarrow R1 $ & Store Word \\ 
+    \hline
+\end{tabularx}
+\caption{I-TYPE Instructions: Load \& Store}
+\label{table:i_type_loadstore}
+\end{table}
+
+\begin{table}[H]
+\begin{tabularx}{\textwidth}{|l|c|l|l|X|}
+    \hline
+    MNEMONIC & OP CODE & EXAMPLE & OPERATION & DESCRIPTION \\ 
+    \hline
+\end{tabularx}
+\caption{I-TYPE Instructions: Conditional Branch Insturctions}
+\label{table:i_type_branch}
 \end{table}
