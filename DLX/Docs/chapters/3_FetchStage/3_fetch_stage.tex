@@ -2,7 +2,7 @@
 The first stage of the DLX pipeline is the Fetch Stage, that has been included directly inside the \texttt{DLX}. It is used to manage the current Program Counter \texttt{PC} and send it out to the memory in order to fetch the instruction from it and save the instruction into the Instruction Register \texttt{IR}. At each clock cycle, the new \texttt{PC} is computed by summing 4, since the instructions are on 32 bits and the memory is organized in words of 1 byte. This can be summarized in the following way:
 \begin{align*}
 	IR &\leftarrow MEM[PC]\\
-	NPN &\leftarrow PC + 4
+	NPC &\leftarrow PC + 4
 \end{align*}
 As will be explained in the Jump and Branch Management section (refer to \ref{sec:jmp_branch}), in order to manage jumps and conditional branches, some additional hardware is necessary in order to compute the new address.
 
@@ -31,6 +31,7 @@ Jumps and branches are crucial instructions in order to be able to build a progr
 		\item A \texttt{CAL} instruction is executed and we have to wait for a spill operation to be completed
 		\item A \texttt{RET} instruction is executed and we have to wait for a fill operation to be completed
 	\end{itemize}
+	It's important to say that, when the \texttt{IR} is not updated, also the \texttt{PC} is not update too.
 	\item \texttt{i\_IR\_STALL}: a NOP is inserted in the pipeline in order to manage the jump and the branch instructions. This is due to the control hazards; when a branch is executed, it may or may not change the PC to something other than its current value plus 4. As it will be described more precisely in the Decode Stage section, the computation of the new PC, both for branch and jump, is done there. For this reason, it is updated only at the end of the Decode Stage and, if not blocked, a wrong instruction is fetch.
 	
 	The solution is this DLX implements is to add a NOP instruction, in order to not execute a wrong instruction.
