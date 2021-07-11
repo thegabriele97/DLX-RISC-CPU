@@ -475,6 +475,24 @@ I-Type instructions support immediate operands, as shown in Table \ref{table:i_t
     \hline
     MNEMONIC & OP CODE & EXAMPLE & OPERATION & DESCRIPTION \\ 
     \hline
+    BEQZ & \texttt{0x04} & \texttt{BEQZ R1, LABEL} & $PC \leftarrow PC + LABEL$ & $R1 = 0$ ?\\ 
+    & & & & PC += label\\
+    \hline
+    BNEZ & \texttt{0x05} & \texttt{BNEZ R1, LABEL} & $PC \leftarrow PC + LABEL$ & $R1 \neq 0$ ?\\ 
+    & & & & PC += label\\
+    \hline
+    BGT & \texttt{0x30} & \texttt{BGT R1, R2, LABEL} & $PC \leftarrow PC + LABEL$ & $R1 > R2$ ?\\ 
+    & & & & PC += label\\
+    \hline
+    BGE & \texttt{0x31} & \texttt{BGE R1, R2, LABEL} & $PC \leftarrow PC + LABEL$ & $R1 \ge R2$ ?\\ 
+    & & & & PC += label\\
+    \hline
+    BLT & \texttt{0x32} & \texttt{BLT R1, R2, LABEL} & $PC \leftarrow PC + LABEL$ & $R1 < R2$ ?\\ 
+    & & & & PC += label\\
+    \hline
+    BLE & \texttt{0x33} & \texttt{BLE R1, R2, LABEL} & $PC \leftarrow PC + LABEL$ & $R1 \le R2$ ?\\ 
+    & & & & PC += label\\
+    \hline
 \end{tabularx}
 \caption{I-TYPE Instructions: Conditional Branch Insturctions}
 \label{table:i_type_branch}
