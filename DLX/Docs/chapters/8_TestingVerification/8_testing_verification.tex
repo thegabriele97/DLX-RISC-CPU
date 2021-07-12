@@ -36,5 +36,68 @@ In order to create the most flexible test possible, multiple components have bee
 	Last but not least, the DRAM must be able to correctly manage all the different data sizes both during the write and the read operation. So, an additional signal on two bits, called \texttt{MAS}, has been included. A more accurate description of the memory data size management is available at section \ref{mas}.
 \end{itemize}
 
+The reduction of the setup time needed to starting a new simulation was a crucial point to speed up the entire verification process. For this reason, a bash script has been develop in order to generate the .mem file from an .asm one a move it into the correct testing folder. This allows to need only to change the the .mem file reference in the Testbench. The bash script is the one at code \ref{code:asm_script}.
+
+\begin{lstlisting}[language=bash,caption={Bash script for generating the .mem file from an .asm one},label=code:asm_script]
+	#!/bin/sh
+	
+	if [ ! -r "$1" ]; then
+		echo "Usage: $0 <dlx_assembly_file>.asm"
+		exit 1
+	fi
+	
+	./assembler.sh $1
+	
+	filename=$(basename $1)
+	filename="${filename%.*}"
+		
+	assembler.bin/conv2memory ${1%/*}/$filename.bin > DLX_vhd_fully_synthesizable/test_bench_and_memory/mems/${filename}.asm.mem
+\end{lstlisting}
+
 \section{Simulation}
+The verification of the behaviour of the DLX is based on the simulation of the DLX itself, using the Testbench wrote in the previous phase. Before starting the simulation, all the components must be compiled; an organizational improvement has been added for simplifying the compilation file organization. The folder structure is based on a hierarchical organization of the components, by using the alphabet letters as starting name. Each folder includes a \texttt{compile.script} file that is used to compile all the files in the folder and call all the others \texttt{compile.script} files in the sub-folders. Folders are organized in the following way:
+
+\dirtree{%
+	.1 DLX\_vhd\_fully\_synthesizable/.
+	.2 compile.script.
+	.2 a.b-DataPath.core/.
+	.3 compile.script.
+	.3 a.b.a-windowedRF.core/.
+	.4 compile.script.
+	.3 a.b.d-ALU.core/.
+	.4 compile.script.
+	.4 a.b.d.c-adder.core/.
+	.5 compile.script.
+	.4 a.b.d.b-multiplier.core/.
+	.5 compile.script.
+	.2 a.d-decode.core/.
+	.3 compile.script.
+	.2 test\_bench\_and\_memory/.
+	.3 compile.script.
+	.3 TB\_packages/.
+	.4 compile.script.
+	.3 TB\_romem/.
+	.4 compile.script.
+	.3 TB\_rwmem/.
+	.4 compile.script.
+}
+
+\hfill
+
+
+Once \textit{Questa Sim} is loaded, the \texttt{DLX\_vhd\_fully\_synthesizable/compile.script} can be executed using the \texttt{source} command. After a while, the all the components for the DLX will be compiled. Another TCL script, called \texttt{launch\_sim\_waves.script}, has been developed in order to start the simulation and load, as waves, the registers from \texttt{R0} to \texttt{R31} in the Wave view.
+
+\begin{figure}[H]   
+	\centering
+	\includegraphics[width=0.85\textwidth]{chapters/8_TestingVerification/images/simulation.png}
+	\caption{Questa Sim Simulation}
+	\label{fig:simulation}
+\end{figure}
+
 \section{Post Synthesis Simulation}
+After the Synthesis and Optimization phase, that allows to improve the circuit under multiple points of view and perform the tech mapping, it's possible to simulate the behaviour of the circuit using the standard cells.
+
+Another script, that is similar to the \texttt{launch\_sim\_waves.script} one has been created in order to manage the standard cells. Basically, the script used for the synthesized circuit, called \texttt{launch\_sim\_synthesis.script}, instead of simply starting the simulation needs also to link the \textit{nangate45} library. It can be done by using the following line:
+\begin{lstlisting}
+	vsim work.dlx_testbench -t ns -L /software/dk/nangate45/verilog/qsim10.7c 
+\end{lstlisting}

@@ -5,7 +5,14 @@
 \usepackage{makeidx}
 \usepackage{titlesec}
 \usepackage{listings}
-
+\lstset{basicstyle=\ttfamily,
+	showstringspaces=false,
+	commentstyle=\color{red},
+	captionpos=b,
+	keywordstyle=\color{blue},
+	breaklines=true
+}
+\usepackage{dirtree}
 \usepackage{booktabs}
 \usepackage{hyperref}
 \usepackage{tikz}
@@ -93,7 +100,7 @@
 \lstdefinestyle{vhdl}{
    language=vhdl,
    frame=none,
-   basicstyle=\scriptsize,
+   basicstyle=\ttfamily\footnotesize,
    breaklines=true,
    captionpos=b,
    keepspaces=true,
