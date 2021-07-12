@@ -297,4 +297,4 @@ So, we the final unit corresponds to the one at figure \ref{comparator_advanced}
 
 \section{Jump and Branch decision}
 \section{Next Program Counter computation}
-
+The next program counter computation is included inside the decode stage, in order to better manage hazards and jumps. To lighten the load on the ALU, a dedicated P4 adder has been included inside the decode stage to compute the next program counter. 
