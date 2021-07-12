@@ -1,4 +1,3 @@
-
 \chapter{Hardware Architecture}
 
 \section{Overview}
@@ -6,10 +5,10 @@
 This DLX is a 32-bit RISC processor with a five-stage pipeline. The external interface is made mainly for memories connection (IRAM, DRAM and a DRAM for the Register File), and for the Clock and Reset signals. Inside we find the following blocks:
 
 \begin{itemize}
-    \item Control Unit: it receives the fetched instruction from the IR register and starts to output the correct control signals towards all the pipeline stages. Moreover, it receives status signals from all other units about their working status like the comparator result (for branch decision), the status about possible hazards in the pipeline, Register File's Push \& Pop operations under execution, and all the memories readiness. It's in charge of controling the entire pipeline and stop it in case of hazards or other situations that requires a stall.
-    \item Decode Unit: part of the decode stage, it is in charge of keeping the status about all registers under use (for further hazard controls), computation of the new Program Counter (given a Jump or not), data comparison (for branches) and, the most important thing, the operation decode with the dispatch of all the operands towards the right ports of the DataPath.
+    \item Control Unit: it receives the fetched instruction from the IR register and starts to output the correct control signals towards all the pipeline stages. Moreover, it receives status signals from all other units about their working status like the comparator result (for branch decision), the status about possible hazards in the pipeline, Register File's Push \& Pop operations under execution, and all the memories readiness. It's in charge of controlling the entire pipeline and stop it in case of hazards or other situations that require a stall.
+    \item Decode Unit: part of the decode stage, it is in charge of keeping the status about all registers underuse (for further hazard controls), computation of the new Program Counter (given a Jump or not), data comparison (for branches) and, the most important thing, the operation decode with the dispatch of all the operands towards the right ports of the DataPath.
     \item DataPath: the computational core of the processor. Made of 4 pipeline stages (Instruction Decode, Execution, Memory, Write Back) contains all the units capable of doing computation. In particular, we have the Register File (that manages all the registers of the core), the Arithmetic Logic Unit, the Load-Store Unit for data memory management, and other units useful for the correct operation of everything.
-    \item IR and PC: two registers the compose the Instruction Fetch stage of the pipeline, they are in charge of keeping in memory the current instruction under execution and the address for the next instruction to execute, respectively. 
+    \item IR and PC: two registers compose the Instruction Fetch stage of the pipeline, they are in charge of keeping in memory the current instruction under execution and the address for the next instruction to execute, respectively. 
 \end{itemize}
 
 
@@ -25,7 +24,7 @@ This DLX is a 32-bit RISC processor with a five-stage pipeline. The external int
 
 \section{Control Unit}
 
-The Control Unit is one of the most important part of the DLX processor. Its role is orchestrate all the jobs through the pipeline of the processor and to manage dangerous situations.\\
+The Control Unit is one of the most important parts of the DLX processor. Its role is to orchestrate all the jobs through the pipeline of the processor and to manage dangerous situations.\\
 
 Its interface is made of input signals (status signals from other components) and of control signals (towards other components), as described in Table \ref{table:cu:input_signals} and Table \ref{table:cu:output_signals}.
 
@@ -102,14 +101,14 @@ It is made mainly by the following components:
 
 % \begin{box_implementation_details}
 %     {\large{\textbf{Implementation details: CW Generation Unit}}}
-% 	\newline
+%   \newline
 %     As said, the \emph{IR-Control Word Generation \& Translation Unit} is in charge of taking as input the actual instruction and to give as output a valid control word. How the mapping IR$\xrightarrow$CW is done?\\
 % \end{box_implementation_details}
 
 
 \section{Memory Interface}
 
-The DLX processor has a Harvard architecture, with two 32-bit data bus carrying instructions and data respectively. Only load and store instructions can access data from Data Memory. The data are stored in memory in a Big-Endian format.\\
+The DLX processor has a Harvard architecture, with two 32-bit data buses carrying instructions and data respectively. Only load and store instructions can access data from Data Memory. The data are stored in memory in a Big-Endian format.\\
 
 \begin{center}
     \begin{bytefield}[endianness=big,bitwidth=0.03\linewidth]{32}
@@ -120,10 +119,10 @@ The DLX processor has a Harvard architecture, with two 32-bit data bus carrying 
     \end{bytefield}
 \end{center}
 
-The third RAM required, the one for the register file, is not under the direct access of the User. It's managed as a Stack memory by the Register File for automatic sub routines management and it has a dedicated interface. It can be merged with the Data Memory with an external logic.\\
+The third RAM required, the one for the register file, is not under the direct access of the User. It's managed as a Stack memory by the Register File for automatic subroutines management and it has a dedicated interface. It can be merged with the Data Memory with an external logic.\\
 
 
-All the subsequent paragraph are referred in the same way to all the three memory types.
+All the subsequent paragraphs are referred in the same way to all the three memory types.
 
 \subsection{Signals and Timing}
 The signals in the DLX processor bus interface can be grouped into tree categories:
@@ -146,7 +145,7 @@ The \emph{Memory Request signals} are:
     \item Ready
 \end{itemize}
 
-Moreover, all the memories connected must agree on a certain protocol both for writing and reading operations. The most important thing to take under consideration is the \emph{Ready} signal: it must be high only when the operation is really completed. For example after a data read, the \emph{Ready} stays at 1 only when the data is valid. If meanwhile the address changes, the \emph{Ready} signal must go off.
+Moreover, all the memories connected must agree on a certain protocol both for writing and reading operations. The most important thing to take under consideration is the \emph{Ready} signal: it must be high only when the operation is really completed. For example, after a data read, the \emph{Ready} stays at 1 only when the data is valid. If meanwhile, the address changes, the \emph{Ready} signal must go off.
 
 \begin{center}
     \begin{tikztimingtable}[%
@@ -174,14 +173,14 @@ Moreover, all the memories connected must agree on a certain protocol both for w
 \end{center}
 
 
-If the memory in use can't accomplish to this timing, an external \emph{Memory Control Unit} must be placed between the CPU and the Memory.
+If the memory in use can't accomplish this timing, an external \emph{Memory Control Unit} must be placed between the CPU and the Memory.
 
 \subsection{Memory Addressing}
 A[31:0] is the 32-bit address bus that specifies the address for the transfer. All addresses are byte addresses, so a burst of word accesses results in the address bus incrementing by four for each cycle.\\
 
-The address bus provides 4GB of linear addressing space, and this can be used externally in different manners like in a SoC with memory mapped peripherals that shares the same address space.\\
+The address bus provides 4GB of linear addressing space, and this can be used externally in different manners like in a SoC with memory-mapped peripherals that share the same address space.\\
 
-When a word access is signaled the memory system ignores the bottom two bits, A[1:0], and when a halfword access is signaled the memory system ignores the bottom bit, A[0]. Howewer, the core already masks the two LSBs when needed.
+When word access is signalled the memory system ignores the bottom two bits, A[1:0], and when halfword access is signalled the memory system ignores the bottom bit, A[0]. However, the core already masks the two LSBs when needed.
 
 \subsection{Memory Data Size: the MAS[1:0] signal}
 \label{mas}
@@ -223,7 +222,7 @@ A writable memory system must be capable of performing a write to any single byt
 \section{Instruction Set}
 \label{section:inst_set}
 
-The Instruction Set supported by the DLX is made of different instructions, in particual regarding Integer operations. Instructions are on 32 bit and are grouped in 3 different types:\\
+The Instruction Set supported by the DLX is made of different instructions, in particular regarding Integer operations. Instructions are on 32 bit and are grouped in 3 different types:\\
 
 \begin{figure}[ht]
     \begin{center}
@@ -329,7 +328,7 @@ R-Type Instructions are called in this way because all the operands are between 
 
 \subsection{Pseudo R-Type Instructions}
 
-Here we find R-Type like operations: they works only with regiters but have their own OP CODE.
+Here we find R-Type like operations: they work only with registers but have their own OPCODE.
 
 \begin{table}[H]
 \begin{tabularx}{\textwidth}{|l|c|l|l|X|}
