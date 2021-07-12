@@ -184,6 +184,7 @@ The address bus provides 4GB of linear addressing space, and this can be used ex
 When a word access is signaled the memory system ignores the bottom two bits, A[1:0], and when a halfword access is signaled the memory system ignores the bottom bit, A[0]. Howewer, the core already masks the two LSBs when needed.
 
 \subsection{Memory Data Size: the MAS[1:0] signal}
+\label{mas}
 
 The \emph{MAS[1:0]} bus encodes the size of the transfer. The DLX processor can transfer word, halfword, and byte quantities and the processor indicates the size of the transfer through this signal.\\
 
