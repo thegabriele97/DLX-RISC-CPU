@@ -1,5 +1,40 @@
 \chapter{Testing and Verification}
+Testing a verification is used to verify the correctness of parts or the whole DLX. Testing can be defined as the process of observing and verifying the results of a component under specific conditions in order to find possible inconsistency between the actual and the required behaviour.
 
-\section{Test Benches}
+The flow used to verify a component follows multiple steps:
+\begin{itemize}
+	\itemsep0sp
+	\item Creation of the Testbench
+	\item Simulation
+	\item Post Synthesis simulation (after the Synthesis and Optimization, refer to section \ref{sec:syn_opt})
+\end{itemize}
+
+\section{Testbenches}
+All Testbenches developed for the DLX verification have been implemented using VHDL. The most critical components have been tested with their own testbenches, like:
+\begin{itemize}
+	\itemsep0sp
+	\item Booth's multiplier
+	\item P4 adder
+	\item Comparator
+	\item ALU
+	\item Shifter
+	\item Windowing Register File
+\end{itemize}
+While the others smaller components have been indirectly intensively tested while verifying the correct behaviour of the DLX itself.\newline\newline
+The DLX Testbench is implicitly based on two processes, the first one manages and creates only the clock signal with a period of 1 ns, while the second one asserts the reset signal for the first clock period and the negates it in order to start the correct test execution.
+
+In order to create the most flexible test possible, multiple components have been instantiated; these are providing all the external interfaces the DLX needs. So, besides the DLX component, the Testbench contains also the following component:
+\begin{itemize} 
+	\item Instruction RAM (IRAM): this is a read only memory that takes an external file, in this case a .mem file, and uses it as source for fetching the instruction. When the reset is performed, all the instructions in the file are written in an internal array of 32 bits. At each clock cycle, the array is indexed with an index that comes from the outside, that corresponds to the DLX \texttt{PC}.
+	\item Data RAM (DRAM): in a similar way with the respect to the IRAM, the DRAM is loaded at the startup using the same .mem explained before. In fact, this compiled file does not contains only the code instruction but, after a blank line, also all the memory content the program should have once it starts. Since a DRAM must be also writable, the memory is implemented as a read/write one. 
+	
+	In order to simplify the verification of the memory content, each time a value is written and external file, that is the exact copy of the DRAM content, is updated too.
+	In order to correctly access the data that are stored into the memory, the address comes from outside and corresponds to the one used in the Memory Stage (refer to \ref{chp:memory_stage}).
+	
+	To replicate a more realistic environment and increase the test reliability, the DRAM has been enhanced with a \texttt{ready} signal that is `1' when it is ready. This has been implemented with a counter, that only after \texttt{data\_delay} clock cycles make the memory ready and allows to generate a meaningful value.
+	
+	Last but not least, the DRAM must be able to correctly manage all the different data sizes both during the write and the read operation. So, an additional signal on two bits, called \texttt{MAS}, has been included. A more accurate description of the memory data size management is available at section \ref{mas}.
+\end{itemize}
+
 \section{Simulation}
 \section{Post Synthesis Simulation}
