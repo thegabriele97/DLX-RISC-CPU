@@ -154,6 +154,12 @@ An additional element is necessary in order to be able to manage the addresses f
 \end{figure}
 
 \section{Hazard Control}
+To exploit this funciontality the starting point was to understand when to stop the pipeline. Problems may occur in read after write and also when changing window for the CALL and RET procedures. 
+The first solution implemented was the use of a table with 32 entry of 1 bit each. When an operation needed to write on a specific register, the bit of the entry related to the register would have been set to 1. When the operation was over, the bit would go back to 0. This solution was perfectly working, but the main problem was scalability and adaptabilty. In fact, if two ore more consecutive operations needed to write on the same register and then another operation need to read that register, the single bit was not enought and it was causing malfunctioning. The problem was that the second operation simply overwrite a 1 on the table. So, when the first operation finish, it set the bit to 0 while the second operation is still writing that register and so the third operation, that is reading that register, could start, but reading a wrong value on the register. 
+
+The solution to this problem was to simply increase the number of bit of each entry of the table. Each time an operation need to write a register it increases the value of the Table (at the specific entry). When the operation finishes, the value is decreased. Thanks to this trick, the example explained before, now works perfectly. 
+The chosen number of bits was 3, in order to be able to count 7, that is an higher number compared to the pipeline stages. 
+
 \section{Comparator}
 \label{sec:comparator}
 The straightforward way to implement a comparator, allows only to check if two operands, \texttt{A} and \texttt{B}, are equals. The solution is sketched at figure \ref{fig:comparator_basic}, that is based on $N$ XNOR, where $N$ is the number of bits of the operands and an AND gate with $N$ inputs.
