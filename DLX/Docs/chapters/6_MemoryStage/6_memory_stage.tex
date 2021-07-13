@@ -14,7 +14,7 @@ If the instruction that reaches the memory stage is a load, the value stored int
 In case of a store, the address in which the data must be saved into the memory is masked too via the Address Mask Unit and its output is given to the DRAM. The data stored in the \texttt{REG\_ME} register is selected, by correctly configuring the multiplex to select it, and put as input to the \texttt{datamem\_ldstr} unit. The output of this unit is put as input data to the DRAM, that perform the store.
 
 \section{Address Mask Unit}
-The basic idea behind the Address Mask Unit is to modify the address, given as input, depending on the data size we want to store or load. All the possibility and masking procedures are summed up in the table \ref{tab:addr_masking}. 
+The basic idea behind the Address Mask Unit is to modify the address, given as input, depending on the data size we want to store or load. All the possibility and masking procedures are summed up in the Table \ref{tab:addr_masking}. 
 
 \begin{table}[ht]
 	\begin{center}
@@ -49,7 +49,7 @@ The Load-Store Unit is used to perform two operations:
 	
 	When the address has been correctly masked in order to fetch a word (32 bits), the data doesn't need to be extracted, neither the sign extension is needed. In the other two cases, when we are managing half word or byte, the correct portion of bits must be taken. 
 
-	\item In case we are managing half word or byte, the bits can be simply taken and set as output of the Load-Store Unit only if we are working with unsigned. In this case, all the others bits are se to 0. On the other hand, if the byte or the half word granularity is used and the \texttt{UNSIG\_SIGN\_N} is set to `0', a sign extension must be performed. In this case, the correct portion of bits is taken, as defined in table \ref{tab:addr_selection}, and the first bit of it used used extends the sign. 
+	\item In case we are managing half word or byte, the bits can be simply taken and set as output of the Load-Store Unit only if we are working with unsigned. In this case, all the others bits are se to 0. On the other hand, if the byte or the half word granularity is used and the \texttt{UNSIG\_SIGN\_N} is set to `0', a sign extension must be performed. In this case, the correct portion of bits is taken, as defined in Table \ref{tab:addr_selection}, and the first bit of it used used extends the sign. 
 	\begin{table}[H]
 		\begin{center}
 			\begin{tabular}{ |c| c | l | l|}
