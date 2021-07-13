@@ -207,8 +207,11 @@ When word access is signalled the memory system ignores the bottom two bits, A[1
 
 The \emph{MAS[1:0]} bus encodes the size of the transfer. The DLX processor can transfer word, halfword, and byte quantities and the processor indicates the size of the transfer through this signal.\\
 
-When a halfword or byte read is performed, a 32-bit memory system can return the complete 32-bit word, and the processor extracts the valid halfword or byte field from it as shown in Table \ref{table:memory_read_configuration}. For 8 and 16 bit memories, the data must be placed on the right byte lanes in the data bus.
+The \emph{MAS[1:0]} signal is supposed to be used in combination with \emph{A[1:0]} in order to know exactly which byte is taken under consideration during an operation.
 
+\subsection{Memory Read}
+
+When a halfword or byte read is performed, a 32-bit memory system can return the complete 32-bit word for simplicity, and the processor extracts the valid halfword or byte field from it as shown in Table \ref{table:memory_read_configuration}. Other byte lanes will be ignored. For 8 and 16 bit memories, the data must be placed on the right byte lanes in the data bus.
 
 \begin{table}[H]
     \centering
@@ -220,12 +223,14 @@ When a halfword or byte read is performed, a 32-bit memory system can return the
         01 HALF & 10 & \texttt{0x----CCDD} & \texttt{0x0000CCDD} \\ \hline
         10 BYTE & 00 & \texttt{0xAA------} & \texttt{0x000000AA} \\ \hline
         10 BYTE & 01 & \texttt{0x--BB----} & \texttt{0x000000BB} \\ \hline
-        0 BYTE & 10 & \texttt{0x----CC--} & \texttt{0x000000CC} \\ \hline
+        10 BYTE & 10 & \texttt{0x----CC--} & \texttt{0x000000CC} \\ \hline
         10 BYTE & 11 & \texttt{0x------DD} & \texttt{0x000000DD} \\ \hline
     \end{tabular}
     \caption{How data are read by the CPU in different MAS configurations}
     \label{table:memory_read_configuration}
 \end{table}
+
+\subsection{Memory Write}
 
 Instead, when the DLX processor performs a byte or halfword write, the data being written is replicated across the data bus, as shown in Figure \ref{figure:dlx:memory_replication}. The memory system can use the most convenient copy of the data.\\
 
