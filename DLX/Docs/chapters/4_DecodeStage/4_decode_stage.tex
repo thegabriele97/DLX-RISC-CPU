@@ -297,4 +297,32 @@ So, we the final unit corresponds to the one at figure \ref{comparator_advanced}
 
 \section{Jump and Branch decision}
 \section{Next Program Counter computation}
-The next program counter computation is included inside the decode stage, in order to better manage hazards and jumps. To lighten the load on the ALU, a dedicated P4 adder has been included inside the decode stage to compute the next program counter. 
+The next program counter computation is included inside the decode block, in order to better manage hazards and jumps. To lighten the load on the ALU, a dedicated P4 adder has been included inside the decode stage to compute the next program counter. 
+The full schematic of the decode is shown in \autoref{decode_block}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\textwidth]{chapters/4_DecodeStage/images/decode_block.pdf}
+	\caption{Schematic of the decode block}
+	\label{decode_block}
+\end{figure}
+
+There are 2 possible conditions:
+
+\begin{enumerate}
+  \item \texttt{JUMP\_EN = 0}: this means that there is no jump. So the program counter should be increased by a constant value, in our case 4. By comparing the explanation and the schematic, it's clear how the left multiplexer, with a 0, will select the signal \texttt{i\_CONSTANT\_PC\_ADD}. Then the two signals enter the P4 Adder and the next program counter is computed. The carry out of the P4 adder is mapped on a signal called \texttt{PC\_OVF}, used to report a program counter overflow. 
+  \item \texttt{JUMP\_EN = 1}: this means that there is a jump. So the program counter should be increased by an offset. Looking at the schematic, it's clear how the left multiplexer, with a 1, will select the signal \texttt{i\_PC\_OFFSET}. Then the two signals enter the P4 Adder and the next program counter is computed. 
+\end{enumerate}
+
+The multiplexer on the right is controlled by a signal that comes from the control unit, in particular from the control word. The only 3 instructions in which the value of \texttt{NPC\_SEL} is 1, and so it selects RD1, are:
+
+\begin{itemize}
+  \item JR
+  \item JARL
+  \item RET
+\end{itemize}
+
+In fact, in these cases, we need to completely change the value of the program counter and put inside it a value read from the register file, in particular \texttt{RD1}.
+\section{Tickcounter}
+When thinking how to further improve the PRO version of the DLX, an idea was to implement a counter. As it's know, counters are very common inside microprocessors because they are useful keep track of the timing. 
+The implementation chosen in the DLX was very simple and straightforward. There is an half-adder on 32 bits that every rising edge of the clock increases the value of the register used inside the tickcounter block to keep track of the value. By doing this we can count the number of ticks and use to estimate the duration of a specific program.
