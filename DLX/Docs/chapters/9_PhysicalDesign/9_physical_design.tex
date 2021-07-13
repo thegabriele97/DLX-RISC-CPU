@@ -1,5 +1,30 @@
 \chapter{Physical Design}
-
+The trends nowadays is to build more complex system (in terms of transistors) in less time (reduce the time-to-market), so we need some powerful tools that allows us to have optimized ICs. The design flow strategy is based on multi-abstraction 3-step iteration; essentially the each
+abstract we must do 3-steps:
+\begin{enumerate}
+	\item The hardware is described using a Hardware Description Language, as VHDL
+	\item The Synthesis phase takes as input the abstract model and generates a more detailed model that contains additional informational information about timing, power consumption and area. The next step is the Optimization, that is used in order to generate a behaviour equivalent circuit and at the same time satisfy some conditions, like timing
+	\item A post synthesis simulation is run to check the functional properties of the final model
+\end{enumerate}
 \section{Synthesis}
 \label{sec:syn_opt}
+The Synthesis has been done with an intensive script usage; in fact, two scripts have been developed in order to setup the environment, perform the synthesis and clean-up all the temporary useless files generated during the process.\newline\newline
+The first script, is a bash script (refer to Appendix \ref{bash_syn}) and, as anticipated before, it is used to setup the environment by coping the \texttt{.synopsys\_dc.setup} file, copy the library and call the synthesis script suing \texttt{dc\_shell}.
+Once the synthesis has been ended, the bash scripts removes all temporary folders like \texttt{ARCH}, \texttt{DOBY} and so on and moves the synthesized DLX, in both verilog and VHDL, and the all the generated reports into a specific folder.\newline\newline
+
+The second script, that is run under the \texttt{dc\_shell} to perform the actual synthesis, performs multiple steps (refer to Appendix \ref{tcl_syn}):
+\begin{itemize}
+	\itemsep0sp
+	\item Analyze all the .vhd files needed for the DLX
+	\item Elaborate the DLX design, by correctly configuring the generics
+	\item Set the wire model and create a clock, that is the constraint
+	\item Perform the compilation
+	\item Save the synthesized DLX
+	\item Save the timing, area and power report 
+\end{itemize}
+The clock timing, that has been set to 2.5, has been selected after many trials and errors, in order to find the lowest possible value. Critical paths, like the one that uses the adder has been reduced using a mode optimized solution, e.g. P4 adder.\newline\newline
+All the complete reports are reported at Appendix \ref{ap3}; from the area report it's possible to observe that the total cell area is 35278.25 that is divided into 19747.84 for the combinational part and 15530.41 for the non combination one.
+
+
+
 \section{Place and Route}

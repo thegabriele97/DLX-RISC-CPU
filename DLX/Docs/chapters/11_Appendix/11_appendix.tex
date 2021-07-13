@@ -4,9 +4,9 @@
 }
 
 \appendix
-\newappendix\label{code:asm_script}
+\newappendix\label{ap1}
 \section{ASM compile script}
-\begin{lstlisting}[language=bash,caption={Bash script for generating the .mem file from an .asm one}]
+\begin{lstlisting}[language=bash,caption={Bash script for generating the .mem file from an .asm one},label=code:asm_script]
 	#!/bin/sh
 	
 	if [ ! -r "$1" ]; then
@@ -21,10 +21,9 @@
 		
 	assembler.bin/conv2memory ${1%/*}/$filename.bin > DLX_vhd_fully_synthesizable/test_bench_and_memory/mems/${filename}.asm.mem
 \end{lstlisting}
-	
-\newappendix\label{sim_wave}
+
 \section{Simulation script}
-\begin{lstlisting}[language=bash,caption={Tcl script for staring the simulation and add the registers from R0 to R31}]
+\begin{lstlisting}[language=tcl,caption={Tcl script for staring the simulation and add the registers from R0 to R31},label=sim_wave]
 	vcom test_bench_and_memory/TB_TOP_DLX.vhd
 	
 	vsim -t 10ps work.DLX_TestBench
@@ -71,4 +70,296 @@
 	add wave -position insertpoint -group PROC_REGS -label R29 sim:/DLX_TestBench/DDLX/DataPath/RF/SEL_BLK/curr_proc_regs[703:672]
 	add wave -position insertpoint -group PROC_REGS -label R30 sim:/DLX_TestBench/DDLX/DataPath/RF/SEL_BLK/curr_proc_regs[735:704]
 	add wave -position insertpoint -group PROC_REGS -label R31 sim:/DLX_TestBench/DDLX/DataPath/RF/SEL_BLK/curr_proc_regs[767:736]
+\end{lstlisting}
+	
+\newappendix\label{ap2}
+\section{Bash synthesis script}
+\begin{lstlisting}[language=bash,caption={Bash script for the DLX synthesis},label=bash_syn]
+	#!/bin/sh
+		
+	source /software/scripts/init_synopsys_64.11
+	
+	cp ../.synopsys_dc.setup ./
+	cp -r ../alib-52 ./
+	dc_shell -no_log -f synthesis.script
+	
+	rm -rf rm -rf ARCH/ BODY/ ENTI/ PACK/
+	rm -rf alib-52
+	rm -f *.mr
+	rm -f ./.synopsys_dc.setup 
+	rm -f default.svf
+	
+	mv DLX_SYN.vhdl ./synthesis_result
+	mv DLX_SYN.v ./synthesis_result
+	mv dlx_sdf.sdf ./synthesis_result
+	mv dlx_sdc.sdc ./synthesis_result
+	mv report_*.txt ./synthesis_result
+\end{lstlisting}
+
+\section{Synthesis script}
+\begin{lstlisting}[language=tcl,caption={TCL script for the DLX synthesis},label=tcl_syn]
+	analyze -library WORK -format vhdl {
+		./000-globals.vhd
+		./001-globals_CU.vhd
+		./a.b-DataPath.core/a.b.a-windowedRF.core/a.b.a.m-utils.vhd
+		./a.b-DataPath.core/a.b.a-windowedRF.core/a.b.a.a-addr_encoder.vhd
+		./a.b-DataPath.core/a.b.a-windowedRF.core/a.b.a.b-address_generator.vhd
+		./a.b-DataPath.core/a.b.a-windowedRF.core/a.b.a.c-connection_mtx.vhd
+		./a.b-DataPath.core/a.b.a-windowedRF.core/a.b.a.d-decoder.vhd
+		./a.b-DataPath.core/a.b.a-windowedRF.core/a.b.a.e-equal_check.vhd
+		./a.b-DataPath.core/a.b.a-windowedRF.core/a.b.a.f-in_loc_selblock.vhd
+		./a.b-DataPath.core/a.b.a-windowedRF.core/a.b.a.g-mux.vhd
+		./a.b-DataPath.core/a.b.a-windowedRF.core/a.b.a.h-nwin_calc.vhd
+		./a.b-DataPath.core/a.b.a-windowedRF.core/a.b.a.i-reg_generic.vhd
+		./a.b-DataPath.core/a.b.a-windowedRF.core/a.b.a.l-select_block.vhd
+		./a.b-DataPath.core/a.b.a-windowedRF.core/a.b.a.n-latch_generic.vhd
+		./a.b-DataPath.core/a.b.a-windowedRF.vhd
+		./a.b-DataPath.core/a.b.b-mux2to1.vhd
+		./a.b-DataPath.core/a.b.d-ALU.core/a.b.d.a-logic.vhd
+		./a.b-DataPath.core/a.b.d-ALU.core/a.b.d.b-multiplier.core/a.b.d.b.a-adder.vhd
+		./a.b-DataPath.core/a.b.d-ALU.core/a.b.d.b-multiplier.core/a.b.d.b.b-encoder.vhd
+		./a.b-DataPath.core/a.b.d-ALU.core/a.b.d.b-multiplier.core/a.b.d.b.c-mux3_1.vhd
+		./a.b-DataPath.core/a.b.d-ALU.core/a.b.d.b-multiplier.vhd
+		./a.b-DataPath.core/a.b.d-ALU.core/a.b.d.c-adder.core/a.b.d.c.a-carry_generator.vhd
+		./a.b-DataPath.core/a.b.d-ALU.core/a.b.d.c-adder.core/a.b.d.c.b-carry_select_block.vhd
+		./a.b-DataPath.core/a.b.d-ALU.core/a.b.d.c-adder.core/a.b.d.c.d-fa.vhd
+		./a.b-DataPath.core/a.b.d-ALU.core/a.b.d.c-adder.core/a.b.d.c.e-GG.vhd
+		./a.b-DataPath.core/a.b.d-ALU.core/a.b.d.c-adder.core/a.b.d.c.f-mux21_generic.vhd
+		./a.b-DataPath.core/a.b.d-ALU.core/a.b.d.c-adder.core/a.b.d.c.g-PG.vhd
+		./a.b-DataPath.core/a.b.d-ALU.core/a.b.d.c-adder.core/a.b.d.c.h-prop_gen.vhd
+		./a.b-DataPath.core/a.b.d-ALU.core/a.b.d.c-adder.core/a.b.d.c.i-prop_gen_generic.vhd
+		./a.b-DataPath.core/a.b.d-ALU.core/a.b.d.c-adder.core/a.b.d.c.l-rca_generic.vhd
+		./a.b-DataPath.core/a.b.d-ALU.core/a.b.d.c-adder.core/a.b.d.c.m-sum_generator.vhd
+		./a.b-DataPath.core/a.b.d-ALU.core/a.b.d.c-adder.vhd
+		./a.b-DataPath.core/a.b.d-ALU.core/a.b.d.e-shifter.vhd
+		./a.b-DataPath.core/a.b.d-ALU.vhd
+		./a.b-DataPath.core/a.b.e-wRF_CU.vhd
+		./a.b-DataPath.core/a.b.f-set_comparator.vhd
+		./a.b-DataPath.core/a.b.g-datamem_ldstr.vhd
+		./a.b-DataPath.core/a.b.h-addr_mask.vhd
+		./a.b-DataPath.vhd
+		./a.d-decode.core/a.d.a-hazard_table.vhd
+		./a.d-decode.core/a.d.b-comparator.vhd
+		./a.d-decode.core/a.d.c-ha_counter.vhd
+		./a.d-decode.vhd
+		./a.a-CU_HW.vhd
+		./a-DLX.vhd
+	}
+	
+	elaborate DLX -architecture dlx_rtl -library WORK -parameters "IR_SIZE = 32, PC_SIZE = 32, RAM_DEPTH = 32"
+	
+	set_wire_load_model -name 5K_hvratio_1_4
+	create_clock -name "CLK" -period 2.5 CLK
+	
+	compile_ultra
+	
+	write -hierarchy -format vhdl -output ./DLX_SYN.vhdl
+	write -hierarchy -format verilog -output ./DLX_SYN.v
+	write_sdf dlx_sdf.sdf
+	write_sdc dlx_sdc.sdc
+	
+	report_timing > report_timing.txt
+	report_area > report_area.txt
+	report_power > report_power.txt
+	
+	exit
+\end{lstlisting}
+
+
+\newappendix\label{ap3}
+\section{Area report}
+\begin{lstlisting}
+	****************************************
+	Report : area
+	Design : DLX_IR_SIZE32_PC_SIZE32_RAM_DEPTH32
+	Version: F-2011.09-SP3
+	Date   : Tue Jun 29 10:05:35 2021
+	****************************************
+	
+	Library(s) Used:
+	
+	NangateOpenCellLibrary (File: /home/mariagrazia.graziano/do/libnangate/NangateOpenCellLibrary_typical_ecsm.db)
+	
+	Number of ports:                          270
+	Number of nets:                         14416
+	Number of cells:                        12385
+	Number of combinational cells:           9020
+	Number of sequential cells:              3360
+	Number of macros:                           0
+	Number of buf/inv:                       1034
+	Number of references:                      70
+	
+	Combinational area:       19747.840357
+	Noncombinational area:    15530.409475
+	Net Interconnect area:      undefined  (Wire load has zero net area)
+	
+	Total cell area:          35278.249832
+	Total area:                 undefined
+\end{lstlisting}
+
+
+\section{Power report}
+\begin{lstlisting}
+	Loading db file '/home/mariagrazia.graziano/do/libnangate/NangateOpenCellLibrary_typical_ecsm.db'
+	Information: Propagating switching activity (low effort zero delay simulation). (PWR-6)
+	Warning: Design has unannotated primary inputs. (PWR-414)
+	Warning: Design has unannotated sequential cell outputs. (PWR-415)
+	
+	****************************************
+	Report : power
+	-analysis_effort low
+	Design : DLX_IR_SIZE32_PC_SIZE32_RAM_DEPTH32
+	Version: F-2011.09-SP3
+	Date   : Tue Jun 29 10:05:39 2021
+	****************************************
+	
+	
+	Library(s) Used:
+	
+	NangateOpenCellLibrary (File: /home/mariagrazia.graziano/do/libnangate/NangateOpenCellLibrary_typical_ecsm.db)
+	
+	
+	Operating Conditions: typical   Library: NangateOpenCellLibrary
+	Wire Load Model Mode: top
+	
+	Design        Wire Load Model            Library
+	------------------------------------------------
+	DLX_IR_SIZE32_PC_SIZE32_RAM_DEPTH32
+	5K_hvratio_1_4    NangateOpenCellLibrary
+	
+	
+	Global Operating Voltage = 1.1  
+	Power-specific unit information :
+	Voltage Units = 1V
+	Capacitance Units = 1.000000ff
+	Time Units = 1ns
+	Dynamic Power Units = 1uW    (derived from V,C,T units)
+	Leakage Power Units = 1nW
+	
+	
+	Cell Internal Power  =   9.4246 mW   (95%)
+	Net Switching Power  = 456.7112 uW    (5%)
+	---------
+	Total Dynamic Power    =   9.8813 mW  (100%)
+	
+	Cell Leakage Power     = 653.2188 uW
+	
+	
+	Internal         Switching           Leakage            Total
+	Power Group      Power            Power               Power              Power   (   %    )  Attrs
+	--------------------------------------------------------------------------------------------------
+	io_pad             0.0000            0.0000            0.0000            0.0000  (   0.00%)
+	memory             0.0000            0.0000            0.0000            0.0000  (   0.00%)
+	black_box          0.0000            0.0000            0.0000            0.0000  (   0.00%)
+	clock_network      0.0000            0.0000            0.0000            0.0000  (   0.00%)
+	register       9.2807e+03           15.9485        2.6592e+05        9.5625e+03  (  90.77%)
+	sequential        12.1676            1.3685        3.1563e+03           16.6924  (   0.16%)
+	combinational    131.8427          439.4084        3.8414e+05          955.3798  (   9.07%)
+	--------------------------------------------------------------------------------------------------
+	Total          9.4247e+03 uW       456.7254 uW     6.5322e+05 nW     1.0535e+04 uW
+	1
+\end{lstlisting}
+
+
+\section{Timing report}
+\begin{lstlisting}
+	 
+	****************************************
+	Report : timing
+	-path full
+	-delay max
+	-max_paths 1
+	Design : DLX_IR_SIZE32_PC_SIZE32_RAM_DEPTH32
+	Version: F-2011.09-SP3
+	Date   : Tue Jun 29 10:05:35 2021
+	****************************************
+	
+	# A fanout number of 1000 was used for high fanout net computations.
+	
+	Operating Conditions: typical   Library: NangateOpenCellLibrary
+	Wire Load Model Mode: top
+	
+	Startpoint: IR_reg[30] (rising edge-triggered flip-flop clocked by CLK)
+	Endpoint: PC_reg[29] (rising edge-triggered flip-flop clocked by CLK)
+	Path Group: CLK
+	Path Type: max
+	
+	Des/Clust/Port     Wire Load Model       Library
+	------------------------------------------------
+	DLX_IR_SIZE32_PC_SIZE32_RAM_DEPTH32
+	5K_hvratio_1_4        NangateOpenCellLibrary
+	
+	Point                                    Incr       Path
+	-----------------------------------------------------------
+	clock CLK (rise edge)                    0.00       0.00
+	clock network delay (ideal)              0.00       0.00
+	IR_reg[30]/CK (DFFS_X1)                  0.00 #     0.00 r
+	IR_reg[30]/QN (DFFS_X1)                  0.10       0.10 r
+	U8269/ZN (NOR2_X1)                       0.06       0.16 f
+	U8386/ZN (NAND2_X1)                      0.05       0.21 r
+	U8901/ZN (NOR2_X1)                       0.04       0.25 f
+	U11609/ZN (NAND2_X1)                     0.04       0.28 r
+	U9207/ZN (NAND2_X1)                      0.04       0.32 f
+	U8837/ZN (OR2_X2)                        0.08       0.40 f
+	U8267/ZN (OR3_X2)                        0.11       0.51 f
+	U8800/ZN (INV_X1)                        0.05       0.55 r
+	U8852/ZN (NAND2_X2)                      0.08       0.63 f
+	U11405/ZN (NAND2_X1)                     0.07       0.70 r
+	U11404/ZN (NAND2_X1)                     0.03       0.73 f
+	U11402/ZN (NAND2_X1)                     0.04       0.77 r
+	U11401/ZN (XNOR2_X1)                     0.07       0.84 r
+	U9722/ZN (AND4_X2)                       0.07       0.91 r
+	U11356/ZN (AND2_X1)                      0.05       0.96 r
+	U11351/ZN (AOI21_X1)                     0.03       0.99 f
+	U11350/ZN (OAI21_X1)                     0.04       1.04 r
+	U8534/ZN (INV_X1)                        0.03       1.07 f
+	U11650/ZN (AOI21_X1)                     0.05       1.12 r
+	U8899/ZN (NAND2_X1)                      0.03       1.15 f
+	U11649/ZN (NAND2_X1)                     0.04       1.19 r
+	U11814/Z (MUX2_X1)                       0.08       1.27 f
+	U8962/ZN (INV_X1)                        0.03       1.31 r
+	U8961/ZN (NAND2_X1)                      0.03       1.34 f
+	U8410/ZN (NAND2_X1)                      0.04       1.38 r
+	U8407/Z (BUF_X1)                         0.04       1.42 r
+	U11758/ZN (NOR2_X1)                      0.03       1.44 f
+	intadd_1/U33/ZN (NOR2_X1)                0.05       1.49 r
+	U11711/ZN (NOR2_X1)                      0.03       1.52 f
+	intadd_1/U22/ZN (AOI21_X1)               0.05       1.58 r
+	U11322/ZN (OAI21_X1)                     0.04       1.62 f
+	U11319/ZN (AOI21_X1)                     0.05       1.67 r
+	U8911/ZN (NOR2_X1)                       0.03       1.70 f
+	U8788/ZN (NOR2_X1)                       0.05       1.74 r
+	U8926/ZN (AOI21_X1)                      0.03       1.78 f
+	U11710/ZN (NOR2_X1)                      0.05       1.83 r
+	U11307/ZN (NOR2_X1)                      0.03       1.86 f
+	U11655/ZN (NOR2_X1)                      0.05       1.91 r
+	U7969/ZN (AOI21_X1)                      0.03       1.94 f
+	U7970/ZN (INV_X1)                        0.04       1.98 r
+	U8834/ZN (NAND2_X1)                      0.03       2.02 f
+	U8835/ZN (NAND2_X1)                      0.04       2.05 r
+	U8323/ZN (AOI21_X1)                      0.04       2.10 f
+	U11709/ZN (NOR3_X1)                      0.06       2.16 r
+	U11280/ZN (OAI22_X1)                     0.04       2.20 f
+	U8984/Z (BUF_X1)                         0.05       2.25 f
+	U8908/ZN (NAND2_X1)                      0.03       2.28 r
+	U11734/ZN (OAI211_X1)                    0.04       2.33 f
+	U10544/ZN (XNOR2_X1)                     0.06       2.39 f
+	U8872/ZN (NAND2_X1)                      0.03       2.42 r
+	U8870/ZN (NAND2_X1)                      0.03       2.45 f
+	PC_reg[29]/D (DFFR_X1)                   0.01       2.46 f
+	data arrival time                                   2.46
+	
+	clock CLK (rise edge)                    2.50       2.50
+	clock network delay (ideal)              0.00       2.50
+	PC_reg[29]/CK (DFFR_X1)                  0.00       2.50 r
+	library setup time                      -0.04       2.46
+	data required time                                  2.46
+	-----------------------------------------------------------
+	data required time                                  2.46
+	data arrival time                                  -2.46
+	-----------------------------------------------------------
+	slack (MET)                                         0.00
+	
+	
+	1
 \end{lstlisting}
