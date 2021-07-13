@@ -324,4 +324,5 @@ The multiplexer on the right is controlled by a signal that comes from the contr
 
 In fact, in these cases, we need to completely change the value of the program counter and put inside it a value read from the register file, in particular \texttt{RD1}.
 \section{Tickcounter}
-
+When thinking how to further improve the PRO version of the DLX, an idea was to implement a counter. As it's know, counters are very common inside microprocessors because they are useful keep track of the timing. 
+The implementation chosen in the DLX was very simple and straightforward. There is an half-adder on 32 bits that every rising edge of the clock increases the value of the register used inside the tickcounter block to keep track of the value. By doing this we can count the number of ticks and use to estimate the duration of a specific program.
