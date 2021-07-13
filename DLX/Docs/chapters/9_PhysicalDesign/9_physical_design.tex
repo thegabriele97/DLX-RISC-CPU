@@ -23,7 +23,8 @@ The second script, that is run under the \texttt{dc\_shell} to perform the actua
 	\item Save the timing, area and power report 
 \end{itemize}
 The clock timing, that has been set to 2.5, has been selected after many trials and errors, in order to find the lowest possible value. Critical paths, like the one that uses the adder has been reduced using a mode optimized solution, e.g. P4 adder.\newline\newline
-All the complete reports are reported at Appendix \ref{ap3}; from the area report it's possible to observe that the total cell area is 35278.25 that is divided into 19747.84 for the combinational part and 15530.41 for the non combination one.
+All complete reports are reported at Appendix \ref{ap3}; from the area report it's possible to observe that the total cell area is 35278.25 that is divided into 19747.84 for the combinational part and 15530.41 for the non combination one.\newline\newline
+Another important information, that can be extracted from the timing report is, given a timing constraint, the \textit{slack}. It represents the time margin that the worst path has; in this way, the clock in the synthesis script can be tuned in order to reduce it as much as possible to increase the performances.
 
 
 
