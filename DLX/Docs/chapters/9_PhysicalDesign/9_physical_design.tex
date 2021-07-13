@@ -59,7 +59,15 @@ In order to obtain a fully placed and routed DLX, many steps are performed:
 	
 	\item I/O placing: at this point, cells and I/O pins can be placed. Before filling the empty spaces with filler cells a Post Clock-Tree-Synthesis (CTS) optimization is performed. The result is visible at Figure \ref{fig:pre_routing};
 	\item Routing: the last step is the routing, logical interconnections are replaced with physical interconnections between cells, considering the available stripes and metal rings. The design is now completed but a post routing optimization has been performed in order to respect the required timing constraints.
-	
-
 	 
 \end{itemize}
+
+Once the Place and Route step has been done, a timing analysis has been performed using the \textit{Innovus Debug timing} in order to visualize the delay distribution. The paths delay distributions is visible at \ref{fig:innovus_delay}.
+\begin{figure}[h]   
+	\centering
+	\includegraphics[width=0.8\textwidth]{chapters/9_PhysicalDesign/images/innvous_delay.png}
+	\caption{Result after placing GND and $V_{dd}$ rings with vertical and horizontal stripes.}
+	\label{fig:innovus_delay}
+\end{figure}
+
+Last but not least, before ending the place and route process, a design analysis and verification is performed in order to ensure the connectivity and the design rules have been respected.
