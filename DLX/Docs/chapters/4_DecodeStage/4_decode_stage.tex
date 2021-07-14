@@ -240,7 +240,7 @@ The advance comparator exploits the comparison by performing a subtraction betwe
  				10 & $A \geq B$
  				
  			\end{tabular}
- 			\caption{LEQ encoding}
+ 			\caption{LGET encoding}
  			\label{tab:lget}
  		\end{center}
  	\end{table}
@@ -331,6 +331,60 @@ So, we the final unit corresponds to the one at figure \ref{comparator_advanced}
 \end{figure}
 
 \section{Jump and Branch decision}
+When taking into consideration jump and branch decision there are many details to exaplin. First, as shown in \autoref{table:decode_instr}, there are some instructions, like JAL and JALR, that need to save the value of the current program counter inside the register R31. For this reason, the value of WS is set to R31 in these king of instructions. 
+
+Another important thing is that when jumping there need to be a change on the program counter. In order to exploit this feature there is a dedicated hardware inside the decode block, that takes into account the computation of the next program counter. All the circuit and its functioning are explained in the next section. 
+
+In the control word there is a dedicated bit for the \texttt{JUMP\_EN}. For the instructions that requires a jump, such as J, JAL, JALR, CALL and RET, this bit is set to 1 by default. For others instruction that may jump, in particular the conditional branches, there is an intermediate step, that is the comparator. In fact, for these instructions, the \texttt{JUMP\_EN} bit is set to 0 by default. Then, thanks to a process inside the control unit, based on the opcode and on the bits of the signal \texttt{LGET}, the \texttt{JUMP\_EN} is set to 1 and the \texttt{IF\_STALL} to 1 as well. This is very important because when jumping, there is the need to wait fetching the next instruction. For this reason the fetch stage is stalled, in order to avoid fetching the next instruction immediately. 
+
+The content of the process that exploit the functionalities just explained is the following:
+\newline
+
+\begin{lstlisting}[style=vhdl,caption={VHDL code for the conditional branch},label=conditional_branches_code]
+  if (IR_opcode = OP_BEQZ and LGET(0) = '0') then -- BEQZ 
+    i_JUMP_EN <= '1';
+    IF_STALL <= '1';
+  elsif (IR_opcode = OP_BNEZ and LGET(0) = '1') then -- BNEZ
+    i_JUMP_EN <= '1';
+    IF_STALL <= '1';
+  elsif (IR_opcode = OP_BGE and (LGET(1) = '1' or LGET(0) = '0')) then -- BGE
+    i_JUMP_EN <= '1';
+    IF_STALL <= '1';
+  elsif (IR_opcode = OP_BLE and LGET(1) = '0') then -- BLE
+    i_JUMP_EN <= '1';
+    IF_STALL <= '1';
+  elsif (IR_opcode = OP_BGT and LGET = "11") then -- BGT
+    i_JUMP_EN <= '1';
+    IF_STALL <= '1';
+  elsif (IR_opcode = OP_BLT and LGET = "01") then -- BLT
+    i_JUMP_EN <= '1';
+    IF_STALL <= '1';
+  elsif (IR_opcode = OP_CALL and BUSY_WINDOW = '1') then -- CALL
+    CALL <= '0';
+    i_JUMP_EN <= '0';	
+  elsif (IR_opcode = OP_CALL and BUSY_WINDOW = '0' and i_SPILL_delay = '0') then -- CALL
+    CALL <= '1';
+  elsif (IR_opcode = OP_RET and BUSY_WINDOW = '1') then -- RET
+    RET <= '0';
+    i_JUMP_EN <= '0';
+  end if;
+\end{lstlisting}
+
+Looking at the \autoref{tab:lget} we undestand that in order to check a specific branch we have:
+
+\begin{itemize}
+  \item BEQZ: if the LSB of \texttt{LGET} is 0, then it means that there is equivalence with 0
+  \item BNEZ: if the LSB of \texttt{LGET} is 1, then it means that there is don't have equivalence with 0
+  \item BGE: if the LSB of \texttt{LGET} is 0 or if the LSB+1 of \texttt{LGET} is 1
+  \item BLE: if the LSB+1 of \texttt{LGET} is 0, then it means that there is less equal
+  \item BGT: if LGET = 11
+  \item BLT: if LGET = 01
+\end{itemize}
+
+The last cases to analyze are the one in which there is CALL or RET. If there is \texttt{BUSY\_WINDOW} equal to 1, it means that the current window is still in use, and so no operation on it have to be executed. In fact \texttt{JUMP\_EN} is set to 0.
+
+The last case is the one when \texttt{BUSY\_WINDOW} and so the execution of the CALL procedure is feasible. In fact, \texttt{CALL} is set to 1.
+
 \section{Next Program Counter computation}
 The next program counter computation is included inside the decode block, in order to better manage hazards and jumps. To lighten the load on the ALU, a dedicated P4 adder has been included inside the decode stage to compute the next program counter. 
 The full schematic of the decode is shown in \autoref{decode_block}.
