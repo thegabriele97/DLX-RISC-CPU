@@ -12,7 +12,7 @@ The Decode is based on the clever shown in Table \ref{table:decode_instr}. The t
 
 \begin{table}[H]
     \centering
-    \begin{tabularx}{\textwidth}{l|l|l|l|l|l|X}
+    \begin{tabularx}{\textwidth}{|l|l|l|l|l|l|X|}
         \hline
         \textbf{Instruction} & INP1 & INP2 & RS1 & RS2 & WS & Note\\
         \hline
@@ -31,7 +31,7 @@ The Decode is based on the clever shown in Table \ref{table:decode_instr}. The t
         LHI & \texttt{IR[15:0]} & \texttt{16} & \texttt{IR[25:21]} & \texttt{IR[20:16]} & \texttt{IR[20:16]} & No Sign Ext\\
         \hline
     \end{tabularx}
-    \caption{Input signals towards the Control Unit}
+    \caption{Instruction Decoding}
     \label{table:decode_instr}
 \end{table}
 
