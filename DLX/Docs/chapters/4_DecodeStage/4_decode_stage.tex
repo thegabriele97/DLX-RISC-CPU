@@ -1,7 +1,41 @@
 \chapter{Decode Stage}
 \label{sec:decode_stage}
 
+The Decode Stage is the first DataPath stage and logically it's divided between the DataPath itself and a separated unit called "Decode". The Decode Stage is mainly used to perform the Instruction Decode so identification of instruction type given its \emph{OP\_CODE} and then the dispatch of the operands containted in the instruction towards the DataPath. Meanwhile other side operations are performed like computation of the new PC (given a jump or not), data hazard detection and comparisons.
+
+
 \section{Instruction Decode}
+
+The most important operation is the Instruction Decode. Here, after the identification of the instruction type, its field are extracted according to the general instruction structure, as described in Figure \ref{fig:rtype}, Figure \ref{fig:itype} and Figure \ref{fig:jtype}.\\
+
+The Decode is based on the clever shown in Table \ref{table:decode_instr}. The table describes only the signals that goes towards the DataPath and not the internal ones.
+
+\begin{table}[H]
+    \centering
+    \begin{tabularx}{\textwidth}{l|l|l|l|l|l|X}
+        \hline
+        \textbf{Instruction} & INP1 & INP2 & RS1 & RS2 & WS & Note\\
+        \hline
+        RTYPE & \texttt{0} & \texttt{0} & \texttt{IR[25:21]} & \texttt{IR[20:16]} & \texttt{IR[15:11]} & \\
+        \hline
+        J & \texttt{0} & \texttt{0} & \texttt{R0} & \texttt{R0} & \texttt{R0} & \\
+        \hline
+        JAL (CALL) & \texttt{0} & \texttt{PC} & \texttt{R0} & \texttt{R0} & \texttt{R31} & \\
+        \hline
+        JALR & \texttt{0} & \texttt{PC} & \texttt{IR[25:21]} & \texttt{R0} & \texttt{R31} & \\
+        \hline
+        TICKTMR & \texttt{0} & \texttt{\emph{i\_TICKTMR}} & \texttt{R0} & \texttt{R0} & \texttt{IR[25:21]} & Destination reg on [25:21]\\
+        \hline
+        ITYPE & \texttt{0} & \texttt{IR[15:0]} & \texttt{IR[25:21]} & \texttt{IR[20:16]} & \texttt{IR[20:16]} & INP2 Sign Extension iff \emph{UNSIGNED\_ID}\\
+        \hline
+        LHI & \texttt{IR[15:0]} & \texttt{16} & \texttt{IR[25:21]} & \texttt{IR[20:16]} & \texttt{IR[20:16]} & No Sign Ext\\
+        \hline
+    \end{tabularx}
+    \caption{Input signals towards the Control Unit}
+    \label{table:decode_instr}
+\end{table}
+
+
 \section{Register File and Windowing}
 The general structure of a register file is based on a decoder that takes the selection input (so the address of the desired register) and enables it (using also the enable signal). At this point, an input signal will contain the value to be written. On the other hand, a read signal is used to select among all the registers.\newline\newline
 The DLX presented in this document has been enhanced in order to be able to manage subroutine in a transparent manner from the point of view of the user. For this reason, the DLX must be able to handle subroutines, and so the context switching, that consists in saving the
