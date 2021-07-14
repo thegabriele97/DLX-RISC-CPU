@@ -68,36 +68,259 @@ Its interface is made of input signals (status signals from other components) an
 
 \begin{table}[H]
     \centering
-    \begin{tabular}{l|l}
-        \textbf{Signal Name} & \textbf{Description}\\
+    \begin{tabular}{l|c|l}
+        \textbf{Signal Name} & Sign & \textbf{Description}\\
         \hline
-        PIPLIN\_IF\_EN & IF Stage enable: enable of IR register \\
-        IF\_STALL & IF Stage stall: a NOP is insterted in the IR register \\
-        PC\_EN & Enable of the PC register \\
-        JUMP\_EN & A JUMP must occur, the Decode Stage will compute the new PC \\
-        CALL & The Register File must start the context switch in a new window\\
-        RET & The Register File must restore the previous window\\
-        SEL\_CMPB & Register or Immediate field as comparator input in the Decode Stage\\
-        UNSIGNED\_ID & Indicates that all arithmetic units must consider operands as unsigned\\
-        NPC\_SEL & Selects as new PC between the value of a REG NPC Adder's output\\
-        HAZARD\_TABLE\_WR1 & Enables the logging of the current instruction in the hazard control\\
-        RF\_RD1\_EN & Enables the Read Port 1 in the RF\\
-        RF\_RD2\_EN & Enables the Read Port 2 in the RF\\
-        PIPLIN\_ID\_EN & ID Stage enable: enables all the ID pipeline REGs\\
-        PIPLIN\_EX\_EN & EX Stage enable: enables all the EX pipeline REGs\\
-        SEL\_LGET & Used by the SET Comparator unit for selection of the SET operand\\
-        DRAM\_WE & Enables the Write Operation in the DRAM\\
-        DRAM\_RE & Enables the Read Operation in the DRAM\\
-        DRAM\_ME & Enable signal for the DRAM\\
-        DATA\_SIZE & Indicates the data of transfer towards/from the DRAM\\
-        UNSIG\_SIGN\_N & Same as \emph{UNSIGNED\_ID} but 2 clock cycles delayed\\
-        PIPLIN\_MEM\_EN & MEM Stage enable: enables all the MEM pipeline REGs\\
-        WB\_MUX\_SEL & Selects between MEM output and ALU out the content to write back\\
-        PIPLIN\_WB\_EN & WB Stage enable: enables the Write signal in the RF\\
+        PIPLIN\_IF\_EN & F & IF Stage enable: enable of IR register \\
+        IF\_STALL & S & IF Stage stall: a NOP is insterted in the IR register \\
+        PC\_EN & P & Enable of the PC register \\
+        JUMP\_EN & J & JUMP must occur: Decode Stage will compute the new PC \\
+        CALL & L & The Register File starts the context switch in a new window\\
+        RET & E & The Register File must restore the previous window\\
+        SEL\_CMPB & P & Reg or Imm field as comparator input in the Decode Stage\\
+        UNSIGNED\_ID & U & All arithmetic units must consider operands as unsigned\\
+        NPC\_SEL & N & Selects new PC (Adder or REG content)\\
+        HAZARD\_TABLE\_WR1 & H & Enables log of the current instruction in the hazard control\\
+        RF\_RD1\_EN & 1 & Enables the Read Port 1 in the RF\\
+        RF\_RD2\_EN & 2 & Enables the Read Port 2 in the RF\\
+        PIPLIN\_ID\_EN & D & ID Stage enable: enables all the ID pipeline REGs\\
+        PIPLIN\_EX\_EN & X & EX Stage enable: enables all the EX pipeline REGs\\
+        MUXA\_SEL & A & Input A of ALU: Immediate 1 or RD1\\
+        MUXB\_SEL & B & Input B of ALU: Immediate 2 or RD2\\
+        SEL\_ALU\_SETCMP & T & ALU or SET Comparator as EX stage output\\
+        ALU\_OPCODE & \texttt{ALU} & ALU operation to be done\\
+        SEL\_LGET & \texttt{SEL} & SET Comparator operation to be done\\
+        DRAM\_WE & W & Enables the Write Operation in the DRAM\\
+        DRAM\_RE & R & Enables the Read Operation in the DRAM\\
+        DRAM\_ME & & Enable signal for the DRAM\\
+        DATA\_SIZE & DS & Indicates the data of transfer towards/from the DRAM\\
+        UNSIG\_SIGN\_N & U & Same as \emph{UNSIGNED\_ID} but 2 clock cycles delayed\\
+        PIPLIN\_MEM\_EN & M & MEM Stage enable: enables all the MEM pipeline REGs\\
+        WB\_MUX\_SEL & C & Selects MEM output or ALU out as content to write back\\
+        PIPLIN\_WB\_EN & K & WB Stage enable: enables the Write signal in the RF\\
     \end{tabular}
     \caption{Output signals towards the Control Unit}
     \label{table:cu:output_signals}
 \end{table}
+
+
+\subsection{Control Words}
+
+Going deeper into the Control Unit, we can give a look at the generated Control Words for each Instruction. Each bit is referred to a Control Signal as indicated in Table \ref{table:cu:output_signals}, \emph{Sign} column, while a blank bit means that it's randomly assigned.
+
+\begin{figure}[ht]
+    \begin{center}
+        \begin{bytefield}[endianness=big,bitwidth=0.03\linewidth]{32}
+        \bitheader{0-31} \\
+            \bitbox{1}{F} & \bitbox{1}{S} & \bitbox{1}{P} & \bitbox{1}{J} & \bitbox{1}{L} & \bitbox{1}{E} & \bitbox{1}{1} & \bitbox{1}{2} & \bitbox{1}{P} & \bitbox{1}{U} & \bitbox{1}{N} & \bitbox{1}{H} & \bitbox{1}{D} & \bitbox{1}{X} & \bitbox{1}{A} & \bitbox{1}{B} & \bitbox{5}{ALU} & \bitbox{3}{SEL} & \bitbox{1}{T} & \bitbox{1}{W} & \bitbox{1}{R} & \bitbox{2}{DS} & \bitbox{1}{M} & \bitbox{1}{C} & \bitbox{1}{K}
+        \end{bytefield}
+    \end{center}
+    \caption{Control Word bits organization}
+\end{figure}
+
+
+\begin{figure}[H]
+    \begin{center}
+        \begin{bytefield}[endianness=big,bitwidth=0.0278\linewidth]{32}
+        \bitheader{0-10, 11, 15, 16-31} \\
+
+        \begin{rightwordgroup}{RTYPE}
+            \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{5}{} & \bitbox{3}{} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{2}{00} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1}
+        \end{rightwordgroup}\\
+
+        \begin{rightwordgroup}{J}
+            \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{5}{ADD} & \bitbox{3}{SEQ} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{2}{00} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0}
+        \end{rightwordgroup}\\
+
+        \begin{rightwordgroup}{JAL}
+            \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{5}{ADD} & \bitbox{3}{SEQ} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{2}{00} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1}
+        \end{rightwordgroup}\\
+
+
+        \end{bytefield}
+    \end{center}
+    \caption{Control Word for each instruction}
+\end{figure}
+
+
+\begin{figure}[H]
+    \begin{center}
+        \begin{bytefield}[endianness=big,bitwidth=0.0278\linewidth]{32}
+        \bitheader{0-10, 11, 15, 16-31} \\
+
+        \begin{rightwordgroup}{BEQZ}
+            \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{ } & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{5}{ADD} & \bitbox{3}{SEQ} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{2}{00} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0}
+        \end{rightwordgroup}\\
+
+        \begin{rightwordgroup}{BNEZ}
+            \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{ } & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{5}{ADD} & \bitbox{3}{SEQ} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{2}{00} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0}
+        \end{rightwordgroup}\\
+
+        \begin{rightwordgroup}{ADDI}
+            \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{5}{ADD} & \bitbox{3}{SEQ} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{2}{00} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1}
+        \end{rightwordgroup}\\
+
+        \begin{rightwordgroup}{ADDUI}
+            \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{5}{ADD} & \bitbox{3}{SEQ} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{2}{00} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1}
+        \end{rightwordgroup}\\
+
+        \begin{rightwordgroup}{SUBI}
+            \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{5}{SUB} & \bitbox{3}{SEQ} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{2}{00} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1}
+        \end{rightwordgroup}\\
+
+        \begin{rightwordgroup}{SUBUI}
+            \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{5}{SUB} & \bitbox{3}{SEQ} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{2}{00} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1}
+        \end{rightwordgroup}\\
+
+        \begin{rightwordgroup}{ANDI}
+            \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{5}{AND} & \bitbox{3}{SEQ} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{2}{00} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1}
+        \end{rightwordgroup}\\
+
+        \begin{rightwordgroup}{ORI}
+            \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{5}{OR} & \bitbox{3}{SEQ} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{2}{00} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1}
+        \end{rightwordgroup}\\
+
+        \begin{rightwordgroup}{XORI}
+            \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{5}{XOR} & \bitbox{3}{SEQ} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{2}{00} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1}
+        \end{rightwordgroup}\\
+
+        \begin{rightwordgroup}{LHI}
+            \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{5}{SLL} & \bitbox{3}{SEQ} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{2}{00} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1}
+        \end{rightwordgroup}\\
+
+        \begin{rightwordgroup}{JR}
+            \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{5}{ADD} & \bitbox{3}{SEQ} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{2}{00} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0}
+        \end{rightwordgroup}\\
+
+        \begin{rightwordgroup}{JALR}
+            \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{5}{ADD} & \bitbox{3}{SEQ} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{2}{00} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1}
+        \end{rightwordgroup}\\
+
+        \begin{rightwordgroup}{SLLI}
+            \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{5}{SLL} & \bitbox{3}{SEQ} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{2}{00} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1}
+        \end{rightwordgroup}\\
+
+        \begin{rightwordgroup}{NOP}
+            \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{5}{ADD} & \bitbox{3}{SEQ} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{2}{00} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0}
+        \end{rightwordgroup}\\
+
+        \begin{rightwordgroup}{SRLI}
+            \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{5}{SRL} & \bitbox{3}{SEQ} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{2}{00} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1}
+        \end{rightwordgroup}\\
+
+        \begin{rightwordgroup}{SRAI}
+            \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{5}{SRA} & \bitbox{3}{SEQ} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{2}{00} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1}
+        \end{rightwordgroup}\\
+
+        \begin{rightwordgroup}{SEQI}
+            \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{5}{ADD} & \bitbox{3}{SEQ} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{2}{00} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1}
+        \end{rightwordgroup}\\
+
+        \begin{rightwordgroup}{SNEI}
+            \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{5}{ADD} & \bitbox{3}{SNE} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{2}{00} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1}
+        \end{rightwordgroup}\\
+
+        \begin{rightwordgroup}{SLTI}
+            \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{5}{ADD} & \bitbox{3}{SLT} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{2}{00} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1}
+        \end{rightwordgroup}\\
+
+        \begin{rightwordgroup}{SGTI}
+                \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{5}{ADD} & \bitbox{3}{SGT} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{2}{00} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1}
+        \end{rightwordgroup}\\
+
+        \begin{rightwordgroup}{SLEI}
+            \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{5}{ADD} & \bitbox{3}{SLE} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{2}{00} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1}
+        \end{rightwordgroup}\\
+
+        \begin{rightwordgroup}{SGEI}
+            \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{5}{ADD} & \bitbox{3}{SGE} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{2}{00} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1}
+        \end{rightwordgroup}\\
+
+        \begin{rightwordgroup}{CALL}
+            \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{5}{ADD} & \bitbox{3}{SEQ} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{2}{00} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1}
+        \end{rightwordgroup}\\
+
+        \begin{rightwordgroup}{RET}
+            \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{5}{ADD} & \bitbox{3}{SEQ} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{2}{00} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0}
+        \end{rightwordgroup}\\
+
+        \begin{rightwordgroup}{LB}
+            \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{5}{ADD} & \bitbox{3}{SEQ} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{2}{10} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{1}
+        \end{rightwordgroup}\\
+
+        \begin{rightwordgroup}{LH}
+            \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{5}{ADD} & \bitbox{3}{SEQ} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{2}{01} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{1}
+        \end{rightwordgroup}\\
+
+        \begin{rightwordgroup}{LW}
+            \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{5}{ADD} & \bitbox{3}{SEQ} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{2}{00} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{1}
+        \end{rightwordgroup}\\
+
+        \begin{rightwordgroup}{LBU}
+            \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{5}{ADD} & \bitbox{3}{SEQ} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{2}{10} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{1}
+        \end{rightwordgroup}\\
+
+        \begin{rightwordgroup}{LHU}
+            \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{5}{ADD} & \bitbox{3}{SEQ} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{2}{01} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{1}
+        \end{rightwordgroup}\\
+
+        \begin{rightwordgroup}{SB}
+            \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{5}{ADD} & \bitbox{3}{SEQ} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{2}{10} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{0}
+        \end{rightwordgroup}\\
+
+        \begin{rightwordgroup}{SH}
+            \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{5}{ADD} & \bitbox{3}{SEQ} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{2}{01} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{0}
+        \end{rightwordgroup}\\
+
+        \begin{rightwordgroup}{SW}
+            \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{5}{ADD} & \bitbox{3}{SEQ} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{2}{00} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{0}
+        \end{rightwordgroup}\\
+
+
+        \begin{rightwordgroup}{TKTM}
+            \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{5}{ADD} & \bitbox{3}{SEQ} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{2}{00} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1}
+        \end{rightwordgroup}\\
+
+        \begin{rightwordgroup}{SLTUI}
+            \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{5}{ADD} & \bitbox{3}{SLT} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{2}{00} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1}
+        \end{rightwordgroup}\\
+
+        \begin{rightwordgroup}{SGTUI}
+            \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{5}{ADD} & \bitbox{3}{SGT} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{2}{00} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1}
+        \end{rightwordgroup}\\
+
+        \begin{rightwordgroup}{SLEUI}
+            \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{5}{ADD} & \bitbox{3}{SLE} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{2}{00} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1}
+        \end{rightwordgroup}\\
+
+        \begin{rightwordgroup}{SGEUI}
+            \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{5}{ADD} & \bitbox{3}{SGE} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{2}{00} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1}
+        \end{rightwordgroup}\\
+
+
+        \begin{rightwordgroup}{BGT}
+            \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{5}{ADD} & \bitbox{3}{SEQ} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{2}{00} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0}
+        \end{rightwordgroup}\\
+
+        \begin{rightwordgroup}{BGE}
+            \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{5}{ADD} & \bitbox{3}{SEQ} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{2}{00} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0}
+        \end{rightwordgroup}\\
+
+        \begin{rightwordgroup}{BLT}
+            \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{5}{ADD} & \bitbox{3}{SEQ} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{2}{00} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0}
+        \end{rightwordgroup}\\
+
+        \begin{rightwordgroup}{BLE}
+            \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{5}{ADD} & \bitbox{3}{SEQ} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{2}{00} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0}
+        \end{rightwordgroup}\\
+
+        \end{bytefield}
+    \end{center}
+    \caption{Control Word for each instruction}
+\end{figure}
+
+
+
 
 \subsection{Internal organization of the Control Unit}
 
