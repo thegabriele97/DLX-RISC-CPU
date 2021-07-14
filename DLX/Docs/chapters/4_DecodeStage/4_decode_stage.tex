@@ -6,7 +6,7 @@ The Decode Stage is the first DataPath stage and logically it's divided between 
 
 \section{Instruction Decode}
 
-The most important operation is the Instruction Decode. Here, after the identification of the instruction type, its field are extracted according to the general instruction structure, as described in Figure \ref{fig:rtype}, Figure \ref{fig:itype} and Figure \ref{fig:jtype}.\\
+The most important operation is the Instruction Decode. Here, after the identification of the instruction type, its fields are extracted according to the general instruction structure, as described in Figure \ref{fig:rtype}, Figure \ref{fig:itype} and Figure \ref{fig:jtype}.\\
 
 The Decode is based on the clever shown in Table \ref{table:decode_instr}. The table describes only the signals that go towards the DataPath and not the internal ones.
 
@@ -35,6 +35,7 @@ The Decode is based on the clever shown in Table \ref{table:decode_instr}. The t
     \label{table:decode_instr}
 \end{table}
 
+For Jump or Branch instruction, the immediate field doesn't go beyond the decode stage itself. The immediate is a relative value to be summed to the actual PC in case of a taken jump. For Jump-like instructions (J, JAL, CALL) the field is 26 bit long (far jumps) while for other branch instructions the field is 16 bit long (near jumps). In both cases the value is extended to 32 bit with sign because the relative value can be both positive (forward jumps) and negative (backward jumps).
 
 \section{Register File and Windowing}
 The general structure of a register file is based on a decoder that takes the selection input (so the address of the desired register) and enables it (using also the enable signal). At this point, an input signal will contain the value to be written. On the other hand, a read signal is used to select among all the registers.\newline\newline
