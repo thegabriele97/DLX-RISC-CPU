@@ -455,13 +455,13 @@ When a halfword or byte read is performed, a 32-bit memory system can return the
 
 \subsection{Memory Write}
 
-Instead, when the DLX processor performs a byte or halfword write, the data being written is replicated across the data bus, as shown in Figure \ref{figure:dlx:memory_replication}. The memory system can use the most convenient copy of the data.\\
+Instead, when the DLX processor performs a byte or halfword write, the data being written is replicated across the data bus, as shown in Figure \ref{figure:dlx:memory_replication}. The memory system can use the most convenient copy of the data.
 
 A writable memory system must be capable of performing a write to any single byte in the memory system. This is required for the correct working of the DLX. 
 
-\begin{figure}[H]
+\begin{figure}[h]
     \centering
-    \includegraphics[width=1.0\textwidth]{chapters/2_dlx/images/DLX-MemoryWordReplication.pdf}
+    \includegraphics[width=.57\textwidth]{chapters/2_dlx/images/DLX-MemoryWordReplication.pdf}
     \caption{Data Write Replication}
     \label{figure:dlx:memory_replication}
 \end{figure} 
