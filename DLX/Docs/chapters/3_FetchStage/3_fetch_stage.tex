@@ -12,13 +12,13 @@ The Instruction Register (\texttt{IR}) is, in this case, a 32 bits register that
 During the normal operation, this register is updated with the new instruction coming from the IRAM, but this is not always true. We have two cases in which the register is not updated:
 \begin{enumerate}
 	\item When \texttt{i\_IR\_LATCH\_EN} is at 0, in fact, this signal is used to avoid updating the value inside the \texttt{IR}. During the instruction execution, it could be that the DRAM is not ready, a signal \texttt{i\_DRAM\_NOTREADY} is checked inside the Control Unit and in case of `1' the \texttt{i\_IR\_LATCH\_EN} is put at 0. In this way, everything is stalled so the CW in the pipeline and the Instruction Register will remain the same until the DRAM will become ready again. 
-	\item When the reset signal is asserted or when the \texttt{i\_IR\_STALL} is at one, a ``bubble" is added to the pipeline. So, the Instruction Register will contain the \texttt{x"54000000"} value. This is used in order to manage the jump and branch instructions. A more detailed description is available at section \ref{sec:jmp_branch}.
+	\item When the reset signal is asserted or when the \texttt{i\_IR\_STALL} is at one (this signal is at one when the pipeline must continue its execution but a NOP is executed for resolving an hazard), a ``bubble" is added to the pipeline. So, the Instruction Register will contain the \texttt{x"54000000"} value. This is used in order to manage the jump and branch instructions. A more detailed description is available at section \ref{sec:jmp_branch}.
 \end{enumerate}
 
 \section{Program Counter}
 As anticipated before, the Program Counter (\texttt{PC}) is the address used to fetch the instruction from the IRAM and it is on 32 bits, thus it is able to address up to 4GB.
 
-At each clock cycle, the current Program Counter is incremented by 4, in order to point to the next instruction. Only in case of reset, it is set to 0 otherwise it will set to the value of the new Program Counter, computed in the Decode stage. In a specular way, from what is done for the Instruction Register, the \texttt{PC} is updated only when the \texttt{i\_PC\_LATCH\_EN} is `1'.
+At each clock cycle, the current Program Counter is updated with the \texttt{NPC} computed from in the Decode stage, in order to point to the next instruction. This allows to manage both the normal execution, by adding 4 to the current \texttt{PC}, subtracting/adding an offset or set it to an immediate. Only in case of reset, it is set to 0 otherwise it will set to the value of the new Program Counter, computed in the Decode stage. In a specular way, from what is done for the Instruction Register, the \texttt{PC} is updated only when the \texttt{i\_PC\_LATCH\_EN} is `1'.
 
 \section{Jump and Branch Management}
 \label{sec:jmp_branch}
