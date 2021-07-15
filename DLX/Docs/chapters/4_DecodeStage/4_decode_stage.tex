@@ -207,11 +207,19 @@ s
 \end{figure}
 
 \section{Hazard Control}
-To exploit this functionality the starting point was to understand when to stop the pipeline. Problems may occur in read after write and also when changing window for the CALL and RET procedures. 
-The first solution implemented was the use of a table with 32 entries of 1 bit each. When an operation needed to write on a specific register, the bit of the entry related to the register would have been set to 1. When the operation was over, the bit would go back to 0. This solution was perfectly working, but the main problem was scalability and adaptability. In fact, if two or more consecutive operations needed to write on the same register and then another operation need to read that register, the single bit was not enough and it was causing malfunctioning. The problem was that the second operation overwrites a one in the table. So, when the first operation finishes, it set the bit to 0 while the second operation is still writing that register and so the third operation could start. The problem is tha the latter operation reads a wrong value.
 
-The solution to this problem was to increase the number of bits of each entry of the table. Each time an operation needed to write a register, it increases the value of the Table (at the specific entry). When the operation finishes, the value is decreased. Thanks to this trick, the example explained before now works perfectly. 
-The chosen number of bits was three, to be able to count 7, which is a higher number compared to the pipeline stages. 
+During the execution of a pipeline, different problems or hazard situations may occur. Regarding Data Hazards, the most dangerous situation is the \emph{Read After Write (RAW)}. So a solution is needed in order to detect these problems and actually there exist a unit inside the Decode Stage that is dedicated to this job, the \emph{Hazard Table}.\\
+
+RAW Hazards occurs when an instruction wants to read from a register that is the destination register of a previous instruction still inside the pipeline so and not completed. This means that the second instruction has to be stopped (i.e. a stall or a bubble must be inserted into the pipeline) until the previous instruction has been completed.\\
+
+\begin{lstlisting}[style=mips,nolol, caption={Example of DLX ASM code for RAW Hazard},label=raw_hazard]
+	add r1, r2, r3
+	add r4, r1, r2 # RAW HAZARD
+\end{lstlisting}
+
+The \emph{Hazard Table} is made of a table with 32 entries (one for each register of the DLX). Each entry is made on 3 bits. When an instruction exits the Decode Stage and enters the Execute Stage, the related destination address entry in the table is increased by one. When the instruction reaches the Write Back Stage, the related entry is decreased by one.\\
+
+When a new instruction is decoded, its source registers are checked inside the \emph{Hazard Table}: if one or both the registers have an entry greather then 0 means that one of them is not available (i.e. a previous instruction is still writing on that register) and the Decode Stage raises a \emph{Hazard Signal} towards the Control Unit that will insert stalls inside the pipeline until the hazard is solved. When the hazard is over, the instruction will be processed inside the pipeline.
 
 \section{Comparator}
 \label{sec:comparator}
@@ -287,9 +295,12 @@ A further improvement has been done to the advanced comparator in order to manag
 The advanced comparator works with unsigned numbers only. So it simply needs to be adapted for cases in which signed comparison and unsigned comparison are different. They are shown in the \autoref{comparator_cases} highlighted in red. 
 It is easy to notice that in the red lines, A and B always have a different sign. The logic must work when the UNSIG\_SIGN\_N bit is 0, which means that the circuit is dealing with a signed number. In this case, the carry bit must be complemented. Knowing this, it's easy to derive the following logic:
 
-\begin{verbatim}
-  i_cout_masked <= Cout xor (not(UNSIG_SIGN_N) and (A(A'length-1) xor B(B'length-1)));
-\end{verbatim}
+\begin{center}
+	$Cout\_masked \leftarrow Cout \oplus (\overline{UNSIG\_SIGN\_N} \cdot (A_{msb} \oplus B_{msb}))$
+\end{center}
+% \begin{verbatim}
+%   i_cout_masked <= Cout xor (not(UNSIG_SIGN_N) and (A(A'length-1) xor B(B'length-1)));
+% \end{verbatim}
 
 \begin{table}[H]
   \centering
