@@ -198,7 +198,7 @@ Inside this block there is a logic able to rotate right or left and a multiplexe
 
 An additional element is necessary in order to be able to manage the addresses for the SPILL and FILL procedure to and from memory. It has been implemented using a Moore FSM and consists of different phases; a starting one that set the memory address to 0 and when the FILL or SPILL input is `1' and the ram is ready, the address is decreased or increased by 4, accordingly to the operation. Refer to figure \ref{wrf_cu}. It's important to say that, if the RAM is not ready the address is kept untouched, so that when the RAM returns in a ready state, the procedure can continue.
 
-s
+
 \begin{figure}[ht]
 	\centering
 	\includegraphics[width=0.8\textwidth]{chapters/4_DecodeStage/images/wRF_CU.pdf}
