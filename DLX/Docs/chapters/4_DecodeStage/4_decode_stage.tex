@@ -200,7 +200,7 @@ Inside this block there is a logic able to rotate right or left and a multiplexe
 
 An additional element is necessary in order to be able to manage the addresses for the SPILL and FILL procedure, to and from the memory. It has been implemented using a Moore FSM and basically consists in different phases; a starting one that set the memory address to 0 and when the FILL or SPILL input is `1' and the ram is ready, the address is decreased or increased by 4, accordingly to the operation. Refer to figure \ref{wrf_cu}. It's important to say that, if the RAM is not ready the address is keep untouched, so that, when the RAM returns in a ready state, the procedure can continue.
 
-
+s
 \begin{figure}[ht]
 	\centering
 	\includegraphics[width=0.8\textwidth]{chapters/4_DecodeStage/images/wRF_CU.pdf}
@@ -341,7 +341,7 @@ It is easy to notice that in the red lines A and B always have different sign. T
   \caption{All cases of possible comparison}
   \label{comparator_cases}
 \end{table}
-So, the final unit corresponds to the one at figure \ref{comparator_advanced} with an additional encoder before the output, that encode the six conditions into a signal on two bits. The resulting schema is the one in figure \ref{cmp_final}.
+So, the final unit corresponds to the one at figure \ref{comparator_advanced} with an additional encoder before the output, that encode the six conditions into a signal on two bits. The resulting schema is the one in figure \ref{cmp_final}. The comparator is used both in the decode stage for the branch instructions and, in order to reduce the area and reuse the component, in the Set-Compare Unit in the Execute Stage.
 
 \begin{figure}[H]
 	\centering
@@ -351,9 +351,9 @@ So, the final unit corresponds to the one at figure \ref{comparator_advanced} wi
 \end{figure}
 
 \section{Jump and Branch decision}
-When taking into consideration jump and branch decision there are many details to exaplin. First, as shown in \autoref{table:decode_instr}, there are some instructions, like JAL and JALR, that need to save the value of the current program counter inside the register R31. For this reason, the value of WS is set to R31 in these king of instructions. 
+When taking into consideration jump and branch decision there are many details to explain. First, as shown in \autoref{table:decode_instr}, there are some instructions, like JAL and JALR, that need to save the value of the current program counter inside the register R31. For this reason, the value of WS is set to R31 in these kind of instructions. 
 
-Another important thing is that when jumping there need to be a change on the program counter. In order to exploit this feature there is a dedicated hardware inside the decode block, that takes into account the computation of the next program counter. All the circuit and its functioning are explained in the next section. 
+Another important thing is that when jumping, there need to be a change on the program counter. In order to exploit this feature there is a dedicated hardware inside the decode block, that takes into account the computation of the next program counter. All the circuit and its functionalities are explained in the next section. 
 
 In the control word there is a dedicated bit for the \texttt{JUMP\_EN}. For the instructions that requires a jump, such as J, JAL, JALR, CALL and RET, this bit is set to 1 by default. For others instruction that may jump, in particular the conditional branches, there is an intermediate step, that is the comparator. In fact, for these instructions, the \texttt{JUMP\_EN} bit is set to 0 by default. Then, thanks to a process inside the control unit, based on the opcode and on the bits of the signal \texttt{LGET}, the \texttt{JUMP\_EN} is set to 1 and the \texttt{IF\_STALL} to 1 as well. This is very important because when jumping, there is the need to wait fetching the next instruction. For this reason the fetch stage is stalled, in order to avoid fetching the next instruction immediately. 
 
