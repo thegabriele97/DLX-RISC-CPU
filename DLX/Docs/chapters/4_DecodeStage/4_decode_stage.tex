@@ -3,6 +3,12 @@
 
 The Decode Stage is the first DataPath stage and logically it's divided between the DataPath itself and a separated unit called "Decode". The Decode Stage is mainly used to perform the Instruction Decode so identification of instruction type given its \emph{OP\_CODE} and then the dispatch of the operands containted in the instruction towards the DataPath. Meanwhile other side operations are performed like computation of the new PC (given a jump or not), data hazard detection and comparisons.
 
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\textwidth]{chapters/4_DecodeStage/images/Decode_stage_focus.pdf}
+  \caption{Simplified schematic of the decode}
+  \label{decode_block_focus}
+\end{figure}
 
 \section{Instruction Decode}
 
