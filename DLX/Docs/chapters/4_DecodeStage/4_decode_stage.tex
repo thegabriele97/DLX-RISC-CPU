@@ -219,7 +219,7 @@ RAW Hazards occurs when an instruction wants to read from a register that is the
 
 The \emph{Hazard Table} is made of a table with 32 entries (one for each register of the DLX). Each entry is made on 3 bits. When an instruction exits the Decode Stage and enters the Execute Stage, the related destination address entry in the table is increased by one. When the instruction reaches the Write Back Stage, the related entry is decreased by one.\\
 
-When a new instruction is decoded, its source registers are checked inside the \emph{Hazard Table}: if one or both the registers have an entry greather then 0 means that one of them is not available (i.e. a previous instruction is still writing on that register) and the Decode Stage raises a \emph{Hazard Signal} towards the Control Unit that will insert stalls inside the pipeline until the hazard is solved. When the hazard is over, the instruction will be processed inside the pipeline.
+When a new instruction is decoded, its source registers are checked inside the \emph{Hazard Table}: if one or both the registers have an entry greater than 0 means that one of them is not available (i.e. a previous instruction is still writing on that register) and the Decode Stage raises a \emph{Hazard Signal} towards the Control Unit that will insert stalls inside the pipeline until the hazard is solved. When the hazard is over, the instruction will be processed inside the pipeline.
 
 \section{Comparator}
 \label{sec:comparator}
@@ -293,7 +293,7 @@ A further improvement has been done to the advanced comparator in order to manag
 \end{itemize}
 
 The advanced comparator works with unsigned numbers only. So it simply needs to be adapted for cases in which signed comparison and unsigned comparison are different. They are shown in the \autoref{comparator_cases} highlighted in red. 
-It is easy to notice that in the red lines, A and B always have a different sign. The logic must work when the UNSIG\_SIGN\_N bit is 0, which means that the circuit is dealing with a signed number. In this case, the carry bit must be complemented. Knowing this, it's easy to derive the following logic:
+It is easy to notice that in the red lines, A and B always have a different sign. The logic must work when the \texttt{UNSIG\_SIGN\_N} bit is 0, which means that the circuit is dealing with a signed number. In this case, the carry bit must be complemented. Knowing this, it's easy to derive the following logic:
 
 \begin{center}
 	$Cout\_masked \leftarrow Cout \oplus (\overline{UNSIG\_SIGN\_N} \cdot (A_{msb} \oplus B_{msb}))$
