@@ -359,6 +359,15 @@ So, the final unit corresponds to the one at figure \ref{comparator_advanced} wi
 	\label{cmp_final}
 \end{figure}
 
+It is important to mention the utility of the multiplexer before the comparator in \autoref{decode_block}. There are two cases in which the comparator is used:
+
+\begin{itemize}
+  \item Comparison between the content of two registers: in this case the multiplexer will select, with a 1, \texttt{i\_RD2} and so the comparator will compare \texttt{i\_RD1} and \texttt{i\_RD2}. For example operations like BGT, BGE fall within this subcase. 
+  \item Comparison between the content of a register and an immediate: in this case the multiplexer will select, with a 0, \texttt{i\_INP2} that is the immeediate. So the comparator will compare \texttt{i\_RD1} and \texttt{i\_INP2}. For example operations like SEQI, SNEI fall within this subcase. 
+\end{itemize}
+
+The selection signal of the multiplexer is hardcoded into the control word
+
 \section{Jump and Branch decision}
 When taking into consideration jump and branch decision, there are many details to explain. First, as shown in \autoref{table:decode_instr}, there are some instructions, like JAL and JALR, that need to save the value of the current program counter inside the register R31. For this reason, the value of WS is set to R31 in these kind of instructions. 
 
