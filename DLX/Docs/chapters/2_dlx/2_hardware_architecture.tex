@@ -35,7 +35,7 @@ As shown in figure \ref{DLX_DP}, the five pipeline stage are:
 
 \begin{enumerate}
     \item \emph{Fetch}: not shown in figure, it keep tracks of the current instruction (IR) and the address of the next instruction to be fetched (PC).
-    \item \emph{Decode}: it has the role of taking as input the current instruction (IR) and to decode it by extracting all the fields and dispatch them to the correct ports (Immediate 1, RS1, RS2, WB ADDR, Immediate 2). It's in charge of comparing values (from the Register File or from an immediate) and of computing the next PC given the actual PC. Last but not least, it keep tracks of all the insturctions in execution inside in the pipeline and signals possible Data Hazard to the Control unit.
+    \item \emph{Decode}: it has the role of taking as input the current instruction (IR) and to decode it by extracting all the fields and dispatch them to the correct ports (Immediate 1, RS1, RS2, WB ADDR, Immediate 2). It's in charge of comparing values (from the Register File or from an immediate) and of computing the next PC given the actual PC. Last but not least, it keep tracks of all the insturctions in execution inside in the pipeline and signals possible Data Hazard to the Control unit. By design choice, the Branch/Jump instructions are executed here instead of the Execute Stage, in order to ideally lose only one clock cycle after a taken jump (because of the wrong fetched instruction).
     \item \emph{Execute}: it takes the data from the Decode stage and do some computation on them, like adding them, multiply them, compute a shift and so on (refer to Table \ref{tab:alu_op} for available ALU operations), or outputs to the next stage the result of the comparison made in the Decode stage.
     \item \emph{Memory}: given the Address computed by the ALU during the previous stage and an optional Data, it's capable of doing a Load from the DRAM or a Store towards the DRAM. Not all the operations use this stage so there is a bypass connection from the output of the EX stage towards the WB stage.
     \item \emph{Write Back}: the last stage of the pipeline, it simply selects the output from the ALU or from the Memory (after a load operation) and gives it as input to the Register File. Meanwhile the destination address has been propagated through each stage and now is ready to be used by the Register File to store the final result. Here the Hazard Control Unit inside the Decode Stage intercepts this Write Back operation and knows that new instructions that require this Data can now be executed.
@@ -370,6 +370,7 @@ All the subsequent paragraphs are referred in the same way to all the three memo
 \subsection{Signals and Timing}
 The signals in the DLX processor bus interface can be grouped into tree categories:
 \begin{itemize}
+	\itemsep0sp
     \item Address class signals
     \item Memory Request signals
     \item Data class signals
@@ -377,12 +378,14 @@ The signals in the DLX processor bus interface can be grouped into tree categori
 
 The \emph{Address class signals} are:
 \begin{itemize}
+	\itemsep0sp
     \item A{[31:0]}
     \item DATA\_SIZE{[1:0]} \emph{or MAS{[1:0]}}
 \end{itemize}
 
 The \emph{Memory Request signals} are:
 \begin{itemize}
+	\itemsep0sp
     \item Enable
     \item $R\overline{W}$
     \item Ready
@@ -509,7 +512,7 @@ In particular, all of them have in common the \emph{OP CODE} field, used to iden
 
 \subsection{R-Type Instructions}
 
-R-Type Instructions are called in this way because all the operands are between registers. They all have in common the \emph{OP CODE} equal to \texttt{0b00000} and each instruction is differentiated from another one thanks to the \emph{FUNC CODE} field, as shown in Table \ref{table:r_type} and Table \ref{table:r_type_test}.
+R-Type Instructions are called in this way because they operates only between registers. They all have in common the \emph{OP CODE} equal to \texttt{0b00000} and each instruction is differentiated from another one thanks to the \emph{FUNC CODE} field, as shown in Table \ref{table:r_type} and Table \ref{table:r_type_test}.
 
 \begin{table}[H]
 \begin{tabularx}{\textwidth}{|l|c|l|l|X|}

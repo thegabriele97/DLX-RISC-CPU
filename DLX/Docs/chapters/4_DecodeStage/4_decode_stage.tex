@@ -5,7 +5,7 @@ The Decode Stage is the first DataPath stage and logically it's divided between 
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.8\textwidth]{chapters/4_DecodeStage/images/Decode_stage_focus.pdf}
+  \includegraphics[width=0.95\textwidth]{chapters/4_DecodeStage/images/Decode_stage_focus.pdf}
   \caption{Simplified schematic of the decode}
   \label{decode_block_focus}
 \end{figure}
@@ -14,7 +14,7 @@ The Decode Stage is the first DataPath stage and logically it's divided between 
 
 The most important operation is the Instruction Decode. Here, after the identification of the instruction type, its fields are extracted according to the general instruction structure, as described in Figure \ref{fig:rtype}, Figure \ref{fig:itype} and Figure \ref{fig:jtype}.\\
 
-The Decode is based on the clever shown in Table \ref{table:decode_instr}. The table describes only the signals that go towards the DataPath and not the internal ones.
+The Decode is based on the logic shown in Table \ref{table:decode_instr}. The table describes only the signals that go towards the DataPath and not the internal ones.
 
 \begin{table}[H]
     \centering
@@ -45,67 +45,82 @@ For Jump or Branch instruction, the immediate field doesn't go beyond the decode
 
 \section{Register File and Windowing}
 The general structure of a register file is based on a decoder that takes the selection input (so the address of the desired register) and enables it (using also the enable signal). At this point, an input signal will contain the value to be written. On the other hand, a read signal is used to select among all the registers.\newline\newline
+
 The DLX presented in this document has been enhanced in order to be able to manage subroutine in a transparent manner from the point of view of the user. For this reason, the DLX must be able to handle subroutines, and so the context switching, that consists in saving the
-registers content in order to be restored once the procedure has been completed. The straightforward solution is to save into the memory all registers but this is not feasible in terms of delay, since for 32 registers 32 clock cycles are needed. In a pipeline this corresponds to a long stall each time a procedure is called.
+registers content in order to be restored once the procedure has been completed. The straightforward solution is to save into the memory all registers but this is not feasible in terms of delay, since for 32 registers 32 clock cycles are needed. In a pipeline this corresponds to a long stall each time a procedure is called.\\
 
+A windowed register allows to reduce the overhead due to the context switch; the basic idea is to split the available registers in the physical register file into blocks, called \textit{windows}. There are a limited amount of physical registers in the register file, for this reason a finite number of windows are defined. Each window is assigned to a subroutine, so that the procedure can write only on those register. This is transparent from the point of view of the CPU, that sees all registers available. Thus, the physical register file has a wrapper around it with a logic and a Register Management Logic (MML) that allows to perform a translation between the CPU requests to corresponding window for the running procedure.\newline\newline
 
-\begin{figure}[ht]
+When the number of called procedure is larger than the number of available windows, the main memory is involved where the oldest allocated window is swapped in. This happens only when there are no free windows in the register file, so that the new one can be allocated. Once all the recursion chain has been unrolled, the swapped windows in the memory must be restored into the register file.
+
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.95\textwidth]{chapters/4_DecodeStage/images/DLX_RF.pdf}
     \caption{Schematic of the Windowing Register File}
     \label{WRF}
 \end{figure}
 
-
-A windowed register allows to reduce the overhead due to the context switch; the basic idea
-is to split the available registers in the physical register file into blocks, called \textit{windows}. There are a limited amount of physical registers in the register file, for this reason a finite number of windows are defined. Each window is assigned to a subroutine, so that the procedure can write only on those register. This is transparent from the point of view of the CPU, that sees all registers available. Thus, the physical register file has a wrapper around it with a logic and a Register Management Logic (MML) that allows to perform the translation between the CPU requests to corresponding window for the running procedure.\newline\newline
-What if the number of called procedure is larger than the number of available windows? The main
-memory is involved only when there are no free windows in the register file. In this case, the oldest allocated window is swapped into the main memory, so that the new one can be allocated. Obviously, once all the recursion chain has been unrolled, the swapped window in the memory must be restored into the register file.
-All windows, so each procedure, has 4 blocks of 8 registers each one:
+All windows, so each procedure, is made of 4 blocks of 8 registers each one:
 \begin{enumerate}
 	\itemsep0sp
-	\item \textbf{IN}: the first block is dedicated to the data inherited from the parent routine (OUT);
-	\item \textbf{LOCALS}: contains the registers that are dedicated to the procedure;
+	\item \textbf{IN}: the first block is dedicated to the data inherited from the parent routine (previous OUT);
+	\item \textbf{LOCAL}: contains the registers that are dedicated to only to the procedure;
 	\item \textbf{OUT}: is dedicated to the variables to be passed to the child routine, that is the IN of the next sub-procedure
 	\item \textbf{GLOBAL}: the last block is common to every windows.
 \end{enumerate}
-When a procedure is called, the first LOCALS and OUT blocks are allocated from the physical file register and assigned to it (because IN is the OUT of the previous one).
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.65\textwidth]{chapters/4_DecodeStage/images/DLX_RF_BASICS.pdf}
+    \caption{Logical organization of the Windowing Register File}
+    \label{logical_wrf}
+\end{figure}
+
+When a procedure is called, the first LOCALS and OUT blocks are allocated from the physical file register and assigned to it (because IN is the OUT of the previous one).\\
 
 By calling many nested procedures, at some point there will be no free windows; for this reason the oldest is de-allocated from the physical FR and swapped to the main memory, the operation is called \textbf{SPILL}. This it accomplished by using a support pointer, called \textbf{Saved Window Pointer SWP} that stores the point of the spilled data, exactly the end of the LOCALS block (only IN and LOCAL are spilled, the OUT block is not spilled because is the IN of the next sub-procedure). In practice it define the position of the last free cell. Notice that this operation cannot be executed in one clock cycle: each register is spilled once at a clock cycle.\newline\newline
+
 On the other hand, when the last procedure in the chain is finished, the other are unrolled; if some of them have been spilled, a \textbf{FILL} must be executed before the actual execution. This can be achieved by, firstly decrement CWP by 16 and check if now CWP $>>$ SWP.\newline\newline
-It's important to notice that the implementation of the entire register file has been implemented in Structural. Is is composed by several components:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\textwidth]{chapters/4_DecodeStage/images/DLX_RF_CWP_SWP.pdf}
+    \caption{Logical Flow of CWP and SWP}
+    \label{cwp_swp}
+\end{figure}
+
+It's important to notice that the implementation of the entire register file has been implemented in a complete structural way. It is composed by several components:
 \begin{itemize}
-	\item \textbf{Decoder}: it is used to generate a single enable signal from a signal on \textbf{NBIT\_ADD} bits; in this way, a register is selected in order to perform a write. The register will check also if a write is requested;
+	\item \textbf{Decoder}: it is used to generate a single enable signal from an address on \emph{NBIT\_ADD} bits given by the CPU; in this way, a register is selected in order to perform a write. 
 	\item \textbf{Connection matrix}: this block allows to ``highlight" the active windows, the block IN, LOCAL and OUT will be the default destination when writing and reading;
-	\item \textbf{Register file}: this block corresponds to the physical registers, composed by rows of Flip-Flops;
-	\item \textbf{Select block}: this block is used for the reading, is connected to all the registers and selects, using the read address, the single register to be read;
+	\item \textbf{Register file}: this block corresponds to the physical registers, composed by rows of registers;
+	\item \textbf{Select block}: this block is used for reading: it is connected to all the registers and selects, using the window pointer, all the registers that belong to the pointed window. A multiplexer then is used to read from a single register;
 	\item \textbf{Address generator}: this block is used only when perform a FILL or a SPILL, it generates the address for the registers to be moved from/to the memory. The memory, in this case works exactly like a stack;
-	\item \textbf{WRF Control Unit}: A FSM used to manage the address generator when performing a SPILL or a FILL.
+	\item \textbf{WRF Control Unit}: A FSM used to manage and generate the memory addresses when performing a SPILL or a FILL.
 \end{itemize}
+
 Additional, but less complex components, have been used in order to manage the CWP and SWP. The complete diagram is available at Figure \ref{figure:wrf_complex}.
 
 
 \subsection{Decoder}
-This block receives as input the \emph{write address} on \textbf{NBIT\_ADD} bits and outputs \(\mathbf{2^{NBIT\_ADD} - 1} \) bits. It has the utility of converting the address of the register at which the CPU needs to write into the relative register enable signal. 
+This block receives as input the \emph{write address} on \emph{NBIT\_ADD} bits and outputs \(\mathbf{2^{NBIT\_ADD} - 1} \) bits. It has the utility of converting the address of the register at which the CPU needs to write into the relative register enable signal. 
 
 The idea is that if the input is \(0b00010\) the output will be \(0b00000000000000000000000000000100\). In fact if the input is decimal 2, it means that the CPU needs to write the second register of the \emph{GLOBAL} block. In terms of enable it can be translated by having the bit with index 2 at one. \\
 
-The output is divided (in the schematic) in order to represent the group of bits. In particular: 
-\begin{itemize}
-    \item M - 1 DOWNTO 0: bits associated to the \emph{GLOBAL} register
-    \item M + N - 1 DOWNTO M: bits associated to the \emph{IN} register
-    \item M + 2N - 1 DOWNTO M + N: bits associated to the \emph{LOCAL} register
-    \item M + 3N - 1 DOWNTO M + 2N: bits associated to the \emph{OUT} register
-\end{itemize}
+The output is divided, as can be seen in Figure \ref{decoder}, in order to represent the group of bits. In particular: 
 
-On the top of the schematic (\autoref{decoder}) an AND logic gate between an \emph{ENABLE} signal and the \emph{WR} signal is used. If both \emph{ENABLE} and \emph{WR} are at 1, it means that the register is enabled.\\
+\begin{center}
+	DECODED ADDRESS: \emph{0b} $\underbrace{00000100}_{\text{OUT}}$ $\underbrace{00000100}_{\text{LOCAL}}$ $\underbrace{00000100}_{\text{IN}}$ $\underbrace{00000100}_{\text{GLOBAL}}$
+\end{center}
 
-The generated enable signal is called \emph{Logical Enable Signal}. In order to generate the \emph{Physical Enable Signal}, it goes into the \emph{connection matrix}.
+On the top of the schematic \autoref{decoder} an AND logic gate between an \emph{ENABLE} signal and the \emph{WR} signal is used. If both \emph{ENABLE} and \emph{WR} are at 1, it means that the register is enabled.\\
+
+The generated enable signal is called \emph{Logical Enable Signal}. In order to generate the \emph{Physical Enable Signal}, a translation is needed and it's performed by the \emph{connection matrix}.
 
 %% MAKE FONT BIGGER
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\textwidth]{chapters/4_DecodeStage/images/Decoder.pdf}
+    \includegraphics[width=0.8\textwidth]{chapters/4_DecodeStage/images/Decoder.pdf}
     \caption{Schematic of the Decoder}
     \label{decoder}
 \end{figure}
@@ -120,8 +135,8 @@ This block receives as inputs mainly the signals coming from the decoder and the
 There is a specific structure for each group of logical enable signals:
 \begin{itemize}
   \item GLOBAL ones: the global is the simplest, because it is always the same despite the selected window.
-  \item IN: for this group of registers, one of them are activated when ``an IN enable signal is high AND the memberhip window is active OR an OUT enable signal is high AND the previous memberhip window is active".
-  \item OUT: same reasoing as before: ``an OUT enable signal is high AND the memberhip window is active OR an IN enable signal is active and the next memberhip window is active".
+  \item IN: for this group of registers, one of them are activated when ``an IN enable signal is high AND the related window is active OR an OUT enable signal is high AND the previous related window is active".
+  \item OUT: same reasoing as before: ``an OUT enable signal is high AND the related window is active OR an IN enable signal is active and the next related window is active".
   \item LOCAL: for this block a simple AND is used with the LOCAL enable coming from the decoder with the related window. 
 \end{itemize}
 
@@ -135,8 +150,6 @@ For adressing during the FILL operation, an internal unencoded address signal is
   \caption{Connection matrix}
   \label{connection_matrix}
 \end{figure}
-
-\newpage
 
 \subsection{Physical Register File}
 
