@@ -1,7 +1,7 @@
 \chapter{Decode Stage}
 \label{sec:decode_stage}
 
-The Decode Stage is the first DataPath stage and logically it's divided between the DataPath itself and a separated unit called "Decode". The Decode Stage is mainly used to perform the Instruction Decode so identification of instruction type given its \emph{OP\_CODE} and then the dispatch of the operands containted in the instruction towards the DataPath. Meanwhile other side operations are performed like computation of the new PC (given a jump or not), data hazard detection and comparisons.
+The Decode Stage is the first DataPath stage and logically it's divided between the DataPath itself and a separated unit called ``Decode". The Decode Stage is mainly used to perform the Instruction Decode so identification of instruction type given its \emph{OP\_CODE} and then the dispatch of the operands containted in the instruction towards the DataPath. Meanwhile other side operations are performed like computation of the new PC (given a jump or not), data hazard detection and comparisons.
 
 \begin{figure}[H]
   \centering
@@ -115,7 +115,7 @@ The generated enable signal is called \emph{Logical Enable Signal}. In order to 
 
 With the previous block, all the logical enable signals are generated. They are related to a single window, so a block that puts together the required enabled register and the actual window is needed. 
 
-This block receives as inputs mainly the signals coming from the decoder and the current window. The output is an enable signal that is a translation from the "logic" enable (the one referred to a virtual register, the ones that are seen by the CPU) and the physical one (within the actual window). This is related to the logic placed on the left in Figure \ref{connection_matrix}.\\
+This block receives as inputs mainly the signals coming from the decoder and the current window. The output is an enable signal that is a translation from the ``logic" enable (the one referred to a virtual register, the ones that are seen by the CPU) and the physical one (within the actual window). This is related to the logic placed on the left in Figure \ref{connection_matrix}.\\
 
 There is a specific structure for each group of logical enable signals:
 \begin{itemize}
