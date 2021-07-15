@@ -219,7 +219,7 @@ The chosen number of bits was 3, in order to be able to count 7, that is an high
 \label{sec:comparator}
 The straightforward way to implement a comparator, allows only to check if two operands, \texttt{A} and \texttt{B}, are equals. The solution is sketched at figure \ref{fig:comparator_basic}, that is based on $N$ XNOR, where $N$ is the number of bits of the operands and an AND gate with $N$ inputs.
 
-Even if this solution is extremely compact, it allows to perform only the equality comparison; since this DLX implementation has the ability to perform complex conditional branch instructions (refer to the Instruction section \ref{section:inst_set}) and conditional set instructions (refer to the Set-Like Operations Unit \ref{section:set_link_operations_unit}) a more complex solution is requested. For example, if a conditional branch based on the condition \texttt{A} $>$ \texttt{B} (strictly greater) is requested, exactly check of this precise condition has to be performed.
+Even if this solution is extremely compact, it allows to perform only the equality comparison; since this DLX implementation has the ability to perform complex conditional branch instructions (refer to the Instruction section \ref{section:inst_set}) and conditional set instructions (refer to the Set-Like Operations Unit \ref{sec:set_like}) a more complex solution is requested. For example, if a conditional branch based on the condition \texttt{A} $>$ \texttt{B} (strictly greater) is executed, the exact check of this precise condition has to be performed.
 
 \begin{figure}[H]
 	\centering
