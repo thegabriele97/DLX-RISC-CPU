@@ -339,11 +339,7 @@ It is easy to notice that in the red lines, A and B always have a different sign
   \caption{All cases of possible comparison}
   \label{comparator_cases}
 \end{table}
-<<<<<<< Updated upstream
 So, the final unit corresponds to the one at figure \ref{comparator_advanced} with an additional encoder before the output, that encode the six conditions into a signal on two bits. The resulting schema is the one in figure \ref{cmp_final}. The comparator is used both in the decode stage for the branch instructions and, in order to reduce the area and reuse the component, in the Set-Compare Unit in the Execute Stage.
-=======
-So, the final unit corresponds to the one at figure \ref{comparator_advanced} with an additional encoder before the output that encodes the six conditions into a signal on two bits. The resulting schema is the one in figure \ref{cmp_final}.
->>>>>>> Stashed changes
 
 \begin{figure}[H]
 	\centering
@@ -353,15 +349,9 @@ So, the final unit corresponds to the one at figure \ref{comparator_advanced} wi
 \end{figure}
 
 \section{Jump and Branch decision}
-<<<<<<< Updated upstream
-When taking into consideration jump and branch decision there are many details to explain. First, as shown in \autoref{table:decode_instr}, there are some instructions, like JAL and JALR, that need to save the value of the current program counter inside the register R31. For this reason, the value of WS is set to R31 in these kind of instructions. 
+When taking into consideration jump and branch decision, there are many details to explain. First, as shown in \autoref{table:decode_instr}, there are some instructions, like JAL and JALR, that need to save the value of the current program counter inside the register R31. For this reason, the value of WS is set to R31 in these kind of instructions. 
 
-Another important thing is that when jumping, there need to be a change on the program counter. In order to exploit this feature there is a dedicated hardware inside the decode block, that takes into account the computation of the next program counter. All the circuit and its functionalities are explained in the next section. 
-=======
-When taking into consideration jump and branch decision, there are many details to explain. First, as shown in \autoref{table:decode_instr}, there are some instructions, like JAL and JALR, that need to save the value of the current program counter inside the register R31. For this reason, the value of WS is set to R31.
-
-Another important thing is that when jumping, there need to be a change on the program counter. In order to exploit this feature, there is dedicated hardware inside the decode block that takes into account the computation of the next program counter. All the circuits and their functioning are explained in the next section. 
->>>>>>> Stashed changes
+Another important thing is that when jumping, there need to be a change on the program counter. In order to exploit this feature, there is a dedicated hardware inside the decode block, that takes into account the computation of the next program counter. All the circuit and its functionalities are explained in the next section. 
 
 In the control word, there is a dedicated bit for the \texttt{JUMP\_EN}. For the instructions that require a jump, such as J, JAL, JALR, CALL and RET, this bit is set to 1 by default. For other instruction that may jump, in particular the conditional branches, there is an intermediate step, that is the comparator. In fact, for these instructions, the \texttt{JUMP\_EN} bit is set to 0 by default. Then, thanks to a process inside the control unit, based on the opcode and on the signal \texttt{LGET}, the \texttt{JUMP\_EN} is set to 1 as well as \texttt{IF\_STALL}. This is very important because when jumping, there is the need of waiting to fetch the next instruction. For this reason, the first stage of the pipeline is stalled to avoid fetching the next instruction immediately. 
 
