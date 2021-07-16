@@ -1,5 +1,3 @@
-Information: Updating design information... (UID-85)
-Warning: Design 'DLX_IR_SIZE32_PC_SIZE32_RAM_DEPTH32' contains 1 high-fanout nets. A fanout number of 1000 will be used for delay calculations involving these nets. (TIM-134)
  
 ****************************************
 Report : timing
@@ -8,7 +6,7 @@ Report : timing
         -max_paths 1
 Design : DLX_IR_SIZE32_PC_SIZE32_RAM_DEPTH32
 Version: F-2011.09-SP3
-Date   : Fri Jul 16 16:29:28 2021
+Date   : Fri Jul 16 16:59:22 2021
 ****************************************
 
  # A fanout number of 1000 was used for high fanout net computations.
@@ -33,47 +31,56 @@ Wire Load Model Mode: top
   clock CLK (rise edge)                                   0.00       0.00
   clock network delay (ideal)                             0.00       0.00
   CU_I/CW_EX_reg[MUXB_SEL]/CK (DFF_X1)                    0.00 #     0.00 r
-  CU_I/CW_EX_reg[MUXB_SEL]/QN (DFF_X1)                    0.07       0.07 f
-  U7598/Z (BUF_X1)                                        0.05       0.12 f
-  U11698/ZN (NAND2_X1)                                    0.04       0.16 r
-  U7658/ZN (OAI21_X1)                                     0.04       0.20 f
-  U11695/ZN (NAND2_X1)                                    0.04       0.24 r
-  U11694/ZN (OAI21_X1)                                    0.04       0.28 f
-  U8658/Z (CLKBUF_X3)                                     0.08       0.37 f
-  U8057/ZN (OAI22_X1)                                     0.08       0.44 r
-  U8058/ZN (XNOR2_X1)                                     0.07       0.52 r
-  U8573/ZN (XNOR2_X1)                                     0.07       0.58 r
-  DP_OP_751_130_6421/U1175/S (FA_X1)                      0.12       0.71 f
-  DP_OP_751_130_6421/U1107/S (FA_X1)                      0.14       0.84 r
-  DP_OP_751_130_6421/U1039/S (FA_X1)                      0.12       0.96 f
-  DP_OP_751_130_6421/U971/S (FA_X1)                       0.14       1.10 r
-  DP_OP_751_130_6421/U903/S (FA_X1)                       0.12       1.22 f
-  DP_OP_751_130_6421/U835/CO (FA_X1)                      0.10       1.32 f
-  DP_OP_751_130_6421/U766/CO (FA_X1)                      0.11       1.43 f
-  DP_OP_751_130_6421/U697/CO (FA_X1)                      0.11       1.54 f
-  DP_OP_751_130_6421/U628/S (FA_X1)                       0.15       1.69 r
-  DP_OP_751_130_6421/U560/S (FA_X1)                       0.12       1.80 f
-  DP_OP_751_130_6421/U492/S (FA_X1)                       0.14       1.94 r
-  DP_OP_751_130_6421/U424/S (FA_X1)                       0.12       2.06 f
-  DP_OP_751_130_6421/U356/S (FA_X1)                       0.14       2.20 r
-  DP_OP_751_130_6421/U43/ZN (NAND2_X1)                    0.04       2.24 f
-  U9313/ZN (OAI21_X1)                                     0.05       2.29 r
-  U9178/ZN (NAND2_X1)                                     0.04       2.33 f
-  U9179/ZN (NAND3_X1)                                     0.03       2.36 r
-  U9203/ZN (OAI211_X1)                                    0.04       2.40 f
-  DataPath/REG_ALU_OUT/Q_reg[31]/D (DFF_X2)               0.01       2.41 f
-  data arrival time                                                  2.41
+  CU_I/CW_EX_reg[MUXB_SEL]/QN (DFF_X1)                    0.07       0.07 r
+  U9386/ZN (INV_X1)                                       0.04       0.11 f
+  U11439/ZN (NAND2_X1)                                    0.04       0.15 r
+  U8853/ZN (NAND2_X1)                                     0.04       0.19 f
+  U8919/ZN (INV_X1)                                       0.05       0.24 r
+  U9225/Z (BUF_X1)                                        0.11       0.36 r
+  U8950/ZN (INV_X1)                                       0.06       0.41 f
+  U8949/ZN (XNOR2_X1)                                     0.08       0.49 f
+  U8993/ZN (XNOR2_X1)                                     0.07       0.56 f
+  DP_OP_751_130_6421/U1157/S (FA_X1)                      0.14       0.70 r
+  DP_OP_751_130_6421/U1089/S (FA_X1)                      0.12       0.81 f
+  DP_OP_751_130_6421/U1021/CO (FA_X1)                     0.10       0.91 f
+  DP_OP_751_130_6421/U952/S (FA_X1)                       0.15       1.06 r
+  DP_OP_751_130_6421/U884/S (FA_X1)                       0.12       1.18 f
+  DP_OP_751_130_6421/U816/S (FA_X1)                       0.14       1.32 r
+  DP_OP_751_130_6421/U748/S (FA_X1)                       0.12       1.43 f
+  DP_OP_751_130_6421/U680/S (FA_X1)                       0.14       1.57 r
+  DP_OP_751_130_6421/U612/S (FA_X1)                       0.12       1.69 f
+  U9220/ZN (OR2_X1)                                       0.07       1.75 f
+  U9221/ZN (AOI21_X1)                                     0.06       1.81 r
+  U9222/ZN (OAI21_X1)                                     0.04       1.85 f
+  U8972/ZN (NAND2_X1)                                     0.03       1.88 r
+  U8971/ZN (NAND2_X1)                                     0.03       1.92 f
+  U9058/ZN (NAND2_X1)                                     0.03       1.95 r
+  U9101/ZN (NAND2_X1)                                     0.03       1.98 f
+  U9099/ZN (NAND2_X1)                                     0.03       2.01 r
+  U9097/ZN (NAND2_X1)                                     0.03       2.04 f
+  U9093/ZN (NAND2_X1)                                     0.03       2.07 r
+  U9043/ZN (NAND2_X1)                                     0.03       2.10 f
+  U9041/ZN (NAND2_X1)                                     0.03       2.13 r
+  U8936/ZN (NAND2_X1)                                     0.03       2.16 f
+  U8340/ZN (NAND2_X1)                                     0.04       2.20 r
+  U8337/ZN (NAND3_X1)                                     0.03       2.23 f
+  U8324/ZN (AND2_X1)                                      0.04       2.28 f
+  U8323/ZN (AOI21_X1)                                     0.05       2.32 r
+  U8320/ZN (XNOR2_X1)                                     0.06       2.39 r
+  U8319/ZN (OAI21_X1)                                     0.03       2.42 f
+  DataPath/REG_ALU_OUT/Q_reg[31]/D (DFF_X1)               0.01       2.43 f
+  data arrival time                                                  2.43
 
-  clock CLK (rise edge)                                   2.40       2.40
-  clock network delay (ideal)                             0.00       2.40
-  DataPath/REG_ALU_OUT/Q_reg[31]/CK (DFF_X2)              0.00       2.40 r
-  library setup time                                     -0.04       2.36
-  data required time                                                 2.36
+  clock CLK (rise edge)                                   2.47       2.47
+  clock network delay (ideal)                             0.00       2.47
+  DataPath/REG_ALU_OUT/Q_reg[31]/CK (DFF_X1)              0.00       2.47 r
+  library setup time                                     -0.04       2.43
+  data required time                                                 2.43
   --------------------------------------------------------------------------
-  data required time                                                 2.36
-  data arrival time                                                 -2.41
+  data required time                                                 2.43
+  data arrival time                                                 -2.43
   --------------------------------------------------------------------------
-  slack (VIOLATED)                                                  -0.06
+  slack (MET)                                                        0.00
 
 
 1

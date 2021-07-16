@@ -60,14 +60,14 @@ elaborate DLX -architecture dlx_rtl -library WORK -parameters "IR_SIZE = 32, PC_
 # compile -exact_map -incremental_mapping -ungroup_all
 
 set_wire_load_model -name 5K_hvratio_1_4
-create_clock -name "CLK" -period 2.5 CLK
+create_clock -name "CLK" -period 2.47 CLK
 
 # compile map_effort high -incremental_mapping -ungroup_all
 # compile -exact_map -incremental_mapping -ungroup_all
 # compile -exact_map -incremental_mapping -ungroup_all
 # compile -exact_map -incremental_mapping -ungroup_all
 
-compile_ultra
+compile_ultra -timing_high_effort_script
 
 write -hierarchy -format vhdl -output ./DLX_SYN.vhdl
 write -hierarchy -format verilog -output ./DLX_SYN.v
