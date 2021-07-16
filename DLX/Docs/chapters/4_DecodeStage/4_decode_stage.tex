@@ -208,9 +208,9 @@ An additional element is necessary in order to be able to manage the addresses f
 
 \section{Hazard Control}
 
-During the execution of a pipeline, different problems or hazard situations may occur. Regarding Data Hazards, the most dangerous situation is the \emph{Read After Write (RAW)}. So a solution is needed in order to detect these problems and actually, there exist a unit inside the Decode Stage that is dedicated to this job, the \emph{Hazard Table}.\\
+During the execution of a pipeline, different problems or hazard situations may occur. Regarding Data Hazards, the most dangerous situation is the \emph{Read After Write (RAW)}. So a solution is needed in order to detect these problems. Actually exists a unit inside the Decode Stage that is dedicated to this job called \emph{Hazard Table}.\\
 
-RAW Hazards occurs when an instruction wants to read from a register that is the destination register of a previous instruction still inside the pipeline so and not completed. This means that the second instruction has to be stopped (i.e. a stall or a bubble must be inserted into the pipeline) until the previous instruction has been completed.\\
+RAW Hazards occurs when an instruction wants to read from a register that is the destination register of a previous instruction still inside the pipeline so not completed yet. This means that the second instruction has to be stopped (i.e. a stall or a bubble must be inserted into the pipeline) until the previous instruction has been completed.\\
 
 \begin{lstlisting}[style=mips,nolol, caption={Example of DLX ASM code for RAW Hazard},label=raw_hazard]
 	add r1, r2, r3
@@ -376,7 +376,7 @@ Another important thing is that when jumping, there needs to be a change on the 
 
 In the control word, there is a dedicated bit for the \texttt{JUMP\_EN}. For the instructions that require a jump, such as J, JAL, JALR, CALL and RET, this bit is set to 1 by default. For other instructions that may jump, particularly the conditional branches, there is an intermediate step, the \emph{decision}. In fact, for these instructions, the \texttt{JUMP\_EN} bit is set to 0 by default. Then, thanks to the \emph{Jump \& Branch Control Unit} inside the Control Unit, as can be seen in Figure \ref{dlx:cu:schematic}, based on the status of the comparison (i.e. the signal \texttt{LGET}), the \texttt{JUMP\_EN} may be set to 1. This is very important because when jumping, there is a need to fetch the next instruction. For this reason, the first stage of the pipeline is stalled to avoid fetching the next instruction immediately.\\ 
 
-According to this, is important to underline again that the signal \emph{IF\_STALL} is set to 1 too solve the Control Hazard caused by a taken jump, as explained in \autoref{sec:jmp_branch}.\\
+According to this, is important to underline again that the signal \emph{IF\_STALL} is set to 1 to solve the Control Hazard caused by a taken jump, as explained in \autoref{sec:jmp_branch}.\\
 
 The \emph{Jump \& Branch Control Unit} can be described with the following VHDL code:\\
 
@@ -452,7 +452,7 @@ The multiplexer on the right allows the CPU to select an \emph{Next Program Coun
   \item RET
 \end{itemize}
 
-In fact, in these cases, the absolute value of the program counter to be used it the one read from the register file, in particular from \texttt{RD1}.
+In fact, in these cases, the absolute value of the program counter to be used is the one read from the register file, in particular from \texttt{RD1}.
 
 \newpage
 \section{System Tick Timer}
