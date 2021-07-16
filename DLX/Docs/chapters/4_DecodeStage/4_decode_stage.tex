@@ -105,7 +105,7 @@ Additional but less complex hardware has been used in order to manage the CWP an
 \subsection{Decoder}
 This block receives as input the \emph{write address} on \emph{NBIT\_ADD} bits and outputs \(\mathbf{2^{NBIT\_ADD} - 1} \) bits. It has the utility of converting the address of the register at which the CPU needs to write into the relative register enable signal. 
 
-The idea is that if the input is \(0b00010\) the output has to be \(0b00000000000000000000000000000100\). If the input is decimal 2, it means that the CPU needs to write the second register of the \emph{GLOBAL} block. In terms of enable signals, it translates into having the bit with index 2 at one. \\
+The idea is that if the input is \(0b00010\) the output has to be \(0b00000000000000000000000000000100\). If the input is decimal 2, it means that the CPU needs to write the third register of the \emph{GLOBAL} block. In terms of enable signals, it translates into having the bit with index 2 at one. \\
 
 The output is divided, as shown in Figure \ref{decoder}, in order to represent the group of bits. In particular: 
 
