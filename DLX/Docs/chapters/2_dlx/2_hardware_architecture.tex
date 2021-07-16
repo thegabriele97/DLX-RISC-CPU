@@ -404,7 +404,7 @@ Moreover, all the memories connected must agree on a specific protocol both for 
         \busref[31:0]{Address}      & 2x 1D{$A_1$} 2D{$A_2$} 1X 1D{$A_4$} UX \\
         \busref[1:0]{MAS}           & 2x 1D{WORD 00} 2D{HALF 01} X 1D{BYTE 10} 2X\\
         \busref{Enable}             & 1L 2H HL HL L\\
-        \busref{$RnW$}              & 1L 2H 2H LH L\\
+        \busref{$R\overline{W}$}              & 1L 2H 2H LH L\\
         Ready                       & ll lh lh hh ll lh LL\\
         \busref[31:0]{Data In}      & 2x 2x 1X 1X 1X 1D{$D_1$} XX \\
         \busref[31:0]{DATA Out}      & 2x x1d{$D_1$} x3d{$D_2$} 4X  \\
