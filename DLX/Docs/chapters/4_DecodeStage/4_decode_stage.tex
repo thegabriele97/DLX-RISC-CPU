@@ -1,7 +1,7 @@
 \chapter{Decode Stage}
 \label{sec:decode_stage}
 
-The Decode Stage is the first DataPath stage and logically it's divided between the DataPath itself and a separated unit called ``Decode". The Decode Stage is mainly used to perform the Instruction Decode so identification of instruction type given its \emph{OP\_CODE} and then the dispatch of the operands contained in the instruction towards the DataPath. Meanwhile, other side operations, like computation of the new PC (given a jump or not), data hazard detection and comparisons, are performed.
+The Decode Stage is the first DataPath stage, and logically, it's divided between the DataPath itself and a separated unit called ``Decode". The Decode Stage is mainly used to perform the Instruction Decode so identification of instruction type given its \emph{OP\_CODE} and then the dispatch of the operands contained in the instruction towards the DataPath. Meanwhile, other side operations, like computation of the new PC (given a jump or not), data hazard detection and comparisons, are performed.
 
 \begin{figure}[H]
   \centering
@@ -41,17 +41,17 @@ The Decode is based on the logic shown in Table \ref{table:decode_instr}. The ta
     \label{table:decode_instr}
 \end{table}
 
-For Jump or Branch instruction, the immediate field doesn't go beyond the decode stage itself. The immediate is a relative value to be summed to the actual PC in case of a taken jump. For Jump-like instructions (J, JAL, CALL) the field is 26 bit long (far jumps) while for other branch instructions the field is 16 bit long (near jumps). In both cases the value is extended to 32 bit with its sign because the relative value can be both positive (forward jumps) and negative (backward jumps).
+For Jump or Branch instruction, the immediate field doesn't go beyond the decode stage itself. The immediate is a relative value to be summed to the actual PC in case of a taken jump. For Jump-like instructions (J, JAL, CALL) the field is 26 bits long (far jumps), while for other branch instructions the field is 16 bits long (near jumps). In both cases, the value is extended to 32 bit with its sign because the relative value can be both positive (forward jumps) and negative (backward jumps).
 
 \section{Register File and Windowing}
 The general structure of a register file is based on a decoder that takes the selection input (so the address of the desired register) and enables it (also using the enable signal). An input signal will contain the value to be written. On the other hand, a read signal is used to select among all the registers.\newline\newline
 
-The DLX presented in this document has been enhanced in order to be able to manage subroutine in a transparent manner from the point of view of the user. For this reason, the DLX must be able to handle subroutines, and so the context switching, that consists in saving the
-registers content in order to be restored once the procedure has been completed. The straightforward solution is to save into the memory all registers but this is not feasible in terms of delay, since for 32 registers, 32 clock cycles are needed. In a pipeline this corresponds to a long stall each time a procedure is called.\\
+The DLX presented in this document has been enhanced in order to be able to manage subroutine transparently from the point of view of the user. For this reason, the DLX must be able to handle subroutines, so the context switching, which consists of saving the content of the
+registers to be restored once the procedure has been completed. The straightforward solution is to save into the memory all registers, but this is not feasible in terms of delay since, for 32 registers, 32 clock cycles are needed. In a pipeline, this corresponds to a long stall each time a procedure is called.\\
 
-A windowed register allows to reduce the overhead due to the context switch. The basic idea is to split the available registers in the physical register file into blocks, called \textit{windows}. There are a limited amount of physical registers in the register file, for this reason a finite number of windows are defined. Each window is assigned to a subroutine, so that the procedure can write only on those registers. This is transparent from the point of view of the CPU, which sees all registers available. Thus, the physical register file has a wrapper around it with a logic and a Register Management Logic (MML) that allows performing a translation between the CPU requests and the corresponding window for the running procedure.\newline\newline
+A windowed register allows reducing the overhead due to the context switch. The basic idea is to split the available registers in the physical register file into blocks, called \textit{windows}. There are a limited amount of physical registers in the register file; for this reason, a finite number of windows are defined. Each window is assigned to a subroutine so that the procedure can write only on those registers. This is transparent from the point of view of the CPU, which sees all registers available. Thus, the physical register file has a wrapper around it with a logic and a Register Management Logic (MML) that allows performing a translation between the CPU requests and the corresponding window for the running procedure.\newline\newline
 
-When the number of called procedures is larger than the number of available windows, the main memory is involved and the oldest allocated window is swapped in. This happens only when there are no free windows in the register file, so that the new one can be allocated. Once all the recursion chain has been unrolled, the swapped windows in the memory must be restored into the register file.
+When the number of called procedures is larger than the number of available windows, the main memory is involved, and the oldest allocated window is swapped in. This happens only when there are no free windows in the register file so that the new one can be allocated. Once all the recursion chain has been unrolled, the swapped windows in the memory must be restored into the register file.
 
 \begin{figure}[H]
     \centering
@@ -78,7 +78,7 @@ All windows, so each procedure, is made of 4 blocks of 8 registers each one:
 
 When a procedure is called, the first LOCALS and OUT blocks are allocated from the physical file register and assigned to it (because IN is the OUT of the previous one).\\
 
-By calling many nested procedures, at some point, there will be no free windows; for this reason, the oldest is de-allocated from the physical FR and swapped to the main memory. This operation is called \textbf{SPILL}. This is accomplished by using a support pointer, called \textbf{Saved Window Pointer SWP} that stores the pointer of the spilled data, exactly the end of the LOCALS block (only IN and LOCAL are spilled, the OUT block is not spilled because is the IN of the next sub-procedure). In practice it define the position of the last free cell. Notice that this operation cannot be executed in one clock cycle: each register is spilled once at a clock cycle.\newline\newline
+By calling many nested procedures, at some point, there will be no free windows; for this reason, the oldest is de-allocated from the physical FR and swapped to the main memory. This operation is called \textbf{SPILL}. This is accomplished by using a support pointer, called \textbf{Saved Window Pointer SWP} that stores the pointer of the spilled data, exactly the end of the LOCALS block (only IN and LOCAL are spilled, the OUT block is not spilled because it is the IN of the next sub-procedure). In practice, it defines the position of the last free cell. Notice that this operation cannot be executed in one clock cycle: each register is spilled once at a clock cycle.\newline\newline
 
 On the other hand, when the last procedure in the chain is finished, the others are unrolled; if some of them have been spilled, a \textbf{FILL} must be executed before the actual execution.\newline\newline
 
@@ -140,7 +140,7 @@ There is a specific structure for each group of logical enable signals:
 
 However, the connection matrix is used during a FILL operation too. It addresses the group of registers to be restored. For this purpose, it receives the SWP and FILL signal and the same reasoning is applied (group of logic in the middle in Figure \ref{connection_matrix}).
 
-For addressing during the FILL operation, an internal address signal is used, called addr\_pop. This group of signals are generated by an address\_generator unit that generates the addresses starting from the last one to the first one. This happens because the memory is used like a STACK.\\
+For addressing during the FILL operation, an internal address signal is used, called addr\_pop. This group of signals is generated by an address\_generator unit that produces the addresses from the last to the first one. This happens because the memory is used like a STACK.\\
 
 \begin{figure}[H]
   \centering
@@ -151,7 +151,7 @@ For addressing during the FILL operation, an internal address signal is used, ca
 
 \subsection{Physical Register File}
 
-The next block is the Physical Register File, that is a sequence of registers. For writing operations, there are two sources of Data: the ones coming from the CPU, that wants to write in a register, and the ones coming from the memory during a FILL operation. In order to support this kind of access, a multiplexer is used for each window, so for each group of IN-LOCAL.\\
+The next block is the Physical Register File, which is a sequence of registers. For writing operations, there are two sources of Data: the ones coming from the CPU that wants to write in a register and the ones coming from the memory during a FILL operation. In order to support this kind of access, a multiplexer is used for each window, so for each group of IN-LOCAL.\\
 
 The multiplexer selection signal is the $SWP-1$ because the SWP always points to the window that eventually needs to be spilled so the previous one is the one that has been spilled and so it's the right one to restore.
 
@@ -208,7 +208,7 @@ An additional element is necessary in order to be able to manage the addresses f
 
 \section{Hazard Control}
 
-During the execution of a pipeline, different problems or hazard situations may occur. Regarding Data Hazards, the most dangerous situation is the \emph{Read After Write (RAW)}. So a solution is needed in order to detect these problems and actually there exist a unit inside the Decode Stage that is dedicated to this job, the \emph{Hazard Table}.\\
+During the execution of a pipeline, different problems or hazard situations may occur. Regarding Data Hazards, the most dangerous situation is the \emph{Read After Write (RAW)}. So a solution is needed in order to detect these problems and actually, there exist a unit inside the Decode Stage that is dedicated to this job, the \emph{Hazard Table}.\\
 
 RAW Hazards occurs when an instruction wants to read from a register that is the destination register of a previous instruction still inside the pipeline so and not completed. This means that the second instruction has to be stopped (i.e. a stall or a bubble must be inserted into the pipeline) until the previous instruction has been completed.\\
 
@@ -217,7 +217,7 @@ RAW Hazards occurs when an instruction wants to read from a register that is the
 	add r4, r1, r2 # RAW HAZARD
 \end{lstlisting}
 
-The \emph{Hazard Table} is made of a table with 32 entries (one for each register of the DLX). Each entry is made on 3 bits. When an instruction exits the Decode Stage and enters the Execute Stage, the related destination address entry in the table is increased by one. When the instruction reaches the Write Back Stage, the related entry is decreased by one.\\
+The \emph{Hazard Table} is made of a table with 32 entries (one for each register of the DLX). Each entry is made of 3 bits. When an instruction exits the Decode Stage and enters the Execute Stage, the related destination address entry in the table is increased by one. When the instruction reaches the Write Back Stage, the corresponding entry is decreased by one.\\
 
 When a new instruction is decoded, its source registers are checked inside the \emph{Hazard Table}: if one or both the registers have an entry greater than 0 means that one of them is not available (i.e. a previous instruction is still writing on that register) and the Decode Stage raises a \emph{Hazard Signal} towards the Control Unit that will insert stalls inside the pipeline until the hazard is solved. When the hazard is over, the instruction will be processed inside the pipeline.
 
@@ -282,7 +282,7 @@ The advance comparator exploits the comparison by performing a subtraction betwe
  	\end{lstlisting}
  \end{multicols}
 
-The ordering of the comparison in the \texttt{when} statement is not casual nor follows the normal patterns. The strictly lower comparison is done before the lower equals one, because, if the latter one is true it means that also \texttt{A} lower than \texttt{B} is true, but not vice-versa. Using this encoding, the CPU can simply check the second bit in order to understand if \texttt{A} $\leq$ \texttt{B} or \texttt{A} $\geq$ \texttt{B}; instead, if the CPU wants to check only $<$ or $>$ comparisons the CPU has to check also the first bit.
+ The ordering of the comparison in the \texttt{when} statement is not casual nor follows the normal patterns. The strictly lower comparison is made before the lower equals one, because, if the latter one is true, it means that also \texttt{A} lower than \texttt{B} is true, but not vice-versa. Using this encoding, the CPU can check the second bit in order to understand if \texttt{A} $\leq$ \texttt{B} or \texttt{A} $\geq$ \texttt{B}; instead, if the CPU wants to check only $<$ or $>$ comparisons the CPU has to check also the first bit.
 
  
 
@@ -293,7 +293,7 @@ A further improvement has been done to the advanced comparator in order to manag
 \end{itemize}
 
 The advanced comparator works with unsigned numbers only. So it simply needs to be adapted for cases in which signed comparison and unsigned comparison are different. They are shown in the \autoref{comparator_cases} highlighted in red. 
-It is easy to notice that in the red lines, A and B always have a different sign. The logic must work when the \texttt{UNSIG\_SIGN\_N} bit is 0, which means that the circuit is dealing with a signed number. In this case, the carry bit must be complemented. Knowing this, it's easy to derive the following logic:
+It is easy to notice that in the red lines, A and B always have different signs. Therefore, the logic must work when the \texttt{UNSIG\_SIGN\_N} bit is 0, which means that the circuit is dealing with a signed number. In this case, the carry bit must be complemented. Knowing this, it's easy to derive the following logic:
 
 \begin{center}
 	$Cout\_masked \leftarrow Cout \oplus (\overline{UNSIG\_SIGN\_N} \cdot (A_{msb} \oplus B_{msb}))$
@@ -350,7 +350,7 @@ It is easy to notice that in the red lines, A and B always have a different sign
   \caption{All cases of possible comparison}
   \label{comparator_cases}
 \end{table}
-So, the final unit corresponds to the one at figure \ref{comparator_advanced} with an additional encoder before the output, that encode the six conditions into a signal on two bits. The resulting schema is the one in figure \ref{cmp_final}. The comparator is used both in the decode stage for the branch instructions and, in order to reduce the area and reuse the component, in the Set-Compare Unit in the Execute Stage.
+So, the final unit corresponds to the one at figure \ref{comparator_advanced} with an additional encoder before the output that encodes the six conditions into a signal on two bits. The resulting schema is the one in figure \ref{cmp_final}. The comparator is used both in the decode stage for the branch instructions and to reduce the area and reuse the component in the Set-Compare Unit in the Execute Stage.
 
 \begin{figure}[H]
 	\centering
@@ -363,17 +363,17 @@ It is important to mention the utility of the multiplexer before the comparator 
 
 \begin{itemize}
   \item Comparison between the content of two registers: in this case the multiplexer will select, with a 1, \texttt{i\_RD2} and so the comparator will compare \texttt{i\_RD1} and \texttt{i\_RD2}. For example operations like BGT, BGE fall within this subcase. 
-  \item Comparison between the content of a register and an immediate: in this case the multiplexer will select, with a 0, \texttt{i\_INP2} that is the immeediate. So the comparator will compare \texttt{i\_RD1} and \texttt{i\_INP2}. For example operations like SEQI, SNEI fall within this subcase. 
+  \item Comparison between the content of a register and an immediate: in this case the multiplexer will select, with a 0, \texttt{i\_INP2} that is the immediate. So the comparator will compare \texttt{i\_RD1} and \texttt{i\_INP2}. For example, operations like SEQI, SNEI fall within this subcase. 
 \end{itemize}
 
 The selection signal of the multiplexer is hardcoded into the control word
 
 \section{Jump and Branch decision}
-When taking into consideration jump and branch decision, there are many details to explain. First, as shown in \autoref{table:decode_instr}, there are some instructions, like JAL and JALR, that need to save the value of the current program counter inside the register R31. For this reason, the value of WS is set to R31 in these kind of instructions. 
+When taking into consideration jump and branch decisions, there are many details to explain. First, as shown in \autoref{table:decode_instr}, there are some instructions, like JAL and JALR, that need to save the value of the current program counter inside the register R31. For this reason, the value of WS is set to R31 in this kind of instruction. 
 
-Another important thing is that when jumping, there need to be a change on the program counter. In order to exploit this feature, there is a dedicated hardware inside the decode block, that takes into account the computation of the next program counter. All the circuit and its functionalities are explained in the next section. 
+Another important thing is that when jumping, there needs to be a change on the program counter. In order to exploit this feature, there is dedicated hardware inside the decode block that takes into account the computation of the next program counter. All the circuits and their functionalities are explained in the next section. 
 
-In the control word, there is a dedicated bit for the \texttt{JUMP\_EN}. For the instructions that require a jump, such as J, JAL, JALR, CALL and RET, this bit is set to 1 by default. For other instruction that may jump, in particular the conditional branches, there is an intermediate step, that is the comparator. In fact, for these instructions, the \texttt{JUMP\_EN} bit is set to 0 by default. Then, thanks to a process inside the control unit, based on the opcode and on the signal \texttt{LGET}, the \texttt{JUMP\_EN} is set to 1 as well as \texttt{IF\_STALL}. This is very important because when jumping, there is the need of waiting to fetch the next instruction. For this reason, the first stage of the pipeline is stalled to avoid fetching the next instruction immediately. 
+In the control word, there is a dedicated bit for the \texttt{JUMP\_EN}. For the instructions that require a jump, such as J, JAL, JALR, CALL and RET, this bit is set to 1 by default. For other instructions that may jump, particularly the conditional branches, there is an intermediate step, the comparator. In fact, for these instructions, the \texttt{JUMP\_EN} bit is set to 0 by default. Then, thanks to a process inside the control unit, based on the opcode and on the signal \texttt{LGET}, the \texttt{JUMP\_EN} is set to 1 as well as \texttt{IF\_STALL}. This is very important because when jumping, there is a need to fetch the next instruction. For this reason, the first stage of the pipeline is stalled to avoid fetching the next instruction immediately. 
 
 The content of the process that exploits the functionalities just explained is the following:
 \newline
@@ -423,8 +423,8 @@ The last cases to analyze are the ones in which there is CALL or RET. If there i
 The last case is the one when \texttt{BUSY\_WINDOW} is 0 and so the execution of the CALL procedure is feasible. In fact, \texttt{CALL} is set to 1.
 
 \section{Next Program Counter computation}
-The next program counter computation is included inside the decode block, in order to manage hazards and jumps better. To lighten the load on the ALU, a dedicated P4 adder has been included inside the decode block to compute the next program counter. 
-The full schematic of the decode is shown in \autoref{decode_block}.
+The next program counter computation is included inside the decode block to manage hazards and jumps better. In addition, to lighten the load on the ALU, a dedicated P4 adder has been included inside the decode block to compute the next program counter. 
+The complete schematic of the decode is shown in \autoref{decode_block}.
 
 \begin{figure}[H]
 	\centering
@@ -442,7 +442,7 @@ There are 2 possible conditions:
   \item \texttt{JUMP\_EN = 1}: this means that there is a jump. So the program counter should be increased by an offset. Looking at the schematic, it's clear how the left multiplexer, with a 1, will select the signal \texttt{i\_PC\_OFFSET}. Then the two signals enter the P4 Adder and the next program counter is computed. 
 \end{enumerate}
 
-The multiplexer on the right is controlled by a signal that comes from the control unit, in particular from the control word. The only 3 instructions in which the value of \texttt{NPC\_SEL} is 1, and so it selects RD1, are:
+The multiplexer on the right is controlled by a signal from the control unit, in particular from the control word. The only three instructions in which the value of \texttt{NPC\_SEL} is 1, and so it selects RD1, are:
 
 \begin{itemize}
   \item JR
@@ -453,5 +453,5 @@ The multiplexer on the right is controlled by a signal that comes from the contr
 In fact, in these cases, the absolute value of the program counter to be used it the one read from the register file, in particular from \texttt{RD1}.
 
 \section{Tickcounter}
-When thinking how to further improve the PRO version of the DLX, the idea was to implement a counter. As it's known, counters are very common inside microprocessors because they are useful to keep track of the timing. 
-The implementation chosen in the DLX was very simple and straightforward. There is an half-adder on 32 bits that every rising edge of the clock increases the value of the register used inside the tickcounter block to keep track of the value. By doing this, the programmer can count the number of ticks and use the value to estimate the duration of a specific program. 
+When thinking about improving the PRO version of the DLX further, the idea was to implement a counter. As it's known, counters are very common inside microprocessors because they are helpful to keep track of the timing. 
+The implementation chosen in the DLX was straightforward. There is a half-adder on 32 bits that every rising edge of the clock increases the value of the register used inside the tickcounter block to keep track of the value. By doing this, the programmer can count the number of ticks and use the value to estimate the duration of a specific program. 
