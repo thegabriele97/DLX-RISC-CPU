@@ -106,7 +106,7 @@ Its interface is made of input signals (status signals from other components) an
 
 \subsection{Control Words}
 
-Going deeper into the Control Unit, we can look at the generated Control Words for each Instruction. Each bit is referred to a Control Signal as indicated in Table \ref{table:cu:output_signals}, \emph{Sign} column, while a blank bit means that it's randomly assigned.
+Going deeper into the Control Unit, it's possible to look at the generated Control Words for each Instruction. Each bit is referred to a Control Signal as indicated in Table \ref{table:cu:output_signals}, \emph{Sign} column, while a blank bit means that it's randomly assigned.
 
 \begin{figure}[ht]
     \begin{center}
@@ -436,7 +436,7 @@ The \emph{MAS[1:0]} signal is supposed to be used in combination with \emph{A[1:
 
 \subsection{Memory Read}
 
-When a half-word or byte read is performed, a 32-bit memory system can return the complete 32-bit word for simplicity, and the processor extracts the valid half-word or byte field from it as shown in Table \ref{table:memory_read_configuration}. Other byte lanes will be ignored. For 8 and 16 bit memories, the data must be placed on the right byte lanes in the data bus.
+When an half-word or byte read is performed, a 32-bit memory system can return the complete 32-bit word for simplicity, and the processor extracts the valid half-word or byte field from it as shown in Table \ref{table:memory_read_configuration}. Other byte lanes will be ignored. For 8 and 16 bit memories, the data must be placed on the right byte lanes in the data bus.
 
 \begin{table}[H]
     \centering
