@@ -92,7 +92,7 @@ As said before, the adder is composed of two blocks:
     
     The idea is to compute both results, on 4 bits in this case, for both when the carry-in is equal to `0' or `1'. In this way, the results are computed in parallel for all the stages, even if the carry-in is `0' or `1'; then the carry-in is used to mux against the two results (on 4 bits) and the two carry-outs. Finally, the carry-out will be used as a result selection signal for the next Carry Select unit.
     
-    We are paying complexity in order to reduce the sum computation time. In fact, by having a carry out that is used as carry in for the next state, there is still propagation but is lower.\newline\newline  
+    The processor is paying complexity in order to reduce the sum computation time. In fact, by having a carry out that is used as carry in for the next state, there is still propagation but is lower.\newline\newline  
     The DLX implementation, instead of using a straightforward one of the Carry Select Adder, uses a modified version of it. It has been accomplished using \textit{CLA - Sparse Tree Carry Generator} and a \textit{Carry Select Like Adder}. The base idea is to use the CLA in order to compute a carry every $n$ bits; these carries are then fed into the sum generator that uses them to compute the results in parallel.
     \begin{figure}[H]
         \centering
@@ -122,12 +122,12 @@ As said before, the adder is composed of two blocks:
         g = a \oplus b \quad\quad p = a \cdot b
     \end{equation}
     The base idea is to write any $s_i$, that is the i-esim bit of the sum and $c_i$, the carry-out at $i$ index in function of $p$ and $g$.
-    We now use $p$ and $g$ to express the same result:
+    It's possible to use $p$ and $g$ to express the same result:
     \begin{align*}
         & s_1 = a \oplus b \oplus c_{in} = p_1 \oplus c_0\\
         & c_1 = a \cdot b + a \cdot c + b \cdot c = a_1 \cdot b_1 + (a_1 + b_1) \cdot c_0 =  g_1 + p_1 \cdot c_0
     \end{align*}
-    The crucial point is that it's possible to compute the carry at $i$ position only using the initial carry-in $c_{in}$ and $p$ and $g$ generate in the current and previous blocks. Tree are a family of Carry Look Ahead that differ for the carry-logic. They are based always on \textit{propagate} and \textit{generate}. We have that   
+    The crucial point is that it's possible to compute the carry at $i$ position only using the initial carry-in $c_{in}$ and $p$ and $g$ generate in the current and previous blocks. Tree are a family of Carry Look Ahead that differ for the carry-logic. They are based always on \textit{propagate} and \textit{generate}. So  
     \begin{align*}
         & carry = g + p \cdot c_{in}\\
         & G_{i:j} = G_{i:k} + P_{i:k} \cdot G_{k-1:j}\\
@@ -160,7 +160,7 @@ So, Carry Look Ahead - Sparse Tree needs a starting block that generates all the
 To be able to perform both subtraction and sum, the first block must be modified and must include the logic to manage also the carry-in, that in case of subtraction is `1'. This is not enough to perform subtraction, in fact, an additional signal called \texttt{SUB\_SUMN} is needed.
 The same structure can be used to implement subtraction by simply adding a XOR on each B input with the \texttt{SUB\_SUMN} control signal.
 
-We can say that a subtraction in 2's complement can be implemented as $A + \overline{B} + 1$. To implement this in the circuit we need to set the carry-in to `1' (so \texttt{SUB\_SUMN} = `1') in order to add 1 and invert the B input by using the XOR. In fact:
+The subtraction in 2's complement can be implemented as $A + \overline{B} + 1$. To implement this, the carry-in needs to be set to `1' (so \texttt{SUB\_SUMN} = `1') in order to add 1 and invert the B input by using the XOR. In fact:
 \begin{displaymath}
     \begin{array}{c c|c}
         % |c c|c| means that there are three columns in the table and
@@ -212,7 +212,7 @@ Where \texttt{P} is the final value of the product and during the algorithm exec
 
 The Booth's multiplier work with 3 main components, supposing $A$ is the multiplicand and $B$ the multiplier:
 \begin{enumerate}
-    \item $N/2$ encoders in order to take 3 bits from the operand $B$; the two LSB are used as a selection signal for the multiplexers and the last one, the MSB, for the adder. In fact, as shown in Table \ref{mult:lut}, when the MSB is 1 the value to be added to the partial result is positive, negative otherwise. For this reason, the inputs of the multiplexers are only $\{0, A, 2A\}$. Since we also need to generate negative values, like ${-A, -2A}$, the MSB of the three bits is used as input for the adder. This signal, called \texttt{SUB\_SUMn} is used to define if the operation is a sum or a subtraction; if it is 1, a subtraction is performed;
+    \item $N/2$ encoders in order to take 3 bits from the operand $B$; the two LSB are used as a selection signal for the multiplexers and the last one, the MSB, for the adder. In fact, as shown in Table \ref{mult:lut}, when the MSB is 1 the value to be added to the partial result is positive, negative otherwise. For this reason, the inputs of the multiplexers are only $\{0, A, 2A\}$. Since it's necessary to generate also negative values, like ${-A, -2A}$, the MSB of the three bits is used as input for the adder. This signal, called \texttt{SUB\_SUMn} is used to define if the operation is a sum or a subtraction; if it is 1, a subtraction is performed;
     \item $N/2$ multiplexers that select only among $\{0, A, 2A\}$, since at each stage $A$ must be multiplied by 4, a shift by two is done starting from $A$ of the previous multiplexer;
     \item $N/2$ ripple carry adders, that allow performing the partial sums. Since the final results will be on $NBIT \cdot 2+1$ bits, the adders in each level have been optimized in order to work only with the minimum bits needed. In fact, the adder at $i$ level, will generate the result on $NBIT + 2 \cdot i$ bits. As said before, a further signal called \texttt{SUB\_SUMn} has been added in order to be able to perform the subtraction. The Ripple Carry Adder has been selected for its simplicity and, since multiplication is a less common instruction, it was not worth using a more sophisticated adder. This allowed reducing the total area of the multiplier itself.
 \end{enumerate}
@@ -316,7 +316,7 @@ This logic unit allows to perform AND, NAND, OR, NOR, XOR and XNOR using only 5 
       \label{tab:log_sign}
 \end{figure}
     
-    For example, in order to generate the AND logical operation, we have to select $S_3 = 1$, so that $out = R_1 \cdot R_2$; on the other hand, if we need NAND $S_0 = S_1 = S_2 = 1$ and $S_3 = 0$, so that $out = \overline{R_1} \cdot \overline{R_2} + \overline{R_1} \cdot R_2 + R_1 \cdot \overline{R_2} = \overline{R_1} \cdot \overline{R_2}$ that using the De Morgan law $out = \overline{R_1 \cdot R_2}$.
+    For example, in order to generate the AND logical operation, $S_3 = 1$, so that $out = R_1 \cdot R_2$; on the other hand, for the NAND,  $S_0 = S_1 = S_2 = 1$ and $S_3 = 0$, so that $out = \overline{R_1} \cdot \overline{R_2} + \overline{R_1} \cdot R_2 + R_1 \cdot \overline{R_2} = \overline{R_1} \cdot \overline{R_2}$ that using the De Morgan law $out = \overline{R_1 \cdot R_2}$.
     This allows to obtain the best performances also because all paths work in parallel, compacting the area and the delay.\newline\newline
     Since only the 3 bits are used to select among the logical operations (\texttt{S} signal), a direct correspondance is needed to generate the signal show in Table \ref{tab:log_sign}. The following table, shows the conversion:
     \begin{table}[H]
@@ -406,12 +406,12 @@ Differently from the T2 version, it uses and addition signal in order to be able
 \begin{mybox}
     \textbf{Examples}
     \newline
-    For example, if we need to perform a left left of 9 bits \texttt{A}, where \texttt{A=18}, the corresponding \texttt{B} value will be 1001; this means that the second masks will be taken and the output result will from the bit at position $40-1=39$ to the one at $39-32=7$ included.
+    For example, if a shift left of 9 bits \texttt{A} is needed, where \texttt{A=18}, the corresponding \texttt{B} value will be 1001; this means that the second masks will be taken and the output result will from the bit at position $40-1=39$ to the one at $39-32=7$ included.
     \begin{center}
         MASK 2: 0$\underbrace{\textbf{0000000 00000000 00000000 00010010 0}}_{\text{shifted \texttt{A}}}$0000000
     \end{center}
     
-    On the other hand, if we need to perform a right shift the masks are generated in the opposite way, so the zeros are put in the MSB of the mask, shifted by 0, 8 ... positions. There is also a distinction between the arithmetic and the logic shift; in the first case, instead of filling the ``empty" bits with zero, the operand sign is used. For example, if we want to shift \texttt{A=-18} of \texttt{B=3} bits, the first mask is used: 
+    On the other hand, if a right shift is needed, the masks are generated in the opposite way, so the zeros are put in the MSB of the mask, shifted by 0, 8 ... positions. There is also a distinction between the arithmetic and the logic shift; in the first case, instead of filling the ``empty" bits with zero, the operand sign is used. For example, if to right shift \texttt{A=-18} of \texttt{B=3} bits, the first mask is used: 
     \begin{center}
         MASK 1: 11111$\underbrace{\textbf{111 11111111 11111111 11111111 11101}}_{\text{shifted \texttt{A}}}$110
     \end{center}

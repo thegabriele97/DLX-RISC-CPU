@@ -2,7 +2,7 @@
 \chapter{Write Back Stage}
 The Write Back Stage is the last stage in the DLX pipeline and it is used to write the results, that can come from the memory (due to a load) or the computation of the ALU, into the File Register.
 Since this DXL is a pipelined processor, the destination register is available when the instruction is decoded and must be propagated until the write back register is needed. For this purpose, inside the entire Datapath, there is a skewing network that is used to have the register index exactly when necessary. \newline\newline
-We need to extract from the instruction itself, depending on its type, the destination address. The position on a 32 bit instruction of the destination address is the following (refer to \ref{section:inst_set}):
+From the instruction itself, depending on its type, the destination address must be extracted. The position on a 32 bit instruction of the destination address is the following (refer to \ref{section:inst_set}):
 \begin{itemize}
     \itemsep0sp
     \item R-Type: [25...21]

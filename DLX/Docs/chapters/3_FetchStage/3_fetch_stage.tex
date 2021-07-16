@@ -9,7 +9,7 @@ As will be explained in the Jump and Branch Management section (refer to \ref{se
 \section{Instruction Register}
 The Instruction Register (\texttt{IR}) is, in this case, a 32 bits register that is used to store the instruction (that is in fact on 32 bits) that comes from the Instruction RAM.
 
-During the normal operation, this register is updated with the new instruction coming from the IRAM, but this is not always true. We have two cases in which the register is not updated:
+During the normal operation, this register is updated with the new instruction coming from the IRAM, but this is not always true. There are two cases in which the register is not updated:
 \begin{enumerate}
     \item When \texttt{i\_IR\_LATCH\_EN} is at 0, in fact, this signal is used to avoid updating the value inside the \texttt{IR}. During the instruction execution, it could be that the DRAM is not ready, a signal \texttt{i\_DRAM\_NOTREADY} is checked inside the Control Unit and in case of `1' the \texttt{i\_IR\_LATCH\_EN} is put at 0. In this way, everything is stalled so the CW in the pipeline and the Instruction Register will remain the same until the DRAM will become ready again. 
     \item When the reset signal is asserted or when the \texttt{i\_IR\_STALL} is at one (this signal is at one when the pipeline must continue its execution but a NOP is executed for resolving a hazard), a ``bubble" is added to the pipeline. So, the Instruction Register will contain the \texttt{x"54000000"} value. This is used in order to manage the jump and branch instructions. A more detailed description is available at section \ref{sec:jmp_branch}.
@@ -28,8 +28,8 @@ Jumps and branches are crucial instructions to build a program, but their manage
     \item \texttt{i\_IR\_LATCH\_EN}: it is used to avoid updating the Instruction Register. This happens when:
     \begin{itemize}
         \item A Data Hazard occurs
-        \item A \texttt{CAL} instruction is executed and we have to wait for a spill operation to be completed
-        \item A \texttt{RET} instruction is executed and we have to wait for a fill operation to be completed
+        \item A \texttt{CALL} instruction is executed and the CPU has to wait for a spill operation to be completed
+        \item A \texttt{RET} instruction is executed and the CPU has to wait for a fill operation to be completed
     \end{itemize}
     It's important to say that, when the \texttt{IR} is not updated, the \texttt{PC} is not updated too.
     \item \texttt{i\_IR\_STALL}: a NOP is inserted in the pipeline in order to manage the jump and the branch instructions. This is due to the control hazards; when a branch is executed, it may or may not change the PC to something other than its current value plus 4. As it will be described more precisely in the Decode Stage section, the computation of the new PC, both for branch and jump, is done there. For this reason, it is updated only at the end of the Decode Stage, and, if not blocked, a wrong instruction is fetched.

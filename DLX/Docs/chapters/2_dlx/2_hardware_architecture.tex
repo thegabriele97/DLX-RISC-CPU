@@ -2,12 +2,12 @@
 
 \section{Overview}
 
-This DLX is a 32-bit RISC processor with a five-stage pipeline. The external interface is made mainly for memories connection (IRAM, DRAM and a DRAM for the Register File) and the Clock and Reset signals. Inside we find the following blocks:
+This DLX is a 32-bit RISC processor with a five-stage pipeline. The external interface is made mainly for memories connection (IRAM, DRAM and a DRAM for the Register File) and the Clock and Reset signals. Inside it's possible to find the following blocks:
 
 \begin{itemize}
     \item Control Unit: it receives the fetched instruction from the IR register and starts to output the correct control signals towards all the pipeline stages. Moreover, it receives status signals from all other units about their working status like the comparator result (for branch decision), the status about possible hazards in the pipeline, Register File's Push \& Pop operations under execution, and all the memories readiness. It's in charge of controlling the entire pipeline and stop it in case of hazards or other situations that require a stall.
     \item Decode Unit: part of the decode stage, it is in charge of keeping the status about all registers under usage (for further hazard controls), computation of the new Program Counter (given a Jump or not), data comparison (for branches) and, the most important thing, the operation decode with the dispatch of all the operands towards the right ports of the DataPath.
-    \item DataPath: the computational core of the processor. Made of 4 pipeline stages (Instruction Decode, Execution, Memory, Write Back) contains all the units capable of computation. In particular, we have the Register File (that manages all the core registers), the Arithmetic Logic Unit, the Load-Store Unit for data memory management, and other units useful for the correct operation of everything.
+    \item DataPath: the computational core of the processor. Made of 4 pipeline stages (Instruction Decode, Execution, Memory, Write Back) contains all the units capable of computation. In particular, there is the Register File (that manages all the core registers), the Arithmetic Logic Unit, the Load-Store Unit for data memory management, and other units useful for the correct operation of everything.
     \item IR and PC: two registers that compose the Instruction Fetch stage of the pipeline are in charge of keeping in memory the current instruction under execution and the address for the next instruction to execute, respectively. 
 \end{itemize}
 
@@ -106,7 +106,7 @@ Its interface is made of input signals (status signals from other components) an
 
 \subsection{Control Words}
 
-Going deeper into the Control Unit, it's possible to look at the generated Control Words for each Instruction. Each bit is referred to a Control Signal as indicated in Table \ref{table:cu:output_signals}, \emph{Sign} column, while a blank bit means that it's randomly assigned.
+Going deeper into the Control Unit, it's possible to look at the generated Control Words for each Instruction. Each bit is referred to a Control Signal as indicated in Table \ref{table:cu:output_signals}, \emph{Sign} column, while a blank bit means that it's dynamically assigned.
 
 \begin{figure}[ht]
     \begin{center}
@@ -193,7 +193,7 @@ Going deeper into the Control Unit, it's possible to look at the generated Contr
         \end{rightwordgroup}\\
 
         \begin{rightwordgroup}{JALR}
-            \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{5}{ADD} & \bitbox{3}{SEQ} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{2}{00} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1}
+            \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{1}{1} & \bitbox{5}{ADD} & \bitbox{3}{SEQ} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{1}{0} & \bitbox{2}{00} & \bitbox{1}{1} & \bitbox{1}{0} & \bitbox{1}{1}
         \end{rightwordgroup}\\
 
         \begin{rightwordgroup}{SLLI}
@@ -336,7 +336,7 @@ The Control Unit internally is organized mainly with a stage that converts the a
 It is made mainly by the following components:
 
 \begin{itemize}
-    \item IR-Control Word Generation \& Translation Unit: its role is to take the instruction given as input and output, a valid Control Word related to that instruction.
+    \item IR-Control Word Generation \& Translation Unit: its role is to take the instruction given as input and outputs a valid Control Word related to that instruction.
     \item Pipeline Execution Unit: it's in charge of controlling the Pipeline Flow and stop it in case of needs and/or masking the actual Control Word to prevent its propagation through the chain in case of Hazards.
     \item Control Word Mask Unit: when the \emph{Pipeline Execution Unit} signals to mask the control word, this unit will do it by disabling all the bits in the CW that referees to the stage enabling signals.
     \item Jump \& Branch Control unit: given the Control Word and other internal control signals, its job is to manage (by enabling or disabling them) signals like \emph{CALL}, \emph{RET}, \emph{JUMP\_EN} and \emph{IF\_STALL}.
@@ -581,7 +581,7 @@ R-Type Instructions are called in this way because they operates only between re
 
 \subsection{Pseudo R-Type Instructions}
 
-Here we find R-Type like operations: they work only with registers but have their OPCODE.
+These are the R-Type like operations: they work only with registers but have their OPCODE.
 
 \begin{table}[H]
 \begin{tabularx}{\textwidth}{|l|c|l|l|X|}
