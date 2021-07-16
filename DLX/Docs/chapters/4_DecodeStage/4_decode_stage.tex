@@ -366,17 +366,18 @@ It is important to mention the utility of the multiplexer before the comparator 
   \item Comparison between the content of a register and an immediate: in this case the multiplexer will select, with a 0, \texttt{i\_INP2} that is the immediate. So the comparator will compare \texttt{i\_RD1} and \texttt{i\_INP2}. For example, operations like SEQI, SNEI fall within this subcase. 
 \end{itemize}
 
-The selection signal of the multiplexer is hardcoded into the control word
+The selection signal of the multiplexer is driven by the Control Unit.
 
 \section{Jump and Branch decision}
-When taking into consideration jump and branch decisions, there are many details to explain. First, as shown in \autoref{table:decode_instr}, there are some instructions, like JAL and JALR, that need to save the value of the current program counter inside the register R31. For this reason, the value of WS is set to R31 in this kind of instruction. 
+When taking into consideration jump and branch decisions, there are many details to explain. First, as shown in \autoref{table:decode_instr}, there are some instructions, like JAL and JALR, that need to save the value of the current program counter inside the register R31. For this reason, the value of WS is set to R31 in this kind of instruction. \\
 
-Another important thing is that when jumping, there needs to be a change on the program counter. In order to exploit this feature, there is dedicated hardware inside the decode block that takes into account the computation of the next program counter. All the circuits and their functionalities are explained in the next section. 
+Another important thing is that when jumping, there needs to be a change on the program counter. In order to exploit this feature, there is dedicated hardware inside the decode block that takes into account the computation of the next program counter. All the circuits and their functionalities are explained in the next section. \\
 
-In the control word, there is a dedicated bit for the \texttt{JUMP\_EN}. For the instructions that require a jump, such as J, JAL, JALR, CALL and RET, this bit is set to 1 by default. For other instructions that may jump, particularly the conditional branches, there is an intermediate step, the comparator. In fact, for these instructions, the \texttt{JUMP\_EN} bit is set to 0 by default. Then, thanks to a process inside the control unit, based on the opcode and on the signal \texttt{LGET}, the \texttt{JUMP\_EN} is set to 1 as well as \texttt{IF\_STALL}. This is very important because when jumping, there is a need to fetch the next instruction. For this reason, the first stage of the pipeline is stalled to avoid fetching the next instruction immediately. 
+In the control word, there is a dedicated bit for the \texttt{JUMP\_EN}. For the instructions that require a jump, such as J, JAL, JALR, CALL and RET, this bit is set to 1 by default. For other instructions that may jump, particularly the conditional branches, there is an intermediate step, the \emph{decision}. In fact, for these instructions, the \texttt{JUMP\_EN} bit is set to 0 by default. Then, thanks to the \emph{Jump \& Branch Control Unit} inside the Control Unit, as can be seen in Figure \ref{dlx:cu:schematic}, based on the status of the comparison (i.e. the signal \texttt{LGET}), the \texttt{JUMP\_EN} may be set to 1. This is very important because when jumping, there is a need to fetch the next instruction. For this reason, the first stage of the pipeline is stalled to avoid fetching the next instruction immediately.\\ 
 
-The content of the process that exploits the functionalities just explained is the following:
-\newline
+According to this, is important to underline again that the signal \emph{IF\_STALL} is set to 1 too solve the Control Hazard caused by a taken jump, as exmplained in \autoref{sec:jmp_branch}.\\
+
+The \emph{Jump \& Branch Control Unit} can be described with the following VHDL code:\\
 
 \begin{lstlisting}[style=vhdl,caption={VHDL code for the conditional branch},label=conditional_branches_code]
   if (IR_opcode = OP_BEQZ and LGET(0) = '0') then -- BEQZ 
@@ -418,12 +419,12 @@ To check if a branch must be taken or not:
   \item BLT: if LGET = 01
 \end{itemize}
 
-The last cases to analyze are the ones in which there is CALL or RET. If there is \texttt{BUSY\_WINDOW} equal to 1, it means that the current window is still in use, and so no operation on it have to be executed. In fact \texttt{JUMP\_EN} is set to 0.
+Another aspect to underline is the management of \emph{CALL} and \emph{RET} operations. They are like Jump Instructions we already seen but there is something more. If there is \texttt{BUSY\_WINDOW} equal to 1, it means that the current window is still in use, and so no operation on it have to be executed. In fact \texttt{JUMP\_EN} is set to 0.\\
 
-The last case is the one when \texttt{BUSY\_WINDOW} is 0 and so the execution of the CALL procedure is feasible. In fact, \texttt{CALL} is set to 1.
+The last case is the one when \texttt{BUSY\_WINDOW} is 0 and so the execution of the \emph{CALL} procedure or the \emph{RET} operation is feasible. In fact, \emph{CALL} is set to 1.
 
 \section{Next Program Counter computation}
-The next program counter computation is included inside the decode block to manage hazards and jumps better. In addition, to lighten the load on the ALU, a dedicated P4 adder has been included inside the decode block to compute the next program counter. 
+The next program counter computation is included inside the decode block to manage Control Hazards created by taken jumps in a better way. In addition, to lighten the load on the ALU, a dedicated P4 adder has been included inside the decode block to compute the next program counter. 
 The complete schematic of the decode is shown in \autoref{decode_block}.
 
 \begin{figure}[H]
@@ -438,11 +439,11 @@ The complete schematic of the decode is shown in \autoref{decode_block}.
 There are 2 possible conditions:
 
 \begin{enumerate}
-  \item \texttt{JUMP\_EN = 0}: this means that there is no jump. So the program counter should be increased by a constant value, in our case 4. By comparing the explanation and the schematic, it's clear how the left multiplexer, with a 0, will select the signal \texttt{i\_CONSTANT\_PC\_ADD}. Then the two signals enter the P4 Adder and the next program counter is computed. The carry out of the P4 adder is mapped on a signal called \texttt{PC\_OVF}, used to report a program counter overflow. 
+  \item \texttt{JUMP\_EN = 0}: this means that there is no jump. So the program counter should be increased by a constant value that is 4, because each instruction is 32 bit long so they are 4 bytes aligned. By comparing the explanation and the schematic, it's clear how the left multiplexer, with a 0, will select the signal \texttt{i\_CONSTANT\_PC\_ADD}. Then the two signals enter the P4 Adder and the next program counter is computed.  
   \item \texttt{JUMP\_EN = 1}: this means that there is a jump. So the program counter should be increased by an offset. Looking at the schematic, it's clear how the left multiplexer, with a 1, will select the signal \texttt{i\_PC\_OFFSET}. Then the two signals enter the P4 Adder and the next program counter is computed. 
 \end{enumerate}
 
-The multiplexer on the right is controlled by a signal from the control unit, in particular from the control word. The only three instructions in which the value of \texttt{NPC\_SEL} is 1, and so it selects RD1, are:
+The multiplexer on the right allows the CPU to select an \emph{Next Program Counter} the value computed by the adder or a complete different value taken from  a Register. This multiplexer is controlled by a signal from the Control Unit. The only three instructions in which the value of \texttt{NPC\_SEL} is 1, and so it selects RD1, are:
 
 \begin{itemize}
   \item JR
@@ -452,6 +453,16 @@ The multiplexer on the right is controlled by a signal from the control unit, in
 
 In fact, in these cases, the absolute value of the program counter to be used it the one read from the register file, in particular from \texttt{RD1}.
 
-\section{Tickcounter}
-When thinking about improving the PRO version of the DLX further, the idea was to implement a counter. As it's known, counters are very common inside microprocessors because they are helpful to keep track of the timing. 
-The implementation chosen in the DLX was straightforward. There is a half-adder on 32 bits that every rising edge of the clock increases the value of the register used inside the tickcounter block to keep track of the value. By doing this, the programmer can count the number of ticks and use the value to estimate the duration of a specific program. 
+\newpage
+\section{TICK TIMER}
+
+The DLX microprocessor offers a System Tick counter inside it, that is very useful for considering timing behaviours.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1.0\textwidth]{chapters/4_DecodeStage/images/ha_counter.png}
+	\caption{Schematic of Tick Timer implementation}
+	\label{ticktmr_hacounter}
+\end{figure}
+
+By mean of this, the user can count the number of ticks and use the value to estimate the duration of a specific program. 
