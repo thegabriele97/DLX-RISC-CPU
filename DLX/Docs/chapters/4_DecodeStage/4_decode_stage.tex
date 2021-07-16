@@ -376,7 +376,7 @@ Another important thing is that when jumping, there needs to be a change on the 
 
 In the control word, there is a dedicated bit for the \texttt{JUMP\_EN}. For the instructions that require a jump, such as J, JAL, JALR, CALL and RET, this bit is set to 1 by default. For other instructions that may jump, particularly the conditional branches, there is an intermediate step, the \emph{decision}. In fact, for these instructions, the \texttt{JUMP\_EN} bit is set to 0 by default. Then, thanks to the \emph{Jump \& Branch Control Unit} inside the Control Unit, as can be seen in Figure \ref{dlx:cu:schematic}, based on the status of the comparison (i.e. the signal \texttt{LGET}), the \texttt{JUMP\_EN} may be set to 1. This is very important because when jumping, there is a need to fetch the next instruction. For this reason, the first stage of the pipeline is stalled to avoid fetching the next instruction immediately.\\ 
 
-According to this, is important to underline again that the signal \emph{IF\_STALL} is set to 1 too solve the Control Hazard caused by a taken jump, as explained in \autoref{sec:jmp_branch}.\\
+According to this, is important to underline again that the signal \emph{IF\_STALL} is set to 1 to solve the Control Hazard caused by a taken jump, as explained in \autoref{sec:jmp_branch}.\\
 
 The \emph{Jump \& Branch Control Unit} can be described with the following VHDL code:\\
 
