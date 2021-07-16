@@ -152,7 +152,7 @@
   % strings, characters, and comments
   morestring=[b]",
   morestring=[b]',
-  morecomment=[l]\#,
+  morecomment=[l]\;,
   % instructions
   morekeywords={[1]abs,abs.d,abs.s,add,add.d,add.s,addi,addiu,addu,%
     and,andi,b,bc1f,bc1t,beq,beqz,bge,bgeu,bgez,bgezal,bgt,bgtu,%
@@ -169,7 +169,9 @@
     sleu,sll,sllv,slt,slti,sltiu,sltu,sne,sqrt.d,sqrt.s,sra,srav,srl,%
     srlv,sub,sub.d,sub.s,subi,subiu,subu,sw,swc1,swl,swr,syscall,teq,%
     teqi,tge,tgei,tgeiu,tgeu,tlt,tlti,tltiu,tltu,tne,tnei,trunc.w.d,%
-    trunc.w.s,ulh,ulhu,ulw,ush,usw,xor,xori},
+    trunc.w.s,ulh,ulhu,ulw,ush,usw,xor,xori, call, ret, sgei, slei, 
+    snei, seqi, sgti, sgeui, sgtui, sltui, slli, srli, srai, addui, lhi,
+    subui},
   % assembler directives
   morekeywords={[2].align,.ascii,.asciiz,.byte,.data,.double,.extern,%
     .float,.globl,.half,.kdata,.ktext,.set,.space,.text,.word},

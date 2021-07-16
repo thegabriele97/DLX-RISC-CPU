@@ -37,9 +37,7 @@ To create the most flexible test possible multiple components have been instanti
     Last but not least, the DRAM must be able to correctly manage all the different data sizes, both during the write and the read operation. So, an additional signal on two bits, called \texttt{MAS}, has been included. A more accurate description of the memory data size management is available in section \ref{mas}.
 \end{itemize}
 
-Reducing the setup time needed to start a new simulation was a crucial point to speed up the entire verification process. For this reason, a bash script has been developed to generate the .mem file from an .asm one and move it into the correct testing folder. This allows to change only the the .mem file reference in the Testbench. The bash script is the one at Appendix \ref{code:asm_script}.
-
-
+Reducing the setup time needed to start a new simulation was a crucial point to speed up the entire verification process. For this reason, a bash script has been developed to generate the .mem file from an .asm one and move it into the correct testing folder. This allows to change only the the .mem file reference in the Testbench. The bash script is the one at Appendix \ref{code:asm_script} and some .asm examples are available at Appendix \ref{asm_examples}.  
 
 \section{Simulation}
 The verification of the behaviour of the DLX is based on the simulation of the DLX itself, using the Testbench wrote in the previous phase. Before starting the simulation, all the components must be compiled; an organizational improvement has been added for simplifying the compilation file organization. The folder structure is based on a hierarchical organization of the components, by using the alphabet letters as starting names. Each folder includes a \texttt{compile.script} file that is used to compile all the files in the folder and call all the others \texttt{compile.script} files in the sub-folders. Folders are organized in the following way:

@@ -364,6 +364,309 @@
 	1
 \end{lstlisting}
 
+\newappendix\label{asm_examples}
+
+\section{Finonacci Code}
+
+\begin{lstlisting}[style=mips,caption={Fibonacci DLX Assembly example},label=asm_fibonacci]
+addi r24, r0, #6
+
+call fib
+j exit
+
+fib:    ; N is on r8, result in r9
+    addi r16, r0, #1
+    ble r8, r16, ret_1
+
+    subi r24, r8, #1
+    call fib ; n-1
+
+    add r9, r25, r0   
+    subi r24, r8, #2
+    call fib ; n-2
+
+    add r9, r9, r25       
+    ret
+
+ret_1:
+    ; if n == 0 -> 0
+    ; if n == 1 -> 1
+    beqz r8, zero
+
+    addi r9, r0, #1
+    j out
+    
+zero:
+    add r9, r0, r0
+
+out:
+    ret   
+
+exit:
+
+    sw 0(r0), r25
+
+    j exit
+
+\end{lstlisting}
+
+\newpage
+\section{Factorial Code}
+
+\begin{lstlisting}[style=mips,caption={Factorial DLX Assembly example},label=asm_factorial]
+addi r24, r0, #10           ;0
+
+ticktmr r16                 ;4
+call fact                   ;8
+ticktmr r17                 ;C
+
+j exit                      ;10
+
+
+; R8 => INPUT for current call from prev call
+; R9 => OUTPUT for current call towards prev call
+; R24 => INPUT FOR NEXT CALL
+; R25 => OUTPUT FROM LAST CALL
+fact:
+    seqi r16, r8, #1        ;14
+    bnez r16, end           ;18
+
+    ; continue rec
+    ; n * call fact(n-1)
+    subi r24, r8, #1      ; n = n-1         ;1C
+    call fact               ;20 
+    mult r9, r8, r25        ;24
+    ret                     ;28
+ 
+ end:
+    addi r9, r0, #1         ;2C
+    ret                     ;30
+
+exit:
+    sw 0(r0), r25   ; store result
+    
+    sub r17, r17, r16 ; total elapsed time (end - start)
+    sw 16(r0), r17  ; store elaps time
+
+halt:
+    j halt
+
+\end{lstlisting}
+
+
+\newpage
+\section{Bubble Sort Code}
+
+\begin{lstlisting}[style=mips,caption={Bubble Sort DLX Assembly example},label=asm_bubble_sort]
+.text
+
+j start_code
+
+swap: ; r8 <- array, r9 <- j
+	slli r20, r9, #2
+	add r17, r8, r20	; ptr to array + j
+	lw r18, 0(r17)	
+	lw r19, 4(r17)
+	ble r18, r19, not_swap
+	; swap here
+	sw 0(r17), r19
+	sw 4(r17), r18
+	addi r1, r0, #1	; swapped = true
+
+not_swap:
+	ret	
+
+
+bubbleSort: ;R8 <- N, R9 <- array
+
+subi R8, R8, #1	; r1 <- N--
+addi r17, r0, #0	; index i
+fori:
+	addi r1, r0, #0 	; swapped = false, global
+	addi r19, r0, #0	; index j
+	sub r20, r8, r17	; r20 <- n-1-i
+	forj:
+		add r24, r0, r9 	; arg #0 : ptr
+		add r25, r0, r19	; arg #2 : index j
+		call swap
+
+		addi r19, r19, #1	;j++
+		seq r18, r19, r20	; if j == n-i-1 
+		bnez r18, exit_forj
+		j forj
+
+
+	exit_forj:
+		beqz r1, end_sort 
+
+		addi r17, r17, #1	; i++
+		seq r18, r17, r8	; if i == n-1
+		bnez r18, end_sort
+		j fori
+	
+
+end_sort:
+	ret
+
+start_code:
+	addi r24, r0, #12 ; N
+	lw r25, array_0(r0)
+	call bubbleSort
+	
+stop:
+	j stop	
+
+
+
+
+
+;###############
+; DATA SEGMENT #
+;###############
+
+	.data
+
+code_space:
+	.space 256
+
+; The available assembler assigns addresses starting from zero each time
+; it finds a new segment. In this way data and text segments are going to 
+; overlap and their addresses cannot be shared. To avoid this problem we 
+; need to generate absolute code in which starting address of data segment
+; is located after last address of text segment. Therefore we use a trick 
+; reserving the first part of data segment (code_space) to empty space while
+; all useful data structures are defined soon after. In this way, when 
+; compiling, the text segment would overlap the data segment just for this
+; initial empty space so that as result we have the compiled code followed
+; by useful data addresses. Obviously the size of code_space has to be enough
+; to contain all compiled code (256 byte are more than enough). 
+; array to be sorted
+
+array:
+	.word 3,18,-12,24,17,1,7,3,-8,20,100,-33
+
+array_0:
+	.word array
+\end{lstlisting}
+
+\section{Advanced Branch Code}
+
+\begin{lstlisting}[style=mips,caption={Advanced Branch Code DLX Assembly example},label=asm_Advanced_Branch_Code]
+
+a:
+    addi r1, r0, #1 ; 1
+    addi r3, r0, #4 ; 1
+    ble r3, r1, c ; 8
+    bge r1, r3, c
+    beqz r1, c
+
+b:
+    addi r5, r0, #12312 ;10
+    blt r3, r1, d
+    bgt r3, r1, d
+
+c:
+    addi r6, r0, #8 ;18
+    jal a
+
+d:
+    bge r1, r1, e
+    j b
+
+e:
+    addi r7, r0, #7
+    bge r0, r0, a
+
+\end{lstlisting}
+
+
+\section{Complete Arithmetic Instructions Code}
+
+\begin{lstlisting}[style=mips,caption={Complete Arithmetic Instructions  DLX Assembly example},label=asm_arithms]
+
+	nop
+	addi r1,r0,#2       ;2          ;2
+	subi r2,r1,#1       ;1          ;1
+	addi r3,r1,#-4      ;-2         ;-2
+	subi r4,r3,#-1      ;-1
+	add r7,r1,r2        ;3
+	sub r8,r5,r6        ;0
+	sge r10,r1,r2       ;1
+	sge r11,r2,r1       ;0
+	sge r12,r1,r1       ;1
+	sle r13,r1,r2       ;0
+	sle r14,r2,r1       ;1
+	sle r15,r1,r1       ;1
+	sne r16,r1,r1       ;0
+	sne r17,r1,r2       ;1
+	seq r18,r1,r2       ;0
+	seq r19,r1,r1       ;1
+	sgt r10,r2,r1       ;0
+	sgt r11,r1,r2       ;1
+	slt r12,r2,r1       ;1
+	slt r10,r1,r2       ;0  2 < 1 
+	sgeu r10,r1,r3      ;0  2 >= 654..
+	sgeu r11,r3,r1      ;1
+	sgtu r12,r1,r3      ;0
+	sgtu r13,r3,r1      ;1
+	sltu r14,r3,r1      ;0
+	sltu r15,r1,r3      ;1
+	sgei r16,r1,#4      ;0
+	sgei r17,r1,#1      ;1
+	slei r18,r1,#0      ;0
+	slei r19,r1,#2      ;1
+	snei r10,r1,#1      ;1
+	snei r11,r1,#2      ;0
+	seqi r12,r1,#0      ;0
+	seqi r13,r1,#2      ;1
+	sgti r14,r1,#3      ;0
+	sgti r15,r1,#1      ;1
+	slti r16,r1,#1      ;0
+	slti r17,r1,#3      ;1
+	sgeui r10,r1,#4     ;0
+	sgeui r10,r1,#-4    ;0 
+	sgeui r11,r1,#1     ;1
+	sgtui r12,r1,#3     ;0
+	sgtui r13,r1,#1     ;1
+	sltui r14,r1,#1     ;0
+	sltui r15,r1,#3     ;1
+	addi r12,r0,#5      ;5
+	or r13,r11,r12      ;5
+	ori r14,r12,#65535  ;0000FFFF
+	and r15,r14,r2      ;1
+	andi r16,r14,#1     ;1
+	sll r17,r16,r2      ;2
+	slli r18,r16,#1     ;2
+	srl r19,r16,r2      ;0
+	srli r20,r16,#1     ;0
+	sra r21,r12,r2      ;2
+	srai r22,r12,#1     ;2
+	mult r23,r1,r5      ;0
+	xor r24,r1,r1       ;0
+	;xori r25, r1, #0xf  ;14
+
+	addi r6, r0, #5     ;5
+	addi r1, r0, #2     ;2
+	ror r30, r6, r1      ;0100 0000 0000 0000 0000 ... 0001
+	addi r7, r0, #5     ;5
+	rol r29, r7, r1     ;0000 0000 0000 0000 ... 0001 0100
+
+	addui r28, r0, #0xffff  ; 0x0000ffff
+	subui r28, r0, #0xffff  ; 0xffff0001
+
+	lhi r28, #-40           ; 0xfffd8000
+
+	sw 0(r0), r14
+	lh r27, 2(r0)       ;ffffffff
+	lhu r26, 2(r0)      ;0000ffff
+
+	nop
+halt:
+	j halt
+
+\end{lstlisting}
+
+
 \newappendix\label{ap4}
 \section{Windowing Register File}
  \mbox{} \begin{center}

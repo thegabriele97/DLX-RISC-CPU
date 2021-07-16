@@ -22,4 +22,4 @@ d:
 
 e:
     addi r7, r0, #7
-    bge r0, r0, aea
+    bge r0, r0, a
