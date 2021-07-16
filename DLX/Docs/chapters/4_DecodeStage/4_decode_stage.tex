@@ -1,7 +1,7 @@
 \chapter{Decode Stage}
 \label{sec:decode_stage}
 
-The Decode Stage is the first DataPath stage, and logically, it's divided between the DataPath itself and a separated unit called ``Decode". The Decode Stage is mainly used to perform the Instruction Decode so identification of instruction type given its \emph{OP\_CODE} and then the dispatch of the operands contained in the instruction towards the DataPath. Meanwhile, other side operations, like computation of the new PC (given a jump or not), data hazard detection and comparisons, are performed.
+The Decode Stage is the first DataPath stage, and logically, it's divided between the DataPath itself and a separated unit called ``Decode". The Decode Stage is mainly used to perform the Instruction Decode identification of instruction type given its \emph{OP\_CODE} and then the dispatch of the operands contained in the instruction towards the DataPath. Meanwhile, other side operations, like computation of the new PC (given a jump or not), data hazard detection and comparisons, are performed.
 
 \begin{figure}[H]
   \centering
@@ -49,7 +49,7 @@ The general structure of a register file is based on a decoder that takes the se
 The DLX presented in this document has been enhanced in order to be able to manage subroutine transparently from the point of view of the user. For this reason, the DLX must be able to handle subroutines, so the context switching, which consists of saving the content of the
 registers to be restored once the procedure has been completed. The straightforward solution is to save into the memory all registers, but this is not feasible in terms of delay since, for 32 registers, 32 clock cycles are needed. In a pipeline, this corresponds to a long stall each time a procedure is called.\\
 
-A windowed register allows reducing the overhead due to the context switch. The basic idea is to split the available registers in the physical register file into blocks, called \textit{windows}. There are a limited amount of physical registers in the register file; for this reason, a finite number of windows are defined. Each window is assigned to a subroutine so that the procedure can write only on those registers. This is transparent from the point of view of the CPU, which sees all registers available. Thus, the physical register file has a wrapper around it with a logic and a Register Management Logic (MML) that allows performing a translation between the CPU requests and the corresponding window for the running procedure.\newline\newline
+A windowed register allows reducing the overhead due to the context switch. The basic idea is to split the available registers in the physical register file into blocks, called \textit{windows}. There are a limited amount of physical registers in the register file; for this reason, a finite number of windows are defined. Each window is assigned to a subroutine so that the procedure can write only on those registers. This is transparent from the point of view of the CPU, which sees all registers available. Thus, the physical register file has a wrapper around it with a logic and a Register Management Logic (RML) that allows performing a translation between the CPU requests and the corresponding window for the running procedure.\newline\newline
 
 When the number of called procedures is larger than the number of available windows, the main memory is involved, and the oldest allocated window is swapped in. This happens only when there are no free windows in the register file so that the new one can be allocated. Once all the recursion chain has been unrolled, the swapped windows in the memory must be restored into the register file.
 
@@ -225,7 +225,7 @@ When a new instruction is decoded, its source registers are checked inside the \
 \label{sec:comparator}
 The straightforward way to implement a comparator, allows only to check if two operands, \texttt{A} and \texttt{B}, are equals. The solution is sketched at figure \ref{fig:comparator_basic}, which is based on $N$ XNOR, where $N$ is the number of bits of the operands and an AND gate with $N$ inputs.
 
-Even if this solution is extremely compact, it allows to perform only the equality comparison; since this DLX implementation has the ability to perform complex conditional branch instructions (refer to the Instruction section \ref{section:inst_set}) and conditional set instructions (refer to the Set-Like Operations Unit \ref{sec:set_like}) a more complex solution is requested. For example, if a conditional branch based on the condition \texttt{A} $>$ \texttt{B} (strictly greater) is executed, the exact check of this precise condition has to be performed.
+Even if this solution is extremely compact, it allows to perform only the equality comparison; since this DLX implementation has the ability to perform complex conditional branch instructions (refer to the Instruction section \ref{section:inst_set}) and conditional set instructions (refer to the Set-Like Operations Unit \ref{sec:set_like}) a more complex solution is requested. For example, if a conditional branch, based on the condition \texttt{A} $>$ \texttt{B} (strictly greater) is executed, the exact check of this precise condition has to be performed.
 
 \begin{figure}[H]
 	\centering
@@ -253,7 +253,7 @@ The advance comparator exploits the comparison by performing a subtraction betwe
 	A \neq B  &\rightarrow \overline{Z} 
 \end{align*}
 
- In order to avoid to propagate six different signal, the outcomes of the comparisons are encoded into a signal \texttt{LGET} on two bits. The encoded value are the ones in the Table \ref{tab:lget}.
+ In order to avoid to propagate six different signals, the outcomes of the comparisons are encoded into a signal \texttt{LGET} on two bits. The encoded value are the ones in the Table \ref{tab:lget}.
  \begin{multicols}{2}
  	\begin{table}[H]
  		\begin{center}
@@ -282,7 +282,7 @@ The advance comparator exploits the comparison by performing a subtraction betwe
  	\end{lstlisting}
  \end{multicols}
 
- The ordering of the comparison in the \texttt{when} statement is not casual nor follows the normal patterns. The strictly lower comparison is made before the lower equals one, because, if the latter one is true, it means that also \texttt{A} lower than \texttt{B} is true, but not vice-versa. Using this encoding, the CPU can check the second bit in order to understand if \texttt{A} $\leq$ \texttt{B} or \texttt{A} $\geq$ \texttt{B}; instead, if the CPU wants to check only $<$ or $>$ comparisons the CPU has to check also the first bit.
+ The ordering of the comparisons in the \texttt{when} statement is not casual nor follows the normal patterns. The strictly lower comparison is made before the lower equals one, because, if the latter one is true, it means that also \texttt{A} lower than \texttt{B} is true, but not vice-versa. Using this encoding, the CPU can check the second bit in order to understand if \texttt{A} $\leq$ \texttt{B} or \texttt{A} $\geq$ \texttt{B}; instead, if the CPU wants to check only $<$ or $>$ comparisons the CPU has to check also the first bit.
 
  
 
@@ -350,7 +350,7 @@ It is easy to notice that in the red lines, A and B always have different signs.
   \caption{All cases of possible comparison}
   \label{comparator_cases}
 \end{table}
-So, the final unit corresponds to the one at figure \ref{comparator_advanced} with an additional encoder before the output that encodes the six conditions into a signal on two bits. The resulting schema is the one in figure \ref{cmp_final}. The comparator is used both in the decode stage for the branch instructions and to reduce the area and reuse the component in the Set-Compare Unit in the Execute Stage.
+So, the final unit corresponds to the one at figure \ref{comparator_advanced} with an additional encoder before the output that encodes the six conditions into a signal on two bits. The resulting schema is the one in figure \ref{cmp_final}. 
 
 \begin{figure}[H]
 	\centering
@@ -444,7 +444,7 @@ There are 2 possible conditions:
   \item \texttt{JUMP\_EN = 1}: this means that there is a jump. So the program counter should be increased by an offset. Looking at the schematic, it's clear how the left multiplexer, with a 1, will select the signal \texttt{i\_PC\_OFFSET}. Then the two signals enter the P4 Adder and the next program counter is computed. 
 \end{enumerate}
 
-The multiplexer on the right allows the CPU to select an \emph{Next Program Counter} the value computed by the adder or a complete different value taken from  a Register. This multiplexer is controlled by a signal from the Control Unit. The only three instructions in which the value of \texttt{NPC\_SEL} is 1, and so it selects RD1, are:
+The multiplexer on the right allows the CPU to select an \emph{Next Program Counter} the value computed by the adder or a complete different value taken from  a Register. This multiplexer is controlled by a signal from the Control Unit. The are only three instructions in which the value of \texttt{NPC\_SEL} is 1, and so it selects RD1, are:
 
 \begin{itemize}
   \item JR
@@ -473,5 +473,5 @@ However, it's important to underline the fact that the Tick Timer value is taken
 To compute the execution time given the CPU frequency and a start and an end time:
 
 \begin{center}
-	$ T_{exec} = (T_{end} - T_{start}) \cdot F_{CPU} $
+	$ T_{exec} = \frac{CC_{end} - CC_{start}}{F_{CPU}} $
 \end{center}

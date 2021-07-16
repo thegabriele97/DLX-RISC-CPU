@@ -31,7 +31,7 @@ Jumps and branches are crucial instructions to build a program, but their manage
         \item A \texttt{CALL} instruction is executed and the CPU has to wait for a spill operation to be completed
         \item A \texttt{RET} instruction is executed and the CPU has to wait for a fill operation to be completed
     \end{itemize}
-    It's important to say that, when the \texttt{IR} is not updated, the \texttt{PC} is not updated too.
+    It's important to say that, when the \texttt{IR} is not updated, the \texttt{PC} is not updated too. In all the three cases, all the pipeline registers are disabled (PC, IR, ID, EX, MEM, WB) for the instruction; so, the stalled instruction is waiting in the Decode stage of the pipeline.
     \item \texttt{i\_IR\_STALL}: a NOP is inserted in the pipeline in order to manage the jump and the branch instructions. This is due to the control hazards; when a branch is executed, it may or may not change the PC to something other than its current value plus 4. As it will be described more precisely in the Decode Stage section, the computation of the new PC, both for branch and jump, is done there. For this reason, it is updated only at the end of the Decode Stage, and, if not blocked, a wrong instruction is fetched.
     
     The solution this DLX implements is to add a NOP not to execute a wrong instruction.

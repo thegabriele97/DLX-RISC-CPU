@@ -30,14 +30,14 @@ To create the most flexible test possible multiple components have been instanti
     \item Data RAM (DRAM): similarly to the IRAM, the DRAM is loaded at the startup using the same .mem explained before. This compiled file does not only contain the code instructions but, after a blank line, also the memory content the program should have once it starts. Since a DRAM must also be writable, the memory is implemented as a read/write one. 
     
     To simplify the verification of the memory content, each time a value is written, the external file, that is the exact copy of the DRAM content, is updated too.
-    In order to correctly access the data that are stored in the memory, the address comes from outside and corresponds to the one used in the Memory Stage (refer to \ref{chp:memory_stage}).
+    In order to correctly access the data that are stored in the memory, the address comes from outside and corresponds to the one used in the Memory Stage (refer to Chapter \ref{chp:memory_stage}).
     
     To replicate a more realistic environment and increase the test reliability, the DRAM has been enhanced with a \texttt{ready} signal that is `1' when it is ready. This has been implemented with a counter, that only after \texttt{data\_delay} clock cycles makes the memory ready and allows to generate a meaningful value.
     
     Last but not least, the DRAM must be able to correctly manage all the different data sizes, both during the write and the read operation. So, an additional signal on two bits, called \texttt{MAS}, has been included. A more accurate description of the memory data size management is available in section \ref{mas}.
 \end{itemize}
 
-Reducing the setup time needed to start a new simulation was a crucial point to speed up the entire verification process. For this reason, a bash script has been developed to generate the .mem file from an .asm one and move it into the correct testing folder. This allows to change only the the .mem file reference in the Testbench. The bash script is the one at Appendix \ref{code:asm_script} and some .asm examples are available at Appendix \ref{asm_examples}.  
+Reducing the setup time needed to start a new simulation was a crucial point to speed up the entire verification process. For this reason, a bash script has been developed to generate the .mem file from an .asm one and move it into the correct testing folder. This allows to change only the .mem file reference in the Testbench. The bash script is the one at Appendix \ref{code:asm_script} and some .asm examples are available at Appendix \ref{asm_examples}.  
 
 \section{Simulation}
 The verification of the behaviour of the DLX is based on the simulation of the DLX itself, using the Testbench wrote in the previous phase. Before starting the simulation, all the components must be compiled; an organizational improvement has been added for simplifying the compilation file organization. The folder structure is based on a hierarchical organization of the components, by using the alphabet letters as starting names. Each folder includes a \texttt{compile.script} file that is used to compile all the files in the folder and call all the others \texttt{compile.script} files in the sub-folders. Folders are organized in the following way:

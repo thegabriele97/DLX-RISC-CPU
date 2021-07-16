@@ -7,7 +7,7 @@
     \label{fig:execute-stage}
 \end{figure}
 
-The execute stage is the second stage of the Datapath, and it is used to perform computation over data, like sum, multiplication, shift and logical operation. Finally, the Control Word coming from the Control Unit allows to correctly configure the internal signal to perform the desired function with the correct operands. In fact, in this stage, multiple signals can be configured:
+The Execute Stage is the second stage of the Datapath, and it is used to perform computation over data, like sum, multiplication, shift and logical operation. Finally, the Control Word coming from the Control Unit allows to correctly configure the internal signal to perform the desired function with the correct operands. In fact, in this stage, multiple signals can be configured:
 \begin{itemize}
     \itemsep0sp
     \item \texttt{EN1}: this signal is used in order to enable/disable the registers sampling in the DECODE/EXE junction;
@@ -64,7 +64,7 @@ The base concept is that, internally, the 4 units are selected through a multipl
         \hline
         000 11 &\multirow{6}{*}{SHIFT} & SHIFT RIGHT \\
         001 11 & & SHIFT LEFT \\
-        010 110 & & ARITH SHIFT RIGHT \\
+        010 11 & & ARITH SHIFT RIGHT \\
         011 11 &  & ARITH SHIFT LEFT\\
         100 11 &  & ROTATE RIGHT\\
         101 11 &  & ROTATE LEFT\\
@@ -150,7 +150,7 @@ As said before, the adder is composed of two blocks:
     \end{figure}
     The base idea is to combine their outputs and take only the G as carries.
 \end{itemize}
-So, Carry Look Ahead - Sparse Tree needs a starting block that generates all the $p$ and $g$ for all the couples of bit using the \ref{eq:pandg} equation. The spars tree and the PG network structure is shown in the figure \ref{fig:pg_network}, in the code this block is called \texttt{prop\_gen\_generic} and is made of \texttt{prop\_gen} block in order to compute $p$ and $g$.
+So, Carry Look Ahead - Sparse Tree needs a starting block that generates all the $p$ and $g$ for all the couples of bit using the \ref{eq:pandg} equation. The sparse tree and the PG network structure is shown in the figure \ref{fig:pg_network}, this block is called \texttt{prop\_gen\_generic} and is made of \texttt{prop\_gen} block in order to compute $p$ and $g$.
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.65\textwidth]{chapters/5_ExecuteStage/images/CLA.pdf}
@@ -178,7 +178,7 @@ The subtraction in 2's complement can be implemented as $A + \overline{B} + 1$. 
 \end{displaymath}
 This solution is good because the PG and G block has the same delay, that is driven by G and since both include it, they are the same. Many paths have the same delay and the load on components is good since an output of a block is connected to a maximum of 2 other blocks. These two factors bring a good \textit{equilibrium} to the entire structure.
 \subsection{Multiplier}
-In order to overcome the limitation of the array multiplier, this DLX implementation includes a modified version of the Booth's multiplier, since the multiplexer for the partial values to be added is only on two bits instead of three. The Booth's algorithm copes with 3 bits at a time, so the number of stages is $N/2$ (this corresponds to the number of the encoders) and this allows to speed up the result computation. 
+In order to overcome the limitation of the array multiplier, this DLX implementation includes a modified version of the Booth's multiplier, since the multiplexer for the partial results to be added is only on two bits instead of three. The Booth's algorithm copes with 3 bits at a time, so the number of stages is $N/2$ (this corresponds to the number of the encoders) and this allows to speed up the result computation. 
 The Booth's algorithm is the following:
 \begin{lstlisting}[frame=none, escapeinside={(*}{*)}]
     i = 0
@@ -299,7 +299,7 @@ This logic unit allows to perform AND, NAND, OR, NOR, XOR and XNOR using only 5 
 
     In order to compute one of the logical instructions, the select signals are properly activated as follow:
     
-    \begin{figure}[ht]
+    \begin{figure}[H]
         \centering
     \[
     \begin{vmatrix}
@@ -338,8 +338,8 @@ This logic unit allows to perform AND, NAND, OR, NOR, XOR and XNOR using only 5 
     \end{table}
 
 \subsection{Shifter}
-The implemented shifter allows to perform shift right, logical/arithmetical shift left and left/right rotate using the full operand \texttt{A} on 32 bits and 6 bits from the second one \texttt{B} and three \textit{control signals}.
-Differently from the T2 version, it uses and addition signal in order to be able to manage also the rotate instruction. Our implementation takes three inputs:
+The implemented shifter allows to perform shift right, logical/arithmetical shift left and left/right rotate using the full operand \texttt{A} on 32 bits and 5 bits from the second one \texttt{B} and three \textit{control signals}.
+Differently from the T2 version, it uses an addition signal in order to be able to manage also the rotate instruction. Our implementation takes three inputs:
 \begin{itemize}
     \itemsep0sp
     \item \texttt{A}: the operand to be shifted/rotated;
@@ -368,8 +368,8 @@ Differently from the T2 version, it uses and addition signal in order to be able
 
  The unit performs the requested operation in three stages, sketched in figure \ref{fig:shifter}:
 \begin{enumerate}
-    \item The first consist of preparing 4 possible ``masks", each already shifted of {0, 8, 16, 32} left or right depending on the configuration. This allows shifting for all 32 bits. It copies the input \texttt{A} into the 4 masks that will be used by the next stage. Being on 32 bits, the generated masks are on $32+8=40$ bits. The only difference between this implementation and the T2 one, is that, in case of rotate, the additional 8 bits of the masks are filled with the corresponding 8 bits that are going ``out" during the rotation.
-    \item The second level perform a coarse grain shift, that consist of selecting one mask among the 4 possible ones generated in the previous stage. This selection is done using the bits {4, 3} of \texttt{B}.
+    \item The first consists of preparing 4 possible ``masks", each already shifted of {0, 8, 16, 32} left or right depending on the configuration. This allows shifting for all 32 bits. It copies the input \texttt{A} into the 4 masks that will be used by the next stage. Being on 32 bits, the generated masks are on $32+8=40$ bits. The only difference between this implementation and the T2 one, is that, in case of rotate, the additional 8 bits of the masks are filled with the corresponding 8 bits that are going ``out" during the rotation.
+    \item The second level perform a coarse grain shift, that consists of selecting one mask among the 4 possible ones generated in the previous stage. This selection is done using the bits {4, 3} of \texttt{B}.
     \item The third level, using the bits {2, 1, 0} of \texttt{B} and the selected mask, performs a fine grain refinement. The 3 bits allow choosing the starting index from the mask, granting a selection among 8 positions.
 \end{enumerate}
 
