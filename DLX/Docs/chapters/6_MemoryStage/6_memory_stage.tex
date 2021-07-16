@@ -32,7 +32,7 @@ The basic idea behind the Address Mask Unit is to modify the address, given as i
 \end{table}
 
 
-Give an address, it must be correctly aligned depending on the dimension of the data the processor want to write/read to/from memory. Refer to the \ref{vhdl_masking_addr} VHDL snippet. The problem with the alignment arises when data to be accessed are larger than the addressable unit (word vs byte). \\
+Give an address, it must be correctly aligned depending on the dimension of the data the processor wants to write/read to/from memory. Refer to the \ref{vhdl_masking_addr} VHDL snippet. The problem with the alignment arises when data to be accessed are larger than the addressable unit (word vs byte). \\
 
 After the generation of the correct address, is a DRAM duty to output the data in the proper byte lanes, as explained in Table \ref{table:memory_read_configuration}. The operation of reading from the correct byte lane and apply a sign extension (if requested) is made by the \ref{sec:ldstr} \emph{Load-Store Unit}.
 
