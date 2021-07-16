@@ -359,6 +359,7 @@ So, the final unit corresponds to the one at figure \ref{comparator_advanced} wi
 	\label{cmp_final}
 \end{figure}
 
+\newpage
 It is important to mention the utility of the multiplexer before the comparator in \autoref{decode_block}. There are two cases in which the comparator is used:
 
 \begin{itemize}
@@ -375,7 +376,7 @@ Another important thing is that when jumping, there needs to be a change on the 
 
 In the control word, there is a dedicated bit for the \texttt{JUMP\_EN}. For the instructions that require a jump, such as J, JAL, JALR, CALL and RET, this bit is set to 1 by default. For other instructions that may jump, particularly the conditional branches, there is an intermediate step, the \emph{decision}. In fact, for these instructions, the \texttt{JUMP\_EN} bit is set to 0 by default. Then, thanks to the \emph{Jump \& Branch Control Unit} inside the Control Unit, as can be seen in Figure \ref{dlx:cu:schematic}, based on the status of the comparison (i.e. the signal \texttt{LGET}), the \texttt{JUMP\_EN} may be set to 1. This is very important because when jumping, there is a need to fetch the next instruction. For this reason, the first stage of the pipeline is stalled to avoid fetching the next instruction immediately.\\ 
 
-According to this, is important to underline again that the signal \emph{IF\_STALL} is set to 1 too solve the Control Hazard caused by a taken jump, as exmplained in \autoref{sec:jmp_branch}.\\
+According to this, is important to underline again that the signal \emph{IF\_STALL} is set to 1 too solve the Control Hazard caused by a taken jump, as explained in \autoref{sec:jmp_branch}.\\
 
 The \emph{Jump \& Branch Control Unit} can be described with the following VHDL code:\\
 
@@ -456,7 +457,7 @@ In fact, in these cases, the absolute value of the program counter to be used it
 \newpage
 \section{TICK TIMER}
 
-The DLX microprocessor offers a System Tick counter inside it, that is very useful for considering timing behaviours.
+The DLX microprocessor offers a 32 System Tick timer inside it, that is very useful in considering timing behaviours.
 
 \begin{figure}[H]
 	\centering
@@ -465,4 +466,12 @@ The DLX microprocessor offers a System Tick counter inside it, that is very usef
 	\label{ticktmr_hacounter}
 \end{figure}
 
-By mean of this, the user can count the number of ticks and use the value to estimate the duration of a specific program. 
+By mean of this, the user can count the number of ticks and use the value to estimate the duration of a specific portion of code. It's meant to be used as a relative value so as a delta delay between a starting point and an end point.\\
+
+However, it's important to underline the fact that the Tick Timer value is taken during the Decode Stage and it has to pass through all the entire pipeline until the Write Back, so for advanced applications the user should take under account this aspect together with the fact that some stalls can be inserted during the execution. \\ 
+
+To compute the execution time given the CPU frequency and a start and an end time:
+
+\begin{center}
+	$ T_{exec} = (T_{end} - T_{start}) \cdot F_{CPU} $
+\end{center}
