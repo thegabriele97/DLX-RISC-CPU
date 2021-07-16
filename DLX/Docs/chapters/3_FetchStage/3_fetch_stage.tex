@@ -16,13 +16,13 @@ During the normal operation, this register is updated with the new instruction c
 \end{enumerate}
 
 \section{Program Counter}
-As anticipated before, the Program Counter (\texttt{PC}) is the address used to fetch the instruction from the IRAM and it is on 32 bits, thus it can address up to 4GB.
+As anticipated before, the Program Counter (\texttt{PC}) is the address used to fetch the instruction from the IRAM and it is on 32 bits. Thus it can address up to 4GB.
 
-At each clock cycle, the current Program Counter is updated with the \texttt{NPC} computed in the Decode stage, in order to point to the next instruction. This allows managing both the normal execution, by adding 4 to the current \texttt{PC}, subtracting/adding an offset or set it to an immediate. Only in case of reset, it is set to 0 otherwise it will be set to the value of the new Program Counter, computed in the Decode stage. In a specular way, from what is done for the Instruction Register, the \texttt{PC} is updated only when the \texttt{i\_PC\_LATCH\_EN} is `1'.
+At each clock cycle, the current Program Counter is updated with the \texttt{NPC} computed in the Decode stage in order to point to the next instruction. This allows managing both the standard execution, by adding 4 to the current \texttt{PC}, subtracting/adding an offset, or set it to an immediate. Only in case of reset, it is set to 0 otherwise, it will be set to the value of the new Program Counter, computed in the Decode stage. In a specular way, from what is done for the Instruction Register, the \texttt{PC} is updated only when the \texttt{i\_PC\_LATCH\_EN} is `1'.
 
 \section{Jump and Branch Management}
 \label{sec:jmp_branch}
-Jumps and branches are crucial instructions in order to be able to build a program, but their management from the point of view of the pipeline is not straightforward. In fact, the Fetch Stage must be able to manage three additional signals:
+Jumps and branches are crucial instructions to build a program, but their management from the point of view of the pipeline is not straightforward. Therefore, the Fetch Stage must be able to manage three additional signals:
 \begin{enumerate}
     \item \texttt{i\_PC\_LATCH\_EN}: this signal is used to avoid updating the PC with the new one coming from the Decode Stage. The update is inhibited when the instruction is a jump or when \texttt{i\_IR\_LATCH\_EN} is `0'. 
     \item \texttt{i\_IR\_LATCH\_EN}: it is used to avoid updating the Instruction Register. This happens when:
@@ -32,7 +32,7 @@ Jumps and branches are crucial instructions in order to be able to build a progr
         \item A \texttt{RET} instruction is executed and we have to wait for a fill operation to be completed
     \end{itemize}
     It's important to say that, when the \texttt{IR} is not updated, the \texttt{PC} is not updated too.
-    \item \texttt{i\_IR\_STALL}: a NOP is inserted in the pipeline in order to manage the jump and the branch instructions. This is due to the control hazards; when a branch is executed, it may or may not change the PC to something other than its current value plus 4. As it will be described more precisely in the Decode Stage section, the computation of the new PC, both for branch and jump, is done there. For this reason, it is updated only at the end of the Decode Stage and, if not blocked, a wrong instruction is fetched.
+    \item \texttt{i\_IR\_STALL}: a NOP is inserted in the pipeline in order to manage the jump and the branch instructions. This is due to the control hazards; when a branch is executed, it may or may not change the PC to something other than its current value plus 4. As it will be described more precisely in the Decode Stage section, the computation of the new PC, both for branch and jump, is done there. For this reason, it is updated only at the end of the Decode Stage, and, if not blocked, a wrong instruction is fetched.
     
-    The solution this DLX implements is to add a NOP, in order not to execute a wrong instruction.
+    The solution this DLX implements is to add a NOP not to execute a wrong instruction.
 \end{enumerate}

@@ -2,13 +2,13 @@
 
 \section{Overview}
 
-This DLX is a 32-bit RISC processor with a five-stage pipeline. The external interface is made mainly for memories connection (IRAM, DRAM and a DRAM for the Register File), and the Clock and Reset signals. Inside we find the following blocks:
+This DLX is a 32-bit RISC processor with a five-stage pipeline. The external interface is made mainly for memories connection (IRAM, DRAM and a DRAM for the Register File) and the Clock and Reset signals. Inside we find the following blocks:
 
 \begin{itemize}
     \item Control Unit: it receives the fetched instruction from the IR register and starts to output the correct control signals towards all the pipeline stages. Moreover, it receives status signals from all other units about their working status like the comparator result (for branch decision), the status about possible hazards in the pipeline, Register File's Push \& Pop operations under execution, and all the memories readiness. It's in charge of controlling the entire pipeline and stop it in case of hazards or other situations that require a stall.
     \item Decode Unit: part of the decode stage, it is in charge of keeping the status about all registers under usage (for further hazard controls), computation of the new Program Counter (given a Jump or not), data comparison (for branches) and, the most important thing, the operation decode with the dispatch of all the operands towards the right ports of the DataPath.
-    \item DataPath: the computational core of the processor. Made of 4 pipeline stages (Instruction Decode, Execution, Memory, Write Back) contains all the units capable of doing computation. In particular, we have the Register File (that manages all the registers of the core), the Arithmetic Logic Unit, the Load-Store Unit for data memory management, and other units useful for the correct operation of everything.
-    \item IR and PC: two registers that compose the Instruction Fetch stage of the pipeline, they are in charge of keeping in memory the current instruction under execution and the address for the next instruction to execute, respectively. 
+    \item DataPath: the computational core of the processor. Made of 4 pipeline stages (Instruction Decode, Execution, Memory, Write Back) contains all the units capable of computation. In particular, we have the Register File (that manages all the core registers), the Arithmetic Logic Unit, the Load-Store Unit for data memory management, and other units useful for the correct operation of everything.
+    \item IR and PC: two registers that compose the Instruction Fetch stage of the pipeline are in charge of keeping in memory the current instruction under execution and the address for the next instruction to execute, respectively. 
 \end{itemize}
 
 
@@ -22,7 +22,7 @@ This DLX is a 32-bit RISC processor with a five-stage pipeline. The external int
 \newpage
 \section{Pipeline Stages}
 
-In order to exploit the performance of the DLX processor, a five pipeline stage is implemented. This is done in order to reduce the overall delay, and different instructions can be processed in different stages at the same time.
+To exploit the performance of the DLX processor, a five pipeline stage is implemented. This is done to reduce the overall delay, and different instructions can be processed in various stages simultaneously.
 
 \begin{figure}[H]
     \centering
@@ -35,16 +35,16 @@ As shown in figure \ref{DLX_DP}, the five pipeline stages are:
 
 \begin{enumerate}
     \item \emph{Fetch}: not shown in the figure, it keeps track of the current instruction (IR) and the address of the next instruction to be fetched (PC).
-    \item \emph{Decode}: it has the role of taking as input the current instruction (IR) and decoding it by extracting all the fields and dispatch them to the correct ports (Immediate 1, RS1, RS2, WB ADDR, Immediate 2). It's in charge of comparing values (from the Register File or from an immediate) and of computing the next PC given the actual PC. Last but not least, it keeps track of all the instructions in execution inside the pipeline and signals possible Data Hazard to the Control unit. By design choice, the Branch/Jump instructions are executed here instead of the Execute Stage, in order to ideally lose only one clock cycle after a taken jump (because of the wrong fetched instruction).
-    \item \emph{Execute}: it takes the data from the Decode stage and do some computation on them, like adding them, multiply them, compute a shift and so on (refer to Table \ref{tab:alu_op} for available ALU operations), or outputs to the next stage the result of the comparison made in the Decode stage.
-    \item \emph{Memory}: given the Address computed by the ALU during the previous stage and an optional Data, it's capable of doing a Load from the DRAM or a Store towards the DRAM. Not all operations use this stage so there is a bypass connection from the output of the EX stage towards the WB stage.
-    \item \emph{Write Back}: the last stage of the pipeline, it simply selects the output from the ALU or from the Memory (after a load operation) and gives it as input to the Register File. Meanwhile, the destination address has been propagated through each stage and now is ready to be used by the Register File to store the final result. Here the Hazard Control Unit inside the Decode Stage intercepts this Write Back operation and knows that new instructions that require this Data can now be executed.
+    \item \emph{Decode}: it has the role of taking as input the current instruction (IR) and decoding it by extracting all the fields and dispatch them to the correct ports (Immediate 1, RS1, RS2, WB ADDR, Immediate 2). Furthermore, it's in charge of comparing values (from the Register File or an immediate) and computing the next PC given the actual PC. Last but not least, it keeps track of all the instructions in execution inside the pipeline and signals possible Data Hazard to the Control unit. By design choice, the Branch/Jump instructions are executed here instead of the Execute Stage, to lose only one clock cycle after a taken jump ideally (because of the wrong fetched instruction).
+    \item \emph{Execute}: it takes the data from the Decode stage. Then, it does some computation on them, like adding them, multiply them, compute a shift and so on (refer to Table \ref{tab:alu_op} for available ALU operations), or outputs to the next stage the result of the comparison made in the Decode stage.
+    \item \emph{Memory}: given the Address computed by the ALU during the previous stage and an optional Data, it's capable of doing a Load from the DRAM or a Store towards the DRAM. However, not all operations use this stage, so there is a bypass connection from the output of the EX stage towards the WB stage.
+    \item \emph{Write Back}: the last stage of the pipeline selects the output from the ALU or the Memory (after a load operation) and gives it input to the Register File. Meanwhile, the destination address has been propagated through each stage and is now ready to be used by the Register File to store the final result. The Hazard Control Unit inside the Decode Stage intercepts this Write Back operation and knows that new instructions requiring this Data can now be executed.
 \end{enumerate}
 
 
 \section{Control Unit}
 
-The Control Unit is one of the most important parts of the DLX processor. Its role is to orchestrate all the jobs through the pipeline of the processor and to manage dangerous situations.\\
+The Control Unit is one of the essential parts of the DLX processor. Its role is to orchestrate all the jobs through the processor's pipeline and manage dangerous situations.\\
 
 Its interface is made of input signals (status signals from other components) and of control signals (towards other components), as described in Table \ref{table:cu:input_signals} and Table \ref{table:cu:output_signals}.
 
@@ -106,7 +106,7 @@ Its interface is made of input signals (status signals from other components) an
 
 \subsection{Control Words}
 
-Going deeper into the Control Unit, we can give a look at the generated Control Words for each Instruction. Each bit is referred to a Control Signal as indicated in Table \ref{table:cu:output_signals}, \emph{Sign} column, while a blank bit means that it's randomly assigned.
+Going deeper into the Control Unit, we can look at the generated Control Words for each Instruction. Each bit is referred to a Control Signal as indicated in Table \ref{table:cu:output_signals}, \emph{Sign} column, while a blank bit means that it's randomly assigned.
 
 \begin{figure}[ht]
     \begin{center}
@@ -324,7 +324,7 @@ Going deeper into the Control Unit, we can give a look at the generated Control 
 
 \subsection{Internal organization of the Control Unit}
 
-The Control Unit internally is organized mainly with a stage that converts the actual Instruction into a Control Word and then this control word is propagated in order to support all the pipeline stages, as shown in Figure \ref{dlx:cu:schematic}.
+The Control Unit internally is organized mainly with a stage that converts the actual Instruction into a Control Word. Then this control word is propagated to support all the pipeline stages, as shown in Figure \ref{dlx:cu:schematic}.
 
 \begin{figure}[H]
     \centering
@@ -336,8 +336,8 @@ The Control Unit internally is organized mainly with a stage that converts the a
 It is made mainly by the following components:
 
 \begin{itemize}
-    \item IR-Control Word Generation \& Translation Unit: its role is to take the Instruction given as input and to output, a valid Control Word related to that instruction.
-    \item Pipeline Execution Unit: it's in charge of controlling the Pipeline Flow and stop it in case of needs and/or masking the actual Control Word in order to stop its propagation through the chain in case of Hazards.
+    \item IR-Control Word Generation \& Translation Unit: its role is to take the instruction given as input and output, a valid Control Word related to that instruction.
+    \item Pipeline Execution Unit: it's in charge of controlling the Pipeline Flow and stop it in case of needs and/or masking the actual Control Word to prevent its propagation through the chain in case of Hazards.
     \item Control Word Mask Unit: when the \emph{Pipeline Execution Unit} signals to mask the control word, this unit will do it by disabling all the bits in the CW that referees to the stage enabling signals.
     \item Jump \& Branch Control unit: given the Control Word and other internal control signals, its job is to manage (by enabling or disabling them) signals like \emph{CALL}, \emph{RET}, \emph{JUMP\_EN} and \emph{IF\_STALL}.
 \end{itemize}
@@ -362,8 +362,7 @@ The DLX processor has a Harvard architecture, with two 32-bit data buses carryin
     \end{bytefield}
 \end{center}
 
-The third RAM required, the one for the register file, is not under the direct access of the User. It's managed as a Stack memory by the Register File for automatic subroutines management and it has a dedicated interface. It can be merged with the Data Memory with external logic.\\
-
+The third RAM required, the one for the register file, is not under the User's direct access. It's managed as a Stack memory by the Register File for automatic subroutines management, and it has a dedicated interface. It can be merged with the Data Memory with external logic.\\
 
 All the subsequent paragraphs are referred in the same way to all the three memory types.
 
@@ -391,7 +390,7 @@ The \emph{Memory Request signals} are:
     \item Ready
 \end{itemize}
 
-Moreover, all the memories connected must agree on a certain protocol both for writing and reading operations. The most important thing to take under consideration is the \emph{Ready} signal: it must be high only when the operation is completed. For example, after a data read, the \emph{Ready} stays at 1 only when the data is valid. If meanwhile, the address changes, the \emph{Ready} signal must go off.
+Moreover, all the memories connected must agree on a specific protocol both for writing and reading operations. The most important thing to take under consideration is the \emph{Ready} signal: it must be high only when the operation is completed. For example, after a data read, the \emph{Ready} stays at 1 only when the data is valid. If, meanwhile, the address changes, the \emph{Ready} signal must go off.
 
 \begin{center}
     \begin{tikztimingtable}[%
@@ -419,21 +418,21 @@ Moreover, all the memories connected must agree on a certain protocol both for w
 \end{center}
 
 
-If the memory in use can't accomplish this timing, an external \emph{Memory Control Unit} must be placed between the CPU and the Memory.
+If the Memory in use can't accomplish this timing, an external \emph{Memory Control Unit} must be placed between the CPU and the Memory.
 
 \subsection{Memory Addressing}
 A[31:0] is the 32-bit address bus that specifies the address for the transfer. All addresses are byte addresses, so a burst of word accesses results in the address bus incrementing by four for each cycle.\\
 
-The address bus provides 4GB of linear addressing space, and this can be used externally in different manners like in a SoC with memory-mapped peripherals that share the same address space.\\
+The address bus provides 4GB of linear addressing space, and this can be used externally in different manners, like in an SoC with memory-mapped peripherals that share the same address space.\\
 
-When word access is signalled the memory system ignores the bottom two bits, A[1:0], and when halfword access is signalled the memory system ignores the bottom bit, A[0]. However, the core already masks the two LSBs when needed.
+When word access is signaled, the memory system ignores the bottom two bits, A[1:0], and when halfword access is signaled, the memory system ignores the bottom bit, A[0]. However, the core already masks the two LSBs when needed.
 
 \subsection{Memory Data Size: the MAS[1:0] signal}
 \label{mas}
 
 The \emph{MAS[1:0]} bus encodes the size of the transfer. The DLX processor can transfer word, halfword, and byte quantities and the processor indicates the size of the transfer through this signal.\\
 
-The \emph{MAS[1:0]} signal is supposed to be used in combination with \emph{A[1:0]} in order to know exactly which byte is taken under consideration during an operation.
+The \emph{MAS[1:0]} signal is supposed to be used in combination with \emph{A[1:0]} to know precisely which byte is taken under consideration during an operation.
 
 \subsection{Memory Read}
 

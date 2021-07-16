@@ -5,7 +5,7 @@ The goal of this project is to build from scratch a working implementation of a 
 
 The second step was the design of the Datapath, done in the best possible way to obtain a high optimization and performance level. Some optimization examples that will be explained more in-depth in the document are the use of the P4 adder and the Booth multiplier inside the ALU, the comparator and many others. 
 
-The third step was the design of the control unit. The choice fell on the microprogrammed version that guaranteed the pipeline implementation. To simplify the maintainability of the control unit, some struct-like constructs were used in the VHDL code. 
+The third step was the design of the control unit. Again, the choice fell on the microprogrammed version that guaranteed the pipeline implementation. To simplify the maintainability of the control unit, some struct-like constructs were used in the VHDL code. 
 
 In the fourth step, very exhaustive testing has been executed. All the proposed asm codes were verified, but some well-known algorithm (bubble sort, Fibonacci and factorial) was written and tested.
 
@@ -13,10 +13,10 @@ Last but not least, the DLX has been synthesized using Synopsis, and a post-synt
 
 Thanks to the datapath optimization and the synthesis optimization, the microprocessor proposed in this paper reached a peak speed of 400MHz.  
 \section{Workflow}
-As many tools we used to automate the working process, all of them are explained in this section.
+As many tools we used to automate the working process, they are explained in this section.
 
 The first and most important tool was versioning control. The choice fell on GitHub. Thanks to this, the team managed all versions of the code and stepped back if any problem occurs. In addition to that, team communication and issue management were very straightforward, thanks to the possibilities offered by the tool. Another handy feature was the milestone, which allows the team to be on time and respect deadlines. 
 
-The used programming technique was pair programming, which allows writing code and checking its correctness at the same time. This technique was particularly useful in difficult parts of the projects. To exploit pair programming the extension used was Live Share for Visual Studio Code (\url{https://github.com/MicrosoftDocs/live-share}). Indeed, for the easier steps, the use of the branches and pull request gave the possibility of parallel working and drastically reduced the presence of conflicts. 
+The used programming technique was pair programming, which allows writing code and checking its correctness at the same time. This technique was beneficial under challenging parts of the projects. To exploit pair programming the extension used was Live Share for Visual Studio Code (\url{https://github.com/MicrosoftDocs/live-share}). Indeed, for the more manageable steps, the use of the branches and pull request gave the possibility of parallel working and drastically reduced the presence of conflicts. 
 
-The last thing to point out was the intensive use of scripting for compiling VHDL code, simulating it, adding waves and then synthesizing. All scripts are reported in the appendix.
+The last thing to point out was the intensive use of scripting to compile VHDL code, simulate it, add waves, and then synthesize. All scripts are reported in the appendix.
