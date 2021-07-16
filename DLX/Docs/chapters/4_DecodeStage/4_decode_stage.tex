@@ -208,9 +208,9 @@ An additional element is necessary in order to be able to manage the addresses f
 
 \section{Hazard Control}
 
-During the execution of a pipeline, different problems or hazard situations may occur. Regarding Data Hazards, the most dangerous situation is the \emph{Read After Write (RAW)}. So a solution is needed in order to detect these problems and actually, there exist a unit inside the Decode Stage that is dedicated to this job, the \emph{Hazard Table}.\\
+During the execution of a pipeline, different problems or hazard situations may occur. Regarding Data Hazards, the most dangerous situation is the \emph{Read After Write (RAW)}. So a solution is needed in order to detect these problems. Actually exists a unit inside the Decode Stage that is dedicated to this job called \emph{Hazard Table}.\\
 
-RAW Hazards occurs when an instruction wants to read from a register that is the destination register of a previous instruction still inside the pipeline so and not completed. This means that the second instruction has to be stopped (i.e. a stall or a bubble must be inserted into the pipeline) until the previous instruction has been completed.\\
+RAW Hazards occurs when an instruction wants to read from a register that is the destination register of a previous instruction still inside the pipeline so not completed yet. This means that the second instruction has to be stopped (i.e. a stall or a bubble must be inserted into the pipeline) until the previous instruction has been completed.\\
 
 \begin{lstlisting}[style=mips,nolol, caption={Example of DLX ASM code for RAW Hazard},label=raw_hazard]
 	add r1, r2, r3

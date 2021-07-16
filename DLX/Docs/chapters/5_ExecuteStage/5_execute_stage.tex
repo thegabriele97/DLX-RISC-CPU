@@ -64,10 +64,10 @@ The base concept is that, internally, the 4 units are selected through a multipl
         \hline
         000 11 &\multirow{6}{*}{SHIFT} & SHIFT RIGHT \\
         001 11 & & SHIFT LEFT \\
-        010 110 & & ARITH SHIFT RIGHT \\
-        011 11 &  & ARITH SHIFT LEFT\\
-        100 11 &  & ROTATE RIGHT\\
-        101 11 &  & ROTATE LEFT\\
+        010 11 & & ARITH SHIFT RIGHT \\
+        011 11 & & ARITH SHIFT LEFT\\
+        100 11 & & ROTATE RIGHT\\
+        101 11 & & ROTATE LEFT\\
     \end{tabular}
     \caption{ALU operations encoding}
     \label{tab:alu_op}
@@ -338,12 +338,12 @@ This logic unit allows to perform AND, NAND, OR, NOR, XOR and XNOR using only 5 
     \end{table}
 
 \subsection{Shifter}
-The implemented shifter allows to perform shift right, logical/arithmetical shift left and left/right rotate using the full operand \texttt{A} on 32 bits and 6 bits from the second one \texttt{B} and three \textit{control signals}.
+The implemented shifter allows to perform shift right, logical/arithmetical shift left and left/right rotate using the full operand \texttt{A} on 32 bits and 5 bits from the second one \texttt{B} and three \textit{control signals}.
 Differently from the T2 version, it uses and addition signal in order to be able to manage also the rotate instruction. Our implementation takes three inputs:
 \begin{itemize}
     \itemsep0sp
     \item \texttt{A}: the operand to be shifted/rotated;
-    \item \texttt{B}: only the 5 LSB [4,3,2,1,0] are used to select first the mask to be used and then the starting point from that mask;
+    \item \texttt{B}: only the 5 LSB [4:0] are used to select first the mask to be used and then the starting point from that mask;
     \item \texttt{SEL}: it encodes the operation type; the second bit is used to select among arithmetic and logic, the third bit is used to select the direction of the shift/rotate (left/right) and the first one is used only if the operation is a rotate. This is the encoding:
     \begin{center}
         \begin{tabular}{c|l}
