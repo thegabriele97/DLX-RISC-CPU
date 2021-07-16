@@ -92,7 +92,7 @@ On the other hand, when the last procedure in the chain is finished, the others 
 It's important to notice that the implementation of the entire register file has been done in a complete structural way. It is composed of several components:
 \begin{itemize}
 	\item \textbf{Decoder}: it is used to generate a single enable signal from an address on \emph{NBIT\_ADD} bits given by the CPU; in this way, a register is selected to perform a write. 
-	\item \textbf{Connection matrix}: this component allows to ``highlight" the active windows, the block IN, LOCAL and OUT will be the default destination when writing and reading;
+	\item \textbf{Connection matrix}: this component allows to ``highlight" the active window, the block IN, LOCAL and OUT will be the default destination when writing and reading;
 	\item \textbf{Register file}: this block corresponds to the physical registers, composed by rows of registers;
 	\item \textbf{Select block}: this block is used for reading: it is connected to all the registers and selects, using the current window pointer, all the registers that belong to the pointed window. A multiplexer then is used to read from a single register;
 	\item \textbf{Address generator}: this block is only used when performing a FILL or a SPILL. It generates the address for the registers to be moved from/to the memory. The latter, in this situation, works exactly like a stack;
