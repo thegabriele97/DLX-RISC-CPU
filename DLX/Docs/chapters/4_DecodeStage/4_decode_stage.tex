@@ -110,7 +110,7 @@ The idea is that if the input is \(0b00010\) the output has to be \(0b0000000000
 The output is divided, as shown in Figure \ref{decoder}, in order to represent the group of bits. In particular: 
 
 \begin{center}
-	DECODED ADDRESS: \emph{0b} $\underbrace{00000100}_{\text{OUT}}$ $\underbrace{00000100}_{\text{LOCAL}}$ $\underbrace{00000100}_{\text{IN}}$ $\underbrace{00000100}_{\text{GLOBAL}}$
+	DECODED ADDRESS: \emph{0b} $\underbrace{00000000}_{\text{OUT}}$ $\underbrace{00000000}_{\text{LOCAL}}$ $\underbrace{00000000}_{\text{IN}}$ $\underbrace{00000100}_{\text{GLOBAL}}$
 \end{center}
 
 On the top of the schematic \autoref{decoder} an AND logic gate between an \emph{ENABLE} signal and the \emph{WR} signal is used. If both \emph{ENABLE} and \emph{WR} are at 1, it means that the register is enabled.\\
