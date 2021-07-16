@@ -1,0 +1,16 @@
+
+source test_bench_and_memory/compile.script
+
+vcom test_bench_and_memory/TB_TOP_DLX_SYN.vhd
+vcom synthesis_result/DLX_SYN.vhdl
+
+# vsim work.dlx_testbench -t ns -L /software/dk/nangate45/verilog/qsim10.7c -sdftyp /=/home/ms21.16/gabri-ms-lab/ms-lab/DLX/DLX_synthesis/dlx_sdf_out.sdf
+
+
+# vsim -voptargs=+acc -L /software/dk/nangate45/verilog/qsim10.7c -sdftyp /dlx_testbench/DDLX=synthesis_result/dlx_sdf.sdf work.dlx_testbench -t ns +nowarnTSCALE
+ 
+# vcd file DDLX.vcd
+# vcd add /dlx_testbench /DDLX/*
+
+
+vsim work.dlx_testbench -t ns -L /software/dk/nangate45/verilog/qsim10.7c 

@@ -1,0 +1,7 @@
+Gate area 0.7980 um^2
+Level 0 Module DLX_IR_SIZE32_PC_SIZE32_RAM_DEPTH32      Gates=     44638 Cells=   19887 Area=   35621.4 um^2
+Level 1 Module DECODEhw/HAZARD_CTRL                     Gates=1505       Cells=767      Area=    1201.5 um^2
+Level 1 Module DataPath/RF/SELBLOCK_INLOC               Gates=3011       Cells=2125     Area=    2403.0 um^2
+Level 1 Module DataPath/RF/RDPORT1                      Gates=1209       Cells=723      Area=     965.3 um^2
+Level 1 Module DataPath/RF/RDPORT0                      Gates=1207       Cells=720      Area=     963.7 um^2
+Level 1 Module DataPath/RF/SEL_BLK                      Gates=4347       Cells=2944     Area=    3468.9 um^2

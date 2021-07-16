@@ -1,0 +1,1 @@
+/home/ms21.16/gabri-ms-lab/ms-lab/DLX/DLX_PhyDesign/dlx_sdc.sdc
