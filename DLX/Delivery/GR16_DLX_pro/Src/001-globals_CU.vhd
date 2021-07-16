@@ -468,7 +468,7 @@ package record_CU is
 		hazard_table_wr1  => '1',
 		id_en             => '1',
 		ex_en             => '1',
-		muxa_sel          => '0',
+		muxa_sel          => '1',
 		muxb_sel          => '1',
 		alu_opcode        =>  ALU_ADD,
 		set_cmp           =>  SET_SEQ,
